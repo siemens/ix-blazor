@@ -10,7 +10,7 @@
 - [ ] ECharts
 - [x] Checkbox (will check other input attributes)
 - [x] Chip
-- [ ] Date picker
+- [x] Date picker
 - [ ] Date time picker
 - [ ] Drawer
 - [ ] Dropdown button

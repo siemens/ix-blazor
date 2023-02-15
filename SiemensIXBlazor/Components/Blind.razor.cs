@@ -17,15 +17,15 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public EventCallback<bool> CollapsedChangedEvent { get; set; }
 
-        private BlindInterops _blindInterops;
+        private BaseInterop _interop;
 
         protected async override Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
-                _blindInterops = new(JSRuntime);
+                _interop = new(JSRuntime);
 
-                await _blindInterops.AddCollapsedChangedEventListener(this, Id);
+                await _interop.AddEventListener(this, Id, "collapsedChange", "CollapsedChanged");
             }
         }
 

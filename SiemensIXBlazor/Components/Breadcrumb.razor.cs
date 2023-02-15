@@ -20,15 +20,15 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public int VisibleItemCount { get; set; } = 9;
 
-        private BreadcrumbInterops _breadcrumbInterops;
+        private BaseInterop _interop;
 
         protected async override Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
-                _breadcrumbInterops = new(JSRuntime);
+                _interop = new(JSRuntime);
 
-                await _breadcrumbInterops.AddItemClickedEventListener(this, Id);
+                await _interop.AddEventListener(this, Id, "itemClick", "BreadcrumbItemClicked");
             }
         }
 

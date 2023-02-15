@@ -2,20 +2,20 @@
 
 namespace SiemensIXBlazor.Components.Interops
 {
-    public class BlindInterops : IAsyncDisposable
+    public class BaseInterop
     {
         private readonly Lazy<Task<IJSObjectReference>> moduleTask;
 
-        public BlindInterops(IJSRuntime jsRuntime)
+        public BaseInterop(IJSRuntime jsRuntime)
         {
             moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
-                "import", "./_content/SiemensIXBlazor/js/interops/blindJsInterop.js").AsTask());
+                "import", $"./_content/SiemensIXBlazor/js/interops/baseJsInterop.js").AsTask());
         }
 
-        public async Task AddCollapsedChangedEventListener(Blind blind, string id)
+        public async Task AddEventListener(object classObject, string id, string eventName, string callbackFunctionName)
         {
             var module = await moduleTask.Value;
-            await module.InvokeAsync<string>("listenCollapsedEvent", DotNetObjectReference.Create(blind), id);
+            await module.InvokeAsync<string>("listenEvent", DotNetObjectReference.Create(classObject), id, eventName, callbackFunctionName);
         }
 
         public async ValueTask DisposeAsync()

@@ -16,6 +16,7 @@ Welcome to your new app.
 <IconButton Icon="info"></IconButton>
 <Checkbox Id="testcbx" Label="Test Cbx" OnChangeEvent="(value) => CbxOnChanged(value)"></Checkbox>
 <Chip Icon="print" Label="Chip with icon" Id="chip1" Closable="true" ClosedEvent="@ChipClosedEventHandler"></Chip>
+<DatePicker From="2023/02/01" To="2023/02/15" Id="timepicker1" DateChangeEvent="(date) => DateChangeEventTest(date)"></DatePicker>
 
 @code {
     List<BreadcrumbElement> breadcrumbElements = new()
@@ -52,5 +53,10 @@ Welcome to your new app.
     private void ChipClosedEventHandler()
     {
         Console.WriteLine("chip closed event");
+    }
+
+    private void DateChangeEventTest(string date)
+    {
+        Console.WriteLine(date);
     }
 }

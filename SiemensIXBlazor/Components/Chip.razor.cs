@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using SiemensIXBlazor.Components.Interops;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SiemensIXBlazor.Components
 {
@@ -32,15 +27,15 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public EventCallback ClosedEvent { get; set; }
 
-        private ChipInterops _chipInterops;
+        private BaseInterop _interop;
 
         protected async override Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
-                _chipInterops = new(JSRuntime);
+                _interop = new(JSRuntime);
 
-                await _chipInterops.AddClosedEventListener(this, Id);
+                await _interop.AddEventListener(this, Id, "close", "Closed");
             }
         }
 
