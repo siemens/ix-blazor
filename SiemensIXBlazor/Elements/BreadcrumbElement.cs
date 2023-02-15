@@ -8,6 +8,6 @@ namespace SiemensIXBlazor.Elements
 {
     public class BreadcrumbElement
     {
-        public string Label { get; set; }
+        public string Label { get; set; } = string.Empty;
     }
 }

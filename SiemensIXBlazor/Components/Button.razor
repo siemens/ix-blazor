@@ -1,0 +1,13 @@
+﻿<ix-button @onclick="Clicked" class="m-1" 
+disabled="@Disabled" 
+ghost="@Ghost" 
+outline="@Outline" 
+selected="@Selected" 
+type="@Type" 
+variant="@Variant">
+    @if(ButtonIcon != null)
+    {
+        <ix-icon name="@ButtonIcon.Name"></ix-icon>
+    }
+    @Label
+</ix-button>

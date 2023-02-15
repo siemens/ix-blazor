@@ -12,6 +12,10 @@ Welcome to your new app.
 
 <Blind Label="demo" Content="loremmm" Id="blind1" CollapsedChangedEvent="(value) => BlindEventHandler(value)" />
 <Breadcrumb Id="Brd1" Elements="@breadcrumbElements" ItemClicked="(label) => BreadcrumbEventHandler(label)"></Breadcrumb>
+<Button Label="Test button"></Button>
+<IconButton Icon="info"></IconButton>
+<Checkbox Id="testcbx" Label="Test Cbx" OnChangeEvent="(value) => CbxOnChanged(value)"></Checkbox>
+<Chip Icon="print" Label="Chip with icon" Id="chip1" Closable="true" ClosedEvent="@ChipClosedEventHandler"></Chip>
 
 @code {
     List<BreadcrumbElement> breadcrumbElements = new()
@@ -38,5 +42,15 @@ Welcome to your new app.
     private void BreadcrumbEventHandler(string label)
     {
         Console.WriteLine(label);
+    }
+
+    private void CbxOnChanged(bool value)
+    {
+        Console.WriteLine(value);
+    }
+
+    private void ChipClosedEventHandler()
+    {
+        Console.WriteLine("chip closed event");
     }
 }

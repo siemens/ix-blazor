@@ -4,11 +4,12 @@
 
 - [x] Blind
 - [x] Breadcrumb (without nextClick event)
-- [ ] Buttons
+- [x] Button
+- [x] Icon Button
 - [ ] Category filter
 - [ ] ECharts
-- [ ] Checkbox
-- [ ] Chip
+- [x] Checkbox (will check other input attributes)
+- [x] Chip
 - [ ] Date picker
 - [ ] Date time picker
 - [ ] Drawer
