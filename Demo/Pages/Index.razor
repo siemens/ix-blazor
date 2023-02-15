@@ -17,6 +17,12 @@ Welcome to your new app.
 <Checkbox Id="testcbx" Label="Test Cbx" OnChangeEvent="(value) => CbxOnChanged(value)"></Checkbox>
 <Chip Icon="print" Label="Chip with icon" Id="chip1" Closable="true" ClosedEvent="@ChipClosedEventHandler"></Chip>
 <DatePicker From="2023/02/01" To="2023/02/15" Id="timepicker1" DateChangeEvent="(date) => DateChangeEventTest(date)"></DatePicker>
+<DateTimePicker 
+    DateChangeEvent="(date) => DateChangeEventTest(date)" 
+    From="2023/02/01" 
+    To="2023/02/15" 
+    Id="datetimepicker1"
+    TimeChangeEvent="(date) => DateChangeEventTest(date)"></DateTimePicker>
 
 @code {
     List<BreadcrumbElement> breadcrumbElements = new()

@@ -11,7 +11,7 @@
 - [x] Checkbox (will check other input attributes)
 - [x] Chip
 - [x] Date picker
-- [ ] Date time picker
+- [x] Date time picker
 - [ ] Drawer
 - [ ] Dropdown button
 - [ ] Dropdown

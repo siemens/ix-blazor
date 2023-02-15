@@ -4,18 +4,16 @@ using SiemensIXBlazor.Components.Interops;
 
 namespace SiemensIXBlazor.Components
 {
-    public partial class DatePicker
+    public partial class DateTimePicker
     {
         [Parameter]
         public string Id { get; set; } = string.Empty;
         [Parameter]
-        public string Corners { get; set; } = "rounded";
+        public static string DateFormat { get; set; } = "yyyy/MM/dd";
         [Parameter]
         public string EventDelimiter { get; set; } = " - ";
         [Parameter]
-        public static string Format { get; set; } = "yyyy/MM/dd";
-        [Parameter]
-        public string From { get; set; } = DateTime.Now.ToString(Format);
+        public string From { get; set; } = DateTime.Now.ToString(DateFormat);
         [Parameter]
         public string? MaxDate { get; set; }
         [Parameter]
@@ -23,15 +21,29 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Range { get; set; } = true;
         [Parameter]
+        public bool ShowHour { get; set; } = false;
+        [Parameter]
+        public bool ShowMinutes { get; set; } = false;
+        [Parameter]
+        public bool ShowSeconds { get; set; } = false;
+        [Parameter]
+        public string ShowTimeReference { get; set; } = string.Empty;
+        [Parameter]
         public string TextSelectDate { get; set; } = "Done";
+        [Parameter]
+        public string? Time { get; set; }
+        [Parameter]
+        public string TimeFormat { get; set; } = "HH:mm:ss";
+        [Parameter]
+        public string? TimeReference { get; set; }
         [Parameter]
         public string? To { get; set; }
         [Parameter]
         public EventCallback<string> DateChangeEvent { get; set; }
         [Parameter]
-        public EventCallback<string> DateRangeChangeEvent { get; set; }
-        [Parameter]
         public EventCallback<string> DateSelectEvent { get; set; }
+        [Parameter]
+        public EventCallback<string> TimeChangeEvent { get; set; }
 
         private BaseInterop _interop;
 
@@ -42,7 +54,7 @@ namespace SiemensIXBlazor.Components
                 _interop = new(JSRuntime);
 
                 await _interop.AddEventListener(this, Id, "dateChange", "DateChange");
-                await _interop.AddEventListener(this, Id, "dateRangeChange", "DateRangeChange");
+                await _interop.AddEventListener(this, Id, "timeChange", "TimeChange");
                 await _interop.AddEventListener(this, Id, "dateSelect", "DateSelect");
             }
         }
@@ -54,9 +66,9 @@ namespace SiemensIXBlazor.Components
         }
 
         [JSInvokable]
-        public async void DateRangeChange(string date)
+        public async void TimeChange(string date)
         {
-            await DateRangeChangeEvent.InvokeAsync(date);
+            await TimeChangeEvent.InvokeAsync(date);
         }
 
         [JSInvokable]
