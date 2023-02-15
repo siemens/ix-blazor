@@ -3,7 +3,7 @@
 ### Progress
 
 - [x] Blind
-- [ ] Breadcrumb
+- [x] Breadcrumb (without nextClick event)
 - [ ] Buttons
 - [ ] Category filter
 - [ ] ECharts

@@ -1,6 +1,6 @@
 ﻿using Microsoft.JSInterop;
 
-namespace SiemensIXBlazor.Components
+namespace SiemensIXBlazor.Components.Interops
 {
     public class BlindInterops : IAsyncDisposable
     {
@@ -16,7 +16,7 @@ namespace SiemensIXBlazor.Components
         {
             var module = await moduleTask.Value;
             await module.InvokeAsync<string>("listenCollapsedEvent", DotNetObjectReference.Create(blind), id);
-        } 
+        }
 
         public async ValueTask DisposeAsync()
         {

@@ -1,4 +1,6 @@
 ﻿@page "/"
+@using SiemensIXBlazor.Components
+@using SiemensIXBlazor.Elements;
 
 <PageTitle>Index</PageTitle>
 
@@ -8,12 +10,33 @@ Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
 
-<SiemensIXBlazor.Component1></SiemensIXBlazor.Component1>
-<SiemensIXBlazor.Components.Blind Label="demo" Content="loremmm" Id="blind1" CollapsedChangedEvent="(value) => BlindEventHandler(value)" />
+<Blind Label="demo" Content="loremmm" Id="blind1" CollapsedChangedEvent="(value) => BlindEventHandler(value)" />
+<Breadcrumb Id="Brd1" Elements="@breadcrumbElements" ItemClicked="(label) => BreadcrumbEventHandler(label)"></Breadcrumb>
 
 @code {
+    List<BreadcrumbElement> breadcrumbElements = new()
+    {
+        new BreadcrumbElement()
+        {
+            Label = "item1"
+        },
+        new BreadcrumbElement()
+        {
+            Label = "item2"
+        },
+        new BreadcrumbElement()
+        {
+            Label = "item3"
+        }
+    };
+
     private void BlindEventHandler(bool value)
     {
         Console.WriteLine(value);
+    }
+
+    private void BreadcrumbEventHandler(string label)
+    {
+        Console.WriteLine(label);
     }
 }

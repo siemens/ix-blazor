@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System.ComponentModel.DataAnnotations;
+using SiemensIXBlazor.Components.Interops;
 
 namespace SiemensIXBlazor.Components
 {
@@ -16,6 +16,7 @@ namespace SiemensIXBlazor.Components
         public bool Collapsed { get; set; } = false;
         [Parameter]
         public EventCallback<bool> CollapsedChangedEvent { get; set; }
+        
         private BlindInterops _blindInterops;
 
         protected async override Task OnAfterRenderAsync(bool firstRender)
@@ -28,7 +29,7 @@ namespace SiemensIXBlazor.Components
             }
         }
 
-        [JSInvokable("CollapsedChanged")]
+        [JSInvokable]
         public async Task CollapsedChanged(bool value)
         {
             await CollapsedChangedEvent.InvokeAsync(value);
