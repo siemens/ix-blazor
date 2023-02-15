@@ -1,0 +1,14 @@
+﻿@using Microsoft.JSInterop;
+@inject IJSRuntime JSRuntime
+
+<ix-drawer show="@Show" 
+full-height="@FullHeight" 
+close-on-click-outside="@CloseOnClickOutside"
+max-width="@MaxWidth"
+min-width="@MinWidth"
+width="@Width">
+    @if(ChildContent != null)
+    {
+        @ChildContent
+    }   
+</ix-drawer>

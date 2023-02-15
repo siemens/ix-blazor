@@ -12,7 +12,7 @@
 - [x] Chip
 - [x] Date picker
 - [x] Date time picker
-- [ ] Drawer
+- [x] Drawer
 - [ ] Dropdown button
 - [ ] Dropdown
 - [ ] Event list
