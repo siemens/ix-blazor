@@ -5,11 +5,11 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EE5229A1-C9DA-416D-99B1-E28B0B614D55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiemensIXBlazor", "SiemensIXBlazor\SiemensIXBlazor.csproj", "{8520AECF-0DA3-4A68-8525-5D9E21E36B14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SiemensIXBlazor", "SiemensIXBlazor\SiemensIXBlazor.csproj", "{8520AECF-0DA3-4A68-8525-5D9E21E36B14}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{0BC06B2B-C80E-44E9-8FFD-C3B0C65E2FEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "Demo\Demo.csproj", "{A5CF309D-B528-43C9-B763-A0DFB38336E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo", "Demo\Demo.csproj", "{A5CF309D-B528-43C9-B763-A0DFB38336E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

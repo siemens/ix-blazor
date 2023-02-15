@@ -1,0 +1,21 @@
+﻿@using Microsoft.JSInterop;
+@using SiemensIXBlazor.Elements;
+
+@inject IJSRuntime JSRuntime
+
+<ix-dropdown id="@Id" 
+trigger="@Trigger"
+anchor="@Anchor"
+close-behavior="@CloseBehavior"
+header="@Header"
+placement="@Placement"
+positioning-strategy="@PositioningStrategy"
+show="@Show">
+    @if(DropdownItemElements != null)
+    {
+        foreach (DropdownItemElement item in DropdownItemElements)
+        {
+            <ix-dropdown-item @onclick="() => ItemSelected(item.Label)" label="@item.Label"></ix-dropdown-item>
+        }
+    }
+</ix-dropdown>

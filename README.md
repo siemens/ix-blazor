@@ -14,7 +14,7 @@
 - [x] Date time picker
 - [x] Drawer
 - [x] Dropdown button
-- [ ] Dropdown
+- [x] Dropdown
 - [ ] Event list
 - [ ] Expanding search
 - [ ] Flip

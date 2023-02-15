@@ -6,6 +6,8 @@ namespace SiemensIXBlazor.Components
     public partial class Button
     {
         [Parameter]
+        public string Id { get; set; } = string.Empty;
+        [Parameter]
         public string Label { get; set; } = string.Empty;
         [Parameter]
         public string Variant { get; set; } = "Primary";

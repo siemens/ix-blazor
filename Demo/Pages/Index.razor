@@ -18,6 +18,8 @@ Welcome to your new app.
 <Chip Icon="print" Label="Chip with icon" Id="chip1" Closable="true" ClosedEvent="@ChipClosedEventHandler"></Chip>
 <DatePicker From="2023/02/01" To="2023/02/15" Id="timepicker1" DateChangeEvent="(date) => DateChangeEventTest(date)"></DatePicker>
 <DropdownButton Label="Test" Icon="star" DropdownItemElements="dropdownItemElements" OnClickEvent="(label) => DropdownButtonClicked(label)"></DropdownButton>
+<Button Id="trigger1" Label="Trigger Button"></Button>
+<Dropdown Id="dd1" Trigger="trigger1" DropdownItemElements="dropdownItemElements" ShowChangedEvent="(value) => DropdownShowChanged(value)"></Dropdown>
 <DateTimePicker 
     DateChangeEvent="(date) => DateChangeEventTest(date)" 
     From="2023/02/01" 
@@ -90,5 +92,9 @@ Welcome to your new app.
     private void DropdownButtonClicked(string label)
     {
         Console.WriteLine(label);
+    }
+    private void DropdownShowChanged(bool value)
+    {
+        Console.WriteLine(value);
     }
 }
