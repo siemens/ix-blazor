@@ -13,7 +13,7 @@
 - [x] Date picker
 - [x] Date time picker
 - [x] Drawer
-- [ ] Dropdown button
+- [x] Dropdown button
 - [ ] Dropdown
 - [ ] Event list
 - [ ] Expanding search
