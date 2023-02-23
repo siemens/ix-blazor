@@ -15,8 +15,8 @@
 - [x] Drawer
 - [x] Dropdown button
 - [x] Dropdown
-- [ ] Event list
-- [ ] Expanding search
+- [x] Event list
+- [x] Expanding search
 - [ ] Flip
 - [ ] AG grid
 - [ ] Group

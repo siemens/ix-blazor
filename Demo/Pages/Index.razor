@@ -37,6 +37,8 @@ Welcome to your new app.
     <EventListItem Id="3" Label="Item 3" ItemCLickEvent="(label) => DropdownButtonClicked(label)"></EventListItem>
 </EventList>
 
+<ExpandingSearch Id="exp-search" ValueChangedEvent="(value) => SearchValueChanged(value)"></ExpandingSearch>
+
 
 
 @code {
@@ -100,6 +102,10 @@ Welcome to your new app.
         Console.WriteLine(args);
     }
     private void DropdownShowChanged(bool value)
+    {
+        Console.WriteLine(value);
+    }
+    private void SearchValueChanged(string value)
     {
         Console.WriteLine(value);
     }
