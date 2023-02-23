@@ -17,11 +17,11 @@
 - [x] Dropdown
 - [x] Event list
 - [x] Expanding search
-- [ ] Flip
+- [x] Flip
 - [ ] AG grid
 - [ ] Group
-- [ ] HTML table
-- [ ] Input
+- [x] HTML table (No need to implement)
+- [x] Input (No need to implement)
 - [ ] KPI
 - [ ] Message bar
 - [ ] Modal
