@@ -23,7 +23,7 @@
 - [x] HTML table (No need to implement)
 - [x] Input (No need to implement)
 - [x] KPI
-- [ ] Message bar
+- [x] Message bar
 - [ ] Modal
 - [ ] Pill
 - [ ] Radio button
