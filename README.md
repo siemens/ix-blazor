@@ -22,7 +22,7 @@
 - [ ] Group
 - [x] HTML table (No need to implement)
 - [x] Input (No need to implement)
-- [ ] KPI
+- [x] KPI
 - [ ] Message bar
 - [ ] Modal
 - [ ] Pill
