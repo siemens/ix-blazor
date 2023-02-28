@@ -29,9 +29,9 @@
 - [x] Radio button (No need to implement)
 - [x] Select (should do tests)
 - [x] Spinner
-- [ ] Split button
+- [x] Split button
 - [ ] Tabs
-- [ ] Text area
+- [x] Text area (No need to implement)
 - [ ] Tile
 - [ ] Time picker
 - [ ] Toast

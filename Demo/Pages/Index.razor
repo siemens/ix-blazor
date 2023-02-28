@@ -47,6 +47,8 @@ Welcome to your new app.
 
 <Spinner></Spinner>
 
+<SplitButton Id="split-button-1" Label="Split Button" SplitIcon="chevron-down-small" ButtonClickedEvent="SplitButtonClicked"></SplitButton>
+
 
 
 @code {
@@ -120,5 +122,9 @@ Welcome to your new app.
     private void ItemSelectionChangedEvent(string[] value)
     {
         Console.WriteLine(value);
+    }
+    private void SplitButtonClicked()
+    {
+        Console.WriteLine();
     }
 }
