@@ -24,9 +24,9 @@
 - [x] Input (No need to implement)
 - [x] KPI
 - [x] Message bar
-- [ ] Modal
-- [ ] Pill
-- [ ] Radio button
+- [x] Modal (No need to implement)
+- [x] Pill
+- [x] Radio button (No need to implement)
 - [ ] Select
 - [ ] Spinner
 - [ ] Split button
