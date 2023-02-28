@@ -32,7 +32,7 @@
 - [x] Split button
 - [ ] Tabs
 - [x] Text area (No need to implement)
-- [ ] Tile
+- [x] Tile
 - [ ] Time picker
 - [ ] Toast
 - [ ] Toggle
