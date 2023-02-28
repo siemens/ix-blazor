@@ -27,8 +27,8 @@
 - [x] Modal (No need to implement)
 - [x] Pill
 - [x] Radio button (No need to implement)
-- [ ] Select
-- [ ] Spinner
+- [x] Select (should do tests)
+- [x] Spinner
 - [ ] Split button
 - [ ] Tabs
 - [ ] Text area

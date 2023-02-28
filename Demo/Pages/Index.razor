@@ -39,6 +39,14 @@ Welcome to your new app.
 
 <ExpandingSearch Id="exp-search" ValueChangedEvent="(value) => SearchValueChanged(value)"></ExpandingSearch>
 
+<Select Id="select-1" Mode="multiple" ItemSelectionChangeEvent="(items) => ItemSelectionChangedEvent(items)">
+    <SelectItem Id="select-item-1" Label="Item 1" Value="1"></SelectItem>
+    <SelectItem Id="select-item-2" Label="Item 2" Value="2" ItemClickEvent="(item) => BreadcrumbEventHandler(item)"></SelectItem>
+    <SelectItem Id="select-item-2" Label="Item 3" Value="3"></SelectItem>
+</Select>
+
+<Spinner></Spinner>
+
 
 
 @code {
@@ -106,6 +114,10 @@ Welcome to your new app.
         Console.WriteLine(value);
     }
     private void SearchValueChanged(string value)
+    {
+        Console.WriteLine(value);
+    }
+    private void ItemSelectionChangedEvent(string[] value)
     {
         Console.WriteLine(value);
     }
