@@ -33,7 +33,7 @@
 - [ ] Tabs
 - [x] Text area (No need to implement)
 - [x] Tile
-- [ ] Time picker
+- [x] Time picker
 - [ ] Toast
 - [ ] Toggle
 - [ ] Tree
