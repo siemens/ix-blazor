@@ -35,7 +35,7 @@
 - [x] Tile
 - [x] Time picker
 - [x] Toast
-- [ ] Toggle
+- [x] Toggle
 - [ ] Tree
 - [ ] Upload
 - [ ] Form validation
