@@ -34,7 +34,7 @@
 - [x] Text area (No need to implement)
 - [x] Tile
 - [x] Time picker
-- [ ] Toast
+- [x] Toast
 - [ ] Toggle
 - [ ] Tree
 - [ ] Upload

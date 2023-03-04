@@ -49,9 +49,12 @@ Welcome to your new app.
 
 <SplitButton Id="split-button-1" Label="Split Button" SplitIcon="chevron-down-small" ButtonClickedEvent="SplitButtonClicked"></SplitButton>
 
+<Toast @ref="toast"></Toast>
+
 
 
 @code {
+    Toast toast;
     List<BreadcrumbElement> breadcrumbElements = new()
     {
         new BreadcrumbElement()
@@ -126,5 +129,6 @@ Welcome to your new app.
     private void SplitButtonClicked()
     {
         Console.WriteLine();
+        toast.ShowToast("test message", "info");
     }
 }
