@@ -1,4 +1,4 @@
-## Siemenes IX for Blazor
+## Siemens IX for Blazor
 
 ### Progress
 
@@ -37,6 +37,6 @@
 - [x] Toast
 - [x] Toggle
 - [ ] Tree
-- [ ] Upload
+- [x] Upload
 - [ ] Form validation
 - [ ] Workflow

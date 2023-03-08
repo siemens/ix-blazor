@@ -51,7 +51,7 @@ Welcome to your new app.
 
 <Toast @ref="toast"></Toast>
 
-
+<Upload Id="file-upload-test" FileChangedEvent="(data) => FileChanged(data)"></Upload>
 
 @code {
     Toast toast;
@@ -130,5 +130,10 @@ Welcome to your new app.
     {
         Console.WriteLine();
         toast.ShowToast("test message", "info");
+    }
+
+    private void FileChanged(byte[] data)
+    {
+        Console.WriteLine(data);
     }
 }
