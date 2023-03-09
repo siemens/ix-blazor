@@ -6,8 +6,8 @@ namespace SiemensIXBlazor.Components
 {
     public partial class MessageBar
     {
-        [Parameter]
-        public string Id { get; set; }
+        [Parameter, EditorRequired]
+        public string Id { get; set; } = string.Empty;
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter]

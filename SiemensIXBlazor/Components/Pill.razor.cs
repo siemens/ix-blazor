@@ -7,7 +7,9 @@ namespace SiemensIXBlazor.Components
 	{
 		[Parameter]
 		public string Label { get; set; } = string.Empty;
-		[Parameter]
+        [Parameter]
+        public string Class { get; set; } = string.Empty;
+        [Parameter]
 		public bool AllignLeft { get; set; } = false;
 		[Parameter]
 		public string? Background { get; set; }

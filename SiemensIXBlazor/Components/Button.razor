@@ -1,14 +1,15 @@
-﻿<ix-button @onclick="Clicked" class="m-1"
+﻿<ix-button @onclick="Clicked" class="@Class"
 id="@Id"
 disabled="@Disabled" 
 ghost="@Ghost" 
 outline="@Outline" 
 selected="@Selected" 
 type="@Type" 
-variant="@Variant">
+variant="@Variant"
+data-toggle="@DataToggle">
     @if(ButtonIcon != null)
     {
         <ix-icon name="@ButtonIcon.Name"></ix-icon>
     }
-    @Label
+    @ChildContent
 </ix-button>

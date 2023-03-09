@@ -7,7 +7,7 @@ namespace SiemensIXBlazor.Components
 {
 	public partial class SelectItem
 	{
-		[Parameter]
+		[Parameter, EditorRequired]
 		public string Id { get; set; } = string.Empty;
 		[Parameter]
 		public string? Label { get; set; }

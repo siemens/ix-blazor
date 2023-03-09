@@ -7,8 +7,10 @@ namespace SiemensIXBlazor.Components
 {
 	public partial class Select
 	{
-		[Parameter]
-		public string Id { get; set; }
+		[Parameter, EditorRequired]
+		public string Id { get; set; } = string.Empty;
+        [Parameter]
+        public string Class { get; set; } = string.Empty;
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
 		[Parameter]

@@ -16,6 +16,8 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string State { get; set; } = "neutral";
         [Parameter]
+        public string Class { get; set; } = string.Empty;
+        [Parameter]
         public string? Unit { get; set; }
         [Parameter]
         public string? Value { get; set; }

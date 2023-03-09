@@ -6,8 +6,10 @@ namespace SiemensIXBlazor.Components
 {
     public partial class Upload
     {
+        [Parameter, EditorRequired]
+        public string Id { get; set; } = string.Empty;
         [Parameter]
-        public string Id { get; set; }
+        public string Class { get; set; } = string.Empty;
         [Parameter]
         public string? Accept { get; set; }
         [Parameter]

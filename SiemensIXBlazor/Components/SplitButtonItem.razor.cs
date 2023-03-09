@@ -11,8 +11,10 @@ namespace SiemensIXBlazor.Components
 {
     public partial class SplitButtonItem
     {
-        [Parameter]
+        [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
+        [Parameter]
+        public string Class { get; set; } = string.Empty;
         [Parameter]
         public string? Icon { get; set; }
         [Parameter]

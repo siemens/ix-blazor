@@ -6,8 +6,10 @@ namespace SiemensIXBlazor.Components
 {
     public partial class Toggle
     {
-        [Parameter]
+        [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
+        [Parameter]
+        public string Class { get; set; } = string.Empty;
         [Parameter]
         public bool Checked { get; set; } = false;
         [Parameter]

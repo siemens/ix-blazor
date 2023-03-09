@@ -6,8 +6,10 @@ namespace SiemensIXBlazor.Components
 {
     public partial class DateTimePicker
     {
-        [Parameter]
+        [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
+        [Parameter]
+        public string Class { get; set; } = string.Empty;
         [Parameter]
         public static string DateFormat { get; set; } = "yyyy/MM/dd";
         [Parameter]

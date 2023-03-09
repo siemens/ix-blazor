@@ -9,8 +9,10 @@ namespace SiemensIXBlazor.Components
 {
     public partial class EventListItem
     {
+        [Parameter, EditorRequired]
+        public string Id { get; set; } = string.Empty;
         [Parameter]
-        public string Id { get; set; }
+        public string Class { get; set; } = string.Empty;
         [Parameter]
         public string Label { get; set; } = string.Empty;
         [Parameter]

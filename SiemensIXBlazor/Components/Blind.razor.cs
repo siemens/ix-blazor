@@ -9,8 +9,10 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string Label { get; set; } = string.Empty;
         [Parameter]
-        public string Content { get; set; } = string.Empty;
+        public string Class { get; set; } = string.Empty;
         [Parameter]
+        public string Content { get; set; } = string.Empty;
+        [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
         [Parameter]
         public bool Collapsed { get; set; } = false;

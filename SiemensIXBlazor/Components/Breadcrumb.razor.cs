@@ -8,9 +8,11 @@ namespace SiemensIXBlazor.Components
     public partial class Breadcrumb
     {
         [Parameter]
-        public IEnumerable<BreadcrumbElement>? Elements { get; set; }
-        [Parameter]
+        public RenderFragment? ChildContent { get; set; }
+        [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
+        [Parameter]
+        public string Class { get; set; } = string.Empty;
         [Parameter]
         public EventCallback<string> ItemClicked { get; set; }
         [Parameter]

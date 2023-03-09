@@ -3,12 +3,6 @@
 
 @inject IJSRuntime JSRuntime
 
-<ix-breadcrumb ghost="@Ghost" nextItems="@NextItems" visibleItemCount="@VisibleItemCount" id="@Id">
-    @if(Elements != null)
-    {
-        foreach (BreadcrumbElement element in Elements)
-        {
-             <ix-breadcrumb-item label="@element.Label"></ix-breadcrumb-item>
-        }
-    }
+<ix-breadcrumb class="@Class" ghost="@Ghost" nextItems="@NextItems" visibleItemCount="@VisibleItemCount" id="@Id">
+    @ChildContent
 </ix-breadcrumb>

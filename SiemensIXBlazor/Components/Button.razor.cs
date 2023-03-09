@@ -8,7 +8,11 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string Id { get; set; } = string.Empty;
         [Parameter]
-        public string Label { get; set; } = string.Empty;
+        public string Class { get; set; } = string.Empty;
+        [Parameter]
+        public string DataToggle { get; set; } = string.Empty;
+        [Parameter]
+        public RenderFragment? ChildContent { get; set; }
         [Parameter]
         public string Variant { get; set; } = "Primary";
         [Parameter]

@@ -9,8 +9,10 @@ namespace SiemensIXBlazor.Components
     {
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
+        [Parameter, EditorRequired]
+        public string Id { get; set; } = string.Empty;
         [Parameter]
-        public string Id { get; set; }
+        public string Class { get; set; } = string.Empty;
         [Parameter]
         public bool Disabled { get; set; } = false;
         [Parameter]

@@ -6,8 +6,10 @@ namespace SiemensIXBlazor.Components
 {
     public partial class TimePicker
     {
-        [Parameter]
+        [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
+        [Parameter]
+        public string Class { get; set; } = string.Empty;
         [Parameter]
         public string Corners { get; set; } = "rounded";
         [Parameter]
