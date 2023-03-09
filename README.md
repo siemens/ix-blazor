@@ -1,6 +1,25 @@
 ## Siemens IX for Blazor
 
-### Progress
+### Installation
+
+#### Install the Nuget package
+
+```cmd
+dotnet add package SiemensIXBlazor
+```
+
+#### Import Required CSS and JS Packages
+
+```html
+<link rel="stylesheet" href="_content/SiemensIXBlazor/css/siemens-ix/ix-icons.css" />
+<link rel="stylesheet" href="_content/SiemensIXBlazor/css/siemens-ix/siemens-ix.css" />
+
+...
+
+<script src="_content/SiemensIXBlazor/js/siemens-ix/index.bundle.js"></script>
+```
+
+### Supported Components
 
 - [x] Blind
 - [x] Breadcrumb (without nextClick event)
@@ -40,3 +59,21 @@
 - [x] Upload
 - [ ] Form validation
 - [ ] Workflow
+
+### Usage
+
+You can follow the original documentation and use native `Javascript` components.
+
+```html
+<ix-button class="m-1" outline variant="Secondary">
+    Button
+</ix-button>
+```
+
+Or you can use supported components as a native `Blazor` components.
+
+```blazor
+<Button Class="m-1" Outline="true" Variant="Secondary">
+    Button
+</Button>
+```
