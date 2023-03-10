@@ -6,15 +6,20 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Siemens IX Blazor</Title>
-    <Version>0.0.7-alpha</Version>
+    <Version>0.1.0</Version>
     <Authors>Yagizhan Necat Yakali</Authors>
     <Description>Siemens IX port for Blazor.</Description>
     <PackageProjectUrl>https://github.com/yagizhanNY/siemens-ix-blazor</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/yagizhanNY/siemens-ix-blazor</RepositoryUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Include="..\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
