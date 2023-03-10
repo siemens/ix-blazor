@@ -16,6 +16,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="SiemensIXBlazor_NpmJS\package-lock.json" />
+    <Content Remove="SiemensIXBlazor_NpmJS\package.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
@@ -24,6 +29,8 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+    <None Include="SiemensIXBlazor_NpmJS\package-lock.json" />
+    <None Include="SiemensIXBlazor_NpmJS\package.json" />
   </ItemGroup>
 
 
