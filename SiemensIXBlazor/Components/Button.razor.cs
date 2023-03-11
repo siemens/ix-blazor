@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using SiemensIXBlazor.Elements;
 
 namespace SiemensIXBlazor.Components
 {
@@ -25,8 +24,6 @@ namespace SiemensIXBlazor.Components
         public bool Selected { get; set; } = false;
         [Parameter]
         public string Type { get; set; } = "button";
-        [Parameter]
-        public ButtonIconElement? ButtonIcon { get; set; }
         [Parameter]
         public EventCallback ClickEvent { get; set; }
 
