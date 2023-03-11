@@ -108,7 +108,26 @@ Test content
 ```
 
 - [x] Dropdown button
+
+```html
+<DropdownButton Label="Dropdown" Variant="Primary" Icon="checkboxes">
+    <DropdownItem Label="Item 1" Value="1"></DropdownItem>
+    <DropdownItem Label="Item 2" Value="2"></DropdownItem>
+    <DropdownItem Label="Item 3" Value="3"></DropdownItem>
+</DropdownButton>
+```
+
 - [x] Dropdown
+
+```html
+<Button Id="triggerId">Open</Button>
+<Dropdown Trigger="triggerId">
+  <DropdownItem Label="Item 1"></DropdownItem>
+  <DropdownItem Label="Item 2"></DropdownItem>
+  <DropdownItem Label="Item 3"></DropdownItem>
+</Dropdown>
+```
+
 - [x] Event list
 
 ```html
