@@ -1,12 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using SiemensIXBlazor.Components.Interops;
-using SiemensIXBlazor.Elements;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SiemensIXBlazor.Components
 {
@@ -31,9 +25,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string? Trigger { get; set; }
         [Parameter]
-        public IEnumerable<DropdownItemElement> DropdownItemElements { get; set; } = Enumerable.Empty<DropdownItemElement>();
-        [Parameter]
-        public EventCallback<string> ItemSelectedEvent { get; set; }
+        public RenderFragment? ChildContent { get; set; }
         [Parameter]
         public EventCallback<bool> ShowChangedEvent { get; set; }
 
@@ -53,11 +45,6 @@ namespace SiemensIXBlazor.Components
         public async void ShowChanged(bool value)
         {
             await ShowChangedEvent.InvokeAsync(value);
-        }
-
-        private async void ItemSelected(string label)
-        {
-            await ItemSelectedEvent.InvokeAsync(label);
         }
     }
 }

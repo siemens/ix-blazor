@@ -8,13 +8,5 @@ disabled="@Disabled"
 ghost="@Ghost"
 outline="@Outline"
 class="@Class">
-    @if (DropdownItemElements != null)
-    {
-        foreach (DropdownItemElement item in DropdownItemElements)
-        {
-            <ix-dropdown-item label="@item.Label" 
-            value="@item.Value"
-            @onclick="() => Clicked(item.Label)"></ix-dropdown-item>
-        }
-    }
+    @ChildContent
 </ix-dropdown-button>

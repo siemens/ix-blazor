@@ -12,11 +12,5 @@ placement="@Placement"
 positioning-strategy="@PositioningStrategy"
 show="@Show"
 class="@Class">
-    @if(DropdownItemElements != null)
-    {
-        foreach (DropdownItemElement item in DropdownItemElements)
-        {
-            <ix-dropdown-item @onclick="() => ItemSelected(item.Label)" label="@item.Label"></ix-dropdown-item>
-        }
-    }
+    @ChildContent
 </ix-dropdown>

@@ -24,13 +24,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string Variant { get; set; } = "Primary";
         [Parameter]
-        public IEnumerable<DropdownItemElement>? DropdownItemElements { get; set; }
-        [Parameter]
-        public EventCallback<string> OnClickEvent { get; set; }
-
-        private async void Clicked(string label)
-        {
-            await OnClickEvent.InvokeAsync(label);
-        }
+        public RenderFragment? ChildContent { get; set; }
+        
     }
 }
