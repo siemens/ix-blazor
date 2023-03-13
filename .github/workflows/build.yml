@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ "master" ]
 
+env:
+   PROJECT_PATH: "SiemensIXBlazor/SiemensIXBlazor.csproj"
+
 jobs:
   build:
 
@@ -19,6 +22,6 @@ jobs:
       with:
         dotnet-version: 7.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ${{ env.PROJECT_PATH }} 
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore ${{ env.PROJECT_PATH }} --configuration Release
