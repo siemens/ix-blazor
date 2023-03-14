@@ -366,7 +366,64 @@ toast.ShowToast("test message", "info");
 </Upload>
 ```
 
-- [ ] Form validation
+- [x] Form validation
+
+```html
+<form class="row g-3 needs-validation" novalidate>
+  <div class="row">
+    <div class="col-md-4">
+      <label for="validationCustom01" class="form-label">
+        First name
+      </label>
+      <input
+        type="text"
+        class="form-control"
+        id="validationCustom01"
+        value=""
+        required
+      />
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <ix-validation-tooltip message="Cannot be empty!">
+        <label for="validationCustom02" class="form-label">
+          Last name
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          id="validationCustom02"
+          value=""
+          required
+        />
+      </ix-validation-tooltip>
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <label for="validationCustomUsername" class="form-label">
+        Username
+      </label>
+      <input
+        type="text"
+        class="form-control"
+        id="validationCustomUsername"
+        aria-describedby="inputGroupPrepend"
+        required
+        minlength="4"
+      />
+      <div class="invalid-feedback">Please choose a username.</div>
+    </div>
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit">Submit form</button>
+  </div>
+</form>
+```
+
 - [ ] Workflow
 
 ### Usage
