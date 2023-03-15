@@ -454,7 +454,18 @@ toast.ShowToast("test message", "info");
 </form>
 ```
 
-- [ ] Workflow
+- [x] Workflow
+
+```html
+<WorkflowSteps Id="wf-steps">
+    <WorkflowStep Status="done">Step 1</WorkflowStep>
+    <WorkflowStep Status="success">Step 2</WorkflowStep>
+    <WorkflowStep Status="open">Step 3</WorkflowStep>
+    <WorkflowStep Status="warning">Step 4</WorkflowStep>
+    <WorkflowStep Status="error">Step 5</WorkflowStep>
+    <WorkflowStep Disabled="true">Step 6</WorkflowStep>
+</WorkflowSteps>
+```
 
 ### Usage
 
