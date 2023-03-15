@@ -320,7 +320,37 @@ private void CloseModal()
 </SplitButton>
 ```
 
-- [ ] Tabs
+- [x] Tabs
+
+```html
+<div class="example">
+    <Tabs Id="tabs-demo">
+        <ix-tab-item data-tab-id="0">Tab 1</ix-tab-item>
+        <ix-tab-item data-tab-id="1">Tab 2</ix-tab-item>
+        <ix-tab-item data-tab-id="2">Tab 3</ix-tab-item>
+    </Tabs>
+    <div data-tab-content="0" class="show">Content Tab 1</div>
+    <div data-tab-content="1">Content Tab 2</div>
+    <div data-tab-content="2">Content Tab 3</div>
+</div>
+```
+
+```css
+.example {
+    display: block;
+    position: relative;
+    width: 100%;
+}
+
+div[data-tab-content] {
+    display: none;
+}
+
+div[data-tab-content].show {
+    display: block;
+}
+```
+
 - [x] Text area
 
 ```html
