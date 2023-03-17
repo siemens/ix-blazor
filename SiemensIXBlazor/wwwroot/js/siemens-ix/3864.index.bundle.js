@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunknpmjs=self.webpackChunknpmjs||[]).push([[3864],{3864:(s,e,n)=>{n.r(e),n.d(e,{my_component:()=>c});var t=n(7577);const c=class{constructor(s){(0,t.r)(this,s)}render(){return(0,t.h)(t.H,null)}};c.style=".sc-my-component-h{display:block;position:relative;width:100vw;height:100vh}"}}]);
