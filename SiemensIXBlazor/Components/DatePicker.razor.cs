@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using Newtonsoft.Json.Linq;
 using SiemensIXBlazor.Components.Interops;
+using SiemensIXBlazor.Objects;
+using System.Text.Json;
 
 namespace SiemensIXBlazor.Components
 {
@@ -29,11 +32,9 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string? To { get; set; }
         [Parameter]
-        public EventCallback<string> DateChangeEvent { get; set; }
+        public EventCallback<DatePickerResponse?> DateRangeChangeEvent { get; set; }
         [Parameter]
-        public EventCallback<string> DateRangeChangeEvent { get; set; }
-        [Parameter]
-        public EventCallback<string> DateSelectEvent { get; set; }
+        public EventCallback<DatePickerResponse> DateSelectEvent { get; set; }
 
         private BaseInterop _interop;
 
@@ -43,28 +44,27 @@ namespace SiemensIXBlazor.Components
             {
                 _interop = new(JSRuntime);
 
-                await _interop.AddEventListener(this, Id, "dateChange", "DateChange");
                 await _interop.AddEventListener(this, Id, "dateRangeChange", "DateRangeChange");
                 await _interop.AddEventListener(this, Id, "dateSelect", "DateSelect");
             }
         }
 
         [JSInvokable]
-        public async void DateChange(string date)
+        public async void DateRangeChange(JsonElement data)
         {
-            await DateChangeEvent.InvokeAsync(date);
+            string jsonDataText = data.GetRawText();
+            DatePickerResponse? jsonData = JObject.Parse(jsonDataText)
+                                                  .ToObject<DatePickerResponse>();
+            await DateRangeChangeEvent.InvokeAsync(jsonData);
         }
 
         [JSInvokable]
-        public async void DateRangeChange(string date)
+        public async void DateSelect(JsonElement data)
         {
-            await DateRangeChangeEvent.InvokeAsync(date);
-        }
-
-        [JSInvokable]
-        public async void DateSelect(string date)
-        {
-            await DateSelectEvent.InvokeAsync(date);
+            string jsonDataText = data.GetRawText();
+            DatePickerResponse? jsonData = JObject.Parse(jsonDataText)
+                                                  .ToObject<DatePickerResponse>();
+            await DateSelectEvent.InvokeAsync(jsonData);
         }
     }
 }
