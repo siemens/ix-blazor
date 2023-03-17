@@ -60,10 +60,15 @@ Test content
 - [x] Checkbox
 
 ```html
-<Checkbox Id="testcbx" 
-          Label="Test Cbx" 
-          OnChangeEvent="(value) => CbxOnChanged(value)">
-</Checkbox>
+<div style="margin-bottom: 1rem">
+  <input type="checkbox" id="checkbox_01" />
+  <label for="checkbox_01">Simple checkbox</label>
+</div>
+
+<div>
+  <input type="checkbox" id="checkbox_02" disabled />
+  <label for="checkbox_02">Disabled checkbox</label>
+</div>
 ```
 
 - [x] Chip
