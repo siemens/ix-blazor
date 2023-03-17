@@ -15,6 +15,8 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public EventCallback<string> ItemClicked { get; set; }
         [Parameter]
+        public EventCallback<string> NextItemClicked { get; set; }
+        [Parameter]
         public bool Ghost { get; set; } = false;
         [Parameter]
         public string[] NextItems { get; set; } = Array.Empty<string>();
@@ -30,6 +32,7 @@ namespace SiemensIXBlazor.Components
                 _interop = new(JSRuntime);
 
                 await _interop.AddEventListener(this, Id, "itemClick", "BreadcrumbItemClicked");
+                await _interop.AddEventListener(this, Id, "nextClick", "BreadcrumbNextItemClicked");
             }
         }
 
@@ -37,6 +40,12 @@ namespace SiemensIXBlazor.Components
         public async Task BreadcrumbItemClicked(string label)
         {
             await ItemClicked.InvokeAsync(label);
+        }
+
+        [JSInvokable]
+        public async Task BreadcrumbNextItemClicked(string label)
+        {
+            await NextItemClicked.InvokeAsync(label);
         }
     }
 }
