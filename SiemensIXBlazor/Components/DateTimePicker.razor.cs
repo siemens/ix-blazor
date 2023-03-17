@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using Newtonsoft.Json.Linq;
 using SiemensIXBlazor.Components.Interops;
+using SiemensIXBlazor.Objects;
+using System.Text.Json;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SiemensIXBlazor.Components
 {
@@ -46,6 +50,8 @@ namespace SiemensIXBlazor.Components
         public EventCallback<string> DateSelectEvent { get; set; }
         [Parameter]
         public EventCallback<string> TimeChangeEvent { get; set; }
+        [Parameter]
+        public EventCallback<string> DoneEvent { get; set; }
 
         private BaseInterop _interop;
 
@@ -58,6 +64,7 @@ namespace SiemensIXBlazor.Components
                 await _interop.AddEventListener(this, Id, "dateChange", "DateChange");
                 await _interop.AddEventListener(this, Id, "timeChange", "TimeChange");
                 await _interop.AddEventListener(this, Id, "dateSelect", "DateSelect");
+                await _interop.AddEventListener(this, Id, "done", "Done");
             }
         }
 
@@ -77,6 +84,12 @@ namespace SiemensIXBlazor.Components
         public async void DateSelect(string date)
         {
             await DateSelectEvent.InvokeAsync(date);
+        }
+
+        [JSInvokable]
+        public async void Done(string date)
+        {
+            await DoneEvent.InvokeAsync(date);
         }
     }
 }
