@@ -104,12 +104,38 @@ Test content
 </DateTimePicker>
 ```
 
+- [x] Divider
+
+```html
+<Divider></Divider>
+```
+
+
 - [x] Drawer
 
 ```html
-<Drawer Id="drawer1">
+<Button ClickEvent="DrawerButtonClicked">Drawer Button</Button>
+<Drawer @ref="drawer1" Id="drawer1">
     <span>Some content of drawer</span>
 </Drawer>
+```
+
+```csharp
+Drawer drawer1;
+
+protected override void OnAfterRender(bool firstRender)
+{
+    if(firstRender)
+    {
+        drawer1.FullHeight = true;
+        drawer1.CloseOnClickOutside = true;
+    }
+}
+
+private void DrawerButtonClicked()
+{
+    drawer1.Show = !drawer1.Show;
+}
 ```
 
 - [x] Dropdown button
