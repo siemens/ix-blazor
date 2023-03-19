@@ -327,7 +327,7 @@ private void CloseModal()
 - [x] Select
 
 ```html
-<Select selected-indices="1">
+<Select SelectedIndices="1">
   <SelectItem Label="Item 1" Value="1"></SelectItem>
   <SelectItem Label="Item 2" Value="2"></SelectItem>
   <SelectItem Label="Item 3" Value="3"></SelectItem>
