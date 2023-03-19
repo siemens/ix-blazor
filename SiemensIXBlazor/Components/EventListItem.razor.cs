@@ -14,7 +14,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string Class { get; set; } = string.Empty;
         [Parameter]
-        public string Label { get; set; } = string.Empty;
+        public RenderFragment? ChildContent { get; set; }
         [Parameter]
         public bool? Chevron { get; set; }
         [Parameter]
