@@ -23,6 +23,8 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string Class { get; set; } = string.Empty;
         [Parameter]
+        public string DataTooltip { get; set; } = string.Empty;
+        [Parameter]
         public string Type { get; set; } = "button";
         [Parameter]
         public string Variant { get; set; } = "Primary";
