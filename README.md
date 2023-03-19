@@ -418,6 +418,17 @@ toast.ShowToast("test message", "info");
 <Toggle></Toggle>
 ```
 
+- [x] Tooltip
+
+```html
+<div style="padding: 4rem">
+    <Button DataTooltip="myTooltip">Hover me</Button>
+    <ix-tooltip for="[data-tooltip='myTooltip']">
+        Some example content
+    </ix-tooltip>
+</div>
+```
+
 - [ ] Tree
 - [x] Upload
 
