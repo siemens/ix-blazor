@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using SiemensIXBlazor.Components.Interops;
@@ -30,11 +31,11 @@ namespace SiemensIXBlazor.Components
 		[Parameter]
 		public bool Readonly { get; set; } = false;
 		[Parameter]
-		public string[] SelectedIndices { get; set; } = Array.Empty<string>();
+		public dynamic? SelectedIndices { get; set; }
 		[Parameter]
 		public EventCallback<string> AddItemEvent { get; set; }
         [Parameter]
-        public EventCallback<string[]> ItemSelectionChangeEvent { get; set; }
+        public EventCallback<dynamic> ItemSelectionChangeEvent { get; set; }
 
         private BaseInterop _interop;
 
@@ -56,9 +57,19 @@ namespace SiemensIXBlazor.Components
 		}
 
         [JSInvokable]
-        public async void ItemSelectionChanged(string[] labels)
+        public async void ItemSelectionChanged(dynamic labels)
         {
-            await ItemSelectionChangeEvent.InvokeAsync(labels);
+			if(labels is string)
+			{
+                await ItemSelectionChangeEvent.InvokeAsync(labels);
+            }
+			else if(labels is JsonElement)
+			{
+				JsonElement jsonText = labels;
+				string[] labelArray = jsonText.Deserialize<string[]>()!;
+                await ItemSelectionChangeEvent.InvokeAsync(labelArray);
+            }
+            
         }
     }
 }
