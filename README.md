@@ -196,7 +196,16 @@ private void DrawerButtonClicked()
 ```
 
 - [ ] AG grid
-- [ ] Group
+- [x] Group
+
+```html
+<Group Id="group1" Header="Header text" SubHeader="Subheader text">
+    <GroupItem Id="groupitem1" Text="Example text 1"></GroupItem>
+    <GroupItem Id="groupitem2" Text="Example text 2"></GroupItem>
+    <GroupItem Id="groupitem3" Text="Example text 3" SelectedChangeEvent="GroupItemSelectedChanged"></GroupItem>
+</Group>
+```
+
 - [x] HTML table
 
 ```html
