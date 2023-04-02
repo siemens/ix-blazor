@@ -262,7 +262,11 @@ private void DrawerButtonClicked()
 - [x] Message bar
 
 ```html
-<MessageBar>Message text</MessageBar>
+<MessageBar ClosedChangeEvent="MessageboxClosed" Id="messagebar1" Type="MessageBarType.Danger">
+    <div class="d-flex align-items-center justify-content-between">
+        Message text <ix-button>Action</ix-button>
+    </div>
+</MessageBar>
 ```
 
 - [x] Modal
@@ -313,8 +317,8 @@ private void CloseModal()
 - [x] Pill
 
 ```html
-<Pill Variant="custom" Color="white" Background="purple">
-  Label
+<Pill Variant="PillVariant.Custom" Color="white" Background="purple">
+    Label
 </Pill>
 ```
 
@@ -336,11 +340,10 @@ private void CloseModal()
 - [x] Select
 
 ```html
-<Select SelectedIndices="1">
-  <SelectItem Label="Item 1" Value="1"></SelectItem>
-  <SelectItem Label="Item 2" Value="2"></SelectItem>
-  <SelectItem Label="Item 3" Value="3"></SelectItem>
-  <SelectItem Label="Item 4" Value="4"></SelectItem>
+<Select ItemSelectionChangeEvent=SelectItemSelectedChanged 
+AddItemEvent="SelectItemAdded" Mode="SelectMode.Single" SelectedIndices="2" Id="select1">
+    <SelectItem Id="selectItem1" Label="Item 1" Value="1"></SelectItem>
+    <SelectItem Id="selectItem2" Label="Item 2" Value="2"></SelectItem>
 </Select>
 ```
 
@@ -400,7 +403,10 @@ div[data-tab-content].show {
 - [x] Tile
 
 ```html
-<Tile Size="small">92.8 °C</Tile>
+<Tile Size="TileSize.Medium" Class="mr-1">
+    <div slot="header">Tile header</div>
+    <div class="text-l">92.8 °C</div>
+</Tile>
 ```
 
 - [x] Time picker
@@ -508,12 +514,12 @@ toast.ShowToast("test message", "info");
 - [x] Workflow
 
 ```html
-<WorkflowSteps Id="wf-steps">
-    <WorkflowStep Status="done">Step 1</WorkflowStep>
-    <WorkflowStep Status="success">Step 2</WorkflowStep>
-    <WorkflowStep Status="open">Step 3</WorkflowStep>
-    <WorkflowStep Status="warning">Step 4</WorkflowStep>
-    <WorkflowStep Status="error">Step 5</WorkflowStep>
+<WorkflowSteps Id="wf-steps" StepSelectedEvent="(index) => WfSelectedEvent(index)">
+    <WorkflowStep Status="WorkflowStatus.Done">Step 1</WorkflowStep>
+    <WorkflowStep Status="WorkflowStatus.Success">Step 2</WorkflowStep>
+    <WorkflowStep Status="WorkflowStatus.Open">Step 3</WorkflowStep>
+    <WorkflowStep Status="WorkflowStatus.Warning">Step 4</WorkflowStep>
+    <WorkflowStep Status="WorkflowStatus.Error">Step 5</WorkflowStep>
     <WorkflowStep Disabled="true">Step 6</WorkflowStep>
 </WorkflowSteps>
 ```
