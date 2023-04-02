@@ -1,0 +1,15 @@
+﻿@using Microsoft.JSInterop;
+@namespace SiemensIXBlazor.Components
+@inject IJSRuntime JSRuntime
+
+<ix-dropdown id="@Id" 
+trigger="@Trigger"
+anchor="@Anchor"
+close-behavior="@CloseBehavior"
+header="@Header"
+placement="@Placement"
+positioning-strategy="@PositioningStrategy"
+show="@Show"
+class="@Class">
+    @ChildContent
+</ix-dropdown>

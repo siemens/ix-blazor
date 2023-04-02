@@ -1,0 +1,15 @@
+﻿@using Microsoft.JSInterop;
+@inject IJSRuntime JSRuntime
+@namespace SiemensIXBlazor.Components
+
+<ix-group-item
+               text="@Text"
+               focusable="@Focusable"
+               icon="@Icon"
+               index="@Index"
+               secondary-text="@SecondaryText"
+               selected="@Selected"
+               suppress-selection="@SuppressSelection"
+               id="@Id"
+               @onclick="ItemClicked">
+</ix-group-item>

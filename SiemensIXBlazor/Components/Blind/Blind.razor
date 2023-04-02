@@ -1,0 +1,8 @@
+﻿@using Microsoft.JSInterop;
+@inject IJSRuntime JSRuntime
+
+@namespace SiemensIXBlazor.Components
+
+<ix-blind class="@Class" id="@Id" label="@Label" collapsed="@Collapsed">
+  @ChildContent
+</ix-blind>

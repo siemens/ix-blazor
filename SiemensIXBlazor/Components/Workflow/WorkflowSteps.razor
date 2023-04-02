@@ -1,0 +1,11 @@
+﻿@using Microsoft.JSInterop;
+@inject IJSRuntime JSRuntime
+@namespace SiemensIXBlazor.Components
+
+<ix-workflow-steps id="@Id"
+clickable="@Clickable"
+linear="@Linear"
+selected-index="@SelectedIndex"
+vertical="@Vertical">
+    @ChildContent
+</ix-workflow-steps>

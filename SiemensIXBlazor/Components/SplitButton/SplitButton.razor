@@ -1,0 +1,15 @@
+﻿@using Microsoft.JSInterop;
+@inject IJSRuntime JSRuntime
+@namespace SiemensIXBlazor.Components
+
+<ix-split-button id="@Id" 
+label="@Label" 
+split-icon="@SplitIcon"
+disabled="@Disabled"
+ghost="@Ghost"
+icon="@Icon"
+outline="@Outline"
+placement="@Placement"
+class="@Class">
+    @ChildContent
+</ix-split-button>

@@ -1,0 +1,17 @@
+﻿@using Microsoft.JSInterop;
+@inject IJSRuntime JSRuntime
+@namespace SiemensIXBlazor.Components
+
+<ix-drawer id="@Id" 
+show="@Show" 
+full-height="@FullHeight" 
+close-on-click-outside="@CloseOnClickOutside"
+max-width="@MaxWidth"
+min-width="@MinWidth"
+width="@Width"
+class="@Class">
+    @if(ChildContent != null)
+    {
+        @ChildContent
+    }   
+</ix-drawer>

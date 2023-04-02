@@ -1,0 +1,14 @@
+﻿@using Microsoft.JSInterop;
+@inject IJSRuntime JSRuntime
+@namespace SiemensIXBlazor.Components
+
+<ix-group header="@Header" 
+          sub-header="@SubHeader"
+          collapsed="@Collapsed"
+          expand-on-header-click="@ExpandOnHeaderClick"
+          index="@Index"
+          selected="@Selected"
+          suppress-header-selection="@SuppressHeaderSelection"
+          id="@Id">
+    @ChildContent
+</ix-group>

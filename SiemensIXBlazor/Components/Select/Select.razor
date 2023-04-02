@@ -1,0 +1,18 @@
+﻿@using Microsoft.JSInterop;
+@inject IJSRuntime JSRuntime
+@namespace SiemensIXBlazor.Components
+
+<ix-select selected-indices="@SelectedIndices"
+           allow-clear="@AllowClear"
+           disabled="@Disabled"
+           editable="@Editable"
+           i-1-8n-placeholder="@i18nPlaceholder"
+           i-1-8n-placeholder-editable="@i18nPlaceholderEditable"
+           i-1-8n-select-list-header="@i18nSelectListHeader"
+           mode="@Mode"
+           id="@Id"
+           readonly="@Readonly"
+class="@Class">
+    @ChildContent
+</ix-select>
+

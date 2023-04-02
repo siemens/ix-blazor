@@ -1,0 +1,12 @@
+﻿@namespace SiemensIXBlazor.Components
+
+<ix-event-list animated="@Animated"
+chevron="@Chevron"
+compact="@Compact"
+item-height="@ItemHeight"
+class="@Class">
+   @if(ChildContent != null)
+    {
+        @ChildContent
+    }
+</ix-event-list>
