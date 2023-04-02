@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Newtonsoft.Json.Linq;
+using SiemensIXBlazor.Enums.DatePicker;
 using SiemensIXBlazor.Interops;
 using SiemensIXBlazor.Objects;
 using System.Text.Json;
@@ -12,7 +13,7 @@ namespace SiemensIXBlazor.Components
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
         [Parameter]
-        public string Corners { get; set; } = "rounded";
+        public DatePickerCorners Corners { get; set; } = DatePickerCorners.Rounded;
         [Parameter]
         public string EventDelimiter { get; set; } = " - ";
         [Parameter]

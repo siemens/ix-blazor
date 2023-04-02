@@ -1,9 +1,11 @@
 ﻿@namespace SiemensIXBlazor.Components
+@using SiemensIXBlazor.Enums.Tile;
+@using SiemensIXBlazor.Helpers;
 @inherits IXBaseComponent
 
 <ix-tile 
 @attributes="UserAttributes"
-size="@Size"
+size="@(EnumParser<TileSize>.ParseEnumToString(Size))"
 style="@Style"
 class="@Class">
     @ChildContent

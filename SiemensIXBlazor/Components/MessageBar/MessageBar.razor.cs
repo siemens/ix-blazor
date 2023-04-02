@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using SiemensIXBlazor.Enums.MessageBar;
 using SiemensIXBlazor.Interops;
 
 namespace SiemensIXBlazor.Components
@@ -13,7 +14,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Dismissible { get; set; } = true;
         [Parameter]
-        public string Type { get; set; } = "info";
+        public MessageBarType Type { get; set; } = MessageBarType.Info;
         [Parameter]
         public EventCallback ClosedChangeEvent { get; set; }
 

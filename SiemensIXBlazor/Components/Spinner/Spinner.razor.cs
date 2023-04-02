@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using SiemensIXBlazor.Enums.Spinner;
 
 namespace SiemensIXBlazor.Components
 {
@@ -7,6 +8,6 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string Size { get; set; } = "medium";
         [Parameter]
-        public string Variant { get; set; } = "secondary";
+        public SpinnerVariant Variant { get; set; } = SpinnerVariant.Secondary;
     }
 }

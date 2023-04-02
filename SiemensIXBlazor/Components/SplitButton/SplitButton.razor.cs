@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
+using SiemensIXBlazor.Enums.Button;
 using SiemensIXBlazor.Interops;
 
 namespace SiemensIXBlazor.Components
@@ -26,7 +27,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string SplitIcon { get; set; } = "context-menu";
         [Parameter]
-        public string Variant { get; set; } = "Primary";
+        public ButtonVariant Variant { get; set; } = ButtonVariant.Primary;
         [Parameter]
         public EventCallback ButtonClickedEvent { get; set; }
 

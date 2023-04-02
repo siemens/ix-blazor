@@ -1,4 +1,6 @@
 ﻿@using Microsoft.JSInterop;
+@using SiemensIXBlazor.Enums.DatePicker;
+@using SiemensIXBlazor.Helpers;
 @namespace SiemensIXBlazor.Components
 @inject IJSRuntime JSRuntime
 @inherits IXBaseComponent
@@ -8,7 +10,7 @@
 id="@Id" 
 from="@From" 
 to="@To"
-corners="@Corners"
+corners="@(EnumParser<DatePickerCorners>.ParseEnumToString(Corners))"
 event-delimiter="@EventDelimiter"
 format="@Format"
 max-date="@MaxDate"

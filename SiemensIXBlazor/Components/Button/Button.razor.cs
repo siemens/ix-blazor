@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using SiemensIXBlazor.Enums.Button;
 
 namespace SiemensIXBlazor.Components
 {
@@ -11,7 +12,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter]
-        public string Variant { get; set; } = "Primary";
+        public ButtonVariant Variant { get; set; } = ButtonVariant.Primary;
         [Parameter]
         public bool Disabled { get; set; } = false;
         [Parameter]
@@ -21,7 +22,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Selected { get; set; } = false;
         [Parameter]
-        public string Type { get; set; } = "button";
+        public ButtonType Type { get; set; } = ButtonType.Button;
         [Parameter]
         public string DataTooltip { get; set; } = string.Empty;
         [Parameter]

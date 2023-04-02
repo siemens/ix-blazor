@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Components;
+using SiemensIXBlazor.Enums.Pill;
 
 namespace SiemensIXBlazor.Components
 {
@@ -18,7 +19,7 @@ namespace SiemensIXBlazor.Components
 		[Parameter]
 		public bool Outline { get; set; } = false;
 		[Parameter]
-		public string Variant { get; set; } = "primary";
+		public PillVariant Variant { get; set; } = PillVariant.Primary;
 	}
 }
 

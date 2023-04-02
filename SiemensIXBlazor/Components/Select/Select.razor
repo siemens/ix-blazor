@@ -1,4 +1,6 @@
 ﻿@using Microsoft.JSInterop;
+@using SiemensIXBlazor.Enums.Select;
+@using SiemensIXBlazor.Helpers;
 @inject IJSRuntime JSRuntime
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
@@ -12,7 +14,7 @@
            i-1-8n-placeholder="@i18nPlaceholder"
            i-1-8n-placeholder-editable="@i18nPlaceholderEditable"
            i-1-8n-select-list-header="@i18nSelectListHeader"
-           mode="@Mode"
+           mode="@(EnumParser<SelectMode>.ParseEnumToString(Mode))"
            id="@Id"
            readonly="@Readonly"
            style="@Style"

@@ -1,11 +1,14 @@
 ﻿@namespace SiemensIXBlazor.Components
+@using SiemensIXBlazor.Enums.KPI;
+@using SiemensIXBlazor.Helpers;
 @inherits IXBaseComponent
 
 <ix-kpi
 @attributes="UserAttributes"
 label="@Label" 
 value="@Value"
-orientation="@Orientation"
+orientation="@(EnumParser<KpiOrientation>.ParseEnumToString(Orientation))"
+state="@(EnumParser<KpiState>.ParseEnumToString(State))"
 onreadystatechange="@State"
 unit="@Unit"
 style="@Style"

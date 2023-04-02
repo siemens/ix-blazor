@@ -1,7 +1,7 @@
-﻿using System;
-using System.Text.Json;
+﻿using System.Text.Json;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using SiemensIXBlazor.Enums.Select;
 using SiemensIXBlazor.Interops;
 
 namespace SiemensIXBlazor.Components
@@ -25,7 +25,7 @@ namespace SiemensIXBlazor.Components
 		[Parameter]
 		public string i18nSelectListHeader { get; set; } = "Please select an option";
 		[Parameter]
-		public string Mode { get; set; } = "single";
+		public SelectMode Mode { get; set; } = SelectMode.Single;
 		[Parameter]
 		public bool Readonly { get; set; } = false;
 		[Parameter]

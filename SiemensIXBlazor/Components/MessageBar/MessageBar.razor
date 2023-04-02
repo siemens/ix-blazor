@@ -1,4 +1,6 @@
 ﻿@using Microsoft.JSInterop;
+@using SiemensIXBlazor.Enums.MessageBar;
+@using SiemensIXBlazor.Helpers;
 @inject IJSRuntime JSRuntime
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
@@ -8,7 +10,7 @@
 style="@Style"
 class="@Class"
 dismissible="@Dismissible"
-type="@Type"
+type="@(EnumParser<MessageBarType>.ParseEnumToString(Type))"
 id="@Id">
     @ChildContent
 </ix-message-bar>

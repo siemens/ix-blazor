@@ -1,8 +1,10 @@
 ﻿@namespace SiemensIXBlazor.Components
+@using SiemensIXBlazor.Enums.Spinner;
+@using SiemensIXBlazor.Helpers;
 @inherits IXBaseComponent
 
 <ix-spinner @attributes="UserAttributes" 
 size="@Size" 
-variant="@Variant"
+variant="@(EnumParser<SpinnerVariant>.ParseEnumToString(Variant))"
 style="@Style"
 class="@Class"></ix-spinner>

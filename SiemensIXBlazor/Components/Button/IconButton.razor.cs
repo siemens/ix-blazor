@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using SiemensIXBlazor.Enums.Button;
 
 namespace SiemensIXBlazor.Components
 {
@@ -23,9 +24,9 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string DataTooltip { get; set; } = string.Empty;
         [Parameter]
-        public string Type { get; set; } = "button";
+        public ButtonType Type { get; set; } = ButtonType.Button;
         [Parameter]
-        public string Variant { get; set; } = "Primary";
+        public ButtonVariant Variant { get; set; } = ButtonVariant.Primary;
         [Parameter]
         public EventCallback ClickEvent { get; set; }
 

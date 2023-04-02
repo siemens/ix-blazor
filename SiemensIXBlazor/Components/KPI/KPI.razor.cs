@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using SiemensIXBlazor.Enums.KPI;
 
 namespace SiemensIXBlazor.Components
 {
@@ -7,9 +8,9 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string? Label { get; set; }
         [Parameter]
-        public string Orientation { get; set; } = "horizontal";
+        public KpiOrientation Orientation { get; set; } = KpiOrientation.Horizontal;
         [Parameter]
-        public string State { get; set; } = "neutral";
+        public KpiState State { get; set; } = KpiState.Neutral;
         [Parameter]
         public string? Unit { get; set; }
         [Parameter]

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using SiemensIXBlazor.Enums.Chip;
 using SiemensIXBlazor.Interops;
 
 namespace SiemensIXBlazor.Components
@@ -23,7 +24,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Outline { get; set; } = false;
         [Parameter]
-        public string Variant { get; set; } = "primary";
+        public ChipVariant Variant { get; set; } = ChipVariant.Primary;
         [Parameter]
         public EventCallback ClosedEvent { get; set; }
 

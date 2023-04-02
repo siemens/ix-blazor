@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using SiemensIXBlazor.Enums.Tabs;
 using SiemensIXBlazor.Interops;
 
 namespace SiemensIXBlazor.Components
@@ -10,9 +11,9 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter]
-        public string Layout { get; set; } = "auto";
+        public TabsLayout Layout { get; set; } = TabsLayout.Auto;
         [Parameter]
-        public string Placement { get; set; } = "bottom";
+        public TabsPlacement Placement { get; set; } = TabsPlacement.Bottom;
         [Parameter]
         public bool Rounded { get; set; } = false;
         [Parameter]

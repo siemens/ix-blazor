@@ -1,4 +1,6 @@
 ﻿@using Microsoft.JSInterop;
+@using SiemensIXBlazor.Enums.Button;
+@using SiemensIXBlazor.Helpers;
 @inject IJSRuntime JSRuntime
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
@@ -14,6 +16,7 @@ icon="@Icon"
 outline="@Outline"
 placement="@Placement"
 style="@Style"
-class="@Class">
+class="@Class"
+variant="@(EnumParser<ButtonVariant>.ParseEnumToString(Variant))">
     @ChildContent
 </ix-split-button>

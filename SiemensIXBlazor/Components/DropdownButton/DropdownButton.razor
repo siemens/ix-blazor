@@ -1,10 +1,12 @@
 ﻿@namespace SiemensIXBlazor.Components
+@using SiemensIXBlazor.Enums.Button;
+@using SiemensIXBlazor.Helpers;
 @inherits IXBaseComponent
 
 <ix-dropdown-button
 @attributes="UserAttributes"
 label="@Label" 
-variant="@Variant" 
+variant="@(EnumParser<ButtonVariant>.ParseEnumToString(Variant))" 
 icon="@Icon"
 active="@Active"
 disabled="@Disabled"

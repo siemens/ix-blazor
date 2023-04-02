@@ -1,4 +1,6 @@
 ﻿@using Microsoft.JSInterop;
+@using SiemensIXBlazor.Enums.Chip;
+@using SiemensIXBlazor.Helpers;
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
 @inject IJSRuntime JSRuntime
@@ -12,6 +14,6 @@ active="@Active"
 background="@Background" 
 color="@Color" 
 icon="@Icon" 
-variant="@Variant"
+variant="@(EnumParser<ChipVariant>.ParseEnumToString(Variant))"
 style="@Style"
 class="@Class">@ChildContent</ix-chip>

@@ -1,14 +1,16 @@
 ﻿@namespace SiemensIXBlazor.Components
+@using SiemensIXBlazor.Enums.Workflow;
+@using SiemensIXBlazor.Helpers;
 @inherits IXBaseComponent
 
 <ix-workflow-step
 @attributes="UserAttributes"
 style="@Style"
 class="@Class"
-status="@Status" 
+status="@(EnumParser<WorkflowStatus>.ParseEnumToString(Status))" 
 clickable="@Clickable"
 disabled="@Disabled"
-position="@Position"
+position="@(EnumParser<WorkflowPosition>.ParseEnumToString(Position))"
 selected="@Selected"
 vertical="@Vertical">
     @ChildContent

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using SiemensIXBlazor.Enums.Workflow;
 
 namespace SiemensIXBlazor.Components
 {
@@ -11,11 +12,11 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Disabled { get; set; } = false;
         [Parameter]
-        public string? Position { get; set; }
+        public WorkflowPosition Position { get; set; } = WorkflowPosition.Undefined;
         [Parameter]
         public bool Selected { get; set; } = false;
         [Parameter]
-        public string Status { get; set; } = "open";
+        public WorkflowStatus Status { get; set; } = WorkflowStatus.Open;
         [Parameter]
         public bool Vertical { get; set; } = false;
     }

@@ -1,9 +1,11 @@
 ﻿@namespace SiemensIXBlazor.Components
+@using SiemensIXBlazor.Enums.Pill;
+@using SiemensIXBlazor.Helpers;
 @inherits IXBaseComponent
 
 <ix-pill
          @attributes="UserAttributes"
-         variant="@Variant"
+         variant="@(EnumParser<PillVariant>.ParseEnumToString(Variant))"
          color="@Color"
          background="@Background"
          align-lef="@AllignLeft"

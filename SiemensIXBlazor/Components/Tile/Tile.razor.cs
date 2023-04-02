@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components;
+using SiemensIXBlazor.Enums.Tile;
 
 namespace SiemensIXBlazor.Components
 {
     public partial class Tile
     {
         [Parameter]
-        public string Size { get; set; } = "medium";
+        public TileSize Size { get; set; } = TileSize.Medium;
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
     }

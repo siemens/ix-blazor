@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using SiemensIXBlazor.Enums.Button;
 
 namespace SiemensIXBlazor.Components
 {
@@ -17,7 +18,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Outline { get; set; } = false;
         [Parameter]
-        public string Variant { get; set; } = "Primary";
+        public ButtonVariant Variant { get; set; } = ButtonVariant.Primary;
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         
