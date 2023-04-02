@@ -1,8 +1,12 @@
 ﻿@using Microsoft.JSInterop;
 @inject IJSRuntime JSRuntime
 @namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
 
 <ix-group-item
+               @attributes="UserAttributes"
+               style="@Style"
+               class="@Class"
                text="@Text"
                focusable="@Focusable"
                icon="@Icon"

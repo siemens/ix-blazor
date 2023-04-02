@@ -1,8 +1,11 @@
 ﻿@using Microsoft.JSInterop;
 @namespace SiemensIXBlazor.Components
 @inject IJSRuntime JSRuntime
+@inherits IXBaseComponent
 
-<ix-dropdown id="@Id" 
+<ix-dropdown
+@attributes="UserAttributes"
+id="@Id" 
 trigger="@Trigger"
 anchor="@Anchor"
 close-behavior="@CloseBehavior"
@@ -10,6 +13,7 @@ header="@Header"
 placement="@Placement"
 positioning-strategy="@PositioningStrategy"
 show="@Show"
+style="@Style"
 class="@Class">
     @ChildContent
 </ix-dropdown>

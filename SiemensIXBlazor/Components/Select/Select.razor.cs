@@ -2,16 +2,14 @@
 using System.Text.Json;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using SiemensIXBlazor.Components.Interops;
+using SiemensIXBlazor.Interops;
 
 namespace SiemensIXBlazor.Components
 {
-	public partial class Select
+    public partial class Select
 	{
 		[Parameter, EditorRequired]
 		public string Id { get; set; } = string.Empty;
-        [Parameter]
-        public string Class { get; set; } = string.Empty;
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
 		[Parameter]

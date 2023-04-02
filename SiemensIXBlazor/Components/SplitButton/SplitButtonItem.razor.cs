@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using SiemensIXBlazor.Components.Interops;
+using SiemensIXBlazor.Interops;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +13,6 @@ namespace SiemensIXBlazor.Components
     {
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
-        [Parameter]
-        public string Class { get; set; } = string.Empty;
         [Parameter]
         public string? Icon { get; set; }
         [Parameter]

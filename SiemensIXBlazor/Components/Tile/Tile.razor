@@ -1,5 +1,10 @@
 ﻿@namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
 
-<ix-tile size="@Size" class="@Class">
+<ix-tile 
+@attributes="UserAttributes"
+size="@Size"
+style="@Style"
+class="@Class">
     @ChildContent
 </ix-tile>

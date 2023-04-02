@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using SiemensIXBlazor.Components.Interops;
+using SiemensIXBlazor.Interops;
 
 namespace SiemensIXBlazor.Components
 {
@@ -8,8 +8,6 @@ namespace SiemensIXBlazor.Components
     {
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
-        [Parameter]
-        public string Class { get; set; } = string.Empty;
         [Parameter]
         public bool Checked { get; set; } = false;
         [Parameter]

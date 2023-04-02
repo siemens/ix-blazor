@@ -1,9 +1,13 @@
 ﻿@namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
 
-<ix-event-list animated="@Animated"
+<ix-event-list
+@attributes="UserAttributes"
+animated="@Animated"
 chevron="@Chevron"
 compact="@Compact"
 item-height="@ItemHeight"
+style="@Style"
 class="@Class">
    @if(ChildContent != null)
     {

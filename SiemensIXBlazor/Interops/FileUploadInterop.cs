@@ -1,21 +1,21 @@
 ﻿using Microsoft.JSInterop;
 
-namespace SiemensIXBlazor.Components.Interops
+namespace SiemensIXBlazor.Interops
 {
-    public class BaseInterop
+    internal class FileUploadInterop
     {
         private readonly Lazy<Task<IJSObjectReference>> moduleTask;
 
-        public BaseInterop(IJSRuntime jsRuntime)
+        public FileUploadInterop(IJSRuntime jsRuntime)
         {
             moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
-                "import", $"./_content/SiemensIXBlazor/js/interops/baseJsInterop.js").AsTask());
+                "import", $"./_content/SiemensIXBlazor/js/interops/fileUploadInterop.js").AsTask());
         }
 
         public async Task AddEventListener(object classObject, string id, string eventName, string callbackFunctionName)
         {
             var module = await moduleTask.Value;
-            await module.InvokeAsync<string>("listenEvent", DotNetObjectReference.Create(classObject), id, eventName, callbackFunctionName);
+            await module.InvokeAsync<string>("fileUploadEventHandler", DotNetObjectReference.Create(classObject), id, eventName, callbackFunctionName);
         }
 
         public async ValueTask DisposeAsync()

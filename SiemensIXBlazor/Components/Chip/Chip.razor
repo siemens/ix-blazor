@@ -1,9 +1,11 @@
 ﻿@using Microsoft.JSInterop;
 @namespace SiemensIXBlazor.Components
-
+@inherits IXBaseComponent
 @inject IJSRuntime JSRuntime
 
-<ix-chip id="@Id" 
+<ix-chip
+@attributes="UserAttributes"
+id="@Id" 
 closable="@Closable" 
 outline="@Outline" 
 active="@Active" 
@@ -11,4 +13,5 @@ background="@Background"
 color="@Color" 
 icon="@Icon" 
 variant="@Variant"
+style="@Style"
 class="@Class">@ChildContent</ix-chip>

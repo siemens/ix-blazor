@@ -1,6 +1,10 @@
 ﻿@namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
 
-<ix-button @onclick="Clicked" class="@Class"
+<ix-button @onclick="Clicked"
+@attributes="UserAttributes"
+style="@Style"
+class="@Class"
 id="@Id"
 disabled="@Disabled" 
 ghost="@Ghost" 

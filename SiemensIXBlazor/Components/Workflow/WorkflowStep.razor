@@ -1,6 +1,11 @@
 ﻿@namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
 
-<ix-workflow-step status="@Status" 
+<ix-workflow-step
+@attributes="UserAttributes"
+style="@Style"
+class="@Class"
+status="@Status" 
 clickable="@Clickable"
 disabled="@Disabled"
 position="@Position"

@@ -1,13 +1,16 @@
 ﻿@namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
 
 <ix-pill
+         @attributes="UserAttributes"
          variant="@Variant"
          color="@Color"
          background="@Background"
          align-lef="@AllignLeft"
          icon="@Icon"
          outline="@Outline"
-class="@Class">
+         style="@Style"
+         class="@Class">
     @ChildContent
 </ix-pill>
 

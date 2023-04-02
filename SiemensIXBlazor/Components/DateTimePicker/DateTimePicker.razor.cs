@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Newtonsoft.Json.Linq;
-using SiemensIXBlazor.Components.Interops;
+using SiemensIXBlazor.Interops;
 using SiemensIXBlazor.Objects;
 using System.Text.Json;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -12,8 +12,6 @@ namespace SiemensIXBlazor.Components
     {
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
-        [Parameter]
-        public string Class { get; set; } = string.Empty;
         [Parameter]
         public static string DateFormat { get; set; } = "yyyy/MM/dd";
         [Parameter]

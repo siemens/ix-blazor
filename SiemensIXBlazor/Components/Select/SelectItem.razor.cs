@@ -1,11 +1,11 @@
 ﻿using System;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using SiemensIXBlazor.Components.Interops;
+using SiemensIXBlazor.Interops;
 
 namespace SiemensIXBlazor.Components
 {
-	public partial class SelectItem
+    public partial class SelectItem
 	{
 		[Parameter, EditorRequired]
 		public string Id { get; set; } = string.Empty;

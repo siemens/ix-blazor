@@ -1,12 +1,16 @@
 ﻿@namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
 
-<ix-dropdown-button label="@Label" 
+<ix-dropdown-button
+@attributes="UserAttributes"
+label="@Label" 
 variant="@Variant" 
 icon="@Icon"
 active="@Active"
 disabled="@Disabled"
 ghost="@Ghost"
 outline="@Outline"
+style="@Style"
 class="@Class">
     @ChildContent
 </ix-dropdown-button>

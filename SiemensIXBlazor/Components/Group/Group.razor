@@ -1,8 +1,13 @@
 ﻿@using Microsoft.JSInterop;
 @inject IJSRuntime JSRuntime
 @namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
 
-<ix-group header="@Header" 
+<ix-group 
+          @attributes="UserAttributes"
+          header="@Header"
+          style="@Style"
+          class="@Class"
           sub-header="@SubHeader"
           collapsed="@Collapsed"
           expand-on-header-click="@ExpandOnHeaderClick"

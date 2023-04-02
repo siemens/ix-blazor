@@ -1,8 +1,11 @@
 ﻿@using Microsoft.JSInterop;
 @inject IJSRuntime JSRuntime
 @namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
 
-<ix-upload id="@Id"
+<ix-upload
+@attributes="UserAttributes"
+id="@Id"
 accept="@Accept"
 disabled="@Disabled"
 i-1-8n-upload-disabled="@I18nUploadDisabled"
@@ -13,4 +16,5 @@ multiple="@Multiple"
 select-file-text="@SelectFileText"
 upload-failed-text="@UploadFailedText"
 upload-success-text="@UploadSuccessText"
+style="@Style"
 class="@Class"></ix-upload>

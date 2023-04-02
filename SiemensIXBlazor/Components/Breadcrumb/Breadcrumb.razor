@@ -1,8 +1,9 @@
 ﻿@using Microsoft.JSInterop;
 @inject IJSRuntime JSRuntime
+@inherits IXBaseComponent
 
 @namespace SiemensIXBlazor.Components
 
-<ix-breadcrumb class="@Class" ghost="@Ghost" nextItems="@NextItems" visibleItemCount="@VisibleItemCount" id="@Id">
+<ix-breadcrumb @attributes="UserAttributes" class="@Class" style="@Style" ghost="@Ghost" nextItems="@NextItems" visibleItemCount="@VisibleItemCount" id="@Id">
     @ChildContent
 </ix-breadcrumb>

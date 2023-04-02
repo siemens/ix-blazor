@@ -1,8 +1,11 @@
 ﻿@using Microsoft.JSInterop;
 @inject IJSRuntime JSRuntime
 @namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
 
-<ix-toggle checked="@Checked"
+<ix-toggle
+@attributes="UserAttributes"
+checked="@Checked"
 id="@Id"
 disabled="@Disabled"
 hide-text="@HideText"
@@ -10,4 +13,5 @@ indeterminate="@Indeterminate"
 text-indeterminate="@TextIndeterminate"
 text-off="@TextOff"
 text-on="@TextOn"
+style="@Style"
 class="@Class"></ix-toggle>

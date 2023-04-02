@@ -8,7 +8,5 @@ namespace SiemensIXBlazor.Components
         public string Size { get; set; } = "medium";
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
-        [Parameter]
-        public string Class { get; set; } = string.Empty;
     }
 }

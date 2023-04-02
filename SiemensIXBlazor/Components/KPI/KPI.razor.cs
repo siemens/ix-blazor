@@ -1,9 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SiemensIXBlazor.Components
 {
@@ -15,8 +10,6 @@ namespace SiemensIXBlazor.Components
         public string Orientation { get; set; } = "horizontal";
         [Parameter]
         public string State { get; set; } = "neutral";
-        [Parameter]
-        public string Class { get; set; } = string.Empty;
         [Parameter]
         public string? Unit { get; set; }
         [Parameter]

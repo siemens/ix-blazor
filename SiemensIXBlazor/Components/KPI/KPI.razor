@@ -1,8 +1,12 @@
 ﻿@namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
 
-<ix-kpi label="@Label" 
+<ix-kpi
+@attributes="UserAttributes"
+label="@Label" 
 value="@Value"
 orientation="@Orientation"
 onreadystatechange="@State"
 unit="@Unit"
+style="@Style"
 class="@Class"></ix-kpi>

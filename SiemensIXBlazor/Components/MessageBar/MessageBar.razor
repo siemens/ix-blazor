@@ -1,8 +1,12 @@
 ﻿@using Microsoft.JSInterop;
 @inject IJSRuntime JSRuntime
 @namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
 
 <ix-message-bar
+@attributes="UserAttributes"
+style="@Style"
+class="@Class"
 dismissible="@Dismissible"
 type="@Type"
 id="@Id">

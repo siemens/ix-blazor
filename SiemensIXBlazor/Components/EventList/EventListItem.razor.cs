@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
-using SiemensIXBlazor.Components.Interops;
-using System.Runtime.InteropServices.JavaScript;
-using System.Text.Json.Serialization;
+using SiemensIXBlazor.Interops;
 
 namespace SiemensIXBlazor.Components
 {
@@ -11,8 +8,6 @@ namespace SiemensIXBlazor.Components
     {
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
-        [Parameter]
-        public string Class { get; set; } = string.Empty;
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter]

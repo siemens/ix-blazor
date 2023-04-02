@@ -1,6 +1,6 @@
 ﻿using Microsoft.JSInterop;
 
-namespace SiemensIXBlazor.Components.Interops
+namespace SiemensIXBlazor.Interops
 {
     internal class TabsInterop
     {

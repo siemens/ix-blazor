@@ -1,5 +1,6 @@
 ﻿@namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
 
-<ix-flip-tile state="@State" class="@Class">
+<ix-flip-tile @attributes="UserAttributes" state="@State" style="@Style" class="@Class">
     @ChildContent
 </ix-flip-tile>

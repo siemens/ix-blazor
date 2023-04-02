@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using SiemensIXBlazor.Components.Interops;
+using SiemensIXBlazor.Interops;
 
 namespace SiemensIXBlazor.Components
 {

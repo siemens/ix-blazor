@@ -1,8 +1,11 @@
 ﻿@using Microsoft.JSInterop;
 @namespace SiemensIXBlazor.Components
 @inject IJSRuntime JSRuntime
+@inherits IXBaseComponent
 
-<ix-datetime-picker id="@Id"
+<ix-datetime-picker
+@attributes="UserAttributes"
+id="@Id"
 date-format="@DateFormat"
 event-delimiter="@EventDelimiter"
 from="@From"
@@ -18,4 +21,5 @@ time="@Time"
 time-format="@TimeFormat"
 time-reference="@TimeReference"
 to="@To"
+style="@Style"
 class="@Class"></ix-datetime-picker>

@@ -1,12 +1,15 @@
 ﻿@using Microsoft.JSInterop;
 @inject IJSRuntime JSRuntime
 @namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
 
 <ix-event-list-item
+@attributes="UserAttributes"
 id="@Id"
 color="@Color"
 chevron="@Chevron"
 disabled="@Disabled"
 opacity="@Opacity"
 selected="@Selected"
+style="@Style"
 class="@Class">@ChildContent</ix-event-list-item>

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using SiemensIXBlazor.Components.Interops;
+using SiemensIXBlazor.Interops;
 
 namespace SiemensIXBlazor.Components
 {
@@ -8,8 +8,6 @@ namespace SiemensIXBlazor.Components
     {
         [Parameter]
         public string Label { get; set; } = string.Empty;
-        [Parameter]
-        public string Class { get; set; } = string.Empty;
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter, EditorRequired]

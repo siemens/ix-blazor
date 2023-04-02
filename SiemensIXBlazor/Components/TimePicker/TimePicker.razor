@@ -1,8 +1,11 @@
 ﻿@using Microsoft.JSInterop;
 @inject IJSRuntime JSRuntime
 @namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
 
-<ix-time-picker id="@Id"
+<ix-time-picker
+@attributes="@UserAttributes"
+id="@Id"
 corners="@Corners" 
 format="@Format" 
 show-hour="@ShowHour" 
@@ -11,5 +14,5 @@ show-seconds="@ShowSeconds"
 show-time-reference="@ShowTimeReference" 
 text-select-time="@TextSelectTime" 
 time="@Time"
-style="display: block; width: 20rem"
+style="display: block; width: 20rem; @Style"
 class="@Class"></ix-time-picker>

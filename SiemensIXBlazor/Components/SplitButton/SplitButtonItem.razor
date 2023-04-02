@@ -1,5 +1,12 @@
 ﻿@using Microsoft.JSInterop;
 @inject IJSRuntime JSRuntime
 @namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
 
-<ix-split-button-item id="@Id" icon="@Icon" label="@Label" class="@Class"></ix-split-button-item>
+<ix-split-button-item
+@attributes="UserAttributes"
+id="@Id" 
+icon="@Icon" 
+label="@Label"
+style="@Style"
+class="@Class"></ix-split-button-item>

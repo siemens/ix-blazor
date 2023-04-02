@@ -19,7 +19,5 @@ namespace SiemensIXBlazor.Components
         public bool Compact { get; set; } = false;
         [Parameter]
         public string ItemHeight { get; set; } = "S";
-        [Parameter]
-        public string Class { get; set; } = string.Empty;
     }
 }

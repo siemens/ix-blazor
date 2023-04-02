@@ -1,11 +1,16 @@
 ﻿@using Microsoft.JSInterop;
 @inject IJSRuntime JSRuntime
 @namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
 
-<ix-workflow-steps id="@Id"
+<ix-workflow-steps
+@attributes="UserAttributes"
+id="@Id"
 clickable="@Clickable"
 linear="@Linear"
 selected-index="@SelectedIndex"
-vertical="@Vertical">
+vertical="@Vertical"
+style="@Style"
+class="@Class">
     @ChildContent
 </ix-workflow-steps>

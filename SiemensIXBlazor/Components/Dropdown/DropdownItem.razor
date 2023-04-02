@@ -1,2 +1,10 @@
 ﻿@namespace SiemensIXBlazor.Components
-<ix-dropdown-item label="@Label" value="@Value" @onclick="() => Clicked(Label)"></ix-dropdown-item>
+@inherits IXBaseComponent
+<ix-dropdown-item
+@attributes="UserAttributes"
+style="@Style"
+class="@Class"
+label="@Label" 
+value="@Value" 
+@onclick="() => Clicked(Label)">
+</ix-dropdown-item>
