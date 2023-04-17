@@ -17,6 +17,6 @@ outline="@Outline"
 placement="@Placement"
 style="@Style"
 class="@Class"
-variant="@(EnumParser<ButtonVariant>.ParseEnumToString(Variant))">
+variant="@((Variant != null) ? EnumParser<ButtonVariant>.ParseEnumToString(Variant) : "primary")">
     @ChildContent
 </ix-split-button>

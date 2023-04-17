@@ -18,7 +18,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Outline { get; set; } = false;
         [Parameter]
-        public ButtonVariant Variant { get; set; } = ButtonVariant.Primary;
+        public ButtonVariant? Variant { get; set; }
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         

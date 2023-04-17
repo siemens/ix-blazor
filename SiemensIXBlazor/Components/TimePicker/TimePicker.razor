@@ -8,7 +8,7 @@
 <ix-time-picker
 @attributes="@UserAttributes"
 id="@Id"
-corners="@(EnumParser<DatePickerCorners>.ParseEnumToString(Corners))" 
+corners="@((Corners != null) ? EnumParser<DatePickerCorners>.ParseEnumToString(Corners) : "rounded")" 
 format="@Format" 
 show-hour="@ShowHour" 
 show-minutes="@ShowMinutes" 

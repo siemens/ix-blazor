@@ -14,7 +14,7 @@
            i-1-8n-placeholder="@i18nPlaceholder"
            i-1-8n-placeholder-editable="@i18nPlaceholderEditable"
            i-1-8n-select-list-header="@i18nSelectListHeader"
-           mode="@(EnumParser<SelectMode>.ParseEnumToString(Mode))"
+           mode="@((Mode != null) ? EnumParser<SelectMode>.ParseEnumToString(Mode) : "single")"
            id="@Id"
            readonly="@Readonly"
            style="@Style"

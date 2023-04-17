@@ -8,9 +8,9 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string? Label { get; set; }
         [Parameter]
-        public KpiOrientation Orientation { get; set; } = KpiOrientation.Horizontal;
+        public KpiOrientation? Orientation { get; set; }
         [Parameter]
-        public KpiState State { get; set; } = KpiState.Neutral;
+        public KpiState? State { get; set; }
         [Parameter]
         public string? Unit { get; set; }
         [Parameter]

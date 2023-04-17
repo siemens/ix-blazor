@@ -12,8 +12,8 @@ disabled="@Disabled"
 ghost="@Ghost" 
 outline="@Outline" 
 selected="@Selected"
-type="@(EnumParser<ButtonType>.ParseEnumToString(Type))"
-variant="@(EnumParser<ButtonVariant>.ParseEnumToString(Variant))"
+type="@((Type != null) ? EnumParser<ButtonType>.ParseEnumToString(Type) : "button"))"
+variant="@((Variant != null) ? EnumParser<ButtonVariant>.ParseEnumToString(Variant) : "primary"))"
 data-toggle="@DataToggle"
 data-tooltip="@DataTooltip">
     @ChildContent

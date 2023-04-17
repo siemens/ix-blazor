@@ -25,7 +25,7 @@ namespace SiemensIXBlazor.Components
 		[Parameter]
 		public string i18nSelectListHeader { get; set; } = "Please select an option";
 		[Parameter]
-		public SelectMode Mode { get; set; } = SelectMode.Single;
+		public SelectMode? Mode { get; set; }
 		[Parameter]
 		public bool Readonly { get; set; } = false;
 		[Parameter]

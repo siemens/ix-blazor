@@ -10,7 +10,7 @@
 style="@Style"
 class="@Class"
 dismissible="@Dismissible"
-type="@(EnumParser<MessageBarType>.ParseEnumToString(Type))"
+type="@((Type != null) ? EnumParser<MessageBarType>.ParseEnumToString(Type) : "info")"
 id="@Id">
     @ChildContent
 </ix-message-bar>

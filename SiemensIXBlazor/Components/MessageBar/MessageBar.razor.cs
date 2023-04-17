@@ -14,7 +14,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Dismissible { get; set; } = true;
         [Parameter]
-        public MessageBarType Type { get; set; } = MessageBarType.Info;
+        public MessageBarType? Type { get; set; }
         [Parameter]
         public EventCallback ClosedChangeEvent { get; set; }
 

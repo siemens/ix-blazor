@@ -8,6 +8,6 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string Size { get; set; } = "medium";
         [Parameter]
-        public SpinnerVariant Variant { get; set; } = SpinnerVariant.Secondary;
+        public SpinnerVariant? Variant { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter]
-        public ButtonVariant Variant { get; set; } = ButtonVariant.Primary;
+        public ButtonVariant? Variant { get; set; }
         [Parameter]
         public bool Disabled { get; set; } = false;
         [Parameter]
@@ -22,7 +22,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Selected { get; set; } = false;
         [Parameter]
-        public ButtonType Type { get; set; } = ButtonType.Button;
+        public ButtonType? Type { get; set; }
         [Parameter]
         public string DataTooltip { get; set; } = string.Empty;
         [Parameter]

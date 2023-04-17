@@ -7,10 +7,10 @@
 @attributes="UserAttributes"
 style="@Style"
 class="@Class"
-status="@(EnumParser<WorkflowStatus>.ParseEnumToString(Status))" 
+status="@((Status != null) ? EnumParser<WorkflowStatus>.ParseEnumToString(Status) : "open")" 
 clickable="@Clickable"
 disabled="@Disabled"
-position="@(EnumParser<WorkflowPosition>.ParseEnumToString(Position))"
+position="@((Position != null) ? EnumParser<WorkflowPosition>.ParseEnumToString(Position) : "undefined")"
 selected="@Selected"
 vertical="@Vertical">
     @ChildContent
