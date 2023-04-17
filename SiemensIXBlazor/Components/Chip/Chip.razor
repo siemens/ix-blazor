@@ -14,6 +14,6 @@ active="@Active"
 background="@Background" 
 color="@Color" 
 icon="@Icon" 
-variant="@((Variant != null) ? EnumParser<ChipVariant>.ParseEnumToString(Variant) : "primary")"
+variant="@(EnumParser<ChipVariant>.ParseEnumToString(Variant))"
 style="@Style"
 class="@Class">@ChildContent</ix-chip>

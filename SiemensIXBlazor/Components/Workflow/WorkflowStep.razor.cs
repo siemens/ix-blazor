@@ -12,11 +12,11 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Disabled { get; set; } = false;
         [Parameter]
-        public WorkflowPosition? Position { get; set; }
+        public WorkflowPosition Position { get; set; } = WorkflowPosition.Undefined;
         [Parameter]
         public bool Selected { get; set; } = false;
         [Parameter]
-        public WorkflowStatus? Status { get; set; }
+        public WorkflowStatus Status { get; set; } = WorkflowStatus.Open;
         [Parameter]
         public bool Vertical { get; set; } = false;
     }

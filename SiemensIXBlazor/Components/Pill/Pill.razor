@@ -5,7 +5,7 @@
 
 <ix-pill
          @attributes="UserAttributes"
-         variant="@((Variant != null) ? EnumParser<PillVariant>.ParseEnumToString(Variant) : "primary")"
+         variant="@(EnumParser<PillVariant>.ParseEnumToString(Variant))"
          color="@Color"
          background="@Background"
          align-lef="@AllignLeft"

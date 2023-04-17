@@ -6,7 +6,7 @@
 <ix-dropdown-button
 @attributes="UserAttributes"
 label="@Label" 
-variant="@((Variant != null) ? EnumParser<ButtonVariant>.ParseEnumToString(Variant) : "primary")" 
+variant="@(EnumParser<ButtonVariant>.ParseEnumToString(Variant))" 
 icon="@Icon"
 active="@Active"
 disabled="@Disabled"

@@ -11,9 +11,9 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter]
-        public TabsLayout? Layout { get; set; }
+        public TabsLayout Layout { get; set; } = TabsLayout.Auto;
         [Parameter]
-        public TabsPlacement? Placement { get; set; }
+        public TabsPlacement Placement { get; set; } = TabsPlacement.Bottom;
         [Parameter]
         public bool Rounded { get; set; } = false;
         [Parameter]

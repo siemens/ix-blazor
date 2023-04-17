@@ -27,7 +27,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string SplitIcon { get; set; } = "context-menu";
         [Parameter]
-        public ButtonVariant? Variant { get; set; }
+        public ButtonVariant Variant { get; set; } = ButtonVariant.Primary;
         [Parameter]
         public EventCallback ButtonClickedEvent { get; set; }
 

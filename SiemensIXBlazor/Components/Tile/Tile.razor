@@ -5,7 +5,7 @@
 
 <ix-tile 
 @attributes="UserAttributes"
-size="@((Size != null) ? EnumParser<TileSize>.ParseEnumToString(Size) : "medium")"
+size="@(EnumParser<TileSize>.ParseEnumToString(Size))"
 style="@Style"
 class="@Class">
     @ChildContent

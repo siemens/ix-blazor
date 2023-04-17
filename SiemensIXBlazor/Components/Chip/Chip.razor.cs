@@ -24,7 +24,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Outline { get; set; } = false;
         [Parameter]
-        public ChipVariant? Variant { get; set; }
+        public ChipVariant Variant { get; set; } = ChipVariant.Primary;
         [Parameter]
         public EventCallback ClosedEvent { get; set; }
 

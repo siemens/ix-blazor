@@ -5,6 +5,6 @@
 
 <ix-spinner @attributes="UserAttributes" 
 size="@Size" 
-variant="@((Variant != null) ? EnumParser<SpinnerVariant>.ParseEnumToString(Variant) : "secondary")"
+variant="@(EnumParser<SpinnerVariant>.ParseEnumToString(Variant))"
 style="@Style"
 class="@Class"></ix-spinner>

@@ -10,7 +10,7 @@
 id="@Id" 
 from="@From" 
 to="@To"
-corners="@((Corners != null) ? EnumParser<DatePickerCorners>.ParseEnumToString(Corners) : "rounded")"
+corners="@(EnumParser<DatePickerCorners>.ParseEnumToString(Corners))"
 event-delimiter="@EventDelimiter"
 format="@Format"
 max-date="@MaxDate"

@@ -8,8 +8,8 @@
 <ix-tabs
 @attributes="UserAttributes"
 id="@Id" 
-layout="@((Layout != null) ? EnumParser<TabsLayout>.ParseEnumToString(Layout) : "auto")" 
-placement="@((Placement != null) ? EnumParser<TabsPlacement>.ParseEnumToString(Placement) : "bottom")" 
+layout="@(EnumParser<TabsLayout>.ParseEnumToString(Layout))" 
+placement="@(EnumParser<TabsPlacement>.ParseEnumToString(Placement))" 
 rounded="@Rounded" 
 selected="@Selected" 
 small="@Small"

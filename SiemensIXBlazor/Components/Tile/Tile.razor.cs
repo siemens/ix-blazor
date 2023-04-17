@@ -6,7 +6,7 @@ namespace SiemensIXBlazor.Components
     public partial class Tile
     {
         [Parameter]
-        public TileSize? Size { get; set; }
+        public TileSize Size { get; set; } = TileSize.Medium;
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
     }
