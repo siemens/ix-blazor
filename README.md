@@ -55,7 +55,61 @@ Test content
 <IconButton Icon="info"></IconButton>
 ```
 
-- [ ] Category filter
+- [x] Category filter
+
+```html
+<CategoryFilter 
+    @ref="categoryFilter" 
+    Id="category-filter-1" 
+    Placeholder="Filter by"
+    RepeatCategories="false"
+    FilterChangedEvent="FilterStateChanged"
+    InputChangedEvent="InputStateChanged">
+</CategoryFilter>
+```
+
+```csharp
+CategoryFilter categoryFilter;
+Dictionary<string, Category> categoriesDict;
+FilterState filterState;
+
+protected override void OnAfterRender(bool firstRender)
+    {
+        if(firstRender)
+        {
+            categoriesDict = new();
+            categoriesDict.Add("ID_1", new Category()
+            {
+                Label = "Vendor",
+                Options = new string[]
+                {
+                    "Apple", "MS", "Siemens"
+                }
+            });
+
+            filterState = new()
+            {
+                Tokens = new string[]
+                {
+                    "Custom filter text"
+                },
+                Categories = new FilterStateCategory[]
+                {
+                    new FilterStateCategory()
+                    {
+                        Id = "ID_1",
+                        Value = "IBM",
+                        Operator = "Not Equal"
+                    }
+                }
+            };
+
+            categoryFilter.Categories = categoriesDict;
+            categoryFilter.FilterState = filterState;
+        }
+    }
+```
+
 - [ ] ECharts
 - [x] Checkbox
 
