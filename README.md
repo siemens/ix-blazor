@@ -1,27 +1,87 @@
 ## Siemens IX for Blazor
 
-### Installation
+## Installation
 
-#### Install the Nuget package
+Install the `SiemensIXBlazor` package from the [NuGet](https://www.nuget.org/packages/SiemensIXBlazor/) package manager.
+
+## .NET CLI
 
 ```cmd
 dotnet add package SiemensIXBlazor
 ```
 
-#### Import Required CSS and JS Packages
+## Package Manager
+
+```cmd
+NuGet\Install-Package SiemensIXBlazor
+```
+
+Add required `CSS` and `Javascript` packages into the `index.html` file.
 
 ```html
-<link rel="stylesheet" href="_content/SiemensIXBlazor/css/siemens-ix/ix-icons.css" />
-<link rel="stylesheet" href="_content/SiemensIXBlazor/css/siemens-ix/siemens-ix.css" />
-
-...
-
-<script src="_content/SiemensIXBlazor/js/siemens-ix/index.bundle.js"></script>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blazor App</title>
+    <link
+      rel="stylesheet"
+      href="_content/SiemensIXBlazor/css/siemens-ix/ix-icons.css"
+    />
+    <link
+      rel="stylesheet"
+      href="_content/SiemensIXBlazor/css/siemens-ix/siemens-ix.css"
+    />
+  </head>
+  <body>
+    ...
+    <script src="_content/SiemensIXBlazor/js/siemens-ix/index.bundle.js"></script>
+  </body>
+</html>
 ```
 
 ### Supported Components
 
-- [x] Blind
+- [Blind](##blind)
+- [Breadcrumb](#breadcrumb)
+- [Button](##button)
+- [Icon Button](##icon-button)
+- [Category Filter](##category-filter)
+- [Checkbox](##checkbox)
+- [Chip](##chip)
+- [Date Picker](##date-picker)
+- [Date Time Picker](##date-time-picker)
+- [Divider](##divider)
+- [Drawer](##drawer)
+- [Dropdown Button](##dropdown-button)
+- [Dropdown](##dropdown)
+- [Event List](##event-list)
+- [Expanding Search](##expanding-search)
+- [Flip](##flip)
+- [Group](##group)
+- [HTML Table](##html-table)
+- [Input](##input)
+- [KPI](##kpi)
+- [Message Bar](##message-bar)
+- [Modal](##modal)
+- [Pagination](##pagination) **(since v0.2.6)**
+- [Pill](##pill)
+- [Radio Button](##radio-button)
+- [Select](##select)
+- [Spinner](##spinner)
+- [Split Button](##split-button)
+- [Tabs](##tabs)
+- [Text Area](##text-area)
+- [Tile](##tile)
+- [Time Picker](##time-picker)
+- [Toast](##toast)
+- [Toggle](##toggle)
+- [Tooltip](##tooltip)
+- [Upload](##upload)
+- [Form Validation](##form-validation)
+- [Workflow](##workflow)
+
+## Blind
 
 ```html
 <Blind 
@@ -32,7 +92,7 @@ Test content
 </Blind>
 ```
 
-- [x] Breadcrumb
+## Breadcrumb
 
 ```html
 <Breadcrumb Id="breadcrumb-1" 
@@ -43,19 +103,19 @@ Test content
 </Breadcrumb>
 ```
 
-- [x] Button
+## Button
 
 ```html
 <Button>Test Button</Button>
 ```
 
-- [x] Icon Button
+## Icon Button
 
 ```html
 <IconButton Icon="info"></IconButton>
 ```
 
-- [x] Category filter
+## Category filter
 
 ```html
 <CategoryFilter 
@@ -111,7 +171,7 @@ protected override void OnAfterRender(bool firstRender)
 ```
 
 - [ ] ECharts
-- [x] Checkbox
+## Checkbox
 
 ```html
 <div style="margin-bottom: 1rem">
@@ -125,7 +185,7 @@ protected override void OnAfterRender(bool firstRender)
 </div>
 ```
 
-- [x] Chip
+## Chip
 
 ```html
 <Chip Icon="print" 
@@ -136,7 +196,7 @@ protected override void OnAfterRender(bool firstRender)
 </Chip>
 ```
 
-- [x] Date picker
+## Date picker
 
 ```html
 <DatePicker From="2023/02/01" 
@@ -146,7 +206,7 @@ protected override void OnAfterRender(bool firstRender)
 </DatePicker>
 ```
 
-- [x] Date time picker
+## Date time picker
 
 ```html
 <DateTimePicker 
@@ -158,14 +218,14 @@ protected override void OnAfterRender(bool firstRender)
 </DateTimePicker>
 ```
 
-- [x] Divider
+## Divider
 
 ```html
 <Divider></Divider>
 ```
 
 
-- [x] Drawer
+## Drawer
 
 ```html
 <Button ClickEvent="DrawerButtonClicked">Drawer Button</Button>
@@ -192,7 +252,7 @@ private void DrawerButtonClicked()
 }
 ```
 
-- [x] Dropdown button
+## Dropdown button
 
 ```html
 <DropdownButton Label="Dropdown" Variant="Primary" Icon="checkboxes">
@@ -202,7 +262,7 @@ private void DrawerButtonClicked()
 </DropdownButton>
 ```
 
-- [x] Dropdown
+## Dropdown
 
 ```html
 <Button Id="triggerId">Open</Button>
@@ -213,7 +273,7 @@ private void DrawerButtonClicked()
 </Dropdown>
 ```
 
-- [x] Event list
+## Event list
 
 ```html
 <EventList>
@@ -223,7 +283,7 @@ private void DrawerButtonClicked()
 </EventList>
 ```
 
-- [x] Expanding search
+## Expanding search
 
 ```html
 <ExpandingSearch Id="exp-search" 
@@ -231,7 +291,7 @@ private void DrawerButtonClicked()
 </ExpandingSearch>
 ```
 
-- [x] Flip
+## Flip
 
 ```html
 <FlipTile>
@@ -250,7 +310,7 @@ private void DrawerButtonClicked()
 ```
 
 - [ ] AG grid
-- [x] Group
+## Group
 
 ```html
 <Group Id="group1" Header="Header text" SubHeader="Subheader text">
@@ -260,7 +320,7 @@ private void DrawerButtonClicked()
 </Group>
 ```
 
-- [x] HTML table
+## HTML table
 
 ```html
 <table class="table">
@@ -294,7 +354,7 @@ private void DrawerButtonClicked()
 </table>
 ```
 
-- [x] Input
+## Input
 
 ```html
 <form class="needs-validation m-2">
@@ -307,13 +367,13 @@ private void DrawerButtonClicked()
 </form>
 ```
 
-- [x] KPI
+## KPI
 
 ```html
 <KPI Label="Motor speed" Value="Nominal"></KPI>
 ```
 
-- [x] Message bar
+## Message bar
 
 ```html
 <MessageBar ClosedChangeEvent="MessageboxClosed" Id="messagebar1" Type="MessageBarType.Danger">
@@ -323,7 +383,7 @@ private void DrawerButtonClicked()
 </MessageBar>
 ```
 
-- [x] Modal
+## Modal
 
 ```html
 <div class="@modalClass" style="display:@modalDisplay">
@@ -368,7 +428,7 @@ private void CloseModal()
 }
 ```
 
-- [x] Pagination
+## Pagination
 
 ```html
 <Pagination Id="pagination-1" 
@@ -379,7 +439,7 @@ private void CloseModal()
 </Pagination>
 ```
 
-- [x] Pill
+## Pill
 
 ```html
 <Pill Variant="PillVariant.Custom" Color="white" Background="purple">
@@ -387,7 +447,7 @@ private void CloseModal()
 </Pill>
 ```
 
-- [x] Radio button
+## Radio button
 
 ```html
 <div class="example-list">
@@ -402,7 +462,7 @@ private void CloseModal()
 </div>
 ```
 
-- [x] Select
+## Select
 
 ```html
 <Select ItemSelectionChangeEvent=SelectItemSelectedChanged 
@@ -412,13 +472,13 @@ AddItemEvent="SelectItemAdded" Mode="SelectMode.Single" SelectedIndices="2" Id="
 </Select>
 ```
 
-- [x] Spinner
+## Spinner
 
 ```html
 <Spinner></Spinner>
 ```
 
-- [x] Split button
+## Split button
 
 ```html
 <SplitButton Id="split-button-1" 
@@ -428,7 +488,7 @@ AddItemEvent="SelectItemAdded" Mode="SelectMode.Single" SelectedIndices="2" Id="
 </SplitButton>
 ```
 
-- [x] Tabs
+## Tabs
 
 ```html
 <div class="example">
@@ -459,13 +519,13 @@ div[data-tab-content].show {
 }
 ```
 
-- [x] Text area
+## Text area
 
 ```html
 <textarea class="form-control" placeholder="Enter text here"></textarea>
 ```
 
-- [x] Tile
+## Tile
 
 ```html
 <Tile Size="TileSize.Medium" Class="mr-1">
@@ -474,13 +534,13 @@ div[data-tab-content].show {
 </Tile>
 ```
 
-- [x] Time picker
+## Time picker
 
 ```html
 <TimePicker></TimePicker>
 ```
 
-- [x] Toast
+## Toast
 
 ```html
 <Toast @ref="toast"></Toast>
@@ -492,13 +552,13 @@ private Toast toast;
 toast.ShowToast("test message", "info");
 ```
 
-- [x] Toggle
+## Toggle
 
 ```html
 <Toggle></Toggle>
 ```
 
-- [x] Tooltip
+## Tooltip
 
 ```html
 <div style="padding: 4rem">
@@ -510,7 +570,7 @@ toast.ShowToast("test message", "info");
 ```
 
 - [ ] Tree
-- [x] Upload
+## Upload
 
 ```html
 <Upload Id="file-upload-test" 
@@ -518,7 +578,7 @@ toast.ShowToast("test message", "info");
 </Upload>
 ```
 
-- [x] Form validation
+## Form validation
 
 ```html
 <form class="row g-3 needs-validation" novalidate>
@@ -576,7 +636,7 @@ toast.ShowToast("test message", "info");
 </form>
 ```
 
-- [x] Workflow
+## Workflow
 
 ```html
 <WorkflowSteps Id="wf-steps" StepSelectedEvent="(index) => WfSelectedEvent(index)">
