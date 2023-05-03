@@ -36,7 +36,7 @@ namespace SiemensIXBlazor.Components
             {
                 _interop = new(JSRuntime);
 
-                await _interop.AddEventListener(this, Id, "close", "Closed");
+                await _interop.AddEventListener(this, Id, "closeChip", "Closed");
             }
         }
 

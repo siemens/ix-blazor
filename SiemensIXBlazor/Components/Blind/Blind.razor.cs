@@ -15,6 +15,8 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Collapsed { get; set; } = false;
         [Parameter]
+        public string? Icon { get; set; }
+        [Parameter]
         public EventCallback<bool> CollapsedChangedEvent { get; set; }
 
         private BaseInterop _interop;

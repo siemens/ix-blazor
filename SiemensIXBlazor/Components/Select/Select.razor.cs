@@ -31,6 +31,10 @@ namespace SiemensIXBlazor.Components
 		[Parameter]
 		public dynamic? SelectedIndices { get; set; }
 		[Parameter]
+		public bool HideListHeader { get; set; } = false;
+		[Parameter]
+		public string I18NNoMatches { get; set; } = "No matches";
+		[Parameter]
 		public EventCallback<string> AddItemEvent { get; set; }
         [Parameter]
         public EventCallback<dynamic> ItemSelectionChangeEvent { get; set; }
