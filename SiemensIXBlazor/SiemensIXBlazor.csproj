@@ -31,6 +31,8 @@
     </None>
     <None Include="SiemensIXBlazor_NpmJS\package-lock.json" />
     <None Include="SiemensIXBlazor_NpmJS\package.json" />
+    <None Include="wwwroot\css\fonts\ix-icons.svg" />
+    <None Include="wwwroot\css\fonts\ix-icons.woff2" />
   </ItemGroup>
 
 
