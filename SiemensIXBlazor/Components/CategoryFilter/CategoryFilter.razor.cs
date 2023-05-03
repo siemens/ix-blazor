@@ -12,8 +12,8 @@ namespace SiemensIXBlazor.Components.CategoryFilter
         private Dictionary<string, Category>? _categories;
         private FilterState? _filterState;
         private Dictionary<string, string>? _nonSelectableCategories;
-        private Lazy<Task<IJSObjectReference>> moduleTask;
-        private BaseInterop _interop;
+        private Lazy<Task<IJSObjectReference>>? moduleTask;
+        private BaseInterop? _interop;
 
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
