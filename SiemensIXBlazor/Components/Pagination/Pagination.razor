@@ -1,0 +1,17 @@
+﻿@using Microsoft.JSInterop;
+@inherits IXBaseComponent
+@inject IJSRuntime JSRuntime
+
+<ix-pagination
+@attributes="UserAttributes"
+class="@Class"
+style="@Style"
+id="@Id"
+count="@Count"
+advanced="@Advanced"
+i-1-8n-items="@I18nItems"
+i-1-8n-of="@I18nOf"
+i-1-8n-page="@I18nPage"
+item-count="@ItemCount"
+selected-page="@SelectedPage"
+show-item-count="@ShowItemCount"></ix-pagination>

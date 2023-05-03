@@ -368,6 +368,17 @@ private void CloseModal()
 }
 ```
 
+- [x] Pagination
+
+```html
+<Pagination Id="pagination-1" 
+    Advanced="true" 
+    Count="100" 
+    ItemCountChangedEvent="PaginationItemCountChanged" 
+    PageSelectedEvent="PaginationPageSelected">
+</Pagination>
+```
+
 - [x] Pill
 
 ```html
