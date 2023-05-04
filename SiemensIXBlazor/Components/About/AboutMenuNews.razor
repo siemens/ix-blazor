@@ -1,0 +1,17 @@
+﻿@using Microsoft.JSInterop;
+@inherits IXBaseComponent
+@inject IJSRuntime JSRuntime
+
+<ix-menu-about-news
+            @attributes="UserAttributes"
+            class="@Class"
+            style="@Style"
+            id="@Id"
+            label="@Label" 
+            show="@Show" 
+            about-item-label="@AboutItemLabel"
+            expanded="@Expanded"
+            i-1-8n-show-more="@I18NShowMore"
+            offset-bottom="@OffsetBottom">
+            @ChildContent
+</ix-menu-about-news>
