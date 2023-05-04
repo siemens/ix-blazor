@@ -1,0 +1,14 @@
+﻿@using Microsoft.JSInterop;
+@inherits IXBaseComponent
+@inject IJSRuntime JSRuntime
+
+<ix-map-navigation 
+                   @attributes="UserAttributes"
+                   class="@Class"
+                   style="@Style"
+                   id="@Id"
+                   application-name="@ApplicationName"
+                   navigation-title="@NavigationTitle"
+                   hide-context-menu="@HideContextMenu">
+                   @ChildContent
+</ix-map-navigation>
