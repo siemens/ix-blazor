@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
+﻿using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using Newtonsoft.Json;
 using SiemensIXBlazor.Interops;
 
-namespace SiemensIXBlazor.Components.About
+namespace SiemensIXBlazor.Components.MenuSettings
 {
-    public partial class AboutMenu
+    public partial class MenuSettings
     {
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
@@ -15,12 +14,12 @@ namespace SiemensIXBlazor.Components.About
         [Parameter]
         public string? ActiveTabLabel { get; set; }
         [Parameter]
-        public string Label { get; set; } = "About & legal information";
+        public string Label { get; set; } = "Settings";
         [Parameter]
         public bool Show { get; set; } = false;
         [Parameter]
         public EventCallback<MouseEventArgs> ClosedEvent { get; set; }
-        
+
         private BaseInterop _interop;
         private Lazy<Task<IJSObjectReference>>? moduleTask;
 
@@ -33,7 +32,7 @@ namespace SiemensIXBlazor.Components.About
                 await _interop.AddEventListener(this, Id, "close", "Closed");
 
                 moduleTask = new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
-                "import", "./_content/SiemensIXBlazor/js/interops/aboutMenuInterop.js").AsTask());
+                "import", "./_content/SiemensIXBlazor/js/interops/settingsMenuInterop.js").AsTask());
             }
         }
 
@@ -43,14 +42,13 @@ namespace SiemensIXBlazor.Components.About
             await ClosedEvent.InvokeAsync(args);
         }
 
-        public async Task ToggleAbout(bool status)
+        public async Task ToggleSettings(bool status)
         {
             var module = await moduleTask.Value;
             if (module != null)
             {
-                await module.InvokeVoidAsync("toggleAbout", Id, status);
+                await module.InvokeVoidAsync("toggleSettings", Id, status);
             };
         }
-
     }
 }

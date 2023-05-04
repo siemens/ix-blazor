@@ -1,0 +1,13 @@
+﻿@using Microsoft.JSInterop;
+@inject IJSRuntime JSRuntime
+@inherits IXBaseComponent
+
+<ix-menu-settings @attributes="UserAttributes"
+               class="@Class"
+               style="@Style"
+               active-tab-label="@ActiveTabLabel"
+               label="@Label"
+               id="@Id"
+               show="@Show">
+    @ChildContent
+</ix-menu-settings>
