@@ -42,6 +42,12 @@ Add required `CSS` and `Javascript` packages into the `index.html` file.
 
 ### Supported Components
 
+- [Basic Navigation](#basic-navigation)
+- [Navigation Menu](#navigation-menu)
+- [About and Legal](#about-and-legal)
+- [Settings](#settings)
+- [Map Navigation](#map-navigation)
+- [Popover News](#popover-news)
 - [Blind](#blind)
 - [Breadcrumb](#breadcrumb)
 - [Button](#button)
@@ -80,6 +86,126 @@ Add required `CSS` and `Javascript` packages into the `index.html` file.
 - [Upload](#upload)
 - [Form Validation](#form-validation)
 - [Workflow](#workflow)
+
+## Basic Navigation
+
+```html
+<BasicNavigation ApplicationName="Application name">
+  <placeholder-logo slot="logo"></placeholder-logo>
+  <NavigationMenu Id="nav-menu-1">
+    <NavigationMenuItem>Item 1</NavigationMenuItem>
+    <NavigationMenuItem>Item 2</NavigationMenuItem>
+  </NavigationMenu>
+</BasicNavigation>
+```
+
+## Navigation Menu
+
+```html
+<NavigationMenu Id="nav-menu-1">
+  <NavigationMenuItem Home="true" TabIcon="home"> Home </NavigationMenuItem>
+  <NavigationMenuItem TabIcon="globe"> Normal Tab </NavigationMenuItem>
+  <NavigationMenuItem TabIcon="star" disabled> Disabled tab </NavigationMenuItem>
+  <NavigationMenuItem TabIcon="star"> With other icon </NavigationMenuItem>
+  <NavigationMenuItem TabIcon="globe" Style="display: none">
+    Should not be visible
+  </NavigationMenuItem>
+</NavigationMenu>
+```
+
+```html
+@* Avatar *@
+<NavigationMenu Id="nav-menu-1">
+  <NavigationMenuAvatar Image="https://ui-avatars.com/api/?name=John+Doe">
+    <NavigationMenuAvatarItem Label="Option 1"></NavigationMenuAvatarItem>
+  </NavigationMenuAvatar>
+  <NavigationMenuItem Home="true" TabIcon="home"> Home </NavigationMenuItem>
+  <NavigationMenuItem TabIcon="globe"> Normal Tab </NavigationMenuItem>
+  <NavigationMenuItem TabIcon="star" Disabled="true"> Disabled tab </NavigationMenuItem>
+  <NavigationMenuItem TabIcon="star"> With other icon </NavigationMenuItem>
+  <NavigationMenuItem TabIcon="globe" Style="display: none">
+    Should not be visible
+  </NavigationMenuItem>
+</NavigationMenu>
+```
+
+## About and Legal
+
+```html
+<BasicNavigation>
+  <placeholder-logo slot="logo"></placeholder-logo>
+  <NavigationMenu Id="nav-menu-1">
+    <AboutMenu @ref="aboutMenuElement">
+      <AboutMenuItem Label="Tab 1">Content 1</AboutMenuItem>
+      <AboutMenuItem Label="Tab 2">Content 2</AboutMenuItem>
+    </AboutMenu>
+  </NavigationMenu>
+</BasicNavigation>
+```
+
+```csharp
+AboutMenu aboutMenuElement;
+
+aboutMenuElement.ToggleAbout(true);
+```
+
+## Settings
+
+```html
+<BasicNavigation>
+  <placeholder-logo slot="logo"></placeholder-logo>
+  <NavigationMenu Id="nav-menu-1">
+    <MenuSettings @ref="settingsMenuElement">
+      <MenuSettingsItem
+        Label="Example Setting 1"
+      ></MenuSettingsItem>
+      <MenuSettingsItem
+        Label="Example Setting 2"
+      ></MenuSettingsItem>
+    </MenuSettings>
+  </NavigationMenu>
+</BasicNavigation>
+```
+
+```csharp
+SettingsMenu settingsMenuElement;
+
+aboutMenuElement.ToggleSettings(true);
+```
+
+## Map Navigation
+
+```html
+<MapNavigation
+  ApplicationName="Test Application"
+  NavigationTitle="Some other content"
+>
+  <placeholder-logo slot="logo"></placeholder-logo>
+  <NavigationMenu Id="nav-menu-1">
+    <NavigationMenuItem>Item 1</NavigationMenuItem>
+    <NavigationMenuItem>Item 2</NavigationMenuItem>
+    <NavigationMenuItem>Item 3</NavigationMenuItem>
+  </NavigationMenu>
+  <div slot="sidebar-content">Sidebar content</div>
+  <div>Content</div>
+</MapNavigation>
+```
+
+## Popover News
+
+```html
+<BasicNavigation>
+  <placeholder-logo slot="logo"></placeholder-logo>
+  <NavigationMenu Id="nav-menu-1">
+    <AboutMenu>
+      <AboutMenuItem Label="Example"> </AboutMenuItem>
+    </AboutMenu>
+    <AboutMenuNews Label="Test" Show="true" AboutItemLabel="Example">
+      Test
+    </AboutMenuNews>
+  </NavigationMenu>
+</BasicNavigation>
+```
 
 ## Blind
 
