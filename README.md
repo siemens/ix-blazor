@@ -42,12 +42,12 @@ Add required `CSS` and `Javascript` packages into the `index.html` file.
 
 ### Supported Components
 
-- [Basic Navigation](#basic-navigation)
-- [Navigation Menu](#navigation-menu)
-- [About and Legal](#about-and-legal)
-- [Settings](#settings)
-- [Map Navigation](#map-navigation)
-- [Popover News](#popover-news)
+- [Basic Navigation](#basic-navigation) **(since v0.2.7)**
+- [Navigation Menu](#navigation-menu) **(since v0.2.7)**
+- [About and Legal](#about-and-legal) **(since v0.2.7)**
+- [Settings](#settings) **(since v0.2.7)**
+- [Map Navigation](#map-navigation) **(since v0.2.7)**
+- [Popover News](#popover-news) **(since v0.2.7)**
 - [Blind](#blind)
 - [Breadcrumb](#breadcrumb)
 - [Button](#button)
