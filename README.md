@@ -116,8 +116,8 @@ Add required `CSS` and `Javascript` packages into the `index.html` file.
 ```html
 @* Avatar *@
 <NavigationMenu Id="nav-menu-1">
-  <NavigationMenuAvatar Image="https://ui-avatars.com/api/?name=John+Doe">
-    <NavigationMenuAvatarItem Label="Option 1"></NavigationMenuAvatarItem>
+  <NavigationMenuAvatar Id="nav-avatar-menu-1" Image="https://ui-avatars.com/api/?name=John+Doe">
+    <NavigationMenuAvatarItem Id="nav-avatar-item-1" Label="Option 1"></NavigationMenuAvatarItem>
   </NavigationMenuAvatar>
   <NavigationMenuItem Home="true" TabIcon="home"> Home </NavigationMenuItem>
   <NavigationMenuItem TabIcon="globe"> Normal Tab </NavigationMenuItem>
