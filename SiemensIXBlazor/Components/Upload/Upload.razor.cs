@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using SiemensIXBlazor.Interops;
+using SiemensIXBlazor.Objects;
+using System.Text.Json;
 
 namespace SiemensIXBlazor.Components
 {
@@ -29,7 +31,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string UploadSuccessText { get; set; } = "Upload successful";
         [Parameter]
-        public EventCallback<byte[]> FileChangedEvent { get; set; }
+        public EventCallback<List<IXFile>> FileChangedEvent { get; set; }
 
         FileUploadInterop _fileUploadInterop;
 
@@ -44,9 +46,33 @@ namespace SiemensIXBlazor.Components
         }
 
         [JSInvokable]
-        public async void FileChanged(byte[] data)
+        public async void FileChanged(object[] files)
         {
-           await FileChangedEvent.InvokeAsync(data);
+            var ixFiles = ParseFileObject(files);
+            await FileChangedEvent.InvokeAsync(ixFiles);
+        }
+
+        private static List<IXFile> ParseFileObject(object[] fileObjects)
+        {
+            List<IXFile> ixFiles = new();
+
+            foreach (var fileObj in fileObjects)
+            {
+                var fileData = (JsonElement)fileObj;
+
+                // Extract file properties and base64 data
+                string fileName = fileData.GetProperty("name").GetString();
+                long fileSize = fileData.GetProperty("size").GetInt64();
+                string fileType = fileData.GetProperty("type").GetString();
+                string base64Data = fileData.GetProperty("data").GetString();
+
+                // Create a custom implementation of IBrowserFile
+                IXFile ixFile = new(fileName, fileSize, fileType, base64Data);
+
+                ixFiles.Add(ixFile);
+            }
+            
+            return ixFiles;
         }
     }
 }
