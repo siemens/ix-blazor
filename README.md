@@ -83,6 +83,7 @@ Add required `CSS` and `Javascript` packages into the `index.html` file.
 - [Toast](#toast)
 - [Toggle](#toggle)
 - [Tooltip](#tooltip)
+- [Tree](#tree)
 - [Upload](#upload)
 - [Form Validation](#form-validation)
 - [Workflow](#workflow)
@@ -695,7 +696,67 @@ toast.ShowToast("test message", "info");
 </div>
 ```
 
-- [ ] Tree
+## Tree
+
+```html
+<div style="height: 8rem; width: 100%">
+    <Tree Id="tree-1" Root="root" ContextChangedEvent="TreeContextChangeEvent" 
+    NodeClickedEvent="TreeNodeClicked" 
+    NodeRemovedEvent="NodeRemoved" 
+    NodeToggledEvent="TreeNodeToggled"  
+    @ref="tree"></Tree>
+</div>
+```
+
+```csharp
+Tree tree;
+
+Dictionary<string, TreeNode> treeNodes = new();
+
+treeNodes.Add("root", new TreeNode()
+{
+    Id = "root",
+    HasChildren = true,
+    Children = new List<string>(){"sample"}
+});
+
+treeNodes.Add("sample", new TreeNode()
+{
+    Id = "sample",
+    Data = new TreeData()
+    {
+        Name = "Sample"  
+    },
+    HasChildren = true,
+    Children = new List<string>(){"sample-child-1", "sample-child-2"}
+});
+
+treeNodes.Add("sample-child-1", new TreeNode()
+{
+    Id = "sample-child-1",
+    Data = new TreeData()
+    {
+        Name = "Sample Child 1"
+    },
+    HasChildren = false,
+    Children = new List<string>() {}
+});
+
+treeNodes.Add("sample-child-2", new TreeNode()
+    {
+        Id = "sample-child-2",
+        Data = new TreeData()
+        {
+            Name = "Sample Child 2"
+        },
+        HasChildren = false,
+        Children = new List<string>() { }
+    });
+
+
+tree.TreeModel = treeNodes;
+```
+
 ## Upload
 
 ```html
