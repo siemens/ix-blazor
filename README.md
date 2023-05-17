@@ -83,7 +83,7 @@ Add required `CSS` and `Javascript` packages into the `index.html` file.
 - [Toast](#toast)
 - [Toggle](#toggle)
 - [Tooltip](#tooltip)
-- [Tree](#tree)
+- [Tree](#tree) **(since v0.2.9)**
 - [Upload](#upload)
 - [Form Validation](#form-validation)
 - [Workflow](#workflow)
