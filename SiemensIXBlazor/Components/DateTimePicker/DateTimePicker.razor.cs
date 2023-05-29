@@ -45,7 +45,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public EventCallback<string> DateChangeEvent { get; set; }
         [Parameter]
-        public EventCallback<string> DateSelectEvent { get; set; }
+        public EventCallback<DateTimePickerResponse> DateSelectEvent { get; set; }
         [Parameter]
         public EventCallback<string> TimeChangeEvent { get; set; }
         [Parameter]
@@ -79,9 +79,12 @@ namespace SiemensIXBlazor.Components
         }
 
         [JSInvokable]
-        public async void DateSelect(string date)
+        public async void DateSelect(JsonElement data)
         {
-            await DateSelectEvent.InvokeAsync(date);
+            string jsonDataText = data.GetRawText();
+            DateTimePickerResponse? jsonData = JObject.Parse(jsonDataText)
+                                                  .ToObject<DateTimePickerResponse>();
+            await DateSelectEvent.InvokeAsync(jsonData);
         }
 
         [JSInvokable]
