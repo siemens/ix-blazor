@@ -4,9 +4,7 @@ import { toast } from "@siemens/ix"
 defineCustomElements();
 
 // toast
-window.showMessage = (message, type) => {
-    toast({
-        message: message,
-        type: type
-    });
+window.showMessage = (config) => {
+    const toastConfig = JSON.parse(config);
+    toast(toastConfig);
 }
