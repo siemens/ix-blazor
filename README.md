@@ -345,6 +345,17 @@ protected override void OnAfterRender(bool firstRender)
 </DateTimePicker>
 ```
 
+To achieve the same behavior as in the original library (the current date is preselected) the following code can be used:
+
+```html
+<DateTimePicker 
+        DateChangeEvent="(date) => DateChangeEventTest(date)" 
+        From=@DateTime.Now.ToString("yyyy/MM/dd", CultureInfo.InvariantCulture)
+        Id="datetimepicker1"
+        TimeChangeEvent="(date) => DateChangeEventTest(date)">
+</DateTimePicker>        
+```
+
 ## Divider
 
 ```html
@@ -657,7 +668,7 @@ div[data-tab-content].show {
 ```html
 <Tile Size="TileSize.Medium" Class="mr-1">
     <div slot="header">Tile header</div>
-    <div class="text-l">92.8 °C</div>
+    <div class="text-l">92.8 Â°C</div>
 </Tile>
 ```
 
