@@ -53,6 +53,7 @@ Add required `CSS` and `Javascript` packages into the `index.html` file.
 - [Button](#button)
 - [Icon Button](#icon-button)
 - [Category Filter](#category-filter)
+- [ECharts](#echarts)
 - [Checkbox](#checkbox)
 - [Chip](#chip)
 - [Date Picker](#date-picker)
@@ -297,7 +298,90 @@ protected override void OnAfterRender(bool firstRender)
     }
 ```
 
-- [ ] ECharts
+## ECharts
+
+```html
+<ECharts Id="chart1" @ref="chart1">
+</ECharts>
+```
+
+```csharp
+ECharts chart1;
+
+// Create the dynamic object
+var dynamicObject = new Dictionary<string, object>();
+
+// Create the tooltip object
+var tooltip = new Dictionary<string, object>
+{
+    { "trigger", "axis" },
+    { "axisPointer", new Dictionary<string, object> { { "type", "shadow" } } }
+};
+dynamicObject.Add("tooltip", tooltip);
+
+// Create the legend object
+dynamicObject.Add("legend", new Dictionary<string, object>());
+
+// Create the grid object
+var grid = new Dictionary<string, object>
+{
+    { "left", "3%" },
+    { "right", "4%" },
+    { "bottom", "3%" },
+    { "containLabel", true }
+};
+dynamicObject.Add("grid", grid);
+
+// Create the xAxis object
+var xAxis = new List<Dictionary<string, object>>
+{
+    new Dictionary<string, object>
+    {
+        { "type", "category" },
+        { "data", new List<string> { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" } }
+    }
+};
+dynamicObject.Add("xAxis", xAxis);
+
+// Create the yAxis object
+var yAxis = new List<Dictionary<string, object>>
+{
+    new Dictionary<string, object> { { "type", "value" } }
+};
+dynamicObject.Add("yAxis", yAxis);
+
+// Create the series object
+var series = new List<Dictionary<string, object>>
+{
+    new Dictionary<string, object>
+    {
+        { "name", "Direct" },
+        { "type", "bar" },
+        { "stack", "Ad" },
+        { "emphasis", new Dictionary<string, object> { { "focus", "series" } } },
+        { "data", new List<int> { 320, 332, 301, 334, 390, 330, 320 } }
+    },
+    new Dictionary<string, object>
+    {
+        { "name", "Email" },
+        { "type", "bar" },
+        { "emphasis", new Dictionary<string, object> { { "focus", "series" } } },
+        { "data", new List<int> { 120, 132, 101, 134, 90, 230, 210 } }
+    },
+    new Dictionary<string, object>
+    {
+        { "name", "Union Ads" },
+        { "type", "bar" },
+        { "emphasis", new Dictionary<string, object> { { "focus", "series" } } },
+        { "data", new List<int> { 220, 182, 191, 234, 290, 330, 310 } }
+    },
+    // Add more series objects as needed
+};
+dynamicObject.Add("series", series);
+
+chart1.InitialChart(object1);
+```
+
 ## Checkbox
 
 ```html
