@@ -676,6 +676,12 @@ div[data-tab-content].show {
 ```csharp
 private Toast toast;
 
+ToastConfig config = new ToastConfig()
+{
+    Message = "Test message",
+    Type = "info"
+}
+
 toast.ShowToast("test message", "info");
 ```
 
