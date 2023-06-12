@@ -53,7 +53,7 @@ Add required `CSS` and `Javascript` packages into the `index.html` file.
 - [Button](#button)
 - [Icon Button](#icon-button)
 - [Category Filter](#category-filter)
-- [ECharts](#echarts)
+- [ECharts](#echarts) **(since v0.3.2)**
 - [Checkbox](#checkbox)
 - [Chip](#chip)
 - [Date Picker](#date-picker)
