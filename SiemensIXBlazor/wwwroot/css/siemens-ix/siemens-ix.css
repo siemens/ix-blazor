@@ -17391,8 +17391,6 @@ a[href] .glyph::before {
 }
 .btn .glyph {
   margin-right: 0.25rem;
-}
-.btn .glyph {
   font-weight: 400;
 }
 .btn:focus-visible, .btn.focus {
@@ -17488,15 +17486,14 @@ a[href] .glyph::before {
 }
 
 .btn-invisible-primary {
+  border-radius: var(--theme-btn--border-radius);
   --bs-btn-border-width: 0px;
   --bs-btn-active-border-color: none;
-}
-.btn-invisible-primary {
-  border-radius: var(--theme-btn--border-radius);
 }
 .btn-invisible-primary, .btn-invisible-primary.focus, .btn-invisible-primary:focus-visible {
   background-color: var(--theme-btn-invisible-primary--background);
   color: var(--theme-btn-invisible-primary--color);
+  border-color: transparent;
 }
 .btn-invisible-primary:not(.disabled):not(:disabled):focus-visible {
   outline: 1px solid var(--theme-color-focus-bdr);
@@ -17618,15 +17615,14 @@ a[href] .glyph::before {
 }
 
 .btn-invisible-secondary {
+  border-radius: var(--theme-btn--border-radius);
   --bs-btn-border-width: 0px;
   --bs-btn-active-border-color: none;
-}
-.btn-invisible-secondary {
-  border-radius: var(--theme-btn--border-radius);
 }
 .btn-invisible-secondary, .btn-invisible-secondary.focus, .btn-invisible-secondary:focus-visible {
   background-color: var(--theme-btn-invisible-secondary--background);
   color: var(--theme-btn-invisible-secondary--color);
+  border-color: transparent;
 }
 .btn-invisible-secondary:not(.disabled):not(:disabled):focus-visible {
   outline: 1px solid var(--theme-color-focus-bdr);
@@ -18244,18 +18240,33 @@ button.dropdown-toggle::after {
 .form-control-plaintext::placeholder {
   color: var(--theme-input-hint--color);
 }
-.form-control:not(.disabled):not(:disabled),
-.form-control-plaintext:not(.disabled):not(:disabled) {
+.form-control:not(:-moz-read-only):not([readonly]):not([readOnly]):not(.readonly):not(.disabled):not(:disabled), .form-control-plaintext:not(:-moz-read-only):not([readonly]):not([readOnly]):not(.readonly):not(.disabled):not(:disabled) {
   cursor: pointer;
 }
-.form-control:not(.disabled):not(:disabled):hover,
-.form-control-plaintext:not(.disabled):not(:disabled):hover {
+.form-control:not(:read-only):not([readonly]):not([readOnly]):not(.readonly):not(.disabled):not(:disabled),
+.form-control-plaintext:not(:read-only):not([readonly]):not([readOnly]):not(.readonly):not(.disabled):not(:disabled) {
+  cursor: pointer;
+}
+.form-control:not(:-moz-read-only):not([readonly]):not([readOnly]):not(.readonly):not(.disabled):not(:disabled):hover, .form-control-plaintext:not(:-moz-read-only):not([readonly]):not([readOnly]):not(.readonly):not(.disabled):not(:disabled):hover {
   background-color: var(--theme-input--background--hover);
   border-color: var(--theme-input--border-color--hover);
   cursor: auto;
 }
-.form-control:not(.disabled):not(:disabled):focus-visible,
-.form-control-plaintext:not(.disabled):not(:disabled):focus-visible {
+.form-control:not(:read-only):not([readonly]):not([readOnly]):not(.readonly):not(.disabled):not(:disabled):hover,
+.form-control-plaintext:not(:read-only):not([readonly]):not([readOnly]):not(.readonly):not(.disabled):not(:disabled):hover {
+  background-color: var(--theme-input--background--hover);
+  border-color: var(--theme-input--border-color--hover);
+  cursor: auto;
+}
+.form-control:not(:-moz-read-only):not([readonly]):not([readOnly]):not(.readonly):not(.disabled):not(:disabled):focus-visible, .form-control-plaintext:not(:-moz-read-only):not([readonly]):not([readOnly]):not(.readonly):not(.disabled):not(:disabled):focus-visible {
+  background-color: var(--theme-input--background--focus);
+  border-color: var(--theme-input--border-color--focus);
+  outline-offset: var(--theme-input--focus--outline-offset);
+  box-shadow: var(--theme-input--box-shadow);
+  outline: 1px solid var(--theme-color-focus-bdr);
+}
+.form-control:not(:read-only):not([readonly]):not([readOnly]):not(.readonly):not(.disabled):not(:disabled):focus-visible,
+.form-control-plaintext:not(:read-only):not([readonly]):not([readOnly]):not(.readonly):not(.disabled):not(:disabled):focus-visible {
   background-color: var(--theme-input--background--focus);
   border-color: var(--theme-input--border-color--focus);
   outline-offset: var(--theme-input--focus--outline-offset);
@@ -18329,6 +18340,13 @@ button.dropdown-toggle::after {
   border-radius: 0rem;
   color: var(--theme-color-weak-text);
   border-color: var(--theme-input--border-color-bottom--disabled);
+}
+.form-control:disabled::-moz-placeholder, .form-control.disabled::-moz-placeholder {
+  color: transparent;
+}
+.form-control:disabled::placeholder,
+.form-control.disabled::placeholder {
+  color: transparent;
 }
 
 .form-control-plaintext {
