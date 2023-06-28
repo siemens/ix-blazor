@@ -24,6 +24,7 @@
   <ItemGroup>
     <None Remove="Components\KeyValueList\" />
     <None Remove="Components\KeyValue\" />
+    <None Remove="Components\EmptyState\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\LICENSE">
@@ -63,6 +64,7 @@
     <Folder Include="wwwroot\css\siemens-ix\" />
     <Folder Include="Components\KeyValueList\" />
     <Folder Include="Components\KeyValue\" />
+    <Folder Include="Components\EmptyState\" />
   </ItemGroup>
 
 </Project>
