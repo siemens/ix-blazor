@@ -10,9 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@siemens/ix": "1.5.0",
-    "@siemens/ix-echarts": "^1.6.2",
-    "@siemens/ix-icons": "1.0.4",
+    "@siemens/ix": "1.6.3",
+    "@siemens/ix-echarts": "^1.6.3",
+    "@siemens/ix-icons": "1.1.2",
     "echarts": "^5.4.2"
   },
   "devDependencies": {
