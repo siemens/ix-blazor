@@ -11,20 +11,38 @@ namespace SiemensIXBlazor.Components.About
         public RenderFragment? ChildContent { get; set; }
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
+        /// <summary>
+        /// Subtitle of the about news. Default value is null.
+        /// </summary>
         [Parameter]
         public string? AboutItemLabel { get; set; }
         [Parameter]
         public bool Expanded { get; set; } = false;
         [Parameter]
         public string I18NShowMore { get; set; } = "Show more";
+        /// <summary>
+        /// Title of the about news. Default value is null.
+        /// </summary>
         [Parameter]
         public string? Label { get; set; }
+        /// <summary>
+        /// Bottom offset. Default value is: 0
+        /// </summary>
         [Parameter]
         public int OffsetBottom { get; set; } = 0;
+        /// <summary>
+        /// Show about news. Default value is: false
+        /// </summary>
         [Parameter]
         public bool Show { get; set; } = false;
+        /// <summary>
+        /// Popover closed event.
+        /// </summary>
         [Parameter]
         public EventCallback ClosePopoverEvent { get; set; }
+        /// <summary>
+        /// Show more button is pressed event. Return value is: MouseEventArgs
+        /// </summary>
         [Parameter]
         public EventCallback<MouseEventArgs> ShowMoreEvent { get; set; }
 

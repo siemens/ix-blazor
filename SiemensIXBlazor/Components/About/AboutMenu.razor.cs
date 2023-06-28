@@ -12,12 +12,24 @@ namespace SiemensIXBlazor.Components.About
         public RenderFragment? ChildContent { get; set; }
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
+        /// <summary>
+        /// Active tab. Default value is null.
+        /// </summary>
         [Parameter]
         public string? ActiveTabLabel { get; set; }
+        /// <summary>
+        /// Label of first tab. Default value is: 'About & legal information' 
+        /// </summary>
         [Parameter]
         public string Label { get; set; } = "About & legal information";
+        /// <summary>
+        /// Internal. Default value is: false
+        /// </summary>
         [Parameter]
         public bool Show { get; set; } = false;
+        /// <summary>
+        /// About and Legal closed event. Return value is: MouseEventArgs
+        /// </summary>
         [Parameter]
         public EventCallback<MouseEventArgs> ClosedEvent { get; set; }
         
