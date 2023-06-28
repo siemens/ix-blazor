@@ -18,8 +18,13 @@
   <ItemGroup>
     <Content Remove="SiemensIXBlazor_NpmJS\package-lock.json" />
     <Content Remove="SiemensIXBlazor_NpmJS\package.json" />
+    <Content Remove="wwwroot\css\siemens-ix\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Components\KeyValueList\" />
+    <None Remove="Components\KeyValue\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="..\LICENSE">
       <Pack>True</Pack>
@@ -31,8 +36,6 @@
     </None>
     <None Include="SiemensIXBlazor_NpmJS\package-lock.json" />
     <None Include="SiemensIXBlazor_NpmJS\package.json" />
-    <None Include="wwwroot\css\fonts\ix-icons.svg" />
-    <None Include="wwwroot\css\fonts\ix-icons.woff2" />
   </ItemGroup>
 
 
@@ -42,14 +45,11 @@
 
   <ItemGroup>
     <PackageReference Include="BlazorComponentUtilities" Version="1.8.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.8" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="wwwroot\css\siemens-ix\ix-icons.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Update="wwwroot\js\interops\baseJsInterop.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -60,6 +60,9 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\js\siemens-ix\" />
+    <Folder Include="wwwroot\css\siemens-ix\" />
+    <Folder Include="Components\KeyValueList\" />
+    <Folder Include="Components\KeyValue\" />
   </ItemGroup>
 
 </Project>
