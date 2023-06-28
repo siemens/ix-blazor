@@ -11,7 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "@siemens/ix": "1.5.0",
-    "@siemens/ix-icons": "1.0.4"
+    "@siemens/ix-echarts": "^1.6.2",
+    "@siemens/ix-icons": "1.0.4",
+    "echarts": "^5.4.2"
   },
   "devDependencies": {
     "webpack": "^5.75.0",
