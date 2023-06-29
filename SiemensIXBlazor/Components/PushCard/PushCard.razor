@@ -1,0 +1,15 @@
+﻿@namespace SiemensIXBlazor.Components
+@using SiemensIXBlazor.Helpers
+@using SiemensIXBlazor.Enums.PushCard
+@inherits IXBaseComponent
+
+<ix-push-card @attributes="UserAttributes"
+              class="@Class"
+              style="@Style"
+              icon="@Icon"
+              notification="@Notification"
+              heading="@Heading"
+              subheading="@SubHeading"
+              variant="@(EnumParser<PushCardVariant>.ParseEnumToString(Variant))">
+</ix-push-card>
+

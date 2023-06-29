@@ -25,6 +25,8 @@
     <None Remove="Components\KeyValueList\" />
     <None Remove="Components\KeyValue\" />
     <None Remove="Components\EmptyState\" />
+    <None Remove="Components\PushCard\" />
+    <None Remove="Enums\PushCard\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\LICENSE">
@@ -65,6 +67,8 @@
     <Folder Include="Components\KeyValueList\" />
     <Folder Include="Components\KeyValue\" />
     <Folder Include="Components\EmptyState\" />
+    <Folder Include="Components\PushCard\" />
+    <Folder Include="Enums\PushCard\" />
   </ItemGroup>
 
 </Project>
