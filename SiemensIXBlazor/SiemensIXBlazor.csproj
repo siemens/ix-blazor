@@ -27,6 +27,7 @@
     <None Remove="Components\EmptyState\" />
     <None Remove="Components\PushCard\" />
     <None Remove="Enums\PushCard\" />
+    <None Remove="Components\ActionCard\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\LICENSE">
@@ -69,6 +70,7 @@
     <Folder Include="Components\EmptyState\" />
     <Folder Include="Components\PushCard\" />
     <Folder Include="Enums\PushCard\" />
+    <Folder Include="Components\ActionCard\" />
   </ItemGroup>
 
 </Project>
