@@ -1,0 +1,17 @@
+﻿@namespace SiemensIXBlazor.Components
+@using Microsoft.JSInterop;
+@using SiemensIXBlazor.Enums.ContentHeader;
+@using SiemensIXBlazor.Helpers;
+@inherits IXBaseComponent
+@inject IJSRuntime JSRuntime
+
+<ix-content-header @attributes="UserAttributes"
+                   class="@Class"
+                   style="@Style"
+                   id="@Id"
+                   has-back-button="@HasBackButton"
+                   header-title="@HeaderTitle"
+                   header-subtitle="@HeaderSubTitle"
+                   variant="@(EnumParser<ContentHeaderVariant>.ParseEnumToString(Variant))">
+    @ChildContent
+</ix-content-header>
