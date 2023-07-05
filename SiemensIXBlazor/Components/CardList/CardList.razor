@@ -1,0 +1,18 @@
+﻿@namespace SiemensIXBlazor.Components
+@using Microsoft.JSInterop;
+@using SiemensIXBlazor.Enums.CardList;
+@using SiemensIXBlazor.Helpers;
+@inherits IXBaseComponent
+@inject IJSRuntime JSRuntime
+
+<ix-card-list @attributes="UserAttributes" class="@Class" style="@Style" 
+              id="@Id" 
+              label="@Label" 
+              show-all-count="@ShowAllCount"
+              list-style="@(EnumParser<CardListStyle>.ParseEnumToString(ListStyle))"
+              collapse="@Collapse"
+              i-1-8n-more-cards="@I18NMoreCards"
+              i-1-8n-show-all="@I18NShowAll"
+              suppress-overflow-handling="@SuppressOverflowHandling">
+    @ChildContent
+</ix-card-list>
