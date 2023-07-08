@@ -54,6 +54,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="wwwroot\.DS_Store">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\css\.DS_Store">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\js\interops\baseJsInterop.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -71,6 +77,12 @@
     <Folder Include="Components\PushCard\" />
     <Folder Include="Enums\PushCard\" />
     <Folder Include="Components\ActionCard\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update=".DS_Store">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
