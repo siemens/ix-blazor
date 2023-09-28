@@ -52,29 +52,32 @@ Add `Theme` component to the page that you want to manipulate the theme.
 Then use this methods to change theme.
 
 ```csharp
-Theme themeProvider; 
-protected override async Task OnAfterRenderAsync(bool firstRender)
+public partial class Index
 {
-    if(firstRender)
+    Theme themeProvider; 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await themeProvider.SetTheme("theme-classic-light");
-    }
+        if(firstRender)
+        {
+            await themeProvider.SetTheme("theme-classic-light");
+        }
             
-}
+    }
 
-private async Task CheckboxChanged()
-{
-    await themeProvider.ToggleTheme();
-}
+    private async Task CheckboxChanged()
+    {
+        await themeProvider.ToggleTheme();
+    }
 
-private async Task SetDarkTheme()
-{
-    await themeProvider.SetTheme("theme-classic-dark");
-}
+    private async Task SetDarkTheme()
+    {
+        await themeProvider.SetTheme("theme-classic-dark");
+    }
 
-private async Task ToggleSystemTheme()
-{
-    await themeProvider.ToggleSystemTheme(true);
+    private async Task ToggleSystemTheme()
+    {
+        await themeProvider.ToggleSystemTheme(true);
+    }
 }
 ```
 
