@@ -41,6 +41,7 @@ Add required `CSS` and `Javascript` packages into the `index.html` file.
 ```
 
 ### Theme Switching
+**Since v0.3.9**
 
 Add `Theme` component to the page that you want to manipulate the theme.
 
