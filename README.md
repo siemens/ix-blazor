@@ -40,6 +40,43 @@ Add required `CSS` and `Javascript` packages into the `index.html` file.
 </html>
 ```
 
+### Theme Switching
+
+Add `Theme` component to the page that you want to manipulate the theme.
+
+```html
+<Theme @ref="themeProvider"></Theme>
+```
+
+Then use this methods to change theme.
+
+```csharp
+Theme themeProvider; 
+protected override async Task OnAfterRenderAsync(bool firstRender)
+{
+    if(firstRender)
+    {
+        await themeProvider.SetTheme("theme-classic-light");
+    }
+            
+}
+
+private async Task CheckboxChanged()
+{
+    await themeProvider.ToggleTheme();
+}
+
+private async Task SetDarkTheme()
+{
+    await themeProvider.SetTheme("theme-classic-dark");
+}
+
+private async Task ToggleSystemTheme()
+{
+    await themeProvider.ToggleSystemTheme(true);
+}
+```
+
 ### Supported Components
 
 - [Basic Navigation](#basic-navigation)
