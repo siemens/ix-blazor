@@ -29,7 +29,7 @@ namespace SiemensIXBlazor.Components
 		[Parameter]
 		public bool Readonly { get; set; } = false;
 		[Parameter]
-		public dynamic? SelectedIndices { get; set; }
+		public dynamic? Value { get; set; }
 		[Parameter]
 		public bool HideListHeader { get; set; } = false;
 		[Parameter]
@@ -37,7 +37,9 @@ namespace SiemensIXBlazor.Components
 		[Parameter]
 		public EventCallback<string> AddItemEvent { get; set; }
         [Parameter]
-        public EventCallback<dynamic> ItemSelectionChangeEvent { get; set; }
+        public EventCallback<dynamic> ValueChangeEvent { get; set; }
+        [Parameter]
+        public EventCallback<string> InputChangeEvent { get; set; }
 
         private BaseInterop _interop;
 
@@ -48,7 +50,8 @@ namespace SiemensIXBlazor.Components
                 _interop = new(JSRuntime);
 
                 await _interop.AddEventListener(this, Id, "addItem", "AddItemChanged");
-                await _interop.AddEventListener(this, Id, "itemSelectionChange", "ItemSelectionChanged");
+                await _interop.AddEventListener(this, Id, "valueChange", "ValueChanged");
+                await _interop.AddEventListener(this, Id, "inputChange", "InputChanged");
             }
         }
 
@@ -59,17 +62,23 @@ namespace SiemensIXBlazor.Components
 		}
 
         [JSInvokable]
-        public async void ItemSelectionChanged(dynamic labels)
+        public async void InputChanged(string input)
+        {
+            await InputChangeEvent.InvokeAsync(input);
+        }
+
+        [JSInvokable]
+        public async void ValueChanged(dynamic labels)
         {
 			if(labels is string)
 			{
-                await ItemSelectionChangeEvent.InvokeAsync(labels);
+                await ValueChangeEvent.InvokeAsync(labels);
             }
 			else if(labels is JsonElement)
 			{
 				JsonElement jsonText = labels;
 				string[] labelArray = jsonText.Deserialize<string[]>()!;
-                await ItemSelectionChangeEvent.InvokeAsync(labelArray);
+                await ValueChangeEvent.InvokeAsync(labelArray);
             }
             
         }
