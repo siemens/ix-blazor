@@ -18,6 +18,12 @@ namespace SiemensIXBlazor.Interops
             await module.InvokeAsync<string>("initalTable", id);
         }
 
+        public async Task SubscribeEvents(object classObject, string id, string eventName, string methodName)
+        {
+            var module = await moduleTask.Value;
+            await module.InvokeVoidAsync("subscribeEvents", DotNetObjectReference.Create(classObject), id, eventName, methodName);
+        }
+
         public async ValueTask DisposeAsync()
         {
             if (moduleTask.IsValueCreated)
