@@ -10,10 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@siemens/ix": "1.6.3",
-    "@siemens/ix-echarts": "^1.6.3",
-    "@siemens/ix-icons": "1.1.2",
-    "echarts": "^5.4.2"
+    "@siemens/ix": "2.0.1",
+    "@siemens/ix-echarts": "2.0.1",
+    "@siemens/ix-icons": "2.0.0",
+    "echarts": "5.4.3"
   },
   "devDependencies": {
     "webpack": "^5.75.0",

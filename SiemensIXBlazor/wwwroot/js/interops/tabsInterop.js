@@ -18,3 +18,10 @@
 
     tabs.forEach(registerClickListener);
 };
+
+export const subscribeEvents = (caller, id, eventName, functionName) => {
+    const element = document.getElementById(id);
+    element.addEventListener(eventName, (e) => {
+        caller.invokeMethodAsync(functionName, e.detail);
+    })
+}

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunknpmjs=self.webpackChunknpmjs||[]).push([[8683],{8683:(s,l,t)=>{t.r(l),t.d(l,{ix_menu_about_item:()=>n});var e=t(4801);const n=class{constructor(s){(0,e.r)(this,s),this.label=void 0}render(){return(0,e.h)(e.H,null,(0,e.h)("slot",null))}};n.style=":host{display:block}"}}]);

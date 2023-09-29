@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunknpmjs=self.webpackChunknpmjs||[]).push([[7262],{7262:(s,t,l)=>{l.r(t),l.d(t,{ix_flip_tile_content:()=>e});var n=l(4801);const e=class{constructor(s){(0,n.r)(this,s),this.contentVisible=!1}render(){return(0,n.h)(n.H,null,this.contentVisible?(0,n.h)("slot",null):null)}};e.style=":host{display:block}"}}]);
