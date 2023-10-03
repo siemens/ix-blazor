@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using SiemensIXBlazor.Enums.Button;
+using SiemensIXBlazor.Enums.DropdownButton;
 
 namespace SiemensIXBlazor.Components
 {
@@ -17,6 +18,8 @@ namespace SiemensIXBlazor.Components
         public string Label { get; set; } = string.Empty;
         [Parameter]
         public bool Outline { get; set; } = false;
+        [Parameter]
+        public DropdownButtonPlacement? Placement { get; set; }
         [Parameter]
         public ButtonVariant Variant { get; set; } = ButtonVariant.Primary;
         [Parameter]
