@@ -6,6 +6,8 @@ namespace SiemensIXBlazor.Components
     public partial class LinkButton
     {
         [Parameter]
+        public RenderFragment? ChildContent { get; set; }
+        [Parameter]
         public bool Disabled { get; set; } = false;
         [Parameter]
         public LinkButtonTarget Target { get; set; } = LinkButtonTarget._self;
