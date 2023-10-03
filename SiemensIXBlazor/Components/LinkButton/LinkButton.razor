@@ -1,0 +1,14 @@
+﻿@namespace SiemensIXBlazor.Components
+@using SiemensIXBlazor.Enums.LinkButton;
+@using SiemensIXBlazor.Helpers;
+@inherits IXBaseComponent
+
+<ix-link-button 
+    @attributes="UserAttributes" 
+    class="@Class" 
+    style="@Style" 
+    url="@Url" 
+    disabled="@Disabled" 
+    target="@(EnumParser<LinkButtonTarget>.ParseEnumToString(Target))">
+    Link text
+</ix-link-button>
