@@ -1,0 +1,17 @@
+﻿@namespace SiemensIXBlazor.Components
+@using SiemensIXBlazor.Enums.Button;
+@using SiemensIXBlazor.Helpers;
+@inherits IXBaseComponent
+<ix-icon-toggle-button @attributes="UserAttributes"
+                       class="@Class"
+                       style="@Style"
+                       id="@Id"
+                       disabled="@Disabled"
+                       ghost="@Ghost"
+                       icon="@Icon"
+                       loading="@Loading"
+                       outline="@Outline"
+                       pressed="@Pressed"
+                       size="@Size"
+                       variant="@(EnumParser<ButtonVariant>.ParseEnumToString(Variant))">
+</ix-icon-toggle-button>
