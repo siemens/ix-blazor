@@ -30,7 +30,7 @@ namespace SiemensIXBlazor.Components
         /// Card variant
         /// </summary>
         [Parameter]
-        public PushCardVariant Variant { get; set; } = PushCardVariant.Insight;
+        public PushCardVariant Variant { get; set; } = PushCardVariant.insight;
     }
 }
 

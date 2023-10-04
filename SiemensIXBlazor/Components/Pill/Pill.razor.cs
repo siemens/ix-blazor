@@ -19,7 +19,7 @@ namespace SiemensIXBlazor.Components
 		[Parameter]
 		public bool Outline { get; set; } = false;
 		[Parameter]
-		public PillVariant Variant { get; set; } = PillVariant.Primary;
+		public PillVariant Variant { get; set; } = PillVariant.primary;
 	}
 }
 

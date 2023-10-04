@@ -12,7 +12,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter]
-        public ButtonVariant Variant { get; set; } = ButtonVariant.Primary;
+        public ButtonVariant Variant { get; set; } = ButtonVariant.primary;
         [Parameter]
         public bool Disabled { get; set; } = false;
         [Parameter]

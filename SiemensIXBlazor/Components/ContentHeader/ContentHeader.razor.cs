@@ -18,7 +18,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string? HeaderTitle { get; set; }
         [Parameter]
-        public ContentHeaderVariant Variant { get; set; } = ContentHeaderVariant.Primary;
+        public ContentHeaderVariant Variant { get; set; } = ContentHeaderVariant.primary;
         [Parameter]
         public EventCallback BackButtonClickedEvent { get; set; }
 

@@ -26,7 +26,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public ButtonType Type { get; set; } = ButtonType.Button;
         [Parameter]
-        public ButtonVariant Variant { get; set; } = ButtonVariant.Primary;
+        public ButtonVariant Variant { get; set; } = ButtonVariant.primary;
         [Parameter]
         public EventCallback ClickEvent { get; set; }
 
