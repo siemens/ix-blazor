@@ -89,6 +89,7 @@ public partial class Index
 - [Settings](#settings)
 - [Map Navigation](#map-navigation)
 - [Popover News](#popover-news)
+- [Avatar](#avatar) **(since v0.4.0)**
 - [Blind](#blind)
 - [Breadcrumb](#breadcrumb)
 - [Button](#button)
@@ -256,6 +257,14 @@ aboutMenuElement.ToggleSettings(true);
     </AboutMenuNews>
   </NavigationMenu>
 </BasicNavigation>
+```
+
+## Avatar
+
+```razor
+<Avatar 
+    Image="https://ui-avatars.com/api/?name=John+Doe">
+</Avatar>
 ```
 
 ## Blind
