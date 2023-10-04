@@ -18,6 +18,10 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Ghost { get; set; } = false;
         [Parameter]
+        public string? Icon { get; set; }
+        [Parameter]
+        public bool Loading { get; set; } = false;
+        [Parameter]
         public bool Outline { get; set; } = false;
         [Parameter]
         public bool Selected { get; set; } = false;
