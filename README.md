@@ -117,6 +117,7 @@ public partial class Index
 - [Key Value List](#key-value-list) **(since v0.3.3)**
 - [Key Value](#key-value) **(since v0.3.3)**
 - [KPI](#kpi)
+- [Link Button](#link-button) **(since v0.4.0)**
 - [Message Bar](#message-bar)
 - [Modal](#modal)
 - [Pagination](#pagination)
@@ -733,6 +734,12 @@ private void DrawerButtonClicked()
 
 ```html
 <KPI Label="Motor speed" Value="Nominal"></KPI>
+```
+
+## Link Button
+
+```html
+<LinkButton Url="https://ix.siemens.io/">Siemens IX</LinkButton>
 ```
 
 ## Message bar
