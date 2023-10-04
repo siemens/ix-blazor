@@ -45,7 +45,7 @@ Add required `CSS` and `Javascript` packages into the `index.html` file.
 
 Add `Theme` component to the page that you want to manipulate the theme.
 
-```html
+```razor
 <Theme @ref="themeProvider"></Theme>
 ```
 
@@ -142,7 +142,7 @@ public partial class Index
 
 ## Basic Navigation
 
-```html
+```razor
 <BasicNavigation ApplicationName="Application name">
   <placeholder-logo slot="logo"></placeholder-logo>
   <NavigationMenu Id="nav-menu-1">
@@ -154,7 +154,7 @@ public partial class Index
 
 ## Navigation Menu
 
-```html
+```razor
 <NavigationMenu Id="nav-menu-1">
   <NavigationMenuItem Home="true" TabIcon="home"> Home </NavigationMenuItem>
   <NavigationMenuItem TabIcon="globe"> Normal Tab </NavigationMenuItem>
@@ -166,7 +166,7 @@ public partial class Index
 </NavigationMenu>
 ```
 
-```html
+```razor
 @* Avatar *@
 <NavigationMenu Id="nav-menu-1">
   <NavigationMenuAvatar Id="nav-avatar-menu-1" Image="https://ui-avatars.com/api/?name=John+Doe">
@@ -184,7 +184,7 @@ public partial class Index
 
 ## About and Legal
 
-```html
+```razor
 <BasicNavigation>
   <placeholder-logo slot="logo"></placeholder-logo>
   <NavigationMenu Id="nav-menu-1">
@@ -204,7 +204,7 @@ aboutMenuElement.ToggleAbout(true);
 
 ## Settings
 
-```html
+```razor
 <BasicNavigation>
   <placeholder-logo slot="logo"></placeholder-logo>
   <NavigationMenu Id="nav-menu-1">
@@ -228,7 +228,7 @@ aboutMenuElement.ToggleSettings(true);
 
 ## Map Navigation
 
-```html
+```razor
 <MapNavigation
   ApplicationName="Test Application"
   NavigationTitle="Some other content"
@@ -246,7 +246,7 @@ aboutMenuElement.ToggleSettings(true);
 
 ## Popover News
 
-```html
+```razor
 <BasicNavigation>
   <placeholder-logo slot="logo"></placeholder-logo>
   <NavigationMenu Id="nav-menu-1">
@@ -270,7 +270,7 @@ aboutMenuElement.ToggleSettings(true);
 
 ## Blind
 
-```html
+```razor
 <Blind 
     Label="Test Blind" 
     Id="blind1" 
@@ -281,7 +281,7 @@ Test content
 
 ## Breadcrumb
 
-```html
+```razor
 <Breadcrumb Id="breadcrumb-1" 
             Class="editor-breadcrumb" 
             ItemClicked="(label) => ClickedOnBreadcrumb(label)">
@@ -292,13 +292,13 @@ Test content
 
 ## Button
 
-```html
+```razor
 <Button>Test Button</Button>
 ```
 
 ## Card List
 
-```html
+```razor
 <CardList Id="carlist1" Label="Stack Layout" ShowAllCount="12" ListStyle="Enums.CardList.CardListStyle.Stack" CollapseChangedEvent="CardListCollapsedChanged" 
 ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowMoreClicked">
     <PushCard Icon="rocket"
@@ -321,7 +321,7 @@ ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowM
 
 ## Push Card
 
-```html
+```razor
 <PushCard Icon="rocket"
         Notification="3"
         Heading="Heading content"
@@ -331,7 +331,7 @@ ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowM
 
 ## Action Card
 
-```html
+```razor
 <ActionCard
       Icon="refresh"
       Heading="Scan for new devices"
@@ -342,13 +342,13 @@ ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowM
 
 ## Icon Button
 
-```html
+```razor
 <IconButton Icon="info"></IconButton>
 ```
 
 ## Category filter
 
-```html
+```razor
 <CategoryFilter 
     @ref="categoryFilter" 
     Id="category-filter-1" 
@@ -403,7 +403,7 @@ protected override void OnAfterRender(bool firstRender)
 
 ## ECharts
 
-```html
+```razor
 <ECharts Id="chart1" @ref="chart1">
 </ECharts>
 ```
@@ -487,7 +487,7 @@ chart1.InitialChart(object1);
 
 ## Checkbox
 
-```html
+```razor
 <div style="margin-bottom: 1rem">
   <input type="checkbox" id="checkbox_01" />
   <label for="checkbox_01">Simple checkbox</label>
@@ -501,7 +501,7 @@ chart1.InitialChart(object1);
 
 ## Chip
 
-```html
+```razor
 <Chip Icon="print" 
       Label="Chip with icon" 
       Id="chip1" 
@@ -512,7 +512,7 @@ chart1.InitialChart(object1);
 
 ## Content Header
 
-```html
+```razor
 <ContentHeader Id="content-header-1" HasBackButton="true"
             HeaderTitle="Content title"
             HeaderSubTitle="Subtitle"
@@ -523,7 +523,7 @@ chart1.InitialChart(object1);
 
 ## Date picker
 
-```html
+```razor
 <DatePicker From="2023/02/01" 
             To="2023/02/15" 
             Id="timepicker1" 
@@ -533,7 +533,7 @@ chart1.InitialChart(object1);
 
 ## Date time picker
 
-```html
+```razor
 <DateTimePicker 
         DateChangeEvent="(date) => DateChangeEventTest(date)" 
         From="2023/02/01" 
@@ -545,14 +545,14 @@ chart1.InitialChart(object1);
 
 ## Divider
 
-```html
+```razor
 <Divider></Divider>
 ```
 
 
 ## Drawer
 
-```html
+```razor
 <Button ClickEvent="DrawerButtonClicked">Drawer Button</Button>
 <Drawer @ref="drawer1" Id="drawer1">
     <span>Some content of drawer</span>
@@ -579,7 +579,7 @@ private void DrawerButtonClicked()
 
 ## Dropdown button
 
-```html
+```razor
 <DropdownButton Label="Dropdown" Variant="Primary" Icon="checkboxes">
     <DropdownItem Label="Item 1" Value="1"></DropdownItem>
     <DropdownItem Label="Item 2" Value="2"></DropdownItem>
@@ -589,7 +589,7 @@ private void DrawerButtonClicked()
 
 ## Dropdown
 
-```html
+```razor
 <Button Id="triggerId">Open</Button>
 <Dropdown Trigger="triggerId">
   <DropdownItem Label="Item 1"></DropdownItem>
@@ -600,7 +600,7 @@ private void DrawerButtonClicked()
 
 ## Empty State
 
-```html
+```razor
 <EmptyState
   Header="No elements available"
   SubHeader="Create an element first"
@@ -611,7 +611,7 @@ private void DrawerButtonClicked()
 
 ## Event list
 
-```html
+```razor
 <EventList>
     <EventListItem Id="event-list-item-1" Label="Item 1" ItemCLickEvent="(label) => DropdownButtonClicked(label)"></EventListItem>
     <EventListItem Id="event-list-item-2" Label="Item 2" ItemCLickEvent="(label) => DropdownButtonClicked(label)"></EventListItem>
@@ -621,7 +621,7 @@ private void DrawerButtonClicked()
 
 ## Expanding search
 
-```html
+```razor
 <ExpandingSearch Id="exp-search" 
                  ValueChangedEvent="(value) => SearchValueChanged(value)">
 </ExpandingSearch>
@@ -629,7 +629,7 @@ private void DrawerButtonClicked()
 
 ## Flip
 
-```html
+```razor
 <FlipTile>
     <div slot="header">Flip header</div>
 
@@ -648,7 +648,7 @@ private void DrawerButtonClicked()
 - [ ] AG grid
 ## Group
 
-```html
+```razor
 <Group Id="group1" Header="Header text" SubHeader="Subheader text">
     <GroupItem Id="groupitem1" Text="Example text 1"></GroupItem>
     <GroupItem Id="groupitem2" Text="Example text 2"></GroupItem>
@@ -658,7 +658,7 @@ private void DrawerButtonClicked()
 
 ## HTML table
 
-```html
+```razor
 <table class="table">
   <thead>
     <tr>
@@ -692,7 +692,7 @@ private void DrawerButtonClicked()
 
 ## Input
 
-```html
+```razor
 <form class="needs-validation m-2">
   <input
     class="form-control"
@@ -705,7 +705,7 @@ private void DrawerButtonClicked()
 
 ## Key Value List
 
-```html
+```razor
 <KeyValueList>
   <KeyValue
     Label="Label"
@@ -729,7 +729,7 @@ private void DrawerButtonClicked()
 
 ## Key Value
 
-```html
+```razor
 <KeyValue Label="Label">
   <input
     class="form-control"
@@ -742,19 +742,19 @@ private void DrawerButtonClicked()
 
 ## KPI
 
-```html
+```razor
 <KPI Label="Motor speed" Value="Nominal"></KPI>
 ```
 
 ## Link Button
 
-```html
+```razor
 <LinkButton Url="https://ix.siemens.io/">Siemens IX</LinkButton>
 ```
 
 ## Message bar
 
-```html
+```razor
 <MessageBar ClosedChangeEvent="MessageboxClosed" Id="messagebar1" Type="MessageBarType.Danger">
     <div class="d-flex align-items-center justify-content-between">
         Message text <ix-button>Action</ix-button>
@@ -764,7 +764,7 @@ private void DrawerButtonClicked()
 
 ## Modal
 
-```html
+```razor
 <div class="@modalClass" style="display:@modalDisplay">
     <div class="modal-header">
         Message headline
@@ -809,7 +809,7 @@ private void CloseModal()
 
 ## Pagination
 
-```html
+```razor
 <Pagination Id="pagination-1" 
     Advanced="true" 
     Count="100" 
@@ -820,7 +820,7 @@ private void CloseModal()
 
 ## Pill
 
-```html
+```razor
 <Pill Variant="PillVariant.Custom" Color="white" Background="purple">
     Label
 </Pill>
@@ -828,7 +828,7 @@ private void CloseModal()
 
 ## Radio button
 
-```html
+```razor
 <div class="example-list">
   <input checked id="checkbox_1_1" name="group_1" type="radio" />
   <label for="checkbox_1_1"> Checked </label>
@@ -843,7 +843,7 @@ private void CloseModal()
 
 ## Select
 
-```html
+```razor
 <Select ItemSelectionChangeEvent=SelectItemSelectedChanged 
 AddItemEvent="SelectItemAdded" Mode="SelectMode.Single" SelectedIndices="2" Id="select1">
     <SelectItem Id="selectItem1" Label="Item 1" Value="1"></SelectItem>
@@ -853,13 +853,13 @@ AddItemEvent="SelectItemAdded" Mode="SelectMode.Single" SelectedIndices="2" Id="
 
 ## Spinner
 
-```html
+```razor
 <Spinner></Spinner>
 ```
 
 ## Split button
 
-```html
+```razor
 <SplitButton Id="split-button-1" 
              Label="Split Button" 
              SplitIcon="chevron-down-small" 
@@ -869,7 +869,7 @@ AddItemEvent="SelectItemAdded" Mode="SelectMode.Single" SelectedIndices="2" Id="
 
 ## Tabs
 
-```html
+```razor
 <div class="example">
     <Tabs Id="tabs-demo">
         <ix-tab-item data-tab-id="0">Tab 1</ix-tab-item>
@@ -900,13 +900,13 @@ div[data-tab-content].show {
 
 ## Text area
 
-```html
+```razor
 <textarea class="form-control" placeholder="Enter text here"></textarea>
 ```
 
 ## Tile
 
-```html
+```razor
 <Tile Size="TileSize.Medium" Class="mr-1">
     <div slot="header">Tile header</div>
     <div class="text-l">92.8 °C</div>
@@ -915,13 +915,13 @@ div[data-tab-content].show {
 
 ## Time picker
 
-```html
+```razor
 <TimePicker></TimePicker>
 ```
 
 ## Toast
 
-```html
+```razor
 <Toast @ref="toast"></Toast>
 ```
 
@@ -953,13 +953,13 @@ toast.ShowToast("test message", "info");
 
 ## Toggle
 
-```html
+```razor
 <Toggle></Toggle>
 ```
 
 ## Tooltip
 
-```html
+```razor
 <div style="padding: 4rem">
     <Button DataTooltip="myTooltip">Hover me</Button>
     <ix-tooltip for="[data-tooltip='myTooltip']">
@@ -970,7 +970,7 @@ toast.ShowToast("test message", "info");
 
 ## Tree
 
-```html
+```razor
 <div style="height: 8rem; width: 100%">
     <Tree Id="tree-1" Root="root" ContextChangedEvent="TreeContextChangeEvent" 
     NodeClickedEvent="TreeNodeClicked" 
@@ -1031,7 +1031,7 @@ tree.TreeModel = treeNodes;
 
 ## Upload
 
-```html
+```razor
 <Upload Id="file-upload-test" 
         FileChangedEvent="(data) => FileChanged(data)">
 </Upload>
@@ -1039,7 +1039,7 @@ tree.TreeModel = treeNodes;
 
 ## Form validation
 
-```html
+```razor
 <form class="row g-3 needs-validation" novalidate>
   <div class="row">
     <div class="col-md-4">
@@ -1097,7 +1097,7 @@ tree.TreeModel = treeNodes;
 
 ## Workflow
 
-```html
+```razor
 <WorkflowSteps Id="wf-steps" StepSelectedEvent="(index) => WfSelectedEvent(index)">
     <WorkflowStep Status="WorkflowStatus.Done">Step 1</WorkflowStep>
     <WorkflowStep Status="WorkflowStatus.Success">Step 2</WorkflowStep>
@@ -1112,7 +1112,7 @@ tree.TreeModel = treeNodes;
 
 You can follow the original documentation and use native `Javascript` components.
 
-```html
+```razor
 <ix-button class="m-1" outline variant="Secondary">
     Button
 </ix-button>
@@ -1120,7 +1120,7 @@ You can follow the original documentation and use native `Javascript` components
 
 Or you can use supported components as a native `Blazor` components.
 
-```html
+```razor
 <Button Class="m-1" Outline="true" Variant="Secondary">
     Button
 </Button>
