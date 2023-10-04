@@ -132,6 +132,7 @@ public partial class Index
 - [Tile](#tile)
 - [Time Picker](#time-picker)
 - [Toast](#toast)
+- [Toggle Buttons](#toggle-buttons) **(since v0.4.0)**
 - [Toggle](#toggle)
 - [Tooltip](#tooltip)
 - [Tree](#tree)
@@ -934,6 +935,20 @@ ToastConfig config = new ToastConfig()
 }
 
 toast.ShowToast("test message", "info");
+```
+
+## Toggle Buttons
+
+```razor
+<ToggleButton>Normal</ToggleButton>
+<ToggleButton Id="toggle-btn-1" Pressed="true">Pressed</ToggleButton>
+
+<IconToggleButton Outline="true" Icon="checkboxes"></IconToggleButton>
+<IconToggleButton
+    Outline="true"
+    Icon="checkboxes"
+    Pressed="true"
+></IconToggleButton>
 ```
 
 ## Toggle
