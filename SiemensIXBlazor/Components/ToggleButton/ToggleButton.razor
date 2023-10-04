@@ -1,0 +1,17 @@
+﻿@using Microsoft.JSInterop;
+@using SiemensIXBlazor.Enums.Button;
+@using SiemensIXBlazor.Helpers;
+@inject IJSRuntime JSRuntime
+@inherits IXBaseComponent
+
+<ix-toggle-button @attributes="UserAttributes"
+class="@Class"
+style="@Style"
+id="@Id"
+disabled="@Disabled"
+ghost="@Ghost"
+icon="@Icon"
+loading="@Loading"
+outline="@Outline"
+pressed="@Pressed"
+variant="@(EnumParser<ButtonVariant>.ParseEnumToString(Variant))">@ChildContent</ix-toggle-button>
