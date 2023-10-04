@@ -1,0 +1,19 @@
+﻿@using Microsoft.JSInterop;
+@inherits IXBaseComponent
+@inject IJSRuntime JSRuntime
+<ix-slider 
+           @attributes="UserAttributes"
+           id="@Id"
+           class="@Class" 
+           style="@Style" 
+           value="@Value"
+           disabled="@Disabled"
+           error="@Error"
+           marker="@Marker"
+           max="@Max"
+           min="@Min"
+           step="@Step"
+           trace="@Trace"
+           trace-reference="@TraceReference">
+    @ChildContent
+</ix-slider>
