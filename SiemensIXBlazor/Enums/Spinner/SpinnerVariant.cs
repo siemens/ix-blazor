@@ -2,8 +2,8 @@
 {
     public enum SpinnerVariant
     {
-        Primary,
-        Secondary,
-        Sencodary
+        primary,
+        secondary,
+        sencodary
     }
 }

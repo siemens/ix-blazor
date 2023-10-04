@@ -1,16 +1,15 @@
-﻿using System;
-namespace SiemensIXBlazor.Enums.PushCard
+﻿namespace SiemensIXBlazor.Enums.PushCard
 {
-	public enum PushCardVariant
+    public enum PushCardVariant
     {
-		Alarm,
-		Critical,
-		Info,
-		Insight,
-		Neutral,
-		Notification,
-		Success,
-		Warning
+		alarm,
+		critical,
+		info,
+		insight,
+		neutral,
+		notification,
+		success,
+		warning
 	}
 }
 

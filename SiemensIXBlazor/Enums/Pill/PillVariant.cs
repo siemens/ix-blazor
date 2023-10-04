@@ -2,13 +2,13 @@
 {
     public enum PillVariant
     {
-        Alarm,
-        Critical,
-        Custom,
-        Info,
-        Neutral,
-        Primary,
-        Success,
-        Warning
+        alarm,
+        critical,
+        custom,
+        info,
+        neutral,
+        primary,
+        success,
+        warning
     }
 }

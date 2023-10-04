@@ -2,7 +2,7 @@
 {
     public enum ButtonVariant
     {
-        Primary,
-        Secondary
+        primary,
+        secondary
     }
 }

@@ -2,7 +2,7 @@
 {
     public enum ContentHeaderVariant
     {
-        Primary,
-        Secondary
+        primary,
+        secondary
     }
 }
