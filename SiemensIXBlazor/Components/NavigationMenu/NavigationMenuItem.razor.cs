@@ -13,6 +13,8 @@ namespace SiemensIXBlazor.Components.NavigationMenu
         [Parameter]
         public bool Home { get; set; } = false;
         [Parameter]
+        public string? Icon { get; set; }
+        [Parameter]
         public int? Notifications { get; set; }
         [Parameter]
         public string TabIcon { get; set; } = "document";
