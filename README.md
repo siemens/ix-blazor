@@ -122,6 +122,7 @@ public partial class Index
 - [Key Value List](#key-value-list) **(since v0.3.3)**
 - [Key Value](#key-value) **(since v0.3.3)**
 - [KPI](#kpi)
+- [Layout Grid](#layout-grid) **(since v0.4.0)**
 - [Link Button](#link-button) **(since v0.4.0)**
 - [Message Bar](#message-bar)
 - [Modal](#modal)
@@ -168,6 +169,20 @@ public partial class Index
     Should not be visible
   </NavigationMenuItem>
 </NavigationMenu>
+```
+
+```razor
+@* Category *@
+<BasicNavigation>
+  <NavigationMenu>
+    <NavigationMenuItem Home="true" Icon="home">Home</NavigationMenuItem>
+    <NavigationMenuItem Icon="globe">Normal Tab</NavigationMenuItem>
+    <NavigationMenuCategory Label="Top level Category" Icon="rocket">
+      <NavigationMenuItem Icon="globe">Nested Tab</NavigationMenuItem>
+      <NavigationMenuItem Icon="globe">Nested Tab</NavigationMenuItem>
+    </NavigationMenuCategory>
+  </NavigationMenu>
+</BasicNavigation>
 ```
 
 ```razor
@@ -748,6 +763,21 @@ private void DrawerButtonClicked()
 
 ```razor
 <KPI Label="Motor speed" Value="Nominal"></KPI>
+```
+
+## Layout Grid
+
+```razor
+<LayoutGrid>
+  <Row>
+    <Col><ix-typography format="display">1</ix-typography></Col>
+    <Col><ix-typography format="display">2</ix-typography></Col>
+    <Col><ix-typography format="display">3</ix-typography></Col>
+    <Col><ix-typography format="display">4</ix-typography></Col>
+    <Col><ix-typography format="display">5</ix-typography></Col>
+    <Col><ix-typography format="display">6</ix-typography></Col>
+  </Row>
+</LayoutGrid>
 ```
 
 ## Link Button
