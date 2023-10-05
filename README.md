@@ -327,17 +327,17 @@ ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowM
               Notification="3"
               Heading="Heading content"
               SubHeading="Subheading"
-              Variant="PushCardVariant.Notification"></PushCard>
+              Variant="PushCardVariant.notification"></PushCard>
     <PushCard Icon="bulb"
               Notification="1"
               Heading="Heading content"
               SubHeading="Subheading"
-              Variant="PushCardVariant.Warning"></PushCard>
+              Variant="PushCardVariant.warning"></PushCard>
     <PushCard Icon="rocket"
               Notification="3"
               Heading="Heading content"
               SubHeading="Subheading"
-              Variant="PushCardVariant.Success"></PushCard>
+              Variant="PushCardVariant.success"></PushCard>
 </CardList>
 ```
 
@@ -348,7 +348,7 @@ ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowM
         Notification="3"
         Heading="Heading content"
         SubHeading="Subheading"
-        Variant="PushCardVariant.Notification"></PushCard>
+        Variant="PushCardVariant.notification"></PushCard>
 ```
 
 ## Action Card
@@ -358,7 +358,7 @@ ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowM
       Icon="refresh"
       Heading="Scan for new devices"
       SubHeading="Secondary text"
-      Variant="PushCardVariant.Notification"
+      Variant="PushCardVariant.notification"
 ></ActionCard>
 ```
 
@@ -858,7 +858,7 @@ private void CloseModal()
 ## Pill
 
 ```razor
-<Pill Variant="PillVariant.Custom" Color="white" Background="purple">
+<Pill Variant="PillVariant.custom" Color="white" Background="purple">
     Label
 </Pill>
 ```
