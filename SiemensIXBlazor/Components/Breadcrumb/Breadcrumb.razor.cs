@@ -17,6 +17,8 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Ghost { get; set; } = false;
         [Parameter]
+        public string AriaLabelPreviousButton { get; set; } = "previous";
+        [Parameter]
         public string[] NextItems { get; set; } = Array.Empty<string>();
         [Parameter]
         public int VisibleItemCount { get; set; } = 9;
