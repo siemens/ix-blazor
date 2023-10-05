@@ -6,7 +6,6 @@ namespace SiemensIXBlazor.Components
     {
         public async Task SetTheme(string theme)
         {
-            Console.WriteLine(theme);
             await JSRuntime.InvokeVoidAsync("setTheme", theme);
         }
 
