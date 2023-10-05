@@ -50,7 +50,7 @@ Add `Theme` component to the page that you want to manipulate the theme.
 
 <Button ClickEvent="SetDarkTheme">Set Dark Theme</Button>
 <Button ClickEvent="ToggleTheme">Toggle Theme</Button>
-<Button ClickEvent="ToggleSystemTheme">Toggle System Theme Theme</Button>
+<Button ClickEvent="ToggleSystemTheme">Toggle System Theme</Button>
 ```
 
 Then use this methods to change theme.
