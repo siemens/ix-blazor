@@ -47,6 +47,10 @@ Add `Theme` component to the page that you want to manipulate the theme.
 
 ```razor
 <Theme @ref="themeProvider"></Theme>
+
+<Button ClickEvent="SetDarkTheme">Set Dark Theme</Button>
+<Button ClickEvent="ToggleTheme">Toggle Theme</Button>
+<Button ClickEvent="ToggleSystemTheme">Toggle System Theme Theme</Button>
 ```
 
 Then use this methods to change theme.
@@ -64,7 +68,7 @@ public partial class Index
             
     }
 
-    private async Task CheckboxChanged()
+    private async Task ToggleTheme()
     {
         await themeProvider.ToggleTheme();
     }
