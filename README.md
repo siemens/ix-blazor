@@ -24,10 +24,13 @@ Add required `CSS` and `Javascript` packages into the `index.html` file.
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blazor App</title>
+
+    <!--Deprecated after v0.4.0-->
     <link
       rel="stylesheet"
       href="_content/SiemensIXBlazor/css/siemens-ix/ix-icons.css"
     />
+
     <link
       rel="stylesheet"
       href="_content/SiemensIXBlazor/css/siemens-ix/siemens-ix.css"
