@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using SiemensIXBlazor.Enums.Blind;
 using SiemensIXBlazor.Interops;
 
 namespace SiemensIXBlazor.Components
@@ -7,7 +8,9 @@ namespace SiemensIXBlazor.Components
     public partial class Blind
     {
         [Parameter]
-        public string Label { get; set; } = string.Empty;
+        public string? Label { get; set; }
+        [Parameter]
+        public string? SubLabel { get; set; }
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter, EditorRequired]
@@ -16,6 +19,8 @@ namespace SiemensIXBlazor.Components
         public bool Collapsed { get; set; } = false;
         [Parameter]
         public string? Icon { get; set; }
+        [Parameter]
+        public BlindVariant Variant { get; set; } = BlindVariant.insight;
         [Parameter]
         public EventCallback<bool> CollapsedChangedEvent { get; set; }
 

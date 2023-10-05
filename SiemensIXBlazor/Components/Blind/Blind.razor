@@ -1,9 +1,12 @@
 ﻿@using Microsoft.JSInterop;
+@using SiemensIXBlazor.Enums.Blind;
+@using SiemensIXBlazor.Helpers;
 @inject IJSRuntime JSRuntime
 @inherits IXBaseComponent
 
 @namespace SiemensIXBlazor.Components
 
-<ix-blind @attributes="UserAttributes" class="@Class" style="@Style" id="@Id" label="@Label" collapsed="@Collapsed" icon="@Icon">
+<ix-blind @attributes="UserAttributes" class="@Class" style="@Style" id="@Id" label="@Label" sublabel="@SubLabel" collapsed="@Collapsed" icon="@Icon" 
+variant="@(EnumParser<BlindVariant>.ParseEnumToString(Variant))">
   @ChildContent
 </ix-blind>
