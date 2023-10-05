@@ -8,7 +8,7 @@
 @attributes="UserAttributes"
 label="@Label" 
 variant="@(EnumParser<ButtonVariant>.ParseEnumToString(Variant))"
-placement="@(EnumParser<DropdownButtonPlacement>.ParseEnumToString(Placement)?.Replace('_', '-'))"
+placement="@((Placement != null) ? EnumParser<DropdownButtonPlacement>.ParseEnumToString(Placement)?.Replace('_', '-') : "")"
 icon="@Icon"
 disabled="@Disabled"
 ghost="@Ghost"
