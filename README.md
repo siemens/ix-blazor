@@ -96,7 +96,7 @@ public partial class Index
 - [Settings](#settings)
 - [Map Navigation](#map-navigation)
 - [Popover News](#popover-news)
-- [AGGrid (Preview)](#ag-grid) **(since 0.4.2)**
+- [AGGrid (Preview)](#aggrid-preview) **(since 0.4.2)**
 - [Avatar](#avatar) **(since v0.4.0)**
 - [Blind](#blind)
 - [Breadcrumb](#breadcrumb)
