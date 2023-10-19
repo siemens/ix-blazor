@@ -22,3 +22,29 @@ LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
+
+/**
+          * @ag-grid-community/all-modules - Advanced Data Grid / Data Table supporting Javascript / Typescript / React / Angular / Vue * @version v29.1.0
+          * @link https://www.ag-grid.com/
+          * @license MIT
+          */
+
+/**
+          * @ag-grid-community/all-modules - Advanced Data Grid / Data Table supporting Javascript / Typescript / React / Angular / Vue * @version v30.2.0
+          * @link https://www.ag-grid.com/
+          * @license MIT
+          */
+
+/**
+ * @ag-grid-community/core - Advanced Data Grid / Data Table supporting Javascript / Typescript / React / Angular / Vue
+ * @version v29.1.0
+ * @link https://www.ag-grid.com/
+ * @license MIT
+ */
+
+/**
+ * @ag-grid-community/core - Advanced Data Grid / Data Table supporting Javascript / Typescript / React / Angular / Vue
+ * @version v30.2.0
+ * @link https://www.ag-grid.com/
+ * @license MIT
+ */
