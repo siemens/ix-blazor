@@ -96,6 +96,7 @@ public partial class Index
 - [Settings](#settings)
 - [Map Navigation](#map-navigation)
 - [Popover News](#popover-news)
+- [AGGrid (Preview)](#ag-grid) **(since 0.4.2)**
 - [Avatar](#avatar) **(since v0.4.0)**
 - [Blind](#blind)
 - [Breadcrumb](#breadcrumb)
@@ -280,6 +281,105 @@ aboutMenuElement.ToggleSettings(true);
     </AboutMenuNews>
   </NavigationMenu>
 </BasicNavigation>
+```
+
+## AGGrid Preview
+
+This component is currently in **preview** version. 
+
+### Installation
+
+Add necessary css files into the `index.html` file.
+
+```html
+<!-- Include the core CSS, this is needed by the grid -->
+<link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-grid.css" />
+
+<!-- Include the theme CSS, only need to import the theme you are going to use -->
+<link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-alpine.css" />
+
+<link rel="stylesheet"
+        href="_content/SiemensIXBlazor/css/siemens-ix/ix-aggrid.css" />
+```
+
+```razor
+<AGGrid 
+    @ref="agGridRef" 
+    Id="grid1" 
+    Class="ag-theme-alpine-dark ag-theme-ix" 
+    Style="height: 150px; width: 600px">
+</AGGrid>
+```
+
+```csharp
+AGGrid agGridRef;
+protected override async Task OnAfterRenderAsync(bool firstRender)
+{
+    if(firstRender)
+    {
+        Dictionary<string, dynamic> row1 = new()
+        {
+            { "type", "Equipment" },
+            { "status", "Normal" },
+            { "hwVersion", "2.0" },
+            { "checked", false }
+        };
+
+        Dictionary<string, dynamic> row2 = new()
+        {
+            { "type", "Positioner" },
+            { "status", "Maintenance" },
+            { "hwVersion", "1.0" },
+            { "checked", true }
+        };
+
+        Dictionary<string, dynamic> row3 = new()
+        {
+            { "type", "Pressure sensor" },
+            { "status", "Unknown" },
+            { "hwVersion", "N/A" },
+            { "checked", false }
+        };
+
+
+        GridOptions options = new GridOptions()
+        {
+            ColumnDefs = new List<ColumnDefs> 
+            { 
+                new ColumnDefs() 
+                { 
+                    Field = "type", 
+                    HeaderName = "Type", 
+                    Resizable = true, 
+                    CheckboxSelection = true
+                }, 
+                new ColumnDefs() 
+                {
+                    Field = "status",
+                    HeaderName = "Status",
+                    Resizable = true,
+                    Sortable = true,
+                    Filter = true
+                }, 
+                new ColumnDefs() 
+                { 
+                    Field = "hwVersion",
+                    HeaderName = "HW version",
+                    Resizable= true
+                } 
+            },
+            RowData = new List<Dictionary<string, dynamic>> { row1, row2, row3 },
+            CheckboxSelection = true,
+            RowSelection = "multiple",
+            SuppressCellFocus = true
+        };
+
+        await agGridRef.CreateGrid(options);
+    }
+            
+}
 ```
 
 ## Avatar

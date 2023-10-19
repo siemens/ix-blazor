@@ -4,6 +4,8 @@ import '@siemens/ix-echarts';
 import { registerTheme } from '@siemens/ix-echarts';
 import * as echarts from 'echarts';
 import { themeSwitcher } from '@siemens/ix';
+import { Grid } from 'ag-grid-community';
+import '@siemens/ix-aggrid/dist/index.js'
 
 defineCustomElements();
 
@@ -34,5 +36,17 @@ window.toggleTheme = () => {
 window.toggleSystemTheme = (useSystemTheme) => {
     if (useSystemTheme === true) {
         themeSwitcher.setVariant();
+    }
+}
+
+// AGGrid
+window.agGridInterop = {
+    createGrid: function (elementId, gridOptions) {
+        const grid = new Grid(document.getElementById(elementId), JSON.parse(gridOptions))
+        console.log(JSON.parse(gridOptions))
+        return grid;
+    },
+    setData: function (grid, data) {
+        grid.api.setRowData(data);
     }
 }
