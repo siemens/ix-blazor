@@ -3,10 +3,10 @@ name: Publish
 on:
   push:
     tags:
-    - 'v*'
+    - '*'
   pull_request:
     tags:
-    - 'v*'
+    - '*'
 
 env:
    PROJECT_PATH: "SiemensIXBlazor/SiemensIXBlazor.csproj"
