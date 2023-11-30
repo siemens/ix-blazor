@@ -1,4 +1,4 @@
-﻿import { defineCustomElements } from '@siemens/ix/loader/index'
+﻿import { defineCustomElements, applyPolyfills } from '@siemens/ix/loader/index'
 import { toast } from "@siemens/ix"
 import '@siemens/ix-echarts';
 import { registerTheme } from '@siemens/ix-echarts';
@@ -6,8 +6,13 @@ import * as echarts from 'echarts';
 import { themeSwitcher } from '@siemens/ix';
 import { Grid } from 'ag-grid-community';
 import '@siemens/ix-aggrid/dist/index.js'
+import { defineCustomElements as ixIconsDefineCustomElements } from '@siemens/ix-icons/loader';
 
-defineCustomElements();
+(async () => {
+    await applyPolyfills();
+    await ixIconsDefineCustomElements();
+    await defineCustomElements();
+})();
 
 // toast
 window.showMessage = (config) => {
