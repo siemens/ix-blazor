@@ -10,13 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@ag-grid-community/core": "^30.2.0",
-    "@siemens/ix": "^2.0.1",
-    "@siemens/ix-aggrid": "^2.0.3",
-    "@siemens/ix-echarts": "^2.0.1",
-    "@siemens/ix-icons": "^2.0.0",
-    "ag-grid-community": "^30.2.0",
-    "echarts": "5.4.3"
+    "@ag-grid-community/core": "30.2.0",
+    "@siemens/ix": "2.0.4",
+    "@siemens/ix-aggrid": "2.0.4",
+    "@siemens/ix-echarts": "2.0.4",
+    "@siemens/ix-icons": "2.0.1",
+    "ag-grid-community": "30.2.0",
+    "echarts": "5.4.1"
   },
   "devDependencies": {
     "webpack": "^5.75.0",
