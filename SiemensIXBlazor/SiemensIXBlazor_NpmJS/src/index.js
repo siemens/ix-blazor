@@ -5,7 +5,6 @@ import { registerTheme } from '@siemens/ix-echarts';
 import * as echarts from 'echarts';
 import { themeSwitcher } from '@siemens/ix';
 import { Grid } from 'ag-grid-community';
-import '@siemens/ix-aggrid/dist/index.js'
 import { defineCustomElements as ixIconsDefineCustomElements } from '@siemens/ix-icons/loader';
 
 (async () => {
