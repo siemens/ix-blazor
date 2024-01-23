@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using SiemensIXBlazor.Enums.BasicNavigation;
 
 namespace SiemensIXBlazor.Components.BasicNavigation
 {
@@ -16,5 +17,7 @@ namespace SiemensIXBlazor.Components.BasicNavigation
         public bool HideHeader { get; set; } = false;
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
+        [Parameter]
+        public Breakpoint? ForceBreakpoint { get; set; }
     }
 }
