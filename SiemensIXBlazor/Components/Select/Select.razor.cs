@@ -77,8 +77,14 @@ namespace SiemensIXBlazor.Components
 			else if(labels is JsonElement)
 			{
 				JsonElement jsonText = labels;
-				string[] labelArray = jsonText.Deserialize<string[]>()!;
-                await ValueChangeEvent.InvokeAsync(labelArray);
+
+				if (jsonText.ValueKind == JsonValueKind.Array) {
+					string[] labelArray = jsonText.Deserialize<string[]>()!;
+					await ValueChangeEvent.InvokeAsync(labelArray);
+				} else
+				{
+                    await ValueChangeEvent.InvokeAsync(jsonText.GetString());
+                }
             }
             
         }
