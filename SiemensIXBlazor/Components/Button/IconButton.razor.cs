@@ -20,6 +20,8 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool? Oval { get; set; }
         [Parameter]
+        public IconButtonSize Size { get; set; } = IconButtonSize._24;
+        [Parameter]
         public bool Selected { get; set; } = false;
         [Parameter]
         public string DataTooltip { get; set; } = string.Empty;
