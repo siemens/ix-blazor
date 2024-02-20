@@ -14,5 +14,9 @@ namespace SiemensIXBlazor.Components.AGGrid
         public bool? SuppressCellFocus { get; set; }
         [JsonProperty("checkboxSelection")]
         public bool? CheckboxSelection { get; set; }
+        [JsonProperty("overlayLoadingTemplate")]
+        public string? OverlayLoadingTemplate { get; set; }
+        [JsonProperty("overlayNoRowsTemplate")]
+        public string? OverlayNoRowsTemplate { get; set; }
     }
 }
