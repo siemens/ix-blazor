@@ -21,7 +21,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool? Selected { get; set; }
         [Parameter]
-        public EventCallback ItemCLickEvent { get; set; }
+        public EventCallback ItemClickEvent { get; set; }
 
         private BaseInterop _interop;
 
@@ -38,7 +38,7 @@ namespace SiemensIXBlazor.Components
         [JSInvokable]
         public async void ItemClicked()
         {
-            await ItemCLickEvent.InvokeAsync();
+            await ItemClickEvent.InvokeAsync();
         }
     }
 }
