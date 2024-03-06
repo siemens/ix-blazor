@@ -16,5 +16,18 @@ namespace SiemensIXBlazor.Components.AGGrid
         public bool? Sortable { get; set; }
         [JsonProperty("filter")]
         public bool? Filter { get; set; }
+        [JsonProperty("suppressSizeToFit")]
+        public bool? SuppressSizeToFit { get; set; }
+        [JsonProperty("suppressAutoSize")]
+        public bool? SuppressAutoSize { get; set; }
+        [JsonProperty("flex")]
+        public int? Flex { get; set; }
+        [JsonProperty("width")]
+        public int? Width { get; set; }
+        [JsonProperty("maxWidth")]
+        public int? MaxWidth { get; set; }
+        [JsonProperty("minWidth")]
+        public int? MinWidth { get; set; }
+
     }
 }

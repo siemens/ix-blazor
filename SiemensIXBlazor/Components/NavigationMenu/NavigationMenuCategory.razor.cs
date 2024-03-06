@@ -2,7 +2,7 @@
 
 namespace SiemensIXBlazor.Components.NavigationMenu
 {
-    public partial class NavigationMenuCategory
+    public partial class NavigationMenuCategory: IXBaseComponent
     {
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
