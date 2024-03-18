@@ -28,6 +28,13 @@ namespace SiemensIXBlazor.Components.AGGrid
         public int? MaxWidth { get; set; }
         [JsonProperty("minWidth")]
         public int? MinWidth { get; set; }
+        [JsonProperty("hide")]
+        public bool? Hide { get; set; }
+        [JsonProperty("lockPosition")]
+        public string? LockPosition { get; set; }
+        [JsonProperty("suppressMovable")]
+        public bool? SuppressMovable {  get; set; }
+
 
     }
 }

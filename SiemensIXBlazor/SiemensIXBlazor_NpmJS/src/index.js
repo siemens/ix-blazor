@@ -45,12 +45,21 @@ window.toggleSystemTheme = (useSystemTheme) => {
 
 // AGGrid
 window.agGridInterop = {
-    createGrid: function (elementId, gridOptions) {
-        const grid = new Grid(document.getElementById(elementId), JSON.parse(gridOptions))
-        console.log(JSON.parse(gridOptions))
-        return grid;
+    dotnetReference: null,
+    createGrid: function (dotnetRef, elementId, gridOptions) {
+        let parsedOption = JSON.parse(gridOptions);
+
+        window.agGridInterop.dotnetReference = dotnetRef;
+        parsedOption.onCellClicked = function (event) {
+            dotnetRef.invokeMethodAsync('OnCellClickedCallback');
+        };
+
+        return new Grid(document.getElementById(elementId), parsedOption);
     },
     setData: function (grid, data) {
-        grid.api.setRowData(data);
-    }
+        grid.gridOptions.api.setRowData(data);
+    },
+    getSelectedRows: function (grid) {
+        return grid.gridOptions.api.getSelectedRows();
+    },
 }
