@@ -1,0 +1,13 @@
+@namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+
+<ix-application class="@Class" style="@Style" @attributes="UserAttributes" 
+    id="@Id" 
+    breakpoints="@Breakpoints" 
+    force-breakpoint="@ForceBreakpoint" 
+    theme="@Theme" 
+    theme-system-appearance="@ThemeSystemAppearance">
+  @ChildContent
+</ix-application>
