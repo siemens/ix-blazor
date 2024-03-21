@@ -19,6 +19,8 @@ namespace SiemensIXBlazor.Components.NavigationMenu
         [Parameter]
         public string? Initials { get; set; }
         [Parameter]
+        public bool ShowLogoutButton { get; set; } = true;
+        [Parameter]
         public string? Top { get; set; }
         [Parameter]
         public EventCallback LogoutClickedEvent { get; set; }

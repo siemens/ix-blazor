@@ -26,6 +26,8 @@ namespace SiemensIXBlazor.Components
         /// </summary>
         [Parameter]
         public string? SubHeading { get; set; }
+        [Parameter]
+        public bool Collapsed { get; set; } = true;
         /// <summary>
         /// Card variant
         /// </summary>

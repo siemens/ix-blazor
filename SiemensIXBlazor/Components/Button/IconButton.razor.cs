@@ -6,7 +6,7 @@ namespace SiemensIXBlazor.Components
     public partial class IconButton
     {
         [Parameter]
-        public string? Color { get; set; }
+        public string? IconColor { get; set; }
         [Parameter]
         public bool Disabled { get; set; } = false;
         [Parameter]
@@ -27,6 +27,8 @@ namespace SiemensIXBlazor.Components
         public string DataTooltip { get; set; } = string.Empty;
         [Parameter]
         public ButtonType Type { get; set; } = ButtonType.Button;
+        [Parameter]
+        public string? A11yLabel { get; set; }
         [Parameter]
         public ButtonVariant Variant { get; set; } = ButtonVariant.primary;
         [Parameter]
