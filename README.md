@@ -90,6 +90,8 @@ public partial class Index
 
 ### Supported Components
 
+- [Application](#application) **(since 0.4.8)**
+- [Application Header](#application-header) **(since 0.4.8)**
 - [Basic Navigation](#basic-navigation)
 - [Navigation Menu](#navigation-menu)
 - [About and Legal](#about-and-legal)
@@ -149,6 +151,65 @@ public partial class Index
 - [Form Validation](#form-validation)
 - [Workflow](#workflow)
 
+## Application
+```razor
+<Application @ref="_app">
+    <ApplicationHeader Name="My Application">
+        <placeholder-logo slot="logo"></placeholder-logo>
+    </ApplicationHeader>
+    <Menu>
+        <MenuItem>Item 1</MenuItem>
+        <MenuItem>Item 2</MenuItem>
+    </Menu>
+
+    <ix-content>
+        <ContentHeader
+            Slot="header"
+            HeaderTitle="My Content Page"
+        >
+        </ContentHeader>
+    </ix-content>
+</Application>
+```
+
+```csharp
+Application _app;
+
+// Set the app switch config when the component is rendered. 
+protected override async Task OnAfterRenderAsync(bool firstRender)
+{
+    if(firstRender)
+    {
+        AppSwitchConfig config = new()
+        {
+            CurrentAppId = "1",
+            Apps = 
+            [
+                new App()
+                {
+                    Id = "App1",
+                    Name = "App 1",
+                    Description = "Awesome app",
+                    Url = "app1",
+                    Target = "_self",
+                    IconSrc = "..."
+                }
+            ]
+        }
+
+        _app.AppSwitchConfig = config;
+    }
+}
+```
+
+## Application Header
+
+```razor
+<ApplicationHeader Name="My Application">
+    <placeholder-logo slot="logo"></placeholder-logo>
+</ApplicationHeader>
+```
+ 
 ## Basic Navigation
 
 ```razor
