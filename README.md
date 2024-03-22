@@ -103,6 +103,7 @@ public partial class Index
 - [Blind](#blind)
 - [Breadcrumb](#breadcrumb)
 - [Button](#button)
+- [Card](#card)
 - [Card List](#card-list) **(since v0.3.3)**
 - [Push Card](#push-card) **(since v0.3.3)**
 - [Action Card](#action-card) **(since v0.3.3)**
@@ -477,6 +478,21 @@ Test content
 
 ```razor
 <Button>Test Button</Button>
+```
+
+## Card
+
+```razor
+<Card Variant="CardVariant.info">
+    <ix-icon name="capacity"></ix-icon>
+    <ix-typography bold>Number of components</ix-typography>
+    <ix-typography>
+        Item 1<br />
+        Item 2<br />
+        Item 3
+    </ix-typography>
+    <ix-typography format="h1">3</ix-typography>
+</Card>
 ```
 
 ## Card List
@@ -1107,7 +1123,7 @@ div[data-tab-content].show {
 ```razor
 <Tile Size="TileSize.Medium" Class="mr-1">
     <div slot="header">Tile header</div>
-    <div class="text-l">92.8 °C</div>
+    <div class="text-l">92.8 Â°C</div>
 </Tile>
 ```
 

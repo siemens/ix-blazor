@@ -1,0 +1,13 @@
+﻿@namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
+@using SiemensIXBlazor.Helpers
+
+<ix-card @attributes="UserAttributes"
+         class=@Class
+         style=@Style
+         variant=@Variant
+         selected=@Selected>
+    <ix-card-content>
+        @ChildContent
+    </ix-card-content>
+</ix-card>
