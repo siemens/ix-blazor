@@ -5,8 +5,6 @@ namespace SiemensIXBlazor.Components
 {
     public partial class Card
     {
-        [Parameter, EditorRequired]
-        public string Id { get; set; } = string.Empty;
         [Parameter]
         public bool? Selected { get; set; }
         [Parameter]
