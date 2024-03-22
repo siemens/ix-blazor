@@ -422,7 +422,7 @@ Test content
 ## Card
 
 ```razor
-<Card Id="card-1" Variant="CardVariant.info">
+<Card Variant="CardVariant.info">
     <ix-icon name="capacity"></ix-icon>
     <ix-typography bold>Number of components</ix-typography>
     <ix-typography>
@@ -1062,7 +1062,7 @@ div[data-tab-content].show {
 ```razor
 <Tile Size="TileSize.Medium" Class="mr-1">
     <div slot="header">Tile header</div>
-    <div class="text-l">92.8 °C</div>
+    <div class="text-l">92.8 Â°C</div>
 </Tile>
 ```
 
