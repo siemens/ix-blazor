@@ -753,7 +753,11 @@ private void Callback(DateDropdownResponse selectedDateDropdown)
 ## Date picker
 
 ```razor
-<DateDropdown Id="MyDateDropdown"></DateDropdown>
+<DatePicker From="2023/02/01" 
+            To="2023/02/15" 
+            Id="timepicker1" 
+            DateChangeEvent="(date) => DateChangeEventTest(date)">
+</DatePicker>
 ```
 
 ## Date time picker
