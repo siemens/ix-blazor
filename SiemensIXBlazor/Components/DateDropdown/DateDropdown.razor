@@ -1,0 +1,24 @@
+﻿@namespace SiemensIXBlazor.Components
+@using Microsoft.JSInterop
+
+@inject IJSRuntime JsRuntime
+@inherits IXBaseComponent
+
+<ix-date-dropdown
+    @attributes="UserAttributes"
+    style="@Style"
+    class="@Class"
+    id="@Id"
+    custom-range-allowed="@CustomRangeAllowed"
+    date-range-id="@DateRangeId"
+    format="@Format"
+    from="@From"
+    i18n-custom-item="@I18NCustomItem"
+    i18n-done="@I18NDone"
+    i18n-no-range="@I18NNoRange"
+    max-date="@MaxDate"
+    min-date="@MinDate"
+    range="@Range"
+    to="@To">
+
+</ix-date-dropdown>
