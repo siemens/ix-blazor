@@ -113,6 +113,7 @@ public partial class Index
 - [Checkbox](#checkbox)
 - [Chip](#chip)
 - [Content Header](#content-header) **(since v0.3.3)**
+- [Date Dropdown](#date-dropdown)
 - [Date Picker](#date-picker)
 - [Date Time Picker](#date-time-picker)
 - [Divider](#divider)
@@ -718,6 +719,35 @@ chart1.InitialChart(object1);
             BackButtonClickedEvent="ContentHeaderBackButtonClicked">
     Test
 </ContentHeader>
+```
+
+## Date Dropdown
+```razor
+<DateDropdown Id="datedropdown1" DateRangeId="last-7" Format="MM/dd/yyyy" DateRangeOptions="_dateRangeOptions" DateRangeChangeEvent="Callback"></DateDropdown>
+```
+```csharp
+    readonly DateDropdownOption[] _dateRangeOptions =
+{
+    new()
+    {
+        Id = "last-7",
+        Label = "Last 7 days",
+        From = DateTime.Today.AddDays(-7).ToString("MM/dd/yyyy"),
+        To = DateTime.Today.ToString("MM/dd/yyyy")
+    },
+    new()
+    {
+        Id = "today",
+        Label = "Today",
+        From = DateTime.Today.ToString("MM/dd/yyyy"),
+        To = DateTime.Today.ToString("MM/dd/yyyy")
+    }
+};
+
+private void Callback(DateDropdownResponse selectedDateDropdown)
+{
+    Console.WriteLine(selectedDateDropdown.Id);
+}
 ```
 
 ## Date picker
