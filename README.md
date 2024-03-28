@@ -112,6 +112,7 @@ public partial class Index
 - [ECharts](#echarts) **(since v0.3.2)**
 - [Checkbox](#checkbox)
 - [Chip](#chip)
+- [Content](#content)
 - [Content Header](#content-header) **(since v0.3.3)**
 - [Date Dropdown](#date-dropdown)
 - [Date Picker](#date-picker)
@@ -708,6 +709,17 @@ chart1.InitialChart(object1);
       Closable="true" 
       ClosedEvent="@ChipClosedEventHandler">
 </Chip>
+```
+
+##Content
+```razor
+<Content>
+    <ContentHeader Id="myheader" HeaderTitle="My Content Page" />
+    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et 
+    accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
+    sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
+    no sea takimata sanctus est Lorem ipsum dolor sit amet.
+</Content>
 ```
 
 ## Content Header
