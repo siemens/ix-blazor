@@ -5,17 +5,17 @@
 @inject IJSRuntime JSRuntime
 @inherits IXBaseComponent
 
-<ix-date-picker
-@attributes="UserAttributes"
-id="@Id" 
-from="@From" 
-to="@To"
-corners="@(EnumParser<DatePickerCorners>.ParseEnumToString(Corners))"
-event-delimiter="@EventDelimiter"
-format="@Format"
-max-date="@MaxDate"
-min-date="@MinDate"
-range="@Range"
-text-select-date="@TextSelectDate"
-style="@Style"
-class="@Class"></ix-date-picker>
+<ix-date-picker @attributes="UserAttributes"
+                id="@Id"
+                from="@From"
+                to="@To"
+                corners="@(EnumParser<DatePickerCorners>.ParseEnumToString(Corners))"
+                format="@Format"
+                max-date="@MaxDate"
+                min-date="@MinDate"
+                range="@Range"
+                locale="@Locale"
+                i18n-done="@I18nDone"
+                week-start-index="@WeekStartIndex"
+                style="@Style"
+                class="@Class"></ix-date-picker>
