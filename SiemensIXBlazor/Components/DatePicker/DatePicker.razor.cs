@@ -37,6 +37,9 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public EventCallback<DatePickerResponse?> DateRangeChangeEvent { get; set; }
         [Parameter]
+        public EventCallback<DatePickerResponse?> DateChangeEvent { get; set; }
+        [Parameter]
+
         public EventCallback<DatePickerResponse> DateSelectEvent { get; set; }
 
         private BaseInterop _interop;
@@ -47,6 +50,7 @@ namespace SiemensIXBlazor.Components
             {
                 _interop = new(JSRuntime);
 
+                await _interop.AddEventListener(this, Id, "dateChange", "DateChange");
                 await _interop.AddEventListener(this, Id, "dateRangeChange", "DateRangeChange");
                 await _interop.AddEventListener(this, Id, "dateSelect", "DateSelect");
             }
@@ -59,6 +63,16 @@ namespace SiemensIXBlazor.Components
             DatePickerResponse? jsonData = JObject.Parse(jsonDataText)
                                                   .ToObject<DatePickerResponse>();
             await DateRangeChangeEvent.InvokeAsync(jsonData);
+        }
+
+
+        [JSInvokable]
+        public async void DateChange(JsonElement data)
+        {
+            string jsonDataText = data.GetRawText();
+            DatePickerResponse? jsonData = JObject.Parse(jsonDataText)
+                                                  .ToObject<DatePickerResponse>();
+            await DateChangeEvent.InvokeAsync(jsonData);
         }
 
         [JSInvokable]
