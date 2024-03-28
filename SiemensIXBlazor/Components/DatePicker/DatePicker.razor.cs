@@ -19,7 +19,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public static string Format { get; set; } = "yyyy/MM/dd";
         [Parameter]
-        public string From { get; set; } = DateTime.Now.ToString(Format);
+        public string? From { get; set; } 
         [Parameter]
         public string? MaxDate { get; set; }
         [Parameter]
@@ -27,7 +27,11 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Range { get; set; } = true;
         [Parameter]
-        public string TextSelectDate { get; set; } = "Done";
+        public string I18nDone { get; set; } = "Done";
+        [Parameter]
+        public string? Locale { get; set; }
+        [Parameter]
+        public int WeekStartIndex { get; set; } = 0;
         [Parameter]
         public string? To { get; set; }
         [Parameter]
