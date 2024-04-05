@@ -135,6 +135,7 @@ public partial class Index
 - [Link Button](#link-button) **(since v0.4.0)**
 - [Message Bar](#message-bar)
 - [Modal](#modal)
+- [Pane](#pane)
 - [Pagination](#pagination)
 - [Pill](#pill)
 - [Radio Button](#radio-button)
