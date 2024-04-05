@@ -1,0 +1,24 @@
+﻿@namespace SiemensIXBlazor.Components
+
+@using Microsoft.JSInterop
+@using SiemensIXBlazor.Helpers
+@using SiemensIXBlazor.Enums.Pane
+
+@inherits IXBaseComponent
+@inject IJSRuntime JSRuntime
+
+
+<ix-pane 
+    class="@Class"
+    style="@Style"
+    @attributes="UserAttributes"
+    id="@Id"
+    heading="@Heading"
+    composition="@(EnumParser<PaneComposition>.ParseEnumToString(Composition))"
+    size="@Size"
+    variant="@(EnumParser<PaneVariant>.ParseEnumToString(Variant))"
+    hide-on-collapse="@HideOnCollapse"
+    expanded="@Expanded"
+>
+   @ChildContent
+</ix-pane>
