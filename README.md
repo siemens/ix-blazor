@@ -1073,6 +1073,33 @@ private void CloseModal()
     PageSelectedEvent="PaginationPageSelected">
 </Pagination>
 ```
+## Pane
+
+```razor
+<PaneLayout id="pane-layout"
+                variant="@PaneVariant.floating"
+                layout="full-horizontal"
+                borderless
+>
+    <Pane Id="pane1" heading="Pane Left" slot="left" size="33%">
+        <p>This is the left pane.</p>
+    </Pane>
+
+    <Pane Id="pane2"  heading="Pane Top" slot="top" size="33%">
+        <p>This is the top pane.</p>
+    </Pane>
+
+    <Pane Id="pane3" heading="Pane Right" slot="right" size="33%">
+        <p>This is the right pane.</p>
+    </Pane>
+
+    <Pane Id="pane4"  heading="Pane Bottom" slot="bottom" size="33%">
+        <p>This is the bottom pane.</p>
+    <Pane>
+
+
+</PaneLayout>
+```
 
 ## Pill
 
