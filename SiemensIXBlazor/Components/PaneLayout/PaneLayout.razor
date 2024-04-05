@@ -1,0 +1,17 @@
+﻿@namespace SiemensIXBlazor.Components
+
+@using SiemensIXBlazor.Helpers
+@using SiemensIXBlazor.Enums.Pane
+
+@inherits IXBaseComponent
+
+<ix-pane-layout 
+   class="@Class"
+   style="@Style;"
+   @attributes="UserAttributes"
+   variant="@Variant"
+   layout="@Layout"
+   borderless="@Borderless"
+>
+    @ChildContent
+</ix-pane-layout>
