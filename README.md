@@ -103,7 +103,7 @@ public partial class Index
 - [Blind](#blind)
 - [Breadcrumb](#breadcrumb)
 - [Button](#button)
-- [Card](#card)
+- [Card](#card) **(since 0.5.0)**
 - [Card List](#card-list) **(since v0.3.3)**
 - [Push Card](#push-card) **(since v0.3.3)**
 - [Action Card](#action-card) **(since v0.3.3)**
@@ -112,11 +112,11 @@ public partial class Index
 - [ECharts](#echarts) **(since v0.3.2)**
 - [Checkbox](#checkbox)
 - [Chip](#chip)
-- [Content](#content)
+- [Content](#content) **(since 0.5.0)**
 - [Content Header](#content-header) **(since v0.3.3)**
 - [Date Dropdown](#date-dropdown)
 - [Date Picker](#date-picker)
-- [Date Time Picker](#date-time-picker)
+- [Date Time Picker](#date-time-picker) **(since 0.5.0)**
 - [Divider](#divider)
 - [Drawer](#drawer)
 - [Dropdown Button](#dropdown-button)
@@ -135,7 +135,7 @@ public partial class Index
 - [Link Button](#link-button) **(since v0.4.0)**
 - [Message Bar](#message-bar)
 - [Modal](#modal)
-- [Pane](#pane)
+- [Pane](#pane) **(since 0.5.0)**
 - [Pagination](#pagination)
 - [Pill](#pill)
 - [Radio Button](#radio-button)
