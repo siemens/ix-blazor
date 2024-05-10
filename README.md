@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2024 Siemens AG
+
+SPDX-License-Identifier: MIT
+-->
+
 ## Siemens IX for Blazor
 
 ## Installation
@@ -1408,3 +1414,9 @@ Or you can use supported components as a native `Blazor` components.
 ```
 
 If you want to use native `siemens-ix` html elements, you have to handle events over `javascript interops`. 
+
+## 📝 License
+
+Copyright © 2022 [Siemens AG](https://www.siemens.com/).
+
+This project is MIT licensed.
