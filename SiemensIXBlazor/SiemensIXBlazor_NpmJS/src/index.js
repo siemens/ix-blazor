@@ -6,6 +6,7 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
+
 import { defineCustomElements, applyPolyfills } from '@siemens/ix/loader/index'
 import { toast } from "@siemens/ix"
 import '@siemens/ix-echarts';
