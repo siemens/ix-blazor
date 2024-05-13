@@ -1,0 +1,31 @@
+<!--
+  First off, thanks for taking the time to contribute! ❤️
+  We appreciate you spending the time to work on these changes. Please provide enough information so that others can review your pull request. The three fields below are mandatory.
+-->
+## 💡 What is the current behavior?
+
+<!-- Please describe the current behavior that you are modifying, or link to a relevant issue. -->
+
+GitHub Issue Number: #<ISSUE NUMBER>
+
+## 🆕 What is the new behavior?
+
+<!-- Please describe the behavior or changes that are being added by this PR. -->
+
+-
+-
+
+## 🏁 Checklist
+
+A pull request can only be merged if all of these conditions are met (where applicable):
+
+- [ ] 🦮 Accessibility (a11y) features were implemented
+- [ ] 🗺️ Internationalization (i18n) - no hard coded strings
+- [ ] 📲 Responsiveness - components handle viewport changes and content overflow gracefully
+- [ ] 📄 Documentation was reviewed/updated
+- [ ] 🧪 Unit tests were added/updated and pass (`dotnet test`)
+- [ ] 🏗️ Successful compilation (`dotnet build`, changes pushed)
+
+## 👨‍💻 Help & support
+
+<!-- If you need help with anything related to your PR please let us know in this section -->
