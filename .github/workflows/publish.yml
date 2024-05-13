@@ -25,13 +25,16 @@ jobs:
     - name: Setup Dotnet
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 7.0.x
+        dotnet-version: 8.0.x
 
     - name: Restore Dependencies
       run: dotnet restore ${{ env.PROJECT_PATH }}
 
     - name: Build Project
       run: dotnet build ${{ env.PROJECT_PATH }} --no-restore --configuration Release
+
+    - name: Test with the dotnet CLI
+      run: dotnet test
 
     - name: 'Get Version'
       id: version
