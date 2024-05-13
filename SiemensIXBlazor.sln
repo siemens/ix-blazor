@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EE5229A1-C9D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SiemensIXBlazor", "SiemensIXBlazor\SiemensIXBlazor.csproj", "{8520AECF-0DA3-4A68-8525-5D9E21E36B14}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9AA3C4E1-3873-4856-8725-D1858590EF32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiemensIXBlazor.Tests", "SiemensIXBlazor.Tests\SiemensIXBlazor.Tests.csproj", "{0E18AA5B-2E9A-48BA-A07F-621B5DCBBDC9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +21,17 @@ Global
 		{8520AECF-0DA3-4A68-8525-5D9E21E36B14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8520AECF-0DA3-4A68-8525-5D9E21E36B14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8520AECF-0DA3-4A68-8525-5D9E21E36B14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E18AA5B-2E9A-48BA-A07F-621B5DCBBDC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E18AA5B-2E9A-48BA-A07F-621B5DCBBDC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E18AA5B-2E9A-48BA-A07F-621B5DCBBDC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E18AA5B-2E9A-48BA-A07F-621B5DCBBDC9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8520AECF-0DA3-4A68-8525-5D9E21E36B14} = {EE5229A1-C9DA-416D-99B1-E28B0B614D55}
+		{0E18AA5B-2E9A-48BA-A07F-621B5DCBBDC9} = {9AA3C4E1-3873-4856-8725-D1858590EF32}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E0AD2AAA-E398-423F-8426-67D6388D11F4}
