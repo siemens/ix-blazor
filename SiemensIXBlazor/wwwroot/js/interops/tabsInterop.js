@@ -1,4 +1,12 @@
-﻿export const initalTable = async (id) => {
+﻿// -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2024 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+//  -----------------------------------------------------------------------
+export const initalTable = async (id) => {
     await window.customElements.whenDefined('ix-tabs');
     const tabsElement = document.getElementById(id);
     const tabs = tabsElement.querySelectorAll('ix-tab-item[data-tab-id]');
