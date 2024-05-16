@@ -50,13 +50,13 @@ namespace SiemensIXBlazor.Components
         }
 
         [JSInvokable]
-        public async void Closed()
+        public async Task Closed()
         {
             await ClosedEvent.InvokeAsync();
         }
 
         [JSInvokable]
-        public async void Opened()
+        public async Task Opened()
         {
             await OpenedEvent.InvokeAsync();
         }
