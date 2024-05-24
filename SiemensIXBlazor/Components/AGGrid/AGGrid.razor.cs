@@ -35,9 +35,9 @@ namespace SiemensIXBlazor.Components.AGGrid
             return await JSRuntime.InvokeAsync<IJSObjectReference?>("agGridInterop.createGrid", dotNetHelper, Id, JsonConvert.SerializeObject(options));
         }
 
-        public async Task<object?> GetSelectedRows(IJSObjectReference gird)
+        public async Task<object?> GetSelectedRows(IJSObjectReference grid)
         {
-            return await JSRuntime.InvokeAsync<Object>("agGridInterop.getSelectedRows", gird);
+            return await JSRuntime.InvokeAsync<object>("agGridInterop.getSelectedRows", grid);
             
         }
 
