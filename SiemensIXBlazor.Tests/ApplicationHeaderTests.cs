@@ -6,7 +6,7 @@ namespace SiemensIXBlazor.Tests
     public class ApplicationHeaderTests : TestContextBase
     {
         [Fact]
-        public void ApplicationRendersWithoutCrashing()
+        public void ApplicationHeaderRendersWithoutCrashing()
         {
             // Arrange
             var cut = RenderComponent<ApplicationHeader>(parameters => {
