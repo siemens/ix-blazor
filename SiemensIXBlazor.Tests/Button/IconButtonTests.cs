@@ -8,7 +8,7 @@ namespace SiemensIXBlazor.Tests
     public class IconButtonTests: TestContextBase
     {
         [Fact]
-        public void ButtonRendersWithoutCrashing()
+        public void IconButtonRendersWithoutCrashing()
         {
             // Arrange
             var cut = RenderComponent<IconButton>(parameters => {
@@ -32,7 +32,7 @@ namespace SiemensIXBlazor.Tests
         }
 
         [Fact]
-        public void ButtonComponentHandlesClickEvent()
+        public void IconButtonComponentHandlesClickEvent()
         {
             // Arrange
             var clickInvoked = false;
