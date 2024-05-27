@@ -39,3 +39,13 @@ export function setNonSelectableCategories(id, nonSelectableCategories) {
     }
     
 }
+
+export function setSuggestions(id, suggestionsObject) {
+    try {
+        const element = document.getElementById(id);
+        element.suggestions = JSON.parse(suggestionsObject).suggestions;
+    }
+    catch {
+
+    }
+} 
