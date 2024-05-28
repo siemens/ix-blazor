@@ -13,7 +13,7 @@ using SiemensIXBlazor.Components;
 
 namespace SiemensIXBlazor.Tests
 {
-    public class DrawerTests : TestContextBase
+    public class DrawerTest : TestContextBase
     {
         [Fact]
         public void DrawerRendersCorrectly()

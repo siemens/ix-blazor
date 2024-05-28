@@ -32,7 +32,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public EventCallback<string> SelectedChangeEvent { get; set; }
 
-        private async void ItemClicked()
+        public async void ItemClicked()
         {
            await SelectedChangeEvent.InvokeAsync(Id);
         }
