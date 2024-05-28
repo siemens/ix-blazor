@@ -26,7 +26,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string EventDelimiter { get; set; } = " - ";
         [Parameter]
-        public static string Format { get; set; } = "yyyy/MM/dd";
+        public string Format { get; set; } = "yyyy/MM/dd";
         [Parameter]
         public string? From { get; set; } 
         [Parameter]
