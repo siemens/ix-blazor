@@ -11,11 +11,12 @@
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
 @using Microsoft.JSInterop
+@using System.Text.Json
 @inject IJSRuntime JSRuntime
 
 <ix-application class="@Class" style="@Style" @attributes="UserAttributes" 
     id="@Id" 
-    breakpoints="@Breakpoints" 
+    breakpoints="@(JsonSerializer.Serialize(Breakpoints).Replace('"', '\''))" 
     force-breakpoint="@ForceBreakpoint" 
     theme="@Theme" 
     theme-system-appearance="@ThemeSystemAppearance">

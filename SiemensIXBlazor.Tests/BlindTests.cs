@@ -2,28 +2,11 @@ using SiemensIXBlazor.Components;
 using SiemensIXBlazor.Enums.Blind;
 using Bunit;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
-using Moq;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace SiemensIXBlazor.Tests
 {
-    public class BlindTest: TestContext
+    public class BlindTests: TestContextBase
     {
-        private readonly Mock<IJSRuntime> _jsRuntimeMock;
-        private readonly Mock<IJSObjectReference> _jsObjectReferenceMock;
-
-        public BlindTest()
-        {
-            _jsRuntimeMock = new Mock<IJSRuntime>();
-            _jsObjectReferenceMock = new Mock<IJSObjectReference>();
-
-            // Mock of module import for JSRuntime
-            _jsRuntimeMock.Setup(x => x.InvokeAsync<IJSObjectReference>("import", It.IsAny<object[]>()))
-                          .Returns(new ValueTask<IJSObjectReference>(_jsObjectReferenceMock.Object));
-            Services.AddSingleton(_jsRuntimeMock.Object);
-        }
-
         [Fact]
         public void ComponentRendersWithoutCrashing()
         {
@@ -79,8 +62,6 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             var eventTriggered = false;
-            _jsRuntimeMock.Setup(x => x.InvokeAsync<bool>(It.IsAny<string>(), It.IsAny<object[]>()))
-                          .Returns(new ValueTask<bool>(true));
             var cut = RenderComponent<Blind>(parameters => parameters.Add(p => p.CollapsedChangedEvent, EventCallback.Factory.Create<bool>(this, () => eventTriggered = true)));
 
             // Act
