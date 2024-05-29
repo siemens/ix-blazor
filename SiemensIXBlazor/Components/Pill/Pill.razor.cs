@@ -18,7 +18,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter]
-		public bool AllignLeft { get; set; } = false;
+		public bool AlignLeft { get; set; } = false;
 		[Parameter]
 		public string? Background { get; set; }
 		[Parameter]
