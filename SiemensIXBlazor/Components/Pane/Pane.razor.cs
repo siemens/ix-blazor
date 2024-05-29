@@ -64,7 +64,9 @@ namespace SiemensIXBlazor.Components
         }
 
         [JSInvokable]
-        public async void ExpandChanged(JsonElement data)
+        public async 
+        Task
+ExpandChanged(JsonElement data)
         {
             var jsonData = data.GetRawText();
 
@@ -74,7 +76,9 @@ namespace SiemensIXBlazor.Components
         }
 
         [JSInvokable]
-        public async void BorderlessChanged(JsonElement data)
+        public async 
+        Task
+BorderlessChanged(JsonElement data)
         {
             var jsonData = data.GetRawText();
 
@@ -84,7 +88,9 @@ namespace SiemensIXBlazor.Components
         }
 
         [JSInvokable]
-        public async void VariantChanged(JsonElement data)
+        public async 
+        Task
+VariantChanged(JsonElement data)
         {
             var jsonData = data.GetRawText();
 
