@@ -40,7 +40,7 @@ public class DateTimePickerTest : TestContextBase
             .Add(p => p.To, "2022/12/31"));
 
         // Assert
-        cut.MarkupMatches("<ix-datetime-picker id=\"testId\" date-format=\"yyyy/MM/dd\" event-delimiter=\" - \" from=\"2024/05/28\" max-date=\"2022/12/31\" min-date=\"2022/01/01\" range=\"\" show-time-reference=\"\" text-select-date=\"Done\" time=\"12:00:00\" time-format=\"HH:mm:ss\" time-reference=\"12:00:00\" to=\"2022/12/31\"></ix-datetime-picker>");
+        cut.MarkupMatches($"<ix-datetime-picker id=\"testId\" date-format=\"yyyy/MM/dd\" event-delimiter=\" - \" from=\"{DateTime.Now:yyyy/MM/dd}\" max-date=\"2022/12/31\" min-date=\"2022/01/01\" range=\"\" show-time-reference=\"\" text-select-date=\"Done\" time=\"12:00:00\" time-format=\"HH:mm:ss\" time-reference=\"12:00:00\" to=\"2022/12/31\"></ix-datetime-picker>");
     }
 
     [Fact]
