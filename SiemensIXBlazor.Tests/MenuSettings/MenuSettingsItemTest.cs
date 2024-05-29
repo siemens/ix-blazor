@@ -1,6 +1,4 @@
 ﻿using Bunit;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SiemensIXBlazor.Components;
 using Microsoft.AspNetCore.Components;
 using SiemensIXBlazor.Components.MenuSettings;
 
