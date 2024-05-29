@@ -1,29 +1,11 @@
 ﻿using Bunit;
 using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.JSInterop;
-using Moq;
 using SiemensIXBlazor.Components.About;
 
 namespace SiemensIXBlazor.Tests.About
 {
-    public class AboutMenuItemTest: TestContext
+    public class AboutMenuItemTest: TestContextBase
     {
-        private readonly Mock<IJSRuntime> _jsRuntimeMock;
-        private readonly Mock<IJSObjectReference> _jsObjectReferenceMock;
-
-        public AboutMenuItemTest()
-        {
-            _jsRuntimeMock = new Mock<IJSRuntime>();
-            _jsObjectReferenceMock = new Mock<IJSObjectReference>();
-
-            // Mock of module import for JSRuntime
-            _jsRuntimeMock.Setup(x => x.InvokeAsync<IJSObjectReference>("import", It.IsAny<object[]>()))
-                          .Returns(new ValueTask<IJSObjectReference>(_jsObjectReferenceMock.Object));
-            Services.AddSingleton(_jsRuntimeMock.Object);
-        }
-
-
         [Fact]
         public void ComponentRendersWithoutCrashing()
         {

@@ -1,0 +1,44 @@
+﻿using Bunit;
+using SiemensIXBlazor.Components;
+
+namespace SiemensIXBlazor.Tests
+{
+    public class ChipTests: TestContextBase
+    {
+        [Fact]
+        public void ChipRendersWithoutCrashing()
+        {
+            // Arrange
+            var cut = RenderComponent<Chip>(parameters => {
+                parameters.Add(p => p.Id, "testId");
+                parameters.Add(p => p.Active, true);
+                parameters.Add(p => p.Background, "testBackground");
+                parameters.Add(p => p.Closable, true);
+                parameters.Add(p => p.Color, "testColor");
+                parameters.Add(p => p.Icon, "testIcon");
+                parameters.Add(p => p.Outline, true);
+                parameters.Add(p => p.Variant, Enums.Chip.ChipVariant.neutral);
+            });
+
+            // Assert
+            cut.MarkupMatches("<ix-chip id=\"testId\" closable=\"\" outline=\"\" active=\"\" background=\"testBackground\" color=\"testColor\" icon=\"testIcon\" variant=\"neutral\"></ix-chip>");
+        }
+
+        [Fact]
+        public void ChipRendersChildContent()
+        {
+            // Arrange
+            var expectedContent = "Expected content";
+
+            // Act
+            var cut = RenderComponent<Chip>(parameters => parameters
+                .Add(p => p.ChildContent, builder =>
+                {
+                    builder.AddContent(0, expectedContent);
+                }));
+
+            // Assert
+            Assert.Contains(expectedContent, cut.Markup);
+        }
+    }
+}

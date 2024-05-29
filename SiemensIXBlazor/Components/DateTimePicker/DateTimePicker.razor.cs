@@ -22,11 +22,11 @@ namespace SiemensIXBlazor.Components
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
         [Parameter]
-        public static string DateFormat { get; set; } = "yyyy/MM/dd";
+        public string DateFormat { get; set; } = "yyyy/MM/dd";
         [Parameter]
         public string EventDelimiter { get; set; } = " - ";
         [Parameter]
-        public string From { get; set; } = DateTime.Now.ToString(DateFormat);
+        public string From { get; set; } = DateTime.Now.ToString("yyyy/MM/dd");
         [Parameter]
         public string? MaxDate { get; set; }
         [Parameter]

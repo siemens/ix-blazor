@@ -21,6 +21,7 @@ namespace SiemensIXBlazor.Components.CategoryFilter
         private Dictionary<string, Category>? _categories;
         private FilterState? _filterState;
         private Dictionary<string, string>? _nonSelectableCategories;
+        private string[] _suggestions = [];
         private Lazy<Task<IJSObjectReference>>? moduleTask;
         private BaseInterop? _interop;
 
@@ -66,7 +67,15 @@ namespace SiemensIXBlazor.Components.CategoryFilter
         [Parameter]
         public bool RepeatCategories { get; set; } = true;
         [Parameter]
-        public string[]? Suggestions { get; set; }
+        public string[]? Suggestions
+        {
+            get => _suggestions;
+            set
+            {
+                _suggestions = value;
+                InitialParameter("setSuggestions", new Dictionary<string, string[]> { { "suggestions", _suggestions } });
+            }
+        }
         [Parameter]
         public EventCallback<FilterState> FilterChangedEvent { get; set; }
         [Parameter]
