@@ -1417,6 +1417,6 @@ If you want to use native `siemens-ix` html elements, you have to handle events 
 
 ## 📝 License
 
-Copyright © 2022 [Siemens AG](https://www.siemens.com/).
+Copyright © 2024 [Siemens AG](https://www.siemens.com/).
 
 This project is MIT licensed.
