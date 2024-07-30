@@ -42,6 +42,15 @@
     <None Include="SiemensIXBlazor_NpmJS\package.json" />
   </ItemGroup>
 
+	<ItemGroup>
+		<Content Include="../docs/*.html" copyToOutput="true">
+			<IncludeInPackage>true</IncludeInPackage>
+			<CopyToOutput>true</CopyToOutput>
+			<BuildAction>Content</BuildAction>
+			<copyToOutput>true</copyToOutput>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
