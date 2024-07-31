@@ -7,8 +7,8 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>Siemens IX Blazor</Title>
 		<Version>0.5.1</Version>
-		<Authors>Siemens AG</Authors>
-		<Company>Siemens AG</Company>
+		<Authors>Siemens</Authors>
+		<Company>Siemens</Company>
 		<Description>Siemens IX port for Blazor.</Description>
 		<PackageProjectUrl>https://github.com/siemens/ix-blazor</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
