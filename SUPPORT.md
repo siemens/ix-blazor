@@ -40,7 +40,7 @@ Copyright © 2024 [Siemens AG].
 This project is MIT licensed.
 
 <!-- MARKDOWN LINKS -->
-[Issues]: https://github.com/yagizhanNY/SiemensIXBlazor/issues
+[Issues]: https://github.com/siemens/ix-blazor/issues
 [Code of Conduct]: /CODE_OF_CONDUCT.md
 [Contributing]: /CONTRIBUTING.md
 [README]: /README.md

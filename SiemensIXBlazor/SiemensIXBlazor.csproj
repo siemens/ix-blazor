@@ -1,46 +1,48 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Title>Siemens IX Blazor</Title>
-    <Version>0.1.2</Version>
-    <Authors>Yagizhan Necat Yakali</Authors>
-    <Description>Siemens IX port for Blazor.</Description>
-    <PackageProjectUrl>https://github.com/yagizhanNY/siemens-ix-blazor</PackageProjectUrl>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/yagizhanNY/siemens-ix-blazor</RepositoryUrl>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Title>Siemens IX Blazor</Title>
+		<Version>0.5.1</Version>
+		<Authors>Siemens AG</Authors>
+		<Company>Siemens AG</Company>
+		<Description>Siemens IX port for Blazor.</Description>
+		<PackageProjectUrl>https://github.com/siemens/ix-blazor</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/siemens/ix-blazor</RepositoryUrl>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageId>Siemens.IX.Blazor</PackageId>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Content Remove="SiemensIXBlazor_NpmJS\package-lock.json" />
-    <Content Remove="SiemensIXBlazor_NpmJS\package.json" />
-    <Content Remove="wwwroot\css\siemens-ix\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Content Remove="SiemensIXBlazor_NpmJS\package-lock.json" />
+		<Content Remove="SiemensIXBlazor_NpmJS\package.json" />
+		<Content Remove="wwwroot\css\siemens-ix\" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Remove="Components\KeyValueList\" />
-    <None Remove="Components\KeyValue\" />
-    <None Remove="Components\EmptyState\" />
-    <None Remove="Components\PushCard\" />
-    <None Remove="Enums\PushCard\" />
-    <None Remove="Components\ActionCard\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Include="..\README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Include="SiemensIXBlazor_NpmJS\package-lock.json" />
-    <None Include="SiemensIXBlazor_NpmJS\package.json" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="Components\KeyValueList\" />
+		<None Remove="Components\KeyValue\" />
+		<None Remove="Components\EmptyState\" />
+		<None Remove="Components\PushCard\" />
+		<None Remove="Enums\PushCard\" />
+		<None Remove="Components\ActionCard\" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="..\LICENSE">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="SiemensIXBlazor_NpmJS\package-lock.json" />
+		<None Include="SiemensIXBlazor_NpmJS\package.json" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<Content Include="../docs/*.html" copyToOutput="true">
@@ -52,34 +54,34 @@
 		</Content>
 	</ItemGroup>
 
-  <ItemGroup>
-    <SupportedPlatform Include="browser" />
-  </ItemGroup>
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="BlazorComponentUtilities" Version="1.8.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.5" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="BlazorComponentUtilities" Version="1.8.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.5" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Content Update="wwwroot\js\interops\baseJsInterop.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\js\interops\fileUploadInterop.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+	<ItemGroup>
+		<Content Update="wwwroot\js\interops\baseJsInterop.js">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Update="wwwroot\js\interops\fileUploadInterop.js">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\js\siemens-ix\" />
-    <Folder Include="wwwroot\js\interops\" />
-    <Folder Include="Components\KeyValueList\" />
-    <Folder Include="Components\KeyValue\" />
-    <Folder Include="Components\EmptyState\" />
-    <Folder Include="Components\PushCard\" />
-    <Folder Include="Enums\PushCard\" />
-    <Folder Include="Components\ActionCard\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="wwwroot\js\siemens-ix\" />
+		<Folder Include="wwwroot\js\interops\" />
+		<Folder Include="Components\KeyValueList\" />
+		<Folder Include="Components\KeyValue\" />
+		<Folder Include="Components\EmptyState\" />
+		<Folder Include="Components\PushCard\" />
+		<Folder Include="Enums\PushCard\" />
+		<Folder Include="Components\ActionCard\" />
+	</ItemGroup>
 
 </Project>
