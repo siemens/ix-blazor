@@ -8,7 +8,7 @@ SPDX-License-Identifier: MIT
 
 ## Installation
 
-Install the `SiemensIXBlazor` package from the [NuGet](https://www.nuget.org/packages/SiemensIXBlazor/) package manager.
+Install the `SiemensIXBlazor` package from the [NuGet](https://www.nuget.org/packages/Siemens.IX.Blazor) package manager.
 
 ## .NET CLI
 
