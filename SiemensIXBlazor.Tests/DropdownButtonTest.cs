@@ -25,6 +25,7 @@ public class DropdownButtonTest : TestContextBase
             .Add(p => p.Disabled, true)
             .Add(p => p.Ghost, true)
             .Add(p => p.Icon, "testIcon")
+            .Add(p => p.CloseBehavior, DropdownButtonCloseBehavior.both)
             .Add(p => p.Label, "testLabel")
             .Add(p => p.Outline, true)
             .Add(p => p.Placement, DropdownButtonPlacement.bottom_start)
@@ -33,6 +34,6 @@ public class DropdownButtonTest : TestContextBase
 
         // Assert
         cut.MarkupMatches(
-            "<ix-dropdown-button label=\"testLabel\" variant=\"primary\" placement=\"bottom-start\" icon=\"testIcon\" disabled=\"\" ghost=\"\" outline=\"\">Test content</ix-dropdown-button>");
+            "<ix-dropdown-button label=\"testLabel\" variant=\"primary\" placement=\"bottom-start\" icon=\"testIcon\" closeBehavior=\"both\" disabled=\"\" ghost=\"\" outline=\"\">Test content</ix-dropdown-button>");
     }
 }
