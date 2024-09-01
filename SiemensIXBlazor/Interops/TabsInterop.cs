@@ -18,7 +18,7 @@ namespace SiemensIXBlazor.Interops
         public TabsInterop(IJSRuntime jsRuntime)
         {
             moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
-                "import", $"./_content/SiemensIXBlazor/js/interops/tabsInterop.js").AsTask());
+                "import", $"./_content/Siemens.IX.Blazor/js/interops/tabsInterop.js").AsTask());
         }
 
         public async Task InitialComponent(string id)
