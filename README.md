@@ -34,17 +34,17 @@ Add required `CSS` and `Javascript` packages into the `index.html` file.
     <!--Deprecated after v0.4.0-->
     <link
       rel="stylesheet"
-      href="_content/SiemensIXBlazor/css/siemens-ix/ix-icons.css"
+      href="_content/Siemens.IX.Blazor/css/siemens-ix/ix-icons.css"
     />
 
     <link
       rel="stylesheet"
-      href="_content/SiemensIXBlazor/css/siemens-ix/siemens-ix.css"
+      href="_content/Siemens.IX.Blazor/css/siemens-ix/siemens-ix.css"
     />
   </head>
   <body>
     ...
-    <script src="_content/SiemensIXBlazor/js/siemens-ix/index.bundle.js"></script>
+    <script src="_content/Siemens.IX.Blazor/js/siemens-ix/index.bundle.js"></script>
   </body>
 </html>
 ```
