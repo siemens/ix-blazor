@@ -9,18 +9,17 @@
 
 using Bunit;
 using Microsoft.AspNetCore.Components;
-using Xunit;
-using SiemensIXBlazor.Components.NavigationMenu;
+using SiemensIXBlazor.Components.MenuAvatar;
 
-namespace SiemensIXBlazor.Tests.NavigationMenu
+namespace SiemensIXBlazor.Tests.Menu
 {
-    public class NavigationMenuAvatarTests : TestContextBase
+	public class MenuAvatarTests : TestContextBase
     {
         [Fact]
-        public void NavigationMenuAvatarRendersCorrectly()
+        public void MenuAvatarRendersCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<NavigationMenuAvatar>(
+            var cut = RenderComponent<MenuAvatar>(
                 ("Id", "testId"),
                 ("Class", "test-class"),
                 ("Style", "width: 100%"),
@@ -47,7 +46,7 @@ namespace SiemensIXBlazor.Tests.NavigationMenu
         {
             // Arrange
             var clicked = false;
-            var cut = RenderComponent<NavigationMenuAvatar>(
+            var cut = RenderComponent<MenuAvatar>(
                 ("Id", "navigationMenuAvatar"),
                 ("LogoutClickedEvent", EventCallback.Factory.Create(this, () => clicked = true))
             );

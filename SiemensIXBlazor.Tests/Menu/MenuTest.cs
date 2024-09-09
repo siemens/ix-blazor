@@ -8,20 +8,17 @@
 //  -----------------------------------------------------------------------
 
 using Bunit;
-using Xunit;
-using SiemensIXBlazor.Components.NavigationMenu;
 using Microsoft.AspNetCore.Components;
-using SiemensIXBlazor.Components;
 
-namespace SiemensIXBlazor.Tests.NavigationMenu
+namespace SiemensIXBlazor.Tests.Menu
 {
-    public class NavigationMenuTest : TestContextBase
+	public class MenuTest : TestContextBase
     {
         [Fact]
-        public void NavigationMenuRendersCorrectly()
+        public void MenuRendersCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<Components.NavigationMenu.NavigationMenu>(
+            var cut = RenderComponent<Components.Menu.Menu>(
                     ("Id", "testId"),
                     ("Class", "test-class"),
                     ("Style", "width: 100%"),
@@ -80,7 +77,7 @@ namespace SiemensIXBlazor.Tests.NavigationMenu
         {
             // Arrange
             var expanded = false;
-            var cut = RenderComponent<Components.NavigationMenu.NavigationMenu>(
+            var cut = RenderComponent<Components.Menu.Menu>(
                 ("Id", "navMenu"),
                 ("ExpandChangedEvent", EventCallback.Factory.Create(this, (bool value) => expanded = value))
             );
@@ -97,7 +94,7 @@ namespace SiemensIXBlazor.Tests.NavigationMenu
         {
             // Arrange
             var mapExpanded = false;
-            var cut = RenderComponent<Components.NavigationMenu.NavigationMenu>(
+            var cut = RenderComponent<Components.Menu.Menu>(
                 ("Id", "navMenu"),
                 ("MapExpandChangedEvent", EventCallback.Factory.Create(this, (bool value) => mapExpanded = value))
             );
