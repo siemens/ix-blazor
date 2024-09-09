@@ -13,7 +13,7 @@ using SiemensIXBlazor.Components.MenuSettings;
 
 namespace SiemensIXBlazor.Tests.MenuSettings
 {
-    public class MenuSettingsItemTests : TestContextBase
+	public class MenuSettingsItemTests : TestContextBase
     {
         [Fact]
         public void MenuSettingsItemRendersCorrectly()

@@ -11,9 +11,9 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using SiemensIXBlazor.Interops;
 
-namespace SiemensIXBlazor.Components.NavigationMenu
+namespace SiemensIXBlazor.Components.Menu
 {
-    public partial class NavigationMenu
+    public partial class Menu
     {
         [Parameter]
         public RenderFragment? ChildContent { get; set; }

@@ -10,12 +10,11 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
-using Newtonsoft.Json;
 using SiemensIXBlazor.Interops;
 
-namespace SiemensIXBlazor.Components.About
+namespace SiemensIXBlazor.Components.MenuAbout
 {
-    public partial class AboutMenu
+	public partial class MenuAbout : IXBaseComponent
     {
         [Parameter]
         public RenderFragment? ChildContent { get; set; }

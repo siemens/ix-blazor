@@ -10,17 +10,17 @@
 using Bunit;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using SiemensIXBlazor.Components.About;
+using SiemensIXBlazor.Components.MenuAbout;
 
-namespace SiemensIXBlazor.Tests.About
+namespace SiemensIXBlazor.Tests.MenuAbout
 {
-    public class AboutMenuNewsTest: TestContextBase
+	public class MenuAboutNewsTest: TestContextBase
     {
         [Fact]
         public void ComponentRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<AboutMenuNews>();
+            var cut = RenderComponent<MenuAboutNews>();
 
             // Assert
             cut.MarkupMatches("<ix-menu-about-news id='' i-1-8n-show-more='Show more' offset-bottom='0'></ix-menu-about-news>");
@@ -30,7 +30,7 @@ namespace SiemensIXBlazor.Tests.About
         public void ChildContentPropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<AboutMenuNews>(parameters => parameters.Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content"))));
+            var cut = RenderComponent<MenuAboutNews>(parameters => parameters.Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content"))));
 
             // Assert
             Assert.NotNull(cut.Instance.ChildContent);
@@ -40,7 +40,7 @@ namespace SiemensIXBlazor.Tests.About
         public void AboutItemLabelPropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<AboutMenuNews>(parameters => parameters.Add(p => p.AboutItemLabel, "testAboutItemLabel"));
+            var cut = RenderComponent<MenuAboutNews>(parameters => parameters.Add(p => p.AboutItemLabel, "testAboutItemLabel"));
 
             // Assert
             Assert.Equal("testAboutItemLabel", cut.Instance.AboutItemLabel);
@@ -50,7 +50,7 @@ namespace SiemensIXBlazor.Tests.About
         public void ExpandedPropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<AboutMenuNews>(parameters => parameters.Add(p => p.Expanded, true));
+            var cut = RenderComponent<MenuAboutNews>(parameters => parameters.Add(p => p.Expanded, true));
 
             // Assert
             Assert.True(cut.Instance.Expanded);
@@ -60,7 +60,7 @@ namespace SiemensIXBlazor.Tests.About
         public void I18nShowMorePropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<AboutMenuNews>(parameters => parameters.Add(p => p.I18NShowMore, "showMoreTest"));
+            var cut = RenderComponent<MenuAboutNews>(parameters => parameters.Add(p => p.I18NShowMore, "showMoreTest"));
 
             // Assert
             Assert.Equal("showMoreTest", cut.Instance.I18NShowMore);
@@ -70,7 +70,7 @@ namespace SiemensIXBlazor.Tests.About
         public void LablePropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<AboutMenuNews>(parameters => parameters.Add(p => p.Label, "testLabel"));
+            var cut = RenderComponent<MenuAboutNews>(parameters => parameters.Add(p => p.Label, "testLabel"));
 
             // Assert
             Assert.Equal("testLabel", cut.Instance.Label);
@@ -80,7 +80,7 @@ namespace SiemensIXBlazor.Tests.About
         public void OffsetBottomPropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<AboutMenuNews>(parameters => parameters.Add(p => p.OffsetBottom, 1));
+            var cut = RenderComponent<MenuAboutNews>(parameters => parameters.Add(p => p.OffsetBottom, 1));
 
             // Assert
             Assert.Equal(1, cut.Instance.OffsetBottom);
@@ -90,7 +90,7 @@ namespace SiemensIXBlazor.Tests.About
         public void ShowPropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<AboutMenuNews>(parameters => parameters.Add(p => p.Show, true));
+            var cut = RenderComponent<MenuAboutNews>(parameters => parameters.Add(p => p.Show, true));
 
             // Assert
             Assert.True(cut.Instance.Show);
@@ -101,7 +101,7 @@ namespace SiemensIXBlazor.Tests.About
         {
             // Arrange
             var eventTriggered = false;
-            var cut = RenderComponent<AboutMenuNews>(parameters => parameters.Add(p => p.ClosePopoverEvent, EventCallback.Factory.Create(this, () => eventTriggered = true)));
+            var cut = RenderComponent<MenuAboutNews>(parameters => parameters.Add(p => p.ClosePopoverEvent, EventCallback.Factory.Create(this, () => eventTriggered = true)));
 
             // Act
             cut.Instance.ClosePopoverEvent.InvokeAsync();
@@ -115,7 +115,7 @@ namespace SiemensIXBlazor.Tests.About
         {
             // Arrange
             var eventTriggered = false;
-            var cut = RenderComponent<AboutMenuNews>(parameters => parameters.Add(p => p.ShowMoreEvent, EventCallback.Factory.Create<MouseEventArgs>(this, () => eventTriggered = true)));
+            var cut = RenderComponent<MenuAboutNews>(parameters => parameters.Add(p => p.ShowMoreEvent, EventCallback.Factory.Create<MouseEventArgs>(this, () => eventTriggered = true)));
 
             // Act
             cut.Instance.ShowMoreEvent.InvokeAsync(new MouseEventArgs());

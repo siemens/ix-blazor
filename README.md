@@ -67,14 +67,14 @@ Then use this methods to change theme.
 ```csharp
 public partial class Index
 {
-    Theme themeProvider; 
+    Theme themeProvider;
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if(firstRender)
         {
             await themeProvider.SetTheme("theme-classic-light");
         }
-            
+
     }
 
     private async Task ToggleTheme()
@@ -99,9 +99,9 @@ public partial class Index
 - [Application](#application) **(since 0.4.8)**
 - [Application Header](#application-header) **(since 0.4.8)**
 - [Basic Navigation](#basic-navigation)
-- [Navigation Menu](#navigation-menu)
+- [Menu](#menu)
 - [About and Legal](#about-and-legal)
-- [Settings](#settings)
+- [Menu Settings](#menu-settings)
 - [Map Navigation](#map-navigation)
 - [Popover News](#popover-news)
 - [AGGrid (Preview)](#aggrid-preview) **(since 0.4.2)**
@@ -185,7 +185,7 @@ public partial class Index
 ```csharp
 Application _app;
 
-// Set the app switch config when the component is rendered. 
+// Set the app switch config when the component is rendered.
 protected override async Task OnAfterRenderAsync(bool firstRender)
 {
     if(firstRender)
@@ -193,7 +193,7 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
         AppSwitchConfig config = new()
         {
             CurrentAppId = "1",
-            Apps = 
+            Apps =
             [
                 new App()
                 {
@@ -219,61 +219,61 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
     <placeholder-logo slot="logo"></placeholder-logo>
 </ApplicationHeader>
 ```
- 
+
 ## Basic Navigation
 
 ```razor
 <BasicNavigation ApplicationName="Application name">
   <placeholder-logo slot="logo"></placeholder-logo>
-  <NavigationMenu Id="nav-menu-1">
-    <NavigationMenuItem>Item 1</NavigationMenuItem>
-    <NavigationMenuItem>Item 2</NavigationMenuItem>
-  </NavigationMenu>
+  <Menu Id="nav-menu-1">
+    <MenuItem>Item 1</MenuItem>
+    <MenuItem>Item 2</MenuItem>
+  </Menu>
 </BasicNavigation>
 ```
 
-## Navigation Menu
+## Menu
 
 ```razor
-<NavigationMenu Id="nav-menu-1">
-  <NavigationMenuItem Home="true" TabIcon="home"> Home </NavigationMenuItem>
-  <NavigationMenuItem TabIcon="globe"> Normal Tab </NavigationMenuItem>
-  <NavigationMenuItem TabIcon="star" disabled> Disabled tab </NavigationMenuItem>
-  <NavigationMenuItem TabIcon="star"> With other icon </NavigationMenuItem>
-  <NavigationMenuItem TabIcon="globe" Style="display: none">
+<Menu Id="nav-menu-1">
+  <MenuItem Home="true" TabIcon="home"> Home </MenuItem>
+  <MenuItem TabIcon="globe"> Normal Tab </MenuItem>
+  <MenuItem TabIcon="star" disabled> Disabled tab </MenuItem>
+  <MenuItem TabIcon="star"> With other icon </MenuItem>
+  <MenuItem TabIcon="globe" Style="display: none">
     Should not be visible
-  </NavigationMenuItem>
-</NavigationMenu>
+  </MenuItem>
+</Menu>
 ```
 
 ```razor
-@* Category *@
+@* Menu Category *@
 <BasicNavigation>
-  <NavigationMenu>
-    <NavigationMenuItem Home="true" Icon="home">Home</NavigationMenuItem>
-    <NavigationMenuItem Icon="globe">Normal Tab</NavigationMenuItem>
-    <NavigationMenuCategory Label="Top level Category" Icon="rocket">
-      <NavigationMenuItem Icon="globe">Nested Tab</NavigationMenuItem>
-      <NavigationMenuItem Icon="globe">Nested Tab</NavigationMenuItem>
-    </NavigationMenuCategory>
-  </NavigationMenu>
+  <Menu>
+    <MenuItem Home="true" Icon="home">Home</MenuItem>
+    <MenuItem Icon="globe">Normal Tab</MenuItem>
+    <MenuCategory Label="Top level Category" Icon="rocket">
+      <MenuItem Icon="globe">Nested Tab</MenuItem>
+      <MenuItem Icon="globe">Nested Tab</MenuItem>
+    </MenuCategory>
+  </Menu>
 </BasicNavigation>
 ```
 
 ```razor
-@* Avatar *@
-<NavigationMenu Id="nav-menu-1">
-  <NavigationMenuAvatar Id="nav-avatar-menu-1" Image="https://ui-avatars.com/api/?name=John+Doe">
-    <NavigationMenuAvatarItem Id="nav-avatar-item-1" Label="Option 1"></NavigationMenuAvatarItem>
-  </NavigationMenuAvatar>
-  <NavigationMenuItem Home="true" TabIcon="home"> Home </NavigationMenuItem>
-  <NavigationMenuItem TabIcon="globe"> Normal Tab </NavigationMenuItem>
-  <NavigationMenuItem TabIcon="star" Disabled="true"> Disabled tab </NavigationMenuItem>
-  <NavigationMenuItem TabIcon="star"> With other icon </NavigationMenuItem>
-  <NavigationMenuItem TabIcon="globe" Style="display: none">
+@* Menu Avatar *@
+<Menu Id="nav-menu-1">
+  <MenuAvatar Id="nav-avatar-menu-1" Image="https://ui-avatars.com/api/?name=John+Doe">
+    <MenuAvatarItem Id="nav-avatar-item-1" Label="Option 1"></MenuAvatarItem>
+  </MenuAvatar>
+  <MenuItem Home="true" TabIcon="home"> Home </MenuItem>
+  <MenuItem TabIcon="globe"> Normal Tab </MenuItem>
+  <MenuItem TabIcon="star" Disabled="true"> Disabled tab </MenuItem>
+  <MenuItem TabIcon="star"> With other icon </MenuItem>
+  <MenuItem TabIcon="globe" Style="display: none">
     Should not be visible
-  </NavigationMenuItem>
-</NavigationMenu>
+  </MenuItem>
+</Menu>
 ```
 
 ## About and Legal
@@ -281,27 +281,27 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 ```razor
 <BasicNavigation>
   <placeholder-logo slot="logo"></placeholder-logo>
-  <NavigationMenu Id="nav-menu-1">
-    <AboutMenu @ref="aboutMenuElement">
-      <AboutMenuItem Label="Tab 1">Content 1</AboutMenuItem>
-      <AboutMenuItem Label="Tab 2">Content 2</AboutMenuItem>
-    </AboutMenu>
-  </NavigationMenu>
+  <Menu Id="nav-menu-1">
+    <MenuAbout @ref="menuAboutElement">
+      <MenuAboutItem Label="Tab 1">Content 1</MenuAboutItem>
+      <MenuAboutItem Label="Tab 2">Content 2</MenuAboutItem>
+    </MenuAbout>
+  </Menu>
 </BasicNavigation>
 ```
 
 ```csharp
-AboutMenu aboutMenuElement;
+MenuAbout menuAboutElement;
 
-aboutMenuElement.ToggleAbout(true);
+menuAboutElement.ToggleAbout(true);
 ```
 
-## Settings
+## Menu Settings
 
 ```razor
 <BasicNavigation>
   <placeholder-logo slot="logo"></placeholder-logo>
-  <NavigationMenu Id="nav-menu-1">
+  <Menu Id="nav-menu-1">
     <MenuSettings @ref="settingsMenuElement">
       <MenuSettingsItem
         Label="Example Setting 1"
@@ -310,14 +310,14 @@ aboutMenuElement.ToggleAbout(true);
         Label="Example Setting 2"
       ></MenuSettingsItem>
     </MenuSettings>
-  </NavigationMenu>
+  </Menu>
 </BasicNavigation>
 ```
 
 ```csharp
 SettingsMenu settingsMenuElement;
 
-aboutMenuElement.ToggleSettings(true);
+menuAboutElement.ToggleSettings(true);
 ```
 
 ## Map Navigation
@@ -328,11 +328,11 @@ aboutMenuElement.ToggleSettings(true);
   NavigationTitle="Some other content"
 >
   <placeholder-logo slot="logo"></placeholder-logo>
-  <NavigationMenu Id="nav-menu-1">
-    <NavigationMenuItem>Item 1</NavigationMenuItem>
-    <NavigationMenuItem>Item 2</NavigationMenuItem>
-    <NavigationMenuItem>Item 3</NavigationMenuItem>
-  </NavigationMenu>
+  <Menu Id="nav-menu-1">
+    <MenuItem>Item 1</MenuItem>
+    <MenuItem>Item 2</MenuItem>
+    <MenuItem>Item 3</MenuItem>
+  </Menu>
   <div slot="sidebar-content">Sidebar content</div>
   <div>Content</div>
 </MapNavigation>
@@ -343,20 +343,20 @@ aboutMenuElement.ToggleSettings(true);
 ```razor
 <BasicNavigation>
   <placeholder-logo slot="logo"></placeholder-logo>
-  <NavigationMenu Id="nav-menu-1">
-    <AboutMenu>
-      <AboutMenuItem Label="Example"> </AboutMenuItem>
-    </AboutMenu>
-    <AboutMenuNews Label="Test" Show="true" AboutItemLabel="Example">
+  <Menu Id="nav-menu-1">
+    <MenuAbout>
+      <MenuAboutItem Label="Example"> </MenuAboutItem>
+    </MenuAbout>
+    <MenuAboutNews Label="Test" Show="true" AboutItemLabel="Example">
       Test
-    </AboutMenuNews>
-  </NavigationMenu>
+    </MenuAboutNews>
+  </Menu>
 </BasicNavigation>
 ```
 
 ## AGGrid Preview
 
-This component is currently in **preview** version. 
+This component is currently in **preview** version.
 
 ### Installation
 
@@ -372,14 +372,14 @@ Add necessary css files into the `index.html` file.
         href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-alpine.css" />
 
 <link rel="stylesheet"
-        href="_content/SiemensIXBlazor/css/siemens-ix/ix-aggrid.css" />
+        href="_content/Siemens.IX.Blazor/css/siemens-ix/ix-aggrid.css" />
 ```
 
 ```razor
-<AGGrid 
-    @ref="agGridRef" 
-    Id="grid1" 
-    Class="ag-theme-alpine-dark ag-theme-ix" 
+<AGGrid
+    @ref="agGridRef"
+    Id="grid1"
+    Class="ag-theme-alpine-dark ag-theme-ix"
     Style="height: 150px; width: 600px">
 </AGGrid>
 ```
@@ -417,29 +417,29 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 
         GridOptions options = new GridOptions()
         {
-            ColumnDefs = new List<ColumnDefs> 
-            { 
-                new ColumnDefs() 
-                { 
-                    Field = "type", 
-                    HeaderName = "Type", 
-                    Resizable = true, 
+            ColumnDefs = new List<ColumnDefs>
+            {
+                new ColumnDefs()
+                {
+                    Field = "type",
+                    HeaderName = "Type",
+                    Resizable = true,
                     CheckboxSelection = true
-                }, 
-                new ColumnDefs() 
+                },
+                new ColumnDefs()
                 {
                     Field = "status",
                     HeaderName = "Status",
                     Resizable = true,
                     Sortable = true,
                     Filter = true
-                }, 
-                new ColumnDefs() 
-                { 
+                },
+                new ColumnDefs()
+                {
                     Field = "hwVersion",
                     HeaderName = "HW version",
                     Resizable= true
-                } 
+                }
             },
             RowData = new List<Dictionary<string, dynamic>> { row1, row2, row3 },
             CheckboxSelection = true,
@@ -449,14 +449,14 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 
         await agGridRef.CreateGrid(options);
     }
-            
+
 }
 ```
 
 ## Avatar
 
 ```razor
-<Avatar 
+<Avatar
     Image="https://ui-avatars.com/api/?name=John+Doe">
 </Avatar>
 ```
@@ -464,9 +464,9 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 ## Blind
 
 ```razor
-<Blind 
-    Label="Test Blind" 
-    Id="blind1" 
+<Blind
+    Label="Test Blind"
+    Id="blind1"
     CollapsedChangedEvent="(value) => BlindEventHandler(value)">
 Test content
 </Blind>
@@ -475,8 +475,8 @@ Test content
 ## Breadcrumb
 
 ```razor
-<Breadcrumb Id="breadcrumb-1" 
-            Class="editor-breadcrumb" 
+<Breadcrumb Id="breadcrumb-1"
+            Class="editor-breadcrumb"
             ItemClicked="(label) => ClickedOnBreadcrumb(label)">
     <BreadcrumbItem Label="Item 1"></BreadcrumbItem>
     <BreadcrumbItem Label="Item 2"></BreadcrumbItem>
@@ -507,7 +507,7 @@ Test content
 ## Card List
 
 ```razor
-<CardList Id="carlist1" Label="Stack Layout" ShowAllCount="12" ListStyle="Enums.CardList.CardListStyle.Stack" CollapseChangedEvent="CardListCollapsedChanged" 
+<CardList Id="carlist1" Label="Stack Layout" ShowAllCount="12" ListStyle="Enums.CardList.CardListStyle.Stack" CollapseChangedEvent="CardListCollapsedChanged"
 ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowMoreClicked">
     <PushCard Icon="rocket"
               Notification="3"
@@ -557,9 +557,9 @@ ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowM
 ## Category filter
 
 ```razor
-<CategoryFilter 
-    @ref="categoryFilter" 
-    Id="category-filter-1" 
+<CategoryFilter
+    @ref="categoryFilter"
+    Id="category-filter-1"
     Placeholder="Filter by"
     RepeatCategories="false"
     FilterChangedEvent="FilterStateChanged"
@@ -710,10 +710,10 @@ chart1.InitialChart(object1);
 ## Chip
 
 ```razor
-<Chip Icon="print" 
-      Label="Chip with icon" 
-      Id="chip1" 
-      Closable="true" 
+<Chip Icon="print"
+      Label="Chip with icon"
+      Id="chip1"
+      Closable="true"
       ClosedEvent="@ChipClosedEventHandler">
 </Chip>
 ```
@@ -722,9 +722,9 @@ chart1.InitialChart(object1);
 ```razor
 <Content>
     <ContentHeader Id="myheader" HeaderTitle="My Content Page" />
-    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et 
-    accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
-    sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
+    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+    accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+    sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
     no sea takimata sanctus est Lorem ipsum dolor sit amet.
 </Content>
 ```
@@ -772,9 +772,9 @@ private void Callback(DateDropdownResponse selectedDateDropdown)
 ## Date picker
 
 ```razor
-<DatePicker From="2023/02/01" 
-            To="2023/02/15" 
-            Id="timepicker1" 
+<DatePicker From="2023/02/01"
+            To="2023/02/15"
+            Id="timepicker1"
             DateChangeEvent="(date) => DateChangeEventTest(date)">
 </DatePicker>
 ```
@@ -782,10 +782,10 @@ private void Callback(DateDropdownResponse selectedDateDropdown)
 ## Date time picker
 
 ```razor
-<DateTimePicker 
-        DateChangeEvent="(date) => DateChangeEventTest(date)" 
-        From="2023/02/01" 
-        To="2023/02/15" 
+<DateTimePicker
+        DateChangeEvent="(date) => DateChangeEventTest(date)"
+        From="2023/02/01"
+        To="2023/02/15"
         Id="datetimepicker1"
         TimeChangeEvent="(date) => DateChangeEventTest(date)">
 </DateTimePicker>
@@ -870,7 +870,7 @@ private void DrawerButtonClicked()
 ## Expanding search
 
 ```razor
-<ExpandingSearch Id="exp-search" 
+<ExpandingSearch Id="exp-search"
                  ValueChangedEvent="(value) => SearchValueChanged(value)">
 </ExpandingSearch>
 ```
@@ -1040,12 +1040,12 @@ private void DrawerButtonClicked()
     </div>
     <div class="modal-body">Message text lorem ipsum</div>
     <div class="modal-footer">
-        <Button Outline="true" 
+        <Button Outline="true"
                 Class="dismiss-modal"
-                ClickEvent="() => CloseModal()"> 
-             Cancel 
+                ClickEvent="() => CloseModal()">
+             Cancel
         </Button>
-        <Button ClickEvent="() => CloseModal()" 
+        <Button ClickEvent="() => CloseModal()"
                 Class="close-modal">
              OK
         </Button>
@@ -1073,10 +1073,10 @@ private void CloseModal()
 ## Pagination
 
 ```razor
-<Pagination Id="pagination-1" 
-    Advanced="true" 
-    Count="100" 
-    ItemCountChangedEvent="PaginationItemCountChanged" 
+<Pagination Id="pagination-1"
+    Advanced="true"
+    Count="100"
+    ItemCountChangedEvent="PaginationItemCountChanged"
     PageSelectedEvent="PaginationPageSelected">
 </Pagination>
 ```
@@ -1131,7 +1131,7 @@ private void CloseModal()
 ## Select
 
 ```razor
-<Select ItemSelectionChangeEvent=SelectItemSelectedChanged 
+<Select ItemSelectionChangeEvent=SelectItemSelectedChanged
 AddItemEvent="SelectItemAdded" Mode="SelectMode.Single" SelectedIndices="2" Id="select1">
     <SelectItem Id="selectItem1" Label="Item 1" Value="1"></SelectItem>
     <SelectItem Id="selectItem2" Label="Item 2" Value="2"></SelectItem>
@@ -1147,9 +1147,9 @@ AddItemEvent="SelectItemAdded" Mode="SelectMode.Single" SelectedIndices="2" Id="
 ## Split button
 
 ```razor
-<SplitButton Id="split-button-1" 
-             Label="Split Button" 
-             SplitIcon="chevron-down-small" 
+<SplitButton Id="split-button-1"
+             Label="Split Button"
+             SplitIcon="chevron-down-small"
              ButtonClickedEvent="SplitButtonClicked">
 </SplitButton>
 ```
@@ -1259,10 +1259,10 @@ toast.ShowToast("test message", "info");
 
 ```razor
 <div style="height: 8rem; width: 100%">
-    <Tree Id="tree-1" Root="root" ContextChangedEvent="TreeContextChangeEvent" 
-    NodeClickedEvent="TreeNodeClicked" 
-    NodeRemovedEvent="NodeRemoved" 
-    NodeToggledEvent="TreeNodeToggled"  
+    <Tree Id="tree-1" Root="root" ContextChangedEvent="TreeContextChangeEvent"
+    NodeClickedEvent="TreeNodeClicked"
+    NodeRemovedEvent="NodeRemoved"
+    NodeToggledEvent="TreeNodeToggled"
     @ref="tree"></Tree>
 </div>
 ```
@@ -1284,7 +1284,7 @@ treeNodes.Add("sample", new TreeNode()
     Id = "sample",
     Data = new TreeData()
     {
-        Name = "Sample"  
+        Name = "Sample"
     },
     HasChildren = true,
     Children = new List<string>(){"sample-child-1", "sample-child-2"}
@@ -1319,7 +1319,7 @@ tree.TreeModel = treeNodes;
 ## Upload
 
 ```razor
-<Upload Id="file-upload-test" 
+<Upload Id="file-upload-test"
         FileChangedEvent="(data) => FileChanged(data)">
 </Upload>
 ```
@@ -1413,7 +1413,7 @@ Or you can use supported components as a native `Blazor` components.
 </Button>
 ```
 
-If you want to use native `siemens-ix` html elements, you have to handle events over `javascript interops`. 
+If you want to use native `siemens-ix` html elements, you have to handle events over `javascript interops`.
 
 ## 📝 License
 
