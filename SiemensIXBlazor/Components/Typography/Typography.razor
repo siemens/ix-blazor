@@ -1,0 +1,26 @@
+﻿@* -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2024 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+//  -----------------------------------------------------------------------
+*@
+
+@using SiemensIXBlazor.Enums.Typography;
+@using SiemensIXBlazor.Helpers;
+
+@namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
+
+<ix-typography @attributes="UserAttributes"
+			   id="@Id"
+			   style="@Style"
+			   class="@Class"
+			   bold="@Bold"
+			   format="@((Format != null) ? EnumParser<TypographyFormat>.ParseEnumToString(Format)?.Replace('_', '-') : "")"
+			   text-color="@((TextColor != null) ? EnumParser<TypographyColor>.ParseEnumToString(TextColor)?.Replace('_', '-') : "")"
+			   text-decoration="@((TextDecoration != null) ? EnumParser<TextDecoration>.ParseEnumToString(TextDecoration)?.Replace('_', '-') : "")">
+	@ChildContent
+</ix-typography>

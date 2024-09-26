@@ -157,6 +157,7 @@ public partial class Index
 - [Toggle](#toggle)
 - [Tooltip](#tooltip)
 - [Tree](#tree)
+- [Typography](#typography)
 - [Upload](#upload)
 - [Form Validation](#form-validation)
 - [Workflow](#workflow)
@@ -1326,6 +1327,12 @@ treeNodes.Add("sample-child-2", new TreeNode()
 
 
 tree.TreeModel = treeNodes;
+```
+
+## Typography
+```razor
+<Typography Format="TypographyFormat.Label" TextColor="TypographyColor.Std" TextDecoration="TextDecoration.None">Label, Std, None</Typography>
+<Typography Bold="true" Format="TypographyFormat.Code_Lg" TextColor="TypographyColor.Contrast" TextDecoration="TextDecoration.Line_Through">Bold, Code_Lg, Contrast, Line_Through</Typography>
 ```
 
 ## Upload
