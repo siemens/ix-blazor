@@ -30,6 +30,8 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public ButtonVariant Variant { get; set; } = ButtonVariant.primary;
         [Parameter]
+        public DropdownButtonCloseBehavior CloseBehavior { get; set; } = DropdownButtonCloseBehavior.both;
+        [Parameter]
         public RenderFragment? ChildContent { get; set; }
         
     }

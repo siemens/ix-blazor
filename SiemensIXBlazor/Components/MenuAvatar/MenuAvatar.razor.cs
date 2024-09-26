@@ -8,22 +8,31 @@
 //  -----------------------------------------------------------------------
 
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using SiemensIXBlazor.Interops;
 
-namespace SiemensIXBlazor.Components.NavigationMenu
+namespace SiemensIXBlazor.Components.MenuAvatar
 {
-    public partial class NavigationMenuAvatarItem
+    public partial class MenuAvatar
     {
+        [Parameter]
+        public RenderFragment? ChildContent { get; set; }
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
         [Parameter]
-        public string? Icon { get; set; }
+        public string? Bottom { get; set; }
         [Parameter]
-        public string? Label { get; set; }
+        public string I18NLogout { get; set; } = "Logout";
         [Parameter]
-        public EventCallback<MouseEventArgs> ItemClickedEvent { get; set; }
+        public string? Image { get; set; }
+        [Parameter]
+        public string? Initials { get; set; }
+        [Parameter]
+        public bool ShowLogoutButton { get; set; } = true;
+        [Parameter]
+        public string? Top { get; set; }
+        [Parameter]
+        public EventCallback LogoutClickedEvent { get; set; }
 
         private BaseInterop _interop;
 
@@ -33,14 +42,14 @@ namespace SiemensIXBlazor.Components.NavigationMenu
             {
                 _interop = new(JSRuntime);
 
-                await _interop.AddEventListener(this, Id, "itemClick", "ItemClicked");
+                await _interop.AddEventListener(this, Id, "logoutClick", "LogoutClicked");
             }
         }
 
         [JSInvokable]
-        public async Task ItemClicked(MouseEventArgs args)
+        public async Task LogoutClicked()
         {
-            await ItemClickedEvent.InvokeAsync(args);
+            await LogoutClickedEvent.InvokeAsync();
         }
     }
 }

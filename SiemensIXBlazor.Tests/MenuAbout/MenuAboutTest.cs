@@ -10,17 +10,15 @@
 using Bunit;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using SiemensIXBlazor.Components.About;
-
-namespace SiemensIXBlazor.Tests.About
+namespace SiemensIXBlazor.Tests.MenuAbout
 {
-    public class AboutMenuTest: TestContextBase
+	public class MenuAboutTest: TestContextBase
     {
         [Fact]
         public void ComponentRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<AboutMenu>();
+            var cut = RenderComponent<Components.MenuAbout.MenuAbout>();
 
             // Assert
             cut.MarkupMatches("<ix-menu-about label=\"About &amp; legal information\" id=\"\"></ix-menu-about>");
@@ -30,7 +28,7 @@ namespace SiemensIXBlazor.Tests.About
         public void ChildContentPropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<AboutMenu>(parameters => parameters.Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content"))));
+            var cut = RenderComponent<Components.MenuAbout.MenuAbout>(parameters => parameters.Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content"))));
 
             // Assert
             Assert.NotNull(cut.Instance.ChildContent);
@@ -40,7 +38,7 @@ namespace SiemensIXBlazor.Tests.About
         public void IdPropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<AboutMenu>(parameters => parameters.Add(p => p.Id, "testId"));
+            var cut = RenderComponent<Components.MenuAbout.MenuAbout>(parameters => parameters.Add(p => p.Id, "testId"));
 
             // Assert
             Assert.Equal("testId", cut.Instance.Id);
@@ -51,7 +49,7 @@ namespace SiemensIXBlazor.Tests.About
         {
             // Arrange
             var eventTriggered = false;
-            var cut = RenderComponent<AboutMenu>(parameters => parameters.Add(p => p.ClosedEvent, EventCallback.Factory.Create<MouseEventArgs>(this, () => eventTriggered = true)));
+            var cut = RenderComponent<Components.MenuAbout.MenuAbout>(parameters => parameters.Add(p => p.ClosedEvent, EventCallback.Factory.Create<MouseEventArgs>(this, () => eventTriggered = true)));
 
             // Act
             cut.Instance.ClosedEvent.InvokeAsync(new MouseEventArgs());

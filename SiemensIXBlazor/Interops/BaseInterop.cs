@@ -18,7 +18,7 @@ namespace SiemensIXBlazor.Interops
         public BaseInterop(IJSRuntime jsRuntime)
         {
             moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
-                "import", $"./_content/SiemensIXBlazor/js/interops/baseJsInterop.js").AsTask());
+                "import", $"./_content/Siemens.IX.Blazor/js/interops/baseJsInterop.js").AsTask());
         }
 
         public async Task AddEventListener(object classObject, string id, string eventName, string callbackFunctionName)

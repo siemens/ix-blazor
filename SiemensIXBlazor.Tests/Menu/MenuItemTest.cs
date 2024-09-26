@@ -9,18 +9,17 @@
 
 using Bunit;
 using Microsoft.AspNetCore.Components;
-using Xunit;
-using SiemensIXBlazor.Components.NavigationMenu;
+using SiemensIXBlazor.Components.Menu;
 
-namespace SiemensIXBlazor.Tests.NavigationMenu
+namespace SiemensIXBlazor.Tests.Menu
 {
-    public class NavigationMenuItemTests : TestContextBase
+	public class MenuItemTests : TestContextBase
     {
         [Fact]
-        public void NavigationMenuItemRendersCorrectly()
+        public void MenuItemRendersCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<NavigationMenuItem>(
+            var cut = RenderComponent<MenuItem>(
                 ("Active", true),
                 ("Disabled", false),
                 ("Home", true),
