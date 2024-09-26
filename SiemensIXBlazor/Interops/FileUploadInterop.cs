@@ -18,7 +18,7 @@ namespace SiemensIXBlazor.Interops
         public FileUploadInterop(IJSRuntime jsRuntime)
         {
             moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
-                "import", $"./_content/SiemensIXBlazor/js/interops/fileUploadInterop.js").AsTask());
+                "import", $"./_content/Siemens.IX.Blazor/js/interops/fileUploadInterop.js").AsTask());
         }
 
         public async Task AddEventListener(object classObject, string id, string eventName, string callbackFunctionName)

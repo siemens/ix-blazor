@@ -18,11 +18,11 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string Value { get; set; } = string.Empty;
         [Parameter]
-        public EventCallback<string> OnClickEvent { get; set; }
+        public EventCallback<DropdownItem> OnClickEvent { get; set; }
 
-        private async void Clicked(string label)
+        private async void Clicked(DropdownItem dropdownItem)
         {
-            await OnClickEvent.InvokeAsync(label);
+            await OnClickEvent.InvokeAsync(dropdownItem);
         }
     }
 }

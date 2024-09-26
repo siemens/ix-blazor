@@ -35,10 +35,10 @@ public class DropdownItemTest : TestContextBase
 
         var cut = RenderComponent<DropdownItem>(parameters => parameters
             .Add(p => p.OnClickEvent,
-                EventCallback.Factory.Create<string>(this, label => isOnClickEventTriggered = true)));
+                EventCallback.Factory.Create<DropdownItem>(this, label => isOnClickEventTriggered = true)));
 
         // Act
-        await cut.Instance.OnClickEvent.InvokeAsync("testLabel");
+        await cut.Instance.OnClickEvent.InvokeAsync(cut.Instance);
 
         // Assert
         Assert.True(isOnClickEventTriggered);

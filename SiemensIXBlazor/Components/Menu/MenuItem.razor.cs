@@ -9,9 +9,9 @@
 
 using Microsoft.AspNetCore.Components;
 
-namespace SiemensIXBlazor.Components.NavigationMenu
+namespace SiemensIXBlazor.Components.Menu
 {
-    public partial class NavigationMenuItem
+    public partial class MenuItem : IXBaseComponent
     {
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
