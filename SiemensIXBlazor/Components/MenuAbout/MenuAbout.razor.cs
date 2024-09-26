@@ -10,12 +10,11 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
-using Newtonsoft.Json;
 using SiemensIXBlazor.Interops;
 
-namespace SiemensIXBlazor.Components.About
+namespace SiemensIXBlazor.Components.MenuAbout
 {
-    public partial class AboutMenu
+	public partial class MenuAbout : IXBaseComponent
     {
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
@@ -54,7 +53,7 @@ namespace SiemensIXBlazor.Components.About
                 await _interop.AddEventListener(this, Id, "close", "Closed");
 
                 moduleTask = new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
-                "import", "./_content/SiemensIXBlazor/js/interops/aboutMenuInterop.js").AsTask());
+                "import", "./_content/Siemens.IX.Blazor/js/interops/aboutMenuInterop.js").AsTask());
             }
         }
 

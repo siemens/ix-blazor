@@ -9,18 +9,17 @@
 
 using Bunit;
 using Microsoft.AspNetCore.Components;
-using Xunit;
-using SiemensIXBlazor.Components.NavigationMenu;
+using SiemensIXBlazor.Components.MenuCategory;
 
-namespace SiemensIXBlazor.Tests.NavigationMenu
+namespace SiemensIXBlazor.Tests.Menu
 {
-    public class NavigationMenuCategoryTests : TestContextBase
+	public class MenuCategoryTests : TestContextBase
     {
         [Fact]
-        public void NavigationMenuCategoryRendersCorrectly()
+        public void MenuCategoryRendersCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<NavigationMenuCategory>(
+            var cut = RenderComponent<MenuCategory>(
                 ("Icon", "testIcon"),
                 ("Label", "Test Label"),
                 ("Notifications", 5),

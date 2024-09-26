@@ -8,20 +8,19 @@
 //  -----------------------------------------------------------------------
 
 using Bunit;
-using Xunit;
-using SiemensIXBlazor.Components.NavigationMenu;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
+using SiemensIXBlazor.Components.MenuAvatar;
 
-namespace SiemensIXBlazor.Tests.NavigationMenu
+namespace SiemensIXBlazor.Tests.Menu
 {
-    public class NavigationMenuAvatarItemTests : TestContextBase
+	public class MenuAvatarItemTests : TestContextBase
     {
         [Fact]
-        public void NavigationMenuAvatarItemRendersCorrectly()
+        public void MenuAvatarItemRendersCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<NavigationMenuAvatarItem>(
+            var cut = RenderComponent<MenuAvatarItem>(
                 ("Id", "testId"),
                 ("Icon", "testIcon"),
                 ("Label", "Test Label"),
@@ -39,7 +38,7 @@ namespace SiemensIXBlazor.Tests.NavigationMenu
         {
             // Arrange
             var clicked = false;
-            var cut = RenderComponent<NavigationMenuAvatarItem>(
+            var cut = RenderComponent<MenuAvatarItem>(
                 ("Id", "navigationMenuAvatarItem"),
                 ("ItemClickedEvent", EventCallback.Factory.Create(this, (MouseEventArgs args) => clicked = true))
             );

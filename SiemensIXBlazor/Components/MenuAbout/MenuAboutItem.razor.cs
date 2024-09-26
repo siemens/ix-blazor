@@ -9,17 +9,16 @@
 
 using Microsoft.AspNetCore.Components;
 
-namespace SiemensIXBlazor.Components.NavigationMenu
+namespace SiemensIXBlazor.Components.MenuAbout
 {
-    public partial class NavigationMenuCategory: IXBaseComponent
+	public partial class MenuAboutItem
     {
-        [Parameter]
-        public RenderFragment? ChildContent { get; set; }
-        [Parameter]
-        public string? Icon { get; set; }
+        /// <summary>
+        /// About Item label. Default value is null.
+        /// </summary>
         [Parameter]
         public string? Label { get; set; }
         [Parameter]
-        public int? Notifications { get; set; }
+        public RenderFragment? ChildContent { get; set; }
     }
 }

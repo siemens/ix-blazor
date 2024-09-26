@@ -8,14 +8,12 @@
 //  -----------------------------------------------------------------------
 
 using Bunit;
-using SiemensIXBlazor.Components;
 using Microsoft.AspNetCore.Components;
-using SiemensIXBlazor.Components.MenuSettings;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace SiemensIXBlazor.Tests.MenuSettings
 {
-    public class MenuSettingsTest : TestContextBase
+	public class MenuSettingsTest : TestContextBase
     {
         [Fact]
         public void MenuSettingsRendersCorrectly()
