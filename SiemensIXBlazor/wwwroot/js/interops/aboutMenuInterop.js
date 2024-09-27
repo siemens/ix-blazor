@@ -8,12 +8,10 @@
 //  -----------------------------------------------------------------------
 
 export async function toggleAbout(id, status) {
-    try {
-        const element = document.getElementById(id);
-        await element.toggleAbout(status)
-    }
-    catch {
-
-    }
-
+  try {
+    const element = document.getElementById(id);
+    await element.toggleAbout(status);
+  } catch {
+    console.error("Failed to toggle about:", error);
+  }
 }

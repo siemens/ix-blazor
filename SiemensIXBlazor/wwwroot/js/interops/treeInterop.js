@@ -8,22 +8,25 @@
 //  -----------------------------------------------------------------------
 
 export function setTreeModel(id, treeModel) {
-    try {
-        const element = document.getElementById(id);
-        element.model = JSON.parse(treeModel);
-        console.log(element, JSON.parse(treeModel));
+  try {
+    const element = document.getElementById(id);
+    if (!element) {
+      throw new Error(`Element with ID ${id} not found`);
     }
-    catch {
-
-    }
+    element.model = JSON.parse(treeModel);
+  } catch {
+    console.error("Failed to set tree model:", error);
+  }
 }
 
 export function setTreeContext(id, treeContext) {
-    try {
-        const element = document.getElementById(id);
-        element.context = JSON.parse(treeContext);
+  try {
+    const element = document.getElementById(id);
+    if (!element) {
+      throw new Error(`Element with ID ${id} not found`);
     }
-    catch {
-
-    }
+    element.context = JSON.parse(treeContext);
+  } catch {
+    console.error("Failed to set tree context:", error);
+  }
 }

@@ -5,7 +5,7 @@
 //
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
-//  -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 *@
 
 @namespace SiemensIXBlazor.Components
@@ -13,13 +13,7 @@
 @using SiemensIXBlazor.Helpers;
 @inherits IXBaseComponent
 
-<ix-kpi
-@attributes="UserAttributes"
-label="@Label" 
-value="@Value"
-orientation="@(EnumParser<KpiOrientation>.ParseEnumToString(Orientation))"
-state="@(EnumParser<KpiState>.ParseEnumToString(State))"
-onreadystatechange="@State"
-unit="@Unit"
-style="@Style"
-class="@Class"></ix-kpi>
+<ix-kpi @attributes="UserAttributes" label="@Label" value="@Value"
+    orientation="@(EnumParser<KpiOrientation>.EnumToString(Orientation))"
+    state="@(EnumParser<KpiState>.EnumToString(State))" onreadystatechange="@State" unit="@Unit" style="@Style"
+    class="@Class"></ix-kpi>

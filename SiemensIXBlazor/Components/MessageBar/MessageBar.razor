@@ -5,7 +5,7 @@
 //
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
-//  -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 *@
 
 @using Microsoft.JSInterop;
@@ -15,12 +15,7 @@
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
 
-<ix-message-bar
-@attributes="UserAttributes"
-style="@Style"
-class="@Class"
-dismissible="@Dismissible"
-type="@(EnumParser<MessageBarType>.ParseEnumToString(Type))"
-id="@Id">
+<ix-message-bar @attributes="UserAttributes" style="@Style" class="@Class" dismissible="@Dismissible"
+    type="@(EnumParser<MessageBarType>.EnumToString(Type))" id="@Id">
     @ChildContent
 </ix-message-bar>

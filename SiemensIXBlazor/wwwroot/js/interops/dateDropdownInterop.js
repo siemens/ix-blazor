@@ -8,11 +8,13 @@
 //  -----------------------------------------------------------------------
 
 export function setDateRangeOptions(id, dateRangeOptions) {
-    try {
-        const element = document.getElementById(id);
-        element.dateRangeOptions = JSON.parse(dateRangeOptions);
+  try {
+    const element = document.getElementById(id);
+    if (!element) {
+      throw new Error(`Element with ID ${id} not found`);
     }
-    catch (err) {
-        console.error(err)
-    }
+    element.dateRangeOptions = JSON.parse(dateRangeOptions);
+  } catch (err) {
+    console.error("Failed to set date range options:", err);
+  }
 }

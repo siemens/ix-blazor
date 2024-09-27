@@ -7,30 +7,55 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
-export const initalTable = async (id) => {
-    await window.customElements.whenDefined('ix-tabs');
-    const tabsElement = document.getElementById(id);
-    const tabs = tabsElement.querySelectorAll('ix-tab-item[data-tab-id]');
+export const initializeTabs = async (id) => {
+  // Ensure that the custom element 'ix-tabs' is defined before proceeding
+  await window.customElements.whenDefined("ix-tabs");
 
-    function registerClickListener(tab) {
-        tab.addEventListener('click', (tabContent) => {
-            const contentList = tabsElement.parentElement.querySelectorAll('[data-tab-content]');
-            contentList.forEach((content) => {
-                if (content.dataset.tabContent === tab.dataset.tabId) {
-                    content.classList.add('show');
-                } else {
-                    content.classList.remove('show');
-                }
-            });
-        });
-    }
+  const tabsElement = document.getElementById(id);
+  if (!tabsElement) {
+    console.error(`Element with ID ${id} not found.`);
+    return;
+  }
 
-    tabs.forEach(registerClickListener);
+  const tabs = tabsElement.querySelectorAll("ix-tab-item[data-tab-id]");
+  if (tabs.length === 0) {
+    console.warn(`No tabs found within element with ID ${id}.`);
+    return;
+  }
+
+  // Register tab click listeners
+  tabs.forEach(registerTabClickListener);
+
+  function registerTabClickListener(tab) {
+    tab.addEventListener("click", () => handleTabClick(tab, tabsElement));
+  }
+
+  function handleTabClick(clickedTab, containerElement) {
+    const contentList =
+      containerElement.parentElement.querySelectorAll("[data-tab-content]");
+    contentList.forEach((content) => {
+      content.classList.toggle(
+        "show",
+        content.dataset.tabContent === clickedTab.dataset.tabId
+      );
+    });
+  }
 };
 
 export const subscribeEvents = (caller, id, eventName, functionName) => {
-    const element = document.getElementById(id);
-    element.addEventListener(eventName, (e) => {
-        caller.invokeMethodAsync(functionName, e.detail);
-    })
-}
+  const element = document.getElementById(id);
+  if (!element) {
+    console.error(`Element with ID ${id} not found.`);
+    return;
+  }
+
+  element.addEventListener(eventName, (e) => {
+    if (caller && typeof caller.invokeMethodAsync === "function") {
+      caller.invokeMethodAsync(functionName, e.detail).catch((error) => {
+        console.error(`Error invoking method '${functionName}':`, error);
+      });
+    } else {
+      console.error("Invalid caller or missing invokeMethodAsync function.");
+    }
+  });
+};

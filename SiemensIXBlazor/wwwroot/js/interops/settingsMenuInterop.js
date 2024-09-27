@@ -8,12 +8,13 @@
 //  -----------------------------------------------------------------------
 
 export async function toggleSettings(id, status) {
-    try {
-        const element = document.getElementById(id);
-        await element.toggleSettings(status)
+  try {
+    const element = document.getElementById(id);
+    if (!element) {
+      throw new Error(`Element with ID ${id} not found`);
     }
-    catch {
-
-    }
-
+    await element.toggleSettings(status);
+  } catch {
+    console.error("Failed to toggle settings:", error);
+  }
 }

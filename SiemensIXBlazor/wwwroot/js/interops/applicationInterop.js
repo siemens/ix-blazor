@@ -8,6 +8,15 @@
 //  -----------------------------------------------------------------------
 
 export const setApplicationConfig = (id, config) => {
-    const element = document.getElementById(id);
+  const element = document.getElementById(id);
+
+  if (!element) {
+    throw new Error(`Element with ID ${id} not found`);
+  }
+
+  try {
     element.appSwitchConfig = JSON.parse(config);
-}
+  } catch (error) {
+    console.error("Failed to set application config:", error);
+  }
+};

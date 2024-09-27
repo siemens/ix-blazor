@@ -5,7 +5,7 @@
 //
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
-//  -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 *@
 
 @namespace SiemensIXBlazor.Components
@@ -13,12 +13,7 @@
 @using SiemensIXBlazor.Helpers;
 @inherits IXBaseComponent
 
-<ix-link-button 
-    @attributes="UserAttributes" 
-    class="@Class" 
-    style="@Style" 
-    url="@Url" 
-    disabled="@Disabled" 
-    target="@(EnumParser<LinkButtonTarget>.ParseEnumToString(Target))">
+<ix-link-button @attributes="UserAttributes" class="@Class" style="@Style" url="@Url" disabled="@Disabled"
+    target="@(EnumParser<LinkButtonTarget>.EnumToString(Target))">
     @ChildContent
 </ix-link-button>

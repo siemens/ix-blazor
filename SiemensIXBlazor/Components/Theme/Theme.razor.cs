@@ -15,17 +15,17 @@ namespace SiemensIXBlazor.Components
     {
         public async Task SetTheme(string theme)
         {
-            await JSRuntime.InvokeVoidAsync("setTheme", theme);
+            await JSRuntime.InvokeVoidAsync("siemensIXInterop.setTheme", theme);
         }
 
         public async Task ToggleTheme()
         {
-            await JSRuntime.InvokeVoidAsync("toggleTheme");
+            await JSRuntime.InvokeVoidAsync("siemensIXInterop.toggleTheme");
         }
 
         public async Task ToggleSystemTheme(bool useSystemTheme)
         {
-            await JSRuntime.InvokeVoidAsync("toggleSystemTheme", useSystemTheme);
+            await JSRuntime.InvokeVoidAsync("siemensIXInterop.toggleSystemTheme", useSystemTheme);
         }
     }
 }

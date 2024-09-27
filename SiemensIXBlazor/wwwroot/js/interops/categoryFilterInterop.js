@@ -8,44 +8,49 @@
 //  -----------------------------------------------------------------------
 
 export function setCategories(id, categories) {
-    try {
-        const element = document.getElementById(id);
-        element.categories = JSON.parse(categories);
+  try {
+    const element = document.getElementById(id);
+    if (!element) {
+      throw new Error(`Element with ID ${id} not found`);
     }
-    catch {
-
-    }
-    
+    element.categories = JSON.parse(categories);
+  } catch (err) {
+    console.error("Failed to set categories:", err);
+  }
 }
 
 export function setFilterState(id, filterState) {
-    try {
-        const element = document.getElementById(id);
-        element.filterState = JSON.parse(filterState);
+  try {
+    const element = document.getElementById(id);
+    if (!element) {
+      throw new Error(`Element with ID ${id} not found`);
     }
-    catch {
-
-    }
-    
+    element.filterState = JSON.parse(filterState);
+  } catch (err) {
+    console.error("Failed to set filter state:", err);
+  }
 }
 
 export function setNonSelectableCategories(id, nonSelectableCategories) {
-    try {
-        const element = document.getElementById(id);
-        element.nonSelectableCategories = JSON.parse(nonSelectableCategories);
+  try {
+    const element = document.getElementById(id);
+    if (!element) {
+      throw new Error(`Element with ID ${id} not found`);
     }
-    catch {
-
-    }
-    
+    element.nonSelectableCategories = JSON.parse(nonSelectableCategories);
+  } catch {
+    console.error("Failed to set non-selectable categories:", error);
+  }
 }
 
 export function setSuggestions(id, suggestionsObject) {
-    try {
-        const element = document.getElementById(id);
-        element.suggestions = JSON.parse(suggestionsObject).suggestions;
+  try {
+    const element = document.getElementById(id);
+    if (!element) {
+      throw new Error(`Element with ID ${id} not found`);
     }
-    catch {
-
-    }
-} 
+    element.suggestions = JSON.parse(suggestionsObject).suggestions;
+  } catch {
+    console.error("Failed to set suggestions:", error);
+  }
+}

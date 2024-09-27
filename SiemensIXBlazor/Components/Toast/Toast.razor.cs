@@ -17,7 +17,7 @@ namespace SiemensIXBlazor.Components
     {
         public async void ShowToast(ToastConfig config)
         {
-            await JSRuntime.InvokeVoidAsync("showMessage", JsonConvert.SerializeObject(config));
+            await JSRuntime.InvokeVoidAsync("siemensIXInterop.showMessage", JsonConvert.SerializeObject(config));
         }
     }
 }
