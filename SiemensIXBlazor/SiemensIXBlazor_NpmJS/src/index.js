@@ -1,4 +1,13 @@
-﻿window.siemensIXInterop = {
+﻿import { defineCustomElements, applyPolyfills } from "@siemens/ix/loader/index";
+import { toast } from "@siemens/ix";
+import "@siemens/ix-echarts";
+import { registerTheme } from "@siemens/ix-echarts";
+import * as echarts from "echarts";
+import { themeSwitcher } from "@siemens/ix";
+import { Grid } from "ag-grid-community";
+import { defineCustomElements as ixIconsDefineCustomElements } from "@siemens/ix-icons/loader";
+
+window.siemensIXInterop = {
   async initialize() {
     await applyPolyfills();
     await ixIconsDefineCustomElements();
