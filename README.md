@@ -50,7 +50,7 @@ Add required `CSS` and `Javascript` packages into the `index.html` file.
 ```
 
 > [!CAUTION]  
-> If you want to use this library with `Blazor Web App` you have to set `render mode` to `InteractiveServer`.
+> If you want to use this library with a `Blazor Web App`, you need to set the `render mode` to `InteractiveServer`.
 > You can find more information at [here](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-8.0).
 
 ### Theme Switching
