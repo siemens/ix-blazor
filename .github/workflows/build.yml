@@ -23,9 +23,9 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore ${{ env.PROJECT_PATH }}
       - name: Make build-npm.sh executable
-        run: chmod +x ../build-npm.sh
+        run: chmod +x ./build-npm.sh
       - name: Run build-npm.sh
-        run: ../build-npm.sh
+        run: ./build-npm.sh
       - name: Build
         run: dotnet build --no-restore ${{ env.PROJECT_PATH }} --configuration Release
       - name: Test with the dotnet CLI
