@@ -2,9 +2,9 @@ name: .NET Build
 
 on:
   push:
-    branches: ["Refactoring"]
+    branches: ["master"]
   pull_request:
-    branches: ["Refactoring"]
+    branches: ["master"]
 
 env:
   PROJECT_PATH: "SiemensIXBlazor/SiemensIXBlazor.csproj"
