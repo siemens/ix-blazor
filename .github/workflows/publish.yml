@@ -30,10 +30,10 @@ jobs:
         run: dotnet restore ${{ env.PROJECT_PATH }}
 
       - name: Make build-npm.sh executable
-        run: chmod +x ./build-npm.sh
+        run: chmod +x .github/build-npm.sh
 
       - name: Run build-npm.sh
-        run: ./build-npm.sh
+        run: .github/build-npm.sh
 
       - name: Build Project
         run: dotnet build ${{ env.PROJECT_PATH }} --no-restore --configuration Release
