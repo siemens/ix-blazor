@@ -20,17 +20,8 @@
 	<ItemGroup>
 		<Content Remove="SiemensIXBlazor_NpmJS\package-lock.json" />
 		<Content Remove="SiemensIXBlazor_NpmJS\package.json" />
-		<Content Remove="wwwroot\css\siemens-ix\" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<None Remove="Components\KeyValueList\" />
-		<None Remove="Components\KeyValue\" />
-		<None Remove="Components\EmptyState\" />
-		<None Remove="Components\PushCard\" />
-		<None Remove="Enums\PushCard\" />
-		<None Remove="Components\ActionCard\" />
-	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\LICENSE">
 			<Pack>True</Pack>
@@ -65,11 +56,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Update="wwwroot\js\interops\baseJsInterop.js">
+		<Content Update="wwwroot\js\siemens-ix\interops\**\*.js">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Update="wwwroot\js\interops\fileUploadInterop.js">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		<Content Update="wwwroot\js\siemens-ix\**\*.js">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
 
