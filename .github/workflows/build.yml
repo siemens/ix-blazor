@@ -26,6 +26,8 @@ jobs:
         run: chmod +x .github/build-npm.sh
       - name: Run build-npm.sh
         run: .github/build-npm.sh
+      - name: List wwwroot/js files
+        run: ls -la ./SiemensIXBlazor/wwwroot/js
       - name: Build
         run: dotnet build --no-restore ${{ env.PROJECT_PATH }} --configuration Release
       - name: Test with the dotnet CLI
