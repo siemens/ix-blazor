@@ -920,19 +920,6 @@ private void DrawerButtonClicked()
 </Group>
 ```
 
-### Group with Context
-
-```razor
-<Group Id="group" Header="Main Header" SubHeader="Subheader">
-    <Dropdown Id="dropdown" IsForGroupContext="true">
-        <DropdownItem Label="Item 1"></DropdownItem>
-        <DropdownItem Label="Item 1"></DropdownItem>
-    </Dropdown>
-    <GroupItem Id="groupitem1" Text="Example text 1"></GroupItem>
-    <GroupItem Id="groupitem2" Text="Example text 2"></GroupItem>
-</Group>
-```
-
 ## HTML table
 
 ```razor

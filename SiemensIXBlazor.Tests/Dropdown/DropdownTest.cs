@@ -26,14 +26,13 @@ public class DropdownTest : TestContextBase
             .Add(p => p.Placement, "bottom-start")
             .Add(p => p.PositioningStrategy, "fixed")
             .Add(p => p.Show, false)
-            .Add(p => p.IsForGroupContext, true)
             .Add(p => p.SuppressAutomaticPlacement, false)
             .Add(p => p.Trigger, "testTrigger")
             .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content"))));
 
         // Assert
         cut.MarkupMatches(
-            "<ix-dropdown id=\"testId\" trigger=\"testTrigger\" anchor=\"testAnchor\" slot=\"dropdown\" close-behavior=\"both\" header=\"testHeader\" placement=\"bottom-start\" positioning-strategy=\"fixed\">Test content</ix-dropdown>");
+            "<ix-dropdown id=\"testId\" trigger=\"testTrigger\" anchor=\"testAnchor\" close-behavior=\"both\" header=\"testHeader\" placement=\"bottom-start\" positioning-strategy=\"fixed\">Test content</ix-dropdown>");
     }
 
     [Fact]
