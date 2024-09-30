@@ -11,11 +11,15 @@ namespace SiemensIXBlazor.Helpers
 {
     public static class EnumParser<TEnum> where TEnum : Enum
     {
-        public static string ParseEnumToString(object enumValue)
+        public static string EnumToString(TEnum enumValue, bool toLowerCase = true)
         {
-            var enumName = Enum.GetName(typeof(TEnum), enumValue);
-            return enumName != null ? enumName.ToLowerInvariant() : string.Empty;
-        }
+            if (!Enum.IsDefined(typeof(TEnum), enumValue))
+            {
+                throw new ArgumentException($"The value '{enumValue}' is not a valid enum value for type '{typeof(TEnum).Name}'");
+            }
 
+            var enumName = Enum.GetName(typeof(TEnum), enumValue);
+            return toLowerCase ? enumName?.ToLowerInvariant() ?? string.Empty : enumName ?? string.Empty;
+        }
     }
 }

@@ -5,7 +5,7 @@
 //
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
-//  -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 *@
 
 @namespace SiemensIXBlazor.Components
@@ -14,17 +14,10 @@
 @using SiemensIXBlazor.Helpers;
 @inherits IXBaseComponent
 
-<ix-dropdown-button
-@attributes="UserAttributes"
-label="@Label" 
-variant="@(EnumParser<ButtonVariant>.ParseEnumToString(Variant))"
-placement="@((Placement != null) ? EnumParser<DropdownButtonPlacement>.ParseEnumToString(Placement)?.Replace('_', '-') : "")"
-icon="@Icon"
-closeBehavior="@(EnumParser<DropdownButtonCloseBehavior>.ParseEnumToString(CloseBehavior))"
-disabled="@Disabled"
-ghost="@Ghost"
-outline="@Outline"
-style="@Style"
-class="@Class">
+<ix-dropdown-button @attributes="UserAttributes" label="@Label"
+    variant="@(EnumParser<ButtonVariant>.EnumToString(Variant))"
+    placement="@(Placement.HasValue ? EnumParser<DropdownButtonPlacement>.EnumToString(Placement.Value)?.Replace('_', '-') : "")"
+    icon="@Icon" closeBehavior="@(EnumParser<DropdownButtonCloseBehavior>.EnumToString(CloseBehavior))"
+    disabled="@Disabled" ghost="@Ghost" outline="@Outline" style="@Style" class="@Class">
     @ChildContent
 </ix-dropdown-button>

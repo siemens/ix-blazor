@@ -5,7 +5,7 @@
 //
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
-//  -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 *@
 
 @using Microsoft.JSInterop;
@@ -15,16 +15,7 @@
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
 
-<ix-time-picker
-@attributes="@UserAttributes"
-id="@Id"
-corners="@(EnumParser<DatePickerCorners>.ParseEnumToString(Corners))" 
-format="@Format" 
-show-hour="@ShowHour" 
-show-minutes="@ShowMinutes" 
-show-seconds="@ShowSeconds" 
-show-time-reference="@ShowTimeReference" 
-text-select-time="@TextSelectTime" 
-time="@Time"
-style="display: block; width: 20rem; @Style"
-class="@Class"></ix-time-picker>
+<ix-time-picker @attributes="@UserAttributes" id="@Id" corners="@(EnumParser<DatePickerCorners>.EnumToString(Corners))"
+    format="@Format" show-hour="@ShowHour" show-minutes="@ShowMinutes" show-seconds="@ShowSeconds"
+    show-time-reference="@ShowTimeReference" text-select-time="@TextSelectTime" time="@Time"
+    style="display: block; width: 20rem; @Style" class="@Class"></ix-time-picker>

@@ -7,17 +7,11 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
-using Microsoft.JSInterop;
-using Newtonsoft.Json;
-using SiemensIXBlazor.Objects;
-
-namespace SiemensIXBlazor.Components
-{
-    public partial class Toast
-    {
-        public async void ShowToast(ToastConfig config)
-        {
-            await JSRuntime.InvokeVoidAsync("siemensIXInterop.showMessage", JsonConvert.SerializeObject(config));
-        }
-    }
+export async function toggleAbout(id, status) {
+  try {
+    const element = document.getElementById(id);
+    await element.toggleAbout(status);
+  } catch {
+    console.error("Failed to toggle about:", error);
+  }
 }

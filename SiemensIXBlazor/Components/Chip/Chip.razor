@@ -5,7 +5,7 @@
 //
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
-//  -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 *@
 
 @using Microsoft.JSInterop;
@@ -15,15 +15,6 @@
 @inherits IXBaseComponent
 @inject IJSRuntime JSRuntime
 
-<ix-chip
-@attributes="UserAttributes"
-id="@Id" 
-closable="@Closable" 
-outline="@Outline" 
-active="@Active" 
-background="@Background" 
-color="@Color" 
-icon="@Icon" 
-variant="@(EnumParser<ChipVariant>.ParseEnumToString(Variant))"
-style="@Style"
-class="@Class">@ChildContent</ix-chip>
+<ix-chip @attributes="UserAttributes" id="@Id" closable="@Closable" outline="@Outline" active="@Active"
+    background="@Background" color="@Color" icon="@Icon" variant="@(EnumParser<ChipVariant>.EnumToString(Variant))"
+    style="@Style" class="@Class">@ChildContent</ix-chip>

@@ -5,7 +5,7 @@
 //
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
-//  -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 *@
 
 @namespace SiemensIXBlazor.Components
@@ -15,13 +15,8 @@
 @inherits IXBaseComponent
 @inject IJSRuntime JSRuntime
 
-<ix-content-header @attributes="UserAttributes"
-                   class="@Class"
-                   style="@Style"
-                   id="@Id"
-                   has-back-button="@HasBackButton"
-                   header-title="@HeaderTitle"
-                   header-subtitle="@HeaderSubTitle"
-                   variant="@(EnumParser<ContentHeaderVariant>.ParseEnumToString(Variant))">
+<ix-content-header @attributes="UserAttributes" class="@Class" style="@Style" id="@Id" has-back-button="@HasBackButton"
+    header-title="@HeaderTitle" header-subtitle="@HeaderSubTitle"
+    variant="@(EnumParser<ContentHeaderVariant>.EnumToString(Variant))">
     @ChildContent
 </ix-content-header>

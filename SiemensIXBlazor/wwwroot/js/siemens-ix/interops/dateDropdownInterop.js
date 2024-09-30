@@ -7,17 +7,14 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
-using Microsoft.JSInterop;
-using Newtonsoft.Json;
-using SiemensIXBlazor.Objects;
-
-namespace SiemensIXBlazor.Components
-{
-    public partial class Toast
-    {
-        public async void ShowToast(ToastConfig config)
-        {
-            await JSRuntime.InvokeVoidAsync("siemensIXInterop.showMessage", JsonConvert.SerializeObject(config));
-        }
+export function setDateRangeOptions(id, dateRangeOptions) {
+  try {
+    const element = document.getElementById(id);
+    if (!element) {
+      throw new Error(`Element with ID ${id} not found`);
     }
+    element.dateRangeOptions = JSON.parse(dateRangeOptions);
+  } catch (err) {
+    console.error("Failed to set date range options:", err);
+  }
 }

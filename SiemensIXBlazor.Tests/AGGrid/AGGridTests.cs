@@ -75,7 +75,7 @@ namespace SiemensIXBlazor.Tests
             Mock<IJSObjectReference> jsObjectReferenceMock = new();
 
             // Mock of module import for JSRuntime
-            jsRuntimeMock.Setup(x => x.InvokeAsync<IJSObjectReference>("agGridInterop.createGrid", It.IsAny<object[]>()))
+            jsRuntimeMock.Setup(x => x.InvokeAsync<IJSObjectReference>("siemensIXInterop.agGridInterop.createGrid", It.IsAny<object[]>()))
                 .Returns(new ValueTask<IJSObjectReference>(jsObjectReferenceMock.Object));
             Services.AddSingleton(jsRuntimeMock.Object);
 
@@ -86,7 +86,7 @@ namespace SiemensIXBlazor.Tests
 
             // Assert
             Assert.NotNull(result);
-            jsRuntimeMock.Verify(x => x.InvokeAsync<object>("agGridInterop.createGrid", It.IsAny<object[]>()), Times.Once);
+            jsRuntimeMock.Verify(x => x.InvokeAsync<object>("siemensIXInterop.agGridInterop.createGrid", It.IsAny<object[]>()), Times.Once);
         }
 
         [Fact]
@@ -97,16 +97,16 @@ namespace SiemensIXBlazor.Tests
             Services.AddSingleton(jsRuntimeMock.Object);
             var cut = RenderComponent<AGGrid>(parameters => parameters.Add(p => p.Id, "testId"));
             var jsObjectReferenceMock = new Mock<IJSObjectReference>();
-            jsRuntimeMock.Setup(x => x.InvokeAsync<object>("agGridInterop.getSelectedRows", It.IsAny<object[]>()))
+            jsRuntimeMock.Setup(x => x.InvokeAsync<object>("siemensIXInterop.agGridInterop.getSelectedRows", It.IsAny<object[]>()))
                 .ReturnsAsync(new object());
-            
+
 
             // Act
             var result = await cut.Instance.GetSelectedRows(jsObjectReferenceMock.Object);
 
             // Assert
             Assert.NotNull(result);
-            jsRuntimeMock.Verify(x => x.InvokeAsync<object>("agGridInterop.getSelectedRows", It.IsAny<object[]>()), Times.Once);
+            jsRuntimeMock.Verify(x => x.InvokeAsync<object>("siemensIXInterop.agGridInterop.getSelectedRows", It.IsAny<object[]>()), Times.Once);
         }
     }
 }

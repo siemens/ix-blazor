@@ -22,7 +22,7 @@ namespace SiemensIXBlazor.Components.ECharts
         {
             string serializedOptions = JsonConvert.SerializeObject(options);
 
-            await JSRuntime.InvokeVoidAsync("initializeChart", Id, serializedOptions);
+            await JSRuntime.InvokeVoidAsync("siemensIXInterop.initializeChart", Id, serializedOptions);
         }
     }
 }

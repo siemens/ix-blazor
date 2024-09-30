@@ -5,23 +5,14 @@
 //
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
-//  -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 *@
 
 @namespace SiemensIXBlazor.Components
 @using SiemensIXBlazor.Enums.Button;
 @using SiemensIXBlazor.Helpers;
 @inherits IXBaseComponent
-<ix-icon-toggle-button @attributes="UserAttributes"
-                       class="@Class"
-                       style="@Style"
-                       id="@Id"
-                       disabled="@Disabled"
-                       ghost="@Ghost"
-                       icon="@Icon"
-                       loading="@Loading"
-                       outline="@Outline"
-                       pressed="@Pressed"
-                       size="@Size"
-                       variant="@(EnumParser<ButtonVariant>.ParseEnumToString(Variant))">
+<ix-icon-toggle-button @attributes="UserAttributes" class="@Class" style="@Style" id="@Id" disabled="@Disabled"
+    ghost="@Ghost" icon="@Icon" loading="@Loading" outline="@Outline" pressed="@Pressed" size="@Size"
+    variant="@(EnumParser<ButtonVariant>.EnumToString(Variant))">
 </ix-icon-toggle-button>

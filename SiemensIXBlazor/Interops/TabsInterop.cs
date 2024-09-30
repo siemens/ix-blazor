@@ -18,7 +18,7 @@ namespace SiemensIXBlazor.Interops
         public TabsInterop(IJSRuntime jsRuntime)
         {
             moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
-                "import", $"./_content/Siemens.IX.Blazor/js/interops/tabsInterop.js").AsTask());
+                "import", $"./_content/Siemens.IX.Blazor/js/siemens-ix/interops/tabsInterop.js").AsTask());
         }
 
         public async Task InitialComponent(string id)
@@ -30,15 +30,23 @@ namespace SiemensIXBlazor.Interops
         public async Task SubscribeEvents(object classObject, string id, string eventName, string methodName)
         {
             var module = await moduleTask.Value;
-            await module.InvokeVoidAsync("subscribeEvents", DotNetObjectReference.Create(classObject), id, eventName, methodName);
+            var objectReference = DotNetObjectReference.Create(classObject);
+            await module.InvokeVoidAsync("subscribeEvents", objectReference, id, eventName, methodName);
         }
 
         public async ValueTask DisposeAsync()
         {
             if (moduleTask.IsValueCreated)
             {
-                var module = await moduleTask.Value;
-                await module.DisposeAsync();
+                try
+                {
+                    var module = await moduleTask.Value;
+                    await module.DisposeAsync();
+                }
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine($"Failed to dispose module: {ex.Message}");
+                }
             }
         }
     }

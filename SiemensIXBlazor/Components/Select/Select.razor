@@ -5,7 +5,7 @@
 //
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
-//  -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 *@
 
 @using Microsoft.JSInterop;
@@ -15,22 +15,10 @@
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
 
-<ix-select 
-           @attributes="UserAttributes"
-           value="@Value"
-           allow-clear="@AllowClear"
-           disabled="@Disabled"
-           editable="@Editable"
-           i-1-8n-placeholder="@i18nPlaceholder"
-           i-1-8n-placeholder-editable="@i18nPlaceholderEditable"
-           i-1-8n-select-list-header="@i18nSelectListHeader"
-           mode="@(EnumParser<SelectMode>.ParseEnumToString(Mode))"
-           id="@Id"
-           readonly="@Readonly"
-           style="@Style"
-           class="@Class"
-           hide-list-header="@HideListHeader"
-           i-1-8n-no-matches="@I18NNoMatches">
+<ix-select @attributes="UserAttributes" value="@Value" allow-clear="@AllowClear" disabled="@Disabled"
+    editable="@Editable" i-1-8n-placeholder="@i18nPlaceholder" i-1-8n-placeholder-editable="@i18nPlaceholderEditable"
+    i-1-8n-select-list-header="@i18nSelectListHeader" mode="@(EnumParser<SelectMode>.EnumToString(Mode))" id="@Id"
+    readonly="@Readonly" style="@Style" class="@Class" hide-list-header="@HideListHeader"
+    i-1-8n-no-matches="@I18NNoMatches">
     @ChildContent
 </ix-select>
-
