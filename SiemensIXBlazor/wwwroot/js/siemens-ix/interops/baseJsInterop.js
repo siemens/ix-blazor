@@ -7,17 +7,14 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
-using Microsoft.JSInterop;
-using Newtonsoft.Json;
-using SiemensIXBlazor.Objects;
+export function listenEvent(caller, elementId, eventName, funtionName) {
+  const element = document.getElementById(elementId);
 
-namespace SiemensIXBlazor.Components
-{
-    public partial class Toast
-    {
-        public async void ShowToast(ToastConfig config)
-        {
-            await JSRuntime.InvokeVoidAsync("siemensIXInterop.showMessage", JsonConvert.SerializeObject(config));
-        }
-    }
+  if (!element) {
+    throw new Error(`Element with ID ${elementId} not found`);
+  }
+
+  element.addEventListener(eventName, (e) => {
+    caller.invokeMethodAsync(funtionName, e.detail);
+  });
 }

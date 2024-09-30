@@ -5,7 +5,7 @@
 //
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
-//  -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 *@
 
 @using Microsoft.JSInterop;
@@ -16,7 +16,7 @@
 
 @namespace SiemensIXBlazor.Components
 
-<ix-blind @attributes="UserAttributes" class="@Class" style="@Style" id="@Id" label="@Label" sublabel="@SubLabel" collapsed="@Collapsed" icon="@Icon" 
-variant="@(EnumParser<BlindVariant>.ParseEnumToString(Variant))">
+<ix-blind @attributes="UserAttributes" class="@Class" style="@Style" id="@Id" label="@Label" sublabel="@SubLabel"
+  collapsed="@Collapsed" icon="@Icon" variant="@(EnumParser<BlindVariant>.EnumToString(Variant))">
   @ChildContent
 </ix-blind>
