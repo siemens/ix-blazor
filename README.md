@@ -8,18 +8,18 @@ SPDX-License-Identifier: MIT
 
 ## Installation
 
-Install the `SiemensIXBlazor` package from the [NuGet](https://www.nuget.org/packages/Siemens.IX.Blazor) package manager.
+Install the `Siemens.IX.Blazor` package from the [NuGet](https://www.nuget.org/packages/Siemens.IX.Blazor) package manager.
 
 ## .NET CLI
 
 ```cmd
-dotnet add package SiemensIXBlazor
+dotnet add package Siemens.IX.Blazor
 ```
 
 ## Package Manager
 
 ```cmd
-NuGet\Install-Package SiemensIXBlazor
+NuGet\Install-Package Siemens.IX.Blazor
 ```
 
 Add required `CSS` and `Javascript` packages into the `index.html` file.
@@ -1270,6 +1270,18 @@ toast.ShowToast("test message", "info");
         Some example content
     </ix-tooltip>
 </div>
+```
+
+## Validation Tooltip
+
+```razor
+<form class="needs-validation" novalidate @onsubmit="()=>{}">
+	<ValidationTooltip Message="Cannot be empty!" Placement="ValidationTooltipPlacement.Top">
+		<label for="validationCustom01">Name</label>
+		<input id="validationCustom01" value="" required />
+	</ValidationTooltip>
+	<Button Type="ButtonType.Submit">Submit </Button>
+</form>
 ```
 
 ## Tree
