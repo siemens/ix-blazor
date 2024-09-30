@@ -365,6 +365,3 @@ FodyWeavers.xsd
 /SiemensIXBlazor.TestApp
 /SiemensIXBlazorTestApp
 /TestBlazorApp
-
-# Ignore webpack generated static js files
-/SiemensIXBlazor/wwwroot/js/siemens-ix/*index.bundle.js*
