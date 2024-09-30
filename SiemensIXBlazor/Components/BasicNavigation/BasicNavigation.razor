@@ -5,18 +5,15 @@
 //
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
-//  -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 *@
 
 @using SiemensIXBlazor.Enums.BasicNavigation
 @using SiemensIXBlazor.Helpers
 @inherits IXBaseComponent
 
-<ix-basic-navigation @attributes="UserAttributes"
-                     class="@Class"
-                     style="@Style"
-                     application-name="@ApplicationName"
-                     hide-header="@HideHeader"
-                     force-breakpoint="@(ForceBreakpoint == null ? string.Empty :  EnumParser<Breakpoint>.ParseEnumToString(ForceBreakpoint))">
+<ix-basic-navigation @attributes="UserAttributes" class="@Class" style="@Style" application-name="@ApplicationName"
+    hide-header="@HideHeader"
+    force-breakpoint="@(ForceBreakpoint.HasValue ? EnumParser<Breakpoint>.EnumToString(ForceBreakpoint.Value) : string.Empty)">
     @ChildContent
 </ix-basic-navigation>

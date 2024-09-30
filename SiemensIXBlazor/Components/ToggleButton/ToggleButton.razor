@@ -5,7 +5,7 @@
 //
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
-//  -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 *@
 
 @using Microsoft.JSInterop;
@@ -14,14 +14,6 @@
 @inject IJSRuntime JSRuntime
 @inherits IXBaseComponent
 
-<ix-toggle-button @attributes="UserAttributes"
-class="@Class"
-style="@Style"
-id="@Id"
-disabled="@Disabled"
-ghost="@Ghost"
-icon="@Icon"
-loading="@Loading"
-outline="@Outline"
-pressed="@Pressed"
-variant="@(EnumParser<ButtonVariant>.ParseEnumToString(Variant))">@ChildContent</ix-toggle-button>
+<ix-toggle-button @attributes="UserAttributes" class="@Class" style="@Style" id="@Id" disabled="@Disabled"
+    ghost="@Ghost" icon="@Icon" loading="@Loading" outline="@Outline" pressed="@Pressed"
+    variant="@(EnumParser<ButtonVariant>.EnumToString(Variant))">@ChildContent</ix-toggle-button>

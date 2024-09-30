@@ -32,8 +32,6 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool SuppressAutomaticPlacement { get; set; } = false;
         [Parameter]
-        public bool IsForGroupContext { get; set; } = false;
-        [Parameter]
         public string? Trigger { get; set; }
         [Parameter]
         public RenderFragment? ChildContent { get; set; }

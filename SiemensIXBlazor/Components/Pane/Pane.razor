@@ -5,7 +5,7 @@
 //
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
-//  -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 *@
 
 @namespace SiemensIXBlazor.Components
@@ -18,19 +18,9 @@
 @inject IJSRuntime JSRuntime
 
 
-<ix-pane 
-    class="@Class"
-    style="@Style"
-    @attributes="UserAttributes"
-    id="@Id"
-    heading="@Heading"
-    composition="@(EnumParser<PaneComposition>.ParseEnumToString(Composition))"
-    size="@Size"
-    borderless="@Borderless"
-    icon="@Icon"
-    variant="@(EnumParser<PaneVariant>.ParseEnumToString(Variant))"
-    hide-on-collapse="@HideOnCollapse"
-    expanded="@Expanded"
->
-   @ChildContent
+<ix-pane class="@Class" style="@Style" @attributes="UserAttributes" id="@Id" heading="@Heading"
+    composition="@(EnumParser<PaneComposition>.EnumToString(Composition))" size="@Size" borderless="@Borderless"
+    icon="@Icon" variant="@(EnumParser<PaneVariant>.EnumToString(Variant))" hide-on-collapse="@HideOnCollapse"
+    expanded="@Expanded">
+    @ChildContent
 </ix-pane>

@@ -5,7 +5,7 @@
 //
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
-//  -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 *@
 
 @using Microsoft.JSInterop;
@@ -15,15 +15,8 @@
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
 
-<ix-tabs
-@attributes="UserAttributes"
-id="@Id" 
-layout="@(EnumParser<TabsLayout>.ParseEnumToString(Layout))" 
-placement="@(EnumParser<TabsPlacement>.ParseEnumToString(Placement))" 
-rounded="@Rounded" 
-selected="@Selected" 
-small="@Small"
-style="@Style"
-class="@Class">
+<ix-tabs @attributes="UserAttributes" id="@Id" layout="@(EnumParser<TabsLayout>.EnumToString(Layout))"
+    placement="@(EnumParser<TabsPlacement>.EnumToString(Placement))" rounded="@Rounded" selected="@Selected"
+    small="@Small" style="@Style" class="@Class">
     @ChildContent
 </ix-tabs>

@@ -18,21 +18,29 @@ namespace SiemensIXBlazor.Interops
         public BaseInterop(IJSRuntime jsRuntime)
         {
             moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
-                "import", $"./_content/Siemens.IX.Blazor/js/interops/baseJsInterop.js").AsTask());
+                "import", $"./_content/Siemens.IX.Blazor/js/siemens-ix/interops/baseJsInterop.js").AsTask());
         }
 
         public async Task AddEventListener(object classObject, string id, string eventName, string callbackFunctionName)
         {
             var module = await moduleTask.Value;
-            await module.InvokeAsync<string>("listenEvent", DotNetObjectReference.Create(classObject), id, eventName, callbackFunctionName);
+            var objectReference = DotNetObjectReference.Create(classObject);
+            await module.InvokeAsync<string>("listenEvent", objectReference, id, eventName, callbackFunctionName);
         }
 
         public async ValueTask DisposeAsync()
         {
             if (moduleTask.IsValueCreated)
             {
-                var module = await moduleTask.Value;
-                await module.DisposeAsync();
+                try
+                {
+                    var module = await moduleTask.Value;
+                    await module.DisposeAsync();
+                }
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine($"Failed to dispose module: {ex.Message}");
+                }
             }
         }
     }

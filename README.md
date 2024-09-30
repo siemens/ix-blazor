@@ -49,7 +49,12 @@ Add required `CSS` and `Javascript` packages into the `index.html` file.
 </html>
 ```
 
+> [!CAUTION]  
+> If you want to use this library with a `Blazor Web App`, you need to set the `render mode` to `InteractiveServer`.
+> You can find more information at [here](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-8.0).
+
 ### Theme Switching
+
 **Since v0.3.9**
 
 Add `Theme` component to the page that you want to manipulate the theme.
@@ -163,6 +168,7 @@ public partial class Index
 - [Workflow](#workflow)
 
 ## Application
+
 ```razor
 <Application @ref="_app">
     <ApplicationHeader Name="My Application">
@@ -365,15 +371,21 @@ Add necessary css files into the `index.html` file.
 
 ```html
 <!-- Include the core CSS, this is needed by the grid -->
-<link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-grid.css" />
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-grid.css"
+/>
 
 <!-- Include the theme CSS, only need to import the theme you are going to use -->
-<link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-alpine.css" />
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-alpine.css"
+/>
 
-<link rel="stylesheet"
-        href="_content/Siemens.IX.Blazor/css/siemens-ix/ix-aggrid.css" />
+<link
+  rel="stylesheet"
+  href="_content/Siemens.IX.Blazor/css/siemens-ix/ix-aggrid.css"
+/>
 ```
 
 ```razor
@@ -720,6 +732,7 @@ chart1.InitialChart(object1);
 ```
 
 ##Content
+
 ```razor
 <Content>
     <ContentHeader Id="myheader" HeaderTitle="My Content Page" />
@@ -742,9 +755,11 @@ chart1.InitialChart(object1);
 ```
 
 ## Date Dropdown
+
 ```razor
 <DateDropdown Id="datedropdown1" DateRangeId="last-7" Format="MM/dd/yyyy" DateRangeOptions="_dateRangeOptions" DateRangeChangeEvent="Callback"></DateDropdown>
 ```
+
 ```csharp
     readonly DateDropdownOption[] _dateRangeOptions =
 {
@@ -797,7 +812,6 @@ private void Callback(DateDropdownResponse selectedDateDropdown)
 ```razor
 <Divider></Divider>
 ```
-
 
 ## Drawer
 
@@ -895,6 +909,7 @@ private void DrawerButtonClicked()
 ```
 
 - [ ] AG grid
+
 ## Group
 
 ```razor
@@ -902,18 +917,6 @@ private void DrawerButtonClicked()
     <GroupItem Id="groupitem1" Text="Example text 1"></GroupItem>
     <GroupItem Id="groupitem2" Text="Example text 2"></GroupItem>
     <GroupItem Id="groupitem3" Text="Example text 3" SelectedChangeEvent="GroupItemSelectedChanged"></GroupItem>
-</Group>
-```
-
-### Group with Context
-```razor
-<Group Id="group" Header="Main Header" SubHeader="Subheader">
-    <Dropdown Id="dropdown" IsForGroupContext="true">
-        <DropdownItem Label="Item 1"></DropdownItem>
-        <DropdownItem Label="Item 1"></DropdownItem>
-    </Dropdown>
-    <GroupItem Id="groupitem1" Text="Example text 1"></GroupItem>
-    <GroupItem Id="groupitem2" Text="Example text 2"></GroupItem>
 </Group>
 ```
 
@@ -1093,6 +1096,7 @@ private void CloseModal()
     PageSelectedEvent="PaginationPageSelected">
 </Pagination>
 ```
+
 ## Pane
 
 ```razor
@@ -1184,17 +1188,17 @@ AddItemEvent="SelectItemAdded" Mode="SelectMode.Single" SelectedIndices="2" Id="
 
 ```css
 .example {
-    display: block;
-    position: relative;
-    width: 100%;
+  display: block;
+  position: relative;
+  width: 100%;
 }
 
 div[data-tab-content] {
-    display: none;
+  display: none;
 }
 
 div[data-tab-content].show {
-    display: block;
+  display: block;
 }
 ```
 
@@ -1342,6 +1346,7 @@ tree.TreeModel = treeNodes;
 ```
 
 ## Typography
+
 ```razor
 <Typography Format="TypographyFormat.Label" TextColor="TypographyColor.Std" TextDecoration="TextDecoration.None">Label, Std, None</Typography>
 <Typography Bold="true" Format="TypographyFormat.Code_Lg" TextColor="TypographyColor.Contrast" TextDecoration="TextDecoration.Line_Through">Bold, Code_Lg, Contrast, Line_Through</Typography>
