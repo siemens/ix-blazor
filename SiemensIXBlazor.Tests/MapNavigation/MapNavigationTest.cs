@@ -9,9 +9,8 @@
 
 using Bunit;
 using Microsoft.AspNetCore.Components;
-using SiemensIXBlazor.Components.MapNavigation;
 
-namespace SiemensIXBlazor.Tests;
+namespace SiemensIXBlazor.Tests.MapNavigation;
 
 public class MapNavigationTest : TestContextBase
 {
@@ -19,7 +18,7 @@ public class MapNavigationTest : TestContextBase
     public void ComponentRendersWithParametersSetCorrectly()
     {
         // Arrange
-        var cut = RenderComponent<MapNavigation>(parameters => parameters
+        var cut = RenderComponent<Components.MapNavigation.MapNavigation>(parameters => parameters
             .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content")))
             .Add(p => p.Id, "testId")
             .Add(p => p.ApplicationName, "testApp")
@@ -38,7 +37,7 @@ public class MapNavigationTest : TestContextBase
         var contextMenuClickEventWasCalled = false;
         var navigationToggledEventWasCalled = false;
 
-        var cut = RenderComponent<MapNavigation>(parameters => parameters
+        var cut = RenderComponent<Components.MapNavigation.MapNavigation> (parameters => parameters
             .Add(p => p.Id, "testId")
             .Add(p => p.ContextMenuClickEvent,
                 EventCallback.Factory.Create(this, () => { contextMenuClickEventWasCalled = true; }))
