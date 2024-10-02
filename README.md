@@ -344,6 +344,11 @@ menuAboutElement.ToggleSettings(true);
   <div>Content</div>
 </MapNavigation>
 ```
+## Map Navigation Overlay
+
+```razor
+<MapNavigationOverlay  Id="overlay"></MapNavigationOverlay>
+```
 
 ## Popover News
 
