@@ -115,7 +115,7 @@ namespace SiemensIXBlazor.Components.CategoryFilter
         {
 
             moduleTask = new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
-                "import", $"./_content/Siemens.IX.Blazor/js/interops/categoryFilterInterop.js").AsTask());
+                "import", $"./_content/Siemens.IX.Blazor/js/siemens-ix/interops/categoryFilterInterop.js").AsTask());
 
             Task.Run(async () =>
             {

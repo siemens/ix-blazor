@@ -67,7 +67,7 @@ public partial class DateDropdown
     private async Task InitialParameterAsync(string functionName, object? param)
     {
         _moduleTask = new Lazy<Task<IJSObjectReference>>(() => JsRuntime.InvokeAsync<IJSObjectReference>(
-            "import", "./_content/Siemens.IX.Blazor/js/interops/dateDropdownInterop.js").AsTask());
+            "import", "./_content/Siemens.IX.Blazor/js/siemens-ix/interops/dateDropdownInterop.js").AsTask());
 
         var dateRangeOptions = JsonConvert.SerializeObject(param, new JsonSerializerSettings
         {

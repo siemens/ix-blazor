@@ -49,7 +49,7 @@ public partial class Application
     {
 
         moduleTask = new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
-            "import", $"./_content/Siemens.IX.Blazor/js/interops/applicationInterop.js").AsTask());
+            "import", $"./_content/Siemens.IX.Blazor/js/siemens-ix/interops/applicationInterop.js").AsTask());
 
         Task.Run(async () =>
         {
