@@ -53,7 +53,7 @@ namespace SiemensIXBlazor.Components.MenuAbout
                 await _interop.AddEventListener(this, Id, "close", "Closed");
 
                 moduleTask = new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
-                "import", "./_content/Siemens.IX.Blazor/js/interops/aboutMenuInterop.js").AsTask());
+                "import", "./_content/Siemens.IX.Blazor/js/siemens-ix/interops/aboutMenuInterop.js").AsTask());
             }
         }
 

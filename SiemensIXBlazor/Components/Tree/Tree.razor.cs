@@ -75,7 +75,7 @@ namespace SiemensIXBlazor.Components.Tree
         {
 
             moduleTask = new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
-                "import", $"./_content/Siemens.IX.Blazor/js/interops/treeInterop.js").AsTask());
+                "import", $"./_content/Siemens.IX.Blazor/js/siemens-ix/interops/treeInterop.js").AsTask());
 
             Task.Run(async () =>
             {
