@@ -1269,12 +1269,12 @@ toast.ShowToast("test message", "info");
 ## Tooltip
 
 ```razor
-<div style="padding: 4rem">
-    <Button DataTooltip="myTooltip">Hover me</Button>
-    <ix-tooltip for="[data-tooltip='myTooltip']">
-        Some example content
-    </ix-tooltip>
-</div>
+<Button class="any-class" aria-describedby="tooltip-1">
+    Save
+</Button>
+<Tooltip Id="tooltip-1" For=".any-class">
+    When you click, all changes will be saved
+</Tooltip>
 ```
 
 ## Validation Tooltip
