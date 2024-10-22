@@ -132,6 +132,7 @@ public partial class Index
 - [Drawer](#drawer)
 - [Dropdown Button](#dropdown-button)
 - [Dropdown](#dropdown)
+- [Dropdown Header](#dropdown-header)
 - [Empty State](#empty-state) **(since v0.3.3)**
 - [Event List](#event-list)
 - [Expanding Search](#expanding-search)
@@ -845,7 +846,7 @@ private void DrawerButtonClicked()
 }
 ```
 
-## Dropdown button
+## Dropdown Button
 
 ```razor
 <DropdownButton Label="Dropdown" Variant="Primary" Icon="checkboxes">
@@ -860,6 +861,18 @@ private void DrawerButtonClicked()
 ```razor
 <Button Id="triggerId">Open</Button>
 <Dropdown Trigger="triggerId">
+  <DropdownItem Label="Item 1"></DropdownItem>
+  <DropdownItem Label="Item 2"></DropdownItem>
+  <DropdownItem Label="Item 3"></DropdownItem>
+</Dropdown>
+```
+
+## Dropdown Header
+
+```razor
+<Button Id="triggerId">Open</Button>
+<Dropdown Trigger="triggerId">
+  <DropdownHeader Label="Category"></DropdownHeader>
   <DropdownItem Label="Item 1"></DropdownItem>
   <DropdownItem Label="Item 2"></DropdownItem>
   <DropdownItem Label="Item 3"></DropdownItem>
