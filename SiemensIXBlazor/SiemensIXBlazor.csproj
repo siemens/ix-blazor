@@ -50,7 +50,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="BlazorComponentUtilities" Version="1.8.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.10" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
