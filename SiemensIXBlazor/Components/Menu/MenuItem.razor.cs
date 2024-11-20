@@ -11,21 +11,23 @@ using Microsoft.AspNetCore.Components;
 
 namespace SiemensIXBlazor.Components.Menu
 {
-    public partial class MenuItem : IXBaseComponent
-    {
-        [Parameter]
-        public RenderFragment? ChildContent { get; set; }
-        [Parameter]
-        public bool? Active { get; set; }
-        [Parameter]
-        public bool? Disabled { get; set; }
-        [Parameter]
-        public bool Home { get; set; } = false;
-        [Parameter]
-        public string? Icon { get; set; }
-        [Parameter]
-        public int? Notifications { get; set; }
-        [Parameter]
-        public string TabIcon { get; set; } = "document";
-    }
+	public partial class MenuItem : IXBaseComponent
+	{
+		[Parameter]
+		public RenderFragment? ChildContent { get; set; }
+		[Parameter]
+		public bool? Active { get; set; }
+		[Parameter]
+		public bool? Disabled { get; set; }
+		[Parameter]
+		public bool Home { get; set; } = false;
+		[Parameter]
+		public string? Icon { get; set; }
+		[Parameter]
+		public int? Notifications { get; set; }
+		[Parameter]
+		public string TabIcon { get; set; } = "document";
+		[Parameter]
+		public string? Label { get; set; }
+	}
 }

@@ -14,29 +14,30 @@ using SiemensIXBlazor.Components.Menu;
 namespace SiemensIXBlazor.Tests.Menu
 {
 	public class MenuItemTests : TestContextBase
-    {
-        [Fact]
-        public void MenuItemRendersCorrectly()
-        {
-            // Arrange
-            var cut = RenderComponent<MenuItem>(
-                ("Active", true),
-                ("Disabled", false),
-                ("Home", true),
-                ("Icon", "testIcon"),
-                ("Notifications", 5),
-                ("TabIcon", "document"),
-                ("ChildContent", (RenderFragment)(builder =>
-                {
-                    builder.OpenElement(0, "div");
-                    builder.AddContent(1, "Test child content");
-                    builder.CloseElement();
-                }))
-            );
+	{
+		[Fact]
+		public void MenuItemRendersCorrectly()
+		{
+			// Arrange
+			var cut = RenderComponent<MenuItem>(
+				("Active", true),
+				("Disabled", false),
+				("Home", true),
+				("Icon", "testIcon"),
+				("Notifications", 5),
+				("TabIcon", "document"),
+				("Label", "label"),
+				("ChildContent", (RenderFragment)(builder =>
+				{
+					builder.OpenElement(0, "div");
+					builder.AddContent(1, "Test child content");
+					builder.CloseElement();
+				}))
+			);
 
-            // Assert
-            // Adjust the expected markup to match your component's output
-            cut.MarkupMatches("<ix-menu-item active=\"\" home=\"\" icon=\"testIcon\" notifications=\"5\" tab-icon=\"document\"><div>Test child content</div></ix-menu-item>");
-        }
-    }
+			// Assert
+			// Adjust the expected markup to match your component's output
+			cut.MarkupMatches("<ix-menu-item active=\"\" home=\"\" icon=\"testIcon\" notifications=\"5\" tab-icon=\"document\" label=\"label\"><div>Test child content</div></ix-menu-item>");
+		}
+	}
 }

@@ -10,15 +10,15 @@
 
 @inherits IXBaseComponent
 
-<ix-menu-item
-@attributes="UserAttributes"
-class="@Class"
-style="@Style"
-home="@Home" 
-tab-icon="@TabIcon"
-icon="@Icon"
-active="@Active"
-disabled="@Disabled"
-notifications="@Notifications"> 
-    @ChildContent 
+<ix-menu-item @attributes="UserAttributes"
+			  class="@Class"
+			  style="@Style"
+			  home="@Home"
+			  tab-icon="@TabIcon"
+			  icon="@Icon"
+			  active="@Active"
+			  disabled="@Disabled"
+			  notifications="@Notifications"
+			  label="@Label">
+	@ChildContent
 </ix-menu-item>
