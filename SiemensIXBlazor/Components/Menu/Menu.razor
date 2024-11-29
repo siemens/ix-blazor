@@ -12,25 +12,26 @@
 @inject IJSRuntime JSRuntime
 @inherits IXBaseComponent
 
-<ix-menu
-         id="@Id"
-         @attributes="UserAttributes"
-         class="@Class"
-         style="@Style"
-         application-description="@ApplicationDescription"
-         application-name="@ApplicationName"
-         enable-map-expand="@EnableMapExpand"
-         enable-settings="@EnableSettings"
-         enable-toggle-theme="@EnableToggleTheme"
-         expand="@Expand"
-         i-1-8n-collapse="@I18NCollapse"
-         i-1-8n-expand="@I18NExpand"
-         i-1-8n-legal="@I18NLegal"
-         i-1-8n-more="@I18NMore"
-         i-1-8n-settings="@I18NSettings"
-         i-1-8n-toggle-theme="@I18NToggleTheme"
-         max-visible-menu-items="@MaxVisibleMenuItems"
-         show-about="@ShowAbout"
-         show-settings="@ShowSettings">
-    @ChildContent
+<ix-menu id="@Id"
+		 @attributes="UserAttributes"
+		 class="@Class"
+		 style="@Style"
+		 application-description="@ApplicationDescription"
+		 application-name="@ApplicationName"
+		 enable-map-expand="@EnableMapExpand"
+		 enable-settings="@EnableSettings"
+		 enable-toggle-theme="@EnableToggleTheme"
+		 expand="@Expand"
+		 i-1-8n-collapse="@I18NCollapse"
+		 i-1-8n-expand="@I18NExpand"
+		 i-1-8n-legal="@I18NLegal"
+		 i-1-8n-more="@I18NMore"
+		 i-1-8n-settings="@I18NSettings"
+		 i-1-8n-toggle-theme="@I18NToggleTheme"
+		 max-visible-menu-items="@MaxVisibleMenuItems"
+		 show-about="@ShowAbout"
+		 show-settings="@ShowSettings"
+		 start-expanded="@StartExpanded"
+		 pinned="@Pinned">
+	@ChildContent
 </ix-menu>

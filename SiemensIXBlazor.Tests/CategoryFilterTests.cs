@@ -30,10 +30,12 @@ namespace SiemensIXBlazor.Tests
                 parameters.Add(p => p.Placeholder, "TestPlaceholder");
                 parameters.Add(p => p.RepeatCategories, true);
                 parameters.Add(p => p.Suggestions, ["testSugestion"]);
+                parameters.Add(p => p.Disabled, true);
+                parameters.Add(p => p.Readonly, true);
             });
 
             // Assert
-            cut.MarkupMatches("<ix-category-filter id=\"testId\" placeholder=\"TestPlaceholder\" hide-icon=\"\" i-1-8n-plain-text=\"testI18PlainText\" icon=\"testIcon\" label-categories=\"testLabelCategories\" repeat-categories=\"\"></ix-category-filter>");
+            cut.MarkupMatches("<ix-category-filter id=\"testId\" placeholder=\"TestPlaceholder\" hide-icon=\"\" i-1-8n-plain-text=\"testI18PlainText\" icon=\"testIcon\" label-categories=\"testLabelCategories\" repeat-categories=\"\" readonly disabled></ix-category-filter>");
         }
 
         [Fact]

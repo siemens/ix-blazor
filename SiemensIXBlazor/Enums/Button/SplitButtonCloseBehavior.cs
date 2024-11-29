@@ -7,12 +7,13 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
-namespace SiemensIXBlazor.Enums.Button
+namespace SiemensIXBlazor.Enums.Button;
+
+public enum CloseBehavior
 {
-    public enum ButtonVariant
-    {
-        primary,
-        secondary,
-        danger
-    }
+	Both,
+	Inside,
+	Outside,
+	True,
+	False
 }

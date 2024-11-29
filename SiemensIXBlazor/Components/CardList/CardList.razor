@@ -16,8 +16,8 @@
 @inject IJSRuntime JSRuntime
 
 <ix-card-list @attributes="UserAttributes" class="@Class" style="@Style" id="@Id" label="@Label"
-    show-all-count="@ShowAllCount" list-style="@(EnumParser<CardListStyle>.EnumToString(ListStyle))"
-    collapse="@Collapse" i-1-8n-more-cards="@I18NMoreCards" i-1-8n-show-all="@I18NShowAll"
-    suppress-overflow-handling="@SuppressOverflowHandling">
-    @ChildContent
+			  show-all-count="@ShowAllCount" list-style="@(EnumParser<CardListStyle>.EnumToString(ListStyle))"
+			  collapse="@Collapse" i-1-8n-more-cards="@I18NMoreCards" i-1-8n-show-all="@I18NShowAll"
+			  suppress-overflow-handling="@SuppressOverflowHandling" hide-show-all="@HideShowAll">
+	@ChildContent
 </ix-card-list>

@@ -67,6 +67,10 @@ namespace SiemensIXBlazor.Components.CategoryFilter
         [Parameter]
         public bool RepeatCategories { get; set; } = true;
         [Parameter]
+        public bool Disabled { get; set; } = false;
+        [Parameter]
+        public bool Readonly { get; set; } = false;
+        [Parameter]
         public string[]? Suggestions
         {
             get => _suggestions;

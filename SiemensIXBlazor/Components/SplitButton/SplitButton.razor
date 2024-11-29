@@ -15,8 +15,18 @@
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
 
-<ix-split-button @attributes="UserAttributes" id="@Id" label="@Label" split-icon="@SplitIcon" disabled="@Disabled"
-    ghost="@Ghost" icon="@Icon" outline="@Outline" placement="@Placement" style="@Style" class="@Class"
-    variant="@(EnumParser<ButtonVariant>.EnumToString(Variant))">
-    @ChildContent
+<ix-split-button @attributes="UserAttributes"
+				 id="@Id"
+				 label="@Label"
+				 split-icon="@SplitIcon"
+				 disabled="@Disabled"
+				 ghost="@Ghost"
+				 icon="@Icon"
+				 outline="@Outline"
+				 placement="@Placement"
+				 style="@Style"
+				 class="@Class"
+				 close-behavior="@(EnumParser<CloseBehavior>.EnumToString(CloseBehavior))"
+				 variant="@(EnumParser<ButtonVariant>.EnumToString(Variant))">
+	@ChildContent
 </ix-split-button>
