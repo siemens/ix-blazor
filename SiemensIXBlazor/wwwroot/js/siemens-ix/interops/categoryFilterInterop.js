@@ -54,3 +54,15 @@ export function setSuggestions(id, suggestionsObject) {
     console.error("Failed to set suggestions:", error);
   }
 }
+
+export function setStaticOperator(id, logicalFilter) {
+    try {
+        const element = document.getElementById(id);
+        if (!element) {
+            throw new Error(`Element with ID ${id} not found`);
+        }
+        element.staticOperator = JSON.parse(logicalFilter);
+    } catch (err) {
+        console.error("Failed on setting staticOperator", err);
+    }
+}

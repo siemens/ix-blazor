@@ -10,6 +10,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Newtonsoft.Json;
+using SiemensIXBlazor.Enums.CategoryFilter;
 using SiemensIXBlazor.Interops;
 using SiemensIXBlazor.Objects;
 using System.Text.Json;
@@ -24,6 +25,7 @@ namespace SiemensIXBlazor.Components.CategoryFilter
         private string[] _suggestions = [];
         private Lazy<Task<IJSObjectReference>>? moduleTask;
         private BaseInterop? _interop;
+        private LogicalFilterOperator  _logicalFilterOperator = LogicalFilterOperator.Equal;
 
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
@@ -41,8 +43,12 @@ namespace SiemensIXBlazor.Components.CategoryFilter
             get => _filterState;
             set
             {
-                _filterState = value;
-                InitialParameter("setFilterState", _filterState);
+                if(value is not null)
+                {
+                    _filterState = value;
+                    InitialParameter("setFilterState", _filterState);
+                }
+
             }
         }
         [Parameter]
@@ -76,6 +82,15 @@ namespace SiemensIXBlazor.Components.CategoryFilter
                 InitialParameter("setSuggestions", new Dictionary<string, string[]> { { "suggestions", _suggestions } });
             }
         }
+
+        [Parameter]
+        public LogicalFilterOperator StaticOperator { 
+            get=>_logicalFilterOperator; 
+            set {
+
+                _logicalFilterOperator = value;
+                InitialParameter("setStaticOperator", _logicalFilterOperator.ToEnumString());
+            } }
         [Parameter]
         public EventCallback<FilterState> FilterChangedEvent { get; set; }
         [Parameter]
@@ -125,6 +140,11 @@ namespace SiemensIXBlazor.Components.CategoryFilter
                     await module.InvokeVoidAsync(functionName, Id, JsonConvert.SerializeObject(param));
                 }
             });
+        }
+
+        private void SetStaticOperator(LogicalFilterOperator logicalFilterOperator)
+        {
+
         }
     }
 }

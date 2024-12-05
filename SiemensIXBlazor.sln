@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9AA3C4E1
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SiemensIXBlazor.Tests", "SiemensIXBlazor.Tests\SiemensIXBlazor.Tests.csproj", "{0E18AA5B-2E9A-48BA-A07F-621B5DCBBDC9}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestBlazorApp", "..\SiemensIXBlazor\TestBlazorApp\TestBlazorApp.csproj", "{C7ADCCA6-68DF-4CE5-B6D4-89A979513648}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,14 +27,10 @@ Global
 		{0E18AA5B-2E9A-48BA-A07F-621B5DCBBDC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E18AA5B-2E9A-48BA-A07F-621B5DCBBDC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E18AA5B-2E9A-48BA-A07F-621B5DCBBDC9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{682ADEDC-AE1F-46C9-9F0D-7DE297BAC82D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{682ADEDC-AE1F-46C9-9F0D-7DE297BAC82D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{682ADEDC-AE1F-46C9-9F0D-7DE297BAC82D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{682ADEDC-AE1F-46C9-9F0D-7DE297BAC82D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{20CB53D6-C6B3-4FCD-9DF3-A0511DB1FBA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{20CB53D6-C6B3-4FCD-9DF3-A0511DB1FBA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{20CB53D6-C6B3-4FCD-9DF3-A0511DB1FBA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{20CB53D6-C6B3-4FCD-9DF3-A0511DB1FBA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7ADCCA6-68DF-4CE5-B6D4-89A979513648}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7ADCCA6-68DF-4CE5-B6D4-89A979513648}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7ADCCA6-68DF-4CE5-B6D4-89A979513648}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7ADCCA6-68DF-4CE5-B6D4-89A979513648}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
