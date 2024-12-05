@@ -142,9 +142,5 @@ namespace SiemensIXBlazor.Components.CategoryFilter
             });
         }
 
-        private void SetStaticOperator(LogicalFilterOperator logicalFilterOperator)
-        {
-
-        }
     }
 }
