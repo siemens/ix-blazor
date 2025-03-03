@@ -11,10 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "@ag-grid-community/core": "^30.2.0",
-    "@siemens/ix": "latest",
-    "@siemens/ix-aggrid": "latest",
-    "@siemens/ix-echarts": "latest",
-    "@siemens/ix-icons": "latest",
+    "@siemens/ix": "2.7.0",
+    "@siemens/ix-aggrid": "2.2.3",
+    "@siemens/ix-echarts": "2.3.1",
+    "@siemens/ix-icons": "2.2.0",
     "ag-grid-community": "^30.2.0",
     "echarts": "^5.4.1"
   },
