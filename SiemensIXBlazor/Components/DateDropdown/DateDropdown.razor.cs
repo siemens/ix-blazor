@@ -12,6 +12,7 @@ using Microsoft.JSInterop;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
+using SiemensIXBlazor.Enums.DateDropdown;
 using SiemensIXBlazor.Interops;
 using SiemensIXBlazor.Objects.DateDropdown;
 using System.Text.Json;
@@ -57,6 +58,14 @@ public partial class DateDropdown
     public string? Locale { get; set; }
     [Parameter]
     public int? WeekStartIndex { get; set; } = 0;
+    [Parameter]
+    public bool Ghost { get; set; } = false;
+    [Parameter]
+    public bool Outline { get; set; } = false;
+    [Parameter]
+    public bool Loading { get; set; } = false;
+    [Parameter]
+    public DateDropdownVariant Variant { get; set; } = DateDropdownVariant.primary;
     [Parameter]
     public EventCallback<DateDropdownResponse> DateRangeChangeEvent { get; set; }
 

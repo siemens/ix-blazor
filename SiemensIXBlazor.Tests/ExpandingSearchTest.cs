@@ -10,6 +10,7 @@
 using Bunit;
 using Microsoft.AspNetCore.Components;
 using SiemensIXBlazor.Components;
+using SiemensIXBlazor.Enums.ExpandingSearch;
 
 namespace SiemensIXBlazor.Tests;
 
@@ -23,11 +24,16 @@ public class ExpandingSearchTest : TestContextBase
             .Add(p => p.Id, "testId")
             .Add(p => p.Icon, "testIcon")
             .Add(p => p.Placeholder, "testPlaceholder")
-            .Add(p => p.Value, "testValue"));
+            .Add(p => p.Value, "testValue")
+            .Add(p => p.FullWidth, true)
+            .Add(p => p.Outline, true)
+            .Add(p => p.Ghost, false)
+            .Add(p => p.Variant, ExpandingSearchVariant.secondary)
+            );
 
         // Assert
         cut.MarkupMatches(
-            "<ix-expanding-search placeholder=\"testPlaceholder\" icon=\"testIcon\" id=\"testId\" value=\"testValue\"></ix-expanding-search>");
+            "<ix-expanding-search placeholder=\"testPlaceholder\" icon=\"testIcon\" id=\"testId\" value=\"testValue\" full-width outline variant='secondary'></ix-expanding-search>");
     }
 
     [Fact]
