@@ -10,8 +10,7 @@
 using Bunit;
 using Microsoft.AspNetCore.Components;
 using SiemensIXBlazor.Components;
-using SiemensIXBlazor.Components.BasicNavigation;
-using SiemensIXBlazor.Enums.BasicNavigation;
+using SiemensIXBlazor.Enums.DateDropdown;
 using SiemensIXBlazor.Objects.DateDropdown;
 using System.Text.Json;
 
@@ -27,7 +26,7 @@ public class DateDropdownTest : TestContextBase
 
         // Assert
         cut.MarkupMatches(@"
-                <ix-date-dropdown id='' custom-range-allowed='' week-start-index='0' date-range-id='custom' format='yyyy/LL/dd' i18n-custom-item='Custom...' i18n-done='Done' i18n-no-range='No range set' range=''></ix-date-dropdown>
+                <ix-date-dropdown id='' variant='primary' custom-range-allowed='' week-start-index='0' date-range-id='custom' format='yyyy/LL/dd' i18n-custom-item='Custom...' i18n-done='Done' i18n-no-range='No range set' range=''></ix-date-dropdown>
             ");
     }
 
@@ -58,11 +57,16 @@ public class DateDropdownTest : TestContextBase
             .Add(p => p.Locale, "en")
             .Add(p => p.WeekStartIndex, 2)
             .Add(p => p.DateRangeChangeEvent, dateRangeChangeEvent)
-            .Add(p => p.Disabled, true));
+            .Add(p => p.Disabled, true)
+            .Add(p => p.Ghost, true)
+            .Add(p => p.Loading, true)
+            .Add(p => p.Outline, true)
+            .Add(p => p.Variant, DateDropdownVariant.secondary)
+            );
 
         // Assert
         cut.MarkupMatches(@"
-                <ix-date-dropdown id='testId' locale='en' week-start-index='2' custom-range-allowed='' date-range-id='custom' format='yyyy/LL/dd' from='2022/01/01' i18n-custom-item='Custom...' i18n-done='Done' i18n-no-range='No range set' max-date='2022/12/31' min-date='2022/01/01' range='' to='2022/12/31' disabled></ix-date-dropdown>
+                <ix-date-dropdown id='testId' outline ghost loading variant='secondary' locale='en' week-start-index='2' custom-range-allowed='' date-range-id='custom' format='yyyy/LL/dd' from='2022/01/01' i18n-custom-item='Custom...' i18n-done='Done' i18n-no-range='No range set' max-date='2022/12/31' min-date='2022/01/01' range='' to='2022/12/31' disabled></ix-date-dropdown>
             ");
     }
 
