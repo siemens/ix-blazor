@@ -10,14 +10,19 @@
 
 @using Microsoft.JSInterop;
 @inject IJSRuntime JSRuntime
+@using SiemensIXBlazor.Helpers;
+@using SiemensIXBlazor.Enums.ExpandingSearch;
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
-
-<ix-expanding-search
-@attributes="UserAttributes"
-placeholder="@Placeholder"
-icon="@Icon"
-id="@Id"
-value="@Value"
-style="@Style"
-class="@Class"></ix-expanding-search>
+<ix-expanding-search @attributes="UserAttributes"
+                     placeholder="@Placeholder"
+                     icon="@Icon"
+                     id="@Id"
+                     value="@Value"
+                     style="@Style"
+                     class="@Class"
+                     full-width="@FullWidth"
+                     outline="@Outline"
+                     ghost="@Ghost"
+                     variant="@(EnumParser<ExpandingSearchVariant>.EnumToString(Variant))">
+</ix-expanding-search>
