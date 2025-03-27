@@ -23,7 +23,7 @@ public class EventListItemTest : TestContextBase
             .Add(p => p.Id, "testId")
             .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content")))
             .Add(p => p.Chevron, true)
-            .Add(p => p.Color, "red")
+            .Add(p => p.ItemColor, "red")
             .Add(p => p.Disabled, false)
             .Add(p => p.Opacity, 1)
             .Add(p => p.Selected, true)
@@ -31,7 +31,7 @@ public class EventListItemTest : TestContextBase
 
         // Assert
         cut.MarkupMatches(
-            "<ix-event-list-item id=\"testId\" color=\"red\" chevron=\"\" opacity=\"1\" selected=\"\">Test content</ix-event-list-item>");
+            "<ix-event-list-item id=\"testId\" item-color=\"red\" chevron=\"\" opacity=\"1\" selected=\"\">Test content</ix-event-list-item>");
     }
 
     [Fact]
