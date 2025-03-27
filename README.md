@@ -1143,7 +1143,7 @@ private void CloseModal()
 ## Pill
 
 ```razor
-<Pill Variant="PillVariant.custom" Color="white" Background="purple">
+<Pill Variant="PillVariant.custom" PillColor="white" Background="purple">
     Label
 </Pill>
 ```
