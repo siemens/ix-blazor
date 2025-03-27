@@ -7,7 +7,7 @@ namespace SiemensIXBlazor.Tests.Helpers
     {
         [Theory]
         [InlineData(PushCardVariant.alarm, "alarm")]
-        [InlineData(PushCardVariant.insight, "insight")]
+        [InlineData(PushCardVariant.outline, "outline")]
         public void EnumToString_ShouldReturnCorrectLowercaseString_ForValidEnum(PushCardVariant variant, string expected)
         {
             // Act
