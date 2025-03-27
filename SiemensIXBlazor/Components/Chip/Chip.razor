@@ -16,5 +16,5 @@
 @inject IJSRuntime JSRuntime
 
 <ix-chip @attributes="UserAttributes" id="@Id" closable="@Closable" outline="@Outline" active="@Active"
-    background="@Background" color="@Color" icon="@Icon" variant="@(EnumParser<ChipVariant>.EnumToString(Variant))"
+    background="@Background" chip-color="@ChipColor" icon="@Icon" variant="@(EnumParser<ChipVariant>.EnumToString(Variant))"
     style="@Style" class="@Class">@ChildContent</ix-chip>

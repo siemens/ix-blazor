@@ -27,7 +27,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Closable { get; set; } = false;
         [Parameter]
-        public string? Color { get; set; }
+        public string? ChipColor { get; set; }
         [Parameter]
         public string? Icon { get; set; }
         [Parameter]
