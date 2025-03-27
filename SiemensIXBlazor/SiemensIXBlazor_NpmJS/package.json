@@ -4,19 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack ./src/index.js --output-path ../wwwroot/js/siemens-ix --output-filename index.bundle.js"
+    "build": "webpack ./src/index.js --mode production --output-path ../wwwroot/js/siemens-ix --output-filename index.bundle.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@ag-grid-community/core": "^30.2.0",
-    "@siemens/ix": "2.7.0",
-    "@siemens/ix-aggrid": "2.2.3",
+    "@siemens/ix": "3.0.0-alpha.3",
+    "@siemens/ix-aggrid": "3.0.0-alpha.0",
     "@siemens/ix-echarts": "2.3.1",
-    "@siemens/ix-icons": "2.2.0",
-    "ag-grid-community": "^30.2.0",
-    "echarts": "^5.4.1"
+    "@siemens/ix-icons": "3.0.0-alpha.1",
+    "ag-grid-community": "^30.2.1",
+    "echarts": "^5.5.1"
   },
   "devDependencies": {
     "webpack": "^5.75.0",
