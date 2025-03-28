@@ -532,7 +532,7 @@ ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowM
               Notification="3"
               Heading="Heading content"
               SubHeading="Subheading"
-              Variant="PushCardVariant.notification"></PushCard>
+              Variant="PushCardVariant.outline"></PushCard>
     <PushCard Icon="bulb"
               Notification="1"
               Heading="Heading content"
@@ -553,7 +553,7 @@ ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowM
         Notification="3"
         Heading="Heading content"
         SubHeading="Subheading"
-        Variant="PushCardVariant.notification"></PushCard>
+        Variant="PushCardVariant.outline"></PushCard>
 ```
 
 ## Action Card
@@ -563,7 +563,7 @@ ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowM
       Icon="refresh"
       Heading="Scan for new devices"
       SubHeading="Secondary text"
-      Variant="PushCardVariant.notification"
+      Variant="PushCardVariant.filled"
 ></ActionCard>
 ```
 

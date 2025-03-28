@@ -14,9 +14,9 @@ namespace SiemensIXBlazor.Enums.PushCard
 		alarm,
 		critical,
 		info,
-		insight,
 		neutral,
-		notification,
+		outline,
+		filled,
 		success,
 		warning
 	}
