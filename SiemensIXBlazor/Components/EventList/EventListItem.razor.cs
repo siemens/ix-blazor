@@ -22,7 +22,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool? Chevron { get; set; }
         [Parameter]
-        public string? Color { get; set; }
+        public string? ItemColor { get; set; }
         [Parameter]
         public bool? Disabled { get; set; }
         [Parameter]

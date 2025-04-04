@@ -42,7 +42,7 @@ namespace SiemensIXBlazor.Tests
                 }));
 
             // Assert
-            cut.MarkupMatches("<ix-card variant=\"insight\">\r\n      <ix-card-content>Expected content</ix-card-content>\r\n    </ix-card>");
+            cut.MarkupMatches("<ix-card variant=\"outline\">\r\n      <ix-card-content>Expected content</ix-card-content>\r\n    </ix-card>");
         }
     }
 }

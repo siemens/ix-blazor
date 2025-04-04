@@ -6,7 +6,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>Siemens IX Blazor</Title>
-		<Version>0.5.1</Version>
+		<Version>0.5.3</Version>
 		<Authors>Siemens</Authors>
 		<Company>Siemens</Company>
 		<Description>Siemens IX port for Blazor.</Description>
