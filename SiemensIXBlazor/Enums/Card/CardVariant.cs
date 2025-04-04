@@ -14,9 +14,9 @@ namespace SiemensIXBlazor.Enums
         alarm,
         critical,
         info,
-        insight,
         neutral,
-        notification,
+        outline,
+        filled,
         primary,
         success,
         warning

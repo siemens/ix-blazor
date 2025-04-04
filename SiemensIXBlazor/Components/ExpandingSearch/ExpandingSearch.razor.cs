@@ -9,6 +9,7 @@
 
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using SiemensIXBlazor.Enums.ExpandingSearch;
 using SiemensIXBlazor.Interops;
 
 namespace SiemensIXBlazor.Components
@@ -24,9 +25,17 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string Value { get; set; } = string.Empty;
         [Parameter]
+        public bool Ghost { get; set; } = true;
+        [Parameter]
+        public bool Outline { get; set; } = false;
+        [Parameter]
+        public bool FullWidth { get; set; } = false;
+        [Parameter]
+        public ExpandingSearchVariant Variant { get; set; } = ExpandingSearchVariant.primary;
+        [Parameter]
         public EventCallback<string> ValueChangedEvent { get; set; }
 
-        private BaseInterop _interop;
+        private BaseInterop? _interop;
 
         protected async override Task OnAfterRenderAsync(bool firstRender)
         {

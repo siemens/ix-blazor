@@ -7,18 +7,37 @@
 // LICENSE file in the root directory of this source tree.
 // -----------------------------------------------------------------------
 *@
-
 @using Microsoft.JSInterop;
 @using SiemensIXBlazor.Enums.Select;
 @using SiemensIXBlazor.Helpers;
 @inject IJSRuntime JSRuntime
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
-
-<ix-select @attributes="UserAttributes" value="@Value" allow-clear="@AllowClear" disabled="@Disabled"
-    editable="@Editable" i-1-8n-placeholder="@i18nPlaceholder" i-1-8n-placeholder-editable="@i18nPlaceholderEditable"
-    i-1-8n-select-list-header="@i18nSelectListHeader" mode="@(EnumParser<SelectMode>.EnumToString(Mode))" id="@Id"
-    readonly="@Readonly" style="@Style" class="@Class" hide-list-header="@HideListHeader"
-    i-1-8n-no-matches="@I18NNoMatches">
+<ix-select @attributes="UserAttributes"
+           value="@Value"
+           allow-clear="@AllowClear"
+           disabled="@Disabled"
+           editable="@Editable"
+           i-1-8n-placeholder="@i18nPlaceholder"
+           i-1-8n-placeholder-editable="@i18nPlaceholderEditable"
+           i-1-8n-select-list-header="@i18nSelectListHeader"
+           mode="@(EnumParser<SelectMode>.EnumToString(Mode))"
+           id="@Id"
+           readonly="@Readonly"
+           style="@Style"
+           class="@Class"
+           hide-list-header="@HideListHeader"
+           i-1-8n-no-matches="@I18NNoMatches"
+           dropdown-max-width="@DropdownMaxWidth"
+           dropdown-width="@DropdownWidth"
+           helper-text="@HelperText"
+           info-text="@InfoText"
+           invalid-text="@InvalidText"
+           valid-text="@ValidText"
+           warning-text="@WarningText"
+           label="@Label"
+           name="@Name"
+           required="@Required"
+           show-text-as-tooltip="@ShowTextAsTooltip">
     @ChildContent
 </ix-select>

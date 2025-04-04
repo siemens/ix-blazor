@@ -22,7 +22,7 @@ namespace SiemensIXBlazor.Tests
             var cut = RenderComponent<ActionCard>();
 
             // Assert
-            cut.MarkupMatches("<ix-action-card variant='insight'></ix-action-card>");
+            cut.MarkupMatches("<ix-action-card variant='outline'></ix-action-card>");
         }
 
         [Fact]
@@ -69,10 +69,10 @@ namespace SiemensIXBlazor.Tests
         public void VariantPropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<ActionCard>(parameters => parameters.Add(p => p.Variant, PushCardVariant.insight));
+            var cut = RenderComponent<ActionCard>(parameters => parameters.Add(p => p.Variant, PushCardVariant.outline));
 
             // Assert
-            Assert.Equal(PushCardVariant.insight, cut.Instance.Variant);
+            Assert.Equal(PushCardVariant.outline, cut.Instance.Variant);
         }
     }
 }

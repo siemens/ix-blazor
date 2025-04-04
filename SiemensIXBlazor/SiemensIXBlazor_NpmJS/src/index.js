@@ -1,4 +1,4 @@
-﻿import { defineCustomElements, applyPolyfills } from "@siemens/ix/loader/index";
+﻿import { defineCustomElements } from "@siemens/ix/loader";
 import { toast } from "@siemens/ix";
 import "@siemens/ix-echarts";
 import { registerTheme } from "@siemens/ix-echarts";
@@ -9,8 +9,10 @@ import { defineCustomElements as ixIconsDefineCustomElements } from "@siemens/ix
 
 window.siemensIXInterop = {
   async initialize() {
-    await applyPolyfills();
-    await ixIconsDefineCustomElements();
+    await ixIconsDefineCustomElements(window, {
+	  resourcesUrl: "/_content/Siemens.IX.Blazor/"
+	});
+
     await defineCustomElements();
   },
 
