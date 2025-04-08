@@ -26,6 +26,7 @@ namespace SiemensIXBlazor.Tests
                 parameters.Add(p => p.Background, "red");
                 parameters.Add(p => p.PillColor, "white");
                 parameters.Add(p => p.Icon, "testIcon");
+                parameters.Add(p => p.TooltipText, "tooltipText");
                 parameters.Add(p => p.Outline, true);
                 parameters.Add(p => p.Variant, PillVariant.primary);
                 parameters.Add(p => p.ChildContent, builder =>
@@ -37,7 +38,7 @@ namespace SiemensIXBlazor.Tests
             });
 
             // Assert
-            cut.MarkupMatches("<ix-pill align-left=\"\" background=\"red\" pill-color=\"white\" icon=\"testIcon\" outline=\"\" variant=\"primary\"><div>Test child content</div></ix-pill>");
+            cut.MarkupMatches("<ix-pill align-left=\"\" background=\"red\" pill-color=\"white\" icon=\"testIcon\" outline=\"\" variant=\"primary\" tooltip-text='tooltipText'><div>Test child content</div></ix-pill>");
         }
 
         [Fact]
