@@ -31,6 +31,8 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string? Icon { get; set; }
         [Parameter]
+        public string? TooltipText { get; set; }
+        [Parameter]
         public bool Outline { get; set; } = false;
         [Parameter]
         public ChipVariant Variant { get; set; } = ChipVariant.primary;

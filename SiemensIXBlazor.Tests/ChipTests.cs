@@ -25,12 +25,13 @@ namespace SiemensIXBlazor.Tests
                 parameters.Add(p => p.Closable, true);
                 parameters.Add(p => p.ChipColor, "testColor");
                 parameters.Add(p => p.Icon, "testIcon");
+                parameters.Add(p => p.TooltipText, "tooltipText");
                 parameters.Add(p => p.Outline, true);
                 parameters.Add(p => p.Variant, Enums.Chip.ChipVariant.neutral);
             });
 
             // Assert
-            cut.MarkupMatches("<ix-chip id=\"testId\" closable=\"\" outline=\"\" active=\"\" background=\"testBackground\" chip-color=\"testColor\" icon=\"testIcon\" variant=\"neutral\"></ix-chip>");
+            cut.MarkupMatches("<ix-chip id=\"testId\" closable=\"\" outline=\"\" active=\"\" background=\"testBackground\" chip-color=\"testColor\" icon=\"testIcon\" variant=\"neutral\" tooltip-text='tooltipText'></ix-chip>");
         }
 
         [Fact]
