@@ -733,6 +733,7 @@ chart1.InitialChart(object1);
       Label="Chip with icon"
       Id="chip1"
       Closable="true"
+      TooltipText="Tooltip Text"
       ClosedEvent="@ChipClosedEventHandler">
 </Chip>
 ```
@@ -1143,7 +1144,7 @@ private void CloseModal()
 ## Pill
 
 ```razor
-<Pill Variant="PillVariant.custom" PillColor="white" Background="purple">
+<Pill Variant="PillVariant.custom" PillColor="white" Background="purple" TooltipText="Tooltip Text">
     Label
 </Pill>
 ```
