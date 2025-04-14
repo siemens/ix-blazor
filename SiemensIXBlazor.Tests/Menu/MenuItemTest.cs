@@ -25,7 +25,6 @@ namespace SiemensIXBlazor.Tests.Menu
 				("Home", true),
 				("Icon", "testIcon"),
 				("Notifications", 5),
-				("TabIcon", "document"),
 				("Label", "label"),
 				("ChildContent", (RenderFragment)(builder =>
 				{
@@ -37,7 +36,7 @@ namespace SiemensIXBlazor.Tests.Menu
 
 			// Assert
 			// Adjust the expected markup to match your component's output
-			cut.MarkupMatches("<ix-menu-item active=\"\" home=\"\" icon=\"testIcon\" notifications=\"5\" tab-icon=\"document\" label=\"label\"><div>Test child content</div></ix-menu-item>");
+			cut.MarkupMatches("<ix-menu-item active=\"\" home=\"\" icon=\"testIcon\" notifications=\"5\" label=\"label\"><div>Test child content</div></ix-menu-item>");
 		}
 	}
 }

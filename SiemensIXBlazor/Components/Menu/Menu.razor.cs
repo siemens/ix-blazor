@@ -43,8 +43,7 @@ namespace SiemensIXBlazor.Components.Menu
 		public string I18NSettings { get; set; } = "Settings";
 		[Parameter]
 		public string I18NToggleTheme { get; set; } = "Toggle theme";
-		[Parameter]
-		public int MaxVisibleMenuItems { get; set; } = 9;
+		
 		[Parameter]
 		public bool ShowAbout { get; set; } = false;
 		[Parameter]

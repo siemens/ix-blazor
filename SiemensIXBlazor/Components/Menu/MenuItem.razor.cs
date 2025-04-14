@@ -25,8 +25,7 @@ namespace SiemensIXBlazor.Components.Menu
 		public string? Icon { get; set; }
 		[Parameter]
 		public int? Notifications { get; set; }
-		[Parameter]
-		public string TabIcon { get; set; } = "document";
+		
 		[Parameter]
 		public string? Label { get; set; }
 	}
