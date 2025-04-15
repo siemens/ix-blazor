@@ -9,6 +9,7 @@
 
 using Bunit;
 using Microsoft.AspNetCore.Components;
+using SiemensIXBlazor.Components;
 
 namespace SiemensIXBlazor.Tests.Menu;
 
@@ -107,4 +108,21 @@ public class MenuTest : TestContextBase
 		// Assert
 		Assert.True(mapExpanded);
 	}
+
+    [Fact]
+    public async Task OpenAppSwitchEventWorks()
+    {
+        // Arrange
+        var eventTriggered = false;
+        var cut = RenderComponent<ApplicationHeader>(
+            ("Id", "testId"),
+            ("OpenAppSwitchEvent", EventCallback.Factory.Create(this, () => { eventTriggered = true; }))
+        );
+
+        // Act
+        await cut.InvokeAsync(() => cut.Instance.OpenAppSwitch());
+
+        // Assert
+        Assert.True(eventTriggered);
+    }
 }
