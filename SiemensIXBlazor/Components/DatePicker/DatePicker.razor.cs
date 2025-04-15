@@ -23,8 +23,7 @@ namespace SiemensIXBlazor.Components
         public string Id { get; set; } = string.Empty;
         [Parameter]
         public DatePickerCorners Corners { get; set; } = DatePickerCorners.Rounded;
-        [Parameter]
-        public string EventDelimiter { get; set; } = " - ";
+   
         [Parameter]
         public string Format { get; set; } = "yyyy/MM/dd";
         [Parameter]

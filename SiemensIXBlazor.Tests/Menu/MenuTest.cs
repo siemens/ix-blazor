@@ -9,6 +9,7 @@
 
 using Bunit;
 using Microsoft.AspNetCore.Components;
+using SiemensIXBlazor.Components;
 
 namespace SiemensIXBlazor.Tests.Menu;
 
@@ -34,7 +35,6 @@ public class MenuTest : TestContextBase
 				("I18NMore", "More"),
 				("I18NSettings", "Settings"),
 				("I18NToggleTheme", "Toggle Theme"),
-				("MaxVisibleMenuItems", 5),
 				("ShowAbout", true),
 				("ShowSettings", true),
 				("StartExpanded", true),
@@ -65,14 +65,13 @@ public class MenuTest : TestContextBase
                     i-1-8n-more='More'
                     i-1-8n-settings='Settings'
                     i-1-8n-toggle-theme='Toggle Theme'
-                    max-visible-menu-items='5'
                     show-about=''
                     start-expanded
 					pinned
                     show-settings=''>
                     <div>Test child content</div>
                 </ix-menu>");
-		//cut.MarkupMatches("<ix-menu id=\"testId\" class=\"test-class\" style=\"width: 100%\" application-name=\"Test Application\" application-description=\"Test Description\" enable-map-expand=\"\" enable-settings=\"\" enable-toggle-theme=\"\" expand=\"\" i-1-8n-collapse=\"Collapse\" i-1-8n-expand=\"Expand\" i-1-8n-legal=\"Legal\" i-1-8n-more=\"More\" i-1-8n-settings=\"Settings\" i-1-8n-toggle-theme=\"Toggle Theme\" max-visible-menu-items=\"5\" show-about=\"\" show-settings=\"\"><div>Test child content</div></ix-menu>");
+		//cut.MarkupMatches("<ix-menu id=\"testId\" class=\"test-class\" style=\"width: 100%\" application-name=\"Test Application\" application-description=\"Test Description\" enable-map-expand=\"\" enable-settings=\"\" enable-toggle-theme=\"\" expand=\"\" i-1-8n-collapse=\"Collapse\" i-1-8n-expand=\"Expand\" i-1-8n-legal=\"Legal\" i-1-8n-more=\"More\" i-1-8n-settings=\"Settings\" i-1-8n-toggle-theme=\"Toggle Theme\"  show-about=\"\" show-settings=\"\"><div>Test child content</div></ix-menu>");
 
 	}
 
@@ -109,4 +108,21 @@ public class MenuTest : TestContextBase
 		// Assert
 		Assert.True(mapExpanded);
 	}
+
+    [Fact]
+    public async Task OpenAppSwitchEventWorks()
+    {
+        // Arrange
+        var eventTriggered = false;
+        var cut = RenderComponent<ApplicationHeader>(
+            ("Id", "testId"),
+            ("OpenAppSwitchEvent", EventCallback.Factory.Create(this, () => { eventTriggered = true; }))
+        );
+
+        // Act
+        await cut.InvokeAsync(() => cut.Instance.OpenAppSwitch());
+
+        // Assert
+        Assert.True(eventTriggered);
+    }
 }

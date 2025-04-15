@@ -8,6 +8,7 @@
 //  -----------------------------------------------------------------------
 
 using Bunit;
+using Microsoft.AspNetCore.Components;
 using SiemensIXBlazor.Components;
 
 namespace SiemensIXBlazor.Tests
@@ -41,6 +42,22 @@ namespace SiemensIXBlazor.Tests
 
             // Assert
             Assert.Contains(expectedContent, cut.Markup);
+        }
+        [Fact]
+        public async Task OpenAppSwitchEventWorks()
+        {
+            // Arrange
+            var eventTriggered = false;
+            var cut = RenderComponent<ApplicationHeader>(
+                ("Id", "headerId"),
+                ("OpenAppSwitchEvent", EventCallback.Factory.Create(this, () => { eventTriggered = true; }))
+            );
+
+            // Act
+            await cut.InvokeAsync(() => cut.Instance.OpenAppSwitch());
+
+            // Assert
+            Assert.True(eventTriggered);
         }
     }
 }

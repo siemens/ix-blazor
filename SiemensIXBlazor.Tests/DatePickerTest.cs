@@ -25,7 +25,6 @@ public class DatePickerTest : TestContextBase
         var cut = RenderComponent<DatePicker>(parameters => parameters
             .Add(p => p.Id, "testId")
             .Add(p => p.Corners, DatePickerCorners.Rounded)
-            .Add(p => p.EventDelimiter, " - ")
             .Add(p => p.Format, "yyyy/MM/dd")
             .Add(p => p.From, "2022/01/01")
             .Add(p => p.MaxDate, "2022/12/31")

@@ -8,14 +8,44 @@
 //  -----------------------------------------------------------------------
 
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+using SiemensIXBlazor.Interops;
+
 
 namespace SiemensIXBlazor.Components
 {
     public partial class ApplicationHeader
     {
+        [Inject] private IJSRuntime JSRuntime { get; set; } = default!;
+        private BaseInterop? _interop;
+
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter]
         public string? Name { get; set; }
-    }
+
+        [Parameter, EditorRequired]
+        public string Id { get; set; } = string.Empty;
+
+        [Parameter]
+        public EventCallback OpenAppSwitchEvent { get; set; }
+
+
+
+        protected async override Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                _interop = new(JSRuntime);
+
+                await _interop.AddEventListener(this, Id, "openAppSwitch", "OpenAppSwitch");
+            }
+        }
+
+        [JSInvokable]
+        public async Task OpenAppSwitch()
+        {
+            await OpenAppSwitchEvent.InvokeAsync();
+        }
+}
 }

@@ -24,7 +24,6 @@ public class DateTimePickerTest : TestContextBase
         var cut = RenderComponent<DateTimePicker>(parameters => parameters
             .Add(p => p.Id, "testId")
             .Add(p => p.DateFormat, "yyyy/MM/dd")
-            .Add(p => p.EventDelimiter, " - ")
             .Add(p => p.From, DateTime.Now.ToString("yyyy/MM/dd"))
             .Add(p => p.MaxDate, "2022/12/31")
             .Add(p => p.MinDate, "2022/01/01")
@@ -33,14 +32,14 @@ public class DateTimePickerTest : TestContextBase
             .Add(p => p.ShowMinutes, false)
             .Add(p => p.ShowSeconds, false)
             .Add(p => p.ShowTimeReference, "")
-            .Add(p => p.TextSelectDate, "Done")
             .Add(p => p.Time, "12:00:00")
             .Add(p => p.TimeFormat, "HH:mm:ss")
             .Add(p => p.TimeReference, "12:00:00")
-            .Add(p => p.To, "2022/12/31"));
+            .Add(p => p.To, "2022/12/31")
+            .Add(p => p.I18nDone, "Done"));
 
         // Assert
-        cut.MarkupMatches($"<ix-datetime-picker id=\"testId\" date-format=\"yyyy/MM/dd\" event-delimiter=\" - \" from=\"{DateTime.Now:yyyy/MM/dd}\" max-date=\"2022/12/31\" min-date=\"2022/01/01\" range=\"\" show-time-reference=\"\" text-select-date=\"Done\" time=\"12:00:00\" time-format=\"HH:mm:ss\" time-reference=\"12:00:00\" to=\"2022/12/31\"></ix-datetime-picker>");
+        cut.MarkupMatches($"<ix-datetime-picker id=\"testId\" date-format=\"yyyy/MM/dd\" from=\"{DateTime.Now:yyyy/MM/dd}\" max-date=\"2022/12/31\" min-date=\"2022/01/01\" range=\"\" show-time-reference=\"\" time=\"12:00:00\" i18n-done=\"Done\" time-format=\"HH:mm:ss\" time-reference=\"12:00:00\" to=\"2022/12/31\"></ix-datetime-picker>");
     }
 
     [Fact]
@@ -55,8 +54,7 @@ public class DateTimePickerTest : TestContextBase
         var cut = RenderComponent<DateTimePicker>(parameters => parameters
             .Add(p => p.DateChangeEvent, EventCallback.Factory.Create<string>(this, (date) => isDateChangeEventTriggered = true))
             .Add(p => p.DateSelectEvent, EventCallback.Factory.Create<DateTimePickerResponse>(this, (response) => isDateSelectEventTriggered = true))
-            .Add(p => p.TimeChangeEvent, EventCallback.Factory.Create<string>(this, (time) => isTimeChangeEventTriggered = true))
-            .Add(p => p.DoneEvent, EventCallback.Factory.Create<string>(this, (done) => isDoneEventTriggered = true)));
+            .Add(p => p.TimeChangeEvent, EventCallback.Factory.Create<string>(this, (time) => isTimeChangeEventTriggered = true)));
 
         // Act
         cut.Instance.DateChange("2022/12/31");
@@ -66,7 +64,6 @@ public class DateTimePickerTest : TestContextBase
         var parsedJson = JsonDocument.Parse(json).RootElement;
         cut.Instance.DateSelect(parsedJson);
 
-        cut.Instance.Done("2022/12/31");
 
         // Assert
         Assert.True(isDateChangeEventTriggered);
