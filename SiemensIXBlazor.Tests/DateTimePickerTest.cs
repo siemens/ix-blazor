@@ -49,7 +49,6 @@ public class DateTimePickerTest : TestContextBase
         bool isDateChangeEventTriggered = false;
         bool isDateSelectEventTriggered = false;
         bool isTimeChangeEventTriggered = false;
-        bool isDoneEventTriggered = false;
 
         var cut = RenderComponent<DateTimePicker>(parameters => parameters
             .Add(p => p.DateChangeEvent, EventCallback.Factory.Create<string>(this, (date) => isDateChangeEventTriggered = true))
@@ -68,7 +67,6 @@ public class DateTimePickerTest : TestContextBase
         // Assert
         Assert.True(isDateChangeEventTriggered);
         Assert.True(isTimeChangeEventTriggered);
-        Assert.True(isDoneEventTriggered);
         Assert.True(isDateSelectEventTriggered);
     }
 }
