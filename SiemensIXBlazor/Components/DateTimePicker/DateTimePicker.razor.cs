@@ -23,8 +23,7 @@ namespace SiemensIXBlazor.Components
         public string Id { get; set; } = string.Empty;
         [Parameter]
         public string DateFormat { get; set; } = "yyyy/MM/dd";
-        [Parameter]
-        public string EventDelimiter { get; set; } = " - ";
+        
         [Parameter]
         public string From { get; set; } = DateTime.Now.ToString("yyyy/MM/dd");
         [Parameter]
@@ -42,7 +41,8 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string ShowTimeReference { get; set; } = string.Empty;
         [Parameter]
-        public string TextSelectDate { get; set; } = "Done";
+        public string I18nDone { get; set; } = "Done";
+
         [Parameter]
         public string? Time { get; set; }
         [Parameter]
@@ -57,8 +57,7 @@ namespace SiemensIXBlazor.Components
         public EventCallback<DateTimePickerResponse> DateSelectEvent { get; set; }
         [Parameter]
         public EventCallback<string> TimeChangeEvent { get; set; }
-        [Parameter]
-        public EventCallback<string> DoneEvent { get; set; }
+
 
         private BaseInterop _interop;
 
@@ -71,7 +70,6 @@ namespace SiemensIXBlazor.Components
                 await _interop.AddEventListener(this, Id, "dateChange", "DateChange");
                 await _interop.AddEventListener(this, Id, "timeChange", "TimeChange");
                 await _interop.AddEventListener(this, Id, "dateSelect", "DateSelect");
-                await _interop.AddEventListener(this, Id, "done", "Done");
             }
         }
 
@@ -96,10 +94,5 @@ namespace SiemensIXBlazor.Components
             await DateSelectEvent.InvokeAsync(jsonData);
         }
 
-        [JSInvokable]
-        public async void Done(string date)
-        {
-            await DoneEvent.InvokeAsync(date);
-        }
     }
 }

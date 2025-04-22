@@ -29,8 +29,6 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool ShowSeconds { get; set; } = false;
         [Parameter]
-        public string ShowTimeReference { get; set; } = Format;
-        [Parameter]
         public string TextSelectTime { get; set; } = "Done";
         [Parameter]
         public string Time { get; set; } = DateTime.Now.ToString(Format);
