@@ -11,8 +11,14 @@ namespace SiemensIXBlazor.Enums.MessageBar
 {
     public enum MessageBarType
     {
+        Alarm,
+        [Obsolete("Type `danger` will be removed in future versions. Use `alarm` instead.")]
         Danger,
+        Critical,
+        Warning,
+        Success,
         Info,
-        Warning
+        Neutral,
+        Primary
     }
 }
