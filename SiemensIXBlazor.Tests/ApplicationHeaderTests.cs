@@ -24,7 +24,7 @@ namespace SiemensIXBlazor.Tests
             });
 
             // Assert
-            cut.MarkupMatches("<ix-application-header name='testName'></ix-application-header>");
+            cut.MarkupMatches("<ix-application-header id='' name='testName'></ix-application-header>");
         }
 
         [Fact]
