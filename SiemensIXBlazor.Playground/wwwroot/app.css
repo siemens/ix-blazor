@@ -1,0 +1,35 @@
+﻿/* -----------------------------------------------------------------------
+   SPDX-FileCopyrightText: 2025 Siemens AG
+
+   SPDX-License-Identifier: MIT
+
+   This source code is licensed under the MIT license found in the
+   LICENSE file in the root directory of this source tree.
+   ----------------------------------------------------------------------- */
+
+html,
+body {
+    font-family: "Siemens Sans", "Siemens Sans Global", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    padding: 0px;
+}
+
+
+div[data-tab-content] {
+    display: none;
+    padding: 1rem;
+}
+
+    div[data-tab-content].show {
+        display: block;
+    }
+
+.content {
+    width: 100%;
+}
+
+.tab-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}

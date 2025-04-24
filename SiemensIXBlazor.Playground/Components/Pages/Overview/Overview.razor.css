@@ -1,0 +1,131 @@
+﻿/* -----------------------------------------------------------------------
+   SPDX-FileCopyrightText: 2025 Siemens AG
+
+   SPDX-License-Identifier: MIT
+
+   This source code is licensed under the MIT license found in the
+   LICENSE file in the root directory of this source tree.
+   ----------------------------------------------------------------------- */
+
+.overview-table h2 {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.overview-table .table {
+    border-collapse: collapse;
+    font-size: 1rem;
+    margin-bottom: 3rem;
+}
+
+    .overview-table .table a {
+        text-decoration: none;
+    }
+
+        .overview-table .table a:hover {
+            text-decoration: underline;
+        }
+
+    .overview-table .table tr td {
+        height: 80px;
+    }
+
+        .overview-table .table tr td:first-child {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+    .overview-table .table th,
+    .overview-table .table td {
+        padding: 12px 12px;
+        text-align: left;
+        vertical-align: middle;
+        border: 1px solid rgba(128, 128, 128, 0.4);
+    }
+
+    .overview-table .table th {
+        font-weight: 600;
+        border-bottom: 2px solid rgba(128, 128, 128, 0.6);
+    }
+
+    .overview-table .table tr:hover td {
+        background-color: rgba(128, 128, 128, 0.1);
+    }
+
+    .overview-table .table tbody tr:nth-child(even) td {
+        background-color: rgba(128, 128, 128, 0.05);
+    }
+
+
+.overview-container {
+    display: flex;
+    box-sizing: border-box;
+    padding-right: 230px;
+    transition: padding 0.3s ease;
+}
+
+.overview-table {
+    flex: 1;
+    padding-right: 0;
+}
+
+.side-navigation {
+    width: 210px;
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%) translateX(0);
+    opacity: 1;
+    visibility: visible;
+    transition: transform 0.4s ease, opacity 0.4s ease, visibility 0.2s ease;
+}
+
+@media (max-width: 900px) {
+    .overview-container {
+        padding-right: 0;
+    }
+
+    .side-navigation {
+        transform: translateY(-50%) translateX(100vw);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+}
+
+.side-navigation ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .side-navigation ul li {
+        margin-bottom: 10px;
+    }
+
+        .side-navigation ul li a {
+            text-decoration: none;
+            font-weight: bold;
+            line-height: 1.5rem;
+            font-size: 1rem;
+        }
+
+            .side-navigation ul li a:hover {
+                text-decoration: underline;
+            }
+
+.centered-h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    text-align: center;
+}
+
+    .centered-h2 ix-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 1em;
+        vertical-align: middle;
+    }

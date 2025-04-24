@@ -1,0 +1,39 @@
+@* -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2025 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+// ----------------------------------------------------------------------- *@
+
+@page "/workflow"
+@using SiemensIXBlazor.Components;
+
+<PageTitle>Workflow</PageTitle>
+
+<h1>Workflow</h1>
+
+<Tabs Id="workflow-demo" SelectedChangeEvent="@(e => activeTab = e)">
+    <ix-tab-item data-tab-id="0">
+        <div class="tab-content">
+            Usage
+            <ix-icon name="document"></ix-icon>
+        </div>
+    </ix-tab-item>
+    <ix-tab-item data-tab-id="1">
+        <div class="tab-content">
+            Code
+            <ix-icon name="code"></ix-icon>
+        </div>
+    </ix-tab-item>
+</Tabs>
+
+<div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
+    <p>Placeholder content for the Usage tab.</p>
+</div>
+
+<div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
+    <p>Placeholder content for the Code tab.</p>
+</div>
+

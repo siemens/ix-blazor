@@ -1,0 +1,416 @@
+﻿@* -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2025 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+//  -----------------------------------------------------------------------
+*@
+
+@page "/"
+@page "/overview"
+@using SiemensIXBlazor.Components;
+<PageTitle>Overview</PageTitle>
+
+<h1>Overview</h1>
+
+<Divider></Divider>
+<div class="overview-container">
+    <div class="overview-table">
+        <h2 class="centered-h2" id="application-frame"><ix-icon name="frames" />Application frame</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="/application">Application</a></td>
+                    <td>Applications manage the layout and theming of top-level app elements, ensuring a cohesive user experience.</td>
+                </tr>
+                <tr>
+                    <td><a href="/applicationheader">Application header</a></td>
+                    <td>Application headers provide a structured area for key elements like brand logo, application name and user avatar.</td>
+                </tr>
+                <tr>
+                    <td><a href="/applicationmenu">Application menu</a></td>
+                    <td>The navigation menu provides direct access to main application parts, legal and version information, and settings.</td>
+                </tr>
+                <tr>
+                    <td><a href="/avatar">Avatar</a></td>
+                    <td>Avatars visually or textually represent individual identities, typically for users logged into a system.</td>
+                </tr>
+                <tr>
+                    <td><a href="/content">Content</a></td>
+                    <td>The content component is a simple layout component made for hosting content.</td>
+                </tr>
+                <tr>
+                    <td><a href="/aboutandlegal">About and legal</a></td>
+                    <td>The About and legal component is an overlay we typically use to show application information, application versions, license terms, legal regulations, copyright information and other legal content.</td>
+                </tr>
+                <tr>
+                    <td><a href="/settings">Settings</a></td>
+                    <td>The settings overlay provides a centralized location for application settings.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="centered-h2" id="navigation-and-hierarchy"><ix-icon name="navigation-left" />Navigation and hierarchy</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="/breadcrumb">Breadcrumb</a></td>
+                    <td>Breadcrumbs provide a clear navigation path within an application.</td>
+                </tr>
+                <tr>
+                    <td><a href="/group">Group</a></td>
+                    <td>Groups are expandable containers for a list of selectable options.</td>
+                </tr>
+                <tr>
+                    <td><a href="/pagination">Pagination</a></td>
+                    <td>Paginations allow users to navigate between pages of content when it is split for performance reasons.</td>
+                </tr>
+                <tr>
+                    <td><a href="/tabs">Tabs</a></td>
+                    <td>Tabs consist of tab items and organize content into separate sections by grouping similar information.</td>
+                </tr>
+                <tr>
+                    <td><a href="/tree">Tree</a></td>
+                    <td>Trees display hierarchical data structures and allow users to navigate by expanding and collapsing nodes.</td>
+                </tr>
+                <tr>
+                    <td><a href="/workflow">Workflow</a></td>
+                    <td>Workflows are a series of logical steps that guide users through a process.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="centered-h2" id="containers-and-layout"><ix-icon name="card-layout" />Containers and layout</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="/blind">Blind</a></td>
+                    <td>Blinds enhance content organization by allowing users to toggle visibility through collapsing and expanding sections.</td>
+                </tr>
+                <tr>
+                    <td><a href="/card">Card</a></td>
+                    <td>Cards neatly organize and group related information about a specific subject.</td>
+                </tr>
+                <tr>
+                    <td><a href="/cardlist">Card list</a></td>
+                    <td>Card lists display a large number of cards or items of the same type in a lightweight, grouped manner.</td>
+                </tr>
+                <tr>
+                    <td><a href="/flip">Flip</a></td>
+                    <td>Flips are containers that flip when clicked to reveal additional content.</td>
+                </tr>
+                <tr>
+                    <td><a href="/eventlist">Event list</a></td>
+                    <td>Event lists display a list of any type of element with additional details.</td>
+                </tr>
+                <tr>
+                    <td><a href="/drawer">Drawer</a></td>
+                    <td>Drawers are containers that open on the click of a button to show additional content.</td>
+                </tr>
+                <tr>
+                    <td><a href="/layoutauto">Layout auto</a></td>
+                    <td>Auto-layouts are containers that automatically adjust the size of their columns based on the content.</td>
+                </tr>
+                <tr>
+                    <td><a href="/layoutgrid">Layout grid</a></td>
+                    <td>Layout grids are used to structure the layout of a page or screen responsively.</td>
+                </tr>
+                <tr>
+                    <td><a href="/modal">Modal</a></td>
+                    <td>Modals present information prominently and are useful for gathering essential user input without navigating to another page.</td>
+                </tr>
+                <tr>
+                    <td><a href="/panes">Panes</a></td>
+                    <td>Panes are interactive components that allow users to access content that isn't constantly visible on the screen.</td>
+                </tr>
+                <tr>
+                    <td><a href="/tile">Tile</a></td>
+                    <td>Tiles are containers that display content in a card-like format.</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <h2 class="centered-h2" id="forms"><ix-icon name="pen" />Forms</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="/formsfield">Forms field</a></td>
+                    <td>A field is a form element when user input is needed. It's typically used with other form elements in a fieldset.</td>
+                </tr>
+                <tr>
+                    <td><a href="/formslayout">Forms layout</a></td>
+                    <td>Effective form layouts play a crucial role in usability. Well-structured forms include fieldsets, considering the hierarchy of information, and understanding how to strike the right balance between aesthetics and functionality.</td>
+                </tr>
+                <tr>
+                    <td><a href="/formsvalidation">Forms validation</a></td>
+                    <td>Form validation gives users feedback on their input to ensure accurate, consistent data is submitted. When requirements are not met or data is incorrect, it’s rejected.</td>
+                </tr>
+                <tr>
+                    <td><a href="/formsbehavior">Forms behavior</a></td>
+                    <td>Forms behavior refers to the way in which user input is handled and validated within a form. It plays a crucial role in providing a seamless and user-friendly experience for form interactions.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="centered-h2" id="input-fields-and-selections"><ix-icon name="control-io-field" />Input fields and selections</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="/categoryfilter">Category filter</a></td>
+                    <td>Category filters allow users to quickly narrow their search by selecting predefined categories.</td>
+                </tr>
+                <tr>
+                    <td><a href="/checkbox">Checkbox</a></td>
+                    <td>Checkboxes are form controls that allow users to select none, one or more options.</td>
+                </tr>
+                <tr>
+                    <td><a href="/customfield">Custom field</a></td>
+                    <td>Custom fields are wrapper components that can host any form component.</td>
+                </tr>
+                <tr>
+                    <td><a href="/datedropdown">Date dropdown</a></td>
+                    <td>Date dropdowns allow users to select a specific date from a date picker or pre-defined date options.</td>
+                </tr>
+                <tr>
+                    <td><a href="/inputdate">Date input</a></td>
+                    <td>Date inputs allow users to enter and select dates in a standardized format, ensuring consistency and accuracy.</td>
+                </tr>
+                <tr>
+                    <td><a href="/datepicker">Date picker</a></td>
+                    <td>Date pickers provide a versatile calendar that can be used as a standalone element or within a dropdown for date input, offering a seamless way to select dates.</td>
+                </tr>
+                <tr>
+                    <td><a href="/datetimepicker">Date time picker</a></td>
+                    <td>Date-time pickers offer an interface for selecting both dates and times, which can be used as a standalone element or within a dropdown, providing a seamless way to input date and time values.</td>
+                </tr>
+                <tr>
+                    <td><a href="/expandingsearch">Expanding search</a></td>
+                    <td>Expanding searches are search fields that expand on click to save space.</td>
+                </tr>
+                <tr>
+                    <td><a href="/inputnumber">Number input</a></td>
+                    <td>Number inputs allow users to enter and adjust numerical values.</td>
+                </tr>
+                <tr>
+                    <td><a href="/radio">Radio</a></td>
+                    <td>Radio buttons enable users to choose only one option from a predefined set of mutually exclusive options.</td>
+                </tr>
+                <tr>
+                    <td><a href="/select">Select</a></td>
+                    <td>Selects allow users to choose from a list of options.</td>
+                </tr>
+                <tr>
+                    <td><a href="/slider">Slider</a></td>
+                    <td>Sliders allow users to select a value from a range of values.</td>
+                </tr>
+                <tr>
+                    <td><a href="/input">Input</a></td>
+                    <td>Input fields allow users to enter and edit single-line text, numbers, and other character-based symbols within an application.</td>
+                </tr>
+                <tr>
+                    <td><a href="/textarea">Textarea</a></td>
+                    <td>Textareas allow users to enter and edit multi-line text input, making it perfect for forms that require longer entries.</td>
+                </tr>
+                <tr>
+                    <td><a href="/timepicker">Time picker</a></td>
+                    <td>Time pickers allow users to select specific times ensuring accurate time input.</td>
+                </tr>
+                <tr>
+                    <td><a href="/toggle">Toggle</a></td>
+                    <td>Toggle switches enable users to toggle between an on and off state.</td>
+                </tr>
+                <tr>
+                    <td><a href="/upload">Upload</a></td>
+                    <td>Uploads allow users to select and upload files from their device via drag-and-drop.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="centered-h2" id="buttons-and-actions"><ix-icon name="control-button" />Buttons and actions</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="/button">Button</a></td>
+                    <td>Buttons facilitate user interactions by initiating actions and applying functions within an application.</td>
+                </tr>
+                <tr>
+                    <td><a href="/dropdownbutton">Dropdown button</a></td>
+                    <td>Dropdown buttons reveal a list of actions when selected.</td>
+                </tr>
+                <tr>
+                    <td><a href="/iconbutton">Icon button</a></td>
+                    <td>Icon buttons use only icons to represent actions, making them ideal for space-constrained layouts.</td>
+                </tr>
+                <tr>
+                    <td><a href="/linkbutton">Link button</a></td>
+                    <td>Link buttons take users to another location either within or outside the application and contain a chevron and a text label.</td>
+                </tr>
+                <tr>
+                    <td><a href="/splitbutton">Split button</a></td>
+                    <td>Split buttons are button elements that allow users to either trigger an action with one click or select an action from a list of options.</td>
+                </tr>
+                <tr>
+                    <td><a href="/togglebutton">Toggle button</a></td>
+                    <td>Toggle buttons allow users to either activate or deactivate a function.</td>
+                </tr>
+                <tr>
+                    <td><a href="/chip">Chip</a></td>
+                    <td>Chips are interactive elements that display small pieces of information in a compact and visually appealing way.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="centered-h2" id="system-feedback-and-status"><ix-icon name="feedback" />System feedback and status</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="/emptystate">Empty state</a></td>
+                    <td>Empty states inform users that there is no content to display.</td>
+                </tr>
+                <tr>
+                    <td><a href="/messagebar">Message bar</a></td>
+                    <td>Message bars display important information to users, e.g. feedback, warnings or errors.</td>
+                </tr>
+                <tr>
+                    <td><a href="/pill">Pill</a></td>
+                    <td>Pills display small pieces of information, e.g. counters or statuses.</td>
+                </tr>
+                <tr>
+                    <td><a href="/spinner">Spinner</a></td>
+                    <td>Spinners indicate that a process is running to provide feedback to the user.</td>
+                </tr>
+                <tr>
+                    <td><a href="/toast">Toast</a></td>
+                    <td>Toasts are small pop-ups that provide simple feedback on a process.</td>
+                </tr>
+                <tr>
+                    <td><a href="/tooltip">Tooltip</a></td>
+                    <td>Tooltips provide additional information when users hover over or focus on an element.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="centered-h2" id="data-display"><ix-icon name="table" />Data display</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="/grid">Angular data grid</a></td>
+                    <td>The popular data grid library AG Grid is seamlessly integrated into our design system, allowing you to harness its powerful features while maintaining consistency with our styleguide.</td>
+                </tr>
+                <tr>
+                    <td><a href="/htmlgrid">HTML table</a></td>
+                    <td>HTML tables are used to display tabular data in a structured way.</td>
+                </tr>
+                <tr>
+                    <td><a href="/keyvalue">Key value</a></td>
+                    <td>Key value pairs display a label (key) and a value in a structured, easy way.</td>
+                </tr>
+                <tr>
+                    <td><a href="/keyvaluelist">Key value list</a></td>
+                    <td>Key value lists organize and list a series of key value pairs.</td>
+                </tr>
+                <tr>
+                    <td><a href="/kpi">KPI</a></td>
+                    <td>KPIs display measured values together with a status indicator to help users interpret data.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="centered-h2" id="charts"><ix-icon name="barchart" />Charts</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="/chartsoverview">Chart overview</a></td>
+                    <td>Charts are essential tools for visualizing data, making complex information more accessible and easier to understand.</td>
+                </tr>
+                <tr>
+                    <td><a href="/linechart">Line chart</a></td>
+                    <td>Line charts display data as a series of data points connected by straight line segments. Line charts are commonly used to visualize trends over time or compare two variables. We typically use line charts to visualize continuous data.</td>
+                </tr>
+                <tr>
+                    <td><a href="/barchart">Bar chart</a></td>
+                    <td>Bar charts display data using rectangular bars. The length of each bar is proportional to the value it represents. Bar charts are commonly used to compare the values of different categories. We typically use bar charts to visualize data that is categorical or ordinal in nature.</td>
+                </tr>
+                <tr>
+                    <td><a href="/gaugechart">Gauge chart</a></td>
+                    <td>Gauge charts are a type of chart that displays data using a dial or needle to indicate a value within a specific range. Gauge charts are commonly used to visualize performance metrics, such as speedometers, progress meters, and other KPIs. We typically use gauge charts to represent a single value within a range of values.</td>
+                </tr>
+                <tr>
+                    <td><a href="/piechart">Pie chart</a></td>
+                    <td>Pie charts display data using a circular graph. The length of each slice is proportional to the value it represents. Pie charts are commonly used to visualize the parts of a whole and are particularly useful for comparing the relative sizes of different categories.</td>
+                </tr>
+                <tr>
+                    <td><a href="/3d">3D chart</a></td>
+                    <td>3D charts are a powerful way to visualize data in three dimensions. They provide a more immersive and interactive experience compared to traditional 2D charts. We typically use 3D charts to represent complex data sets or to visualize data in a more engaging way.</td>
+                </tr>
+                <tr>
+                    <td><a href="/specialchart">Special chart</a></td>
+                    <td>ECharts offer a wide variety of different chart types and features. The following page deals with some of the more special chart types and features.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="side-navigation">
+        <ul>
+            <li><a href="#application-frame">Application frame</a></li>
+            <li><a href="#navigation-and-hierarchy">Navigation and hierarchy</a></li>
+            <li><a href="#containers-and-layout">Containers and layout</a></li>
+            <li><a href="#forms">Forms</a></li>
+            <li><a href="#input-fields-and-selections">Input fields and selections</a></li>
+            <li><a href="#buttons-and-actions">Buttons and actions</a></li>
+            <li><a href="#system-feedback-and-status">System feedback and status</a></li>
+            <li><a href="#data-display">Data display</a></li>
+            <li><a href="#charts">Charts</a></li>
+        </ul>
+    </div>
+</div>

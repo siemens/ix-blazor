@@ -1,0 +1,108 @@
+﻿@* -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2025 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+//  -----------------------------------------------------------------------
+*@
+
+
+@inherits LayoutComponentBase
+@inject NavigationManager Navigation
+@using SiemensIXBlazor.Components.Menu;
+@using SiemensIXBlazor.Components.BasicNavigation;
+@using SiemensIXBlazor.Components.MenuAbout;
+@using SiemensIXBlazor.Components.MenuAvatar;
+@using SiemensIXBlazor.Components.MenuCategory;
+@using SiemensIXBlazor.Components.MenuSettings;
+@using SiemensIXBlazor.Components.Avatar;
+@using SiemensIXBlazor.Components;
+@using SiemensIXBlazor.Playground.Services;
+<Theme @ref="_themeProvider" />
+
+<Application Id="ix-blazor-playground">
+    <ApplicationHeader Id="ix-blazor-playground-header" Name="IX Blazor Playground">
+        <img slot="logo" src="/siemens_logo.png" style="height:32px">
+        <Avatar Initials="IX"></Avatar>
+        <IconButton Icon="light-dark" Oval="true" ClickEvent="ToggleThemeAsync" DataTooltip="Switch Theme"></IconButton>
+    </ApplicationHeader>
+    <Menu Id="nav-menu-1" StartExpanded="true" ApplicationName="IX Blazor Playground">
+        <MenuItem Home=true
+                  Active="@IsMenuItemActive("", "/", "overview")"
+                  icon="globe"
+                  @onclick="@(() => RedirectPage("overview"))">
+            Overview
+        </MenuItem>
+
+        @foreach (var category in MenuConfiguration.Categories)
+        {
+            <MenuCategory Label="@category.Label" Icon="@category.Icon">
+                @foreach (var item in category.Items)
+                {
+                    <MenuItem Icon="@item.Icon"
+                              Home="@item.IsHome"
+                              Active="@IsMenuItemActive(item.Route)"
+                              @onclick="@(() => RedirectPage(item.Route))">
+                        @item.Label
+                    </MenuItem>
+                }
+            </MenuCategory>
+        }
+
+        <MenuAbout Id="menuabout" Style="font-size:1rem; line-height:1.5">
+            <MenuAboutItem Label="About">
+                <p>
+                    This project is based on the <strong>Siemens Industrial Experience (IX)</strong> design system, an open-source initiative for designers and developers to create consistent, high-quality digital experiences for industrial applications.
+                </p>
+                <p>
+                    We are currently working on a <strong>Blazor integration</strong> that enables seamless usage of Siemens IX Web Components within Blazor applications. This integration helps bridge modern Web Component technology with .NET’s Razor-based frontend development model.
+                </p>
+                <p>
+                    Learn more about the main design system at:
+                    <a href="https://ix.siemens.io/" target="_blank" rel="noopener noreferrer">https://ix.siemens.io</a>
+                </p>
+
+                <MessageBar Id="experimental-disclaimer" Type="Enums.MessageBar.MessageBarType.Warning" Class="my-2">
+                    <strong>Experimental Disclaimer:</strong> There is no guarantee that the core functionality is fully covered by the Blazor library.
+                    Bug reports, feature requests, or support must be directed to the
+                    <a href="https://github.com/siemens/ix-blazor/" target="_blank" rel="noopener noreferrer"> Blazor repository</a>.
+                    <br />Feedback of any kind is welcome and appreciated.
+                </MessageBar>
+
+                <MessageBar Id="info" Type="Enums.MessageBar.MessageBarType.Info" Class="my-2">
+                    <strong>Info:</strong> The Blazor library is <em>not developed by the Siemens Industrial Experience team</em>. All credits and maintenance responsibilities belong to the developers of the
+                    <a href="https://github.com/siemens/ix-blazor/" target="_blank">ix-blazor</a> package.
+                </MessageBar>
+
+            </MenuAboutItem>
+
+            <MenuAboutItem Label="Legal">
+                <p>
+                    This project is licensed under the <strong>MIT License</strong>, a permissive open-source license that allows for reuse, modification, and distribution.
+                </p>
+                <p>
+                    You are free to use this software in commercial and non-commercial projects, provided that the original license and copyright notice are included.
+                </p>
+                <p>
+                    For more details, refer to the full license in the repository:
+                    <a href="https://github.com/siemens/ix-blazor/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">
+                        MIT License on GitHub
+                    </a>
+                </p>
+            </MenuAboutItem>
+        </MenuAbout>
+    </Menu>
+    <div class="layout-root">
+        <div class="page">
+            <div class="content p-4">
+                @Body
+            </div>
+        </div>
+        <Divider></Divider>
+        <footer class="ix-footer">
+            © Siemens 1996 - 2025
+        </footer>
+    </div>
+</Application>

@@ -1,83 +1,88 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
-		<Nullable>enable</Nullable>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Title>Siemens IX Blazor</Title>
-		<Version>0.5.3</Version>
-		<Authors>Siemens</Authors>
-		<Company>Siemens</Company>
-		<Description>Siemens IX port for Blazor.</Description>
-		<PackageProjectUrl>https://github.com/siemens/ix-blazor</PackageProjectUrl>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<RepositoryUrl>https://github.com/siemens/ix-blazor</RepositoryUrl>
-		<PackageLicenseFile>LICENSE</PackageLicenseFile>
-		<PackageId>Siemens.IX.Blazor</PackageId>
-	</PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <Title>Siemens IX Blazor</Title>
+        <Version>0.5.3</Version>
+        <Authors>Siemens</Authors>
+        <Company>Siemens</Company>
+        <Description>Siemens IX port for Blazor.</Description>
+        <PackageProjectUrl>https://github.com/siemens/ix-blazor</PackageProjectUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <RepositoryUrl>https://github.com/siemens/ix-blazor</RepositoryUrl>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageId>Siemens.IX.Blazor</PackageId>
+    </PropertyGroup>
 
-	<ItemGroup>
-		<Content Remove="SiemensIXBlazor_NpmJS\package-lock.json" />
-		<Content Remove="SiemensIXBlazor_NpmJS\package.json" />
-	</ItemGroup>
+    <ItemGroup>
+        <Content Remove="SiemensIXBlazor_NpmJS\package-lock.json" />
+        <Content Remove="SiemensIXBlazor_NpmJS\package.json" />
+    </ItemGroup>
 
-	<ItemGroup>
-		<None Include="..\LICENSE">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-		<None Include="..\README.md">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-		<None Include="SiemensIXBlazor_NpmJS\package-lock.json" />
-		<None Include="SiemensIXBlazor_NpmJS\package.json" />
-	</ItemGroup>
+    <ItemGroup>
+        <None Include="..\LICENSE">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Include="..\README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Include="SiemensIXBlazor_NpmJS\package-lock.json" />
+        <None Include="SiemensIXBlazor_NpmJS\package.json" />
+    </ItemGroup>
 
-	<ItemGroup>
-		<Content Include="../docs/*.html" copyToOutput="true">
-			<IncludeInPackage>true</IncludeInPackage>
-			<CopyToOutput>true</CopyToOutput>
-			<BuildAction>Content</BuildAction>
-			<copyToOutput>true</copyToOutput>
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-	</ItemGroup>
+    <ItemGroup>
+        <Content Include="../docs/*.html" copyToOutput="true">
+            <IncludeInPackage>true</IncludeInPackage>
+            <CopyToOutput>true</CopyToOutput>
+            <BuildAction>Content</BuildAction>
+            <copyToOutput>true</copyToOutput>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
 
-	<ItemGroup>
-		<SupportedPlatform Include="browser" />
-	</ItemGroup>
+    <ItemGroup>
+        <SupportedPlatform Include="browser" />
+    </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.15" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.15" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
 
-	<ItemGroup>
-		<Content Update="wwwroot\js\siemens-ix\interops\**\*.js">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-		<Content Update="wwwroot\js\siemens-ix\**\*.js">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-	</ItemGroup>
+    <ItemGroup>
+        <Content Update="wwwroot\js\siemens-ix\interops\**\*.js">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Update="wwwroot\js\siemens-ix\**\*.js">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="wwwroot\js\siemens-ix\" />
-		<Folder Include="Components\KeyValueList\" />
-		<Folder Include="Components\KeyValue\" />
-		<Folder Include="Components\EmptyState\" />
-		<Folder Include="Components\PushCard\" />
-		<Folder Include="Enums\PushCard\" />
-		<Folder Include="Components\ActionCard\" />
-	</ItemGroup>
+    <ItemGroup>
+        <Folder Include="wwwroot\js\siemens-ix\" />
+        <Folder Include="Components\KeyValueList\" />
+        <Folder Include="Components\KeyValue\" />
+        <Folder Include="Components\EmptyState\" />
+        <Folder Include="Components\PushCard\" />
+        <Folder Include="Enums\PushCard\" />
+        <Folder Include="Components\ActionCard\" />
+    </ItemGroup>
 
-	<PropertyGroup>
-		<IsWindows Condition="'$(OS)' == 'Windows_NT'">true</IsWindows>
-	</PropertyGroup>
+    <PropertyGroup>
+        <IsWindows Condition="'$(OS)' == 'Windows_NT'">true</IsWindows>
+    </PropertyGroup>
 
-	<Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(IsWindows)' == 'true'">
-	  <Exec Command="call $(SolutionDir)scripts\pre-build.bat"/>
-	</Target>
+    <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(IsWindows)' == 'true'">
+        <Exec Command='call "$(SolutionDir)scripts\pre-build.bat"' ContinueOnError="true">
+            <Output TaskParameter="ExitCode" PropertyName="PreBuildExitCode" />
+        </Exec>
+        <Exec Command='cmd /c "$(SolutionDir)scripts\pre-build.bat"' Condition="'$(PreBuildExitCode)' != '0'" />
+    </Target>
+
+
 </Project>
