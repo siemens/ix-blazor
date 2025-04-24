@@ -41,7 +41,6 @@ namespace SiemensIXBlazor.Components
             {
                 _tabsInterop = new(JSRuntime);
 
-                await _tabsInterop.InitialComponent(Id);
                 await _tabsInterop.SubscribeEvents(this, Id, "selectedChange", "SelectedChange");
             }
         }
