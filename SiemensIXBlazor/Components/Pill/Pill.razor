@@ -14,6 +14,6 @@
 @inherits IXBaseComponent
 
 <ix-pill @attributes="UserAttributes" variant="@(EnumParser<PillVariant>.EnumToString(Variant))" pill-color="@PillColor"
-    background="@Background" align-left="@AlignLeft" icon="@Icon" outline="@Outline" style="@Style" class="@Class">
+    background="@Background" align-left="@AlignLeft" icon="@Icon" outline="@Outline" style="@Style" class="@Class" tooltip-text="@TooltipText">
     @ChildContent
 </ix-pill>
