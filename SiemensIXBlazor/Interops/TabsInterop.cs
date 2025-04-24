@@ -24,7 +24,7 @@ namespace SiemensIXBlazor.Interops
         public async Task InitialComponent(string id)
         {
             var module = await moduleTask.Value;
-            await module.InvokeAsync<string>("initalTable", id);
+            await module.InvokeAsync<string>("initialTable", id);
         }
 
         public async Task SubscribeEvents(object classObject, string id, string eventName, string methodName)
