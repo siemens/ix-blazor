@@ -15,9 +15,21 @@ namespace SiemensIXBlazor.Components
 {
     public partial class Toast
     {
-        public async void ShowToast(ToastConfig config)
+        public async Task ShowToast(ToastConfig config)
         {
-            await JSRuntime.InvokeVoidAsync("siemensIXInterop.showMessage", JsonConvert.SerializeObject(config));
+            if (config == null)
+            {
+                throw new ArgumentNullException(nameof(config), "Toast configuration cannot be null");
+            }
+
+            try
+            {
+                await JSRuntime.InvokeAsync<object>("siemensIXInterop.showMessage", JsonConvert.SerializeObject(config));
+            }
+            catch (JSException jsException)
+            {
+                throw;
+            }
         }
     }
 }
