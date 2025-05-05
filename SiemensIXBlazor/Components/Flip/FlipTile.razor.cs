@@ -8,16 +8,16 @@
 //  -----------------------------------------------------------------------
 
 using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.JSInterop;
+using SiemensIXBlazor.Interops;
+using Microsoft.JSInterop;
 
 namespace SiemensIXBlazor.Components
 {
     public partial class FlipTile
     {
+        [Parameter, EditorRequired]
+        public string Id { get; set; } = string.Empty;
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter]
@@ -26,5 +26,29 @@ namespace SiemensIXBlazor.Components
         public dynamic Height { get; set; } = 15.125;
         [Parameter]
         public dynamic Width { get; set; } = 16;
+
+        [Parameter]
+        public int Index { get; set; } = 0;
+
+        [Parameter]
+       public EventCallback<int> ToggleEvent { get; set; }
+
+        private BaseInterop _interop;
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                _interop = new(JSRuntime);
+                await _interop.AddEventListener(this, Id, "toggle", "ToggleClicked");
+
+            }
+        }
+
+        [JSInvokable]
+        public async Task ToggleClicked(int index)
+        {
+            await ToggleEvent.InvokeAsync(index);
+        }
     }
 }
