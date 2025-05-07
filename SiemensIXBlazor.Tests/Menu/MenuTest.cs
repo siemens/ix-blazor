@@ -114,7 +114,7 @@ public class MenuTest : TestContextBase
     {
         // Arrange
         var eventTriggered = false;
-        var cut = RenderComponent<ApplicationHeader>(
+        var cut = RenderComponent<Components.Menu.Menu>(
             ("Id", "testId"),
             ("OpenAppSwitchEvent", EventCallback.Factory.Create(this, () => { eventTriggered = true; }))
         );
