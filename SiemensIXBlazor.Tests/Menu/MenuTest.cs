@@ -114,7 +114,7 @@ public class MenuTest : TestContextBase
     {
         // Arrange
         var eventTriggered = false;
-        var cut = RenderComponent<ApplicationHeader>(
+        var cut = RenderComponent<Components.Menu.Menu>(
             ("Id", "testId"),
             ("OpenAppSwitchEvent", EventCallback.Factory.Create(this, () => { eventTriggered = true; }))
         );
@@ -123,6 +123,32 @@ public class MenuTest : TestContextBase
         await cut.InvokeAsync(() => cut.Instance.OpenAppSwitch());
 
         // Assert
+        Assert.True(eventTriggered);
+    }
+    [Fact]
+    public async Task OpenAboutEventWorks()
+    {
+		var eventTriggered = false;
+        var cut = RenderComponent<Components.Menu.Menu>(parameters => parameters
+				.Add(p=>p.Id,"test")
+				.Add(p=>p.OpenAboutEvent,EventCallback.Factory.Create(this, () => eventTriggered = true)));
+ 
+
+        await cut.Instance.OpenAboutEvent.InvokeAsync();
+
+        Assert.True(eventTriggered);
+    }
+    [Fact]
+    public async Task OpenSettingsEventWorks()
+    {
+        var eventTriggered = false;
+        var cut = RenderComponent<Components.Menu.Menu>(parameters => parameters
+				.Add(p => p.Id, "test")
+				.Add(p => p.OpenSettingsEvent, EventCallback.Factory.Create(this, () => eventTriggered = true)));
+
+
+        await cut.Instance.OpenSettingsEvent.InvokeAsync();
+
         Assert.True(eventTriggered);
     }
 }

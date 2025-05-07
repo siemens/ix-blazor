@@ -57,7 +57,11 @@ namespace SiemensIXBlazor.Components.Menu
 		[Parameter]
 		public EventCallback<bool> MapExpandChangedEvent { get; set; }
         [Parameter]
-        public EventCallback openAppSwitchEvent { get; set; }
+        public EventCallback OpenAppSwitchEvent { get; set; }
+        [Parameter]
+        public EventCallback OpenSettingsEvent { get; set; }
+        [Parameter]
+        public EventCallback OpenAboutEvent { get; set; }
 
         private BaseInterop _interop;
 
@@ -70,6 +74,8 @@ namespace SiemensIXBlazor.Components.Menu
 				await _interop.AddEventListener(this, Id, "expandChange", "ExpandChanged");
 				await _interop.AddEventListener(this, Id, "mapExpandChange", "MapExpandChanged");
                 await _interop.AddEventListener(this, Id, "openAppSwitch", "OpenAppSwitch");
+                await _interop.AddEventListener(this, Id, "openAbout", "OpenAbout");
+                await _interop.AddEventListener(this, Id, "openSettings", "OpenSettings");
             }
 		}
 
@@ -88,7 +94,18 @@ namespace SiemensIXBlazor.Components.Menu
         [JSInvokable]
         public async Task OpenAppSwitch()
         {
-            await openAppSwitchEvent.InvokeAsync();
+            await OpenAppSwitchEvent.InvokeAsync();
+        }
+
+        [JSInvokable]
+        public async Task OpenAbout()
+        {
+            await OpenAboutEvent.InvokeAsync();
+        }
+        [JSInvokable]
+        public async Task OpenSettings()
+        {
+            await OpenSettingsEvent.InvokeAsync();
         }
     }
 }
