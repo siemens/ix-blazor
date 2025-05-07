@@ -5,16 +5,17 @@
 //
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
-//  -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using SiemensIXBlazor.Interops;
 
 namespace SiemensIXBlazor.Components.Slider
 {
     public partial class Slider
     {
+        private Lazy<Task<IJSObjectReference>>? _moduleTask;
+
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
         [Parameter]
@@ -23,6 +24,14 @@ namespace SiemensIXBlazor.Components.Slider
         public bool Disabled { get; set; } = false;
         [Parameter]
         public dynamic? Error { get; set; }
+        private string? ErrorAsString => Error switch
+        {
+            bool b => b.ToString().ToLowerInvariant(),
+            string s => s,
+            null => null,
+            _ => Error?.ToString()
+        };
+
         [Parameter]
         public double[]? Marker { get; set; }
         [Parameter]
@@ -40,22 +49,43 @@ namespace SiemensIXBlazor.Components.Slider
         [Parameter]
         public EventCallback<double> ValueChangeEvent { get; set; }
 
-        private BaseInterop _interop;
-
-        protected async override Task OnAfterRenderAsync(bool firstRender)
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
-                _interop = new(JSRuntime);
+                _moduleTask = new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
+                    "import", "./_content/Siemens.IX.Blazor/js/siemens-ix/interops/sliderInterop.js").AsTask());
 
-                await _interop.AddEventListener(this, Id, "valueChange", "ValueChanged");
+                var module = await _moduleTask.Value;
+
+                await module.InvokeAsync<string>(
+                    "listenEvent",
+                    DotNetObjectReference.Create(this),
+                    Id,
+                    "valueChange",
+                    "ValueChanged"
+                );
+
+                if (Marker is { Length: > 0 })
+                {
+                    await module.InvokeAsync<object>("setMarker", Id, Marker);
+                }
             }
         }
 
         [JSInvokable]
-        public async void ValueChanged(double value)
+        public async Task ValueChanged(double value)
         {
             await ValueChangeEvent.InvokeAsync(value);
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            if (_moduleTask?.IsValueCreated == true)
+            {
+                var module = await _moduleTask.Value;
+                await module.DisposeAsync();
+            }
         }
     }
 }

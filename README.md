@@ -152,6 +152,7 @@ public partial class Index
 - [Pill](#pill)
 - [Radio Button](#radio-button)
 - [Select](#select)
+- [Slider](#slider)
 - [Spinner](#spinner)
 - [Split Button](#split-button)
 - [Tabs](#tabs)
@@ -1172,6 +1173,14 @@ AddItemEvent="SelectItemAdded" Mode="SelectMode.Single" SelectedIndices="2" Id="
     <SelectItem Id="selectItem1" Label="Item 1" Value="1"></SelectItem>
     <SelectItem Id="selectItem2" Label="Item 2" Value="2"></SelectItem>
 </Select>
+```
+## Slider
+
+```razor
+<Slider Id="slider-demo" Min="0" Max="50" Step="5" Value="0" Marker="[0, 10, 20, 30, 40, 50]">
+    <span slot="label-start">0</span>
+    <span slot="label-end">50</span>
+</Slider>
 ```
 
 ## Spinner
