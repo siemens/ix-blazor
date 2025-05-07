@@ -125,4 +125,30 @@ public class MenuTest : TestContextBase
         // Assert
         Assert.True(eventTriggered);
     }
+    [Fact]
+    public async Task OpenAboutEventWorks()
+    {
+		var eventTriggered = false;
+        var cut = RenderComponent<Components.Menu.Menu>(parameters => parameters
+				.Add(p=>p.Id,"test")
+				.Add(p=>p.OpenAboutEvent,EventCallback.Factory.Create(this, () => eventTriggered = true)));
+ 
+
+        await cut.Instance.OpenAboutEvent.InvokeAsync();
+
+        Assert.True(eventTriggered);
+    }
+    [Fact]
+    public async Task OpenSettingsEventWorks()
+    {
+        var eventTriggered = false;
+        var cut = RenderComponent<Components.Menu.Menu>(parameters => parameters
+				.Add(p => p.Id, "test")
+				.Add(p => p.OpenSettingsEvent, EventCallback.Factory.Create(this, () => eventTriggered = true)));
+
+
+        await cut.Instance.OpenSettingsEvent.InvokeAsync();
+
+        Assert.True(eventTriggered);
+    }
 }
