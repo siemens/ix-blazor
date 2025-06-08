@@ -1,0 +1,19 @@
+﻿.code-block {
+    padding: 1rem;
+    border-radius: 4px;
+    margin: 1rem 0;
+    min-width:fit-content;
+    height:fit-content
+}
+
+.code-container{
+    padding:1rem 2rem;
+}
+
+code {
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+

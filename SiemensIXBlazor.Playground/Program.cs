@@ -7,11 +7,17 @@
 // LICENSE file in the root directory of this source tree.
 // -----------------------------------------------------------------------
 
+using SiemensIXBlazor.Playground.Interops;
+using SiemensIXBlazor.Playground.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddScoped<ICodeHighlightService, CodeHighlightService>();
+builder.Services.AddScoped<PrismInterop>();
 
 var app = builder.Build();
 

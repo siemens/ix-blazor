@@ -12,4 +12,9 @@ namespace SiemensIXBlazor.Playground.Components.Pages.InputFieldsAndSelections.U
 public partial class Upload
 {
     private int activeTab = 0;
+    
+     public string ContentForBasic { get; private set; } = @"
+        <SiemensIXBlazor.Components.Upload Id=""upload-basic"">
+        </SiemensIXBlazor.Components.Upload>
+    ";
 }

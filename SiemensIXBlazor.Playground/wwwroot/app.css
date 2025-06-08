@@ -33,3 +33,20 @@ div[data-tab-content] {
     justify-content: center;
     gap: 4px;
 }
+
+.code-block {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-x: auto;
+    white-space: pre;
+}
+
+.component-type{
+    padding:1rem;
+    margin: 2rem 0; 
+}
