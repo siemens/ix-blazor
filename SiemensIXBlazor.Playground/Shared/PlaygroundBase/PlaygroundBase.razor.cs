@@ -7,18 +7,23 @@ namespace SiemensIXBlazor.Playground.Shared.PlaygroundBase
         private int activeTab = 0;
 
         [Parameter]
+        [EditorRequired]
         public string Id { get; set; }
 
         [Parameter]
-        public string Title { get; set; }
+        [EditorRequired]
+        public string ComponentName { get; set; }
 
         [Parameter]
+        [EditorRequired]
         public string TabsId { get; set; }
 
         [Parameter]
+        [EditorRequired]
         public RenderFragment ComponentContent { get; set; }
 
         [Parameter]
+        [EditorRequired]
         public string CodeContent { get; set; }
 
         [Parameter]
