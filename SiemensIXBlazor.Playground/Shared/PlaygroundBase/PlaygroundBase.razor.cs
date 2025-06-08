@@ -1,0 +1,36 @@
+﻿using Microsoft.AspNetCore.Components;
+
+namespace SiemensIXBlazor.Playground.Shared.PlaygroundBase
+{
+    public partial class PlaygroundBase
+    {
+        private int activeTab = 0;
+
+        [Parameter]
+        public string Id { get; set; }
+
+        [Parameter]
+        public string Title { get; set; }
+
+        [Parameter]
+        public string TabsId { get; set; }
+
+        [Parameter]
+        public RenderFragment ComponentContent { get; set; }
+
+        [Parameter]
+        public string CodeContent { get; set; }
+
+        [Parameter]
+        public string UsageTabTitle { get; set; } = "Usage";
+
+        [Parameter]
+        public string CodeTabTitle { get; set; } = "Code";
+
+        [Parameter]
+        public string UsageTabIcon { get; set; } = "document";
+
+        [Parameter]
+        public string CodeTabIcon { get; set; } = "code";
+    }
+}
