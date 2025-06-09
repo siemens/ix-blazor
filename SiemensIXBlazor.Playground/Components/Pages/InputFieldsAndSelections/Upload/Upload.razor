@@ -10,6 +10,7 @@
 @page "/upload"
 @using SiemensIXBlazor.Components;
 @using SiemensIXBlazor.Playground.Shared.CodeHighlighter
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase
 
 <PageTitle>Upload</PageTitle>
 
@@ -42,5 +43,12 @@
     <div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
         <CodeHiglighter CodeContent="@ContentForBasic" />
     </div>
+
+    <PlaygroundBase Id="upload-component" TabId="upload-basic-type" ComponentType="Basic" CodeContent="@ContentForBasic">
+
+        <ComponentContent>
+            <SiemensIXBlazor.Components.Upload Id="ix-upload-basic"></SiemensIXBlazor.Components.Upload>
+        </ComponentContent>
+    </PlaygroundBase>
 
 </div>

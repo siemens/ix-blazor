@@ -10,65 +10,24 @@
 @page "/datedropdown"
 @using SiemensIXBlazor.Components;
 @using SiemensIXBlazor.Playground.Shared.CodeHighlighter
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase
 
 <PageTitle>Date Dropdown</PageTitle>
 
 <h1>Date Dropdown</h1>
 
-<div class="component-type" id="basic">
+<PlaygroundBase Id="basic" ComponentType="Basic" TabId="date-dropdown-basic" CodeContent="@ContentForBasic">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.DateDropdown Id="datedropdown-basic"></SiemensIXBlazor.Components.DateDropdown>
+    </ComponentContent>
+</PlaygroundBase>
 
-    <h2>Basic</h2>
 
-    <Tabs Id="datedropdown-demo" SelectedChangeEvent="@(e => activeTab = e)">
-        <ix-tab-item data-tab-id="0">
-            <div class="tab-content">
-                Usage
-                <ix-icon name="document"></ix-icon>
-            </div>
-        </ix-tab-item>
-        <ix-tab-item data-tab-id="1">
-            <div class="tab-content">
-                Code
-                <ix-icon name="code"></ix-icon>
-            </div>
-        </ix-tab-item>
-    </Tabs>
-
-    <div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-        <SiemensIXBlazor.Components.DateDropdown Id="datedropdown-basic" DateRangeChangeEvent="Callback">
-        </SiemensIXBlazor.Components.DateDropdown>
-    </div>
-
-    <div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-       <CodeHiglighter CodeContent="@ContentForBasic"/>
-    </div>
-
-</div>
-<div class="component-type" id="user-defined-range">
-
-    <h2>With user defined range options</h2>
-    <Tabs Id="datedropdown-demo" SelectedChangeEvent="@(e => activeTabForDateDefined = e)">
-        <ix-tab-item data-tab-id="0">
-            <div class="tab-content">
-                Usage
-                <ix-icon name="document"></ix-icon>
-            </div>
-        </ix-tab-item>
-        <ix-tab-item data-tab-id="1">
-            <div class="tab-content">
-                Code
-                <ix-icon name="code"></ix-icon>
-            </div>
-        </ix-tab-item>
-    </Tabs>
-
-    <div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-        <SiemensIXBlazor.Components.DateDropdown Id="datedropdown-defined-date" DateRangeId="last-7" Format="MM/dd/yyyy"
+<PlaygroundBase Id="dropdown-component" ComponentType="With user defined range options" TabId="date-dropdown-defined"
+    CodeContent="@ContentForDefinedDate">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.DateDropdown Id="ix-datedropdown-defined-date" DateRangeId="last-7" Format="MM/dd/yyyy"
             DateRangeOptions="_dateRangeOptions" DateRangeChangeEvent="Callback">
         </SiemensIXBlazor.Components.DateDropdown>
-    </div>
-
-    <div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-        <CodeHiglighter CodeContent="@ContentForDefinedDate"/>
-    </div>
-</div>
+    </ComponentContent>
+</PlaygroundBase>

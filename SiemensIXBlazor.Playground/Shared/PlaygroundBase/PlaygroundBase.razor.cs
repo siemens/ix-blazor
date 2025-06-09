@@ -12,11 +12,11 @@ namespace SiemensIXBlazor.Playground.Shared.PlaygroundBase
 
         [Parameter]
         [EditorRequired]
-        public string ComponentName { get; set; }
+        public string ComponentType { get; set; }
 
         [Parameter]
         [EditorRequired]
-        public string TabsId { get; set; }
+        public string TabId { get; set; }
 
         [Parameter]
         [EditorRequired]
