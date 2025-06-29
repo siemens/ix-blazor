@@ -53,7 +53,8 @@ public class DateTimePickerTest : TestContextBase
         var cut = RenderComponent<DateTimePicker>(parameters => parameters
             .Add(p => p.DateChangeEvent, EventCallback.Factory.Create<string>(this, (date) => isDateChangeEventTriggered = true))
             .Add(p => p.DateSelectEvent, EventCallback.Factory.Create<DateTimePickerResponse>(this, (response) => isDateSelectEventTriggered = true))
-            .Add(p => p.TimeChangeEvent, EventCallback.Factory.Create<string>(this, (time) => isTimeChangeEventTriggered = true)));
+            .Add(p => p.TimeChangeEvent, EventCallback.Factory.Create<string>(this, (time) => isTimeChangeEventTriggered = true))
+            .Add(p => p.Id, "testId"));
 
         // Act
         cut.Instance.DateChange("2022/12/31");

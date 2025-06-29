@@ -45,7 +45,8 @@ namespace SiemensIXBlazor.Tests
                 .Add(p => p.ChildContent, builder =>
                 {
                     builder.AddContent(0, expectedContent);
-                }));
+                })
+                .Add(p => p.Id, "testId"));
 
             // Assert
             Assert.Contains(expectedContent, cut.Markup);

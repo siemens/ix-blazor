@@ -40,7 +40,8 @@ public class EventListItemTest : TestContextBase
         // Arrange
         var wasClicked = false;
         var cut = RenderComponent<EventListItem>(parameters => parameters
-            .Add(p => p.ItemClickEvent, EventCallback.Factory.Create(this, () => wasClicked = true)));
+            .Add(p => p.ItemClickEvent, EventCallback.Factory.Create(this, () => wasClicked = true))
+            .Add(p => p.Id, "testId"));
 
         // Act
         cut.Instance.ItemClicked();

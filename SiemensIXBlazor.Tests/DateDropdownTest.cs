@@ -22,11 +22,12 @@ public class DateDropdownTest : TestContextBase
     public void ComponentRendersWithoutCrashing()
     {
         // Arrange
-        var cut = RenderComponent<DateDropdown>();
+        var cut = RenderComponent<DateDropdown>(parameters => parameters
+            .Add(p => p.Id, "testId"));
 
         // Assert
         cut.MarkupMatches(@"
-                <ix-date-dropdown id='' variant='primary' custom-range-allowed='' week-start-index='0' date-range-id='custom' format='yyyy/LL/dd' i18n-custom-item='Custom...' i18n-done='Done' i18n-no-range='No range set' range=''></ix-date-dropdown>
+                <ix-date-dropdown id='testId' variant='primary' custom-range-allowed='' week-start-index='0' date-range-id='custom' format='yyyy/LL/dd' i18n-custom-item='Custom...' i18n-done='Done' i18n-no-range='No range set' range=''></ix-date-dropdown>
             ");
     }
 

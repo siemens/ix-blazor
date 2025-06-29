@@ -43,7 +43,8 @@ public class ExpandingSearchTest : TestContextBase
         var valueChangedEventInvoked = false;
         var cut = RenderComponent<ExpandingSearch>(parameters => parameters
             .Add(p => p.ValueChangedEvent,
-                EventCallback.Factory.Create<string>(this, _ => valueChangedEventInvoked = true)));
+                EventCallback.Factory.Create<string>(this, _ => valueChangedEventInvoked = true))
+            .Add(p => p.Id, "testId"));
 
         // Act
         cut.Instance.ValueChanged(string.Empty);

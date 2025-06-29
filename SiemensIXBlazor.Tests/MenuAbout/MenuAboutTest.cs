@@ -18,17 +18,19 @@ namespace SiemensIXBlazor.Tests.MenuAbout
         public void ComponentRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<Components.MenuAbout.MenuAbout>();
+            var cut = RenderComponent<Components.MenuAbout.MenuAbout>(parameters => parameters
+                .Add(p => p.Id, "testId"));
 
             // Assert
-            cut.MarkupMatches("<ix-menu-about label=\"About &amp; legal information\" id=\"\"></ix-menu-about>");
+            cut.MarkupMatches("<ix-menu-about label=\"About &amp; legal information\" id=\"testId\"></ix-menu-about>");
         }
 
         [Fact]
         public void ChildContentPropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<Components.MenuAbout.MenuAbout>(parameters => parameters.Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content"))));
+            var cut = RenderComponent<Components.MenuAbout.MenuAbout>(parameters => parameters.Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content")))
+                .Add(p => p.Id, "testId"));
 
             // Assert
             Assert.NotNull(cut.Instance.ChildContent);
@@ -49,7 +51,8 @@ namespace SiemensIXBlazor.Tests.MenuAbout
         {
             // Arrange
             var eventTriggered = false;
-            var cut = RenderComponent<Components.MenuAbout.MenuAbout>(parameters => parameters.Add(p => p.ClosedEvent, EventCallback.Factory.Create<MouseEventArgs>(this, () => eventTriggered = true)));
+            var cut = RenderComponent<Components.MenuAbout.MenuAbout>(parameters => parameters.Add(p => p.ClosedEvent, EventCallback.Factory.Create<MouseEventArgs>(this, () => eventTriggered = true))
+                .Add(p => p.Id, "testId"));
 
             // Act
             cut.Instance.ClosedEvent.InvokeAsync(new MouseEventArgs());

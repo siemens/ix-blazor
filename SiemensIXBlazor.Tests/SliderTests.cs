@@ -87,7 +87,7 @@ public class SliderTests : TestContextBase
                 "listenEvent",
                 It.IsAny<object[]>()
             ))
-            .ReturnsAsync("fakeEventId");
+            .ReturnsAsync("eventId");
 
         jsObjectReferenceMock
             .Setup(js => js.InvokeAsync<object>(
