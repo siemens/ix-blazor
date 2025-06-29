@@ -43,7 +43,8 @@ public class DropdownTest : TestContextBase
 
         var cut = RenderComponent<Components.Dropdown>(parameters => parameters
             .Add(p => p.ShowChangedEvent,
-                EventCallback.Factory.Create<bool>(this, value => isShowChangedEventTriggered = true)));
+                EventCallback.Factory.Create<bool>(this, value => isShowChangedEventTriggered = true))
+            .Add(p => p.Id, "testId"));
 
         // Act
         cut.Instance.ShowChanged(true);

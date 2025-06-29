@@ -19,12 +19,14 @@ namespace SiemensIXBlazor.Tests
         public void ApplicationHeaderRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<ApplicationHeader>(parameters => {
+            var cut = RenderComponent<ApplicationHeader>(parameters =>
+            {
                 parameters.Add(p => p.Name, "testName");
+                parameters.Add(p => p.Id, "testId");
             });
 
             // Assert
-            cut.MarkupMatches("<ix-application-header id='' name='testName'></ix-application-header>");
+            cut.MarkupMatches("<ix-application-header id='testId' name='testName'></ix-application-header>");
         }
 
         [Fact]
@@ -38,7 +40,8 @@ namespace SiemensIXBlazor.Tests
                 .Add(p => p.ChildContent, builder => 
                 {
                     builder.AddContent(0, expectedContent);
-                }));
+                })
+                .Add(p => p.Id, "testId"));
 
             // Assert
             Assert.Contains(expectedContent, cut.Markup);

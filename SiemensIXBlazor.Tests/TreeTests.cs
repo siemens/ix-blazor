@@ -152,12 +152,13 @@ public class TreeTests : TestContextBase
             ))
             .ReturnsAsync(jsObjectReferenceMock.Object);
 
+        // Mock the underlying InvokeAsync method that InvokeVoidAsync calls
         jsObjectReferenceMock
-            .Setup(js => js.InvokeAsync<string>(
+            .Setup(js => js.InvokeAsync<object>(
                 It.IsAny<string>(),
                 It.IsAny<object[]>()
             ))
-            .ReturnsAsync("fakeEventId");
+            .ReturnsAsync(new object());
 
         Services.AddSingleton(jsRuntimeMock.Object);
 
@@ -167,7 +168,7 @@ public class TreeTests : TestContextBase
         );
 
         // Assert
-        jsObjectReferenceMock.Verify(js => js.InvokeAsync<string>(
+        jsObjectReferenceMock.Verify(js => js.InvokeAsync<object>(
             It.Is<string>(s => s == "listenEvent"),
             It.Is<object[]>(args =>
                 args.Length >= 4 &&

@@ -14,16 +14,16 @@ using Microsoft.AspNetCore.Components;
 
 namespace SiemensIXBlazor.Tests
 {
-    public class BlindTests: TestContextBase
+    public class BlindTests : TestContextBase
     {
         [Fact]
         public void ComponentRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<Blind>();
+            var cut = RenderComponent<Blind>(parameters => parameters.Add(p => p.Id, "testId"));
 
             // Assert
-            cut.MarkupMatches("<ix-blind id='' variant='insight'></ix-blind>");
+            cut.MarkupMatches("<ix-blind id='testId' variant='insight'></ix-blind>");
         }
 
         [Fact]
@@ -40,7 +40,7 @@ namespace SiemensIXBlazor.Tests
         public void CollapsedPropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<Blind>(parameters => parameters.Add(p => p.Collapsed, true));
+            var cut = RenderComponent<Blind>(parameters => parameters.Add(p => p.Collapsed, true).Add(p => p.Id, "testId"));
 
             // Assert
             Assert.True(cut.Instance.Collapsed);
@@ -50,7 +50,7 @@ namespace SiemensIXBlazor.Tests
         public void IconPropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<Blind>(parameters => parameters.Add(p => p.Icon, "testIcon"));
+            var cut = RenderComponent<Blind>(parameters => parameters.Add(p => p.Icon, "testIcon").Add(p => p.Id, "testId"));
 
             // Assert
             Assert.Equal("testIcon", cut.Instance.Icon);
@@ -60,7 +60,7 @@ namespace SiemensIXBlazor.Tests
         public void VariantPropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<Blind>(parameters => parameters.Add(p => p.Variant, BlindVariant.insight));
+            var cut = RenderComponent<Blind>(parameters => parameters.Add(p => p.Variant, BlindVariant.insight).Add(p => p.Id, "testId"));
 
             // Assert
             Assert.Equal(BlindVariant.insight, cut.Instance.Variant);
@@ -71,7 +71,8 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             var eventTriggered = false;
-            var cut = RenderComponent<Blind>(parameters => parameters.Add(p => p.CollapsedChangedEvent, EventCallback.Factory.Create<bool>(this, () => eventTriggered = true)));
+            var cut = RenderComponent<Blind>(parameters => parameters.Add(p => p.CollapsedChangedEvent, EventCallback.Factory.Create<bool>(this, () => eventTriggered = true))
+            .Add(p => p.Id, "testId"));
 
             // Act
             cut.Instance.CollapsedChangedEvent.InvokeAsync(true);

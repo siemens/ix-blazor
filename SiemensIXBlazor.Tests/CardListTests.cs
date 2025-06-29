@@ -42,7 +42,8 @@ namespace SiemensIXBlazor.Tests
 		{
 			// Arrange
 			var eventTriggered = false;
-			var cut = RenderComponent<CardList>(parameters => parameters.Add(p => p.CollapseChangedEvent, EventCallback.Factory.Create<bool>(this, () => eventTriggered = true)));
+			var cut = RenderComponent<CardList>(parameters => parameters.Add(p => p.CollapseChangedEvent, EventCallback.Factory.Create<bool>(this, () => eventTriggered = true))
+			.Add(p => p.Id, "testId"));
 
 			// Act
 			cut.Instance.CollapseChangedEvent.InvokeAsync(true);
@@ -56,7 +57,8 @@ namespace SiemensIXBlazor.Tests
 		{
 			// Arrange
 			var eventTriggered = false;
-			var cut = RenderComponent<CardList>(parameters => parameters.Add(p => p.ShowAllClickEvent, EventCallback.Factory.Create(this, () => eventTriggered = true)));
+			var cut = RenderComponent<CardList>(parameters => parameters.Add(p => p.ShowAllClickEvent, EventCallback.Factory.Create(this, () => eventTriggered = true))
+			.Add(p => p.Id, "testId"));
 
 			// Act
 			cut.Instance.ShowAllClickEvent.InvokeAsync();
@@ -70,7 +72,8 @@ namespace SiemensIXBlazor.Tests
 		{
 			// Arrange
 			var eventTriggered = false;
-			var cut = RenderComponent<CardList>(parameters => parameters.Add(p => p.ShowMoreCardClickEvent, EventCallback.Factory.Create(this, () => eventTriggered = true)));
+			var cut = RenderComponent<CardList>(parameters => parameters.Add(p => p.ShowMoreCardClickEvent, EventCallback.Factory.Create(this, () => eventTriggered = true))
+			.Add(p => p.Id, "testId"));
 
 			// Act
 			cut.Instance.ShowMoreCardClickEvent.InvokeAsync();

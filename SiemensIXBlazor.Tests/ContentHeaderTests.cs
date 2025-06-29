@@ -43,7 +43,8 @@ namespace SiemensIXBlazor.Tests
                 .Add(p => p.ChildContent, builder =>
                 {
                     builder.AddContent(0, expectedContent);
-                }));
+                })
+                .Add(p => p.Id, "testId"));
 
             // Assert
             Assert.Contains(expectedContent, cut.Markup);
@@ -54,7 +55,8 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             var eventTriggered = false;
-            var cut = RenderComponent<ContentHeader>(parameters => parameters.Add(p => p.BackButtonClickedEvent, EventCallback.Factory.Create(this, () => eventTriggered = true)));
+            var cut = RenderComponent<ContentHeader>(parameters => parameters.Add(p => p.BackButtonClickedEvent, EventCallback.Factory.Create(this, () => eventTriggered = true))
+            .Add(p => p.Id, "testId"));
 
             // Act
             cut.Instance.BackButtonClickedEvent.InvokeAsync(true);

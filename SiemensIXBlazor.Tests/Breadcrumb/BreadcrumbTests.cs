@@ -42,7 +42,8 @@ namespace SiemensIXBlazor.Tests
                 .Add(p => p.ChildContent, builder => 
                 {
                     builder.AddContent(0, expectedContent);
-                }));
+                })
+                .Add(p => p.Id, "testId"));
 
             // Assert
             Assert.Contains(expectedContent, cut.Markup);
@@ -53,7 +54,8 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             var eventTriggered = false;
-            var cut = RenderComponent<Breadcrumb>(parameters => parameters.Add(p => p.ItemClicked, EventCallback.Factory.Create<string>(this, () => eventTriggered = true)));
+            var cut = RenderComponent<Breadcrumb>(parameters => parameters.Add(p => p.ItemClicked, EventCallback.Factory.Create<string>(this, () => eventTriggered = true))
+            .Add(p => p.Id, "testId"));
 
             // Act
             cut.Instance.ItemClicked.InvokeAsync("test");
@@ -67,7 +69,8 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             var eventTriggered = false;
-            var cut = RenderComponent<Breadcrumb>(parameters => parameters.Add(p => p.NextItemClicked, EventCallback.Factory.Create<string>(this, () => eventTriggered = true)));
+            var cut = RenderComponent<Breadcrumb>(parameters => parameters.Add(p => p.NextItemClicked, EventCallback.Factory.Create<string>(this, () => eventTriggered = true))
+            .Add(p => p.Id, "testId"));
 
             // Act
             cut.Instance.NextItemClicked.InvokeAsync("test");
