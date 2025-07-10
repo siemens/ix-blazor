@@ -12,4 +12,15 @@ namespace SiemensIXBlazor.Playground.Components.Pages.InputFieldsAndSelections.C
 public partial class Checkbox
 {
     private int activeTab = 0;
+
+    public string ContentForBasic { get; private set; } = @"
+    <div style=""margin-bottom: 1rem"">
+      <input type=""checkbox"" id=""checkbox_01"" />
+      <label for=""checkbox_01"">Simple checkbox</label>
+    </div>
+    
+    <div>
+      <input type=""checkbox"" id=""checkbox_02"" disabled />
+      <label for=""checkbox_02"">Disabled checkbox</label>
+    </div>";
 }

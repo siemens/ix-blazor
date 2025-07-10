@@ -1,4 +1,4 @@
-@* -----------------------------------------------------------------------
+﻿@* -----------------------------------------------------------------------
 // SPDX-FileCopyrightText: 2025 Siemens AG
 //
 // SPDX-License-Identifier: MIT
@@ -8,26 +8,24 @@
 // ----------------------------------------------------------------------- *@
 
 @page "/datedropdown"
-@using SiemensIXBlazor.Components;
-@using SiemensIXBlazor.Playground.Shared.CodeHighlighter
-@using SiemensIXBlazor.Playground.Shared.PlaygroundBase
+
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
 
 <PageTitle>Date Dropdown</PageTitle>
 
 <h1>Date Dropdown</h1>
 
-<PlaygroundBase Id="basic" ComponentType="Basic" TabId="date-dropdown-basic" CodeContent="@ContentForBasic">
+<PlaygroundBase Id="basic" ComponentType="Basic" TabId="date-dropdown-basic"  CodeContent="@ContentForBasic">
     <ComponentContent>
-        <SiemensIXBlazor.Components.DateDropdown Id="datedropdown-basic"></SiemensIXBlazor.Components.DateDropdown>
+        <SiemensIXBlazor.Components.DateDropdown Id="date-dropdown-basic"></SiemensIXBlazor.Components.DateDropdown>
     </ComponentContent>
 </PlaygroundBase>
 
-
 <PlaygroundBase Id="dropdown-component" ComponentType="With user defined range options" TabId="date-dropdown-defined"
-    CodeContent="@ContentForDefinedDate">
+                CodeContent="@ContentForDefinedDate">
     <ComponentContent>
         <SiemensIXBlazor.Components.DateDropdown Id="ix-datedropdown-defined-date" DateRangeId="last-7" Format="MM/dd/yyyy"
-            DateRangeOptions="_dateRangeOptions" DateRangeChangeEvent="Callback">
-        </SiemensIXBlazor.Components.DateDropdown>
+            DateRangeOptions="_dateRangeOptions" DateRangeChangeEvent="Callback"></SiemensIXBlazor.Components.DateDropdown>
     </ComponentContent>
+
 </PlaygroundBase>

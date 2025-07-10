@@ -12,4 +12,13 @@ namespace SiemensIXBlazor.Playground.Components.Pages.InputFieldsAndSelections.D
 public partial class DateTimePicker
 {
     private int activeTab = 0;
+
+    public string ContentForBasic { get; private set; } = @"
+    <DateTimePicker
+        DateChangeEvent=""(date) => DateChangeEventTest(date)""
+        From=""2023/02/01""
+        To=""2023/02/15""
+        Id=""datetimepicker1""
+        TimeChangeEvent=""(date) => DateChangeEventTest(date)"">
+    </DateTimePicker>";
 }
