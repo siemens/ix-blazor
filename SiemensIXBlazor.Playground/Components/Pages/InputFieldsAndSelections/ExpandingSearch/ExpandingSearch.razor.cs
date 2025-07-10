@@ -12,4 +12,9 @@ namespace SiemensIXBlazor.Playground.Components.Pages.InputFieldsAndSelections.E
 public partial class ExpandingSearch
 {
     private int activeTab = 0;
+
+    public string CodeContent { get; private set; } = @"
+        <ExpandingSearch Id=""exp-search""
+            ValueChangedEvent=""(value) => SearchValueChanged(value)"">
+        </ExpandingSearch>";
 }

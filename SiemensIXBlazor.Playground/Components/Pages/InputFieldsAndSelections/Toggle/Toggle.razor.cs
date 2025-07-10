@@ -12,4 +12,7 @@ namespace SiemensIXBlazor.Playground.Components.Pages.InputFieldsAndSelections.T
 public partial class Toggle
 {
     private int activeTab = 0;
+
+    public string CodeContent { get; private set; } = @"
+        <Toggle></Toggle>";
 }
