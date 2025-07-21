@@ -8,32 +8,28 @@
 // ----------------------------------------------------------------------- *@
 
 @page "/panes"
-@using SiemensIXBlazor.Components;
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
 
 <PageTitle>Panes</PageTitle>
 
 <h1>Panes</h1>
 
-<Tabs Id="panes-demo" SelectedChangeEvent="@(e => activeTab = e)">
-    <ix-tab-item data-tab-id="0">
-        <div class="tab-content">
-            Usage
-            <ix-icon name="document"></ix-icon>
-        </div>
-    </ix-tab-item>
-    <ix-tab-item data-tab-id="1">
-        <div class="tab-content">
-            Code
-            <ix-icon name="code"></ix-icon>
-        </div>
-    </ix-tab-item>
-</Tabs>
-
-<div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-    <p>Placeholder content for the Usage tab.</p>
-</div>
-
-<div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-    <p>Placeholder content for the Code tab.</p>
-</div>
-
+<PlaygroundBase Id="basic" ComponentType="Basic" TabId="panes-basic" CodeContent="@ContentForBasic">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.PaneLayout Id="panes-basic" Variant="Enums.Pane.PaneVariant.inline"
+            Layout="full-horizontal" Borderless="true">
+            <SiemensIXBlazor.Components.Pane Id="pane1" Heading="Pane Left" Slot="left" Size="25%">
+                <p>This is the left pane</p>
+            </SiemensIXBlazor.Components.Pane>
+            <SiemensIXBlazor.Components.Pane Id="pane2" Heading="Pane Top" Slot="top" Size="25%">
+                <p>This is the top pane</p>
+            </SiemensIXBlazor.Components.Pane>
+            <SiemensIXBlazor.Components.Pane Id="pane3" Heading="Pane Right" Slot="right" Size="25%">
+                <p>This is the right pane</p>
+            </SiemensIXBlazor.Components.Pane>
+            <SiemensIXBlazor.Components.Pane Id="pane4" Heading="Pane Bottom" Slot="bottom" Size="25%">
+                <p>This is the bottom pane</p>
+            </SiemensIXBlazor.Components.Pane>
+        </SiemensIXBlazor.Components.PaneLayout>
+    </ComponentContent>
+</PlaygroundBase>

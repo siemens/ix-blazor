@@ -12,4 +12,19 @@ namespace SiemensIXBlazor.Playground.Components.Pages.ContainersAndLayout.Flip;
 public partial class Flip
 {
     private int activeTab = 0;
+
+    public string ContentForBasic { get; private set; } = @"
+    <FlipTile>
+        <div slot=""header"">Flip header</div>
+    
+        <div slot=""footer"">
+          <div>Predicted maintenance date</div>
+          <div class=""d-flex align-items-center"">
+            <ix-icon name=""info"" size=""16""></ix-icon>2021-06-22
+          </div>
+        </div>
+    
+        <FlipTileContent> Example 1 </FlipTileContent>
+        <FlipTileContent> Example 2 </FlipTileContent>
+    </FlipTile>";
 }
