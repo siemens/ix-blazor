@@ -12,4 +12,16 @@ namespace SiemensIXBlazor.Playground.Components.Pages.ContainersAndLayout.Card;
 public partial class Card
 {
     private int activeTab = 0;
+
+    public string ContentForBasic { get; private set; } = @"
+    <Card Variant=""CardVariant.info"">
+        <ix-icon name=""capacity""></ix-icon>
+        <ix-typography bold>Number of components</ix-typography>
+        <ix-typography>
+            Item 1<br />
+            Item 2<br />
+            Item 3
+        </ix-typography>
+        <ix-typography format=""h1"">3</ix-typography>
+    </Card>";
 }

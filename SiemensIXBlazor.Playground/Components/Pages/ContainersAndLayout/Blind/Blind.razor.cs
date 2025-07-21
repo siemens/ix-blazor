@@ -12,4 +12,12 @@ namespace SiemensIXBlazor.Playground.Components.Pages.ContainersAndLayout.Blind;
 public partial class Blind
 {
     private int activeTab = 0;
+
+    public string ContentForBasic { get; private set; } = @"
+    <Blind
+        Label=""Test Blind""
+        Id=""blind1""
+        CollapsedChangedEvent=""(value) => BlindEventHandler(value)"">
+        Test content
+    </Blind>";
 }

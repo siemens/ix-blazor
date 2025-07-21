@@ -12,4 +12,24 @@ namespace SiemensIXBlazor.Playground.Components.Pages.ContainersAndLayout.CardLi
 public partial class CardList
 {
     private int activeTab = 0;
+
+    public string ContentForBasic { get; private set; } = @"
+    <CardList Id=""carlist1"" Label=""Stack Layout"" ShowAllCount=""12"" ListStyle=""Enums.CardList.CardListStyle.Stack"" CollapseChangedEvent=""CardListCollapsedChanged""
+    ShowAllClickEvent=""CardListShowAllClicked"" ShowMoreCardClickEvent=""CardListShowMoreClicked"">
+        <PushCard Icon=""rocket""
+                  Notification=""3""
+                  Heading=""Heading content""
+                  SubHeading=""Subheading""
+                  Variant=""PushCardVariant.outline""></PushCard>
+        <PushCard Icon=""bulb""
+                  Notification=""1""
+                  Heading=""Heading content""
+                  SubHeading=""Subheading""
+                  Variant=""PushCardVariant.warning""></PushCard>
+        <PushCard Icon=""rocket""
+                  Notification=""3""
+                  Heading=""Heading content""
+                  SubHeading=""Subheading""
+                  Variant=""PushCardVariant.success""></PushCard>
+    </CardList>";
 }

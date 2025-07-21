@@ -8,32 +8,28 @@
 // ----------------------------------------------------------------------- *@
 
 @page "/card"
-@using SiemensIXBlazor.Components;
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
 
 <PageTitle>Card</PageTitle>
 
 <h1>Card</h1>
 
-<Tabs Id="card-demo" SelectedChangeEvent="@(e => activeTab = e)">
-    <ix-tab-item data-tab-id="0">
-        <div class="tab-content">
-            Usage
-            <ix-icon name="document"></ix-icon>
-        </div>
-    </ix-tab-item>
-    <ix-tab-item data-tab-id="1">
-        <div class="tab-content">
-            Code
-            <ix-icon name="code"></ix-icon>
-        </div>
-    </ix-tab-item>
-</Tabs>
-
-<div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-    <p>Placeholder content for the Usage tab.</p>
-</div>
-
-<div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-    <p>Placeholder content for the Code tab.</p>
-</div>
-
+<PlaygroundBase Id="basic" ComponentType="Basic" TabId="card-basic" CodeContent="@ContentForBasic">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Card Id="card-basic" Variant="Enums.CardVariant.info">
+            <SiemensIXBlazor.Components.IconButton Icon="capacity">
+            </SiemensIXBlazor.Components.IconButton>
+            <SiemensIXBlazor.Components.Typography Bold>
+                Number of components
+            </SiemensIXBlazor.Components.Typography>
+            <SiemensIXBlazor.Components.Typography>
+                Item1 <br />
+                Item2 <br />
+                Item3
+            </SiemensIXBlazor.Components.Typography>
+            <SiemensIXBlazor.Components.Typography Format="Enums.Typography.TypographyFormat.H1">
+                3
+            </SiemensIXBlazor.Components.Typography>
+        </SiemensIXBlazor.Components.Card>
+    </ComponentContent>
+</PlaygroundBase>
