@@ -8,32 +8,181 @@
 // ----------------------------------------------------------------------- *@
 
 @page "/button"
-@using SiemensIXBlazor.Components;
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
 
 <PageTitle>Button</PageTitle>
 
 <h1>Button</h1>
 
-<Tabs Id="button-demo" SelectedChangeEvent="@(e => activeTab = e)">
-    <ix-tab-item data-tab-id="0">
-        <div class="tab-content">
-            Usage
-            <ix-icon name="document"></ix-icon>
-        </div>
-    </ix-tab-item>
-    <ix-tab-item data-tab-id="1">
-        <div class="tab-content">
-            Code
-            <ix-icon name="code"></ix-icon>
-        </div>
-    </ix-tab-item>
-</Tabs>
+<PlaygroundBase Id="primary" ComponentType="Primary" TabId="primary-button" CodeContent="@ContentForPrimary">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Button Id="primary-button" Variant="Enums.Button.ButtonVariant.primary">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
 
-<div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-    <p>Placeholder content for the Usage tab.</p>
-</div>
+        <SiemensIXBlazor.Components.Button Id="primary-button-disabled" Disabled Variant="Enums.Button.ButtonVariant.primary">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
+    </ComponentContent>
+</PlaygroundBase>
 
-<div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-    <p>Placeholder content for the Code tab.</p>
-</div>
+<PlaygroundBase Id="primaryOutline" ComponentType="Primary Outline" TabId="primary-outline-button" CodeContent="@ContentForPrimaryOutline">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Button Id="primary-outline-button" Outline Variant="Enums.Button.ButtonVariant.primary">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
 
+        <SiemensIXBlazor.Components.Button Id="primary-outline-button-disabled" Outline Disabled 
+        Variant="Enums.Button.ButtonVariant.primary">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="primaryGhost" ComponentType="Primary Ghost" TabId="primary-ghost-button" CodeContent="@ContentForPrimaryGhost">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Button Id="primary-ghost-button" Ghost Variant="Enums.Button.ButtonVariant.primary">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
+
+        <SiemensIXBlazor.Components.Button Id="primary-ghost-button-disabled" Ghost Disabled 
+        Variant="Enums.Button.ButtonVariant.primary">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="secondary" ComponentType="Secondary" TabId="secondary-button" CodeContent="@ContentForSecondary">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Button Id="secondary-button" Variant="Enums.Button.ButtonVariant.secondary">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
+
+        <SiemensIXBlazor.Components.Button Id="secondary-button-disabled" Disabled Variant="Enums.Button.ButtonVariant.secondary">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="secondaryOutline" ComponentType="Secondary Outline" TabId="secondary-outline-button" CodeContent="@ContentForSecondaryOutline">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Button Id="secondary-outline-button" Outline Variant="Enums.Button.ButtonVariant.secondary">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
+
+        <SiemensIXBlazor.Components.Button Id="secondary-outline-button-disabled" Outline Disabled 
+        Variant="Enums.Button.ButtonVariant.secondary">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="secondaryGhost" ComponentType="Secondary Ghost" TabId="secondary-ghost-button" CodeContent="@ContentForSecondaryGhost">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Button Id="secondary-ghost-button" Ghost Variant="Enums.Button.ButtonVariant.secondary">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
+
+        <SiemensIXBlazor.Components.Button Id="secondary-ghost-button-disabled" Ghost Disabled 
+        Variant="Enums.Button.ButtonVariant.secondary">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="danger" ComponentType="Danger" TabId="danger-button" CodeContent="@ContentForDanger">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Button Id="danger-button" Variant="Enums.Button.ButtonVariant.danger">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
+
+        <SiemensIXBlazor.Components.Button Id="danger-button-disabled" Disabled Variant="Enums.Button.ButtonVariant.danger">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="dangerOutline" ComponentType="Danger Outline" TabId="danger-outline-button" CodeContent="@ContentForDangerOutline">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Button Id="danger-outline-button" Outline Variant="Enums.Button.ButtonVariant.danger">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
+
+        <SiemensIXBlazor.Components.Button Id="danger-outline-button-disabled" Outline Disabled 
+        Variant="Enums.Button.ButtonVariant.danger">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="dangerGhost" ComponentType="Danger Ghost" TabId="danger-ghost-button" CodeContent="@ContentForDangerGhost">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Button Id="danger-ghost-button" Ghost Variant="Enums.Button.ButtonVariant.danger">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
+
+        <SiemensIXBlazor.Components.Button Id="danger-ghost-button-disabled" Ghost Disabled 
+        Variant="Enums.Button.ButtonVariant.danger">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
+    </ComponentContent>
+</PlaygroundBase>
+
+@* <PlaygroundBase Id="buttonGroup" ComponentType="Button group" TabId="button-group" CodeContent="@ContentFor">
+    <ComponentContent>
+        
+    BURADA BUTON GRUBU OLMALI
+        <SiemensIXBlazor.Components.Button Id="danger-ghost-button-disabled" Ghost Disabled Variant="Enums.Button.ButtonVariant.danger">
+        </SiemensIXBlazor.Components.Button>
+    </ComponentContent>
+</PlaygroundBase> *@
+
+<PlaygroundBase Id="textAndIconButton" ComponentType="Button with text and icon" TabId="text-and-icon-button" 
+CodeContent="@ContentForTextAndIconButton">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Button Id="primary-text-and-icon-button" Icon="Star">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
+
+        <SiemensIXBlazor.Components.Button Id="secondary-text-and-icon-button" Icon="Star" 
+        Variant="Enums.Button.ButtonVariant.secondary">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
+        
+        <SiemensIXBlazor.Components.Button Id="primary-outline-text-and-icon-button" Outline Icon="Star">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
+        
+        <SiemensIXBlazor.Components.Button Id="primary-ghost-text-and-icon-button" Ghost Icon="Star">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="loadingButton" ComponentType="Loading Button" TabId="loading-button" CodeContent="@ContentForLoadingButton">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Button Id="loading-button" Outline Loading>
+            Test Button
+        </SiemensIXBlazor.Components.Button>
+        
+        <SiemensIXBlazor.Components.Button Id="loading-button" Outline Loading Icon="Star">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
+        
+        <SiemensIXBlazor.Components.Button Id="loading-button" Outline Loading Icon="Star">
+        </SiemensIXBlazor.Components.Button>
+        
+        <SiemensIXBlazor.Components.Button Id="loading-button" Outline Loading 
+        Variant="Enums.Button.ButtonVariant.secondary" Icon="Star">
+        </SiemensIXBlazor.Components.Button>
+        
+        <SiemensIXBlazor.Components.Button Id="loading-button" Outline Loading 
+        Variant="Enums.Button.ButtonVariant.secondary">
+            Test Button
+        </SiemensIXBlazor.Components.Button>
+        
+        <SiemensIXBlazor.Components.Button Id="loading-button" Outline Loading 
+        Variant="Enums.Button.ButtonVariant.secondary">
+        </SiemensIXBlazor.Components.Button>
+    </ComponentContent>
+</PlaygroundBase>
