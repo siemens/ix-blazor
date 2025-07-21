@@ -13,7 +13,7 @@ public partial class Panes
 {
     private int activeTab = 0;
 
-    public string ContentForBasic { get; private set; } = @"
+    public string ContentForPaneLayout { get; private set; } = @"
     <PaneLayout Id=""pane-layout""
                     Variant=""@PaneVariant.floating""
                     Layout=""full-horizontal""
