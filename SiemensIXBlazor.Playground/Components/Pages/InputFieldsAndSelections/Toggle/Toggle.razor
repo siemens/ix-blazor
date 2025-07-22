@@ -15,9 +15,37 @@
 <h1>Toggle</h1>
 
 
-<PlaygroundBase Id="basic" ComponentType="Basic" TabId="toggle-basic" CodeContent="@CodeContent">
+<PlaygroundBase Id="basic" ComponentType="Basic" TabId="toggle-basic" CodeContent="@ContentForBasic">
     <ComponentContent>
         <SiemensIXBlazor.Components.Toggle Id="toggle-basic">
+        </SiemensIXBlazor.Components.Toggle>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="customLabel" ComponentType="Custom label" TabId="custom-label-toggle" CodeContent="@ContentForCustomLabel">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Toggle Id="custom-label-toggle" TextOn="Online" TextOff="Offline">
+        </SiemensIXBlazor.Components.Toggle>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="disabled" ComponentType="Disabled" TabId="disabled-toggle" CodeContent="@ContentForDisabled">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Toggle Id="disabled-toggle" Disabled>
+        </SiemensIXBlazor.Components.Toggle>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="checked" ComponentType="Checked" TabId="checked-toggle" CodeContent="@ContentForChecked">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Toggle Id="checked-toggle" Checked>
+        </SiemensIXBlazor.Components.Toggle>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="indeterminate" ComponentType="Indeterminate" TabId="indeterminate-toggle" CodeContent="@ContentForIndeterminate">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Toggle Id="indeterminate-toggle" Indeterminate>
         </SiemensIXBlazor.Components.Toggle>
     </ComponentContent>
 </PlaygroundBase>
