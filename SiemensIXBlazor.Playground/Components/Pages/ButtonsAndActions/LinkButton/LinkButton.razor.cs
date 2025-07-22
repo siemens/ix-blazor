@@ -12,4 +12,9 @@ namespace SiemensIXBlazor.Playground.Components.Pages.ButtonsAndActions.LinkButt
 public partial class LinkButton
 {
     private int activeTab = 0;
+
+    public string ContentForBasic { get; private set; } = @"
+        <LinkButton Url=""https://ix.siemens.io/"">Link text</LinkButton>";
+    public string ContentForDisabled { get; private set; } = @"
+        <LinkButton Url=""https://ix.siemens.io/"" Disabled>Link text</LinkButton>";
 }

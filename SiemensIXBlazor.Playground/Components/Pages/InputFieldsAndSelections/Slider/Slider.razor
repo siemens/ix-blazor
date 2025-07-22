@@ -15,9 +15,32 @@
 <h1>Slider</h1>
 
 
-<PlaygroundBase Id="basic" ComponentType="Basic" TabId="slider-basic" CodeContent="@CodeContent">
+<PlaygroundBase Id="basic" ComponentType="Basic" TabId="slider-basic" CodeContent="@ContentForBasic">
     <ComponentContent>
-        <SiemensIXBlazor.Components.Slider.Slider Id="slider-basic">
+        <SiemensIXBlazor.Components.Slider.Slider Id="slider-basic" Value="25">
+        </SiemensIXBlazor.Components.Slider.Slider>
+        
+        <SiemensIXBlazor.Components.Slider.Slider Id="slider-basic" Min="0" Max="50" Step="10" Value="10">
+        </SiemensIXBlazor.Components.Slider.Slider>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="marker" ComponentType="Marker" TabId="slider-marker" CodeContent="@ContentForMarker">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Slider.Slider Id="slider-marker" Value="25" Marker="[0, 25, 50, 75, 100]">
+        </SiemensIXBlazor.Components.Slider.Slider>
+        
+        <SiemensIXBlazor.Components.Slider.Slider Id="slider-marker" Min="0" Max="50" Step="10" Value="10" Marker="[0, 25, 50, 75, 100]">
+        </SiemensIXBlazor.Components.Slider.Slider>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="trace" ComponentType="Trace" TabId="slider-trace" CodeContent="@ContentForTrace">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Slider.Slider Id="slider-trace" Trace Value="25" Marker="[0, 25, 50, 75, 100]">
+        </SiemensIXBlazor.Components.Slider.Slider>
+        
+        <SiemensIXBlazor.Components.Slider.Slider Id="slider-trace" Trace Min="0" Max="50" Step="10" Value="10" Marker="[0, 25, 50, 75, 100]">
         </SiemensIXBlazor.Components.Slider.Slider>
     </ComponentContent>
 </PlaygroundBase>

@@ -8,32 +8,51 @@
 // ----------------------------------------------------------------------- *@
 
 @page "/iconbutton"
-@using SiemensIXBlazor.Components;
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
 
 <PageTitle>Icon Button</PageTitle>
 
 <h1>Icon Button</h1>
 
-<Tabs Id="iconbutton-demo" SelectedChangeEvent="@(e => activeTab = e)">
-    <ix-tab-item data-tab-id="0">
-        <div class="tab-content">
-            Usage
-            <ix-icon name="document"></ix-icon>
-        </div>
-    </ix-tab-item>
-    <ix-tab-item data-tab-id="1">
-        <div class="tab-content">
-            Code
-            <ix-icon name="code"></ix-icon>
-        </div>
-    </ix-tab-item>
-</Tabs>
+<PlaygroundBase Id="basic" ComponentType="Basic" TabId="icon-button-basic" CodeContent="@ContentForBasic">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.IconButton Icon="Info">
+        </SiemensIXBlazor.Components.IconButton>
 
-<div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-    <p>Placeholder content for the Usage tab.</p>
-</div>
+        <SiemensIXBlazor.Components.IconButton Icon="Info" Variant="Enums.Button.ButtonVariant.secondary">
+        </SiemensIXBlazor.Components.IconButton>
 
-<div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-    <p>Placeholder content for the Code tab.</p>
-</div>
+        <SiemensIXBlazor.Components.IconButton Icon="Info" Variant="Enums.Button.ButtonVariant.danger">
+        </SiemensIXBlazor.Components.IconButton>
 
+        <SiemensIXBlazor.Components.IconButton Icon="Info" Outline>
+        </SiemensIXBlazor.Components.IconButton>
+
+        <SiemensIXBlazor.Components.IconButton Icon="Info" Ghost>
+        </SiemensIXBlazor.Components.IconButton>
+
+        <SiemensIXBlazor.Components.IconButton Icon="Info" Oval=true>
+        </SiemensIXBlazor.Components.IconButton>
+
+        <SiemensIXBlazor.Components.IconButton Icon="Info" Variant="Enums.Button.ButtonVariant.secondary" Oval=true>
+        </SiemensIXBlazor.Components.IconButton>
+
+        <SiemensIXBlazor.Components.IconButton Icon="Info" Variant="Enums.Button.ButtonVariant.danger" Oval=true>
+        </SiemensIXBlazor.Components.IconButton>
+
+        <SiemensIXBlazor.Components.IconButton Icon="Info" Outline Oval=true>
+        </SiemensIXBlazor.Components.IconButton>
+
+        <SiemensIXBlazor.Components.IconButton Icon="Info" Ghost Oval=true>
+        </SiemensIXBlazor.Components.IconButton>
+        
+        <SiemensIXBlazor.Components.IconButton Icon="Info" Size="Enums.Button.IconButtonSize._12">
+        </SiemensIXBlazor.Components.IconButton>
+
+        <SiemensIXBlazor.Components.IconButton Icon="Info" Size="Enums.Button.IconButtonSize._16">
+        </SiemensIXBlazor.Components.IconButton>
+        
+        <SiemensIXBlazor.Components.IconButton Icon="Info" Size="Enums.Button.IconButtonSize._24">
+        </SiemensIXBlazor.Components.IconButton>
+    </ComponentContent>
+</PlaygroundBase>

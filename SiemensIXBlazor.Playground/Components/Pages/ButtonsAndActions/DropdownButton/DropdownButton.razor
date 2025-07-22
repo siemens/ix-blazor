@@ -8,32 +8,84 @@
 // ----------------------------------------------------------------------- *@
 
 @page "/dropdownbutton"
-@using SiemensIXBlazor.Components;
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
 
 <PageTitle>Dropdown Button</PageTitle>
 
 <h1>Dropdown Button</h1>
 
-<Tabs Id="dropdownbutton-demo" SelectedChangeEvent="@(e => activeTab = e)">
-    <ix-tab-item data-tab-id="0">
-        <div class="tab-content">
-            Usage
-            <ix-icon name="document"></ix-icon>
-        </div>
-    </ix-tab-item>
-    <ix-tab-item data-tab-id="1">
-        <div class="tab-content">
-            Code
-            <ix-icon name="code"></ix-icon>
-        </div>
-    </ix-tab-item>
-</Tabs>
+<PlaygroundBase Id="basic" ComponentType="Basic" TabId="dropdown-button-basic" CodeContent="@ContentForBasic">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.DropdownButton Id="dropdown-button-basic" Icon="Checkboxes" Label="Dropdown">
+            <SiemensIXBlazor.Components.DropdownItem Label="Item 1" Value="1">
+            </SiemensIXBlazor.Components.DropdownItem>
 
-<div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-    <p>Placeholder content for the Usage tab.</p>
-</div>
+            <SiemensIXBlazor.Components.DropdownItem Label="Item 2" Value="2">
+            </SiemensIXBlazor.Components.DropdownItem>
+        </SiemensIXBlazor.Components.DropdownButton>
 
-<div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-    <p>Placeholder content for the Code tab.</p>
-</div>
+        <SiemensIXBlazor.Components.DropdownButton Id="dropdown-outline-button-basic"
+                                                   Outline Icon="Checkboxes" Label="Dropdown">
 
+            <SiemensIXBlazor.Components.DropdownItem Label="Item 1" Value="1">
+            </SiemensIXBlazor.Components.DropdownItem>
+
+            <SiemensIXBlazor.Components.DropdownItem Label="Item 2" Value="2">
+            </SiemensIXBlazor.Components.DropdownItem>
+
+        </SiemensIXBlazor.Components.DropdownButton>
+
+        <SiemensIXBlazor.Components.DropdownButton Id="dropdown-ghost-button-basic"
+                                                   Ghost Icon="Checkboxes" Label="Dropdown">
+
+            <SiemensIXBlazor.Components.DropdownItem Label="Item 1" Value="1">
+            </SiemensIXBlazor.Components.DropdownItem>
+
+            <SiemensIXBlazor.Components.DropdownItem Label="Item 2" Value="2">
+            </SiemensIXBlazor.Components.DropdownItem>
+
+        </SiemensIXBlazor.Components.DropdownButton>
+
+        <SiemensIXBlazor.Components.DropdownButton Id="dropdown-disabled-button-basic"
+                                                   Disabled Icon="Checkboxes" Label="Dropdown">
+        </SiemensIXBlazor.Components.DropdownButton>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="icon" ComponentType="Icon" TabId="dropdown-button-icon" CodeContent="@ContentForIcon">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.DropdownButton Id="dropdown-button-icon" Icon="Checkboxes" Label="">
+            <SiemensIXBlazor.Components.DropdownItem Label="Item 1" Value="1">
+            </SiemensIXBlazor.Components.DropdownItem>
+
+            <SiemensIXBlazor.Components.DropdownItem Label="Item 2" Value="2">
+            </SiemensIXBlazor.Components.DropdownItem>
+        </SiemensIXBlazor.Components.DropdownButton>
+
+        <SiemensIXBlazor.Components.DropdownButton Id="dropdown-outline-button-icon"
+                                                   Outline Icon="Checkboxes" Label="">
+
+            <SiemensIXBlazor.Components.DropdownItem Label="Item 1" Value="1">
+            </SiemensIXBlazor.Components.DropdownItem>
+
+            <SiemensIXBlazor.Components.DropdownItem Label="Item 2" Value="2">
+            </SiemensIXBlazor.Components.DropdownItem>
+
+        </SiemensIXBlazor.Components.DropdownButton>
+
+        <SiemensIXBlazor.Components.DropdownButton Id="dropdown-ghost-button-icon"
+                                                   Ghost Icon="Checkboxes" Label="">
+
+            <SiemensIXBlazor.Components.DropdownItem Label="Item 1" Value="1">
+            </SiemensIXBlazor.Components.DropdownItem>
+
+            <SiemensIXBlazor.Components.DropdownItem Label="Item 2" Value="2">
+            </SiemensIXBlazor.Components.DropdownItem>
+
+        </SiemensIXBlazor.Components.DropdownButton>
+
+        <SiemensIXBlazor.Components.DropdownButton Id="dropdown-disabled-button-icon"
+                                                   Disabled Icon="Checkboxes" Label="">
+        </SiemensIXBlazor.Components.DropdownButton>
+    </ComponentContent>
+</PlaygroundBase>

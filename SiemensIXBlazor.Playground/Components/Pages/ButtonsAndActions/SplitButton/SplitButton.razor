@@ -8,32 +8,32 @@
 // ----------------------------------------------------------------------- *@
 
 @page "/splitbutton"
-@using SiemensIXBlazor.Components;
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
 
 <PageTitle>Split Button</PageTitle>
 
 <h1>Split Button</h1>
 
-<Tabs Id="splitbutton-demo" SelectedChangeEvent="@(e => activeTab = e)">
-    <ix-tab-item data-tab-id="0">
-        <div class="tab-content">
-            Usage
-            <ix-icon name="document"></ix-icon>
-        </div>
-    </ix-tab-item>
-    <ix-tab-item data-tab-id="1">
-        <div class="tab-content">
-            Code
-            <ix-icon name="code"></ix-icon>
-        </div>
-    </ix-tab-item>
-</Tabs>
+<PlaygroundBase Id="basic" ComponentType="Basic" TabId="split-button-basic" CodeContent="@ContentForBasic">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.SplitButton Id="split-button-basic" SplitIcon="chevron-down-small" Label="Split Button">
+            <SiemensIXBlazor.Components.DropdownItem Id="split-button-basic" Label="Item 1">
+            </SiemensIXBlazor.Components.DropdownItem>
 
-<div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-    <p>Placeholder content for the Usage tab.</p>
-</div>
+            <SiemensIXBlazor.Components.DropdownItem Id="split-button-basic" Label="Item 2">
+            </SiemensIXBlazor.Components.DropdownItem>
+        </SiemensIXBlazor.Components.SplitButton>
+    </ComponentContent>
+</PlaygroundBase>
 
-<div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-    <p>Placeholder content for the Code tab.</p>
-</div>
-
+<PlaygroundBase Id="withIconOnly" ComponentType="With icon only" TabId="icon-only-split-button" CodeContent="@ContentForIconOnly">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.SplitButton Id="icon-only-split-button" Label="Split Button" SplitIcon="chevron-down-small">
+            <SiemensIXBlazor.Components.DropdownItem Id="icon-only-split-button" Icon="Cut">
+            </SiemensIXBlazor.Components.DropdownItem>
+            
+            <SiemensIXBlazor.Components.DropdownItem Id="icon-only-split-button" Icon="Bulb">
+            </SiemensIXBlazor.Components.DropdownItem>
+        </SiemensIXBlazor.Components.SplitButton>
+    </ComponentContent>
+</PlaygroundBase>

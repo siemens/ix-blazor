@@ -8,32 +8,264 @@
 // ----------------------------------------------------------------------- *@
 
 @page "/togglebutton"
-@using SiemensIXBlazor.Components;
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
 
 <PageTitle>Toggle Button</PageTitle>
 
 <h1>Toggle Button</h1>
 
-<Tabs Id="togglebutton-demo" SelectedChangeEvent="@(e => activeTab = e)">
-    <ix-tab-item data-tab-id="0">
-        <div class="tab-content">
-            Usage
-            <ix-icon name="document"></ix-icon>
-        </div>
-    </ix-tab-item>
-    <ix-tab-item data-tab-id="1">
-        <div class="tab-content">
-            Code
-            <ix-icon name="code"></ix-icon>
-        </div>
-    </ix-tab-item>
-</Tabs>
+<PlaygroundBase Id="primary" ComponentType="Toggle button primary" TabId="toggle-button-primary" CodeContent="@ContentForPrimary">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-primary"
+                                                              Variant="Enums.Button.ButtonVariant.primary">
+            Normal
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
 
-<div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-    <p>Placeholder content for the Usage tab.</p>
-</div>
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-primary" Pressed
+                                                              Variant="Enums.Button.ButtonVariant.primary">
+            Pressed
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
 
-<div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-    <p>Placeholder content for the Code tab.</p>
-</div>
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-primary" Disabled
+                                                              Variant="Enums.Button.ButtonVariant.primary">
+            Disabled
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
 
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-primary" Disabled Loading
+                                                              Variant="Enums.Button.ButtonVariant.primary">
+            Loading
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="primary-outline" ComponentType="Toggle button primary outline" TabId="toggle-button-primary-outline" CodeContent="@ContentForPrimaryOutline">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-primary-outline" Outline
+                                                              Variant="Enums.Button.ButtonVariant.primary">
+            Normal
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
+
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-primary-outline" Pressed Outline
+                                                              Variant="Enums.Button.ButtonVariant.primary">
+            Pressed
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
+
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-primary-outline" Disabled Outline
+                                                              Variant="Enums.Button.ButtonVariant.primary">
+            Disabled
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
+
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-primary-outline" Disabled Loading Outline
+                                                              Variant="Enums.Button.ButtonVariant.primary">
+            Loading
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="primary-ghost" ComponentType="Toggle button primary ghost" TabId="toggle-button-primary-ghost" CodeContent="@ContentForPrimaryGhost">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-primary-ghost" Ghost
+                                                              Variant="Enums.Button.ButtonVariant.primary">
+            Normal
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
+
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-primary-ghost" Pressed Ghost
+                                                              Variant="Enums.Button.ButtonVariant.primary">
+            Pressed
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
+
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-primary-ghost" Disabled Ghost
+                                                              Variant="Enums.Button.ButtonVariant.primary">
+            Disabled
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
+
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-primary-ghost" Disabled Loading Ghost
+                                                              Variant="Enums.Button.ButtonVariant.primary">
+            Loading
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="secondary" ComponentType="Toggle button secondary" TabId="toggle-button-secondary" CodeContent="@ContentForSecondary">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-secondary"
+                                                              Variant="Enums.Button.ButtonVariant.secondary">
+            Normal
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
+
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-secondary" Pressed
+                                                              Variant="Enums.Button.ButtonVariant.secondary">
+            Pressed
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
+
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-secondary" Disabled
+                                                              Variant="Enums.Button.ButtonVariant.secondary">
+            Disabled
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
+
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-secondary" Disabled Loading
+                                                              Variant="Enums.Button.ButtonVariant.secondary">
+            Loading
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="secondary-outline" ComponentType="Toggle button secondary outline" TabId="toggle-button-secondary-outline" CodeContent="@ContentForSecondaryOutline">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-secondary-outline" Outline
+                                                              Variant="Enums.Button.ButtonVariant.secondary">
+            Normal
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
+
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-secondary-outline" Pressed Outline
+                                                              Variant="Enums.Button.ButtonVariant.secondary">
+            Pressed
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
+
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-secondary-outline" Disabled Outline
+                                                              Variant="Enums.Button.ButtonVariant.secondary">
+            Disabled
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
+
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-secondary-outline" Disabled Loading Outline
+                                                              Variant="Enums.Button.ButtonVariant.secondary">
+            Loading
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="secondary-ghost" ComponentType="Toggle button secondary ghost" TabId="toggle-button-secondary-ghost" CodeContent="@ContentForSecondaryGhost">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-secondary-ghost" Ghost
+                                                              Variant="Enums.Button.ButtonVariant.secondary">
+            Normal
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
+
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-secondary-ghost" Pressed Ghost
+                                                              Variant="Enums.Button.ButtonVariant.secondary">
+            Pressed
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
+
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-secondary-ghost" Disabled Ghost
+                                                              Variant="Enums.Button.ButtonVariant.secondary">
+            Disabled
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
+
+        <SiemensIXBlazor.Components.ToggleButton.ToggleButton Id="toggle-button-secondary-ghost" Disabled Loading Ghost
+                                                              Variant="Enums.Button.ButtonVariant.secondary">
+            Loading
+        </SiemensIXBlazor.Components.ToggleButton.ToggleButton>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="icon-secondary-outline" ComponentType="Icon Toggle button secondary outline" TabId="icon-toggle-button-secondary-outline" CodeContent="@ContentForIconToggleButtonSecondaryOutline">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-secondary-outline" Outline Icon="checkboxes">
+        </SiemensIXBlazor.Components.IconToggleButton>
+
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-secondary-outline" Outline Pressed Icon="checkboxes">
+        </SiemensIXBlazor.Components.IconToggleButton>
+
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-secondary-outline" Outline Disabled Icon="checkboxes">
+        </SiemensIXBlazor.Components.IconToggleButton>
+
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-secondary-outline" Outline Disabled Loading Icon="checkboxes">
+        </SiemensIXBlazor.Components.IconToggleButton>
+
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-secondary-outline" Outline Icon="checkboxes" Size="16">
+        </SiemensIXBlazor.Components.IconToggleButton>
+
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-secondary-outline" Outline Pressed Icon="checkboxes" Size="16">
+        </SiemensIXBlazor.Components.IconToggleButton>
+
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-secondary-outline" Outline Disabled Icon="checkboxes" Size="16">
+        </SiemensIXBlazor.Components.IconToggleButton>
+
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-secondary-outline" Outline Disabled Loading Icon="checkboxes" Size="16">
+        </SiemensIXBlazor.Components.IconToggleButton>
+
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-secondary-outline" Outline Icon="checkboxes" Size="12">
+        </SiemensIXBlazor.Components.IconToggleButton>
+
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-secondary-outline" Outline Pressed Icon="checkboxes" Size="12">
+        </SiemensIXBlazor.Components.IconToggleButton>
+
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-secondary-outline" Outline Disabled Icon="checkboxes" Size="12">
+        </SiemensIXBlazor.Components.IconToggleButton>
+
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-secondary-outline" Outline Disabled Loading Icon="checkboxes" Size="12">
+        </SiemensIXBlazor.Components.IconToggleButton>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="icon-secondary-ghost" ComponentType="Icon Toggle button secondary ghost" TabId="icon-toggle-button-secondary-ghost" CodeContent="@ContentForIconToggleButtonSecondaryGhost">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-secondary-outline" Ghost Icon="checkboxes">
+        </SiemensIXBlazor.Components.IconToggleButton>
+
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-secondary-outline" Ghost Pressed Icon="checkboxes">
+        </SiemensIXBlazor.Components.IconToggleButton>
+
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-secondary-outline" Ghost Disabled Icon="checkboxes">
+        </SiemensIXBlazor.Components.IconToggleButton>
+
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-secondary-outline" Ghost Disabled Loading Icon="checkboxes">
+        </SiemensIXBlazor.Components.IconToggleButton>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="icon-secondary" ComponentType="Icon Toggle button secondary" TabId="icon-toggle-button-secondary" CodeContent="@ContentForIconToggleButtonSecondary">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-secondary-outline" Icon="checkboxes">
+        </SiemensIXBlazor.Components.IconToggleButton>
+
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-secondary-outline" Pressed Icon="checkboxes">
+        </SiemensIXBlazor.Components.IconToggleButton>
+
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-secondary-outline" Disabled Icon="checkboxes">
+        </SiemensIXBlazor.Components.IconToggleButton>
+
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-secondary-outline" Disabled Loading Icon="checkboxes">
+        </SiemensIXBlazor.Components.IconToggleButton>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="icon-primary-outline" ComponentType="Icon Toggle button primary outline" TabId="icon-toggle-button-primary-outline" CodeContent="@ContentForIconToggleButtonPrimaryOutline">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-primary-outline" Outline Icon="checkboxes"
+                                                     Variant="Enums.Button.ButtonVariant.primary">
+        </SiemensIXBlazor.Components.IconToggleButton>
+
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-primary-outline" Outline Pressed Icon="checkboxes"
+                                                     Variant="Enums.Button.ButtonVariant.primary">
+        </SiemensIXBlazor.Components.IconToggleButton>
+
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-primary-outline" Outline Disabled Icon="checkboxes"
+                                                     Variant="Enums.Button.ButtonVariant.primary">
+        </SiemensIXBlazor.Components.IconToggleButton>
+
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-primary-outline" Outline Disabled Loading Icon="checkboxes"
+                                                     Variant="Enums.Button.ButtonVariant.primary">
+        </SiemensIXBlazor.Components.IconToggleButton>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="icon-primary-ghost" ComponentType="Icon Toggle button primary ghost" TabId="icon-toggle-button-primary-ghost" CodeContent="@ContentForIconToggleButtonPrimaryGhost">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-primary-ghost" Ghost Icon="checkboxes"
+                                                     Variant="Enums.Button.ButtonVariant.primary">
+        </SiemensIXBlazor.Components.IconToggleButton>
+
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-primary-ghost" Ghost Pressed Icon="checkboxes"
+                                                     Variant="Enums.Button.ButtonVariant.primary">
+        </SiemensIXBlazor.Components.IconToggleButton>
+
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-primary-ghost" Ghost Disabled Icon="checkboxes"
+                                                     Variant="Enums.Button.ButtonVariant.primary">
+        </SiemensIXBlazor.Components.IconToggleButton>
+
+        <SiemensIXBlazor.Components.IconToggleButton Id="icon-toggle-button-primary-ghost" Ghost Disabled Loading Icon="checkboxes"
+                                                     Variant="Enums.Button.ButtonVariant.primary">
+        </SiemensIXBlazor.Components.IconToggleButton>
+    </ComponentContent>
+</PlaygroundBase>
