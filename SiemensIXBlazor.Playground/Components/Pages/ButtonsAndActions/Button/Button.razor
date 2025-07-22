@@ -32,8 +32,8 @@
             Test Button
         </SiemensIXBlazor.Components.Button>
 
-        <SiemensIXBlazor.Components.Button Id="primary-outline-button-disabled" Outline Disabled 
-        Variant="Enums.Button.ButtonVariant.primary">
+        <SiemensIXBlazor.Components.Button Id="primary-outline-button-disabled" Outline Disabled
+                                           Variant="Enums.Button.ButtonVariant.primary">
             Test Button
         </SiemensIXBlazor.Components.Button>
     </ComponentContent>
@@ -45,8 +45,8 @@
             Test Button
         </SiemensIXBlazor.Components.Button>
 
-        <SiemensIXBlazor.Components.Button Id="primary-ghost-button-disabled" Ghost Disabled 
-        Variant="Enums.Button.ButtonVariant.primary">
+        <SiemensIXBlazor.Components.Button Id="primary-ghost-button-disabled" Ghost Disabled
+                                           Variant="Enums.Button.ButtonVariant.primary">
             Test Button
         </SiemensIXBlazor.Components.Button>
     </ComponentContent>
@@ -70,8 +70,8 @@
             Test Button
         </SiemensIXBlazor.Components.Button>
 
-        <SiemensIXBlazor.Components.Button Id="secondary-outline-button-disabled" Outline Disabled 
-        Variant="Enums.Button.ButtonVariant.secondary">
+        <SiemensIXBlazor.Components.Button Id="secondary-outline-button-disabled" Outline Disabled
+                                           Variant="Enums.Button.ButtonVariant.secondary">
             Test Button
         </SiemensIXBlazor.Components.Button>
     </ComponentContent>
@@ -83,8 +83,8 @@
             Test Button
         </SiemensIXBlazor.Components.Button>
 
-        <SiemensIXBlazor.Components.Button Id="secondary-ghost-button-disabled" Ghost Disabled 
-        Variant="Enums.Button.ButtonVariant.secondary">
+        <SiemensIXBlazor.Components.Button Id="secondary-ghost-button-disabled" Ghost Disabled
+                                           Variant="Enums.Button.ButtonVariant.secondary">
             Test Button
         </SiemensIXBlazor.Components.Button>
     </ComponentContent>
@@ -108,8 +108,8 @@
             Test Button
         </SiemensIXBlazor.Components.Button>
 
-        <SiemensIXBlazor.Components.Button Id="danger-outline-button-disabled" Outline Disabled 
-        Variant="Enums.Button.ButtonVariant.danger">
+        <SiemensIXBlazor.Components.Button Id="danger-outline-button-disabled" Outline Disabled
+                                           Variant="Enums.Button.ButtonVariant.danger">
             Test Button
         </SiemensIXBlazor.Components.Button>
     </ComponentContent>
@@ -121,38 +121,47 @@
             Test Button
         </SiemensIXBlazor.Components.Button>
 
-        <SiemensIXBlazor.Components.Button Id="danger-ghost-button-disabled" Ghost Disabled 
-        Variant="Enums.Button.ButtonVariant.danger">
+        <SiemensIXBlazor.Components.Button Id="danger-ghost-button-disabled" Ghost Disabled
+                                           Variant="Enums.Button.ButtonVariant.danger">
             Test Button
         </SiemensIXBlazor.Components.Button>
     </ComponentContent>
 </PlaygroundBase>
 
-@* <PlaygroundBase Id="buttonGroup" ComponentType="Button group" TabId="button-group" CodeContent="@ContentFor">
+<PlaygroundBase Id="buttonGroup" ComponentType="Button group" TabId="button-group" CodeContent="@ContentForButtonGroup">
     <ComponentContent>
-        
-    BURADA BUTON GRUBU OLMALI
-        <SiemensIXBlazor.Components.Button Id="danger-ghost-button-disabled" Ghost Disabled Variant="Enums.Button.ButtonVariant.danger">
-        </SiemensIXBlazor.Components.Button>
-    </ComponentContent>
-</PlaygroundBase> *@
+        <div class="ix-button-group">
+            <SiemensIXBlazor.Components.Button Id="button-group" Outline Variant="Enums.Button.ButtonVariant.primary">
+                Test Button
+            </SiemensIXBlazor.Components.Button>
 
-<PlaygroundBase Id="textAndIconButton" ComponentType="Button with text and icon" TabId="text-and-icon-button" 
-CodeContent="@ContentForTextAndIconButton">
+            <SiemensIXBlazor.Components.Button Id="button-group" Variant="Enums.Button.ButtonVariant.primary">
+                Test Button
+            </SiemensIXBlazor.Components.Button>
+
+            <SiemensIXBlazor.Components.Button Id="button-group" Outline Variant="Enums.Button.ButtonVariant.primary">
+                Test Button
+            </SiemensIXBlazor.Components.Button>
+        </div>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="textAndIconButton" ComponentType="Button with text and icon" TabId="text-and-icon-button"
+                CodeContent="@ContentForTextAndIconButton">
     <ComponentContent>
         <SiemensIXBlazor.Components.Button Id="primary-text-and-icon-button" Icon="Star">
             Test Button
         </SiemensIXBlazor.Components.Button>
 
-        <SiemensIXBlazor.Components.Button Id="secondary-text-and-icon-button" Icon="Star" 
-        Variant="Enums.Button.ButtonVariant.secondary">
+        <SiemensIXBlazor.Components.Button Id="secondary-text-and-icon-button" Icon="Star"
+                                           Variant="Enums.Button.ButtonVariant.secondary">
             Test Button
         </SiemensIXBlazor.Components.Button>
-        
+
         <SiemensIXBlazor.Components.Button Id="primary-outline-text-and-icon-button" Outline Icon="Star">
             Test Button
         </SiemensIXBlazor.Components.Button>
-        
+
         <SiemensIXBlazor.Components.Button Id="primary-ghost-text-and-icon-button" Ghost Icon="Star">
             Test Button
         </SiemensIXBlazor.Components.Button>
@@ -161,28 +170,60 @@ CodeContent="@ContentForTextAndIconButton">
 
 <PlaygroundBase Id="loadingButton" ComponentType="Loading Button" TabId="loading-button" CodeContent="@ContentForLoadingButton">
     <ComponentContent>
-        <SiemensIXBlazor.Components.Button Id="loading-button" Outline Loading>
+        <SiemensIXBlazor.Components.Button Id="loading-button" Outline Loading="@_isLoading" ClickEvent="OnInitializedAsync">
             Test Button
         </SiemensIXBlazor.Components.Button>
-        
-        <SiemensIXBlazor.Components.Button Id="loading-button" Outline Loading Icon="Star">
+
+        <SiemensIXBlazor.Components.Button Id="loading-button" Outline Loading="@_isLoading2" Icon="Star" ClickEvent="OnClickLoadingButton2">
             Test Button
         </SiemensIXBlazor.Components.Button>
-        
-        <SiemensIXBlazor.Components.Button Id="loading-button" Outline Loading Icon="Star">
+
+        <SiemensIXBlazor.Components.Button Id="loading-button" Outline Loading="@_isLoading3" Icon="Star" ClickEvent="OnClickLoadingButton3">
         </SiemensIXBlazor.Components.Button>
-        
-        <SiemensIXBlazor.Components.Button Id="loading-button" Outline Loading 
-        Variant="Enums.Button.ButtonVariant.secondary" Icon="Star">
+
+        <SiemensIXBlazor.Components.Button Id="loading-button" Outline Loading="@_isLoading4" ClickEvent="OnClickLoadingButton4"
+                                           Variant="Enums.Button.ButtonVariant.secondary" Icon="Star">
         </SiemensIXBlazor.Components.Button>
-        
-        <SiemensIXBlazor.Components.Button Id="loading-button" Outline Loading 
-        Variant="Enums.Button.ButtonVariant.secondary">
+
+        <SiemensIXBlazor.Components.Button Id="loading-button" Outline Loading
+                                           Variant="Enums.Button.ButtonVariant.secondary">
             Test Button
         </SiemensIXBlazor.Components.Button>
-        
-        <SiemensIXBlazor.Components.Button Id="loading-button" Outline Loading 
-        Variant="Enums.Button.ButtonVariant.secondary">
+
+        <SiemensIXBlazor.Components.Button Id="loading-button" Outline Loading
+                                           Variant="Enums.Button.ButtonVariant.secondary">
         </SiemensIXBlazor.Components.Button>
     </ComponentContent>
 </PlaygroundBase>
+
+@code {
+    private bool _isLoading = false;
+    private bool _isLoading2 = false;
+    private bool _isLoading3 = false;
+    private bool _isLoading4 = false;
+    protected override async Task OnInitializedAsync()
+    {
+        _isLoading = true;
+        await Task.Delay(2500);
+        _isLoading = false;
+    }
+
+    protected async Task OnClickLoadingButton2()
+    {
+        _isLoading2 = true;
+        await Task.Delay(2500);
+        _isLoading2 = false;
+    }
+    protected async Task OnClickLoadingButton3()
+    {
+        _isLoading3 = true;
+        await Task.Delay(2500);
+        _isLoading3 = false;
+    }
+    protected async Task OnClickLoadingButton4()
+    {
+        _isLoading4 = true;
+        await Task.Delay(2500);
+        _isLoading4 = false;
+    }
+}
