@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: 2024 Siemens AG
+SPDX-FileCopyrightText: 2025 Siemens AG
 
 SPDX-License-Identifier: MIT
 -->
@@ -49,7 +49,7 @@ Add required `CSS` and `Javascript` packages into the `index.html` file.
 </html>
 ```
 
-> [!CAUTION]  
+> [!CAUTION]
 > If you want to use this library with a `Blazor Web App`, you need to set the `render mode` to `InteractiveServer`.
 > You can find more information at [here](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-8.0).
 
@@ -1423,8 +1423,8 @@ If you want to use native `siemens-ix` html elements, you have to handle events 
 
 ## 📝 License
 
-Copyright © 2024 [Siemens AG](https://www.siemens.com/).
+Copyright © 2025 [Siemens AG](https://www.siemens.com/).
 
-[Siemens Third-Party Software Disclosure Document](/docs/Siemens.IX.Blazor__0.5.2__READMEOSS.html)
+[Siemens Third-Party Software Disclosure Document](/docs/Siemens.IX.Blazor__0.5.3__READMEOSS.html)
 
 This project is MIT licensed.

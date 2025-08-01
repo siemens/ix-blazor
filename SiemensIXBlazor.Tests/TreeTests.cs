@@ -14,6 +14,7 @@ using Microsoft.JSInterop;
 using Moq;
 using SiemensIXBlazor.Components.Tree;
 using SiemensIXBlazor.Objects;
+using System.Diagnostics;
 using System.Text.Json;
 
 namespace SiemensIXBlazor.Tests;
@@ -139,7 +140,7 @@ public class TreeTests : TestContextBase
     }
 
     [Fact]
-    public void OnAfterRenderAsync_FirstRender_AttachesListeners()
+    public async Task OnAfterRenderAsync_FirstRender_AttachesListeners()
     {
         // Arrange
         var jsRuntimeMock = new Mock<IJSRuntime>();
@@ -166,15 +167,43 @@ public class TreeTests : TestContextBase
             .Add(p => p.Id, "tree-js")
         );
 
-        // Assert
-        jsObjectReferenceMock.Verify(js => js.InvokeAsync<string>(
-            It.Is<string>(s => s == "listenEvent"),
-            It.Is<object[]>(args =>
-                args.Length >= 4 &&
-                args[1]!.ToString() == "tree-js" &&
-                args[2]!.ToString() == "contextChange" &&
-                args[3]!.ToString() == "ContextChanged"
-            )
-        ), Times.AtLeastOnce());
+        var timeout = TimeSpan.FromSeconds(10);
+        var stopwatch = Stopwatch.StartNew();
+        bool verificationSucceeded = false;
+
+        while (!verificationSucceeded && stopwatch.Elapsed < timeout)
+        {
+            try
+            {
+                jsObjectReferenceMock.Verify(js => js.InvokeAsync<string>(
+                    It.Is<string>(s => s == "listenEvent"),
+                    It.Is<object[]>(args =>
+                        args.Length >= 4 &&
+                        args[1]!.ToString() == "tree-js" &&
+                        args[2]!.ToString() == "contextChange" &&
+                        args[3]!.ToString() == "ContextChanged"
+                    )
+                ), Times.AtLeastOnce());
+
+                verificationSucceeded = true;
+            }
+            catch
+            {
+                await Task.Delay(100);
+            }
+        }
+
+        if (!verificationSucceeded)
+        {
+            jsObjectReferenceMock.Verify(js => js.InvokeAsync<string>(
+                It.Is<string>(s => s == "listenEvent"),
+                It.Is<object[]>(args =>
+                    args.Length >= 4 &&
+                    args[1]!.ToString() == "tree-js" &&
+                    args[2]!.ToString() == "contextChange" &&
+                    args[3]!.ToString() == "ContextChanged"
+                )
+            ), Times.AtLeastOnce());
+        }
     }
 }
