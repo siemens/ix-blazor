@@ -13,6 +13,14 @@ public partial class Toggle
 {
     private int activeTab = 0;
 
-    public string CodeContent { get; private set; } = @"
+    public string ContentForBasic { get; private set; } = @"
         <Toggle></Toggle>";
+    public string ContentForCustomLabel { get; private set; } = @"
+        <Toggle TextOn=""Online"" TextOff=""Offline""></Toggle>";
+    public string ContentForDisabled { get; private set; } = @"
+        <Toggle Disabled></Toggle>";
+    public string ContentForChecked { get; private set; } = @"
+        <Toggle Checked></Toggle>";
+    public string ContentForIndeterminate { get; private set; } = @"
+        <Toggle Indeterminate></Toggle>";
 }
