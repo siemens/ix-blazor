@@ -8,32 +8,37 @@
 // ----------------------------------------------------------------------- *@
 
 @page "/layoutgrid"
-@using SiemensIXBlazor.Components;
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
 
 <PageTitle>Layout Grid</PageTitle>
 
 <h1>Layout Grid</h1>
 
-<Tabs Id="layoutgrid-demo" SelectedChangeEvent="@(e => activeTab = e)">
-    <ix-tab-item data-tab-id="0">
-        <div class="tab-content">
-            Usage
-            <ix-icon name="document"></ix-icon>
-        </div>
-    </ix-tab-item>
-    <ix-tab-item data-tab-id="1">
-        <div class="tab-content">
-            Code
-            <ix-icon name="code"></ix-icon>
-        </div>
-    </ix-tab-item>
-</Tabs>
-
-<div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-    <p>Placeholder content for the Usage tab.</p>
-</div>
-
-<div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-    <p>Placeholder content for the Code tab.</p>
-</div>
-
+<PlaygroundBase Id="basic" ComponentType="Basic" TabId="layout-grid-basic" CodeContent="@ContentForBasic">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.LayoutGrid.LayoutGrid Id="layout-grid-basic">
+            <SiemensIXBlazor.Components.LayoutGrid.Row>
+                <SiemensIXBlazor.Components.LayoutGrid.Col>
+                    <SiemensIXBlazor.Components.Typography Format="Enums.Typography.TypographyFormat.Display">
+                        1
+                    </SiemensIXBlazor.Components.Typography>
+                    <SiemensIXBlazor.Components.Typography Format="Enums.Typography.TypographyFormat.Display">
+                        2
+                    </SiemensIXBlazor.Components.Typography>
+                    <SiemensIXBlazor.Components.Typography Format="Enums.Typography.TypographyFormat.Display">
+                        3
+                    </SiemensIXBlazor.Components.Typography>
+                    <SiemensIXBlazor.Components.Typography Format="Enums.Typography.TypographyFormat.Display">
+                        4
+                    </SiemensIXBlazor.Components.Typography>
+                    <SiemensIXBlazor.Components.Typography Format="Enums.Typography.TypographyFormat.Display">
+                        5
+                    </SiemensIXBlazor.Components.Typography>
+                    <SiemensIXBlazor.Components.Typography Format="Enums.Typography.TypographyFormat.Display">
+                        6
+                    </SiemensIXBlazor.Components.Typography>
+                </SiemensIXBlazor.Components.LayoutGrid.Col>
+            </SiemensIXBlazor.Components.LayoutGrid.Row>
+        </SiemensIXBlazor.Components.LayoutGrid.LayoutGrid>
+    </ComponentContent>
+</PlaygroundBase>

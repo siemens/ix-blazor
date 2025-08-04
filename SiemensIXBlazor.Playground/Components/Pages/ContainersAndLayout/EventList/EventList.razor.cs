@@ -12,4 +12,11 @@ namespace SiemensIXBlazor.Playground.Components.Pages.ContainersAndLayout.EventL
 public partial class EventList
 {
     private int activeTab = 0;
+
+    public string ContentForBasic { get; private set; } = @"
+    <EventList>
+        <EventListItem Id=""event-list-item-1"" Label=""Item 1"" ItemCLickEvent=""(label) => DropdownButtonClicked(label)""></EventListItem>
+        <EventListItem Id=""event-list-item-2"" Label=""Item 2"" ItemCLickEvent=""(label) => DropdownButtonClicked(label)""></EventListItem>
+        <EventListItem Id=""event-list-item-3"" Label=""Item 3"" ItemCLickEvent=""(label) => DropdownButtonClicked(label)""></EventListItem>
+    </EventList>";
 }

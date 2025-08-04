@@ -153,6 +153,6 @@ public partial class CategoryFilter
     
     private void CreateCategoriesForWithoutState(SiemensIXBlazor.Components.CategoryFilter.CategoryFilter categoryFilter)
     {
-        //categoryFilter.Suggestions = suggestions;
+        categoryFilter.Suggestions = suggestions;
     }
 }
