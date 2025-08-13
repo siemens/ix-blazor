@@ -8,32 +8,43 @@
 // ----------------------------------------------------------------------- *@
 
 @page "/toast"
-@using SiemensIXBlazor.Components;
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
 
 <PageTitle>Toast</PageTitle>
 
 <h1>Toast</h1>
 
-<Tabs Id="toast-demo" SelectedChangeEvent="@(e => activeTab = e)">
-    <ix-tab-item data-tab-id="0">
-        <div class="tab-content">
-            Usage
-            <ix-icon name="document"></ix-icon>
-        </div>
-    </ix-tab-item>
-    <ix-tab-item data-tab-id="1">
-        <div class="tab-content">
-            Code
-            <ix-icon name="code"></ix-icon>
-        </div>
-    </ix-tab-item>
-</Tabs>
+<PlaygroundBase Id="basic" ComponentType="Basic" TabId="basic" CodeContent="CodeForBasic">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Button Id="toast-button" @onclick="HandleShowToast">
+            Trigger Toast
+        </SiemensIXBlazor.Components.Button>
 
-<div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-    <p>Placeholder content for the Usage tab.</p>
-</div>
+        <SiemensIXBlazor.Components.Toast @ref="toast"></SiemensIXBlazor.Components.Toast>
+    </ComponentContent>
+</PlaygroundBase>
 
-<div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-    <p>Placeholder content for the Code tab.</p>
-</div>
+<PlaygroundBase Id="custom-toast-message" ComponentType="Custom toast message" TabId="custom-toast-message" CodeContent="CodeForCustom">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Button Id="toastMessageButton" @onclick="HandleShowToastCustomMessage">
+            Trigger toast with custom message
+        </SiemensIXBlazor.Components.Button>
+
+        <SiemensIXBlazor.Components.Button Id="toastActionButton" @onclick="HandleShowToastActionButton">
+            Trigger toast with action button
+        </SiemensIXBlazor.Components.Button>
+
+        <SiemensIXBlazor.Components.Toast @ref="toast"></SiemensIXBlazor.Components.Toast>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="position" ComponentType="Position" TabId="position" CodeContent="CodeForPosition">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Button Id="toast-button-position" @onclick="HandleShowToastPosition">
+            Trigger Toast
+        </SiemensIXBlazor.Components.Button>
+
+        <SiemensIXBlazor.Components.Toast @ref="toast" Position="top-right"></SiemensIXBlazor.Components.Toast>
+    </ComponentContent>
+</PlaygroundBase>
 

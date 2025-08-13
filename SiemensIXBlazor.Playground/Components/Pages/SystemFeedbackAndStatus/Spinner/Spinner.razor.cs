@@ -12,4 +12,13 @@ namespace SiemensIXBlazor.Playground.Components.Pages.SystemFeedbackAndStatus.Sp
 public partial class Spinner
 {
     private int activeTab = 0;
+
+    public string ContentForBasic { get; private set; } = @"
+        <SiemensIXBlazor.Components.Spinner id=""basic"">
+            
+        </SiemensIXBlazor.Components.Spinner>";
+    public string ContentForLarge { get; private set; } = @"
+        <SiemensIXBlazor.Components.Spinner id=""large"" Size=""large"">
+
+        </SiemensIXBlazor.Components.Spinner>";
 }

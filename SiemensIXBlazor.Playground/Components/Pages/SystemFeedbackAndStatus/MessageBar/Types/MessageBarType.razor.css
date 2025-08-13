@@ -1,0 +1,14 @@
+﻿.message-bar {
+    margin: 0.5rem;
+}
+
+    .message-bar > ix-message-bar {
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+.message-bar-danger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

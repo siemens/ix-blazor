@@ -12,4 +12,16 @@ namespace SiemensIXBlazor.Playground.Components.Pages.SystemFeedbackAndStatus.Em
 public partial class EmptyState
 {
     private int activeTab = 0;
+
+    public string ContentForBasic { get; private set; } = @"
+        <SiemensIXBlazor.Components.EmptyState Id=""empty-state-basic"" Header=""No Elements available"" SubHeader=""Create an element first"" Icon=""add"" Action=""Create an element"" >
+        </SiemensIXBlazor.Components.EmptyState>";
+
+    public string ContentForCompact { get; private set; } = @"
+        <SiemensIXBlazor.Components.EmptyState Id=""empty-state-compact"" Header=""No Elements available"" SubHeader=""Create an element first"" Icon=""add"" Action=""Create an element"" Layout=""compact"">
+        </SiemensIXBlazor.Components.EmptyState>";
+
+    public string ContentForCompactBreak { get; private set; } = @"
+        <SiemensIXBlazor.Components.EmptyState Id=""empty-state-compact-break"" Header=""No Elements available"" SubHeader=""Create an element first"" Icon=""add"" Action=""Create an element"" Layout=""compactBreak"">
+        </SiemensIXBlazor.Components.EmptyState>";
 }

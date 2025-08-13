@@ -12,4 +12,26 @@ namespace SiemensIXBlazor.Playground.Components.Pages.SystemFeedbackAndStatus.To
 public partial class Tooltip
 {
     private int activeTab = 0;
+
+    public string ContentForBasic { get; private set; } = @"
+        <div class=""ix-row"">
+            <div class=""ix-button"">
+                <SiemensIXBlazor.Components.Button Id=""first-basic"" Class=""any-class"">
+                    Hover me
+                </SiemensIXBlazor.Components.Button>
+            </div>
+            <SiemensIXBlazor.Components.Tooltip Id=""tooltip-1"" For="".any-class"">
+                Simple Selector
+            </SiemensIXBlazor.Components.Tooltip>
+
+            <div class=""ix-button"">
+                <SiemensIXBlazor.Components.Button Id=""second-basic"" my-custom-special-selector=""any-value"">
+                    Also hover me
+                </SiemensIXBlazor.Components.Button>
+            </div>
+            <SiemensIXBlazor.Components.Tooltip Id=""tooltip-2"" For=""[my-custom-special-selector='any-value']"">
+                Custom Selector
+            </SiemensIXBlazor.Components.Tooltip>
+        </div>";
+
 }
