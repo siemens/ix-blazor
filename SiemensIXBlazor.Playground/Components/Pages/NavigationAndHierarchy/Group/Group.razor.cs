@@ -12,4 +12,41 @@ namespace SiemensIXBlazor.Playground.Components.Pages.NavigationAndHierarchy.Gro
 public partial class Group
 {
     private int activeTab = 0;
+
+    public string ContentForBasic { get; private set; } = @"
+        <SiemensIXBlazor.Components.Group Id=""basic-group"" Header=""Header Text"" SubHeader=""Subheader text"">
+            <SiemensIXBlazor.Components.GroupItem Id=""basic-group-item-1"" Text=""Example text 1""></SiemensIXBlazor.Components.GroupItem>
+            <SiemensIXBlazor.Components.GroupItem Id=""basic-group-item-2"" Text=""Example text 2""></SiemensIXBlazor.Components.GroupItem>
+            <SiemensIXBlazor.Components.GroupItem Id=""basic-group-item-3"" Text=""Example text 3""></SiemensIXBlazor.Components.GroupItem>
+        </SiemensIXBlazor.Components.Group>";
+
+    public string ContentForSuppressHeader { get; private set; } = @"
+        <SiemensIXBlazor.Components.Group Id=""suppress-header-group"" Header=""Header Text"" SubHeader=""Subheader text"" SuppressHeaderSelection=""true"">
+            <SiemensIXBlazor.Components.GroupItem Id=""suppress-header-group-item-1"" Text=""Example Text 1""></SiemensIXBlazor.Components.GroupItem>
+            <SiemensIXBlazor.Components.GroupItem Id=""suppress-header-group-item-2"" Text=""Example Text 2""></SiemensIXBlazor.Components.GroupItem>
+            <SiemensIXBlazor.Components.GroupItem Id=""suppress-header-group-item-3"" Text=""Example Text 3""></SiemensIXBlazor.Components.GroupItem>
+        </SiemensIXBlazor.Components.Group>";
+
+    public string ContentForCustomGroupEntry { get; private set; } = @"
+        <SiemensIXBlazor.Components.Group Id=""custom-group"" Header=""Header text"" SubHeader=""Subheader text"">
+            <SiemensIXBlazor.Components.GroupItem Id=""custom-group-item-1"" Text=""Example Text 1"">
+            </SiemensIXBlazor.Components.GroupItem>
+            <SiemensIXBlazor.Components.GroupItem Id=""custom-group-item-2"" Text=""Example Text 2""></SiemensIXBlazor.Components.GroupItem>
+            <SiemensIXBlazor.Components.GroupItem Id=""custom-group-item-3"">
+                <SiemensIXBlazor.Components.Button Id=""custom-group-item-3-button"">
+                    Test
+                </SiemensIXBlazor.Components.Button>
+            </SiemensIXBlazor.Components.GroupItem>
+        </SiemensIXBlazor.Components.Group>";
+
+    public string ContentForGroupWithContextMenu { get; private set; } = @"
+        <SiemensIXBlazor.Components.Group Id=""with-context-menu"" Header=""Header text"" SubHeader=""Subheader text"">
+            <SiemensIXBlazor.Components.Dropdown Id=""with-context-menu-dropdown"" slot=""dropdown"">
+                <SiemensIXBlazor.Components.DropdownItem Id=""dropdown-item-1"" Label=""Item 1""></SiemensIXBlazor.Components.DropdownItem>
+                <SiemensIXBlazor.Components.DropdownItem Id=""dropdown-item-2"" Label=""Item 2""></SiemensIXBlazor.Components.DropdownItem>
+            </SiemensIXBlazor.Components.Dropdown>
+            <SiemensIXBlazor.Components.GroupItem Id=""with-context-menu-item-1"" Text=""Example Test 1""></SiemensIXBlazor.Components.GroupItem>
+            <SiemensIXBlazor.Components.GroupItem Id=""with-context-menu-item-2"" Text=""Example Test 2""></SiemensIXBlazor.Components.GroupItem>
+            <SiemensIXBlazor.Components.GroupItem Id=""with-context-menu-item-3"" Text=""Example Test 3""></SiemensIXBlazor.Components.GroupItem>
+        </SiemensIXBlazor.Components.Group>";
 }

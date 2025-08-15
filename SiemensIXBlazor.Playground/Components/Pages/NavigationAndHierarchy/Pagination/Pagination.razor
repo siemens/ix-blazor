@@ -8,32 +8,20 @@
 // ----------------------------------------------------------------------- *@
 
 @page "/pagination"
-@using SiemensIXBlazor.Components;
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
 
 <PageTitle>Pagination</PageTitle>
 
 <h1>Pagination</h1>
 
-<Tabs Id="pagination-demo" SelectedChangeEvent="@(e => activeTab = e)">
-    <ix-tab-item data-tab-id="0">
-        <div class="tab-content">
-            Usage
-            <ix-icon name="document"></ix-icon>
-        </div>
-    </ix-tab-item>
-    <ix-tab-item data-tab-id="1">
-        <div class="tab-content">
-            Code
-            <ix-icon name="code"></ix-icon>
-        </div>
-    </ix-tab-item>
-</Tabs>
+<PlaygroundBase Id="basic" ComponentType="Basic" TabId="basic" CodeContent="@ContentForBasic">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Pagination.Pagination Id="basic-pagination" Count="100"></SiemensIXBlazor.Components.Pagination.Pagination>
+    </ComponentContent>
+</PlaygroundBase>
 
-<div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-    <p>Placeholder content for the Usage tab.</p>
-</div>
-
-<div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-    <p>Placeholder content for the Code tab.</p>
-</div>
-
+<PlaygroundBase Id="advanced" ComponentType="Advanced" TabId="advanced" CodeContent="@ContentForAdvanced">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Pagination.Pagination Id="advanced-pagination" Advanced="true" ShowItemCount="true" Count="100"></SiemensIXBlazor.Components.Pagination.Pagination>
+    </ComponentContent>
+</PlaygroundBase>

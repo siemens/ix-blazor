@@ -8,32 +8,59 @@
 // ----------------------------------------------------------------------- *@
 
 @page "/group"
-@using SiemensIXBlazor.Components;
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
 
 <PageTitle>Group</PageTitle>
 
 <h1>Group</h1>
 
-<Tabs Id="group-demo" SelectedChangeEvent="@(e => activeTab = e)">
-    <ix-tab-item data-tab-id="0">
-        <div class="tab-content">
-            Usage
-            <ix-icon name="document"></ix-icon>
-        </div>
-    </ix-tab-item>
-    <ix-tab-item data-tab-id="1">
-        <div class="tab-content">
-            Code
-            <ix-icon name="code"></ix-icon>
-        </div>
-    </ix-tab-item>
-</Tabs>
 
-<div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-    <p>Placeholder content for the Usage tab.</p>
-</div>
+<PlaygroundBase Id="basic" ComponentType="Basic" TabId="basic" CodeContent="@ContentForBasic">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Group Id="basic-group" Header="Header Text" SubHeader="Subheader text">
+            <SiemensIXBlazor.Components.GroupItem Id="basic-group-item-1" Text="Example text 1"></SiemensIXBlazor.Components.GroupItem>
+            <SiemensIXBlazor.Components.GroupItem Id="basic-group-item-2" Text="Example text 2"></SiemensIXBlazor.Components.GroupItem>
+            <SiemensIXBlazor.Components.GroupItem Id="basic-group-item-3" Text="Example text 3"></SiemensIXBlazor.Components.GroupItem>
+        </SiemensIXBlazor.Components.Group>
+    </ComponentContent>
+</PlaygroundBase>
 
-<div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-    <p>Placeholder content for the Code tab.</p>
-</div>
+<PlaygroundBase Id="suppress-header" ComponentType="Suppres header selection" TabId="suppress-header" CodeContent="@ContentForSuppressHeader">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Group Id="suppress-header-group" Header="Header Text" SubHeader="Subheader text" SuppressHeaderSelection="true">
+            <SiemensIXBlazor.Components.GroupItem Id="suppress-header-group-item-1" Text="Example Text 1"></SiemensIXBlazor.Components.GroupItem>
+            <SiemensIXBlazor.Components.GroupItem Id="suppress-header-group-item-2" Text="Example Text 2"></SiemensIXBlazor.Components.GroupItem>
+            <SiemensIXBlazor.Components.GroupItem Id="suppress-header-group-item-3" Text="Example Text 3"></SiemensIXBlazor.Components.GroupItem>
+        </SiemensIXBlazor.Components.Group>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="custom-group-entry" ComponentType="Custom group entry" TabId="custom-group-entry" CodeContent="@ContentForCustomGroupEntry">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Group Id="custom-group" Header="Header text" SubHeader="Subheader text">
+            <SiemensIXBlazor.Components.GroupItem Id="custom-group-item-1" Text="Example Text 1">
+            </SiemensIXBlazor.Components.GroupItem>
+            <SiemensIXBlazor.Components.GroupItem Id="custom-group-item-2" Text="Example Text 2"></SiemensIXBlazor.Components.GroupItem>
+            <SiemensIXBlazor.Components.GroupItem Id="custom-group-item-3">
+                <SiemensIXBlazor.Components.Button Id="custom-group-item-3-button">
+                    Test
+                </SiemensIXBlazor.Components.Button>
+            </SiemensIXBlazor.Components.GroupItem>
+        </SiemensIXBlazor.Components.Group>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="group-with-context-menu" ComponentType="Group with context menu" TabId="group-with-context-menu" CodeContent="@ContentForGroupWithContextMenu">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Group Id="with-context-menu" Header="Header text" SubHeader="Subheader text">
+            <SiemensIXBlazor.Components.Dropdown Id="with-context-menu-dropdown" slot="dropdown">
+                <SiemensIXBlazor.Components.DropdownItem Id="dropdown-item-1" Label="Item 1"></SiemensIXBlazor.Components.DropdownItem>
+                <SiemensIXBlazor.Components.DropdownItem Id="dropdown-item-2" Label="Item 2"></SiemensIXBlazor.Components.DropdownItem>
+            </SiemensIXBlazor.Components.Dropdown>
+            <SiemensIXBlazor.Components.GroupItem Id="with-context-menu-item-1" Text="Example Test 1"></SiemensIXBlazor.Components.GroupItem>
+            <SiemensIXBlazor.Components.GroupItem Id="with-context-menu-item-2" Text="Example Test 2"></SiemensIXBlazor.Components.GroupItem>
+            <SiemensIXBlazor.Components.GroupItem Id="with-context-menu-item-3" Text="Example Test 3"></SiemensIXBlazor.Components.GroupItem>
+        </SiemensIXBlazor.Components.Group>
+    </ComponentContent>
+</PlaygroundBase>
 

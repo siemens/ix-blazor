@@ -12,4 +12,49 @@ namespace SiemensIXBlazor.Playground.Components.Pages.NavigationAndHierarchy.Wor
 public partial class Workflow
 {
     private int activeTab = 0;
+
+    public string ContentForBasic { get; private set; } = @"
+         <SiemensIXBlazor.Components.WorkflowSteps Id=""basic-workflow-steps"">
+            <SiemensIXBlazor.Components.WorkflowStep Id=""basic-step-1"" Status=""Enums.Workflow.WorkflowStatus.Done"">
+                Step 1
+            </SiemensIXBlazor.Components.WorkflowStep>
+            <SiemensIXBlazor.Components.WorkflowStep Id=""basic-step-2"" Status=""Enums.Workflow.WorkflowStatus.Success"">
+                Step 2
+            </SiemensIXBlazor.Components.WorkflowStep>
+            <SiemensIXBlazor.Components.WorkflowStep Id=""basic-step-3"" Status=""Enums.Workflow.WorkflowStatus.Open"">
+                Step 3
+            </SiemensIXBlazor.Components.WorkflowStep>
+            <SiemensIXBlazor.Components.WorkflowStep Id=""basic-step-4"" Status=""Enums.Workflow.WorkflowStatus.Warning"">
+                Step 4
+            </SiemensIXBlazor.Components.WorkflowStep>
+            <SiemensIXBlazor.Components.WorkflowStep Id=""basic-step-5"" Status=""Enums.Workflow.WorkflowStatus.Error"">
+                Step 5
+            </SiemensIXBlazor.Components.WorkflowStep>
+            <SiemensIXBlazor.Components.WorkflowStep Id=""basic-step-6"" Disabled=""true"">
+                Step 6
+            </SiemensIXBlazor.Components.WorkflowStep>
+        </SiemensIXBlazor.Components.WorkflowSteps>";
+
+    public string ContentForVertical { get; private set; } = @"
+         <SiemensIXBlazor.Components.WorkflowSteps Id=""vertical-workflow-steps"" Vertical=""true"">
+            <SiemensIXBlazor.Components.WorkflowStep Id=""vertical-step-1"" Status=""Enums.Workflow.WorkflowStatus.Done"">
+                Step 1
+            </SiemensIXBlazor.Components.WorkflowStep>
+            <SiemensIXBlazor.Components.WorkflowStep Id=""vertical-step-2"" Status=""Enums.Workflow.WorkflowStatus.Success"">
+                Step 2
+            </SiemensIXBlazor.Components.WorkflowStep>
+            <SiemensIXBlazor.Components.WorkflowStep Id=""vertical-step-3"" Status=""Enums.Workflow.WorkflowStatus.Open"">
+                Step 3
+            </SiemensIXBlazor.Components.WorkflowStep>
+            <SiemensIXBlazor.Components.WorkflowStep Id=""vertical-step-4"" Status=""Enums.Workflow.WorkflowStatus.Warning"">
+                Step 4
+            </SiemensIXBlazor.Components.WorkflowStep>
+            <SiemensIXBlazor.Components.WorkflowStep Id=""vertical-step-5"" Status=""Enums.Workflow.WorkflowStatus.Error"">
+                Step 5
+            </SiemensIXBlazor.Components.WorkflowStep>
+            <SiemensIXBlazor.Components.WorkflowStep Id=""vertical-step-6"" Disabled=""true"">
+                Step 6
+            </SiemensIXBlazor.Components.WorkflowStep>
+        </SiemensIXBlazor.Components.WorkflowSteps>";
+
 }

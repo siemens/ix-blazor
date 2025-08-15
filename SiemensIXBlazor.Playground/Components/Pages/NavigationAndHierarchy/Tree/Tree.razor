@@ -8,32 +8,27 @@
 // ----------------------------------------------------------------------- *@
 
 @page "/tree"
-@using SiemensIXBlazor.Components;
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
 
 <PageTitle>Tree</PageTitle>
 
 <h1>Tree</h1>
 
-<Tabs Id="tree-demo" SelectedChangeEvent="@(e => activeTab = e)">
-    <ix-tab-item data-tab-id="0">
-        <div class="tab-content">
-            Usage
-            <ix-icon name="document"></ix-icon>
+<PlaygroundBase Id="basic-tree" ComponentType="Basic" TabId="basic-tree" CodeContent="@ContentForBasic">
+    <ComponentContent>
+        <div class="tree-style">
+            <SiemensIXBlazor.Components.Tree.Tree Root="root" Id="tree" @ref="treeComponent"></SiemensIXBlazor.Components.Tree.Tree>
         </div>
-    </ix-tab-item>
-    <ix-tab-item data-tab-id="1">
-        <div class="tab-content">
-            Code
-            <ix-icon name="code"></ix-icon>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="custom-tree-node" ComponentType="Custom tree node" TabId="custom-tree-node" CodeContent="@ContentForCustomTreeNode">
+    <ComponentContent>
+        <div class="tree-style">
+            <SiemensIXBlazor.Components.Button Id="expand-button" Ghost="true" @onclick="HandleExpandButton">
+                Expand Button
+            </SiemensIXBlazor.Components.Button>
+            <SiemensIXBlazor.Components.Tree.Tree Root="root" Id="custom-tree" @ref="treeComponentforCustom"></SiemensIXBlazor.Components.Tree.Tree>
         </div>
-    </ix-tab-item>
-</Tabs>
-
-<div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-    <p>Placeholder content for the Usage tab.</p>
-</div>
-
-<div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-    <p>Placeholder content for the Code tab.</p>
-</div>
-
+    </ComponentContent>
+</PlaygroundBase>
