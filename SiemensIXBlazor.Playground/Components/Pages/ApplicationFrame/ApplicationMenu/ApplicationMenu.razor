@@ -8,32 +8,67 @@
 // ----------------------------------------------------------------------- *@
 
 @page "/applicationmenu"
-@using SiemensIXBlazor.Components;
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
 
 <PageTitle>Application Menu</PageTitle>
 
 <h1>Application Menu</h1>
 
-<Tabs Id="applicationmenu-demo" SelectedChangeEvent="@(e => activeTab = e)">
-    <ix-tab-item data-tab-id="0">
-        <div class="tab-content">
-            Usage
-            <ix-icon name="document"></ix-icon>
-        </div>
-    </ix-tab-item>
-    <ix-tab-item data-tab-id="1">
-        <div class="tab-content">
-            Code
-            <ix-icon name="code"></ix-icon>
-        </div>
-    </ix-tab-item>
-</Tabs>
+<PlaygroundBase Id="basic-menu" ComponentType="Basic" TabId="basic-menu" CodeContent="@ContentForBasic">
+    <ComponentContent>
+        <div class="ix-menu">
+            <SiemensIXBlazor.Components.Menu.Menu Id="app-menu">
+                <SiemensIXBlazor.Components.Menu.MenuItem Id="menu-item-1" Home="true" Icon="home">
+                    Home
+                </SiemensIXBlazor.Components.Menu.MenuItem>
+                <SiemensIXBlazor.Components.Menu.MenuItem Id="menu-item-2" Icon="globe">
+                    Normal Tab
+                </SiemensIXBlazor.Components.Menu.MenuItem>
+                <SiemensIXBlazor.Components.Menu.MenuItem Id="menu-item-3" Icon="star" Disabled="true">
+                    Disabled tab
+                </SiemensIXBlazor.Components.Menu.MenuItem>
+                <SiemensIXBlazor.Components.Menu.MenuItem Id="menu-item-4" Icon="star">
+                    With other icon
+                </SiemensIXBlazor.Components.Menu.MenuItem>
+                <SiemensIXBlazor.Components.Menu.MenuItem Id="menu-item-5" Icon="globe" Style="display: none">
+                    Should not be visible
+                </SiemensIXBlazor.Components.Menu.MenuItem>
+            </SiemensIXBlazor.Components.Menu.Menu>
+        </div>     
+    </ComponentContent>  
+</PlaygroundBase>
 
-<div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-    <p>Placeholder content for the Usage tab.</p>
-</div>
+<PlaygroundBase Id="second-navigation-level" ComponentType="2nd navigation level" TabId="second-navigation-level" CodeContent="@ContentForSecondNavigationLevel">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Application Id="nav-application" ForceBreakpoint="Enums.ForceBreakpoint.lg">
+            <SiemensIXBlazor.Components.Menu.Menu Id="nav-menu">
+                <SiemensIXBlazor.Components.Menu.MenuItem Id="nav-menu-item-1" Home="true" Icon="home">
+                    Home
+                </SiemensIXBlazor.Components.Menu.MenuItem>
+                <SiemensIXBlazor.Components.Menu.MenuItem Id="nav-menu-item-2" Icon="globe">
+                    Normal Tab
+                </SiemensIXBlazor.Components.Menu.MenuItem>
+                <SiemensIXBlazor.Components.MenuCategory.MenuCategory Id="menu-category" Label="Top level Category" Icon="rocket">
+                    <SiemensIXBlazor.Components.Menu.MenuItem Id="cat-menu-item-1" Icon="globe">Nested Tab</SiemensIXBlazor.Components.Menu.MenuItem>
+                    <SiemensIXBlazor.Components.Menu.MenuItem Id="cat-menu-item-2" Icon="globe">Nested Tab</SiemensIXBlazor.Components.Menu.MenuItem>
+                </SiemensIXBlazor.Components.MenuCategory.MenuCategory>
+            </SiemensIXBlazor.Components.Menu.Menu>
+        </SiemensIXBlazor.Components.Application>
+    </ComponentContent>
+</PlaygroundBase>
 
-<div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-    <p>Placeholder content for the Code tab.</p>
-</div>
+<PlaygroundBase Id="avatar" ComponentType="Avatar" TabId="avatar" CodeContent="@ContentForAvatar">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Menu.Menu Id="avatar-menu">
+            <SiemensIXBlazor.Components.MenuAvatar.MenuAvatar Id="menu-avatar" Top="john.doe@company.com" Bottom="Administrator" Image="https://ui-avatars.com/api/?name=John+Doe">
+                <SiemensIXBlazor.Components.MenuAvatar.MenuAvatarItem Id="menu-avatar-item" Icon="user-profile" Label="User profile..."></SiemensIXBlazor.Components.MenuAvatar.MenuAvatarItem>
+            </SiemensIXBlazor.Components.MenuAvatar.MenuAvatar>
 
+            <SiemensIXBlazor.Components.Menu.MenuItem Id="avatar-menu-item-1" Home="true" Icon="home">Home</SiemensIXBlazor.Components.Menu.MenuItem>
+            <SiemensIXBlazor.Components.Menu.MenuItem Id="avatar-menu-item-2" Icon="globe">Normal Tab</SiemensIXBlazor.Components.Menu.MenuItem>
+            <SiemensIXBlazor.Components.Menu.MenuItem Id="avatar-menu-item-3" Icon="star" Disabled="true">Disabled tab</SiemensIXBlazor.Components.Menu.MenuItem>
+            <SiemensIXBlazor.Components.Menu.MenuItem Id="avatar-menu-item-4" Icon="star">With other icon</SiemensIXBlazor.Components.Menu.MenuItem>
+            <SiemensIXBlazor.Components.Menu.MenuItem Id="avatar-menu-item-5" Icon="globe" style="display: none">Should not be visible</SiemensIXBlazor.Components.Menu.MenuItem>
+        </SiemensIXBlazor.Components.Menu.Menu>
+    </ComponentContent>   
+</PlaygroundBase>

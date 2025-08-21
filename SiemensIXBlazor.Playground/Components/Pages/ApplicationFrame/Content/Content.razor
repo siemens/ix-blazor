@@ -8,32 +8,26 @@
 // ----------------------------------------------------------------------- *@
 
 @page "/content"
-@using SiemensIXBlazor.Components;
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
 
 <PageTitle>Content</PageTitle>
 
 <h1>Content</h1>
 
-<Tabs Id="content-demo" SelectedChangeEvent="@(e => activeTab = e)">
-    <ix-tab-item data-tab-id="0">
-        <div class="tab-content">
-            Usage
-            <ix-icon name="document"></ix-icon>
-        </div>
-    </ix-tab-item>
-    <ix-tab-item data-tab-id="1">
-        <div class="tab-content">
-            Code
-            <ix-icon name="code"></ix-icon>
-        </div>
-    </ix-tab-item>
-</Tabs>
-
-<div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-    <p>Placeholder content for the Usage tab.</p>
-</div>
-
-<div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-    <p>Placeholder content for the Code tab.</p>
-</div>
+<PlaygroundBase Id="basic" ComponentType="Basic" TabId="basic" CodeContent="@ContentForBasic">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Content Id="basic-content">
+            <SiemensIXBlazor.Components.ContentHeader Id="basic-content-header" slot="header" HeaderTitle="My Content Page"></SiemensIXBlazor.Components.ContentHeader>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+            eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+            voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+            amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+            diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+            Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
+            sit amet.
+        </SiemensIXBlazor.Components.Content>
+    </ComponentContent>
+</PlaygroundBase>
 

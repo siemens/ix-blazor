@@ -8,32 +8,33 @@
 // ----------------------------------------------------------------------- *@
 
 @page "/applicationheader"
-@using SiemensIXBlazor.Components;
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
 
 <PageTitle>Application Header</PageTitle>
 
 <h1>Application Header</h1>
 
-<Tabs Id="applicationheader-demo" SelectedChangeEvent="@(e => activeTab = e)">
-    <ix-tab-item data-tab-id="0">
-        <div class="tab-content">
-            Usage
-            <ix-icon name="document"></ix-icon>
-        </div>
-    </ix-tab-item>
-    <ix-tab-item data-tab-id="1">
-        <div class="tab-content">
-            Code
-            <ix-icon name="code"></ix-icon>
-        </div>
-    </ix-tab-item>
-</Tabs>
+<PlaygroundBase Id="basic-header" ComponentType="Basic" TabId="basic-header" CodeContent="@ContentForBasic">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.ApplicationHeader Id="basic-app-header" Name="My Application">
+            <div class="placeholder-logo" slot="logo"></div>
 
-<div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-    <p>Placeholder content for the Usage tab.</p>
-</div>
+            <SiemensIXBlazor.Components.IconButton Id="icon-button-1" Ghost="true" icon="checkboxes"></SiemensIXBlazor.Components.IconButton>
+            <SiemensIXBlazor.Components.IconButton Id="icon-button-2" Ghost="true" icon="checkboxes"></SiemensIXBlazor.Components.IconButton>
+            <SiemensIXBlazor.Components.IconButton Id="icon-button-3" Ghost="true" icon="checkboxes"></SiemensIXBlazor.Components.IconButton>
 
-<div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-    <p>Placeholder content for the Code tab.</p>
-</div>
+            <SiemensIXBlazor.Components.DropdownButton Id="dropdown-button" Variant="Enums.Button.ButtonVariant.secondary" Label="Select Config" Ghost="true">
+                <SiemensIXBlazor.Components.DropdownItem Id="dropdown-item-1" Label="Config 1"></SiemensIXBlazor.Components.DropdownItem>
+                <SiemensIXBlazor.Components.DropdownItem Id="dropdown-item-2" Label="Config 2"></SiemensIXBlazor.Components.DropdownItem>
+                <SiemensIXBlazor.Components.DropdownItem Id="dropdown-item-3" Label="Config 3"></SiemensIXBlazor.Components.DropdownItem>
+            </SiemensIXBlazor.Components.DropdownButton>
+
+            <SiemensIXBlazor.Components.Avatar.Avatar Id="avatar" username="John Doe" extra="Administrator">
+                <SiemensIXBlazor.Components.DropdownItem Id="avatar-dropdown-item-1" Label="Action 1"></SiemensIXBlazor.Components.DropdownItem>
+                <SiemensIXBlazor.Components.DropdownItem Id="avatar-dropdown-item-2" Label="Action 2"></SiemensIXBlazor.Components.DropdownItem>
+            </SiemensIXBlazor.Components.Avatar.Avatar>
+        </SiemensIXBlazor.Components.ApplicationHeader>
+    </ComponentContent>
+</PlaygroundBase>
+
 
