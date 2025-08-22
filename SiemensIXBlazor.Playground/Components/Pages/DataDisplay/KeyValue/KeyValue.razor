@@ -8,32 +8,39 @@
 // ----------------------------------------------------------------------- *@
 
 @page "/keyvalue"
-@using SiemensIXBlazor.Components;
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
 
 <PageTitle>Key Value</PageTitle>
 
 <h1>Key Value</h1>
 
-<Tabs Id="keyvalue-demo" SelectedChangeEvent="@(e => activeTab = e)">
-    <ix-tab-item data-tab-id="0">
-        <div class="tab-content">
-            Usage
-            <ix-icon name="document"></ix-icon>
-        </div>
-    </ix-tab-item>
-    <ix-tab-item data-tab-id="1">
-        <div class="tab-content">
-            Code
-            <ix-icon name="code"></ix-icon>
-        </div>
-    </ix-tab-item>
-</Tabs>
+<PlaygroundBase Id="basic" ComponentType="Basic" TabId="basic" CodeContent="@ContentForBasic">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.KeyValue Id="basic-key-value" Label="Label" Value="Value"></SiemensIXBlazor.Components.KeyValue>
+    </ComponentContent>
+</PlaygroundBase>
 
-<div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-    <p>Placeholder content for the Usage tab.</p>
-</div>
+<PlaygroundBase Id="with-custom-value" ComponentType="With custom value" TabId="with-custom-value" CodeContent="@ContentForCustomValue">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.KeyValue Id="custom-key-value" Label="Label">
+            <input class="ix-form-control"
+                   placeholder="Enter text here"
+                   type="text"
+                   slot="custom-value" />
+        </SiemensIXBlazor.Components.KeyValue>
+    </ComponentContent>
+</PlaygroundBase>
 
-<div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-    <p>Placeholder content for the Code tab.</p>
-</div>
+<PlaygroundBase Id="with-icon" ComponentType="With icon" TabId="with-icon" CodeContent="@ContentForWithIcon">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.KeyValue Icon="location" Label="Label" Value="Value">
+        </SiemensIXBlazor.Components.KeyValue>
+    </ComponentContent>
+</PlaygroundBase>
 
+<PlaygroundBase Id="label-on-left" ComponentType="With label on left side" TabId="label-on-left" CodeContent="@ContentForLabelOnLeft">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.KeyValue Id="left-key-value" Label="Label" LabelPosition="left" Value="Value">
+        </SiemensIXBlazor.Components.KeyValue>
+    </ComponentContent>
+</PlaygroundBase>

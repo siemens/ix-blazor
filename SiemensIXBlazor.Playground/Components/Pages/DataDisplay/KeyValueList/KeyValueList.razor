@@ -8,32 +8,69 @@
 // ----------------------------------------------------------------------- *@
 
 @page "/keyvaluelist"
-@using SiemensIXBlazor.Components;
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
 
 <PageTitle>Key Value List</PageTitle>
 
 <h1>Key Value List</h1>
 
-<Tabs Id="keyvaluelist-demo" SelectedChangeEvent="@(e => activeTab = e)">
-    <ix-tab-item data-tab-id="0">
-        <div class="tab-content">
-            Usage
-            <ix-icon name="document"></ix-icon>
-        </div>
-    </ix-tab-item>
-    <ix-tab-item data-tab-id="1">
-        <div class="tab-content">
-            Code
-            <ix-icon name="code"></ix-icon>
-        </div>
-    </ix-tab-item>
-</Tabs>
+<PlaygroundBase Id="basic" ComponentType="Basic" TabId="basic" CodeContent="@ContentForBasic">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.KeyValueList Id="basic-key-value-list">
+            <SiemensIXBlazor.Components.KeyValue id="basic-key-value-1" Label="Label" LabelPosition="left" Value="Value"></SiemensIXBlazor.Components.KeyValue>
+            <SiemensIXBlazor.Components.KeyValue id="basic-key-value-2" Label="Label" LabelPosition="left" Value="Value"></SiemensIXBlazor.Components.KeyValue>
+            <SiemensIXBlazor.Components.KeyValue id="basic-key-value-3" Label="Label" LabelPosition="left" Value="Value"></SiemensIXBlazor.Components.KeyValue>
+        </SiemensIXBlazor.Components.KeyValueList>
+    </ComponentContent>
+</PlaygroundBase>
 
-<div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-    <p>Placeholder content for the Usage tab.</p>
-</div>
+<PlaygroundBase Id="with-custom-value" ComponentType="With custom value" TabId="with-custom-value" CodeContent="@ContentForCustomValue">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.KeyValueList Id="custom-key-value-list">
+            <SiemensIXBlazor.Components.KeyValue Id="custom-key-value-1" Label="Label" LabelPosition="left">
+                <input class="ix-form-control"
+                       placeholder="Enter text here"
+                       type="text"
+                       slot="custom-value" />
+            </SiemensIXBlazor.Components.KeyValue>
+            <SiemensIXBlazor.Components.KeyValue Id="custom-key-value-2" Label="Label" LabelPosition="left">
+                <input class="ix-form-control"
+                       placeholder="Enter text here"
+                       type="text"
+                       slot="custom-value" />
+            </SiemensIXBlazor.Components.KeyValue>
+            <SiemensIXBlazor.Components.KeyValue Id="custom-key-value-3" Label="Label" LabelPosition="left">
+                <input class="ix-form-control"
+                       placeholder="Enter text here"
+                       type="text"
+                       slot="custom-value" />
+            </SiemensIXBlazor.Components.KeyValue>
+        </SiemensIXBlazor.Components.KeyValueList>
+    </ComponentContent>
+</PlaygroundBase>
 
-<div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-    <p>Placeholder content for the Code tab.</p>
-</div>
+<PlaygroundBase Id="with-icon" ComponentType="With icon" TabId="with-icon" CodeContent="@ContentForWithIcon">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.KeyValueList Id="with-icon-key-value-list">
+            <SiemensIXBlazor.Components.KeyValue Id="with-icon-key-value-1" Icon="location" Label="Label" LabelPosition="left" Value="Value">
+            </SiemensIXBlazor.Components.KeyValue>
+            <SiemensIXBlazor.Components.KeyValue Id="with-icon-key-value-2" Icon="location" Label="Label" LabelPosition="left" Value="Value">
+            </SiemensIXBlazor.Components.KeyValue>
+            <SiemensIXBlazor.Components.KeyValue Id="with-icon-key-value-3" Icon="location" Label="Label" LabelPosition="left" Value="Value">
+            </SiemensIXBlazor.Components.KeyValue>
+        </SiemensIXBlazor.Components.KeyValueList>
+    </ComponentContent>
+</PlaygroundBase>
 
+<PlaygroundBase Id="striped" ComponentType="Striped" TabId="striped" CodeContent="@ContentForStriped">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.KeyValueList Id="striped-key-value-list" Striped="true">
+            <SiemensIXBlazor.Components.KeyValue Id="striped-key-value-1" Label="Label" LabelPosition="left" Value="Value">
+            </SiemensIXBlazor.Components.KeyValue>
+            <SiemensIXBlazor.Components.KeyValue Id="striped-key-value-2" Label="Label" LabelPosition="left" Value="Value">
+            </SiemensIXBlazor.Components.KeyValue>
+            <SiemensIXBlazor.Components.KeyValue Id="striped-key-value-3" Label="Label" LabelPosition="left" Value="Value">
+            </SiemensIXBlazor.Components.KeyValue>
+        </SiemensIXBlazor.Components.KeyValueList>
+    </ComponentContent>
+</PlaygroundBase>

@@ -8,32 +8,24 @@
 // ----------------------------------------------------------------------- *@
 
 @page "/kpi"
-@using SiemensIXBlazor.Components;
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
 
 <PageTitle>K P I</PageTitle>
 
 <h1>K P I</h1>
 
-<Tabs Id="kpi-demo" SelectedChangeEvent="@(e => activeTab = e)">
-    <ix-tab-item data-tab-id="0">
-        <div class="tab-content">
-            Usage
-            <ix-icon name="document"></ix-icon>
+<PlaygroundBase Id="basic" ComponentType="Basic" TabId="basic" CodeContent="@ContentForBasic">
+    <ComponentContent>
+        <div class="example">
+            <div class="kpi">
+                <SiemensIXBlazor.Components.KPI id="basic-kpi-1" Label="Motor Speed" Value="Nominal"></SiemensIXBlazor.Components.KPI>
+                <SiemensIXBlazor.Components.KPI id="basic-kpi-2" Label="Motor Speed" Value="122.6" Unit="rpm"></SiemensIXBlazor.Components.KPI>
+                <SiemensIXBlazor.Components.KPI id="basic-kpi-3" Label="Motor Speed" Value="122.6" State="Enums.KPI.KpiState.Alarm"></SiemensIXBlazor.Components.KPI>
+                <SiemensIXBlazor.Components.KPI id="basic-kpi-4" Label="Motor Speed" Value="122.6" State="Enums.KPI.KpiState.Warning"></SiemensIXBlazor.Components.KPI>
+
+                <SiemensIXBlazor.Components.KPI id="basic-kpi-5" Label="Motor Speed" Value="Nominal" Orientation="Enums.KPI.KpiOrientation.Vertical"></SiemensIXBlazor.Components.KPI>
+                <SiemensIXBlazor.Components.KPI id="basic-kpi-6" Label="Motor Speed" Value="122.6" Unit="rpm" State="Enums.KPI.KpiState.Alarm" Orientation="Enums.KPI.KpiOrientation.Vertical"></SiemensIXBlazor.Components.KPI>
+            </div>
         </div>
-    </ix-tab-item>
-    <ix-tab-item data-tab-id="1">
-        <div class="tab-content">
-            Code
-            <ix-icon name="code"></ix-icon>
-        </div>
-    </ix-tab-item>
-</Tabs>
-
-<div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-    <p>Placeholder content for the Usage tab.</p>
-</div>
-
-<div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-    <p>Placeholder content for the Code tab.</p>
-</div>
-
+    </ComponentContent>
+</PlaygroundBase>
