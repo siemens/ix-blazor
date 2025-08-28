@@ -8,32 +8,50 @@
 // ----------------------------------------------------------------------- *@
 
 @page "/chartoverview"
-@using SiemensIXBlazor.Components;
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
 
 <PageTitle>Chart Overview</PageTitle>
 
 <h1>Chart Overview</h1>
 
-<Tabs Id="chartoverview-demo" SelectedChangeEvent="@(e => activeTab = e)">
-    <ix-tab-item data-tab-id="0">
-        <div class="tab-content">
-            Usage
-            <ix-icon name="document"></ix-icon>
+<PlaygroundBase Id="colors" ComponentType="Colors" TabId="Colors" CodeContent="@ContentForColors">
+    <ComponentContent>
+        <div class="overview-charts">
+            <SiemensIXBlazor.Components.ECharts.ECharts Id="color-chart" @ref="colorchart">
+
+            </SiemensIXBlazor.Components.ECharts.ECharts>
         </div>
-    </ix-tab-item>
-    <ix-tab-item data-tab-id="1">
-        <div class="tab-content">
-            Code
-            <ix-icon name="code"></ix-icon>
+    </ComponentContent>
+</PlaygroundBase>
+
+<PlaygroundBase Id="empty-states" ComponentType="Empty states" TabId="empty-states" CodeContent="@ContentForEmptyStates">
+    <ComponentContent>
+        <div class="my-chart-container">
+
+            @if (isLoading)
+            {
+                <div class="component-loading-overlay">
+                    <div class="loading-text">
+                        <span class="spinner"></span>
+                        Loading...
+                    </div>
+                </div>
+            }
+
+            @if (showOverlay)
+            {
+                <div id="empty-state-container" class="empty-state-container">
+                    <SiemensIXBlazor.Components.EmptyState Id="empty-state"
+                                                           Class="empty-state"
+                                                           Header="No elements available"
+                                                           SubHeader="Failed to retrieve data"
+                                                           Icon="info"
+                                                           Action="Try Again"
+                                                           ActionClickedEvent="LoadData"/>
+                </div>
+            }
+
+            <SiemensIXBlazor.Components.ECharts.ECharts Id="empty-states-chart" @ref="emptyStateChart" />
         </div>
-    </ix-tab-item>
-</Tabs>
-
-<div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-    <p>Placeholder content for the Usage tab.</p>
-</div>
-
-<div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-    <p>Placeholder content for the Code tab.</p>
-</div>
-
+    </ComponentContent>
+</PlaygroundBase>

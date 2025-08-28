@@ -1,0 +1,52 @@
+﻿.overview-charts {
+    position: relative;
+    width: 100%;
+    height: 40rem;
+    padding-top: 1rem;
+}
+
+.component-loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.loading-text {
+    color: #222;
+    font-size: 1rem;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+}
+
+.spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #bbb;
+    border-top: 2px solid #5478f7;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 0.6rem;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.my-chart-container {
+    position: relative;
+    min-height: 400px;
+}
