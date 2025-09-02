@@ -35,6 +35,8 @@ namespace SiemensIXBlazor.Components.ToggleButton
         [Parameter]
         public ButtonVariant Variant { get; set; } = ButtonVariant.secondary;
         [Parameter]
+        public bool Oval { get; set; } = false;
+        [Parameter]
         public EventCallback<bool> PressedChangeEvent { get; set; }
 
         private BaseInterop _interop;
