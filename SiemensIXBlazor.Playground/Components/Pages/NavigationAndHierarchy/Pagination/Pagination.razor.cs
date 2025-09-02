@@ -12,4 +12,10 @@ namespace SiemensIXBlazor.Playground.Components.Pages.NavigationAndHierarchy.Pag
 public partial class Pagination
 {
     private int activeTab = 0;
+
+    public string ContentForBasic { get; private set; } = @"
+         <SiemensIXBlazor.Components.Pagination.Pagination Id=""basic-pagination"" Count=""100""></SiemensIXBlazor.Components.Pagination.Pagination>";
+
+    public string ContentForAdvanced { get; private set; } = @"
+          <SiemensIXBlazor.Components.Pagination.Pagination Id=""advanced-pagination"" Advanced=""true"" ShowItemCount=""true"" Count=""100""></SiemensIXBlazor.Components.Pagination.Pagination>";
 }

@@ -8,32 +8,47 @@
 // ----------------------------------------------------------------------- *@
 
 @page "/breadcrumb"
-@using SiemensIXBlazor.Components;
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
+
 
 <PageTitle>Breadcrumb</PageTitle>
 
 <h1>Breadcrumb</h1>
 
-<Tabs Id="breadcrumb-demo" SelectedChangeEvent="@(e => activeTab = e)">
-    <ix-tab-item data-tab-id="0">
-        <div class="tab-content">
-            Usage
-            <ix-icon name="document"></ix-icon>
-        </div>
-    </ix-tab-item>
-    <ix-tab-item data-tab-id="1">
-        <div class="tab-content">
-            Code
-            <ix-icon name="code"></ix-icon>
-        </div>
-    </ix-tab-item>
-</Tabs>
+<PlaygroundBase Id="basic" ComponentType="Basic" TabId="basic" CodeContent="@ContentForBasic">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Breadcrumb Id="basic-breadcrumb">
+            <SiemensIXBlazor.Components.BreadcrumbItem Id="basic-breadcrumb-item-1" Label="Item 1">
+            </SiemensIXBlazor.Components.BreadcrumbItem>
+            <SiemensIXBlazor.Components.BreadcrumbItem Id="basic-breadcrumb-item-2" Label="Item 2">
+            </SiemensIXBlazor.Components.BreadcrumbItem>
+            <SiemensIXBlazor.Components.BreadcrumbItem Id="basic-breadcrumb-item-3" Label="Item 3">
+            </SiemensIXBlazor.Components.BreadcrumbItem>
+        </SiemensIXBlazor.Components.Breadcrumb> 
+    </ComponentContent>
+</PlaygroundBase>
 
-<div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-    <p>Placeholder content for the Usage tab.</p>
-</div>
+<PlaygroundBase Id="truncate" ComponentType="Truncate" TabId="truncate" CodeContent="@ContentForTruncate">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Breadcrumb Id="truncate-breadcrumb" VisibleItemCount=3>
+            <SiemensIXBlazor.Components.BreadcrumbItem Id="truncate-breadcrumb-item-1" Label="Item 1"></SiemensIXBlazor.Components.BreadcrumbItem>
+            <SiemensIXBlazor.Components.BreadcrumbItem Id="truncate-breadcrumb-item-2" Label="Item 2"></SiemensIXBlazor.Components.BreadcrumbItem>
+            <SiemensIXBlazor.Components.BreadcrumbItem Id="truncate-breadcrumb-item-3" Label="Item 3"></SiemensIXBlazor.Components.BreadcrumbItem>
+            <SiemensIXBlazor.Components.BreadcrumbItem Id="truncate-breadcrumb-item-4" Label="Item 4"></SiemensIXBlazor.Components.BreadcrumbItem>
+            <SiemensIXBlazor.Components.BreadcrumbItem Id="truncate-breadcrumb-item-5" Label="Item 5"></SiemensIXBlazor.Components.BreadcrumbItem>
+        </SiemensIXBlazor.Components.Breadcrumb>
+    </ComponentContent>
+</PlaygroundBase>
 
-<div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-    <p>Placeholder content for the Code tab.</p>
-</div>
-
+<PlaygroundBase Id="lazy-loaded-next-items" ComponentType="Lazy loaded next items" TabId="lazy-loaded-next-items" CodeContent="ContentForLazyLoadedNextItems">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Breadcrumb Id="lazy-loaded-next-item-breadcrumb" NextItems="@NextItems" ItemClicked="SetNextItem">
+            <SiemensIXBlazor.Components.BreadcrumbItem Id="basic-breadcrumb-item-1" Label="Item 1">
+            </SiemensIXBlazor.Components.BreadcrumbItem>
+            <SiemensIXBlazor.Components.BreadcrumbItem Id="basic-breadcrumb-item-2" Label="Item 2">
+            </SiemensIXBlazor.Components.BreadcrumbItem>
+            <SiemensIXBlazor.Components.BreadcrumbItem Id="basic-breadcrumb-item-3" Label="Item 3">
+            </SiemensIXBlazor.Components.BreadcrumbItem>
+        </SiemensIXBlazor.Components.Breadcrumb>
+    </ComponentContent>
+</PlaygroundBase>
