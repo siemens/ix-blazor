@@ -1,0 +1,10 @@
+﻿.chip {
+    display: flex;
+    gap: 2rem;
+}
+
+.chip-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}

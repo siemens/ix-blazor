@@ -1,0 +1,10 @@
+﻿.ix-button {
+    margin: 4rem;
+}
+
+.ix-row {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    align-items: center;
+}

@@ -1,0 +1,32 @@
+@* -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2025 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+// ----------------------------------------------------------------------- *@
+
+
+
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
+<!-- @using SiemensIXBlazor.Components; -->
+
+<SiemensIXBlazor.Components.MessageBar Id="info-messagebar" Type="Enums.MessageBar.MessageBarType.Info" Dismissible="false">
+    Message Text
+</SiemensIXBlazor.Components.MessageBar>
+
+<SiemensIXBlazor.Components.MessageBar Id="warning-messagebar" Type="Enums.MessageBar.MessageBarType.Warning" Dismissible="false">
+    Message Text
+</SiemensIXBlazor.Components.MessageBar>
+
+<SiemensIXBlazor.Components.MessageBar Id="danger-messagebar" Type="Enums.MessageBar.MessageBarType.Danger" Dismissible="false">
+    
+    <div class="message-bar-danger">
+        Message Text
+        <SiemensIXBlazor.Components.Button Id="action-button">
+            Action
+        </SiemensIXBlazor.Components.Button>
+    </div>
+
+</SiemensIXBlazor.Components.MessageBar>
