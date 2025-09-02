@@ -8,32 +8,28 @@
 // ----------------------------------------------------------------------- *@
 
 @page "/aboutandlegal"
-@using SiemensIXBlazor.Components;
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
 
 <PageTitle>About And Legal</PageTitle>
 
 <h1>About And Legal</h1>
 
-<Tabs Id="aboutandlegal-demo" SelectedChangeEvent="@(e => activeTab = e)">
-    <ix-tab-item data-tab-id="0">
-        <div class="tab-content">
-            Usage
-            <ix-icon name="document"></ix-icon>
-        </div>
-    </ix-tab-item>
-    <ix-tab-item data-tab-id="1">
-        <div class="tab-content">
-            Code
-            <ix-icon name="code"></ix-icon>
-        </div>
-    </ix-tab-item>
-</Tabs>
-
-<div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-    <p>Placeholder content for the Usage tab.</p>
-</div>
-
-<div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-    <p>Placeholder content for the Code tab.</p>
-</div>
-
+<PlaygroundBase Id="basic" ComponentType="Basic" TabId="basic" CodeContent="@ContentForBasic">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Application Id="basic-application">
+            <SiemensIXBlazor.Components.ApplicationHeader Id="basic-application-header">
+                <div class="placeholder-logo" slot="logo"></div>
+            </SiemensIXBlazor.Components.ApplicationHeader>
+            <SiemensIXBlazor.Components.Menu.Menu Id="basic-app-menu" @onclick="HandleToggleAbout">
+                <SiemensIXBlazor.Components.MenuAbout.MenuAbout Id="basic-app-menu-about" @ref="basicMenuAbout">
+                    <SiemensIXBlazor.Components.MenuAbout.MenuAboutItem  Label="Tab 1">
+                        Content 1
+                    </SiemensIXBlazor.Components.MenuAbout.MenuAboutItem>
+                    <SiemensIXBlazor.Components.MenuAbout.MenuAboutItem  Label="Tab 2">
+                        Content 2
+                    </SiemensIXBlazor.Components.MenuAbout.MenuAboutItem>
+                </SiemensIXBlazor.Components.MenuAbout.MenuAbout>
+            </SiemensIXBlazor.Components.Menu.Menu>
+        </SiemensIXBlazor.Components.Application>
+    </ComponentContent>
+</PlaygroundBase>

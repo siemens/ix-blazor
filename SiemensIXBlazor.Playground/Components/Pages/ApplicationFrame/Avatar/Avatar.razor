@@ -8,32 +8,26 @@
 // ----------------------------------------------------------------------- *@
 
 @page "/avatar"
-@using SiemensIXBlazor.Components;
+@using SiemensIXBlazor.Playground.Shared.PlaygroundBase;
 
 <PageTitle>Avatar</PageTitle>
 
 <h1>Avatar</h1>
 
-<Tabs Id="avatar-demo" SelectedChangeEvent="@(e => activeTab = e)">
-    <ix-tab-item data-tab-id="0">
-        <div class="tab-content">
-            Usage
-            <ix-icon name="document"></ix-icon>
-        </div>
-    </ix-tab-item>
-    <ix-tab-item data-tab-id="1">
-        <div class="tab-content">
-            Code
-            <ix-icon name="code"></ix-icon>
-        </div>
-    </ix-tab-item>
-</Tabs>
+<PlaygroundBase Id="basic" ComponentType="Basic" TabId="basic" CodeContent="@ContentForBasic">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Avatar.Avatar Id="basic-avatar"></SiemensIXBlazor.Components.Avatar.Avatar>
+    </ComponentContent>
+</PlaygroundBase>
 
-<div data-tab-content="0" class="@(activeTab == 0 ? "show" : "hide")">
-    <p>Placeholder content for the Usage tab.</p>
-</div>
+<PlaygroundBase Id="initials" ComponentType="Initials" TabId="initials" CodeContent="@ContentForInitials">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Avatar.Avatar Id="initials-avatar" Initials="JD"></SiemensIXBlazor.Components.Avatar.Avatar>
+    </ComponentContent>
+</PlaygroundBase>
 
-<div data-tab-content="1" class="@(activeTab == 1 ? "show" : "hide")">
-    <p>Placeholder content for the Code tab.</p>
-</div>
-
+<PlaygroundBase Id="image" ComponentType="Image" TabId="image" CodeContent="@ContentForImage">
+    <ComponentContent>
+        <SiemensIXBlazor.Components.Avatar.Avatar Id="image-avatar" Image="https://www.gravatar.com/avatar/00000000000000000000000000000000"></SiemensIXBlazor.Components.Avatar.Avatar>
+    </ComponentContent>
+</PlaygroundBase>

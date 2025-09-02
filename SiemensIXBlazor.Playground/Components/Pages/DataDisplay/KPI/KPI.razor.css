@@ -1,0 +1,11 @@
+﻿.example {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    max-width: 35rem;
+}
+
+.kpi {
+        margin: 0.5rem;
+    }
