@@ -39,6 +39,8 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string DataTooltip { get; set; } = string.Empty;
         [Parameter]
+        public string? Form { get; set; }
+        [Parameter]
         public EventCallback ClickEvent { get; set; }
 
         private void Clicked()

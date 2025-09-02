@@ -32,10 +32,11 @@ namespace SiemensIXBlazor.Tests
                 parameters.Add(p => p.Selected, true);
                 parameters.Add(p => p.Type, ButtonType.Button);
                 parameters.Add(p => p.DataTooltip, "testDataTooltip");
+                parameters.Add(p => p.Form, "testForm");
             });
-        
+
             // Assert
-            cut.MarkupMatches("<ix-button  id='testId' disabled='' ghost='' outline='' selected='' icon='testIcon' loading='' type='button' variant='primary' data-toggle='testDataToggle' data-tooltip='testDataTooltip'></ix-button>");
+            cut.MarkupMatches("<ix-button id='testId' disabled='' ghost='' outline='' selected='' icon='testIcon' loading='' type='button' variant='primary' data-toggle='testDataToggle' data-tooltip='testDataTooltip' form='testForm'></ix-button>");
         }
 
         [Fact]
