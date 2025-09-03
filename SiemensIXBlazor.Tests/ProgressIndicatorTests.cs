@@ -26,7 +26,7 @@ namespace SiemensIXBlazor.Tests
                 ("Label", "Loading"),
                 ("HelperText", "Please wait"),
                 ("Size", ProgressIndicatorSize.md),
-                ("Status", ProgressIndicatorStatus._default),
+                ("Status", ProgressIndicatorStatus.@default),
                 ("Type", ProgressIndicatorType.linear),
                 ("TextAlignment", ProgressIndicatorTextAlignment.left),
                 ("ShowTextAsTooltip", true),

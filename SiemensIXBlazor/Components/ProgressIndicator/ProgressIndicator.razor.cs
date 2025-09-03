@@ -60,7 +60,7 @@ namespace SiemensIXBlazor.Components
         /// The state of the progress indicator. This is used to indicate the current state of the progress indicator.
         /// </summary>
         [Parameter]
-        public ProgressIndicatorStatus Status { get; set; } = ProgressIndicatorStatus._default;
+        public ProgressIndicatorStatus Status { get; set; } = ProgressIndicatorStatus.@default;
 
         /// <summary>
         /// The text alignment for the helper text. Can be 'left', 'center', or 'right'.

@@ -11,7 +11,7 @@ namespace SiemensIXBlazor.Enums.ProgressIndicator
 {
     public enum ProgressIndicatorStatus
     {
-        _default,
+        @default,
         error,
         info,
         paused,
