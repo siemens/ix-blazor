@@ -150,6 +150,7 @@ public partial class Index
 - [Pane](#pane) **(since 0.5.0)**
 - [Pagination](#pagination)
 - [Pill](#pill)
+- [Progress Indicator](#progress-indicator) **(since 0.5.4)**
 - [Radio Button](#radio-button)
 - [Select](#select)
 - [Slider](#slider)
@@ -346,6 +347,7 @@ menuAboutElement.ToggleSettings(true);
   <div>Content</div>
 </MapNavigation>
 ```
+
 ## Map Navigation Overlay
 
 ```razor
@@ -1150,6 +1152,16 @@ private void CloseModal()
 </Pill>
 ```
 
+## Progress Indicator
+
+```razor
+<ProgressIndicator Value="75"
+                   Label="Processing data..."
+                   HelperText="Please wait while we process your request"
+                   Size="@ProgressIndicatorSize.lg"
+                   Status="@ProgressIndicatorStatus.info" />
+```
+
 ## Radio button
 
 ```razor
@@ -1174,6 +1186,7 @@ AddItemEvent="SelectItemAdded" Mode="SelectMode.Single" SelectedIndices="2" Id="
     <SelectItem Id="selectItem2" Label="Item 2" Value="2"></SelectItem>
 </Select>
 ```
+
 ## Slider
 
 ```razor
