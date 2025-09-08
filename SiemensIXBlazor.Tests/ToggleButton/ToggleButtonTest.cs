@@ -29,11 +29,12 @@ namespace SiemensIXBlazor.Tests.ToggleButton
                 ("Loading", true),
                 ("Outline", true),
                 ("Pressed", true),
-                ("Variant", ButtonVariant.secondary)
+                ("Variant", ButtonVariant.secondary),
+                ("Oval", true)
             );
 
             // Assert
-            cut.MarkupMatches("<ix-toggle-button id=\"testId\" disabled ghost icon=\"test-icon\" loading outline pressed variant=\"secondary\"></ix-toggle-button>");
+            cut.MarkupMatches("<ix-toggle-button id=\"testId\" disabled ghost icon=\"test-icon\" loading outline pressed variant=\"secondary\" oval></ix-toggle-button>");
         }
 
         [Fact]
