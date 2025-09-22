@@ -1,0 +1,14 @@
+﻿@using Microsoft.JSInterop;
+@using SiemensIXBlazor.Components
+@inherits IXBaseComponent
+@inject IJSRuntime JSRuntime
+
+<ix-radio id="@Id"
+          checked="@Checked"
+          disabled="@Disabled"
+          label="@Label"
+          name="@Name"
+          required="@Required"
+          value="@Value"
+          class="@CssClass">
+</ix-radio>
