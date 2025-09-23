@@ -7,66 +7,31 @@ namespace SiemensIXBlazor.Components.Radio
 {
     public partial class Radio
     {
-        private bool _checked = false;
-        private bool _disabled = false;
-        private string? _label;
-        private string? _name;
-        private bool _required = false;
-        private string? _value;
-        private string? _cssClass;
         private BaseInterop? _interop;
 
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
 
         [Parameter]
-        public bool Checked
-        {
-            get => _checked;
-            set => _checked = value;
-        }
+        public bool Checked { get; set; } = false;
 
         [Parameter]
-        public bool Disabled
-        {
-            get => _disabled;
-            set => _disabled = value;
-        }
+        public bool Disabled { get; set; } = false;
 
         [Parameter]
-        public string? Label
-        {
-            get => _label;
-            set => _label = value;
-        }
+        public string? Label { get; set; }
 
         [Parameter]
-        public string? Name
-        {
-            get => _name;
-            set => _name = value;
-        }
+        public string? Name { get; set; }
 
         [Parameter]
-        public bool Required
-        {
-            get => _required;
-            set => _required = value;
-        }
+        public bool Required { get; set; } = false;
 
         [Parameter]
-        public string? Value
-        {
-            get => _value;
-            set => _value = value;
-        }
+        public string? Value { get; set; }
 
         [Parameter]
-        public string? CssClass
-        {
-            get => _cssClass;
-            set => _cssClass = value;
-        }
+        public string? CssClass { get; set; }
 
         [Parameter]
         public EventCallback<bool> CheckedChangeEvent { get; set; }
@@ -97,7 +62,7 @@ namespace SiemensIXBlazor.Components.Radio
         public async void CheckedChange(JsonElement checkedState)
         {
             bool newChecked = checkedState.GetBoolean();
-            _checked = newChecked;
+            Checked = newChecked;
             await CheckedChangeEvent.InvokeAsync(newChecked);
             StateHasChanged();
         }
@@ -112,7 +77,7 @@ namespace SiemensIXBlazor.Components.Radio
         public async void ValueChange(JsonElement valueState)
         {
             string newValue = valueState.GetString();
-            _value = newValue;
+            Value = newValue;
             await ValueChangeEvent.InvokeAsync(newValue);
             StateHasChanged();
         }

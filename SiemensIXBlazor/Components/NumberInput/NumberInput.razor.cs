@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using Newtonsoft.Json.Linq;
 using SiemensIXBlazor.Interops;
 using System.Text.Json;
 
@@ -7,170 +8,70 @@ namespace SiemensIXBlazor.Components.NumberInput
 {
     public partial class NumberInput
     {
-        private bool _disabled = false;
-        private string? _helperText;
-        private string? _infoText;
-        private string? _invalidText;
-        private string? _label;
-        private object? _max;
-        private object? _min;
-        private string? _name;
-        private string? _pattern;
-        private string? _allowedCharactersPattern;
-        private string? _placeholder;
-        private bool _readonly = false;
-        private bool _required = false;
-        private bool? _showStepperButtons;
-        private bool? _showTextAsTooltip;
-        private object? _step;
-        private string? _validText;
-        private double _value = 0;
-        private string? _warningText;
-        private string? _cssClass;
         private BaseInterop? _interop;
 
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
 
         [Parameter]
-        public string? AllowedCharactersPattern
-        {
-            get => _allowedCharactersPattern;
-            set => _allowedCharactersPattern = value;
-        }
+        public string? AllowedCharactersPattern { get; set; }
 
         [Parameter]
-        public bool Disabled
-        {
-            get => _disabled;
-            set => _disabled = value;
-        }
+        public bool Disabled { get; set; } = false;
 
         [Parameter]
-        public string? HelperText
-        {
-            get => _helperText;
-            set => _helperText = value;
-        }
+        public string? HelperText { get; set; }
 
         [Parameter]
-        public string? InfoText
-        {
-            get => _infoText;
-            set => _infoText = value;
-        }
+        public string? InfoText { get; set; }
 
         [Parameter]
-        public string? InvalidText
-        {
-            get => _invalidText;
-            set => _invalidText = value;
-        }
+        public string? InvalidText { get; set; }
 
         [Parameter]
-        public string? Label
-        {
-            get => _label;
-            set => _label = value;
-        }
+        public string? Label { get; set; }
 
         [Parameter]
-        public object? Max
-        {
-            get => _max;
-            set => _max = value;
-        }
+        public object? Max { get; set; }
 
         [Parameter]
-        public object? Min
-        {
-            get => _min;
-            set => _min = value;
-        }
+        public object? Min { get; set; }
 
         [Parameter]
-        public string? Name
-        {
-            get => _name;
-            set => _name = value;
-        }
+        public string? Name { get; set; }
 
         [Parameter]
-        public string? Pattern
-        {
-            get => _pattern;
-            set => _pattern = value;
-        }
+        public string? Pattern { get; set; }
 
         [Parameter]
-        public string? Placeholder
-        {
-            get => _placeholder;
-            set => _placeholder = value;
-        }
+        public string? Placeholder { get; set; }
 
         [Parameter]
-        public bool Readonly
-        {
-            get => _readonly;
-            set => _readonly = value;
-        }
+        public bool Readonly { get; set; } = false;
 
         [Parameter]
-        public bool Required
-        {
-            get => _required;
-            set => _required = value;
-        }
+        public bool Required { get; set; } = false;
 
         [Parameter]
-        public bool? ShowStepperButtons
-        {
-            get => _showStepperButtons;
-            set => _showStepperButtons = value;
-        }
+        public bool? ShowStepperButtons { get; set; }
 
         [Parameter]
-        public bool? ShowTextAsTooltip
-        {
-            get => _showTextAsTooltip;
-            set => _showTextAsTooltip = value;
-        }
+        public bool? ShowTextAsTooltip { get; set; }
 
         [Parameter]
-        public object? Step
-        {
-            get => _step;
-            set => _step = value;
-        }
+        public object? Step { get; set; }
 
         [Parameter]
-        public string? ValidText
-        {
-            get => _validText;
-            set => _validText = value;
-        }
+        public string? ValidText { get; set; }
 
         [Parameter]
-        public double Value
-        {
-            get => _value;
-            set => _value = value;
-        }
+        public double Value { get; set; } = 0;
 
         [Parameter]
-        public string? WarningText
-        {
-            get => _warningText;
-            set => _warningText = value;
-        }
+        public string? WarningText { get; set; }
 
         [Parameter]
-        public string? CssClass
-        {
-            get => _cssClass;
-            set => _cssClass = value;
-        }
+        public string? CssClass { get; set; }
 
         [Parameter]
         public RenderFragment? StartSlot { get; set; }
@@ -219,7 +120,7 @@ namespace SiemensIXBlazor.Components.NumberInput
         public async void ValueChange(JsonElement valueState)
         {
             double newValue = valueState.GetDouble();
-            _value = newValue;
+            Value = newValue;
             await ValueChangeEvent.InvokeAsync(newValue);
             StateHasChanged();
         }

@@ -1,0 +1,37 @@
+﻿@using Microsoft.JSInterop;
+@using SiemensIXBlazor.Components
+@inherits IXBaseComponent
+@inject IJSRuntime JSRuntime
+
+<ix-custom-field @attributes="UserAttributes"
+                 class="@Class"
+                 style="@Style"
+                 id="@Id"
+                 helper-text="@HelperText"
+                 info-text="@InfoText"
+                 invalid-text="@InvalidText"
+                 label="@Label"
+                 required="@Required"
+                 show-text-as-tooltip="@ShowTextAsTooltip"
+                 valid-text="@ValidText"
+                 warning-text="@WarningText">
+
+    @if (IsFileUpload)
+    {
+        <ix-input @ref="inputRef" value="@FileDisplayText" readonly></ix-input>
+        <ix-icon-button @ref="buttonRef"
+                        icon="open-file"
+                        variant="primary"
+                        outline="true">
+        </ix-icon-button>
+        <input @ref="fileRef"
+               id="@($"{Id}-file-upload")"
+               type="file"
+               style="display: none" />
+    }
+    else
+    {
+        @ChildContent
+    }
+
+</ix-custom-field>

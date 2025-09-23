@@ -8,29 +8,13 @@ namespace SiemensIXBlazor.Components.Input
     public partial class Input
     {
         private string _value = "";
-        private string _type = "text";
-        private bool _disabled = false;
-        private bool _readonly = false;
-        private string? _placeholder;
-        private string? _label;
-        private string? _helperText;
-        private string? _infoText;
-        private string? _warningText;
-        private string? _validText;
-        private string? _invalidText;
-        private string? _allowedCharactersPattern;
-        private int? _maxLength;
         private BaseInterop? _interop;
 
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
 
         [Parameter]
-        public string? Placeholder
-        {
-            get => _placeholder;
-            set => _placeholder = value;
-        }
+        public string? Placeholder {  get; set; } 
 
         [Parameter]
         public string Value
@@ -40,81 +24,37 @@ namespace SiemensIXBlazor.Components.Input
         }
 
         [Parameter]
-        public bool Disabled
-        {
-            get => _disabled;
-            set => _disabled = value;
-        }
+        public bool Disabled { get; set; } = false;
 
         [Parameter]
-        public bool Readonly
-        {
-            get => _readonly;
-            set => _readonly = value;
-        }
+        public bool Readonly { get; set; } = false;
 
         [Parameter]
-        public string Type
-        {
-            get => _type;
-            set => _type = value;
-        }
+        public string Type { get; set; } = "text";
 
         [Parameter]
-        public string? Label
-        {
-            get => _label;
-            set => _label = value;
-        }
+        public string? Label { get; set; }
 
         [Parameter]
-        public string? HelperText
-        {
-            get => _helperText;
-            set => _helperText = value;
-        }
+        public string? HelperText { get; set; }
 
         [Parameter]
-        public string? InfoText
-        {
-            get => _infoText;
-            set => _infoText = value;
-        }
+        public string? InfoText { get; set; }
 
         [Parameter]
-        public string? WarningText
-        {
-            get => _warningText;
-            set => _warningText = value;
-        }
+        public string? WarningText { get; set; }
 
         [Parameter]
-        public string? ValidText
-        {
-            get => _validText;
-            set => _validText = value;
-        }
+        public string? ValidText { get; set; }
 
         [Parameter]
-        public string? InvalidText
-        {
-            get => _invalidText;
-            set => _invalidText = value;
-        }
+        public string? InvalidText { get; set; }
 
         [Parameter]
-        public string? AllowedCharactersPattern
-        {
-            get => _allowedCharactersPattern;
-            set => _allowedCharactersPattern = value;
-        }
+        public string? AllowedCharactersPattern { get; set; }
 
         [Parameter]
-        public int? MaxLength
-        {
-            get => _maxLength;
-            set => _maxLength = value;
-        }
+        public int? MaxLength { get; set; }
 
         [Parameter]
         public RenderFragment? StartSlot { get; set; }

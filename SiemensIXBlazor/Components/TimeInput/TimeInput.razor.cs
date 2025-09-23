@@ -3,29 +3,31 @@ using Microsoft.JSInterop;
 using SiemensIXBlazor.Interops;
 using System.Text.Json;
 
-namespace SiemensIXBlazor.Components.TextArea
+namespace SiemensIXBlazor.Components.TimeInput
 {
-    public partial class TextArea
+    public partial class TimeInput
     {
+        private int _hourInterval = 1;
+        private string _i18nErrorDateUnparsable = "Time is not valid";
+        private string _i18nHourColumnHeader = "hr";
+        private string _i18nMillisecondColumnHeader = "ms";
+        private string _i18nMinuteColumnHeader = "min";
+        private string _i18nSecondColumnHeader = "sec";
+        private string _i18nSelectTime = "Confirm";
+        private string _i18nTime = "Time";
+        private int _millisecondInterval = 100;
+        private int _minuteInterval = 1;
+        private int _secondInterval = 1;
         private BaseInterop? _interop;
 
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
 
         [Parameter]
-        public string Value { get; set; } = "";
-
-        [Parameter]
         public bool Disabled { get; set; } = false;
 
         [Parameter]
-        public bool Readonly { get; set; } = false;
-
-        [Parameter]
-        public bool Required { get; set; } = false;
-
-        [Parameter]
-        public bool? ShowTextAsTooltip { get; set; }
+        public string Format { get; set; } = "TT";
 
         [Parameter]
         public string? HelperText { get; set; }
@@ -43,46 +45,37 @@ namespace SiemensIXBlazor.Components.TextArea
         public string? Name { get; set; }
 
         [Parameter]
-        public string? Placeholder { get; set; }
+        public string? PlaceHolder { get; set; }
+
+        [Parameter]
+        public bool Readonly { get; set; } = false;
+
+        [Parameter]
+        public bool? Required { get; set; }
+
+        [Parameter]
+        public bool? ShowTextAsTooltip { get; set; }
 
         [Parameter]
         public string? ValidText { get; set; }
 
         [Parameter]
+        public string Value { get; set; } = "";
+
+        [Parameter]
         public string? WarningText { get; set; }
 
         [Parameter]
-        public string? CssClass { get; set; }
+        public RenderFragment? StartSlot { get; set; }
 
         [Parameter]
-        public int? MaxLength { get; set; }
-
-        [Parameter]
-        public int? MinLength { get; set; }
-
-        [Parameter]
-        public int? TextareaCols { get; set; }
-
-        [Parameter]
-        public int? TextareaRows { get; set; }
-
-        [Parameter]
-        public string? TextareaHeight { get; set; }
-
-        [Parameter]
-        public string? TextareaWidth { get; set; }
-
-        [Parameter]
-        public string ResizeBehavior { get; set; } = "both";
-
-        [Parameter]
-        public EventCallback IxBlurEvent { get; set; }
-
-        [Parameter]
-        public EventCallback<JsonElement> ValidityStateChangeEvent { get; set; }
+        public RenderFragment? EndSlot { get; set; }
 
         [Parameter]
         public EventCallback<string> ValueChangeEvent { get; set; }
+
+        [Parameter]
+        public EventCallback<JsonElement> ValidityStateChangeEvent { get; set; }
 
         protected override void OnAfterRender(bool firstRender)
         {
@@ -93,7 +86,6 @@ namespace SiemensIXBlazor.Components.TextArea
                 Task.Run(async () =>
                 {
                     await _interop.AddEventListener(this, Id, "valueChange", "ValueChange");
-                    await _interop.AddEventListener(this, Id, "ixBlur", "IxBlur");
                     await _interop.AddEventListener(this, Id, "validityStateChange", "ValidityStateChange");
                 });
             }
@@ -107,12 +99,6 @@ namespace SiemensIXBlazor.Components.TextArea
             Value = newValue;
             await ValueChangeEvent.InvokeAsync(newValue);
             StateHasChanged();
-        }
-
-        [JSInvokable]
-        public async void IxBlur()
-        {
-            await IxBlurEvent.InvokeAsync();
         }
 
         [JSInvokable]

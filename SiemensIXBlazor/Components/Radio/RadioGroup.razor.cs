@@ -4,58 +4,27 @@ namespace SiemensIXBlazor.Components.Radio
 {
     public partial class RadioGroup
     {
-        private string? _label;
-        private string? _infoText;
-        private string? _warningText;
-        private string? _validText;
-        private string? _invalidText;
-        private string? _cssClass;
-
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
 
         [Parameter]
-        public string? Label
-        {
-            get => _label;
-            set => _label = value;
-        }
+        public string? Label { get; set; }
 
         [Parameter]
-        public string? InfoText
-        {
-            get => _infoText;
-            set => _infoText = value;
-        }
+        public string? InfoText { get; set; }
 
         [Parameter]
-        public string? WarningText
-        {
-            get => _warningText;
-            set => _warningText = value;
-        }
+        public string? WarningText { get; set; }
 
         [Parameter]
-        public string? ValidText
-        {
-            get => _validText;
-            set => _validText = value;
-        }
+        public string? ValidText { get; set; }
 
         [Parameter]
-        public string? InvalidText
-        {
-            get => _invalidText;
-            set => _invalidText = value;
-        }
+        public string? InvalidText { get; set; }
 
 
         [Parameter]
-        public string? CssClass
-        {
-            get => _cssClass;
-            set => _cssClass = value;
-        }
+        public string? CssClass { get; set; }
 
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
