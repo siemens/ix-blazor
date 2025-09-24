@@ -1,4 +1,4 @@
-﻿@using Microsoft.JSInterop;
+@using Microsoft.JSInterop;
 @using SiemensIXBlazor.Components
 @inherits IXBaseComponent
 @inject IJSRuntime JSRuntime
@@ -7,6 +7,9 @@
                class = "@Class"
                style = "@Style"
                id = "@Id"
+               aria-label-calender-button="@AriaLabelCalendarButton"
+               aria-label-next-month-button="@AriaLabelNextMonthButton"
+               aria-label-previous-month-button="@AriaLabelPreviousMonthButton"
                value = "@Value"
                min-date = "@MinDate"
                max-date = "@MaxDate"
