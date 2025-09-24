@@ -15,6 +15,18 @@
 @inherits IXBaseComponent
 @inject IJSRuntime JSRuntime
 
-<ix-chip @attributes="UserAttributes" id="@Id" closable="@Closable" outline="@Outline" active="@Active"
-    background="@Background" chip-color="@ChipColor" icon="@Icon" variant="@(EnumParser<ChipVariant>.EnumToString(Variant))"
-    style="@Style" class="@Class" tooltip-text="@TooltipText">@ChildContent</ix-chip>
+<ix-chip @attributes="UserAttributes" 
+         id="@Id" 
+         closable="@Closable" 
+         outline="@Outline" 
+         active="@Active"   
+         background="@Background" 
+         center-content="@CenterContent"
+         chip-color="@ChipColor" 
+         icon="@Icon" 
+         variant="@(EnumParser<ChipVariant>.EnumToString(Variant))"
+         style="@Style" 
+         class="@Class" 
+         tooltip-text="@TooltipText">
+     @ChildContent
+</ix-chip>
