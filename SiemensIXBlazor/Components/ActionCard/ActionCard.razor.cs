@@ -15,6 +15,11 @@ namespace SiemensIXBlazor.Components
 {
 	public partial class ActionCard
 	{
+        [Parameter]
+        public string? AriaLabelCard { get; set; }
+
+        [Parameter]
+        public string? AriaLabelIcon { get; set; }  
         /// <summary>
         /// Card heading
         /// </summary>

@@ -19,6 +19,8 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool AlignLeft { get; set; } = false;
         [Parameter]
+        public string? AriaLabelIcon { get; set; }  
+        [Parameter]
         public string? Background { get; set; }
         [Parameter]
         public string? PillColor { get; set; }

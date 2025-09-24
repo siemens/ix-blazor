@@ -25,6 +25,10 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public TabsPlacement Placement { get; set; } = TabsPlacement.Bottom;
         [Parameter]
+        public string? AriaLabelChevronLeftIconButton { get; set; }
+        [Parameter]
+        public string? AriaLabelChevronRightIconButton { get; set; }    
+        [Parameter]
         public bool Rounded { get; set; } = false;
         [Parameter]
         public int Selected { get; set; } = 0;
