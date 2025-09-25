@@ -1,0 +1,37 @@
+﻿@using Microsoft.JSInterop;
+@using SiemensIXBlazor.Components
+@inherits IXBaseComponent
+@inject IJSRuntime JSRuntime
+
+<ix-checkbox @attributes="UserAttributes"
+             class="@GetCombinedClass()"
+             style="@Style"
+             id="@Id"
+             checked="@Checked"
+             disabled="@Disabled"
+             indeterminate="@Indeterminate"
+             label="@Label"
+             name="@Name"
+             required="@Required"
+             value="@Value">
+</ix-checkbox>
+
+@code {
+    // CSS sınıflarını birleştirir: mevcut Class + validation durumuna göre sınıf
+    private string GetCombinedClass()
+    {
+        var validationClass = ValidationState switch
+        {
+            ValidationState.Info => "ix-info",
+            ValidationState.Warning => "ix-warning",
+            ValidationState.Invalid => "ix-invalid",
+            ValidationState.Valid => "ix-valid",
+            _ => ""
+        };
+
+        if (string.IsNullOrEmpty(validationClass))
+            return Class;
+
+        return string.IsNullOrEmpty(Class) ? validationClass : $"{Class} {validationClass}";
+    }
+}
