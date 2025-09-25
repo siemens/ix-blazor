@@ -30,3 +30,21 @@ export function setTreeContext(id, treeContext) {
     console.error("Failed to set tree context:", error);
   }
 }
+
+export function markItemAsDirty(treeId, itemIdentifiers) {
+    console.log('markItemAsDirty called:', treeId, itemIdentifiers);
+
+    const treeElement = document.getElementById(treeId);
+    if (!treeElement) {
+        console.warn(`Tree element with id '${treeId}' not found`);
+        return;
+    }
+
+    // ix-tree component'inin markItemAsDirty metodunu çağır
+    if (typeof treeElement.markItemAsDirty === 'function') {
+        treeElement.markItemAsDirty(itemIdentifiers);
+        console.log('Items marked as dirty:', itemIdentifiers);
+    } else {
+        console.warn('markItemAsDirty method not available on tree element');
+    }
+}
