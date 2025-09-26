@@ -51,7 +51,6 @@ namespace SiemensIXBlazor.Components
         public string Time { get; set; }
         protected override void OnInitialized()
         {
-            // Eğer Time set edilmemişse, Format'a göre şu anki zamanı ayarla
             if (string.IsNullOrEmpty(Time))
             {
                 Time = DateTime.Now.ToString(Format);
