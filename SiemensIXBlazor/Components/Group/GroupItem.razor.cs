@@ -16,6 +16,8 @@ namespace SiemensIXBlazor.Components
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
         [Parameter]
+        public string? AriaLabelIcon { get; set; }  
+        [Parameter]
         public bool Focusable { get; set; } = true;
         [Parameter]
         public string? Icon { get; set; }

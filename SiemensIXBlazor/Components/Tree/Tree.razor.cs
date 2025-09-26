@@ -115,5 +115,21 @@ namespace SiemensIXBlazor.Components.Tree
             TreeNodeToggledEventResult result = JsonConvert.DeserializeObject<TreeNodeToggledEventResult>(jsonDataText);
             await NodeToggledEvent.InvokeAsync(result);
         }
+
+        public async Task MarkItemAsDirty(params string[] itemIdentifiers)
+        {
+            if (_interop == null || itemIdentifiers == null || itemIdentifiers.Length == 0)
+                return;
+
+            moduleTask = new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
+                "import", $"./_content/Siemens.IX.Blazor/js/siemens-ix/interops/treeInterop.js").AsTask());
+
+            var module = await moduleTask.Value;
+            if (module != null)
+            {
+                await module.InvokeVoidAsync("markItemAsDirty", Id, itemIdentifiers);
+            }
+        }
+
     }
 }

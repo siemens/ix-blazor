@@ -19,6 +19,12 @@ namespace SiemensIXBlazor.Components
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
         [Parameter]
+        public string? AriaLabelClearIconButton { get; set; }
+        [Parameter]
+        public string? AriaLabelSearchIconButton { get; set; }
+        [Parameter]
+        public string? AriaLabelSearchInput { get; set; }   
+        [Parameter] 
         public string Icon { get; set; } = "search";
         [Parameter]
         public string Placeholder { get; set; } = "Enter text here";

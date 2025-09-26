@@ -21,9 +21,15 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter]
+        public string? AriaLabelCloseButton { get; set; }   
+        [Parameter]
         public bool Active { get; set; } = true;
         [Parameter]
         public string? Background { get; set; }
+
+        [Parameter]
+        public bool CenterContent { get; set; } = false;
+
         [Parameter]
         public bool Closable { get; set; } = false;
         [Parameter]

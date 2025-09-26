@@ -15,6 +15,20 @@
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
 
-<ix-time-picker @attributes="@UserAttributes" id="@Id" corners="@(EnumParser<DatePickerCorners>.EnumToString(Corners))"
-    format="@Format" show-hour="@ShowHour" show-minutes="@ShowMinutes" show-seconds="@ShowSeconds"
-    text-select-time="@TextSelectTime" time="@Time" style="display: block; width: 20rem; @Style" class="@Class"></ix-time-picker>
+<ix-time-picker @attributes="@UserAttributes" 
+                id="@Id" 
+                corners="@(EnumParser<DatePickerCorners>.EnumToString(Corners))"
+                format="@Format" 
+                show-hour="@ShowHour" 
+                show-minutes="@ShowMinutes" 
+                show-seconds="@ShowSeconds"
+                text-select-time="@TextSelectTime" 
+                time="@Time" 
+                hide-header="@HideHeader"
+                hour-interval ="@HourInterval"
+                millisecond-interval ="@MillisecondInterval"
+                minute-interval = "@MinuteInterval"
+                second-interval = "@SecondInterval"
+                style="display: block; width: 20rem; @Style" 
+                class="@Class">
+</ix-time-picker>

@@ -17,6 +17,8 @@ namespace SiemensIXBlazor.Components
         [Parameter, EditorRequired]
         public string Id { get; set; }
         [Parameter]
+        public string? AriaLabelIconButton { get; set; }   
+        [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter]
         public bool Disabled { get; set; } = false;

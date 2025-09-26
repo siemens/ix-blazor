@@ -23,6 +23,8 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public ButtonVariant Variant { get; set; } = ButtonVariant.primary;
         [Parameter]
+        public string? AriaLabelButton { get; set; }
+        [Parameter]
         public bool Disabled { get; set; } = false;
         [Parameter]
         public bool Ghost { get; set; } = false;

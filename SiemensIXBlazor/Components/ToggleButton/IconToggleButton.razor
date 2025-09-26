@@ -12,7 +12,18 @@
 @using SiemensIXBlazor.Enums.Button;
 @using SiemensIXBlazor.Helpers;
 @inherits IXBaseComponent
-<ix-icon-toggle-button @attributes="UserAttributes" class="@Class" style="@Style" id="@Id" disabled="@Disabled"
-    ghost="@Ghost" icon="@Icon" loading="@Loading" outline="@Outline" pressed="@Pressed" size="@Size"
-    variant="@(EnumParser<ButtonVariant>.EnumToString(Variant))" oval="@Oval">
+<ix-icon-toggle-button @attributes="UserAttributes" 
+                       class="@Class" 
+                       style="@Style" 
+                       id="@Id" 
+                       disabled="@Disabled"
+                       ghost="@Ghost" 
+                       icon="@Icon" 
+                       aria-label-icon-button="@AriaLabelIconButton"
+                       loading="@Loading" 
+                       outline="@Outline" 
+                       pressed="@Pressed" 
+                       size="@Size"
+                       variant="@(EnumParser<ButtonVariant>.EnumToString(Variant))" 
+                       oval="@Oval">
 </ix-icon-toggle-button>

@@ -13,6 +13,13 @@
 @using SiemensIXBlazor.Enums.PushCard
 @inherits IXBaseComponent
 
-<ix-action-card @attributes="UserAttributes" class="@Class" style="@Style" icon="@Icon" heading="@Heading"
-    subheading="@SubHeading" variant="@(EnumParser<PushCardVariant>.EnumToString(Variant))">
+<ix-action-card @attributes="UserAttributes" 
+                class="@Class" 
+                style="@Style" 
+                icon="@Icon" 
+                heading="@Heading"
+                subheading="@SubHeading" 
+                aria-label-card="@AriaLabelCard"
+                aria-label-icon="@AriaLabelIcon"
+                variant="@(EnumParser<PushCardVariant>.EnumToString(Variant))">
 </ix-action-card>

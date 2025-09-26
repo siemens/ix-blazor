@@ -14,7 +14,7 @@
 @using SiemensIXBlazor.Helpers
 
 <ix-button @onclick="Clicked" @attributes="UserAttributes" style="@Style" class="@Class" id="@Id" disabled="@Disabled"
-    ghost="@Ghost" outline="@Outline" selected="@Selected" icon="@Icon" loading="@Loading"
+    ghost="@Ghost" outline="@Outline" selected="@Selected" icon="@Icon" aria-label-button="@AriaLabelButton"  loading="@Loading"
     type="@(EnumParser<ButtonType>.EnumToString(Type))" variant="@(EnumParser<ButtonVariant>.EnumToString(Variant))"
     data-toggle="@DataToggle" data-tooltip="@DataTooltip" form="@Form">
     @ChildContent

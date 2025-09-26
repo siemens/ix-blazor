@@ -17,5 +17,6 @@
 
 <ix-date-picker @attributes="UserAttributes" id="@Id" from="@From" to="@To"
     corners="@(EnumParser<DatePickerCorners>.EnumToString(Corners))" format="@Format" max-date="@MaxDate"
+    aria-label-next-month-button="@AriaLabelNextMonthButton" aria-label-previous-month-button="@AriaLabelPreviousMonthButton"
     min-date="@MinDate" range="@Range" locale="@Locale" i18n-done="@I18nDone" week-start-index="@WeekStartIndex"
     style="@Style" class="@Class"></ix-date-picker>

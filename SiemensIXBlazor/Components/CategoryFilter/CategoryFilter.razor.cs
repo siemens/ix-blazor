@@ -59,6 +59,12 @@ namespace SiemensIXBlazor.Components.CategoryFilter
         public string Icon { get; set; } = "search";
         [Parameter]
         public string LabelCategories { get; set; } = "Categories";
+        [Parameter]
+        public string? AriaLabelFilterInput { get; set; }
+        [Parameter]
+        public string? AriaLabelOperatorButton { get; set; }
+        [Parameter]
+        public string? AriaLabelResetButton { get; set; }   
         public Dictionary<string, string>? NonSelectableCategories
         {
             get => _nonSelectableCategories;

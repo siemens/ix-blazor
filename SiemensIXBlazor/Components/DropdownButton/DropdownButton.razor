@@ -15,6 +15,7 @@
 @inherits IXBaseComponent
 
 <ix-dropdown-button @attributes="UserAttributes" label="@Label"
+    aria-label-dropdown-button="@AriaLabelDropdownButton"
     variant="@(EnumParser<ButtonVariant>.EnumToString(Variant))"
     placement="@(Placement.HasValue ? EnumParser<DropdownButtonPlacement>.EnumToString(Placement.Value)?.Replace('_', '-') : "")"
     icon="@Icon" closeBehavior="@(EnumParser<DropdownButtonCloseBehavior>.EnumToString(CloseBehavior))"

@@ -21,7 +21,23 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public DatePickerCorners Corners { get; set; } = DatePickerCorners.Rounded;
         [Parameter]
-        public static string Format { get; set; } = "yyyy/MM/dd";
+        public string Format { get; set; } = "yyyy/MM/dd";
+
+        [Parameter]
+        public bool HideHeader { get; set; } = false;
+
+        [Parameter]
+        public int HourInterval { get; set; } = 1;
+
+        [Parameter]
+        public int MillisecondInterval { get; set; } = 1;
+
+        [Parameter]
+        public int MinuteInterval { get; set; } = 1;
+
+        [Parameter]
+        public int SecondInterval { get; set; } = 1;
+
         [Parameter]
         public bool ShowHour { get; set; } = false;
         [Parameter]
@@ -30,8 +46,17 @@ namespace SiemensIXBlazor.Components
         public bool ShowSeconds { get; set; } = false;
         [Parameter]
         public string TextSelectTime { get; set; } = "Done";
+
         [Parameter]
-        public string Time { get; set; } = DateTime.Now.ToString(Format);
+        public string Time { get; set; }
+        protected override void OnInitialized()
+        {
+            if (string.IsNullOrEmpty(Time))
+            {
+                Time = DateTime.Now.ToString(Format);
+            }
+        }
+
         [Parameter]
         public EventCallback<string> DoneEvent { get; set; }
         [Parameter]
