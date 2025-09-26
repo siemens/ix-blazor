@@ -4,7 +4,7 @@
 @inject IJSRuntime JSRuntime
 
 <ix-checkbox @attributes="UserAttributes"
-             class="@GetCombinedClass()"
+             class="@Class"
              style="@Style"
              id="@Id"
              checked="@Checked"
@@ -16,21 +16,3 @@
              value="@Value">
 </ix-checkbox>
 
-@code {
-    private string GetCombinedClass()
-    {
-        var validationClass = ValidationState switch
-        {
-            ValidationState.Info => "ix-info",
-            ValidationState.Warning => "ix-warning",
-            ValidationState.Invalid => "ix-invalid",
-            ValidationState.Valid => "ix-valid",
-            _ => ""
-        };
-
-        if (string.IsNullOrEmpty(validationClass))
-            return Class;
-
-        return string.IsNullOrEmpty(Class) ? validationClass : $"{Class} {validationClass}";
-    }
-}
