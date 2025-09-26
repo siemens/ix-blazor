@@ -116,11 +116,6 @@ namespace SiemensIXBlazor.Components.Tree
             await NodeToggledEvent.InvokeAsync(result);
         }
 
-        /// <summary>
-        /// Marks specified tree items as dirty to trigger hard re-rendering
-        /// </summary>
-        /// <param name="itemIdentifiers">Array of tree item identifiers to mark as dirty</param>
-        /// <returns></returns>
         public async Task MarkItemAsDirty(params string[] itemIdentifiers)
         {
             if (_interop == null || itemIdentifiers == null || itemIdentifiers.Length == 0)
