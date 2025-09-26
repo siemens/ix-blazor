@@ -40,7 +40,6 @@ export function markItemAsDirty(treeId, itemIdentifiers) {
         return;
     }
 
-    // ix-tree component'inin markItemAsDirty metodunu çağır
     if (typeof treeElement.markItemAsDirty === 'function') {
         treeElement.markItemAsDirty(itemIdentifiers);
         console.log('Items marked as dirty:', itemIdentifiers);
