@@ -49,7 +49,7 @@ namespace SiemensIXBlazor.Components.CustomField
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (firstRender && IsFileUpload) // Sadece IsFileUpload true ise JS fonksiyonunu çağır
+            if (firstRender && IsFileUpload) 
             {
                 await JSRuntime.InvokeVoidAsync("customFieldHelpers.initFileUpload",
                     buttonRef, fileRef, inputRef);

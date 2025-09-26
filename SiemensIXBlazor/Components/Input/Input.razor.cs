@@ -86,7 +86,6 @@ namespace SiemensIXBlazor.Components.Input
             }
         }
 
-        // EVENT HANDLERS
         [JSInvokable]
         public async void ValueChange(JsonElement valueState)
         {

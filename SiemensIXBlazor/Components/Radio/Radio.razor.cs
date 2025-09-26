@@ -57,7 +57,6 @@ namespace SiemensIXBlazor.Components.Radio
             }
         }
 
-        // EVENT HANDLERS
         [JSInvokable]
         public async void CheckedChange(JsonElement checkedState)
         {

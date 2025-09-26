@@ -63,8 +63,6 @@ namespace SiemensIXBlazor.Components.Checkbox
             }
         }
 
-        // Validation durumu (Info, Warning, Invalid, Valid)
-        // CSS sınıflarını otomatik olarak günceller
         [Parameter]
         public ValidationState ValidationState
         {
@@ -72,7 +70,7 @@ namespace SiemensIXBlazor.Components.Checkbox
             set
             {
                 _validationState = value;
-                UpdateValidationClass(); // CSS sınıflarını güncelle
+                UpdateValidationClass(); 
             }
         }
 
@@ -105,7 +103,6 @@ namespace SiemensIXBlazor.Components.Checkbox
         {
             bool isChecked = checkState.GetBoolean();
             _checked = isChecked;
-            // Parent component'e bildirim gönder
             await CheckedChangeEvent.InvokeAsync(isChecked);
         }
 

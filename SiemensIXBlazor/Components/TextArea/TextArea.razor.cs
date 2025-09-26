@@ -99,7 +99,6 @@ namespace SiemensIXBlazor.Components.TextArea
             }
         }
 
-        // EVENT HANDLERS
         [JSInvokable]
         public async void ValueChange(JsonElement valueState)
         {

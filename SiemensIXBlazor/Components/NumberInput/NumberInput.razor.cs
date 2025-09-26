@@ -103,7 +103,6 @@ namespace SiemensIXBlazor.Components.NumberInput
             }
         }
 
-        // EVENT HANDLERS 
         [JSInvokable]
         public async void IxBlur()
         {

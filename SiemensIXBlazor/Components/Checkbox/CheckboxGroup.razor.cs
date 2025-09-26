@@ -23,7 +23,6 @@ namespace SiemensIXBlazor.Components.Checkbox
         [Parameter]
         public string? ValidText { get; set; }
 
-        // Group içindeki checkbox'ları içerir
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
     }
