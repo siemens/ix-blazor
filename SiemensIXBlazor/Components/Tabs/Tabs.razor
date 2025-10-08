@@ -17,6 +17,8 @@
 
 <ix-tabs @attributes="UserAttributes" id="@Id" layout="@(EnumParser<TabsLayout>.EnumToString(Layout))"
     placement="@(EnumParser<TabsPlacement>.EnumToString(Placement))" rounded="@Rounded" selected="@Selected"
+    aria-label-chevron-left-icon-button="@AriaLabelChevronLeftIconButton" 
+    aria-label-chevron-right-icon-button="@AriaLabelChevronRightIconButton"
     small="@Small" style="@Style" class="@Class">
     @ChildContent
 </ix-tabs>

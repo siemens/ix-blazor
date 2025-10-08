@@ -16,6 +16,8 @@ namespace SiemensIXBlazor.Components
     public partial class DropdownButton
     {
         [Parameter]
+        public string? AriaLabelDropdownButton { get; set; }    
+        [Parameter]
         public bool Disabled { get; set; } = false;
         [Parameter]
         public bool Ghost { get; set; } = false;

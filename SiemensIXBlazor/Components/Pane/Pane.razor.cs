@@ -24,6 +24,8 @@ namespace SiemensIXBlazor.Components
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
         [Parameter]
+        public string? AriaLabelIcon { get; set; }  
+        [Parameter]
         public bool Borderless { get; set; } = false;
         [Parameter]
         public PaneComposition Composition { get; set; } = PaneComposition.top;
