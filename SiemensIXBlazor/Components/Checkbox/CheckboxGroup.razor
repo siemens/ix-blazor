@@ -1,0 +1,19 @@
+﻿@using Microsoft.JSInterop;
+@using SiemensIXBlazor.Components
+@inherits IXBaseComponent
+@inject IJSRuntime JSRuntime
+@namespace SiemensIXBlazor.Components.Checkbox
+
+<CascadingValue Value="this">
+    <ix-checkbox-group @attributes="UserAttributes"
+                       class="@Class"
+                       style="@Style"
+                       id="@Id"
+                       label="@Label"
+                       info-text="@InfoText"
+                       warning-text="@WarningText"
+                       invalid-text="@InvalidText"
+                       valid-text="@ValidText">
+        @ChildContent
+    </ix-checkbox-group>
+</CascadingValue>

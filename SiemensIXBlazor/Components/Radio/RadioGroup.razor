@@ -1,0 +1,14 @@
+﻿@using Microsoft.JSInterop;
+@using SiemensIXBlazor.Components
+@inherits IXBaseComponent
+@inject IJSRuntime JSRuntime
+
+<ix-radio-group id="@Id"
+                label="@Label"
+                info-text="@InfoText"
+                warning-text="@WarningText"
+                valid-text="@ValidText"
+                invalid-text="@InvalidText"
+                class="@CssClass">
+    @ChildContent
+</ix-radio-group>
