@@ -14,10 +14,6 @@ using Microsoft.JSInterop;
 using Moq;
 using SiemensIXBlazor.Components;
 using SiemensIXBlazor.Enums.DatePicker;
-using SiemensIXBlazor.Tests.Menu;
-using Xunit;
-using static System.Net.Mime.MediaTypeNames;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SiemensIXBlazor.Tests
 {
