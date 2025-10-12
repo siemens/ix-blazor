@@ -27,6 +27,7 @@ public class KPITest : TestContextBase
             .Add(p => p.Value, "testValue"));
 
         // Assert
-        cut.MarkupMatches("<ix-kpi label=\"testLabel\" value=\"testValue\" orientation=\"horizontal\" state=\"neutral\" onreadystatechange=\"Neutral\" unit=\"testUnit\"></ix-kpi>");
+        cut.MarkupMatches("<ix-kpi label=\"testLabel\" value=\"testValue\" orientation=\"horizontal\" state=\"neutral\" onreadystatechange=\"Neutral\" unit=\"testUnit\" aria-label-warning-icon=\"AriaLabelWarningIcon\"></ix-kpi>");
+
     }
 }
