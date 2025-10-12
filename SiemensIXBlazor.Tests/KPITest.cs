@@ -8,10 +8,8 @@
 //  -----------------------------------------------------------------------
 
 using Bunit;
-using Newtonsoft.Json.Linq;
 using SiemensIXBlazor.Components;
 using SiemensIXBlazor.Enums.KPI;
-using System.Reflection.Emit;
 
 namespace SiemensIXBlazor.Tests;
 
