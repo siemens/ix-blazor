@@ -12,15 +12,16 @@ using SiemensIXBlazor.Components;
 
 namespace SiemensIXBlazor.Tests
 {
-    public class ChipTests: TestContextBase
+    public class ChipTests : TestContextBase
     {
         [Fact]
         public void ChipRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<Chip>(parameters => {
+            var cut = RenderComponent<Chip>(parameters =>
+            {
                 parameters.Add(p => p.Id, "testId");
-                parameters.Add(p => p.Active, true);
+                parameters.Add(p => p.Inactive, false);
                 parameters.Add(p => p.Background, "testBackground");
                 parameters.Add(p => p.Closable, true);
                 parameters.Add(p => p.ChipColor, "testColor");
@@ -31,7 +32,7 @@ namespace SiemensIXBlazor.Tests
             });
 
             // Assert
-            cut.MarkupMatches("<ix-chip id=\"testId\" closable=\"\" outline=\"\" active=\"\" background=\"testBackground\" chip-color=\"testColor\" icon=\"testIcon\" variant=\"neutral\" tooltip-text='tooltipText'></ix-chip>");
+            cut.MarkupMatches("<ix-chip id=\"testId\" closable=\"\" outline=\"\" inactive=\"\" background=\"testBackground\" chip-color=\"testColor\" icon=\"testIcon\" variant=\"neutral\" tooltip-text='tooltipText'></ix-chip>");
         }
 
         [Fact]
