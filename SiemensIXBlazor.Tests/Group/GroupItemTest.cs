@@ -31,7 +31,7 @@ public class GroupItemTest : TestContextBase
 
         // Assert
         cut.MarkupMatches(
-            "<ix-group-item text=\"testText\" focusable=\"\" icon=\"testIcon\" index=\"1\" secondary-text=\"testSecondaryText\" selected=\"\" id=\"testId\"></ix-group-item>");
+            "<ix-group-item text=\"testText\" disabled=\"\" icon=\"testIcon\" index=\"1\" secondary-text=\"testSecondaryText\" selected=\"\" id=\"testId\"></ix-group-item>");
     }
 
     [Fact]
