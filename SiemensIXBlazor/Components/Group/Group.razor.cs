@@ -20,7 +20,7 @@ namespace SiemensIXBlazor.Components
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
         [Parameter]
-        public bool Collapsed { get; set; } = true;
+        public bool Expanded { get; set; } = false;
         [Parameter]
         public bool ExpandOnHeaderClick { get; set; } = false;
         [Parameter]
@@ -34,7 +34,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool SuppressHeaderSelection { get; set; } = false;
         [Parameter]
-        public EventCallback<bool> CollapsedChangedEvent { get; set; }
+        public EventCallback<bool> ExpandedChangedEvent { get; set; }
         [Parameter]
         public EventCallback<bool> SelectGroupEvent { get; set; }
         [Parameter]
@@ -48,16 +48,16 @@ namespace SiemensIXBlazor.Components
             {
                 _interop = new(JSRuntime);
 
-                await _interop.AddEventListener(this, Id, "collapsedChanged", "CollapsedChanged");
+                await _interop.AddEventListener(this, Id, "expandedChanged", "ExpandedChanged");
                 await _interop.AddEventListener(this, Id, "selectGroup", "GroupSelected");
                 await _interop.AddEventListener(this, Id, "selectItem", "ItemSelected");
             }
         }
 
         [JSInvokable]
-        public async void CollapsedChanged(bool value)
+        public async void ExpandedChanged(bool value)
         {
-            await CollapsedChangedEvent.InvokeAsync(value);
+            await ExpandedChangedEvent.InvokeAsync(value);
         }
 
         [JSInvokable]

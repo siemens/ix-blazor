@@ -25,12 +25,12 @@ namespace SiemensIXBlazor.Components.CategoryFilter
         private string[] _suggestions = [];
         private Lazy<Task<IJSObjectReference>>? moduleTask;
         private BaseInterop? _interop;
-        private LogicalFilterOperator  _logicalFilterOperator = LogicalFilterOperator.Equal;
+        private LogicalFilterOperator _logicalFilterOperator = LogicalFilterOperator.Equal;
 
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
         public Dictionary<string, Category>? Categories
-        { 
+        {
             get => _categories;
             set
             {
@@ -43,7 +43,7 @@ namespace SiemensIXBlazor.Components.CategoryFilter
             get => _filterState;
             set
             {
-                if(value is not null)
+                if (value is not null)
                 {
                     _filterState = value;
                     InitialParameter("setFilterState", _filterState);
@@ -64,7 +64,7 @@ namespace SiemensIXBlazor.Components.CategoryFilter
         [Parameter]
         public string? AriaLabelOperatorButton { get; set; }
         [Parameter]
-        public string? AriaLabelResetButton { get; set; }   
+        public string? AriaLabelResetButton { get; set; }
         public Dictionary<string, string>? NonSelectableCategories
         {
             get => _nonSelectableCategories;
@@ -77,7 +77,7 @@ namespace SiemensIXBlazor.Components.CategoryFilter
         [Parameter]
         public string? Placeholder { get; set; }
         [Parameter]
-        public bool RepeatCategories { get; set; } = true;
+        public bool UniqueCategories { get; set; } = false;
         [Parameter]
         public bool Disabled { get; set; } = false;
         [Parameter]
@@ -94,13 +94,16 @@ namespace SiemensIXBlazor.Components.CategoryFilter
         }
 
         [Parameter]
-        public LogicalFilterOperator StaticOperator { 
-            get=>_logicalFilterOperator; 
-            set {
+        public LogicalFilterOperator StaticOperator
+        {
+            get => _logicalFilterOperator;
+            set
+            {
 
                 _logicalFilterOperator = value;
                 InitialParameter("setStaticOperator", _logicalFilterOperator.ToEnumString());
-            } }
+            }
+        }
         [Parameter]
         public EventCallback<FilterState> FilterChangedEvent { get; set; }
         [Parameter]
@@ -108,7 +111,7 @@ namespace SiemensIXBlazor.Components.CategoryFilter
 
         protected override void OnAfterRender(bool firstRender)
         {
-            if(firstRender)
+            if (firstRender)
             {
                 _interop = new(JSRuntime);
 
