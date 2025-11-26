@@ -21,7 +21,7 @@ public class GroupItemTest : TestContextBase
         // Arrange
         var cut = RenderComponent<GroupItem>(parameters => parameters
             .Add(p => p.Id, "testId")
-            .Add(p => p.Focusable, true)
+            .Add(p => p.Disabled, true)
             .Add(p => p.Icon, "testIcon")
             .Add(p => p.Index, 1)
             .Add(p => p.SecondaryText, "testSecondaryText")

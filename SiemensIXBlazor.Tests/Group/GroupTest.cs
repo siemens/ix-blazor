@@ -20,7 +20,7 @@ public class GroupTest : TestContextBase
         // Arrange
         var cut = RenderComponent<Components.Group>(parameters => parameters
             .Add(p => p.Id, "testId")
-            .Add(p => p.Collapsed, true)
+            .Add(p => p.Expanded, true)
             .Add(p => p.ExpandOnHeaderClick, false)
             .Add(p => p.Header, "testHeader")
             .Add(p => p.Index, 1)

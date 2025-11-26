@@ -7,19 +7,18 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
-using System;
 using Microsoft.AspNetCore.Components;
 using SiemensIXBlazor.Enums.PushCard;
 
 namespace SiemensIXBlazor.Components
 {
-	public partial class PushCard
-	{
+    public partial class PushCard
+    {
         /// <summary>
         /// Card heading
         /// </summary>
         [Parameter]
-		public string? Heading { get; set; }
+        public string? Heading { get; set; }
         /// <summary>
         /// Card icon
         /// </summary>
@@ -36,7 +35,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string? SubHeading { get; set; }
         [Parameter]
-        public bool Collapsed { get; set; } = true;
+        public bool Expanded { get; set; } = true;
         /// <summary>
         /// Card variant
         /// </summary>

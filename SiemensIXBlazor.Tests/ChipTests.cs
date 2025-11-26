@@ -20,7 +20,7 @@ namespace SiemensIXBlazor.Tests
             // Arrange
             var cut = RenderComponent<Chip>(parameters => {
                 parameters.Add(p => p.Id, "testId");
-                parameters.Add(p => p.Active, true);
+                parameters.Add(p => p.Inactive, true);
                 parameters.Add(p => p.Background, "testBackground");
                 parameters.Add(p => p.Closable, true);
                 parameters.Add(p => p.ChipColor, "testColor");
