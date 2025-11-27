@@ -1365,7 +1365,8 @@ treeNodes.Add("sample-child-1", new TreeNode()
     Id = "sample-child-1",
     Data = new TreeData()
     {
-        Name = "Sample Child 1"
+        Name = "Sample Child 1",
+        Icon = "star"
     },
     HasChildren = false,
     Children = new List<string>() {}
