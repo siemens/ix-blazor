@@ -49,4 +49,18 @@ public class GroupItemTest : TestContextBase
         // Assert
         Assert.True(wasCalled);
     }
+
+    [Fact]
+    public void ComponentRendersWithChildContent()
+    {
+        // Arrange
+        var cut = RenderComponent<GroupItem>(parameters => parameters
+            .Add(p => p.Id, "testId")
+            .AddChildContent("<button>Custom Entry</button>"));
+
+        // Assert
+        var ixGroupItem = cut.Find("ix-group-item");
+        Assert.NotNull(ixGroupItem);
+        Assert.Contains("<button>Custom Entry</button>", cut.Markup);
+    }
 }
