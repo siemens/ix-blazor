@@ -206,4 +206,22 @@ public class TreeTests : TestContextBase
             ), Times.AtLeastOnce());
         }
     }
+
+    [Fact]
+    public void TreeData_WithIcon_ShouldSerializeCorrectly()
+    {
+        // Arrange
+        var treeData = new TreeData
+        {
+            Name = "Test Node",
+            Icon = "star"
+        };
+
+        // Act
+        var json = Newtonsoft.Json.JsonConvert.SerializeObject(treeData);
+
+        // Assert
+        Assert.Contains("\"name\":\"Test Node\"", json);
+        Assert.Contains("\"icon\":\"star\"", json);
+    }
 }
