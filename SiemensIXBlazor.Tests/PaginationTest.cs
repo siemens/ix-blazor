@@ -20,19 +20,16 @@ namespace SiemensIXBlazor.Tests
         public void PaginationRendersCorrectly()
         {
             // Arrange
-
-
-            var cut2 = RenderComponent<Components.Pagination.Pagination>(parameters=>
-            {
-                parameters.Add(p => p.Id, "testId");
-                parameters.Add(p => p.ItemCount, 15);
-                parameters.Add(p => p.SelectedPage, 1);
-                parameters.Add(p => p.HideItemCount, true);
-            }
+            var cut = RenderComponent<Components.Pagination.Pagination>(parameters=>
+                {
+                    parameters.Add(p => p.Id, "testId");
+                    parameters.Add(p => p.ItemCount, 15);
+                    parameters.Add(p => p.SelectedPage, 1);
+                    parameters.Add(p => p.HideItemCount, true);
+                }
             );
             // Assert
-
-            cut2.MarkupMatches("<ix-pagination id=\"testId\" item-count=\"15\" selected-page=\"1\" hide-item-count=\"\"  i-1-8n-items=\"Items\" i-1-8n-of=\"of\" i-1-8n-page=\"Page\"></ix-pagination>");
+            cut.MarkupMatches("<ix-pagination id=\"testId\" item-count=\"15\" selected-page=\"1\" hide-item-count=\"\" i-1-8n-items=\"Items\" i-1-8n-of=\"of\" i-1-8n-page=\"Page\"></ix-pagination>");
         }
 
         [Fact]
