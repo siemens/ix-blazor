@@ -21,6 +21,8 @@ namespace SiemensIXBlazor.Components.ToggleButton
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter]
+        public string? AriaLabelIconButton { get; set; }    
+        [Parameter]
         public bool Disabled { get; set; } = false;
         [Parameter]
         public bool Ghost { get; set; } = false;

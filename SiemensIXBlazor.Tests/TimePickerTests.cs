@@ -60,9 +60,6 @@ namespace SiemensIXBlazor.Tests
         [Fact]
         public void ComponentRendersWithAllParametersSetCorrectly()
         {
-            // Because Format is a static property, set it directly
-            TimePicker.Format = "MM-dd";
-
             // Arrange & Act
             var cut = RenderComponent<TimePicker>(parameters => parameters
                 .AddUnmatched("data-test", "my-value")
@@ -75,6 +72,7 @@ namespace SiemensIXBlazor.Tests
                 .Add(p => p.Time, "2025-04-24T15:30:00")
                 .Add(p => p.Class, "my-class")
                 .Add(p => p.Style, "color:red;")
+                .Add(p=>p.Format,"MM-dd")
             );
 
             // Assert full markup
@@ -82,6 +80,10 @@ namespace SiemensIXBlazor.Tests
                 @"<ix-time-picker data-test=""my-value"" id=""tp1""
                     corners=""left""
                     format=""MM-dd""
+                    hour-interval=""1""
+                    millisecond-interval=""1""
+                    minute-interval=""1""  
+                    second-interval=""1""
                     show-hour
                     show-minutes
                     show-seconds
@@ -91,9 +93,6 @@ namespace SiemensIXBlazor.Tests
                     class=""my-class"">
                 </ix-time-picker>"
             );
-
-            // Reset static Format to default for other tests
-            TimePicker.Format = "yyyy/MM/dd";
         }
 
         [Fact]

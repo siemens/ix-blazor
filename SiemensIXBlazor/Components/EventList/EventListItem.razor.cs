@@ -9,6 +9,7 @@
 
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using SiemensIXBlazor.Enums.EventList;
 using SiemensIXBlazor.Interops;
 
 namespace SiemensIXBlazor.Components
@@ -29,6 +30,9 @@ namespace SiemensIXBlazor.Components
         public int Opacity { get; set; } = 1;
         [Parameter]
         public bool? Selected { get; set; }
+        [Parameter]
+        public EventListVariant Variant { get; set; } = EventListVariant.outline;
+
         [Parameter]
         public EventCallback ItemClickEvent { get; set; }
 

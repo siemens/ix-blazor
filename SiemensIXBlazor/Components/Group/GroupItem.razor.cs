@@ -16,7 +16,9 @@ namespace SiemensIXBlazor.Components
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
         [Parameter]
-        public bool Focusable { get; set; } = true;
+        public string? AriaLabelIcon { get; set; }
+        [Parameter]
+        public bool Disabled { get; set; } = false;
         [Parameter]
         public string? Icon { get; set; }
         [Parameter]
@@ -34,7 +36,7 @@ namespace SiemensIXBlazor.Components
 
         public async void ItemClicked()
         {
-           await SelectedChangeEvent.InvokeAsync(Id);
+            await SelectedChangeEvent.InvokeAsync(Id);
         }
 
     }

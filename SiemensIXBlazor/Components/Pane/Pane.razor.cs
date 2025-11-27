@@ -8,13 +8,13 @@
 //  -----------------------------------------------------------------------
 
 using Microsoft.AspNetCore.Components;
-using System.Reflection.Metadata;
-using SiemensIXBlazor.Interops;
 using Microsoft.JSInterop;
-using SiemensIXBlazor.Enums.Pane;
-using SiemensIXBlazor.Objects.Pane;
-using System.Text.Json;
 using Newtonsoft.Json;
+using SiemensIXBlazor.Enums.Pane;
+using SiemensIXBlazor.Interops;
+using SiemensIXBlazor.Objects.Pane;
+using System.Reflection.Metadata;
+using System.Text.Json;
 
 
 namespace SiemensIXBlazor.Components
@@ -23,6 +23,12 @@ namespace SiemensIXBlazor.Components
     {
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
+        [Parameter]
+        public string? AriaLabelIcon { get; set; }
+        [Parameter]
+        public RenderFragment? HeaderContent { get; set; }
+        [Parameter]
+        public bool CloseOnClickOutside { get; set; } = true;
         [Parameter]
         public bool Borderless { get; set; } = false;
         [Parameter]
@@ -51,7 +57,7 @@ namespace SiemensIXBlazor.Components
 
         private BaseInterop _interop;
 
-        protected  override  async Task OnAfterRenderAsync(bool firstRender)
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
@@ -64,7 +70,7 @@ namespace SiemensIXBlazor.Components
         }
 
         [JSInvokable]
-        public async 
+        public async
         Task
 ExpandChanged(JsonElement data)
         {
@@ -76,7 +82,7 @@ ExpandChanged(JsonElement data)
         }
 
         [JSInvokable]
-        public async 
+        public async
         Task
 BorderlessChanged(JsonElement data)
         {
@@ -88,7 +94,7 @@ BorderlessChanged(JsonElement data)
         }
 
         [JSInvokable]
-        public async 
+        public async
         Task
 VariantChanged(JsonElement data)
         {

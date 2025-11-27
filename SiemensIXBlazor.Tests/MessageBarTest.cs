@@ -32,12 +32,12 @@ public class MessageBarTests : TestContextBase
             ("Id", "testId"),
             ("Class", "test-class"),
             ("Style", "width: 100%"),
-            ("Dismissible", true),
+            ("Persistent", true),
             ("Type", MessageBarType.Info),
             ("ChildContent", childContent));
 
         // Assert
-        cut.MarkupMatches("<ix-message-bar id=\"testId\" class=\"test-class\" style=\"width: 100%\" dismissible=\"\" type=\"info\">Simple Text</ix-message-bar>");
+        cut.MarkupMatches("<ix-message-bar id=\"testId\" class=\"test-class\" style=\"width: 100%\" persistent=\"\" type=\"info\">Simple Text</ix-message-bar>");
     }
 
     [Fact]

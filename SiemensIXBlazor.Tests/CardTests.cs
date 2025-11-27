@@ -9,17 +9,17 @@
 
 using Bunit;
 using SiemensIXBlazor.Components;
-using SiemensIXBlazor.Components.BasicNavigation;
 
 namespace SiemensIXBlazor.Tests
 {
-    public class CardTests: TestContextBase
+    public class CardTests : TestContextBase
     {
         [Fact]
         public void CardRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<Card>(parameters => {
+            var cut = RenderComponent<Card>(parameters =>
+            {
                 parameters.Add(p => p.Selected, true);
                 parameters.Add(p => p.Variant, Enums.CardVariant.neutral);
             });

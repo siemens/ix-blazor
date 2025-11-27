@@ -15,5 +15,7 @@ namespace SiemensIXBlazor.Objects
     {
         [JsonProperty("name")]
         public string? Name { get; set; }
+        [JsonProperty("icon")]
+        public string? Icon { get; set; }
     }
 }

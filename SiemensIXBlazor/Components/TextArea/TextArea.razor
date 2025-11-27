@@ -1,0 +1,28 @@
+﻿@using Microsoft.JSInterop;
+@using SiemensIXBlazor.Components
+@inherits IXBaseComponent
+@inject IJSRuntime JSRuntime
+
+<ix-textarea id="@Id"
+             value="@Value"
+             disabled="@Disabled"
+             readonly="@Readonly"
+             required="@Required"
+             max-length="@MaxLength"
+             min-length="@MinLength"
+             name="@Name"
+             label="@Label"
+             placeholder="@Placeholder"
+             textarea-rows="@TextareaRows"
+             textarea-cols="@TextareaCols"
+             textarea-height="@TextareaHeight"
+             textarea-width="@TextareaWidth"
+             resize-behavior="@ResizeBehavior"
+             helper-text="@HelperText"
+             info-text="@InfoText"
+             warning-text="@WarningText"
+             valid-text="@ValidText"
+             invalid-text="@InvalidText"
+             show-text-as-tooltip="@ShowTextAsTooltip"
+             class="@CssClass">
+</ix-textarea>

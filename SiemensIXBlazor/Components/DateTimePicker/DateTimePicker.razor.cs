@@ -31,6 +31,10 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string? MinDate { get; set; }
         [Parameter]
+        public string? AriaLabelNextMonthButton { get; set; }
+        [Parameter]
+        public string? AriaLabelPreviousMonthButton { get; set; }
+        [Parameter]
         public bool Range { get; set; } = true;
         [Parameter]
         public bool ShowHour { get; set; } = false;

@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Components;
 using SiemensIXBlazor.Components;
 using SiemensIXBlazor.Enums.Pane;
 using SiemensIXBlazor.Objects.Pane;
-using Xunit;
 
 namespace SiemensIXBlazor.Tests
 {
@@ -27,6 +26,7 @@ namespace SiemensIXBlazor.Tests
                 ("Borderless", true),
                 ("Composition", PaneComposition.top),
                 ("Expanded", true),
+                ("CloseOnClickOutside", true),
                 ("Heading", "Test Heading"),
                 ("HideOnCollapse", true),
                 ("Icon", "Test Icon"),
@@ -35,7 +35,7 @@ namespace SiemensIXBlazor.Tests
             );
 
             // Assert
-            cut.MarkupMatches("<ix-pane id=\"testId\" borderless composition=\"top\" expanded heading=\"Test Heading\" hide-on-collapse icon=\"Test Icon\" size=\"240px\" variant=\"inline\"></ix-pane>");
+            cut.MarkupMatches("<ix-pane id=\"testId\" borderless composition=\"top\" expanded close-on-click-outside=\"\" heading=\"Test Heading\" hide-on-collapse icon=\"Test Icon\" size=\"240px\" variant=\"inline\"></ix-pane>");
         }
 
         [Fact]

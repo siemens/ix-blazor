@@ -18,6 +18,8 @@ namespace SiemensIXBlazor.Components
 	{
         [Parameter, EditorRequired]
         public string Id { get; set; }
+        [Parameter]
+        public string? AriaLabelEmptyStateIcon { get; set; }
         /// <summary>
         /// Optional empty state action
         /// </summary>

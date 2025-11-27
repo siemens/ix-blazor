@@ -17,5 +17,7 @@ namespace SiemensIXBlazor.Components
         public string? Icon { get; set; }
         [Parameter]
         public string? Label { get; set; }
+        [Parameter]
+        public string? AriaLabelButton { get; set; } 
     }
 }

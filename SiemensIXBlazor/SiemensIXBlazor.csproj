@@ -77,7 +77,4 @@
 		<IsWindows Condition="'$(OS)' == 'Windows_NT'">true</IsWindows>
 	</PropertyGroup>
 
-	<Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(IsWindows)' == 'true'">
-	  <Exec Command="call $(SolutionDir)scripts\pre-build.bat" />
-	</Target>
 </Project>

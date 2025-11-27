@@ -9,33 +9,33 @@
 
 using Bunit;
 using Microsoft.AspNetCore.Components;
-using SiemensIXBlazor.Components;
 using SiemensIXBlazor.Components.CategoryFilter;
 using SiemensIXBlazor.Objects;
 
 namespace SiemensIXBlazor.Tests
 {
-    public class CategoryFilterTests: TestContextBase
+    public class CategoryFilterTests : TestContextBase
     {
         [Fact]
         public void CategoryFilterRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<CategoryFilter>(parameters => {
+            var cut = RenderComponent<CategoryFilter>(parameters =>
+            {
                 parameters.Add(p => p.Id, "testId");
                 parameters.Add(p => p.HideIcon, true);
                 parameters.Add(p => p.I18nPlainText, "testI18PlainText");
                 parameters.Add(p => p.Icon, "testIcon");
                 parameters.Add(p => p.LabelCategories, "testLabelCategories");
                 parameters.Add(p => p.Placeholder, "TestPlaceholder");
-                parameters.Add(p => p.RepeatCategories, true);
+                parameters.Add(p => p.UniqueCategories, true);
                 parameters.Add(p => p.Suggestions, ["testSugestion"]);
                 parameters.Add(p => p.Disabled, true);
                 parameters.Add(p => p.Readonly, true);
             });
 
             // Assert
-            cut.MarkupMatches("<ix-category-filter id=\"testId\" placeholder=\"TestPlaceholder\" hide-icon=\"\" i-1-8n-plain-text=\"testI18PlainText\" icon=\"testIcon\" label-categories=\"testLabelCategories\" repeat-categories=\"\" readonly disabled></ix-category-filter>");
+            cut.MarkupMatches("<ix-category-filter id=\"testId\" placeholder=\"TestPlaceholder\" hide-icon=\"\" i-1-8n-plain-text=\"testI18PlainText\" icon=\"testIcon\" label-categories=\"testLabelCategories\" unique-categories readonly disabled></ix-category-filter>");
         }
 
         [Fact]
@@ -57,7 +57,7 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             var cut = RenderComponent<CategoryFilter>();
-            var mockFilterState = new FilterState { Categories = [new FilterStateCategory { Id = "testId", Operator = "testOperator", Value = "testValue"}] };
+            var mockFilterState = new FilterState { Categories = [new FilterStateCategory { Id = "testId", Operator = "testOperator", Value = "testValue" }] };
 
             // Act
             cut.Instance.FilterState = mockFilterState;
@@ -85,7 +85,7 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             var cut = RenderComponent<CategoryFilter>();
-            var mockSuggestions = new string[] {"test", "test2"};
+            var mockSuggestions = new string[] { "test", "test2" };
 
             // Act
             cut.Instance.Suggestions = mockSuggestions;
