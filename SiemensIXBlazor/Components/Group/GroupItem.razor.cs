@@ -32,6 +32,8 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string? Text { get; set; }
         [Parameter]
+        public RenderFragment? ChildContent { get; set; }
+        [Parameter]
         public EventCallback<string> SelectedChangeEvent { get; set; }
 
         public async void ItemClicked()
