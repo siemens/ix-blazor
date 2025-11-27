@@ -21,8 +21,30 @@ namespace SiemensIXBlazor.Components
 
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
+
+        [Parameter]
+        public RenderFragment? Secondary { get; set; }
+
         [Parameter]
         public string? Name { get; set; }
+
+        [Parameter]
+        public string? NameSuffix { get; set; }
+
+        [Parameter]
+        public string? CompanyLogo { get; set; }
+
+        [Parameter]
+        public string? CompanyLogoAlt { get; set; }
+
+        [Parameter]
+        public string? AppIcon { get; set; }
+
+        [Parameter]
+        public string? AppIconAlt { get; set; }
+
+        [Parameter]
+        public bool HideBottomBorder { get; set; } = false;
 
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;

@@ -88,5 +88,38 @@ namespace SiemensIXBlazor.Tests
             // Assert
             Assert.True(variantChanged);
         }
+
+        [Fact]
+        public void PaneRendersHeaderSlot()
+        {
+            // Arrange
+            var expectedHeaderContent = "Header content";
+
+            // Act
+            var cut = RenderComponent<Pane>(parameters => parameters
+                .Add(p => p.Id, "testPane")
+                .Add(p => p.HeaderContent, builder => 
+                {
+                    builder.AddContent(0, expectedHeaderContent);
+                }));
+
+            // Assert
+            var markup = cut.Markup;
+            Assert.Contains("slot=\"header\"", markup);
+            Assert.Contains(expectedHeaderContent, markup);
+        }
+
+        [Fact]
+        public void PaneDoesNotRenderHeaderSlotWhenNull()
+        {
+            // Arrange & Act
+            var cut = RenderComponent<Pane>(parameters => {
+                parameters.Add(p => p.Id, "testPane");
+                parameters.Add(p => p.Heading, "Test Heading");
+            });
+
+            // Assert
+            Assert.DoesNotContain("slot=\"header\"", cut.Markup);
+        }
     }
 }
