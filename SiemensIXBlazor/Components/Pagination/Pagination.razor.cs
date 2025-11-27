@@ -36,7 +36,7 @@ namespace SiemensIXBlazor.Components.Pagination
         [Parameter]
         public int SelectedPage { get; set; } = 0;
         [Parameter]
-        public bool ShowItemCount { get; set; } = true;
+        public bool HideItemCount { get; set; } = false;
         [Parameter]
         public EventCallback<int> ItemCountChangedEvent { get; set; }
         [Parameter]
