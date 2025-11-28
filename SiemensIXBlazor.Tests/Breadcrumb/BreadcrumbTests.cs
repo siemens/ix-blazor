@@ -26,9 +26,9 @@ namespace SiemensIXBlazor.Tests
                 parameters.Add(p => p.NextItems, ["Data"]);
                 parameters.Add(p => p.VisibleItemCount, 9);
             });
-        
+
             // Assert
-            cut.MarkupMatches("<ix-breadcrumb ghost='true' nextitems=\"['Data'])\" visibleitemcount='9' id='testId' aria-label-previous-button='previous'></ix-breadcrumb>");
+            cut.MarkupMatches("<ix-breadcrumb ghost='true' nextitems=\"['Data'])\" visible-item-count='9' id='testId' aria-label-previous-button='previous'></ix-breadcrumb>");
         }
 
         [Fact]
@@ -39,7 +39,7 @@ namespace SiemensIXBlazor.Tests
 
             // Act
             var cut = RenderComponent<Breadcrumb>(parameters => parameters
-                .Add(p => p.ChildContent, builder => 
+                .Add(p => p.ChildContent, builder =>
                 {
                     builder.AddContent(0, expectedContent);
                 }));
