@@ -1,5 +1,5 @@
 ﻿import { defineCustomElements } from "@siemens/ix/loader";
-import { toast } from "@siemens/ix";
+import { toast, setToastPosition } from "@siemens/ix";
 import "@siemens/ix-echarts";
 import { registerTheme } from "@siemens/ix-echarts";
 import * as echarts from "echarts";
@@ -10,8 +10,8 @@ import { defineCustomElements as ixIconsDefineCustomElements } from "@siemens/ix
 window.siemensIXInterop = {
   async initialize() {
     await ixIconsDefineCustomElements(window, {
-	  resourcesUrl: "/_content/Siemens.IX.Blazor/"
-	});
+      resourcesUrl: "/_content/Siemens.IX.Blazor/"
+    });
 
     await defineCustomElements();
   },
@@ -19,6 +19,24 @@ window.siemensIXInterop = {
   showMessage(config) {
     try {
       const toastConfig = JSON.parse(config);
+      if (toastConfig.messageHtml) {
+        const msgEl = document.createElement('div');
+        msgEl.innerHTML = toastConfig.messageHtml;
+        toastConfig.message = msgEl;
+      }
+
+      if (toastConfig.action) {
+        const actionEl = document.createElement('div');
+        actionEl.innerHTML = toastConfig.action;
+        actionEl.slot = 'action';
+        toastConfig.action = actionEl;
+      }
+
+      if (toastConfig.position) {
+        setToastPosition(toastConfig.position);
+        delete toastConfig.position;
+      }
+
       toast(toastConfig);
     } catch (error) {
       console.error("Failed to display toast message:", error);

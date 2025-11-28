@@ -1276,10 +1276,23 @@ private Toast toast;
 ToastConfig config = new ToastConfig()
 {
     Message = "Test message",
+    Position = "bottom-right",
     Type = "info"
-}
+};
 
-toast.ShowToast("test message", "info");
+await toast.ShowToast(config);
+
+ToastConfig configWithAction = new ToastConfig()
+{
+    Title = "Changes applied",
+    Message = "<div>Your settings were saved successfully.</div>",
+    Action = "<ix-button variant=\"tertiary\" icon=\"undo\">Undo</ix-button>",
+    Type = "success",
+    AutoClose = true,
+    AutoCloseDelay = 5000
+};
+
+await toast.ShowToast(configWithAction);
 ```
 
 ## Toggle Buttons
