@@ -1276,7 +1276,7 @@ private Toast toast;
 ToastConfig config = new ToastConfig()
 {
     Message = "Test message",
-    Position = "bottom-right",
+    Position = ToastPosition.BottomRight,
     Type = "info"
 };
 
