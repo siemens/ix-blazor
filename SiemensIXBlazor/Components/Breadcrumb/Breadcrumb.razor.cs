@@ -42,6 +42,19 @@ namespace SiemensIXBlazor.Components
 
                 await _interop.AddEventListener(this, Id, "itemClick", "BreadcrumbItemClicked");
                 await _interop.AddEventListener(this, Id, "nextClick", "BreadcrumbNextItemClicked");
+
+                if (NextItems != null && NextItems.Length > 0)
+                {
+                    await _interop.SetElementProperty(Id, "nextItems", NextItems);
+                }
+            }
+        }
+
+        protected override async Task OnParametersSetAsync()
+        {
+            if (_interop != null && NextItems != null)
+            {
+                await _interop.SetElementProperty(Id, "nextItems", NextItems);
             }
         }
 
