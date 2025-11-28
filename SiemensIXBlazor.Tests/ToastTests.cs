@@ -13,6 +13,7 @@ using Microsoft.JSInterop;
 using Moq;
 using Newtonsoft.Json;
 using SiemensIXBlazor.Components;
+using SiemensIXBlazor.Enums;
 using SiemensIXBlazor.Objects;
 
 namespace SiemensIXBlazor.Tests
@@ -218,6 +219,75 @@ namespace SiemensIXBlazor.Tests
                 js => js.InvokeAsync<object>(
                     It.Is<string>(s => s == "siemensIXInterop.showMessage"),
                     It.Is<object[]>(args => JsonConvert.DeserializeObject<ToastConfig>(args[0].ToString()).Type == toastType)),
+                Times.Once);
+        }
+
+        [Fact]
+        public async Task ShowToast_WithAction_PassesThroughInterop()
+        {
+            var jsRuntimeMock = new Mock<IJSRuntime>();
+            Services.AddSingleton(jsRuntimeMock.Object);
+
+            var toastConfig = new ToastConfig
+            {
+                Title = "Toast headline",
+                MessageHtml = "<div>Message from template</div>",
+                Action = "<ix-button variant=\"tertiary\" icon=\"undo\">Undo</ix-button>"
+            };
+
+            string expectedJson = JsonConvert.SerializeObject(toastConfig);
+
+            jsRuntimeMock
+                .Setup(js => js.InvokeAsync<object>(
+                    It.Is<string>(s => s == "siemensIXInterop.showMessage"),
+                    It.Is<object[]>(args => args.Length == 1 && args[0].ToString() == expectedJson)))
+                .ReturnsAsync(new ValueTask<object>());
+
+            var cut = RenderComponent<Toast>();
+
+            await cut.InvokeAsync(() => cut.Instance.ShowToast(toastConfig));
+
+            jsRuntimeMock.Verify(
+                js => js.InvokeAsync<object>(
+                    It.Is<string>(s => s == "siemensIXInterop.showMessage"),
+                    It.Is<object[]>(args => args.Length == 1 && args[0].ToString() == expectedJson)),
+                Times.Once);
+        }
+
+        [Theory]
+        [InlineData(ToastPosition.BottomRight)]
+        [InlineData(ToastPosition.TopRight)]
+        public async Task ShowToast_WithPosition_PassesThroughInterop(ToastPosition position)
+        {
+            // Arrange
+            var jsRuntimeMock = new Mock<IJSRuntime>();
+            Services.AddSingleton(jsRuntimeMock.Object);
+
+            var toastConfig = new ToastConfig
+            {
+                Title = "Positioned Toast",
+                Message = "This toast has a position",
+                Position = position
+            };
+
+            string expectedJson = JsonConvert.SerializeObject(toastConfig);
+
+            jsRuntimeMock
+                .Setup(js => js.InvokeAsync<object>(
+                    It.Is<string>(s => s == "siemensIXInterop.showMessage"),
+                    It.Is<object[]>(args => args.Length == 1 && args[0].ToString() == expectedJson)))
+                .ReturnsAsync(new ValueTask<object>());
+
+            var cut = RenderComponent<Toast>();
+
+            // Act
+            await cut.InvokeAsync(() => cut.Instance.ShowToast(toastConfig));
+
+            // Assert
+            jsRuntimeMock.Verify(
+                js => js.InvokeAsync<object>(
+                    It.Is<string>(s => s == "siemensIXInterop.showMessage"),
+                    It.Is<object[]>(args => JsonConvert.DeserializeObject<ToastConfig>(args[0].ToString()).Position == position)),
                 Times.Once);
         }
 
