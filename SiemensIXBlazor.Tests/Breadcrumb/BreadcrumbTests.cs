@@ -19,7 +19,8 @@ namespace SiemensIXBlazor.Tests
         public void BreadcrumbRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<Breadcrumb>(parameters => {
+            var cut = RenderComponent<Breadcrumb>(parameters =>
+            {
                 parameters.Add(p => p.Id, "testId");
                 parameters.Add(p => p.Ghost, true);
                 parameters.Add(p => p.AriaLabelPreviousButton, "previous");
@@ -28,7 +29,7 @@ namespace SiemensIXBlazor.Tests
             });
 
             // Assert
-            cut.MarkupMatches("<ix-breadcrumb ghost='true' nextitems=\"['Data'])\" visible-item-count='9' id='testId' aria-label-previous-button='previous'></ix-breadcrumb>");
+            cut.MarkupMatches("<ix-breadcrumb ghost='true' visible-item-count='9' id='testId' aria-label-previous-button='previous'></ix-breadcrumb>");
         }
 
         [Fact]
