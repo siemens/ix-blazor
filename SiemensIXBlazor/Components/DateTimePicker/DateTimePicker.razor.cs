@@ -35,13 +35,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string? AriaLabelPreviousMonthButton { get; set; }
         [Parameter]
-        public bool Range { get; set; } = true;
-        [Parameter]
-        public bool ShowHour { get; set; } = false;
-        [Parameter]
-        public bool ShowMinutes { get; set; } = false;
-        [Parameter]
-        public bool ShowSeconds { get; set; } = false;
+        public bool SingleSelection { get; set; } = false;
         [Parameter]
         public string ShowTimeReference { get; set; } = string.Empty;
         [Parameter]

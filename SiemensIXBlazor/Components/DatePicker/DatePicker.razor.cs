@@ -37,7 +37,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string? AriaLabelPreviousMonthButton { get; set; }
         [Parameter]
-        public bool Range { get; set; } = true;
+        public bool SingleSelection { get; set; } = false;
         [Parameter]
         public string I18nDone { get; set; } = "Done";
         [Parameter]

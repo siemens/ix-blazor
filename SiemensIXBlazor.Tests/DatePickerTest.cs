@@ -29,7 +29,7 @@ public class DatePickerTest : TestContextBase
             .Add(p => p.From, "2022/01/01")
             .Add(p => p.MaxDate, "2022/12/31")
             .Add(p => p.MinDate, "2022/01/01")
-            .Add(p => p.Range, true)
+            .Add(p => p.SingleSelection, true)
             .Add(p => p.I18nDone, "Done")
             .Add(p => p.Locale, "en-US")
             .Add(p => p.WeekStartIndex, 0)
@@ -37,7 +37,7 @@ public class DatePickerTest : TestContextBase
 
         // Assert
         cut.MarkupMatches($@"
-                <ix-date-picker id=""testId"" from=""2022/01/01"" to=""2022/12/31"" corners=""rounded"" format=""yyyy/MM/dd"" max-date=""2022/12/31"" min-date=""2022/01/01"" range="""" locale=""en-US"" i18n-done=""Done"" week-start-index=""0""></ix-date-picker>");
+                <ix-date-picker id=""testId"" from=""2022/01/01"" to=""2022/12/31"" corners=""rounded"" format=""yyyy/MM/dd"" max-date=""2022/12/31"" min-date=""2022/01/01"" single-selection="""" locale=""en-US"" i18n-done=""Done"" week-start-index=""0""></ix-date-picker>");
     }
 
     [Fact]

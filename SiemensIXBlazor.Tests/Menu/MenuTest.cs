@@ -26,7 +26,6 @@ public class MenuTest : TestContextBase
 				("ApplicationName", "Test Application"),
 				("ApplicationDescription", "Test Description"),
 				("EnableMapExpand", true),
-				("EnableSettings", true),
 				("EnableToggleTheme", true),
 				("Expand", true),
 				("I18NCollapse", "Collapse"),
@@ -56,7 +55,6 @@ public class MenuTest : TestContextBase
                     application-name='Test Application' 
                     application-description='Test Description' 
                     enable-map-expand='' 
-                    enable-settings='' 
                     enable-toggle-theme=''
                     expand=''
                     i-1-8n-collapse='Collapse'

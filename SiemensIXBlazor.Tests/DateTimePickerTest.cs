@@ -27,10 +27,7 @@ public class DateTimePickerTest : TestContextBase
             .Add(p => p.From, DateTime.Now.ToString("yyyy/MM/dd"))
             .Add(p => p.MaxDate, "2022/12/31")
             .Add(p => p.MinDate, "2022/01/01")
-            .Add(p => p.Range, true)
-            .Add(p => p.ShowHour, false)
-            .Add(p => p.ShowMinutes, false)
-            .Add(p => p.ShowSeconds, false)
+            .Add(p => p.SingleSelection, true)
             .Add(p => p.ShowTimeReference, "")
             .Add(p => p.Time, "12:00:00")
             .Add(p => p.TimeFormat, "HH:mm:ss")
@@ -39,7 +36,7 @@ public class DateTimePickerTest : TestContextBase
             .Add(p => p.I18nDone, "Done"));
 
         // Assert
-        cut.MarkupMatches($"<ix-datetime-picker id=\"testId\" date-format=\"yyyy/MM/dd\" from=\"{DateTime.Now:yyyy/MM/dd}\" max-date=\"2022/12/31\" min-date=\"2022/01/01\" range=\"\" show-time-reference=\"\" time=\"12:00:00\" i18n-done=\"Done\" time-format=\"HH:mm:ss\" time-reference=\"12:00:00\" to=\"2022/12/31\"></ix-datetime-picker>");
+        cut.MarkupMatches($"<ix-datetime-picker id=\"testId\" date-format=\"yyyy/MM/dd\" from=\"{DateTime.Now:yyyy/MM/dd}\" max-date=\"2022/12/31\" min-date=\"2022/01/01\" single-selection=\"\" show-time-reference=\"\" time=\"12:00:00\" i18n-done=\"Done\" time-format=\"HH:mm:ss\" time-reference=\"12:00:00\" to=\"2022/12/31\"></ix-datetime-picker>");
     }
 
     [Fact]

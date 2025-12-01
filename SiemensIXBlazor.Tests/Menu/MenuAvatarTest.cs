@@ -28,7 +28,7 @@ namespace SiemensIXBlazor.Tests.Menu
                 ("Image", "testImage"),
                 ("Initials", "TI"),
                 ("Top", "Top Text"),
-                ("ShowLogoutButton", true),
+                ("HideLogoutButton", true),
                 ("ChildContent", (RenderFragment)(builder =>
                 {
                     builder.OpenElement(0, "div");
@@ -39,7 +39,7 @@ namespace SiemensIXBlazor.Tests.Menu
 
             // Assert
             // Adjust the expected markup to match your component's output
-            cut.MarkupMatches("<ix-menu-avatar id=\"testId\" class=\"test-class\" style=\"width: 100%\" bottom=\"Bottom Text\" i-1-8n-logout=\"Logout\" image=\"testImage\" initials=\"TI\" top=\"Top Text\" show-logout-button=\"\"><div>Test child content</div></ix-menu-avatar>");
+            cut.MarkupMatches("<ix-menu-avatar id=\"testId\" class=\"test-class\" style=\"width: 100%\" bottom=\"Bottom Text\" i-1-8n-logout=\"Logout\" image=\"testImage\" initials=\"TI\" top=\"Top Text\" hide-logout-button=\"\"><div>Test child content</div></ix-menu-avatar>");
         }
         [Fact]
         public async Task LogoutClickedEventWorks()

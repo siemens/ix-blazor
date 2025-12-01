@@ -37,13 +37,6 @@ namespace SiemensIXBlazor.Components
 
         [Parameter]
         public int SecondInterval { get; set; } = 1;
-
-        [Parameter]
-        public bool ShowHour { get; set; } = false;
-        [Parameter]
-        public bool ShowMinutes { get; set; } = false;
-        [Parameter]
-        public bool ShowSeconds { get; set; } = false;
         [Parameter]
         public string TextSelectTime { get; set; } = "Done";
 
