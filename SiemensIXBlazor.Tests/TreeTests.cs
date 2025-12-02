@@ -224,4 +224,54 @@ public class TreeTests : TestContextBase
         Assert.Contains("\"name\":\"Test Node\"", json);
         Assert.Contains("\"icon\":\"star\"", json);
     }
+
+    [Fact]
+    public async Task MarkItemAsDirty_WithValidIdentifiers_ExecutesSuccessfully()
+    {
+        // Arrange
+        var cut = RenderComponent<Tree>(parameters => parameters
+            .Add(p => p.Id, "tree-mark-dirty")
+        );
+
+        string[] itemIdentifiers = new[] { "item1", "item2", "item3" };
+
+        // Act & Assert
+        await cut.InvokeAsync(async () => await cut.Instance.MarkItemAsDirty(itemIdentifiers));
+    }
+
+    [Fact]
+    public async Task MarkItemAsDirty_WithSingleIdentifier_ExecutesSuccessfully()
+    {
+        // Arrange
+        var cut = RenderComponent<Tree>(parameters => parameters
+            .Add(p => p.Id, "tree-mark-dirty-single")
+        );
+
+        // Act & Assert
+        await cut.InvokeAsync(async () => await cut.Instance.MarkItemAsDirty("item1"));
+    }
+
+    [Fact]
+    public async Task MarkItemAsDirty_WithEmptyArray_ExecutesSuccessfully()
+    {
+        // Arrange
+        var cut = RenderComponent<Tree>(parameters => parameters
+            .Add(p => p.Id, "tree-mark-dirty-empty")
+        );
+
+        // Act & Assert
+        await cut.InvokeAsync(async () => await cut.Instance.MarkItemAsDirty(Array.Empty<string>()));
+    }
+
+    [Fact]
+    public async Task MarkItemAsDirty_WithNullArray_ExecutesSuccessfully()
+    {
+        // Arrange
+        var cut = RenderComponent<Tree>(parameters => parameters
+            .Add(p => p.Id, "tree-mark-dirty-null")
+        );
+
+        // Act & Assert
+        await cut.InvokeAsync(async () => await cut.Instance.MarkItemAsDirty(null!));
+    }
 }
