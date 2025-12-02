@@ -27,30 +27,30 @@ export function setTreeModel(id, treeModel) {
     element.renderItem = (_, item, __, context, update) => {
       const { icon: iconName, name: itemName } = item.data || {};
       const children = [];
-      
+
       if (iconName) {
         children.push(createElement('ix-icon', {
           name: iconName,
           style: 'margin-right: 0.5rem'
         }));
       }
-      
+
       let nameEl;
       if (itemName) {
         nameEl = createElement('span', { innerText: itemName });
         children.push(nameEl);
       }
-      
+
       const el = createElement('ix-tree-item', {
         hasChildren: item.hasChildren,
         context: context[item.id]
       }, children);
-      
+
       update(updateTreeItem => {
         const uData = updateTreeItem.data || {};
         if (nameEl && uData.name) nameEl.innerText = uData.name;
       });
-      
+
       return el;
     };
     element.model = JSON.parse(treeModel);
@@ -75,10 +75,10 @@ export function markItemAsDirty(treeId, itemIdentifiers) {
     console.warn(`Tree element with id '${treeId}' not found`);
     return;
   }
-  if (typeof treeElement.markItemAsDirty === 'function') {
-    treeElement.markItemAsDirty(itemIdentifiers);
+  if (typeof treeElement.markItemsAsDirty === 'function') {
+    treeElement.markItemsAsDirty(itemIdentifiers);
     console.log('Items marked as dirty:', itemIdentifiers);
   } else {
-    console.warn('markItemAsDirty method not available on tree element');
+    console.warn('markItemsAsDirty method not available on tree element');
   }
 }
