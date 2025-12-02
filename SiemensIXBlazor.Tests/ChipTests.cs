@@ -23,6 +23,7 @@ namespace SiemensIXBlazor.Tests
                 parameters.Add(p => p.Id, "testId");
                 parameters.Add(p => p.Inactive, true);
                 parameters.Add(p => p.Background, "testBackground");
+                parameters.Add(p => p.CenterContent, true);
                 parameters.Add(p => p.Closable, true);
                 parameters.Add(p => p.ChipColor, "testColor");
                 parameters.Add(p => p.Icon, "testIcon");
@@ -32,7 +33,7 @@ namespace SiemensIXBlazor.Tests
             });
 
             // Assert
-            cut.MarkupMatches("<ix-chip id=\"testId\" closable=\"\" outline=\"\" inactive=\"\" background=\"testBackground\" chip-color=\"testColor\" icon=\"testIcon\" variant=\"neutral\" tooltip-text='tooltipText'></ix-chip>");
+            cut.MarkupMatches("<ix-chip id=\"testId\" closable=\"\" outline=\"\" inactive=\"\" background=\"testBackground\" center-content chip-color=\"testColor\" icon=\"testIcon\" variant=\"neutral\" tooltip-text='tooltipText'></ix-chip>");
         }
 
         [Fact]
@@ -50,6 +51,34 @@ namespace SiemensIXBlazor.Tests
 
             // Assert
             Assert.Contains(expectedContent, cut.Markup);
+        }
+
+        [Fact]
+        public void ChipWithCenterContentTrue()
+        {
+            // Arrange
+            var cut = RenderComponent<Chip>(parameters =>
+            {
+                parameters.Add(p => p.Id, "centeredChip");
+                parameters.Add(p => p.CenterContent, true);
+            });
+
+            // Assert
+            cut.MarkupMatches("<ix-chip id=\"centeredChip\" center-content variant=\"primary\"></ix-chip>");
+        }
+
+        [Fact]
+        public void ChipWithCenterContentFalse()
+        {
+            // Arrange
+            var cut = RenderComponent<Chip>(parameters =>
+            {
+                parameters.Add(p => p.Id, "notCenteredChip");
+                parameters.Add(p => p.CenterContent, false);
+            });
+
+            // Assert
+            cut.MarkupMatches("<ix-chip id=\"notCenteredChip\" variant=\"primary\"></ix-chip>");
         }
     }
 }
