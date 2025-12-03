@@ -24,7 +24,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public EventCallback<string> NextItemClicked { get; set; }
         [Parameter]
-        public bool Ghost { get; set; } = false;
+        public bool Subtle { get; set; } = false;
         [Parameter]
         public string AriaLabelPreviousButton { get; set; } = "previous";
         [Parameter]

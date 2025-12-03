@@ -9,12 +9,18 @@
 *@
 
 @namespace SiemensIXBlazor.Components
+@using SiemensIXBlazor.Enums.Breadcrumb;
+@using SiemensIXBlazor.Helpers;
 @inherits IXBaseComponent
 
-<ix-breadcrumb-item @attributes="UserAttributes" 
-                    class="@Class" 
-                    style="@Style" 
-                    label="@Label" 
-                    aria-label-button="@AriaLabelButton"
-                    icon="@Icon">
-</ix-breadcrumb-item>
+
+    <ix-breadcrumb-item @attributes="UserAttributes"
+                        class="@Class"
+                        style="@Style"
+                        label="@Label"
+                        aria-label-button="@AriaLabelButton"
+                        icon="@Icon"
+                        href="@Href"
+                    target="@(EnumParser<BreadcrumbTarget>.EnumToString(Target))"
+                        rel="@Rel">
+    </ix-breadcrumb-item>
