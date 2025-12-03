@@ -22,14 +22,14 @@ namespace SiemensIXBlazor.Tests
             var cut = RenderComponent<Breadcrumb>(parameters =>
             {
                 parameters.Add(p => p.Id, "testId");
-                parameters.Add(p => p.Ghost, true);
+                parameters.Add(p => p.Subtle, true);
                 parameters.Add(p => p.AriaLabelPreviousButton, "previous");
                 parameters.Add(p => p.NextItems, ["Data"]);
                 parameters.Add(p => p.VisibleItemCount, 9);
             });
 
             // Assert
-            cut.MarkupMatches("<ix-breadcrumb ghost='true' visible-item-count='9' id='testId' aria-label-previous-button='previous'></ix-breadcrumb>");
+            cut.MarkupMatches("<ix-breadcrumb subtle='true' visibleitemcount='9' id='testId' aria-label-previous-button='previous'></ix-breadcrumb>");
         }
 
         [Fact]
