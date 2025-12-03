@@ -32,9 +32,6 @@ namespace SiemensIXBlazor.Tests
             Assert.Equal("tp-default", picker.GetAttribute("id"));
             Assert.Equal("rounded", picker.GetAttribute("corners"));
             Assert.Equal("yyyy/MM/dd", picker.GetAttribute("format"));
-            Assert.Null(picker.GetAttribute("show-hour"));
-            Assert.Null(picker.GetAttribute("show-minutes"));
-            Assert.Null(picker.GetAttribute("show-seconds"));
             Assert.Equal("Done", picker.GetAttribute("text-select-time"));
             // Default Time is dynamic; just assert it's non-empty
             Assert.False(string.IsNullOrWhiteSpace(picker.GetAttribute("time")));
@@ -65,9 +62,6 @@ namespace SiemensIXBlazor.Tests
                 .AddUnmatched("data-test", "my-value")
                 .Add(p => p.Id, "tp1")
                 .Add(p => p.Corners, DatePickerCorners.Left)
-                .Add(p => p.ShowHour, true)
-                .Add(p => p.ShowMinutes, true)
-                .Add(p => p.ShowSeconds, true)
                 .Add(p => p.TextSelectTime, "SelectTime")
                 .Add(p => p.Time, "2025-04-24T15:30:00")
                 .Add(p => p.Class, "my-class")
@@ -84,9 +78,6 @@ namespace SiemensIXBlazor.Tests
                     millisecond-interval=""1""
                     minute-interval=""1""  
                     second-interval=""1""
-                    show-hour
-                    show-minutes
-                    show-seconds
                     text-select-time=""SelectTime""
                     time=""2025-04-24T15:30:00""
                     style=""display: block; width: 20rem; color:red;""

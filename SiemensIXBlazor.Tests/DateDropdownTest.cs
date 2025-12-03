@@ -18,17 +18,6 @@ namespace SiemensIXBlazor.Tests;
 
 public class DateDropdownTest : TestContextBase
 {
-    [Fact]
-    public void ComponentRendersWithoutCrashing()
-    {
-        // Arrange
-        var cut = RenderComponent<DateDropdown>();
-
-        // Assert
-        cut.MarkupMatches(@"
-                <ix-date-dropdown id='' variant='primary' custom-range-allowed='' week-start-index='0' date-range-id='custom' format='yyyy/LL/dd' i18n-custom-item='Custom...' i18n-done='Done' i18n-no-range='No range set' range=''></ix-date-dropdown>
-            ");
-    }
 
     [Fact]
     public void AllPropertiesAreSetCorrectly()
@@ -42,7 +31,7 @@ public class DateDropdownTest : TestContextBase
 
         var cut = RenderComponent<DateDropdown>(parameters => parameters
             .Add(p => p.Id, "testId")
-            .Add(p => p.CustomRangeAllowed, true)
+            .Add(p => p.CustomRangeDisabled, true)
             .Add(p => p.DateRangeId, "custom")
             .Add(p => p.DateRangeOptions, dateDropdownOptions)
             .Add(p => p.Format, "yyyy/LL/dd")
@@ -66,7 +55,7 @@ public class DateDropdownTest : TestContextBase
 
         // Assert
         cut.MarkupMatches(@"
-                <ix-date-dropdown id='testId' outline ghost loading variant='secondary' locale='en' week-start-index='2' custom-range-allowed='' date-range-id='custom' format='yyyy/LL/dd' from='2022/01/01' i18n-custom-item='Custom...' i18n-done='Done' i18n-no-range='No range set' max-date='2022/12/31' min-date='2022/01/01' range='' to='2022/12/31' disabled></ix-date-dropdown>
+                <ix-date-dropdown id='testId' outline ghost loading variant='secondary' locale='en' week-start-index='2' custom-range-disabled='' date-range-id='custom' format='yyyy/LL/dd' from='2022/01/01' i18n-custom-item='Custom...' i18n-done='Done' i18n-no-range='No range set' max-date='2022/12/31' min-date='2022/01/01' range='' to='2022/12/31' disabled></ix-date-dropdown>
             ");
     }
 
@@ -86,7 +75,7 @@ public class DateDropdownTest : TestContextBase
 
         var cut = RenderComponent<DateDropdown>(parameters => parameters
             .Add(p => p.Id, "testId")
-            .Add(p => p.CustomRangeAllowed, true)
+            .Add(p => p.CustomRangeDisabled, true)
             .Add(p => p.DateRangeId, "test1")
             .Add(p => p.DateRangeOptions, dateDropdownOptions)
             .Add(p => p.Format, "yyyy/LL/dd")

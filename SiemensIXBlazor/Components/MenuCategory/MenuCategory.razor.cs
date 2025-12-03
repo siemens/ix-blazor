@@ -21,5 +21,7 @@ namespace SiemensIXBlazor.Components.MenuCategory
         public string? Label { get; set; }
         [Parameter]
         public int? Notifications { get; set; }
+        [Parameter]
+        public string? TooltipText { get; set; }
     }
 }

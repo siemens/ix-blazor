@@ -31,12 +31,13 @@ namespace SiemensIXBlazor.Tests.Menu
 					builder.OpenElement(0, "div");
 					builder.AddContent(1, "Test child content");
 					builder.CloseElement();
-				}))
+				})),
+				("TooltipText", "Test tooltip")
 			);
 
 			// Assert
 			// Adjust the expected markup to match your component's output
-			cut.MarkupMatches("<ix-menu-item active=\"\" home=\"\" icon=\"testIcon\" notifications=\"5\" label=\"label\"><div>Test child content</div></ix-menu-item>");
+			cut.MarkupMatches("<ix-menu-item active=\"\" home=\"\" icon=\"testIcon\" notifications=\"5\" label=\"label\" tooltip-text=\"Test tooltip\"><div>Test child content</div></ix-menu-item>");
 		}
 	}
 }

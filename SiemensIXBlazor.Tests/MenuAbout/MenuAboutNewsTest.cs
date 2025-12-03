@@ -23,7 +23,7 @@ namespace SiemensIXBlazor.Tests.MenuAbout
             var cut = RenderComponent<MenuAboutNews>();
 
             // Assert
-            cut.MarkupMatches("<ix-menu-about-news id='' i-1-8n-show-more='Show more' offset-bottom='0'></ix-menu-about-news>");
+            cut.MarkupMatches("<ix-menu-about-news id='' i-1-8n-show-more='Show more'></ix-menu-about-news>");
         }
 
         [Fact]
@@ -74,16 +74,6 @@ namespace SiemensIXBlazor.Tests.MenuAbout
 
             // Assert
             Assert.Equal("testLabel", cut.Instance.Label);
-        }
-
-        [Fact]
-        public void OffsetBottomPropertyIsSetCorrectly()
-        {
-            // Arrange
-            var cut = RenderComponent<MenuAboutNews>(parameters => parameters.Add(p => p.OffsetBottom, 1));
-
-            // Assert
-            Assert.Equal(1, cut.Instance.OffsetBottom);
         }
 
         [Fact]

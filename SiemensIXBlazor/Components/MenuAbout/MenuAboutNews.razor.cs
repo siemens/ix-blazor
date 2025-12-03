@@ -35,11 +35,6 @@ namespace SiemensIXBlazor.Components.MenuAbout
 		[Parameter]
 		public string? Label { get; set; }
 		/// <summary>
-		/// Bottom offset. Default value is: 0
-		/// </summary>
-		[Parameter]
-		public int OffsetBottom { get; set; } = 0;
-		/// <summary>
 		/// Show about news. Default value is: false
 		/// </summary>
 		[Parameter]
