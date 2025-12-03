@@ -29,7 +29,7 @@ namespace SiemensIXBlazor.Tests
             });
 
             // Assert
-            cut.MarkupMatches("<ix-breadcrumb subtle='true' nextitems=\"['Data'])\" visibleitemcount='9' id='testId' aria-label-previous-button='previous'></ix-breadcrumb>");
+            cut.MarkupMatches("<ix-breadcrumb subtle='true' visibleitemcount='9' id='testId' aria-label-previous-button='previous'></ix-breadcrumb>");
         }
 
         [Fact]

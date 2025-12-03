@@ -11,6 +11,22 @@
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
 
-<ix-application-header id="@Id" class="@Class" style="@Style" @attributes="UserAttributes" name="@Name">
+<ix-application-header id="@Id" 
+                      class="@Class" 
+                      style="@Style" 
+                      @attributes="UserAttributes" 
+                      name="@Name"
+                      name-suffix="@NameSuffix"
+                      company-logo="@CompanyLogo"
+                      company-logo-alt="@CompanyLogoAlt"
+                      app-icon="@AppIcon"
+                      app-icon-alt="@AppIconAlt"
+                      hide-bottom-border="@HideBottomBorder">
     @ChildContent
+    @if (Secondary != null)
+    {
+        <div slot="secondary">
+            @Secondary
+        </div>
+    }
 </ix-application-header>

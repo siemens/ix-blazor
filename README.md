@@ -1276,10 +1276,23 @@ private Toast toast;
 ToastConfig config = new ToastConfig()
 {
     Message = "Test message",
+    Position = ToastPosition.BottomRight,
     Type = "info"
-}
+};
 
-toast.ShowToast("test message", "info");
+await toast.ShowToast(config);
+
+ToastConfig configWithAction = new ToastConfig()
+{
+    Title = "Changes applied",
+    Message = "<div>Your settings were saved successfully.</div>",
+    Action = "<ix-button variant=\"tertiary\" icon=\"undo\">Undo</ix-button>",
+    Type = "success",
+    AutoClose = true,
+    AutoCloseDelay = 5000
+};
+
+await toast.ShowToast(configWithAction);
 ```
 
 ## Toggle Buttons
@@ -1365,7 +1378,8 @@ treeNodes.Add("sample-child-1", new TreeNode()
     Id = "sample-child-1",
     Data = new TreeData()
     {
-        Name = "Sample Child 1"
+        Name = "Sample Child 1",
+        Icon = "star"
     },
     HasChildren = false,
     Children = new List<string>() {}

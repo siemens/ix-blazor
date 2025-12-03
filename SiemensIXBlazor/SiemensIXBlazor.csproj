@@ -50,8 +50,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.22" />
+		<PackageReference Include="Newtonsoft.Json" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" />
 	</ItemGroup>
 
 	<ItemGroup>
