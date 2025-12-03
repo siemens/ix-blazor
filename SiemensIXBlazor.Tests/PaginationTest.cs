@@ -26,10 +26,11 @@ namespace SiemensIXBlazor.Tests
                     parameters.Add(p => p.ItemCount, 15);
                     parameters.Add(p => p.SelectedPage, 1);
                     parameters.Add(p => p.HideItemCount, true);
+                    parameters.Add(p => p.AriaLabelPageSelection, "testAriaLabelPageSelection");
                 }
             );
             // Assert
-            cut.MarkupMatches("<ix-pagination id=\"testId\" item-count=\"15\" selected-page=\"1\" hide-item-count=\"\" i-1-8n-items=\"Items\" i-1-8n-of=\"of\" i-1-8n-page=\"Page\"></ix-pagination>");
+            cut.MarkupMatches("<ix-pagination id=\"testId\" item-count=\"15\" selected-page=\"1\" hide-item-count=\"\" aria-label-page-selection=\"testAriaLabelPageSelection\" i-1-8n-items=\"Items\" i-1-8n-of=\"of\" i-1-8n-page=\"Page\"></ix-pagination>");
         }
 
         [Fact]

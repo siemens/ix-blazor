@@ -31,11 +31,12 @@ namespace SiemensIXBlazor.Tests
                 ("HideOnCollapse", true),
                 ("Icon", "Test Icon"),
                 ("Size", "240px"),
-                ("Variant", PaneVariant.inline)
+                ("Variant", PaneVariant.inline),
+                ("AriaLabelCollapseCloseButton", "testAriaLabelCollapseCloseButton")
             );
 
             // Assert
-            cut.MarkupMatches("<ix-pane id=\"testId\" borderless composition=\"top\" expanded close-on-click-outside=\"\" heading=\"Test Heading\" hide-on-collapse icon=\"Test Icon\" size=\"240px\" variant=\"inline\"></ix-pane>");
+            cut.MarkupMatches("<ix-pane id=\"testId\" borderless composition=\"top\" expanded close-on-click-outside=\"\" heading=\"Test Heading\" hide-on-collapse icon=\"Test Icon\" size=\"240px\" variant=\"inline\" aria-label-collapse-close-button=\"testAriaLabelCollapseCloseButton\"></ix-pane>");
         }
 
         [Fact]

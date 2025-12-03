@@ -24,6 +24,8 @@ namespace SiemensIXBlazor.Components.Pagination
         [Parameter]
         public string? AriaLabelChevronRightIconButton { get; set; }    
         [Parameter]
+        public string? AriaLabelPageSelection { get; set; } = "Page selection input";
+        [Parameter]
         public int? Count { get; set; }
         [Parameter]
         public string I18nItems { get; set; } = "Items";
