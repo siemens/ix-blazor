@@ -91,7 +91,7 @@ namespace SiemensIXBlazor.Tests
                 Type = "success",
                 Icon = "info",
                 IconColor = "#00FF00",
-                AutoClose = true,
+                PreventAutoClose = true,
                 AutoCloseDelay = 3000
             };
 
@@ -301,7 +301,7 @@ namespace SiemensIXBlazor.Tests
 
             return config.Message == expectedMessage &&
                    config.Type == "info" &&
-                   config.AutoClose == true &&
+                   config.PreventAutoClose == true &&
                    config.AutoCloseDelay == 5000;
         }
 
