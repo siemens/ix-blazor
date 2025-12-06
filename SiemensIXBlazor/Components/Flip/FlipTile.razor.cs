@@ -10,7 +10,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using SiemensIXBlazor.Interops;
-using Microsoft.JSInterop;
+using SiemensIXBlazor.Enums.Flip;
 
 namespace SiemensIXBlazor.Components
 {
@@ -21,7 +21,9 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter]
-        public string? State { get; set; }
+        public FlipTileVariant Variant { get; set; } = FlipTileVariant.filled;
+        [Parameter]
+        public string? AriaLabelEyeIconButton { get; set; }
         [Parameter]
         public dynamic Height { get; set; } = 15.125;
         [Parameter]
@@ -31,7 +33,7 @@ namespace SiemensIXBlazor.Components
         public int Index { get; set; } = 0;
 
         [Parameter]
-       public EventCallback<int> ToggleEvent { get; set; }
+        public EventCallback<int> ToggleEvent { get; set; }
 
         private BaseInterop _interop;
 

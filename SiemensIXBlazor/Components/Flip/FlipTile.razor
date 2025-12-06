@@ -8,16 +8,19 @@
 //  -----------------------------------------------------------------------
 *@
 @using Microsoft.JSInterop
+@using SiemensIXBlazor.Helpers
+@using SiemensIXBlazor.Enums.Flip
 
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
 @inject IJSRuntime JSRuntime
 
-<ix-flip-tile 
-@attributes="UserAttributes" 
+<ix-flip-tile
+@attributes="UserAttributes"
 id="@Id"
-state="@State" 
-style="@Style" 
+variant="@(EnumParser<FlipTileVariant>.EnumToString(Variant))"
+aria-label-eye-icon-button="@AriaLabelEyeIconButton"
+style="@Style"
 class="@Class"
 height="@Height"
 width="@Width"
