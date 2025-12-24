@@ -7,6 +7,8 @@ import { themeSwitcher } from "@siemens/ix";
 import { Grid } from "ag-grid-community";
 import { defineCustomElements as ixIconsDefineCustomElements } from "@siemens/ix-icons/loader";
 
+window.echarts = echarts;
+
 window.siemensIXInterop = {
   async initialize() {
     await ixIconsDefineCustomElements(window, {
@@ -49,8 +51,31 @@ window.siemensIXInterop = {
       if (!element) throw new Error(`Element with ID ${id} not found`);
 
       registerTheme(echarts);
-      const myChart = echarts.init(element, window.demoTheme);
-      myChart.setOption(JSON.parse(options));
+      
+      const parsedOptions = JSON.parse(options);
+      
+      if (parsedOptions.series) {
+        parsedOptions.series.forEach(series => {
+          if (series.equation && series.equation.z && typeof series.equation.z === 'string') {
+            series.equation.z = eval('(' + series.equation.z + ')');
+          }
+        });
+      }
+      
+      let myChart = echarts.init(element, themeSwitcher.getCurrentTheme());
+      myChart.setOption(parsedOptions);
+
+      themeSwitcher.themeChanged.on((theme) => {
+        myChart.dispose();
+        myChart = echarts.init(element, theme);
+        myChart.setOption(parsedOptions);
+      });
+      
+      window.addEventListener('resize', () => {
+        if (myChart && !myChart.isDisposed()) {
+          myChart.resize();
+        }
+      });
     } catch (error) {
       console.error("Failed to initialize chart:", error);
     }
