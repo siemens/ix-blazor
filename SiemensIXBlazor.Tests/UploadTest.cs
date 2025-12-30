@@ -36,7 +36,7 @@ namespace SiemensIXBlazor.Tests
             );
 
             // Assert
-            cut.MarkupMatches("<ix-upload id=\"testId\" accept=\"image/*\" disabled i-1-8n-upload-disabled=\"File upload currently not possible.\" i-1-8n-upload-file=\"Upload file…\" loading-text=\"Checking files…\" multiline multiple select-file-text=\"+ Drag files here or…\" upload-failed-text=\"Upload failed. Please try again.\" upload-success-text=\"Upload successful\"></ix-upload>");
+            cut.MarkupMatches("<ix-upload id=\"testId\" accept=\"image/*\" disabled i18n-upload-disabled=\"File upload currently not possible.\" i18n-upload-file=\"Upload file…\" loading-text=\"Checking files…\" multiline multiple select-file-text=\"+ Drag files here or…\" upload-failed-text=\"Upload failed. Please try again.\" upload-success-text=\"Upload successful\"></ix-upload>");
         }
 
         [Fact]
