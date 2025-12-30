@@ -9,9 +9,7 @@
 
 using Bunit;
 using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
-using Moq;
 using SiemensIXBlazor.Components;
 using SiemensIXBlazor.Enums.DatePicker;
 
@@ -31,9 +29,7 @@ namespace SiemensIXBlazor.Tests
             // Assert required attributes
             Assert.Equal("tp-default", picker.GetAttribute("id"));
             Assert.Equal("rounded", picker.GetAttribute("corners"));
-            Assert.Equal("yyyy/MM/dd", picker.GetAttribute("format"));
-            Assert.Equal("Done", picker.GetAttribute("text-select-time"));
-            // Default Time is dynamic; just assert it's non-empty
+            Assert.Equal("TT", picker.GetAttribute("format"));
             Assert.False(string.IsNullOrWhiteSpace(picker.GetAttribute("time")));
         }
 
@@ -50,7 +46,7 @@ namespace SiemensIXBlazor.Tests
             );
             var picker = cut.Find("ix-time-picker");
 
-            // Assert corners attribute matches enum string
+            // Assert
             Assert.Equal(expected, picker.GetAttribute("corners"));
         }
 
@@ -62,24 +58,26 @@ namespace SiemensIXBlazor.Tests
                 .AddUnmatched("data-test", "my-value")
                 .Add(p => p.Id, "tp1")
                 .Add(p => p.Corners, DatePickerCorners.Left)
-                .Add(p => p.TextSelectTime, "SelectTime")
-                .Add(p => p.Time, "2025-04-24T15:30:00")
+                .Add(p => p.Time, "15:30")
                 .Add(p => p.Class, "my-class")
                 .Add(p => p.Style, "color:red;")
-                .Add(p=>p.Format,"MM-dd")
+                .Add(p => p.Format, "HH:mm")
             );
 
-            // Assert full markup
+            // Assert
             cut.MarkupMatches(
                 @"<ix-time-picker data-test=""my-value"" id=""tp1""
                     corners=""left""
-                    format=""MM-dd""
+                    format=""HH:mm""
                     hour-interval=""1""
                     millisecond-interval=""1""
-                    minute-interval=""1""  
+                    minute-interval=""1""
                     second-interval=""1""
-                    text-select-time=""SelectTime""
-                    time=""2025-04-24T15:30:00""
+                    time=""15:30""
+                    i18n-hour-column-header=""hr""
+                    i18n-minute-column-header=""min""
+                    i18n-second-column-header=""sec""
+                    i18n-millisecond-column-header=""ms""
                     style=""display: block; width: 20rem; color:red;""
                     class=""my-class"">
                 </ix-time-picker>"
@@ -87,41 +85,27 @@ namespace SiemensIXBlazor.Tests
         }
 
         [Fact]
-        public void OnAfterRender_InvokesJsRuntimeImportForModule()
-        {
-            // Arrange
-            var jsRuntimeMock = Mock.Get(Services.GetRequiredService<IJSRuntime>());
-
-            // Act: first render triggers OnAfterRenderAsync(true)
-            RenderComponent<TimePicker>(parameters => parameters.Add(p => p.Id, "tp-js"));
-
-            // Assert: import called once to load the JS module
-            jsRuntimeMock.Verify(
-                js => js.InvokeAsync<IJSObjectReference>(
-                    "import", It.IsAny<object[]>()),
-                Times.Once);
-        }
-
-        [Fact]
-        public async Task DoneAndTimeChanged_JsInvokable_InvokeEventCallbacks()
+        public async Task TimeSelectAndTimeChange_JsInvokable_InvokeEventCallbacks()
         {
             // Arrange
             var cut = RenderComponent<TimePicker>(parameters => parameters
                 .Add(p => p.Id, "tp-callback")
-                .Add(p => p.DoneEvent, EventCallback.Factory.Create<string>(this, (string d) => DoneValue = d))
-                .Add(p => p.TimeChangeEvent, EventCallback.Factory.Create<string>(this, (string d) => TimeChangedValue = d))
+                .Add(p => p.TimeSelectEvent,
+                    EventCallback.Factory.Create<string>(this, d => TimeSelectedValue = d))
+                .Add(p => p.TimeChangeEvent,
+                    EventCallback.Factory.Create<string>(this, d => TimeChangedValue = d))
             );
 
-            // Act: invoke the two JSInvokable methods
-            await cut.InvokeAsync(() => cut.Instance.Done("2025/04/24"));
-            await cut.InvokeAsync(() => cut.Instance.TimeChanged("2025/04/25"));
+            // Act
+            await cut.InvokeAsync(() => cut.Instance.TimeSelected("15:30"));
+            await cut.InvokeAsync(() => cut.Instance.TimeChanged("15:31"));
 
-            // Assert that our handlers were called
-            Assert.Equal("2025/04/24", DoneValue);
-            Assert.Equal("2025/04/25", TimeChangedValue);
+            // Assert
+            Assert.Equal("15:30", TimeSelectedValue);
+            Assert.Equal("15:31", TimeChangedValue);
         }
 
-        private string? DoneValue { get; set; }
+        private string? TimeSelectedValue { get; set; }
         private string? TimeChangedValue { get; set; }
     }
 }
