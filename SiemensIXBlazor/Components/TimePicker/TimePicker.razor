@@ -15,17 +15,23 @@
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
 
-<ix-time-picker @attributes="@UserAttributes" 
-                id="@Id" 
+<ix-time-picker @attributes="UserAttributes"
+                id="@Id"
+                class="@Class"
+                style="display: block; width: 20rem; @Style"
                 corners="@(EnumParser<DatePickerCorners>.EnumToString(Corners))"
-                format="@Format" 
-                text-select-time="@TextSelectTime" 
-                time="@Time" 
+                embedded="@Embedded"
+                format="@Format"
+                time="@Time"
                 hide-header="@HideHeader"
-                hour-interval ="@HourInterval"
-                millisecond-interval ="@MillisecondInterval"
-                minute-interval = "@MinuteInterval"
-                second-interval = "@SecondInterval"
-                style="display: block; width: 20rem; @Style" 
-                class="@Class">
+                hour-interval="@HourInterval"
+                minute-interval="@MinuteInterval"
+                second-interval="@SecondInterval"
+                millisecond-interval="@MillisecondInterval"
+                i18n-confirm-time="@I18nConfirmTime"
+                i18n-header="@I18nHeader"
+                i18n-hour-column-header="@I18nHourColumnHeader"
+                i18n-minute-column-header="@I18nMinuteColumnHeader"
+                i18n-second-column-header="@I18nSecondColumnHeader"
+                i18n-millisecond-column-header="@I18nMillisecondColumnHeader">
 </ix-time-picker>
