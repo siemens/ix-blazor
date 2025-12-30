@@ -27,9 +27,9 @@ public class SelectTests : TestContextBase
 
         // Assert
         cut.MarkupMatches("<ix-select id='test-select' value='1'" +
-                          "i-1-8n-placeholder='Select an option' i-1-8n-placeholder-editable='Type of select option' " +
-                          "i-1-8n-select-list-header='Please select an option' mode='single' " +
-                          "i-1-8n-no-matches='No matches'></ix-select>");
+                          "i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
+                          "i18n-select-list-header='Please select an option' mode='single' " +
+                          "i18n-no-matches='No matches'></ix-select>");
     }
 
     [Fact]
@@ -43,9 +43,9 @@ public class SelectTests : TestContextBase
         // Assert
         Assert.Equal("custom-id", cut.Instance.Id);
         cut.MarkupMatches("<ix-select id='custom-id' value='1'" +
-                          "i-1-8n-placeholder='Select an option' i-1-8n-placeholder-editable='Type of select option' " +
-                          "i-1-8n-select-list-header='Please select an option' mode='single' " +
-                          "i-1-8n-no-matches='No matches'></ix-select>");
+                          "i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
+                          "i18n-select-list-header='Please select an option' mode='single' " +
+                          "i18n-no-matches='No matches'></ix-select>");
     }
 
     [Fact]
@@ -59,9 +59,9 @@ public class SelectTests : TestContextBase
         // Assert
         Assert.True(cut.Instance.AllowClear);
         cut.MarkupMatches("<ix-select id='test-select' allow-clear " +
-                          "i-1-8n-placeholder='Select an option' i-1-8n-placeholder-editable='Type of select option' " +
-                          "i-1-8n-select-list-header='Please select an option' mode='single'" +
-                          "i-1-8n-no-matches='No matches'></ix-select>");
+                          "i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
+                          "i18n-select-list-header='Please select an option' mode='single'" +
+                          "i18n-no-matches='No matches'></ix-select>");
     }
 
     [Fact]
@@ -76,9 +76,9 @@ public class SelectTests : TestContextBase
         // Assert
         Assert.Equal(SelectMode.Multiple, cut.Instance.Mode);
         cut.MarkupMatches("<ix-select id='test-select' value='1'" +
-                          "i-1-8n-placeholder='Select an option' i-1-8n-placeholder-editable='Type of select option' " +
-                          "i-1-8n-select-list-header='Please select an option' mode='multiple' " +
-                          "i-1-8n-no-matches='No matches'></ix-select>");
+                          "i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
+                          "i18n-select-list-header='Please select an option' mode='multiple' " +
+                          "i18n-no-matches='No matches'></ix-select>");
     }
 
     [Fact]
@@ -92,9 +92,9 @@ public class SelectTests : TestContextBase
         // Assert
         Assert.Equal("testValue", cut.Instance.Value);
         cut.MarkupMatches("<ix-select id='test-select' value='testValue'" +
-                          "i-1-8n-placeholder='Select an option' i-1-8n-placeholder-editable='Type of select option' " +
-                          "i-1-8n-select-list-header='Please select an option' mode='single'" +
-                          "i-1-8n-no-matches='No matches'></ix-select>");
+                          "i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
+                          "i18n-select-list-header='Please select an option' mode='single'" +
+                          "i18n-no-matches='No matches'></ix-select>");
     }
 
     [Fact]
@@ -109,9 +109,9 @@ public class SelectTests : TestContextBase
         // Assert
         Assert.Equal("ix-warning", cut.Instance.Class);
         cut.MarkupMatches("<ix-select id='test-select' value='1'" +
-                          "i-1-8n-placeholder='Select an option' i-1-8n-placeholder-editable='Type of select option' " +
-                          "i-1-8n-select-list-header='Please select an option' mode='single' class='ix-warning' " +
-                          "i-1-8n-no-matches='No matches'></ix-select>");
+                          "i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
+                          "i18n-select-list-header='Please select an option' mode='single' class='ix-warning' " +
+                          "i18n-no-matches='No matches'></ix-select>");
     }
 
     [Fact]
@@ -126,9 +126,9 @@ public class SelectTests : TestContextBase
         // Assert
         Assert.Equal("This is a warning text", cut.Instance.WarningText);
         cut.MarkupMatches("<ix-select id='test-select' value='1'" +
-                          "i-1-8n-placeholder='Select an option' i-1-8n-placeholder-editable='Type of select option' " +
-                          "i-1-8n-select-list-header='Please select an option' mode='single' " +
-                          "i-1-8n-no-matches='No matches' " +
+                          "i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
+                          "i18n-select-list-header='Please select an option' mode='single' " +
+                          "i18n-no-matches='No matches' " +
                           "warning-text='This is a warning text'></ix-select>");
     }
 
@@ -150,9 +150,9 @@ public class SelectTests : TestContextBase
 
         // Assert
         cut.MarkupMatches("<ix-select id='test-select' value='1'" +
-                          "i-1-8n-placeholder='Select an option' i-1-8n-placeholder-editable='Type of select option' " +
-                          "i-1-8n-select-list-header='Please select an option' mode='single' " +
-                          "i-1-8n-no-matches='No matches'>" +
+                          "i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
+                          "i18n-select-list-header='Please select an option' mode='single' " +
+                          "i18n-no-matches='No matches'>" +
                           "<ix-select-item id='selectItem1' label='Item 1' value='1'></ix-select-item>" +
                           "</ix-select>");
     }
@@ -271,9 +271,9 @@ public class SelectTests : TestContextBase
 
         // Assert
         cut.MarkupMatches("<ix-select id='valid-select' value='2'" +
-                          "i-1-8n-placeholder='Select an option' i-1-8n-placeholder-editable='Type of select option' " +
-                          "i-1-8n-select-list-header='Please select an option' mode='single' " +
-                          "class='ix-warning' i-1-8n-no-matches='No matches' " +
+                          "i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
+                          "i18n-select-list-header='Please select an option' mode='single' " +
+                          "class='ix-warning' i18n-no-matches='No matches' " +
                           " info-text='This is an info text' valid-text='Your selection is correct!' " +
                           "warning-text='This is a warning text'>" +
                           "<ix-select-item id='selectItem1' label='Item 1' value='1'></ix-select-item>" +

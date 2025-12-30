@@ -23,7 +23,6 @@ namespace SiemensIXBlazor.Components
         public string Id { get; set; } = string.Empty;
         [Parameter]
         public string DateFormat { get; set; } = "yyyy/MM/dd";
-        
         [Parameter]
         public string From { get; set; } = DateTime.Now.ToString("yyyy/MM/dd");
         [Parameter]
@@ -40,7 +39,8 @@ namespace SiemensIXBlazor.Components
         public string ShowTimeReference { get; set; } = string.Empty;
         [Parameter]
         public string I18nDone { get; set; } = "Done";
-
+        [Parameter]
+        public string I18nTime { get; set; } = "Time";
         [Parameter]
         public string? Time { get; set; }
         [Parameter]

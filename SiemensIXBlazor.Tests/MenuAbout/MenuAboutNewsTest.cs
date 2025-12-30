@@ -23,7 +23,7 @@ namespace SiemensIXBlazor.Tests.MenuAbout
             var cut = RenderComponent<MenuAboutNews>();
 
             // Assert
-            cut.MarkupMatches("<ix-menu-about-news id='' i-1-8n-show-more='Show more'></ix-menu-about-news>");
+            cut.MarkupMatches("<ix-menu-about-news id='' i18n-show-more='Show more'></ix-menu-about-news>");
         }
 
         [Fact]

@@ -154,9 +154,9 @@ public class SelectItemTests : TestContextBase
 
         // Assert
         cut.MarkupMatches("<ix-select id='parent-select' value='1' " +
-                          "i-1-8n-placeholder='Select an option' i-1-8n-placeholder-editable='Type of select option' " +
-                          "i-1-8n-select-list-header='Please select an option' mode='single'" +
-                          "i-1-8n-no-matches='No matches'>" +
+                          "i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
+                          "i18n-select-list-header='Please select an option' mode='single'" +
+                          "i18n-no-matches='No matches'>" +
                           "<ix-select-item id='selectItem1' label='Item 1' value='1'></ix-select-item>" +
                           "</ix-select>");
     }
