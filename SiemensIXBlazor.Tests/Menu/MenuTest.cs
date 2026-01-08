@@ -57,19 +57,19 @@ public class MenuTest : TestContextBase
                     enable-map-expand='' 
                     enable-toggle-theme=''
                     expand=''
-                    i-1-8n-collapse='Collapse'
-                    i-1-8n-expand='Expand'
-                    i-1-8n-legal='Legal'
-                    i-1-8n-more='More'
-                    i-1-8n-settings='Settings'
-                    i-1-8n-toggle-theme='Toggle Theme'
+                    i18n-collapse='Collapse'
+                    i18n-expand='Expand'
+                    i18n-legal='Legal'
+                    i18n-more='More'
+                    i18n-settings='Settings'
+                    i18n-toggle-theme='Toggle Theme'
                     show-about=''
                     start-expanded
 					pinned
                     show-settings=''>
                     <div>Test child content</div>
                 </ix-menu>");
-		//cut.MarkupMatches("<ix-menu id=\"testId\" class=\"test-class\" style=\"width: 100%\" application-name=\"Test Application\" application-description=\"Test Description\" enable-map-expand=\"\" enable-settings=\"\" enable-toggle-theme=\"\" expand=\"\" i-1-8n-collapse=\"Collapse\" i-1-8n-expand=\"Expand\" i-1-8n-legal=\"Legal\" i-1-8n-more=\"More\" i-1-8n-settings=\"Settings\" i-1-8n-toggle-theme=\"Toggle Theme\"  show-about=\"\" show-settings=\"\"><div>Test child content</div></ix-menu>");
+		//cut.MarkupMatches("<ix-menu id=\"testId\" class=\"test-class\" style=\"width: 100%\" application-name=\"Test Application\" application-description=\"Test Description\" enable-map-expand=\"\" enable-settings=\"\" enable-toggle-theme=\"\" expand=\"\" i18n-collapse=\"Collapse\" i18n-expand=\"Expand\" i18n-legal=\"Legal\" i18n-more=\"More\" i18n-settings=\"Settings\" i18n-toggle-theme=\"Toggle Theme\"  show-about=\"\" show-settings=\"\"><div>Test child content</div></ix-menu>");
 
 	}
 

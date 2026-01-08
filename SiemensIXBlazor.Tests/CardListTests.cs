@@ -34,7 +34,7 @@ namespace SiemensIXBlazor.Tests
 			});
 
 			// Assert
-			cut.MarkupMatches("<ix-card-list id=\"testId\" label=\"testLabel\" show-all-count=\"1\" list-style=\"stack\" collapse=\"\" i-1-8n-more-cards=\"testMoreCards\" i-1-8n-show-all=\"testShowAll\" suppress-overflow-handling=\"\" hide-show-all></ix-card-list>");
+			cut.MarkupMatches("<ix-card-list id=\"testId\" label=\"testLabel\" show-all-count=\"1\" list-style=\"stack\" collapse=\"\" i18n-more-cards=\"testMoreCards\" i18n-show-all=\"testShowAll\" suppress-overflow-handling=\"\" hide-show-all></ix-card-list>");
 		}
 
 		[Fact]

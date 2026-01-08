@@ -20,7 +20,7 @@ namespace SiemensIXBlazor.Tests
         public void PaginationRendersCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<Components.Pagination.Pagination>(parameters=>
+            var cut = RenderComponent<Pagination>(parameters =>
                 {
                     parameters.Add(p => p.Id, "testId");
                     parameters.Add(p => p.ItemCount, 15);
@@ -30,7 +30,7 @@ namespace SiemensIXBlazor.Tests
                 }
             );
             // Assert
-            cut.MarkupMatches("<ix-pagination id=\"testId\" item-count=\"15\" selected-page=\"1\" hide-item-count=\"\" aria-label-page-selection=\"testAriaLabelPageSelection\" i-1-8n-items=\"Items\" i-1-8n-of=\"of\" i-1-8n-page=\"Page\"></ix-pagination>");
+            cut.MarkupMatches("<ix-pagination id=\"testId\" item-count=\"15\" selected-page=\"1\" hide-item-count=\"\" aria-label-page-selection=\"testAriaLabelPageSelection\" i18n-items=\"Items\" i18n-of=\"of\" i18n-page=\"Page\"></ix-pagination>");
         }
 
         [Fact]

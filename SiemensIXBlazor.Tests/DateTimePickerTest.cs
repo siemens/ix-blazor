@@ -36,7 +36,7 @@ public class DateTimePickerTest : TestContextBase
             .Add(p => p.I18nDone, "Done"));
 
         // Assert
-        cut.MarkupMatches($"<ix-datetime-picker id=\"testId\" date-format=\"yyyy/MM/dd\" from=\"{DateTime.Now:yyyy/MM/dd}\" max-date=\"2022/12/31\" min-date=\"2022/01/01\" single-selection=\"\" show-time-reference=\"\" time=\"12:00:00\" i18n-done=\"Done\" time-format=\"HH:mm:ss\" time-reference=\"12:00:00\" to=\"2022/12/31\"></ix-datetime-picker>");
+        cut.MarkupMatches($"<ix-datetime-picker id=\"testId\" date-format=\"yyyy/MM/dd\" from=\"{DateTime.Now:yyyy/MM/dd}\" max-date=\"2022/12/31\" min-date=\"2022/01/01\" single-selection=\"\" show-time-reference=\"\" time=\"12:00:00\" i18n-done=\"Done\" i18n-time=\"Time\" time-format=\"HH:mm:ss\" time-reference=\"12:00:00\" to=\"2022/12/31\"></ix-datetime-picker>");
     }
 
     [Fact]
