@@ -1261,7 +1261,14 @@ div[data-tab-content].show {
 ## Time picker
 
 ```razor
-<TimePicker></TimePicker>
+<TimePicker Id="timePicker1"
+            Class="my-time-picker"
+            HourInterval="1"
+            MinuteInterval="15"
+            SecondInterval="30"
+            HideHeader="false"
+            Corners="DatePickerCorners.Rounded">
+</TimePicker>
 ```
 
 ## Toast
