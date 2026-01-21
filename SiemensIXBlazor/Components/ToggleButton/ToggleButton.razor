@@ -16,5 +16,5 @@
 
 <ix-toggle-button @attributes="UserAttributes" class="@Class" style="@Style" id="@Id" disabled="@Disabled"
     aria-label-icon-button="@AriaLabelIconButton"
-    ghost="@Ghost" icon="@Icon" loading="@Loading" outline="@Outline" pressed="@Pressed"
-    variant="@(EnumParser<ButtonVariant>.EnumToString(Variant))">@ChildContent</ix-toggle-button>
+    icon="@Icon" icon-right="@IconRight" loading="@Loading" pressed="@Pressed"
+    variant="@(EnumParser<ButtonVariant>.EnumToString(Variant, replaceUnderscores: true))">@ChildContent</ix-toggle-button>

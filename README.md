@@ -1070,7 +1070,6 @@ private void DrawerButtonClicked()
     <div class="modal-header">
         Message headline
         <IconButton
-            Ghost="true"
             Icon="close"
             Class="dismiss-modal"
             ClickEvent="() => CloseModal()"
@@ -1078,8 +1077,7 @@ private void DrawerButtonClicked()
     </div>
     <div class="modal-body">Message text lorem ipsum</div>
     <div class="modal-footer">
-        <Button Outline="true"
-                Class="dismiss-modal"
+        <Button Class="dismiss-modal"
                 ClickEvent="() => CloseModal()">
              Cancel
         </Button>
@@ -1440,7 +1438,7 @@ tree.TreeModel = treeNodes;
 You can follow the original documentation and use native `Javascript` components.
 
 ```razor
-<ix-button class="m-1" outline variant="Secondary">
+<ix-button class="m-1" variant="Secondary">
     Button
 </ix-button>
 ```
@@ -1448,7 +1446,7 @@ You can follow the original documentation and use native `Javascript` components
 Or you can use supported components as a native `Blazor` components.
 
 ```razor
-<Button Class="m-1" Outline="true" Variant="Secondary">
+<Button Class="m-1" Variant="Secondary">
     Button
 </Button>
 ```

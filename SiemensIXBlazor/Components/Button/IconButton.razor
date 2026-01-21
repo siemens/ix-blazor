@@ -9,18 +9,18 @@
 *@
 
 @namespace SiemensIXBlazor.Components
+@using SiemensIXBlazor.Helpers
+@using SiemensIXBlazor.Enums.Button;
 @inherits IXBaseComponent
 
 <ix-icon-button @onclick="Clicked"
 @attributes="UserAttributes"
 style="@Style"
-class="@Class" 
-disabled="@Disabled" 
-ghost="@Ghost" 
-outline="@Outline" 
+class="@Class"
+disabled="@Disabled"
 selected="@Selected"
-type="@Enum.GetName(Type)?.ToLower()"
-variant="@Enum.GetName(Variant)?.ToLower()"
+type="@(EnumParser<ButtonType>.EnumToString(Type))"
+variant="@(EnumParser<ButtonVariant>.EnumToString(Variant, replaceUnderscores: true))"
 icon-color="@IconColor"
 icon="@Icon"
 oval="@Oval"
