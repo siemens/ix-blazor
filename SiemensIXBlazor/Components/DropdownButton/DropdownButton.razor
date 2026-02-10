@@ -16,9 +16,9 @@
 
 <ix-dropdown-button @attributes="UserAttributes" label="@Label"
     aria-label-dropdown-button="@AriaLabelDropdownButton"
-    variant="@(EnumParser<ButtonVariant>.EnumToString(Variant))"
+    variant="@(EnumParser<ButtonVariant>.EnumToString(Variant, replaceUnderscores: true))"
     placement="@(Placement.HasValue ? EnumParser<DropdownButtonPlacement>.EnumToString(Placement.Value)?.Replace('_', '-') : "")"
     icon="@Icon" closeBehavior="@(EnumParser<DropdownButtonCloseBehavior>.EnumToString(CloseBehavior))"
-    disabled="@Disabled" ghost="@Ghost" outline="@Outline" style="@Style" class="@Class">
+    disabled="@Disabled" style="@Style" class="@Class">
     @ChildContent
 </ix-dropdown-button>
