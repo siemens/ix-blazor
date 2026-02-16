@@ -20,6 +20,8 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Disabled { get; set; } = false;
         [Parameter]
+        public bool EnableTopLayer { get; set; } = false;
+        [Parameter]
         public string? Icon { get; set; }
         [Parameter]
         public string Label { get; set; } = string.Empty;

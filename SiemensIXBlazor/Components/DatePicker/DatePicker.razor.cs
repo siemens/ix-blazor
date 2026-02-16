@@ -39,6 +39,8 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool SingleSelection { get; set; } = false;
         [Parameter]
+        public bool EnableTopLayer { get; set; } = false;
+        [Parameter]
         public string I18nDone { get; set; } = "Done";
         [Parameter]
         public string? Locale { get; set; }

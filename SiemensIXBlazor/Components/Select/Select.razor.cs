@@ -31,6 +31,8 @@ public partial class Select
     [Parameter]
     public bool Editable { get; set; } = false;
     [Parameter]
+    public bool EnableTopLayer { get; set; } = false;
+    [Parameter]
     public string i18nPlaceholder { get; set; } = "Select an option";
     [Parameter]
     public string i18nPlaceholderEditable { get; set; } = "Type of select option";

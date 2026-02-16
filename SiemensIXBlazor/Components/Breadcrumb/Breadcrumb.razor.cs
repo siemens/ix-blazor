@@ -26,6 +26,8 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Subtle { get; set; } = false;
         [Parameter]
+        public bool EnableTopLayer { get; set; } = false;
+        [Parameter]
         public string AriaLabelPreviousButton { get; set; } = "previous";
         [Parameter]
         public string[] NextItems { get; set; } = Array.Empty<string>();

@@ -55,6 +55,8 @@ public partial class DateDropdown
     [Parameter]
     public bool Disabled { get; set; } = false;
     [Parameter]
+    public bool EnableTopLayer { get; set; } = false;
+    [Parameter]
     public string? Locale { get; set; }
     [Parameter]
     public int? WeekStartIndex { get; set; } = 0;

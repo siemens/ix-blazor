@@ -21,7 +21,7 @@ namespace SiemensIXBlazor.Tests.MenuAbout
             var cut = RenderComponent<Components.MenuAbout.MenuAbout>();
 
             // Assert
-            cut.MarkupMatches("<ix-menu-about label=\"About &amp; legal information\" id=\"\"></ix-menu-about>");
+            cut.MarkupMatches("<ix-menu-about aria-label-close-button=\"Close About\" label=\"About &amp; legal information\" id=\"\"></ix-menu-about>");
         }
 
         [Fact]
@@ -56,6 +56,31 @@ namespace SiemensIXBlazor.Tests.MenuAbout
 
             // Assert
             Assert.True(eventTriggered);
+        }
+
+        [Fact]
+        public void AriaLabelCloseButtonDefaultsToCloseAbout()
+        {
+            // Arrange
+            var cut = RenderComponent<Components.MenuAbout.MenuAbout>(parameters => parameters
+                .Add(p => p.Id, "test-id"));
+
+            // Assert
+            Assert.Equal("Close About", cut.Instance.AriaLabelCloseButton);
+            Assert.Contains("aria-label-close-button=\"Close About\"", cut.Markup);
+        }
+
+        [Fact]
+        public void AriaLabelCloseButtonCanBeCustomized()
+        {
+            // Arrange
+            var cut = RenderComponent<Components.MenuAbout.MenuAbout>(parameters => parameters
+                .Add(p => p.Id, "test-id")
+                .Add(p => p.AriaLabelCloseButton, "Custom Close Label"));
+
+            // Assert
+            Assert.Equal("Custom Close Label", cut.Instance.AriaLabelCloseButton);
+            Assert.Contains("aria-label-close-button=\"Custom Close Label\"", cut.Markup);
         }
     }
 }

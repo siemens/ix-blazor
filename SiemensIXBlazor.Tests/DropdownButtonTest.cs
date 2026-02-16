@@ -34,4 +34,29 @@ public class DropdownButtonTest : TestContextBase
         cut.MarkupMatches(
             "<ix-dropdown-button label=\"testLabel\" variant=\"primary\" placement=\"bottom-start\" icon=\"testIcon\" closeBehavior=\"both\" disabled=\"\">Test content</ix-dropdown-button>");
     }
+
+    [Fact]
+    public void EnableTopLayerDefaultsToFalse()
+    {
+        // Arrange
+        var cut = RenderComponent<DropdownButton>(parameters => parameters
+            .Add(p => p.Label, "test"));
+
+        // Assert
+        Assert.False(cut.Instance.EnableTopLayer);
+        Assert.DoesNotContain("enable-top-layer", cut.Markup);
+    }
+
+    [Fact]
+    public void EnableTopLayerTrueRendersAttribute()
+    {
+        // Arrange
+        var cut = RenderComponent<DropdownButton>(parameters => parameters
+            .Add(p => p.Label, "test")
+            .Add(p => p.EnableTopLayer, true));
+
+        // Assert
+        Assert.True(cut.Instance.EnableTopLayer);
+        Assert.Contains("enable-top-layer", cut.Markup);
+    }
 }

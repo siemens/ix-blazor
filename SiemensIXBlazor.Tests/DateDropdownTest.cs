@@ -98,4 +98,29 @@ public class DateDropdownTest : TestContextBase
         // Assert
         Assert.True(dateRangeChangeEventTriggered);
     }
+
+    [Fact]
+    public void EnableTopLayerDefaultsToFalse()
+    {
+        // Arrange
+        var cut = RenderComponent<DateDropdown>(parameters => parameters
+            .Add(p => p.Id, "test-id"));
+
+        // Assert
+        Assert.False(cut.Instance.EnableTopLayer);
+        Assert.DoesNotContain("enable-top-layer", cut.Markup);
+    }
+
+    [Fact]
+    public void EnableTopLayerTrueRendersAttribute()
+    {
+        // Arrange
+        var cut = RenderComponent<DateDropdown>(parameters => parameters
+            .Add(p => p.Id, "test-id")
+            .Add(p => p.EnableTopLayer, true));
+
+        // Assert
+        Assert.True(cut.Instance.EnableTopLayer);
+        Assert.Contains("enable-top-layer", cut.Markup);
+    }
 }

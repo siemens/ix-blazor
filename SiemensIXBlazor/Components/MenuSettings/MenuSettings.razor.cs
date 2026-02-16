@@ -23,6 +23,8 @@ namespace SiemensIXBlazor.Components.MenuSettings
         [Parameter]
         public string? ActiveTabLabel { get; set; }
         [Parameter]
+        public string AriaLabelCloseButton { get; set; } = "Close Settings";
+        [Parameter]
         public string Label { get; set; } = "Settings";
         [Parameter]
         public bool Show { get; set; } = false;
