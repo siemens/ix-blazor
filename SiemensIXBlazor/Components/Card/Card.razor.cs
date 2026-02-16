@@ -21,6 +21,8 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool? Selected { get; set; }
         [Parameter]
+        public bool Passive { get; set; } = false;
+        [Parameter]
         public CardVariant Variant { get; set; } = CardVariant.outline;
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
