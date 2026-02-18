@@ -27,6 +27,9 @@ namespace SiemensIXBlazor.Components.TimeInput
         public bool Disabled { get; set; } = false;
 
         [Parameter]
+        public bool EnableTopLayer { get; set; } = false;
+
+        [Parameter]
         public string Format { get; set; } = "TT";
 
         [Parameter]

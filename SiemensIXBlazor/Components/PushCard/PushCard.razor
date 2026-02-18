@@ -13,7 +13,14 @@
 @using SiemensIXBlazor.Enums.PushCard
 @inherits IXBaseComponent
 
-<ix-push-card @attributes="UserAttributes" class="@Class" style="@Style" icon="@Icon" notification="@Notification"
-    heading="@Heading" subheading="@SubHeading" variant="@(EnumParser<PushCardVariant>.EnumToString(Variant))"
-              expanded="@Expanded">
+<ix-push-card @attributes="UserAttributes"
+              class="@Class"
+              style="@Style"
+              icon="@Icon"
+              notification="@Notification"
+              heading="@Heading"
+              subheading="@SubHeading"
+              expanded="@Expanded"
+              passive="@Passive"
+              variant="@(EnumParser<PushCardVariant>.EnumToString(Variant))">
 </ix-push-card>

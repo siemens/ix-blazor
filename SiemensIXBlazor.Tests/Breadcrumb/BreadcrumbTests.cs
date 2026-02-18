@@ -76,5 +76,30 @@ namespace SiemensIXBlazor.Tests
             // Assert
             Assert.True(eventTriggered);
         }
+
+        [Fact]
+        public void EnableTopLayerDefaultsToFalse()
+        {
+            // Arrange
+            var cut = RenderComponent<Breadcrumb>(parameters => parameters
+                .Add(p => p.Id, "test-id"));
+
+            // Assert
+            Assert.False(cut.Instance.EnableTopLayer);
+            Assert.DoesNotContain("enable-top-layer", cut.Markup);
+        }
+
+        [Fact]
+        public void EnableTopLayerTrueRendersAttribute()
+        {
+            // Arrange
+            var cut = RenderComponent<Breadcrumb>(parameters => parameters
+                .Add(p => p.Id, "test-id")
+                .Add(p => p.EnableTopLayer, true));
+
+            // Assert
+            Assert.True(cut.Instance.EnableTopLayer);
+            Assert.Contains("enable-top-layer", cut.Markup);
+        }
     }
 }

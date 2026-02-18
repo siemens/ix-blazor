@@ -26,6 +26,9 @@ namespace SiemensIXBlazor.Components.DateInput
         public bool Disabled { get; set; } = false;
 
         [Parameter]
+        public bool EnableTopLayer { get; set; } = false;
+
+        [Parameter]
         public string Format { get; set; } = "yyyy/LL/dd";
 
         [Parameter]

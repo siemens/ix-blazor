@@ -36,6 +36,11 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Selected { get; set; } = false;
         /// <summary>
+        /// If true, disables hover and active styles and changes cursor to default
+        /// </summary>
+        [Parameter]
+        public bool Passive { get; set; } = false;
+        /// <summary>
         /// Card subheading
         /// </summary>
         [Parameter]

@@ -280,5 +280,30 @@ public class SelectTests : TestContextBase
                           "<ix-select-item id='selectItem2' label='Item 2' value='2'></ix-select-item>" +
                           "</ix-select>");
     }
+
+    [Fact]
+    public void EnableTopLayerDefaultsToFalse()
+    {
+        // Arrange
+        var cut = RenderComponent<Components.Select>(parameters => parameters
+            .Add(p => p.Id, "test-select"));
+
+        // Assert
+        Assert.False(cut.Instance.EnableTopLayer);
+        Assert.DoesNotContain("enable-top-layer", cut.Markup);
+    }
+
+    [Fact]
+    public void EnableTopLayerTrueRendersAttribute()
+    {
+        // Arrange
+        var cut = RenderComponent<Components.Select>(parameters => parameters
+            .Add(p => p.Id, "test-select")
+            .Add(p => p.EnableTopLayer, true));
+
+        // Assert
+        Assert.True(cut.Instance.EnableTopLayer);
+        Assert.Contains("enable-top-layer", cut.Markup);
+    }
 }
 

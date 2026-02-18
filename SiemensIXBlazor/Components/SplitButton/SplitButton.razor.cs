@@ -27,6 +27,8 @@ public partial class SplitButton
     [Parameter]
 	public bool Disabled { get; set; } = false;
 	[Parameter]
+	public bool EnableTopLayer { get; set; } = false;
+	[Parameter]
 	public bool Ghost { get; set; } = false;
 	[Parameter]
 	public string Icon { get; set; } = string.Empty;

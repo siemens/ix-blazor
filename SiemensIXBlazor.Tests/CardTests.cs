@@ -44,5 +44,28 @@ namespace SiemensIXBlazor.Tests
             // Assert
             cut.MarkupMatches("<ix-card variant=\"outline\">\r\n      <ix-card-content>Expected content</ix-card-content>\r\n    </ix-card>");
         }
+
+        [Fact]
+        public void PassiveDefaultsToFalse()
+        {
+            // Arrange
+            var cut = RenderComponent<Card>();
+
+            // Assert
+            Assert.False(cut.Instance.Passive);
+            Assert.DoesNotContain("passive", cut.Markup);
+        }
+
+        [Fact]
+        public void PassiveTrueRendersAttribute()
+        {
+            // Arrange
+            var cut = RenderComponent<Card>(parameters => parameters
+                .Add(p => p.Passive, true));
+
+            // Assert
+            Assert.True(cut.Instance.Passive);
+            Assert.Contains("passive", cut.Markup);
+        }
     }
 }

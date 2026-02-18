@@ -46,6 +46,9 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool HideBottomBorder { get; set; } = false;
 
+        [Parameter]
+        public bool EnableTopLayer { get; set; } = false;
+
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
 

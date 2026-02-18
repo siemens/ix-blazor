@@ -291,6 +291,51 @@ namespace SiemensIXBlazor.Tests
                 Times.Once);
         }
 
+        [Fact]
+        public void HideIconDefaultsToFalse()
+        {
+            // Arrange
+            var toastConfig = new ToastConfig();
+
+            // Assert
+            Assert.False(toastConfig.HideIcon);
+        }
+
+        [Fact]
+        public async Task ShowToast_WithHideIconTrue_PassesThroughInterop()
+        {
+            // Arrange
+            var jsRuntimeMock = new Mock<IJSRuntime>();
+            Services.AddSingleton(jsRuntimeMock.Object);
+
+            var toastConfig = new ToastConfig
+            {
+                Title = "Toast without icon",
+                Message = "This toast has no icon",
+                HideIcon = true
+            };
+
+            string expectedJson = JsonConvert.SerializeObject(toastConfig);
+
+            jsRuntimeMock
+                .Setup(js => js.InvokeAsync<object>(
+                    It.Is<string>(s => s == "siemensIXInterop.showMessage"),
+                    It.Is<object[]>(args => args.Length == 1 && args[0].ToString() == expectedJson)))
+                .ReturnsAsync(new ValueTask<object>());
+
+            var cut = RenderComponent<Toast>();
+
+            // Act
+            await cut.InvokeAsync(() => cut.Instance.ShowToast(toastConfig));
+
+            // Assert
+            jsRuntimeMock.Verify(
+                js => js.InvokeAsync<object>(
+                    It.Is<string>(s => s == "siemensIXInterop.showMessage"),
+                    It.Is<object[]>(args => JsonConvert.DeserializeObject<ToastConfig>(args[0].ToString()).HideIcon == true)),
+                Times.Once);
+        }
+
         #region Helper Methods
 
         private bool VerifyToastConfigDefaults(string json, string expectedMessage)
