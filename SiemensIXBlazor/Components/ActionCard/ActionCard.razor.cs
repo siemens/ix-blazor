@@ -15,6 +15,11 @@ namespace SiemensIXBlazor.Components
 {
 	public partial class ActionCard
 	{
+        [Parameter]
+        public string? AriaLabelCard { get; set; }
+
+        [Parameter]
+        public string? AriaLabelIcon { get; set; }  
         /// <summary>
         /// Card heading
         /// </summary>
@@ -30,6 +35,11 @@ namespace SiemensIXBlazor.Components
         /// </summary>
         [Parameter]
         public bool Selected { get; set; } = false;
+        /// <summary>
+        /// If true, disables hover and active styles and changes cursor to default
+        /// </summary>
+        [Parameter]
+        public bool Passive { get; set; } = false;
         /// <summary>
         /// Card subheading
         /// </summary>

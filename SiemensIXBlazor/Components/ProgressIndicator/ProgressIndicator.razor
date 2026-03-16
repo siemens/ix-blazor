@@ -1,0 +1,23 @@
+@* -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2025 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+// -----------------------------------------------------------------------
+*@
+
+@namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
+@using SiemensIXBlazor.Enums.ProgressIndicator;
+@using SiemensIXBlazor.Helpers
+
+<ix-progress-indicator
+    @attributes="UserAttributes" style="@Style" class="@Class" id="@Id" helper-text="@HelperText"
+    label="@Label" max="@Max" min="@Min" show-text-as-tooltip="@ShowTextAsTooltip"
+    size="@(EnumParser<ProgressIndicatorSize>.EnumToString(Size))"
+    status="@(EnumParser<ProgressIndicatorStatus>.EnumToString(Status))"
+    text-alignment="@(EnumParser<ProgressIndicatorTextAlignment>.EnumToString(TextAlignment))"
+    type="@(EnumParser<ProgressIndicatorType>.EnumToString(Type))" value="@Value">
+</ix-progress-indicator>

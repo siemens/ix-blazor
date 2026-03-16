@@ -8,6 +8,7 @@
 //  -----------------------------------------------------------------------
 
 using Microsoft.AspNetCore.Components;
+using SiemensIXBlazor.Enums.Breadcrumb;
 
 namespace SiemensIXBlazor.Components
 {
@@ -17,5 +18,13 @@ namespace SiemensIXBlazor.Components
         public string? Icon { get; set; }
         [Parameter]
         public string? Label { get; set; }
+        [Parameter]
+        public string? AriaLabelButton { get; set; }
+        [Parameter]
+        public string? Href { get; set; }
+        [Parameter]
+        public BreadcrumbTarget Target { get; set; } = BreadcrumbTarget._self;
+        [Parameter]
+        public string? Rel { get; set; }
     }
 }

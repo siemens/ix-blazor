@@ -74,5 +74,28 @@ namespace SiemensIXBlazor.Tests
             // Assert
             Assert.Equal(PushCardVariant.outline, cut.Instance.Variant);
         }
+
+        [Fact]
+        public void PassiveDefaultsToFalse()
+        {
+            // Arrange
+            var cut = RenderComponent<ActionCard>();
+
+            // Assert
+            Assert.False(cut.Instance.Passive);
+            Assert.DoesNotContain("passive", cut.Markup);
+        }
+
+        [Fact]
+        public void PassiveTrueRendersAttribute()
+        {
+            // Arrange
+            var cut = RenderComponent<ActionCard>(parameters => parameters
+                .Add(p => p.Passive, true));
+
+            // Assert
+            Assert.True(cut.Instance.Passive);
+            Assert.Contains("passive", cut.Markup);
+        }
     }
 }

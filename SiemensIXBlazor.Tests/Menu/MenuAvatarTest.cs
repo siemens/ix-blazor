@@ -28,7 +28,7 @@ namespace SiemensIXBlazor.Tests.Menu
                 ("Image", "testImage"),
                 ("Initials", "TI"),
                 ("Top", "Top Text"),
-                ("ShowLogoutButton", true),
+                ("HideLogoutButton", true),
                 ("ChildContent", (RenderFragment)(builder =>
                 {
                     builder.OpenElement(0, "div");
@@ -39,7 +39,7 @@ namespace SiemensIXBlazor.Tests.Menu
 
             // Assert
             // Adjust the expected markup to match your component's output
-            cut.MarkupMatches("<ix-menu-avatar id=\"testId\" class=\"test-class\" style=\"width: 100%\" bottom=\"Bottom Text\" i-1-8n-logout=\"Logout\" image=\"testImage\" initials=\"TI\" top=\"Top Text\" show-logout-button=\"\"><div>Test child content</div></ix-menu-avatar>");
+            cut.MarkupMatches("<ix-menu-avatar id=\"testId\" class=\"test-class\" style=\"width: 100%\" bottom=\"Bottom Text\" i18n-logout=\"Logout\" image=\"testImage\" initials=\"TI\" top=\"Top Text\" hide-logout-button=\"\"><div>Test child content</div></ix-menu-avatar>");
         }
         [Fact]
         public async Task LogoutClickedEventWorks()
@@ -56,6 +56,73 @@ namespace SiemensIXBlazor.Tests.Menu
 
             // Assert
             Assert.True(clicked);
+        }
+
+        [Fact]
+        public void EnableTopLayerDefaultsToFalse()
+        {
+            // Arrange
+            var cut = RenderComponent<MenuAvatar>(parameters => parameters
+                .Add(p => p.Id, "test-id"));
+
+            // Assert
+            Assert.False(cut.Instance.EnableTopLayer);
+            Assert.DoesNotContain("enable-top-layer", cut.Markup);
+        }
+
+        [Fact]
+        public void EnableTopLayerTrueRendersAttribute()
+        {
+            // Arrange
+            var cut = RenderComponent<MenuAvatar>(parameters => parameters
+                .Add(p => p.Id, "test-id")
+                .Add(p => p.EnableTopLayer, true));
+
+            // Assert
+            Assert.True(cut.Instance.EnableTopLayer);
+            Assert.Contains("enable-top-layer", cut.Markup);
+        }
+
+        [Fact]
+        public void TooltipTextPropertyIsSetCorrectly()
+        {
+            // Arrange
+            var cut = RenderComponent<MenuAvatar>(parameters => parameters
+                .Add(p => p.Id, "test-id")
+                .Add(p => p.TooltipText, "Test tooltip"));
+
+            // Assert
+            Assert.Equal("Test tooltip", cut.Instance.TooltipText);
+            Assert.Contains("tooltip-text=\"Test tooltip\"", cut.Markup);
+        }
+
+        [Fact]
+        public void AriaLabelTooltipPropertyIsSetCorrectly()
+        {
+            // Arrange
+            var cut = RenderComponent<MenuAvatar>(parameters => parameters
+                .Add(p => p.Id, "test-id")
+                .Add(p => p.AriaLabelTooltip, "Tooltip label"));
+
+            // Assert
+            Assert.Equal("Tooltip label", cut.Instance.AriaLabelTooltip);
+            Assert.Contains("aria-label-tooltip=\"Tooltip label\"", cut.Markup);
+        }
+
+        [Fact]
+        public void TooltipTextAndAriaLabelTooltipCanBeCombined()
+        {
+            // Arrange
+            var cut = RenderComponent<MenuAvatar>(parameters => parameters
+                .Add(p => p.Id, "test-id")
+                .Add(p => p.TooltipText, "Hover text")
+                .Add(p => p.AriaLabelTooltip, "Screen reader text"));
+
+            // Assert
+            Assert.Equal("Hover text", cut.Instance.TooltipText);
+            Assert.Equal("Screen reader text", cut.Instance.AriaLabelTooltip);
+            Assert.Contains("tooltip-text=\"Hover text\"", cut.Markup);
+            Assert.Contains("aria-label-tooltip=\"Screen reader text\"", cut.Markup);
         }
     }
 }

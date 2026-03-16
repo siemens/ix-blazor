@@ -28,9 +28,15 @@ namespace SiemensIXBlazor.Components.MenuAvatar
         [Parameter]
         public string? Initials { get; set; }
         [Parameter]
-        public bool ShowLogoutButton { get; set; } = true;
+        public bool HideLogoutButton { get; set; } = false;
+        [Parameter]
+        public bool EnableTopLayer { get; set; } = false;
         [Parameter]
         public string? Top { get; set; }
+        [Parameter]
+        public string? TooltipText { get; set; }
+        [Parameter]
+        public string? AriaLabelTooltip { get; set; }
         [Parameter]
         public EventCallback LogoutClickedEvent { get; set; }
 

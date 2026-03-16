@@ -15,6 +15,10 @@ namespace SiemensIXBlazor.Components
     public partial class KPI
     {
         [Parameter]
+        public string? AriaLabelAlarmIcon { get; set; }
+        [Parameter]
+        public string? AriaLabelWarningIcon { get; set; }   
+        [Parameter]
         public string? Label { get; set; }
         [Parameter]
         public KpiOrientation Orientation { get; set; } = KpiOrientation.Horizontal;

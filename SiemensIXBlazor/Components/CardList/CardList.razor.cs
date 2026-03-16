@@ -21,7 +21,9 @@ namespace SiemensIXBlazor.Components
 		public string Id { get; set; } = string.Empty;
 		[Parameter]
 		public RenderFragment? ChildContent { get; set; }
-		[Parameter]
+        [Parameter]
+        public string? AriaLabelExpandButton { get; set; }	
+        [Parameter]
 		public bool Collapse { get; set; } = false;
 		[Parameter]
 		public string I18NMoreCards { get; set; } = "There are more cards available";

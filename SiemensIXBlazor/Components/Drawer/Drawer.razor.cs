@@ -20,6 +20,8 @@ namespace SiemensIXBlazor.Components
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
         [Parameter]
+        public string? AriaLabelCloseButton { get; set; }   
+        [Parameter]
         public bool CloseOnClickOutside { get; set; } = true;
         [Parameter]
         public bool FullHeight { get; set; } = false;

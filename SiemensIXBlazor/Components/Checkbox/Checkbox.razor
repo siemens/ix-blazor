@@ -1,0 +1,18 @@
+﻿@using Microsoft.JSInterop;
+@using SiemensIXBlazor.Components
+@inherits IXBaseComponent
+@inject IJSRuntime JSRuntime
+
+<ix-checkbox @attributes="UserAttributes"
+             class="@Class"
+             style="@Style"
+             id="@Id"
+             checked="@Checked"
+             disabled="@Disabled"
+             indeterminate="@Indeterminate"
+             label="@Label"
+             name="@Name"
+             required="@Required"
+             value="@Value">
+</ix-checkbox>
+

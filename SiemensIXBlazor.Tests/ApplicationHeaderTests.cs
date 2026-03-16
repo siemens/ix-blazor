@@ -21,10 +21,16 @@ namespace SiemensIXBlazor.Tests
             // Arrange
             var cut = RenderComponent<ApplicationHeader>(parameters => {
                 parameters.Add(p => p.Name, "testName");
+                parameters.Add(p => p.NameSuffix, "testSuffix");
+                parameters.Add(p => p.CompanyLogo, "logo.png");
+                parameters.Add(p => p.CompanyLogoAlt, "Company Logo");
+                parameters.Add(p => p.AppIcon, "app-icon.svg");
+                parameters.Add(p => p.AppIconAlt, "App Icon");
+                parameters.Add(p => p.HideBottomBorder, true);
             });
 
             // Assert
-            cut.MarkupMatches("<ix-application-header id='' name='testName'></ix-application-header>");
+            cut.MarkupMatches("<ix-application-header id='' name='testName' name-suffix='testSuffix' company-logo='logo.png' company-logo-alt='Company Logo' app-icon='app-icon.svg' app-icon-alt='App Icon' hide-bottom-border=\"\" ></ix-application-header>");
         }
 
         [Fact]
@@ -43,6 +49,37 @@ namespace SiemensIXBlazor.Tests
             // Assert
             Assert.Contains(expectedContent, cut.Markup);
         }
+
+        [Fact]
+        public void ApplicationHeaderRendersSecondarySlot()
+        {
+            // Arrange
+            var expectedSecondaryContent = "Secondary content";
+
+            // Act
+            var cut = RenderComponent<ApplicationHeader>(parameters => parameters
+                .Add(p => p.Secondary, builder => 
+                {
+                    builder.AddContent(0, expectedSecondaryContent);
+                }));
+
+            // Assert
+            var markup = cut.Markup;
+            Assert.Contains("slot=\"secondary\"", markup);
+            Assert.Contains(expectedSecondaryContent, markup);
+        }
+
+        [Fact]
+        public void ApplicationHeaderDoesNotRenderSecondarySlotWhenNull()
+        {
+            // Arrange & Act
+            var cut = RenderComponent<ApplicationHeader>(parameters => {
+                parameters.Add(p => p.Name, "testName");
+            });
+
+            // Assert
+            Assert.DoesNotContain("slot=\"secondary\"", cut.Markup);
+        }
         [Fact]
         public async Task OpenAppSwitchEventWorks()
         {
@@ -58,6 +95,31 @@ namespace SiemensIXBlazor.Tests
 
             // Assert
             Assert.True(eventTriggered);
+        }
+
+        [Fact]
+        public void EnableTopLayerDefaultsToFalse()
+        {
+            // Arrange
+            var cut = RenderComponent<ApplicationHeader>(parameters => parameters
+                .Add(p => p.Id, "test-id"));
+
+            // Assert
+            Assert.False(cut.Instance.EnableTopLayer);
+            Assert.DoesNotContain("enable-top-layer", cut.Markup);
+        }
+
+        [Fact]
+        public void EnableTopLayerTrueRendersAttribute()
+        {
+            // Arrange
+            var cut = RenderComponent<ApplicationHeader>(parameters => parameters
+                .Add(p => p.Id, "test-id")
+                .Add(p => p.EnableTopLayer, true));
+
+            // Assert
+            Assert.True(cut.Instance.EnableTopLayer);
+            Assert.Contains("enable-top-layer", cut.Markup);
         }
     }
 }

@@ -14,6 +14,7 @@
 @inherits IXBaseComponent
 
 <ix-kpi @attributes="UserAttributes" label="@Label" value="@Value"
+    aria-label-alarm-icon="@AriaLabelAlarmIcon" aria-label-warning-icon="AriaLabelWarningIcon"
     orientation="@(EnumParser<KpiOrientation>.EnumToString(Orientation))"
     state="@(EnumParser<KpiState>.EnumToString(State))" onreadystatechange="@State" unit="@Unit" style="@Style"
     class="@Class"></ix-kpi>

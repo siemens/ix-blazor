@@ -23,17 +23,40 @@ public class DropdownButtonTest : TestContextBase
         // Arrange
         var cut = RenderComponent<DropdownButton>(parameters => parameters
             .Add(p => p.Disabled, true)
-            .Add(p => p.Ghost, true)
             .Add(p => p.Icon, "testIcon")
             .Add(p => p.CloseBehavior, DropdownButtonCloseBehavior.both)
             .Add(p => p.Label, "testLabel")
-            .Add(p => p.Outline, true)
             .Add(p => p.Placement, DropdownButtonPlacement.bottom_start)
             .Add(p => p.Variant, ButtonVariant.primary)
             .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content"))));
 
         // Assert
         cut.MarkupMatches(
-            "<ix-dropdown-button label=\"testLabel\" variant=\"primary\" placement=\"bottom-start\" icon=\"testIcon\" closeBehavior=\"both\" disabled=\"\" ghost=\"\" outline=\"\">Test content</ix-dropdown-button>");
+            "<ix-dropdown-button label=\"testLabel\" variant=\"primary\" placement=\"bottom-start\" icon=\"testIcon\" closeBehavior=\"both\" disabled=\"\">Test content</ix-dropdown-button>");
+    }
+
+    [Fact]
+    public void EnableTopLayerDefaultsToFalse()
+    {
+        // Arrange
+        var cut = RenderComponent<DropdownButton>(parameters => parameters
+            .Add(p => p.Label, "test"));
+
+        // Assert
+        Assert.False(cut.Instance.EnableTopLayer);
+        Assert.DoesNotContain("enable-top-layer", cut.Markup);
+    }
+
+    [Fact]
+    public void EnableTopLayerTrueRendersAttribute()
+    {
+        // Arrange
+        var cut = RenderComponent<DropdownButton>(parameters => parameters
+            .Add(p => p.Label, "test")
+            .Add(p => p.EnableTopLayer, true));
+
+        // Assert
+        Assert.True(cut.Instance.EnableTopLayer);
+        Assert.Contains("enable-top-layer", cut.Markup);
     }
 }

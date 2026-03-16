@@ -17,5 +17,9 @@ namespace SiemensIXBlazor.Components.Avatar
         public string? Image { get; set; }
         [Parameter]
         public string? Initials { get; set; }
+        [Parameter]
+        public string? AriaLabel { get; set; }
+        [Parameter]
+        public string? AriaLabelTooltip { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace SiemensIXBlazor.Helpers
 {
     public static class EnumParser<TEnum> where TEnum : Enum
     {
-        public static string EnumToString(TEnum enumValue, bool toLowerCase = true)
+        public static string EnumToString(TEnum enumValue, bool toLowerCase = true, bool replaceUnderscores = false)
         {
             if (!Enum.IsDefined(typeof(TEnum), enumValue))
             {
@@ -19,7 +19,8 @@ namespace SiemensIXBlazor.Helpers
             }
 
             var enumName = Enum.GetName(typeof(TEnum), enumValue);
-            return toLowerCase ? enumName?.ToLowerInvariant() ?? string.Empty : enumName ?? string.Empty;
+            var result = toLowerCase ? enumName?.ToLowerInvariant() ?? string.Empty : enumName ?? string.Empty;
+            return replaceUnderscores ? result.Replace('_', '-') : result;
         }
     }
 }

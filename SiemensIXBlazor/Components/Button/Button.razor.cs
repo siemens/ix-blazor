@@ -23,21 +23,23 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public ButtonVariant Variant { get; set; } = ButtonVariant.primary;
         [Parameter]
-        public bool Disabled { get; set; } = false;
+        public string? AriaLabelButton { get; set; }
         [Parameter]
-        public bool Ghost { get; set; } = false;
+        public bool Disabled { get; set; } = false;
         [Parameter]
         public string? Icon { get; set; }
         [Parameter]
-        public bool Loading { get; set; } = false;
+        public string? IconRight { get; set; }
         [Parameter]
-        public bool Outline { get; set; } = false;
+        public bool Loading { get; set; } = false;
         [Parameter]
         public bool Selected { get; set; } = false;
         [Parameter]
         public ButtonType Type { get; set; } = ButtonType.Button;
         [Parameter]
         public string DataTooltip { get; set; } = string.Empty;
+        [Parameter]
+        public string? Form { get; set; }
         [Parameter]
         public EventCallback ClickEvent { get; set; }
 

@@ -1,0 +1,38 @@
+﻿@using Microsoft.JSInterop;
+@using SiemensIXBlazor.Components
+@inherits IXBaseComponent
+@inject IJSRuntime JSRuntime
+
+<ix-input @attributes="UserAttributes"
+          class="@Class"
+          style="@Style"
+          id="@Id"
+          type="@Type"
+          placeholder="@Placeholder"
+          value="@Value"
+          disabled="@Disabled"
+          readonly="@Readonly"
+          label="@Label"
+          helper-text="@HelperText"
+          info-text="@InfoText"
+          warning-text="@WarningText"
+          valid-text="@ValidText"
+          invalid-text="@InvalidText"
+          allowed-characters-pattern="@AllowedCharactersPattern"
+          max-length="@MaxLength">
+
+    @if (StartSlot != null)
+    {
+        <div slot="start">
+            @StartSlot
+        </div>
+    }
+
+    @if (EndSlot != null)
+    {
+        <div slot="end">
+            @EndSlot
+        </div>
+    }
+
+</ix-input>

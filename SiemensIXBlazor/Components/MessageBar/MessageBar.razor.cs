@@ -21,7 +21,8 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter]
-        public bool Dismissible { get; set; } = true;
+        public bool Persistent { get; set; } = false;
+
         [Parameter]
         public MessageBarType Type { get; set; } = MessageBarType.Info;
         [Parameter]

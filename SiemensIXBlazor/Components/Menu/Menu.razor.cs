@@ -26,8 +26,6 @@ namespace SiemensIXBlazor.Components.Menu
 		[Parameter]
 		public bool EnableMapExpand { get; set; } = false;
 		[Parameter]
-		public bool EnableSettings { get; set; } = false;
-		[Parameter]
 		public bool EnableToggleTheme { get; set; } = false;
 		[Parameter]
 		public bool Expand { get; set; } = false;

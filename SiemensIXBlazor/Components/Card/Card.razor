@@ -15,8 +15,11 @@
 <ix-card @attributes="UserAttributes"
          class=@Class
          style=@Style
+         aria-label-card="@AriaLabelCard"
+         aria-label-icon="@AriaLabelIcon"
          variant=@Variant
-         selected=@Selected>
+         selected=@Selected
+         passive=@Passive>
     <ix-card-content>
         @ChildContent
     </ix-card-content>

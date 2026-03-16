@@ -16,7 +16,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter]
-        public bool Animated { get; set; } = true;
+        public bool Animated { get; set; } = false;
         [Parameter]
         public bool? Chevron { get; set; }
         [Parameter]

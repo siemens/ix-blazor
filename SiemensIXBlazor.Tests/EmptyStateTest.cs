@@ -29,7 +29,7 @@ public class EmptyStateTest : TestContextBase
 
         // Assert
         cut.MarkupMatches(
-            "<ix-empty-state header=\"testHeader\" sub-header=\"testSubHeader\" icon=\"testIcon\" action=\"testAction\" id=\"testId\"></ix-empty-state>");
+            "<ix-empty-state header=\"testHeader\" sub-header=\"testSubHeader\" icon=\"testIcon\" action=\"testAction\" id=\"testId\" layout=\"compact\"></ix-empty-state>");
     }
 
     [Fact]

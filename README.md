@@ -150,6 +150,7 @@ public partial class Index
 - [Pane](#pane) **(since 0.5.0)**
 - [Pagination](#pagination)
 - [Pill](#pill)
+- [Progress Indicator](#progress-indicator) **(since 0.5.4)**
 - [Radio Button](#radio-button)
 - [Select](#select)
 - [Slider](#slider)
@@ -346,6 +347,7 @@ menuAboutElement.ToggleSettings(true);
   <div>Content</div>
 </MapNavigation>
 ```
+
 ## Map Navigation Overlay
 
 ```razor
@@ -1068,7 +1070,6 @@ private void DrawerButtonClicked()
     <div class="modal-header">
         Message headline
         <IconButton
-            Ghost="true"
             Icon="close"
             Class="dismiss-modal"
             ClickEvent="() => CloseModal()"
@@ -1076,8 +1077,7 @@ private void DrawerButtonClicked()
     </div>
     <div class="modal-body">Message text lorem ipsum</div>
     <div class="modal-footer">
-        <Button Outline="true"
-                Class="dismiss-modal"
+        <Button Class="dismiss-modal"
                 ClickEvent="() => CloseModal()">
              Cancel
         </Button>
@@ -1150,6 +1150,16 @@ private void CloseModal()
 </Pill>
 ```
 
+## Progress Indicator
+
+```razor
+<ProgressIndicator Value="75"
+                   Label="Processing data..."
+                   HelperText="Please wait while we process your request"
+                   Size="@ProgressIndicatorSize.lg"
+                   Status="@ProgressIndicatorStatus.info" />
+```
+
 ## Radio button
 
 ```razor
@@ -1174,6 +1184,7 @@ AddItemEvent="SelectItemAdded" Mode="SelectMode.Single" SelectedIndices="2" Id="
     <SelectItem Id="selectItem2" Label="Item 2" Value="2"></SelectItem>
 </Select>
 ```
+
 ## Slider
 
 ```razor
@@ -1248,7 +1259,14 @@ div[data-tab-content].show {
 ## Time picker
 
 ```razor
-<TimePicker></TimePicker>
+<TimePicker Id="timePicker1"
+            Class="my-time-picker"
+            HourInterval="1"
+            MinuteInterval="15"
+            SecondInterval="30"
+            HideHeader="false"
+            Corners="DatePickerCorners.Rounded">
+</TimePicker>
 ```
 
 ## Toast
@@ -1263,10 +1281,23 @@ private Toast toast;
 ToastConfig config = new ToastConfig()
 {
     Message = "Test message",
+    Position = ToastPosition.BottomRight,
     Type = "info"
-}
+};
 
-toast.ShowToast("test message", "info");
+await toast.ShowToast(config);
+
+ToastConfig configWithAction = new ToastConfig()
+{
+    Title = "Changes applied",
+    Message = "<div>Your settings were saved successfully.</div>",
+    Action = "<ix-button variant=\"tertiary\" icon=\"undo\">Undo</ix-button>",
+    Type = "success",
+    AutoClose = true,
+    AutoCloseDelay = 5000
+};
+
+await toast.ShowToast(configWithAction);
 ```
 
 ## Toggle Buttons
@@ -1352,7 +1383,8 @@ treeNodes.Add("sample-child-1", new TreeNode()
     Id = "sample-child-1",
     Data = new TreeData()
     {
-        Name = "Sample Child 1"
+        Name = "Sample Child 1",
+        Icon = "star"
     },
     HasChildren = false,
     Children = new List<string>() {}
@@ -1406,7 +1438,7 @@ tree.TreeModel = treeNodes;
 You can follow the original documentation and use native `Javascript` components.
 
 ```razor
-<ix-button class="m-1" outline variant="Secondary">
+<ix-button class="m-1" variant="Secondary">
     Button
 </ix-button>
 ```
@@ -1414,7 +1446,7 @@ You can follow the original documentation and use native `Javascript` components
 Or you can use supported components as a native `Blazor` components.
 
 ```razor
-<Button Class="m-1" Outline="true" Variant="Secondary">
+<Button Class="m-1" Variant="Secondary">
     Button
 </Button>
 ```

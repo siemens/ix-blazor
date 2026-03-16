@@ -18,3 +18,13 @@ export function listenEvent(caller, elementId, eventName, funtionName) {
     caller.invokeMethodAsync(funtionName, e.detail);
   });
 }
+
+export function setElementProperty(elementId, propertyName, propertyValue) {
+  const element = document.getElementById(elementId);
+
+  if (!element) {
+    throw new Error(`Element with ID ${elementId} not found`);
+  }
+
+  element[propertyName] = propertyValue;
+}

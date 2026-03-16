@@ -21,10 +21,13 @@ namespace SiemensIXBlazor.Tests
             var cut = RenderComponent<Avatar>(parameters => {
                 parameters.Add(p => p.Image, "testImage");
                 parameters.Add(p => p.Initials, "testInitials");
+                parameters.Add(p => p.AriaLabel, "testAriaLabel");
+                parameters.Add(p => p.AriaLabelTooltip, "testAriaLabelTooltip");
+
             });
         
             // Assert
-            cut.MarkupMatches("<ix-avatar image='testImage' initials='testInitials'></ix-avatar>");
+            cut.MarkupMatches("<ix-avatar image='testImage' initials='testInitials' aria-label='testAriaLabel' aria-label-tooltip='testAriaLabelTooltip'></ix-avatar>");
         }
     }
 }

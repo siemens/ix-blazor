@@ -9,6 +9,8 @@
 *@
 
 @using Microsoft.JSInterop;
+@using SiemensIXBlazor.Enums.EventList
+@using SiemensIXBlazor.Helpers
 @inject IJSRuntime JSRuntime
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
@@ -21,5 +23,6 @@ chevron="@Chevron"
 disabled="@Disabled"
 opacity="@Opacity"
 selected="@Selected"
+variant="@(EnumParser<EventListVariant>.EnumToString(Variant))"
 style="@Style"
 class="@Class">@ChildContent</ix-event-list-item>

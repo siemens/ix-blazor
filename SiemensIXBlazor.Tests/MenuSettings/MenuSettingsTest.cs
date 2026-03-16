@@ -31,7 +31,7 @@ namespace SiemensIXBlazor.Tests.MenuSettings
 
             // Assert
             cut.MarkupMatches(
-                "<ix-menu-settings id=\"testId\" class=\"test-class\" style=\"width: 100%\" active-tab-label=\"Active Tab\" label=\"Test Label\" show=\"\"></ix-menu-settings>");
+                "<ix-menu-settings id=\"testId\" class=\"test-class\" style=\"width: 100%\" active-tab-label=\"Active Tab\" aria-label-close-button=\"Close Settings\" label=\"Test Label\" show=\"\"></ix-menu-settings>");
         }
 
         [Fact]
@@ -49,6 +49,31 @@ namespace SiemensIXBlazor.Tests.MenuSettings
 
             // Assert
             Assert.True(closed);
+        }
+
+        [Fact]
+        public void AriaLabelCloseButtonDefaultsToCloseSettings()
+        {
+            // Arrange
+            var cut = RenderComponent<Components.MenuSettings.MenuSettings>(parameters => parameters
+                .Add(p => p.Id, "test-id"));
+
+            // Assert
+            Assert.Equal("Close Settings", cut.Instance.AriaLabelCloseButton);
+            Assert.Contains("aria-label-close-button=\"Close Settings\"", cut.Markup);
+        }
+
+        [Fact]
+        public void AriaLabelCloseButtonCanBeCustomized()
+        {
+            // Arrange
+            var cut = RenderComponent<Components.MenuSettings.MenuSettings>(parameters => parameters
+                .Add(p => p.Id, "test-id")
+                .Add(p => p.AriaLabelCloseButton, "Custom Close Label"));
+
+            // Assert
+            Assert.Equal("Custom Close Label", cut.Instance.AriaLabelCloseButton);
+            Assert.Contains("aria-label-close-button=\"Custom Close Label\"", cut.Markup);
         }
     }
 }

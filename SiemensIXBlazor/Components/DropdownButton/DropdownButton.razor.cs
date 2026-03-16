@@ -16,15 +16,15 @@ namespace SiemensIXBlazor.Components
     public partial class DropdownButton
     {
         [Parameter]
+        public string? AriaLabelDropdownButton { get; set; }
+        [Parameter]
         public bool Disabled { get; set; } = false;
         [Parameter]
-        public bool Ghost { get; set; } = false;
+        public bool EnableTopLayer { get; set; } = false;
         [Parameter]
         public string? Icon { get; set; }
         [Parameter]
         public string Label { get; set; } = string.Empty;
-        [Parameter]
-        public bool Outline { get; set; } = false;
         [Parameter]
         public DropdownButtonPlacement? Placement { get; set; }
         [Parameter]
@@ -33,6 +33,6 @@ namespace SiemensIXBlazor.Components
         public DropdownButtonCloseBehavior CloseBehavior { get; set; } = DropdownButtonCloseBehavior.both;
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
-        
+
     }
 }

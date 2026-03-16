@@ -23,7 +23,6 @@ namespace SiemensIXBlazor.Components
         public string Id { get; set; } = string.Empty;
         [Parameter]
         public string DateFormat { get; set; } = "yyyy/MM/dd";
-        
         [Parameter]
         public string From { get; set; } = DateTime.Now.ToString("yyyy/MM/dd");
         [Parameter]
@@ -31,18 +30,17 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string? MinDate { get; set; }
         [Parameter]
-        public bool Range { get; set; } = true;
+        public string? AriaLabelNextMonthButton { get; set; }
         [Parameter]
-        public bool ShowHour { get; set; } = false;
+        public string? AriaLabelPreviousMonthButton { get; set; }
         [Parameter]
-        public bool ShowMinutes { get; set; } = false;
-        [Parameter]
-        public bool ShowSeconds { get; set; } = false;
+        public bool SingleSelection { get; set; } = false;
         [Parameter]
         public string ShowTimeReference { get; set; } = string.Empty;
         [Parameter]
         public string I18nDone { get; set; } = "Done";
-
+        [Parameter]
+        public string I18nTime { get; set; } = "Time";
         [Parameter]
         public string? Time { get; set; }
         [Parameter]

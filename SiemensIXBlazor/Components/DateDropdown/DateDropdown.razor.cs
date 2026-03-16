@@ -27,7 +27,7 @@ public partial class DateDropdown
     [Parameter, EditorRequired]
     public string Id { get; set; } = string.Empty;
     [Parameter]
-    public bool CustomRangeAllowed { get; set; } = true;
+    public bool CustomRangeDisabled { get; set; } = false;
     [Parameter]
     public string DateRangeId { get; set; } = "custom";
     [Parameter]
@@ -54,6 +54,8 @@ public partial class DateDropdown
     public string? To { get; set; }
     [Parameter]
     public bool Disabled { get; set; } = false;
+    [Parameter]
+    public bool EnableTopLayer { get; set; } = false;
     [Parameter]
     public string? Locale { get; set; }
     [Parameter]

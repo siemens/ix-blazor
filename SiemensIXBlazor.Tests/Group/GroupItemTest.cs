@@ -21,7 +21,7 @@ public class GroupItemTest : TestContextBase
         // Arrange
         var cut = RenderComponent<GroupItem>(parameters => parameters
             .Add(p => p.Id, "testId")
-            .Add(p => p.Focusable, true)
+            .Add(p => p.Disabled, true)
             .Add(p => p.Icon, "testIcon")
             .Add(p => p.Index, 1)
             .Add(p => p.SecondaryText, "testSecondaryText")
@@ -31,7 +31,7 @@ public class GroupItemTest : TestContextBase
 
         // Assert
         cut.MarkupMatches(
-            "<ix-group-item text=\"testText\" focusable=\"\" icon=\"testIcon\" index=\"1\" secondary-text=\"testSecondaryText\" selected=\"\" id=\"testId\"></ix-group-item>");
+            "<ix-group-item text=\"testText\" disabled=\"\" icon=\"testIcon\" index=\"1\" secondary-text=\"testSecondaryText\" selected=\"\" id=\"testId\"></ix-group-item>");
     }
 
     [Fact]
@@ -48,5 +48,19 @@ public class GroupItemTest : TestContextBase
 
         // Assert
         Assert.True(wasCalled);
+    }
+
+    [Fact]
+    public void ComponentRendersWithChildContent()
+    {
+        // Arrange
+        var cut = RenderComponent<GroupItem>(parameters => parameters
+            .Add(p => p.Id, "testId")
+            .AddChildContent("<button>Custom Entry</button>"));
+
+        // Assert
+        var ixGroupItem = cut.Find("ix-group-item");
+        Assert.NotNull(ixGroupItem);
+        Assert.Contains("<button>Custom Entry</button>", cut.Markup);
     }
 }

@@ -18,7 +18,8 @@
                style="@Style"
                class="@Class"
                text="@Text"
-               focusable="@Focusable"
+               aria-label-icon="@AriaLabelIcon"
+               disabled="@Disabled"
                icon="@Icon"
                index="@Index"
                secondary-text="@SecondaryText"
@@ -26,4 +27,5 @@
                suppress-selection="@SuppressSelection"
                id="@Id"
                @onclick="ItemClicked">
+    @ChildContent
 </ix-group-item>

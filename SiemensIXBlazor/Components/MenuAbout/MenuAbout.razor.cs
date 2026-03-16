@@ -26,7 +26,12 @@ namespace SiemensIXBlazor.Components.MenuAbout
         [Parameter]
         public string? ActiveTabLabel { get; set; }
         /// <summary>
-        /// Label of first tab. Default value is: 'About & legal information' 
+        /// Aria label for close button. Default value is: 'Close About'
+        /// </summary>
+        [Parameter]
+        public string AriaLabelCloseButton { get; set; } = "Close About";
+        /// <summary>
+        /// Label of first tab. Default value is: 'About & legal information'
         /// </summary>
         [Parameter]
         public string Label { get; set; } = "About & legal information";

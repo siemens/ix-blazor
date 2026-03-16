@@ -1,0 +1,41 @@
+﻿@using Microsoft.JSInterop;
+@using SiemensIXBlazor.Components
+@inherits IXBaseComponent
+@inject IJSRuntime JSRuntime
+
+<ix-number-input id="@Id"
+                 allowed-characters-pattern="@AllowedCharactersPattern"
+                 disabled="@Disabled"
+                 helper-text="@HelperText"
+                 info-text="@InfoText"
+                 invalid-text="@InvalidText"
+                 label="@Label"
+                 max="@Max"
+                 min="@Min"
+                 name="@Name"
+                 pattern="@Pattern"
+                 placeholder="@Placeholder"
+                 readonly="@Readonly"
+                 required="@Required"
+                 show-stepper-buttons="@ShowStepperButtons"
+                 show-text-as-tooltip="@ShowTextAsTooltip"
+                 step="@Step"
+                 valid-text="@ValidText"
+                 value="@Value"
+                 warning-text="@WarningText"
+                 class="@CssClass">
+    @if (StartSlot != null)
+    {
+        <div slot="start">
+            @StartSlot
+        </div>
+    }
+
+    @if (EndSlot != null)
+    {
+        <div slot="end">
+            @EndSlot
+        </div>
+    }
+
+</ix-number-input>

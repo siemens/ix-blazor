@@ -23,9 +23,15 @@ public partial class Select
     [Parameter]
     public bool AllowClear { get; set; } = false;
     [Parameter]
+    public string? AriaLabelChevronDownIconButton { get; set; }
+    [Parameter]
+    public string? AriaLabelClearIconButton { get; set; }   
+    [Parameter]
     public bool Disabled { get; set; } = false;
     [Parameter]
     public bool Editable { get; set; } = false;
+    [Parameter]
+    public bool EnableTopLayer { get; set; } = false;
     [Parameter]
     public string i18nPlaceholder { get; set; } = "Select an option";
     [Parameter]
