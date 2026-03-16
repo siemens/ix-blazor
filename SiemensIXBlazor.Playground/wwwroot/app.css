@@ -25,6 +25,15 @@ div[data-tab-content] {
 
 .content {
     width: 100%;
+    padding: 1rem;
+}
+
+.category-dropdown {
+    z-index: 9999;
+}
+
+ix-application, ix-application-header{
+    z-index: 1;
 }
 
 .tab-content {
