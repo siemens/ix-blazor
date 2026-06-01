@@ -140,7 +140,7 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/siemen
 
 ### Your First Code Contribution
 #### Setup
-1. Download and install the latest version of .NET8 SDK from [here](https://dotnet.microsoft.com/download/dotnet/8.0).
+1. Download and install the latest version of .NET10 SDK from [here](https://dotnet.microsoft.com/download/dotnet/10.0).
 2. Fork the repository.
 3. Clone the repository to your local machine.
 4. Create a new branch from master for your changes.
