@@ -12,7 +12,7 @@
   "dependencies": {
     "@siemens/ix": "4.4.0",
     "@siemens/ix-aggrid": "4.0.2",
-    "@siemens/ix-echarts": "3.0.1",
+    "@siemens/ix-echarts": "3.0.2",
     "@siemens/ix-icons": "3.4.0",
     "ag-grid-community": "^33",
     "echarts": "^5.5.1"

@@ -51,7 +51,7 @@ Add required `CSS` and `Javascript` packages into the `index.html` file.
 
 > [!CAUTION]
 > If you want to use this library with a `Blazor Web App`, you need to set the `render mode` to `InteractiveServer`.
-> You can find more information at [here](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-8.0).
+> You can find more information at [here](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-10.0).
 
 ### Theme Switching
 
@@ -1067,32 +1067,32 @@ private void DrawerButtonClicked()
 
 ```razor
 <Modal @ref="_modal" Id="modal-example-template"
-    Centered="true" 
+    Centered="true"
     DismissedEvent="OnModalDismissed">
-   <ModalHeader Id="modal-header">Message headline</ModalHeader> 
+   <ModalHeader Id="modal-header">Message headline</ModalHeader>
    <ModalContent Id="modal-content">Message text </ModalContent>
    <ModalFooter Id="modal-footer">
-   <Button Variant="ButtonVariant.primary" ClickEvent="CloseModal"> Cancel </Button> 
-   <Button ClickEvent="CloseModal">OK</Button> 
+   <Button Variant="ButtonVariant.primary" ClickEvent="CloseModal"> Cancel </Button>
+   <Button ClickEvent="CloseModal">OK</Button>
    </ModalFooter>
 </Modal>
 ```
 
 ```csharp
 private Modal? _modal;
-private async Task OpenModal() 
-{ 
+private async Task OpenModal()
+{
   if (_modal is not null)
-    await _modal.ShowAsync(); 
+    await _modal.ShowAsync();
 }
 private async Task CloseModal()
 {
-  if (_modal is not null) 
-    await _modal.HideAsync(); 
+  if (_modal is not null)
+    await _modal.HideAsync();
 }
-private void OnModalDismissed() 
+private void OnModalDismissed()
 {
-  Console.WriteLine("Modal was dismissed."); 
+  Console.WriteLine("Modal was dismissed.");
 }
 ```
 
@@ -1213,7 +1213,7 @@ AddItemEvent="SelectItemAdded" Mode="SelectMode.Single" SelectedIndices="2" Id="
 </Tabs>
 @if (_SelectedTab == 0)
 {
-  <h5>Content of Tab 1</h5>   
+  <h5>Content of Tab 1</h5>
 }
 else if (_SelectedTab == 1)
 {
@@ -1449,8 +1449,8 @@ If you want to use native `siemens-ix` html elements, you have to handle events 
 
 ## 📝 License
 
-Copyright © 2025 [Siemens AG](https://www.siemens.com/).
+Copyright © 2026 [Siemens AG](https://www.siemens.com/).
 
-[Siemens Third-Party Software Disclosure Document](/docs/Siemens.IX.Blazor__0.5.4__READMEOSS.html)
+[Siemens Third-Party Software Disclosure Document](/docs/Siemens.IX.Blazor__0.5.5__READMEOSS.html)
 
 This project is MIT licensed.
