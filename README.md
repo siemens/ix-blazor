@@ -1451,6 +1451,6 @@ If you want to use native `siemens-ix` html elements, you have to handle events 
 
 Copyright © 2026 [Siemens AG](https://www.siemens.com/).
 
-[Siemens Third-Party Software Disclosure Document](/docs/Siemens.IX.Blazor__0.5.4__READMEOSS.html)
+[Siemens Third-Party Software Disclosure Document](/docs/Siemens.IX.Blazor__0.5.5__READMEOSS.html)
 
 This project is MIT licensed.
