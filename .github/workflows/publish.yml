@@ -17,10 +17,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: read
-      id-token: write
-
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -28,7 +24,7 @@ jobs:
       - name: Setup Dotnet
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 8.0.x
+          dotnet-version: 10.0.x
 
       - name: Restore Dependencies
         run: dotnet restore ${{ env.PROJECT_PATH }}
@@ -52,11 +48,5 @@ jobs:
       - name: "Pack Project"
         run: dotnet pack ${{ env.PROJECT_PATH }} --no-restore --no-build --configuration Release -p:PackageVersion=${{ steps.version.outputs.version-without-v }} --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
 
-      - name: "NuGet Login"
-        id: login
-        uses: NuGet/login@v1
-        with:
-          user: Siemens
-
       - name: "Push Package"
-        run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg --api-key ${{ steps.login.outputs.NUGET_API_KEY }} -s ${{ env.NUGET_SOURCE_URL }} --skip-duplicate --no-symbols
+        run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s ${{ env.NUGET_SOURCE_URL }} --skip-duplicate --no-symbols

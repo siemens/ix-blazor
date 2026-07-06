@@ -31,7 +31,7 @@ body:
       label: Prerequisites
       description:  Make sure you are using correct .NET version.
       options:
-        - label: I am using .NET8.
+        - label: I am using .NET 10.
           required: true
 
   - type: input
