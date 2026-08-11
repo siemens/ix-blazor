@@ -12,7 +12,7 @@ window.echarts = echarts;
 window.siemensIXInterop = {
     async initialize() {
         await ixIconsDefineCustomElements(window, {
-            resourcesUrl: "/_content/Siemens.IX.Blazor/"
+            resourcesUrl: "./_content/Siemens.IX.Blazor/"
         });
 
         await defineCustomElements();
