@@ -915,7 +915,10 @@ private void DrawerButtonClicked()
 ## Flip
 
 ```razor
-<FlipTile>
+<FlipTile Id="flip-tile-example"
+          Height="@("auto")"
+          Width="@("auto")"
+          AriaLabelEyeIconButton="Toggle view">
     <div slot="header">Flip header</div>
 
     <div slot="footer">
