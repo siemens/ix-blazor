@@ -21,6 +21,16 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public PaneVariant Variant { get; set; } = PaneVariant.inline;
         [Parameter]
+        public RenderFragment? Left { get; set; }
+        [Parameter]
+        public RenderFragment? Top { get; set; }
+        [Parameter]
+        public RenderFragment? Content { get; set; }
+        [Parameter]
+        public RenderFragment? Bottom { get; set; }
+        [Parameter]
+        public RenderFragment? Right { get; set; }
+        [Parameter]
         public RenderFragment? ChildContent { get; set; }
 
     }
