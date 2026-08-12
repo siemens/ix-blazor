@@ -1418,7 +1418,12 @@ tree.TreeModel = treeNodes;
 
 ```razor
 <WorkflowSteps Id="wf-steps" StepSelectedEvent="(index) => WfSelectedEvent(index)">
-    <WorkflowStep Status="WorkflowStatus.Done">Step 1</WorkflowStep>
+    <WorkflowStep Status="WorkflowStatus.Done">
+        <CustomIcon>
+            <ix-icon name="star"></ix-icon>
+        </CustomIcon>
+        <ChildContent>Step 1</ChildContent>
+    </WorkflowStep>
     <WorkflowStep Status="WorkflowStatus.Success">Step 2</WorkflowStep>
     <WorkflowStep Status="WorkflowStatus.Open">Step 3</WorkflowStep>
     <WorkflowStep Status="WorkflowStatus.Warning">Step 4</WorkflowStep>
