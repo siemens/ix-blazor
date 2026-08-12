@@ -21,6 +21,10 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string? SubLabel { get; set; }
         [Parameter]
+        public RenderFragment? CustomHeader { get; set; }
+        [Parameter]
+        public RenderFragment? HeaderActions { get; set; }
+        [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
@@ -29,7 +33,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string? Icon { get; set; }
         [Parameter]
-        public BlindVariant Variant { get; set; } = BlindVariant.insight;
+        public BlindVariant Variant { get; set; } = BlindVariant.filled;
         [Parameter]
         public EventCallback<bool> CollapsedChangedEvent { get; set; }
 
