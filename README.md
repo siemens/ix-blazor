@@ -1053,6 +1053,19 @@ private void DrawerButtonClicked()
 <LinkButton Url="https://ix.siemens.io/">Siemens IX</LinkButton>
 ```
 
+## Checkbox group
+
+```razor
+<CheckboxGroup Id="notification-options"
+               Label="Notifications"
+               HelperText="Choose any options"
+               Direction="CheckboxGroupDirection.Row">
+    <Checkbox Id="email-notifications" Label="Email" Value="email" />
+    <Checkbox Id="sms-notifications" Label="SMS" Value="sms" />
+    <Checkbox Id="push-notifications" Label="Push" Value="push" />
+</CheckboxGroup>
+```
+
 ## Message bar
 
 ```razor
