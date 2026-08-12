@@ -1053,6 +1053,20 @@ private void DrawerButtonClicked()
 <LinkButton Url="https://ix.siemens.io/">Siemens IX</LinkButton>
 ```
 
+## Radio group
+
+```razor
+<RadioGroup Id="storage-options"
+            Label="Storage options"
+            Direction="RadioGroupDirection.Row"
+            Value="512"
+            ValueChangeEvent="OnStorageChanged">
+    <Radio Label="256GB SSD storage" Value="256" Name="storage" />
+    <Radio Label="512GB SSD storage" Value="512" Name="storage" />
+    <Radio Label="1TB SSD storage" Value="1024" Name="storage" />
+</RadioGroup>
+```
+
 ## Message bar
 
 ```razor
