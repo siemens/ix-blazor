@@ -9,6 +9,8 @@
 *@
 
 @namespace SiemensIXBlazor.Components
+@using SiemensIXBlazor.Enums.KeyValue
+@using SiemensIXBlazor.Helpers
 @inherits IXBaseComponent
 <ix-key-value @attributes="UserAttributes"
               class="@Class"
@@ -17,7 +19,11 @@
               value="@Value"
               icon="@Icon"
               aria-label-icon="@AriaLabelIcon"
-              label-position="@LabelPosition">
-    @ChildContent
+              label-position="@(EnumParser<KeyValueLabelPosition>.EnumToString(LabelPosition))">
+    @if (Value is null && CustomValue is not null)
+    {
+        <div slot="custom-value">
+            @CustomValue
+        </div>
+    }
 </ix-key-value>
-
