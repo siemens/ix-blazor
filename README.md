@@ -1297,14 +1297,23 @@ await toast.ShowToast(configWithAction);
 ## Toggle Buttons
 
 ```razor
-<ToggleButton>Normal</ToggleButton>
-<ToggleButton Id="toggle-btn-1" Pressed="true">Pressed</ToggleButton>
+<ToggleButton Id="toggle-btn-1" Variant="ToggleButtonVariant.subtle_secondary">
+    Normal
+</ToggleButton>
+<ToggleButton Id="toggle-btn-2" Pressed="true" Icon="star">
+    Pressed
+</ToggleButton>
 
-<IconToggleButton Outline="true" Icon="checkboxes"></IconToggleButton>
+<IconToggleButton Icon="checkboxes"
+                   Variant="ButtonVariant.subtle_secondary"
+                   Size="IconButtonSize._16"
+                   Pressed="true"
+                   aria-label="Toggle checkboxes">
+</IconToggleButton>
 <IconToggleButton
     Outline="true"
     Icon="checkboxes"
-    Pressed="true"
+    aria-label="Toggle checkboxes outline"
 ></IconToggleButton>
 ```
 
