@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // SPDX-FileCopyrightText: 2024 Siemens AG
 //
 // SPDX-License-Identifier: MIT
@@ -14,121 +14,141 @@ using SiemensIXBlazor.Interops;
 using SiemensIXBlazor.Objects;
 using System.Text.Json;
 
-namespace SiemensIXBlazor.Components.Tree
+namespace SiemensIXBlazor.Components.Tree;
+
+public partial class Tree
 {
-    public partial class Tree
+    private Lazy<Task<IJSObjectReference>>? _moduleTask;
+    private BaseInterop? _interop;
+    private string? _lastModel;
+    private string? _lastContext;
+    private bool? _lastToggleOnItemClick;
+
+    [Parameter, EditorRequired]
+    public string Id { get; set; } = string.Empty;
+
+    [Parameter]
+    public Dictionary<string, TreeNode> Model { get; set; } = new();
+
+    [Parameter]
+    public Dictionary<string, TreeContextNode> Context { get; set; } = new();
+
+    [Parameter]
+    public string Root { get; set; } = "root";
+
+    [Parameter]
+    public bool ToggleOnItemClick { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback<Dictionary<string, TreeContextNode>> ContextChangedEvent { get; set; }
+
+    [Parameter]
+    public EventCallback NodeRemovedEvent { get; set; }
+
+    [Parameter]
+    public EventCallback<string> NodeClickedEvent { get; set; }
+
+    [Parameter]
+    public EventCallback<TreeNodeToggledEventResult> NodeToggledEvent { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        private Dictionary<string, TreeNode>? _treeModel;
-        private Dictionary<string, TreeContextNode>? _treeContext;
-        private Lazy<Task<IJSObjectReference>>? moduleTask;
-        private BaseInterop? _interop;
-
-        [Parameter, EditorRequired]
-        public string Id { get; set; } = string.Empty;
-        public Dictionary<string, TreeNode>? TreeModel 
+        if (firstRender)
         {
-            get => _treeModel;
-            set
-            {
-                _treeModel = value;
-                InitialParameter("setTreeModel", _treeModel);
-            } 
-        }
-        public Dictionary<string, TreeContextNode>? TreeContext 
-        {
-            get => _treeContext;
-            set
-            {
-                _treeContext = value;
-                InitialParameter("setTreeContext", _treeContext);
-            }
-        }
-        [Parameter]
-        public string? Root { get; set; }
-        [Parameter]
-        public EventCallback<Dictionary<string, TreeContextNode>> ContextChangedEvent { get; set; }
-        [Parameter]
-        public EventCallback NodeRemovedEvent { get; set; }
-        [Parameter]
-        public EventCallback<string> NodeClickedEvent { get; set; }
-        [Parameter]
-        public EventCallback<TreeNodeToggledEventResult> NodeToggledEvent { get; set; }
+            _interop = new(JSRuntime);
 
-        protected override void OnAfterRender(bool firstRender)
-        {
-            if (firstRender)
-            {
-                _interop = new(JSRuntime);
-
-                Task.Run(async () =>
-                {
-                    await _interop.AddEventListener(this, Id, "contextChange", "ContextChanged");
-                    await _interop.AddEventListener(this, Id, "nodeRemoved", "NodeRemoved");
-                    await _interop.AddEventListener(this, Id, "nodeClicked", "NodeClicked");
-                    await _interop.AddEventListener(this, Id, "nodeToggled", "NodeToggled");
-                });
-            }
+            await _interop.AddEventListener(this, Id, "contextChange", nameof(ContextChanged));
+            await _interop.AddEventListener(this, Id, "nodeRemoved", nameof(NodeRemoved));
+            await _interop.AddEventListener(this, Id, "nodeClicked", nameof(NodeClicked));
+            await _interop.AddEventListener(this, Id, "nodeToggled", nameof(NodeToggled));
         }
 
-        private void InitialParameter(string functionName, object param)
+        await ApplyPropertiesAsync();
+    }
+
+    private async Task<IJSObjectReference> GetModuleAsync()
+    {
+        _moduleTask ??= new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
+            "import", "./_content/Siemens.IX.Blazor/js/siemens-ix/interops/treeInterop.js").AsTask());
+
+        return await _moduleTask.Value;
+    }
+
+    private async Task ApplyPropertiesAsync()
+    {
+        var module = await GetModuleAsync();
+        var model = JsonConvert.SerializeObject(Model ?? new Dictionary<string, TreeNode>());
+        var context = JsonConvert.SerializeObject(Context ?? new Dictionary<string, TreeContextNode>());
+
+        if (!string.Equals(_lastModel, model, StringComparison.Ordinal))
         {
-
-            moduleTask = new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
-                "import", $"./_content/Siemens.IX.Blazor/js/siemens-ix/interops/treeInterop.js").AsTask());
-
-            Task.Run(async () =>
-            {
-                var module = await moduleTask.Value;
-                if (module != null)
-                {
-                    var serObj = JsonConvert.SerializeObject(param);
-                    await module.InvokeVoidAsync(functionName, Id, JsonConvert.SerializeObject(param));
-                }
-            });
+            await module.InvokeVoidAsync("setTreeModel", Id, model);
+            _lastModel = model;
         }
 
-        [JSInvokable]
-        public async Task ContextChanged(JsonElement context)
+        if (!string.Equals(_lastContext, context, StringComparison.Ordinal))
         {
-            string jsonDataText = context.GetRawText();
-            Dictionary<string, TreeContextNode>? changedContext = JsonConvert.DeserializeObject<Dictionary<string, TreeContextNode>>(jsonDataText);
-            await ContextChangedEvent.InvokeAsync(changedContext);
+            await module.InvokeVoidAsync("setTreeContext", Id, context);
+            _lastContext = context;
         }
 
-        [JSInvokable]
-        public async Task NodeRemoved()
+        if (_lastToggleOnItemClick != ToggleOnItemClick)
         {
-            await NodeRemovedEvent.InvokeAsync();
+            await module.InvokeVoidAsync("setToggleOnItemClick", Id, ToggleOnItemClick);
+            _lastToggleOnItemClick = ToggleOnItemClick;
+        }
+    }
+
+    [JSInvokable]
+    public async Task ContextChanged(JsonElement context)
+    {
+        var changedContext = JsonConvert.DeserializeObject<Dictionary<string, TreeContextNode>>(context.GetRawText())
+            ?? new Dictionary<string, TreeContextNode>();
+        await ContextChangedEvent.InvokeAsync(changedContext);
+    }
+
+    [JSInvokable]
+    public async Task NodeRemoved()
+    {
+        await NodeRemovedEvent.InvokeAsync();
+    }
+
+    [JSInvokable]
+    public async Task NodeClicked(string nodeId)
+    {
+        await NodeClickedEvent.InvokeAsync(nodeId);
+    }
+
+    [JSInvokable]
+    public async Task NodeToggled(JsonElement toggledNode)
+    {
+        var result = JsonConvert.DeserializeObject<TreeNodeToggledEventResult>(toggledNode.GetRawText())
+            ?? new TreeNodeToggledEventResult();
+        await NodeToggledEvent.InvokeAsync(result);
+    }
+
+    public async Task MarkItemsAsDirty(params string[] itemIdentifiers)
+    {
+        if (itemIdentifiers == null || itemIdentifiers.Length == 0)
+        {
+            return;
         }
 
-        [JSInvokable]
-        public async Task NodeClicked(string label)
-        {
-            await NodeClickedEvent.InvokeAsync(label);
-        }
+        var module = await GetModuleAsync();
+        await module.InvokeVoidAsync("markItemsAsDirty", Id, itemIdentifiers);
+    }
 
-        [JSInvokable]
-        public async Task NodeToggled(JsonElement toggledNode)
-        {
-            string jsonDataText = toggledNode.GetRawText();
-            TreeNodeToggledEventResult result = JsonConvert.DeserializeObject<TreeNodeToggledEventResult>(jsonDataText);
-            await NodeToggledEvent.InvokeAsync(result);
-        }
+    public Task MarkItemAsDirty(params string[] itemIdentifiers)
+    {
+        return MarkItemsAsDirty(itemIdentifiers);
+    }
 
-        public async Task MarkItemAsDirty(params string[] itemIdentifiers)
-        {
-            if (_interop == null || itemIdentifiers == null || itemIdentifiers.Length == 0)
-                return;
-
-            moduleTask = new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
-                "import", $"./_content/Siemens.IX.Blazor/js/siemens-ix/interops/treeInterop.js").AsTask());
-
-            var module = await moduleTask.Value;
-            if (module != null)
-            {
-                await module.InvokeVoidAsync("markItemAsDirty", Id, itemIdentifiers);
-            }
-        }
-
+    public async Task RefreshTree(RefreshTreeOptions? options = null)
+    {
+        var module = await GetModuleAsync();
+        await module.InvokeVoidAsync("refreshTree", Id, options ?? new RefreshTreeOptions());
     }
 }

@@ -1341,11 +1341,17 @@ await toast.ShowToast(configWithAction);
 
 ```razor
 <div style="height: 8rem; width: 100%">
-    <Tree Id="tree-1" Root="root" ContextChangedEvent="TreeContextChangeEvent"
-    NodeClickedEvent="TreeNodeClicked"
-    NodeRemovedEvent="NodeRemoved"
-    NodeToggledEvent="TreeNodeToggled"
-    @ref="tree"></Tree>
+    <Tree Id="tree-1"
+          Root="root"
+          Model="@treeNodes"
+          Context="@treeContext"
+          ToggleOnItemClick="true"
+          ContextChangedEvent="TreeContextChangeEvent"
+          NodeClickedEvent="TreeNodeClicked"
+          NodeRemovedEvent="NodeRemoved"
+          NodeToggledEvent="TreeNodeToggled"
+          @ref="tree">
+    </Tree>
 </div>
 ```
 
@@ -1380,6 +1386,7 @@ treeNodes.Add("sample-child-1", new TreeNode()
         Name = "Sample Child 1",
         Icon = "star"
     },
+    Disabled = false,
     HasChildren = false,
     Children = new List<string>() {}
 });
@@ -1393,10 +1400,29 @@ treeNodes.Add("sample-child-2", new TreeNode()
         },
         HasChildren = false,
         Children = new List<string>() { }
-    });
+});
 
+Dictionary<string, TreeContextNode> treeContext = new()
+{
+    ["sample"] = new TreeContextNode { IsExpanded = true, IsSelected = false },
+    ["sample-child-1"] = new TreeContextNode { IsExpanded = false, IsSelected = true }
+};
 
-tree.TreeModel = treeNodes;
+// Update data through the component parameters, or call the public methods:
+await tree.MarkItemsAsDirty("sample-child-1");
+await tree.RefreshTree(new RefreshTreeOptions { Force = true });
+```
+
+Use `TreeItem` for a standalone official tree item, including custom content:
+
+```razor
+<TreeItem Text="Custom item"
+          HasChildren="true"
+          Context="@treeItemContext"
+          ToggleEvent="OnTreeItemToggle"
+          ItemClickEvent="OnTreeItemClick">
+    Custom content
+</TreeItem>
 ```
 
 ## Typography
