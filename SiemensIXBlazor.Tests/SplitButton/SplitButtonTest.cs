@@ -9,6 +9,7 @@
 
 using Bunit;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using SiemensIXBlazor.Enums.Button;
 
 namespace SiemensIXBlazor.Tests.SplitButton;
@@ -22,11 +23,10 @@ public class SplitButtonTests : TestContextBase
 		var cut = RenderComponent<Components.SplitButton>(
 			("Id", "testId"),
 			("Disabled", true),
-			("Ghost", true),
+			("DisableButton", true),
+			("DisableDropdownButton", true),
 			("Icon", "test-icon"),
 			("Label", "Test Label"),
-			("Outline", true),
-			("Placement", "bottom-start"),
 			("SplitIcon", "context-menu"),
 			("CloseBehavior", CloseBehavior.Both),
 			("Variant", ButtonVariant.primary)
@@ -34,7 +34,7 @@ public class SplitButtonTests : TestContextBase
 
 		// Assert
 		cut.MarkupMatches(
-			"<ix-split-button id=\"testId\" disabled ghost icon=\"test-icon\" label=\"Test Label\" outline placement=\"bottom-start\" split-icon=\"context-menu\" variant=\"primary\" close-behavior=\"both\"></ix-split-button>");
+			"<ix-split-button id=\"testId\" disabled disable-button disable-dropdown-button icon=\"test-icon\" label=\"Test Label\" split-icon=\"context-menu\" variant=\"primary\" close-behavior=\"both\"></ix-split-button>");
 	}
 
 	[Fact]
@@ -44,11 +44,11 @@ public class SplitButtonTests : TestContextBase
 		var buttonClicked = false;
 		var cut = RenderComponent<Components.SplitButton>(
 			("Id", "testId"),
-			("ButtonClickedEvent", EventCallback.Factory.Create(this, () => buttonClicked = true))
+			("ButtonClickedEvent", EventCallback.Factory.Create<MouseEventArgs>(this, _ => buttonClicked = true))
 		);
 
 		// Act
-		cut.Instance.ButtonClicked();
+		cut.Instance.ButtonClicked(new MouseEventArgs());
 
 		// Assert
 		Assert.True(buttonClicked);
