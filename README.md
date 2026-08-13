@@ -1266,32 +1266,36 @@ private async Task OnChangeTab(int index)
 ## Toast
 
 ```razor
-<Toast @ref="toast"></Toast>
+<ToastContainer @ref="toastContainer" Id="toast-container" Position="ToastPosition.TopRight" />
+
+<Toast Id="toast"
+       Type="ToastType.Success"
+       ToastTitle="Changes applied"
+       PreventAutoClose="true">
+    <ChildContent>Your settings were saved successfully.</ChildContent>
+    <ActionContent>
+        <ix-button variant="tertiary">Undo</ix-button>
+    </ActionContent>
+</Toast>
 ```
 
 ```csharp
-private Toast toast;
+private ToastContainer toastContainer = default!;
+private ToastResult? toastResult;
 
-ToastConfig config = new ToastConfig()
-{
-    Message = "Test message",
-    Position = ToastPosition.BottomRight,
-    Type = "info"
-};
-
-await toast.ShowToast(config);
-
-ToastConfig configWithAction = new ToastConfig()
+toastResult = await toastContainer.ShowToast(new ToastConfig
 {
     Title = "Changes applied",
-    Message = "<div>Your settings were saved successfully.</div>",
-    Action = "<ix-button variant=\"tertiary\" icon=\"undo\">Undo</ix-button>",
-    Type = "success",
-    AutoClose = true,
-    AutoCloseDelay = 5000
-};
+    Message = "Your settings were saved successfully.",
+    Type = ToastType.Success,
+    AutoClose = false
+});
 
-await toast.ShowToast(configWithAction);
+toastResult.OnClose += (_, _) => Console.WriteLine("Toast closed");
+
+await toastResult.PauseAsync();
+await toastResult.ResumeAsync();
+await toastResult.CloseAsync();
 ```
 
 ## Toggle Buttons
