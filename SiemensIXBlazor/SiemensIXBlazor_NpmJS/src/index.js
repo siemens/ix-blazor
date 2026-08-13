@@ -1,5 +1,14 @@
-﻿import { defineCustomElements } from "@siemens/ix/loader";
-import { toast, setToastPosition } from "@siemens/ix";
+// -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2026 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+//  -----------------------------------------------------------------------
+
+import { defineCustomElements } from "@siemens/ix/loader";
+import { toast, setToastPosition, showModalLoading } from "@siemens/ix";
 import "@siemens/ix-echarts";
 import { registerTheme } from "@siemens/ix-echarts";
 import * as echarts from "echarts";
@@ -18,33 +27,89 @@ window.siemensIXInterop = {
         await defineCustomElements();
     },
     modal: {
-        show(id) {
+        async show(id) {
             const el = document.getElementById(id);
             if (el) {
-                el.showModal();
+                await el.showModal();
             } else {
                 console.error(`[siemensIXInterop.modal.show] Element with id '${id}' not found.`);
             }
         },
-        hide(id) {
+        async close(id, reason) {
             const el = document.getElementById(id);
             if (el) {
-                el.hideModal();
+                await el.closeModal(reason);
             } else {
-                console.error(`[siemensIXInterop.modal.hide] Element with id '${id}' not found.`);
+                console.error(`[siemensIXInterop.modal.close] Element with id '${id}' not found.`);
             }
         },
-        toggle(id) {
+        async dismiss(id, reason) {
             const el = document.getElementById(id);
             if (el) {
-                if (el.hasAttribute('open')) {
-                    el.hideModal();
-                } else {
-                    el.showModal();
-                }
+                await el.dismissModal(reason);
             } else {
-                console.error(`[siemensIXInterop.modal.toggle] Element with id '${id}' not found.`);
+                console.error(`[siemensIXInterop.modal.dismiss] Element with id '${id}' not found.`);
             }
+        },
+        attach(id, dotnetReference) {
+            const el = document.getElementById(id);
+            if (!el) {
+                throw new Error(`Element with id '${id}' not found`);
+            }
+
+            this.detach(id);
+
+            const beforeDismiss = (reason) =>
+                dotnetReference.invokeMethodAsync('BeforeDismiss', reason);
+            const dialogClose = (event) =>
+                dotnetReference.invokeMethodAsync('DialogClose', event.detail);
+            const dialogDismiss = (event) =>
+                dotnetReference.invokeMethodAsync('DialogDismiss', event.detail);
+
+            el.beforeDismiss = beforeDismiss;
+            el.addEventListener('dialogClose', dialogClose);
+            el.addEventListener('dialogDismiss', dialogDismiss);
+            el.__siemensIxModalListeners = { beforeDismiss, dialogClose, dialogDismiss, dotnetReference };
+        },
+        detach(id) {
+            const el = document.getElementById(id);
+            const listeners = el?.__siemensIxModalListeners;
+            if (!el || !listeners) {
+                return;
+            }
+
+            el.removeEventListener('dialogClose', listeners.dialogClose);
+            el.removeEventListener('dialogDismiss', listeners.dialogDismiss);
+            el.beforeDismiss = undefined;
+            delete el.__siemensIxModalListeners;
+        },
+        showLoading(options) {
+            return showModalLoading(options);
+        },
+    },
+
+    modalHeader: {
+        attach(id, dotnetReference) {
+            const el = document.getElementById(id);
+            if (!el) {
+                throw new Error(`Element with id '${id}' not found`);
+            }
+
+            this.detach(id);
+            const closeClick = (event) =>
+                dotnetReference.invokeMethodAsync('CloseClick', event.detail);
+            el.addEventListener('closeClick', closeClick);
+            el.__siemensIxModalHeaderListeners = { closeClick };
+        },
+        detach(id) {
+            const el = document.getElementById(id);
+            const listeners = el?.__siemensIxModalHeaderListeners;
+            if (!el || !listeners) {
+                return;
+            }
+
+            el.removeEventListener('closeClick', listeners.closeClick);
+            delete el.__siemensIxModalHeaderListeners;
         },
     },
 
