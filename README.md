@@ -1037,14 +1037,27 @@ private void DrawerButtonClicked()
 ```razor
 <LayoutGrid>
   <Row>
-    <Col><ix-typography format="display">1</ix-typography></Col>
-    <Col><ix-typography format="display">2</ix-typography></Col>
-    <Col><ix-typography format="display">3</ix-typography></Col>
-    <Col><ix-typography format="display">4</ix-typography></Col>
-    <Col><ix-typography format="display">5</ix-typography></Col>
-    <Col><ix-typography format="display">6</ix-typography></Col>
+    <Col Size="ColumnSize._6">First column</Col>
+    <Col Size="ColumnSize._6">Second column</Col>
   </Row>
 </LayoutGrid>
+```
+
+## Layout Auto
+
+```razor
+<LayoutAuto Id="layout-auto-example" Layout="@Layout">
+  <Input Label="First name" />
+  <Input Label="Last name" />
+</LayoutAuto>
+
+@code {
+  private LayoutAutoItem[] Layout =
+  [
+    new() { MinWidth = "0", Columns = 1 },
+    new() { MinWidth = "48em", Columns = 2 }
+  ];
+}
 ```
 
 ## Link Button

@@ -1,5 +1,5 @@
-﻿@* -----------------------------------------------------------------------
-// SPDX-FileCopyrightText: 2024 Siemens AG
+@* -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2026 Siemens AG
 //
 // SPDX-License-Identifier: MIT
 //
@@ -8,13 +8,14 @@
 //  -----------------------------------------------------------------------
 *@
 
-@using SiemensIXBlazor.Enums.LayoutGrid
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+@implements IAsyncDisposable
 @inherits IXBaseComponent
-<ix-layout-grid @attributes="UserAttributes"
+
+<ix-layout-auto @attributes="UserAttributes"
                 class="@Class"
                 style="@Style"
-                columns="@Columns"
-                gap="@Gap.ToAttributeValue()"
-                no-margin="@NoMargin">
+                id="@Id">
     @ChildContent
-</ix-layout-grid>
+</ix-layout-auto>
