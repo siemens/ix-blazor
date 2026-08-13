@@ -140,6 +140,10 @@ public partial class Index
 - [Group](#group)
 - [HTML Table](#html-table)
 - [Input](#input)
+- [Number Input](#number-input)
+- [Custom Field](#custom-field)
+- [Field Label](#field-label)
+- [Helper Text](#helper-text)
 - [Key Value List](#key-value-list) **(since v0.3.3)**
 - [Key Value](#key-value) **(since v0.3.3)**
 - [KPI](#kpi)
@@ -979,14 +983,67 @@ private void DrawerButtonClicked()
 ## Input
 
 ```razor
-<form class="needs-validation m-2">
-  <input
-    class="form-control"
-    defaultValue="Some example text"
-    placeholder="Enter text here"
-    type="text"
-  />
-</form>
+<Input Id="input-example"
+       Type="InputType.Email"
+       Label="Email"
+       Placeholder="name@example.com"
+       TextAlignment="TextAlignment.Start"
+       SuppressSubmitOnEnter="true"
+       ValueChangeEvent="OnInputValueChanged"
+       IxChangeEvent="OnInputChanged" />
+```
+
+## Number Input
+
+```razor
+<NumberInput Id="number-input-example"
+             Label="Quantity"
+             Value="10"
+             Min="0"
+             Max="100"
+             Step="1"
+             AllowEmptyValueChange="true"
+             ValueChangeEvent="OnNumberChanged"
+             IxChangeEvent="OnNumberCommitted" />
+```
+
+## Text Area
+
+```razor
+<TextArea Id="text-area-example"
+          Label="Description"
+          TextareaRows="4"
+          ResizeBehavior="TextAreaResizeBehavior.Vertical"
+          ValueChangeEvent="OnTextChanged"
+          IxChangeEvent="OnTextCommitted" />
+```
+
+## Custom Field
+
+```razor
+<CustomField Id="custom-field-example"
+             Label="Custom control"
+             HelperText="Choose an option">
+  <select aria-label="Custom control">
+    <option>Option one</option>
+  </select>
+</CustomField>
+```
+
+## Field Label
+
+```razor
+<FieldLabel HtmlFor="custom-control" Required="true">
+  Custom control
+</FieldLabel>
+```
+
+## Helper Text
+
+```razor
+<HelperText HtmlFor="custom-control"
+            HelperText="Choose an option"
+            InvalidText="This value is required" />
 ```
 
 ## Key Value List
