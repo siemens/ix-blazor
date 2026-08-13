@@ -8,21 +8,24 @@
 //  -----------------------------------------------------------------------
 *@
 
-@using Microsoft.JSInterop;
 @namespace SiemensIXBlazor.Components
-@inject IJSRuntime JSRuntime
 @inherits IXBaseComponent
 
 <ix-dropdown
 @attributes="UserAttributes"
 id="@Id" 
-trigger="@Trigger"
-anchor="@Anchor"
-close-behavior="@CloseBehavior"
+trigger="@(Trigger as string)"
+anchor="@(Anchor as string)"
+close-behavior="@(CloseBehavior is bool ? null : CloseBehaviorAttribute)"
 header="@Header"
 placement="@Placement"
 positioning-strategy="@PositioningStrategy"
 suppress-automatic-placement="@SuppressAutomaticPlacement"
+ suppress-trigger-visibility-check="@SuppressTriggerVisibilityCheck"
+ disable-focus-handling="@DisableFocusHandling"
+ disable-focus-trap="@DisableFocusTrap"
+ enable-top-layer="@EnableTopLayer"
+ focus-checked-item="@FocusCheckedItem"
 show="@Show"
 style="@Style"
 class="@Class">

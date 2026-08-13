@@ -854,9 +854,9 @@ private void DrawerButtonClicked()
 
 ```razor
 <DropdownButton Label="Dropdown" Variant="Primary" Icon="checkboxes">
-    <DropdownItem Label="Item 1" Value="1"></DropdownItem>
-    <DropdownItem Label="Item 2" Value="2"></DropdownItem>
-    <DropdownItem Label="Item 3" Value="3"></DropdownItem>
+    <DropdownItem Label="Item 1" Checked="true"></DropdownItem>
+    <DropdownItem Label="Item 2"></DropdownItem>
+    <DropdownItem Label="Item 3" Disabled="true"></DropdownItem>
 </DropdownButton>
 ```
 
@@ -864,22 +864,29 @@ private void DrawerButtonClicked()
 
 ```razor
 <Button Id="triggerId">Open</Button>
-<Dropdown Trigger="triggerId">
-  <DropdownItem Label="Item 1"></DropdownItem>
+<Dropdown Trigger="@TriggerId">
+  <DropdownItem Label="Item 1" Icon="save-all"></DropdownItem>
   <DropdownItem Label="Item 2"></DropdownItem>
   <DropdownItem Label="Item 3"></DropdownItem>
 </Dropdown>
+
+@code {
+    private object TriggerId { get; } = "triggerId";
+}
 ```
 
 ## Dropdown Header
 
 ```razor
 <Button Id="triggerId">Open</Button>
-<Dropdown Trigger="triggerId">
+<Dropdown Trigger="@TriggerId">
   <DropdownHeader Label="Category"></DropdownHeader>
   <DropdownItem Label="Item 1"></DropdownItem>
   <DropdownItem Label="Item 2"></DropdownItem>
   <DropdownItem Label="Item 3"></DropdownItem>
+  <DropdownQuickActions>
+    <IconButton Icon="save-all" A11yLabel="Save"></IconButton>
+  </DropdownQuickActions>
 </Dropdown>
 ```
 
