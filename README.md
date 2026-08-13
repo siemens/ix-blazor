@@ -1203,36 +1203,33 @@ AddItemEvent="SelectItemAdded" Mode="SelectMode.Single" SelectedIndices="2" Id="
 ## Tabs
 
 ```razor
-<Tabs Id="TabsId"  Selected=@_SelectedTab   SelectedChangeEvent=@OnChangeTab >
-    <TabItem Id="Tab1" Selected="@(_SelectedTab == 0)" TabTitle="Tab 1" >Tab 1
-    </TabItem>
-    <TabItem Id="Tab2" Selected="@(_SelectedTab == 1)" TabTitle="Tab 2"> Tab 2
-    </TabItem>
-    <TabItem Id="Tab3" Selected="@(_SelectedTab == 2)" TabTitle="Tab 3"> Tab 3
-    </TabItem>
+<Tabs Id="TabsId" ActiveTabKey="@_activeTabKey" TabChangeEvent="@OnTabChange">
+    <TabItem TabKey="overview" Label="Overview" />
+    <TabItem TabKey="details" Label="Details" Counter="2" />
+    <TabItem TabKey="history" Label="History" Closable="true" />
 </Tabs>
-@if (_SelectedTab == 0)
+@if (_activeTabKey == "overview")
 {
-  <h5>Content of Tab 1</h5>
+  <h5>Content of the overview tab</h5>
 }
-else if (_SelectedTab == 1)
+else if (_activeTabKey == "details")
 {
-  <h5>Content of Tab 2</h5>
+  <h5>Content of the details tab</h5>
 }
-else if (_SelectedTab == 2)
+else if (_activeTabKey == "history")
 {
-  <h5>Content of Tab 3</h5>
+  <h5>Content of the history tab</h5>
 }
 ```
 
 ```csharp
- private int _SelectedTab = 0;
+private string? _activeTabKey = "overview";
 
-private async Task OnChangeTab(int index)
+private Task OnTabChange(string? tabKey)
 {
-    _SelectedTab = index;
+    _activeTabKey = tabKey;
+    return Task.CompletedTask;
 }
-
 ```
 
 ## Text area
