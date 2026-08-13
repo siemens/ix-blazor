@@ -1,0 +1,24 @@
+@* -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2026 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+// -----------------------------------------------------------------------
+*@
+
+@namespace SiemensIXBlazor.Components
+@using SiemensIXBlazor.Enums.CardAccordion
+@using SiemensIXBlazor.Helpers
+@inherits IXBaseComponent
+
+<ix-card-accordion @attributes="UserAttributes"
+                   class="@Class"
+                   style="@Style"
+                   slot="card-accordion"
+                   aria-label-expand-button="@AriaLabelExpandButton"
+                   collapse="@Collapse"
+                   variant="@(EnumParser<CardAccordionVariant>.EnumToString(Variant))">
+    @ChildContent
+</ix-card-accordion>

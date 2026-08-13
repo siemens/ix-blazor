@@ -514,15 +514,17 @@ Test content
 ## Card
 
 ```razor
-<Card Variant="CardVariant.info">
-    <ix-icon name="capacity"></ix-icon>
-    <ix-typography bold>Number of components</ix-typography>
-    <ix-typography>
-        Item 1<br />
-        Item 2<br />
-        Item 3
-    </ix-typography>
-    <ix-typography format="h1">3</ix-typography>
+<Card Variant="CardVariant.info" Selected="true">
+    <CardTitle>
+        <ChildContent>Components</ChildContent>
+        <TitleActions>
+            <span>Details</span>
+        </TitleActions>
+    </CardTitle>
+    <p>Card content is rendered in the default slot.</p>
+    <CardAccordion Variant="CardAccordionVariant.info">
+        <p>Expandable card content.</p>
+    </CardAccordion>
 </Card>
 ```
 
@@ -553,10 +555,14 @@ ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowM
 
 ```razor
 <PushCard Icon="rocket"
+        AriaLabelIcon="Status"
         Notification="3"
         Heading="Heading content"
         SubHeading="Subheading"
-        Variant="PushCardVariant.outline"></PushCard>
+        Variant="PushCardVariant.outline">
+    <TitleAction>Action</TitleAction>
+    <ChildContent><p>Expandable content.</p></ChildContent>
+</PushCard>
 ```
 
 ## Action Card
@@ -566,8 +572,9 @@ ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowM
       Icon="refresh"
       Heading="Scan for new devices"
       SubHeading="Secondary text"
-      Variant="PushCardVariant.filled"
-></ActionCard>
+      Variant="ActionCardVariant.filled">
+    <span>Additional non-interactive content</span>
+</ActionCard>
 ```
 
 ## Icon Button

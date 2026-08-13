@@ -9,7 +9,7 @@
 
 using Bunit;
 using SiemensIXBlazor.Components;
-using SiemensIXBlazor.Enums.PushCard;
+using SiemensIXBlazor.Enums.ActionCard;
 
 namespace SiemensIXBlazor.Tests 
 {
@@ -63,16 +63,17 @@ namespace SiemensIXBlazor.Tests
 
             // Assert
             Assert.True(cut.Instance.Selected);
+            Assert.Contains("selected", cut.Markup);
         }
 
         [Fact]
         public void VariantPropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<ActionCard>(parameters => parameters.Add(p => p.Variant, PushCardVariant.outline));
+            var cut = RenderComponent<ActionCard>(parameters => parameters.Add(p => p.Variant, ActionCardVariant.outline));
 
             // Assert
-            Assert.Equal(PushCardVariant.outline, cut.Instance.Variant);
+            Assert.Equal(ActionCardVariant.outline, cut.Instance.Variant);
         }
 
         [Fact]
@@ -96,6 +97,15 @@ namespace SiemensIXBlazor.Tests
             // Assert
             Assert.True(cut.Instance.Passive);
             Assert.Contains("passive", cut.Markup);
+        }
+
+        [Fact]
+        public void RendersDefaultContent()
+        {
+            var cut = RenderComponent<ActionCard>(parameters => parameters
+                .Add(p => p.ChildContent, builder => builder.AddContent(0, "Additional content")));
+
+            Assert.Contains("Additional content", cut.Markup);
         }
     }
 }
