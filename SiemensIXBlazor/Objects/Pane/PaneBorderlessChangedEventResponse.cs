@@ -14,8 +14,8 @@ namespace SiemensIXBlazor.Objects.Pane
     public  class PaneBorderlessChangedEventResponse
     {
         [JsonPropertyName("slot")]
-        public string Slot { get; set; }
+        public string Slot { get; set; } = string.Empty;
         [JsonPropertyName("borderless")]
-        public string Borderless { get; set; }
+        public bool Borderless { get; set; }
     }
 }

@@ -9,12 +9,15 @@
 
 using System;
 using Microsoft.AspNetCore.Components;
-using SiemensIXBlazor.Enums.PushCard;
+using SiemensIXBlazor.Enums.ActionCard;
 
 namespace SiemensIXBlazor.Components
 {
 	public partial class ActionCard
 	{
+        [Parameter]
+        public RenderFragment? ChildContent { get; set; }
+
         [Parameter]
         public string? AriaLabelCard { get; set; }
 
@@ -49,7 +52,6 @@ namespace SiemensIXBlazor.Components
         /// Card variant
         /// </summary>
         [Parameter]
-        public PushCardVariant Variant { get; set; } = PushCardVariant.outline;
+        public ActionCardVariant Variant { get; set; } = ActionCardVariant.outline;
     }
 }
-

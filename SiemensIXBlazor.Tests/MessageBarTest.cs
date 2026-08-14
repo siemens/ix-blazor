@@ -56,4 +56,21 @@ public class MessageBarTests : TestContextBase
         // Assert
         Assert.True(closed);
     }
+
+    [Fact]
+    public void CloseAnimationCompletedEventWorks()
+    {
+        // Arrange
+        var animationCompleted = false;
+        var cut = RenderComponent<MessageBar>(
+            ("Id", "messageBar"),
+            ("CloseAnimationCompletedEvent", EventCallback.Factory.Create(this, () => animationCompleted = true))
+        );
+
+        // Act
+        cut.Instance.CloseAnimationCompleted();
+
+        // Assert
+        Assert.True(animationCompleted);
+    }
 }

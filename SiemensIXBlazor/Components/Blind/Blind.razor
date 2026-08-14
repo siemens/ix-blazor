@@ -18,5 +18,17 @@
 
 <ix-blind @attributes="UserAttributes" class="@Class" style="@Style" id="@Id" label="@Label" sublabel="@SubLabel"
   collapsed="@Collapsed" icon="@Icon" variant="@(EnumParser<BlindVariant>.EnumToString(Variant))">
+  @if (CustomHeader != null)
+  {
+      <div slot="custom-header">
+          @CustomHeader
+      </div>
+  }
+  @if (HeaderActions != null)
+  {
+      <div slot="header-actions">
+          @HeaderActions
+      </div>
+  }
   @ChildContent
 </ix-blind>

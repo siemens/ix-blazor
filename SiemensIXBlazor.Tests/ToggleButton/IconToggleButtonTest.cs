@@ -29,13 +29,13 @@ namespace SiemensIXBlazor.Tests.ToggleButton
                 ("Loading", true),
                 ("Outline", true),
                 ("Pressed", true),
-                ("Size", "24"),
-                ("Variant", ButtonVariant.secondary),
+                ("Size", IconButtonSize._16),
+                ("Variant", ButtonVariant.subtle_secondary),
                 ("Oval", true)
             );
 
             // Assert
-            cut.MarkupMatches("<ix-icon-toggle-button id=\"testId\" disabled ghost icon=\"test-icon\" loading outline pressed size=\"24\" variant=\"secondary\" oval></ix-icon-toggle-button>");
+            cut.MarkupMatches("<ix-icon-toggle-button id=\"testId\" disabled ghost icon=\"test-icon\" loading outline pressed size=\"16\" variant=\"subtle-secondary\" oval></ix-icon-toggle-button>");
         }
 
         [Fact]
@@ -49,7 +49,7 @@ namespace SiemensIXBlazor.Tests.ToggleButton
             );
 
             // Act
-            await cut.Instance.PressedChangeEvent.InvokeAsync(true);
+            await cut.Instance.PressedChange(true);
 
             // Assert
             Assert.True(pressedChanged);

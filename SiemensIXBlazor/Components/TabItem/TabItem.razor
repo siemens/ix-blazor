@@ -1,18 +1,18 @@
-<ix-tab-item id="@Id"
-             class="@GetCssClasses()"
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+@inherits IXBaseComponent
+
+<ix-tab-item id="@EffectiveId"
+             @attributes="UserAttributes"
+             class="@Class"
              style="@Style"
-             icon="@(string.IsNullOrEmpty(TabTitle) && !string.IsNullOrEmpty(Icon))"
+             tab-key="@TabKey"
              disabled="@Disabled"
              selected="@Selected"
+             icon="@Icon"
              counter="@Counter"
-             @attributes="UserAttributes">
-    @if (!string.IsNullOrEmpty(Icon))
-    {
-        <ix-icon name="@Icon"></ix-icon>
-    }
-    @if (!string.IsNullOrEmpty(TabTitle))
-    {
-        @TabTitle
-    }
+             closable="@Closable"
+             label="@Label"
+             aria-label-close-button="@AriaLabelCloseButton">
     @ChildContent
 </ix-tab-item>

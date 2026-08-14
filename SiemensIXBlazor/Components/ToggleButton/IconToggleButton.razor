@@ -11,6 +11,8 @@
 @namespace SiemensIXBlazor.Components
 @using SiemensIXBlazor.Enums.Button;
 @using SiemensIXBlazor.Helpers;
+@using Microsoft.JSInterop;
+@inject IJSRuntime JSRuntime
 @inherits IXBaseComponent
 <ix-icon-toggle-button @attributes="UserAttributes" 
                         class="@Class" 
@@ -19,11 +21,10 @@
                        disabled="@Disabled"
                        ghost="@Ghost"
                         icon="@Icon"
-                       aria-label-icon-button="@AriaLabelIconButton"
                        loading="@Loading"
                        outline="@Outline"
                         pressed="@Pressed" 
-                        size="@Size"
+                       size="@((int)Size)"
                        variant="@(EnumParser<ButtonVariant>.EnumToString(Variant, replaceUnderscores: true))"
                         oval="@Oval">
 </ix-icon-toggle-button>

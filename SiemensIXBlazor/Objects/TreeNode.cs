@@ -19,6 +19,8 @@ namespace SiemensIXBlazor.Objects
         public TreeData? Data { get; set; }
         [JsonProperty("hasChildren")]
         public bool HasChildren { get; set; }
+        [JsonProperty("disabled")]
+        public bool? Disabled { get; set; }
         [JsonProperty("children")]
         public List<string>? Children { get; set; }
     }

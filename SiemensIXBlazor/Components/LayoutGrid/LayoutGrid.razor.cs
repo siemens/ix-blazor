@@ -8,6 +8,7 @@
 //  -----------------------------------------------------------------------
 
 using Microsoft.AspNetCore.Components;
+using SiemensIXBlazor.Enums.LayoutGrid;
 
 namespace SiemensIXBlazor.Components.LayoutGrid
 {
@@ -18,7 +19,7 @@ namespace SiemensIXBlazor.Components.LayoutGrid
         [Parameter]
         public int Columns { get; set; } = 12;
         [Parameter]
-        public string Gap { get; set; } = "24";
+        public LayoutGridGap Gap { get; set; } = LayoutGridGap._24;
         [Parameter]
         public bool NoMargin { get; set; } = false;
     }

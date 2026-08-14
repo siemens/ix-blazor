@@ -18,11 +18,15 @@ style="@Style"
 class="@Class"
 aria-label-button="@AriaLabelButton"
 aria-label-icon="@AriaLabelIcon"
-label="@Label" 
+label="@Label"
 icon="@Icon"
 hover="@Hover"
 disabled="@Disabled"
 checked="@Checked"
 item-role="@(EnumParser<DropdownItemRole>.EnumToString(ItemRole))">
     @ChildContent
+    @if (EndContent is not null)
+    {
+        <div slot="end">@EndContent</div>
+    }
 </ix-dropdown-item>

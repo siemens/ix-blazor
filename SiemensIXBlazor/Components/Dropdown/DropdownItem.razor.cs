@@ -32,5 +32,7 @@ namespace SiemensIXBlazor.Components
         public DropdownItemRole ItemRole { get; set; } = DropdownItemRole.menuitem;
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
+        [Parameter]
+        public RenderFragment? EndContent { get; set; }
     }
 }

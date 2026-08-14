@@ -18,11 +18,31 @@
            style="@Style" 
            value="@Value"
            disabled="@Disabled"
-           error="@(ErrorAsString)"
+           helper-text="@HelperText"
+           label="@Label"
+           invalid-text="@InvalidText"
+           info-text="@InfoText"
+           warning-text="@WarningText"
+           valid-text="@ValidText"
+           show-text-as-tooltip="@ShowTextAsTooltip"
            max="@Max"
            min="@Min"
            step="@Step"
            trace="@Trace"
            trace-reference="@TraceReference">
+    @if (LabelStart is not null)
+    {
+        <div slot="label-start">
+            @LabelStart
+        </div>
+    }
+
+    @if (LabelEnd is not null)
+    {
+        <div slot="label-end">
+            @LabelEnd
+        </div>
+    }
+
     @ChildContent
 </ix-slider>

@@ -10,24 +10,58 @@
 using Bunit;
 using Microsoft.AspNetCore.Components;
 using SiemensIXBlazor.Components;
+using SiemensIXBlazor.Enums.KeyValue;
 
 namespace SiemensIXBlazor.Tests;
 
 public class KeyValueTest : TestContextBase
 {
     [Fact]
-    public void ComponentRendersWithParametersSetCorrectly()
+    public void ComponentRendersCustomValueThroughNamedSlot()
     {
         // Arrange
         var cut = RenderComponent<KeyValue>(parameters => parameters
-            .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content")))
+            .Add(p => p.CustomValue, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content")))
             .Add(p => p.Icon, "testIcon")
+            .Add(p => p.AriaLabelIcon, "Test icon")
             .Add(p => p.Label, "testLabel")
-            .Add(p => p.LabelPosition, "left")
+            .Add(p => p.LabelPosition, KeyValueLabelPosition.left));
+
+        // Assert
+        var element = cut.Find("ix-key-value");
+        Assert.Equal("testIcon", element.GetAttribute("icon"));
+        Assert.Equal("Test icon", element.GetAttribute("aria-label-icon"));
+        Assert.Equal("testLabel", element.GetAttribute("label"));
+        Assert.Equal("left", element.GetAttribute("label-position"));
+
+        var customValue = cut.Find("[slot=\"custom-value\"]");
+        Assert.Equal("Test content", customValue.TextContent);
+    }
+
+    [Fact]
+    public void ComponentUsesTextValueInsteadOfCustomValueSlotWhenValueIsSet()
+    {
+        // Arrange
+        var cut = RenderComponent<KeyValue>(parameters => parameters
+            .Add(p => p.CustomValue, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content")))
+            .Add(p => p.Label, "testLabel")
             .Add(p => p.Value, "testValue"));
 
         // Assert
-        cut.MarkupMatches(
-            "<ix-key-value label=\"testLabel\" value=\"testValue\" icon=\"testIcon\" label-position=\"left\">Test content</ix-key-value>");
+        var element = cut.Find("ix-key-value");
+        Assert.Equal("testValue", element.GetAttribute("value"));
+        Assert.Empty(cut.FindAll("[slot=\"custom-value\"]"));
+    }
+
+    [Fact]
+    public void ComponentUsesOfficialDefaultLabelPosition()
+    {
+        // Arrange
+        var cut = RenderComponent<KeyValue>(parameters => parameters
+            .Add(p => p.Label, "testLabel"));
+
+        // Assert
+        Assert.Equal(KeyValueLabelPosition.top, cut.Instance.LabelPosition);
+        Assert.Equal("top", cut.Find("ix-key-value").GetAttribute("label-position"));
     }
 }

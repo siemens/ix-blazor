@@ -14,6 +14,12 @@ namespace SiemensIXBlazor.Components
 {
     public partial class PushCard
     {
+        [Parameter]
+        public RenderFragment? ChildContent { get; set; }
+
+        [Parameter]
+        public RenderFragment? TitleAction { get; set; }
+
         /// <summary>
         /// Card heading
         /// </summary>
@@ -25,6 +31,11 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string? Icon { get; set; }
         /// <summary>
+        /// ARIA label for the icon
+        /// </summary>
+        [Parameter]
+        public string? AriaLabelIcon { get; set; }
+        /// <summary>
         /// Card KPI value
         /// </summary>
         [Parameter]
@@ -35,7 +46,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string? SubHeading { get; set; }
         [Parameter]
-        public bool Expanded { get; set; } = true;
+        public bool Expanded { get; set; } = false;
         /// <summary>
         /// If true, disables hover and active styles and changes cursor to default
         /// </summary>
@@ -48,4 +59,3 @@ namespace SiemensIXBlazor.Components
         public PushCardVariant Variant { get; set; } = PushCardVariant.outline;
     }
 }
-

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SiemensIXBlazor.Enums.CategoryFilter
 {
+    [System.Text.Json.Serialization.JsonConverter(typeof(LogicalFilterOperatorJsonConverter))]
     public enum LogicalFilterOperator
     {
         Equal,

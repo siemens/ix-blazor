@@ -35,4 +35,13 @@ public class DropdownItemTest : TestContextBase
         cut.MarkupMatches(
             "<ix-dropdown-item aria-label-button=\"button label\" aria-label-icon=\"icon label\" label=\"testLabel\" icon=\"testIcon\" hover disabled checked item-role=\"option\">Test content</ix-dropdown-item>");
     }
+
+    [Fact]
+    public void RendersEndContentSlot()
+    {
+        var cut = RenderComponent<DropdownItem>(parameters => parameters
+            .Add(p => p.EndContent, (RenderFragment)(builder => builder.AddContent(0, "End content"))));
+
+        cut.MarkupMatches("<ix-dropdown-item item-role=\"menuitem\"><div slot=\"end\">End content</div></ix-dropdown-item>");
+    }
 }

@@ -22,8 +22,6 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Clickable { get; set; } = false;
         [Parameter]
-        public bool Linear { get; set; } = false;
-        [Parameter]
         public int SelectedIndex { get; set; } = 0;
         [Parameter]
         public bool Vertical { get; set; } = false;

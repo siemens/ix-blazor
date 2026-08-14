@@ -10,7 +10,9 @@
 using Bunit;
 using Microsoft.AspNetCore.Components;
 using SiemensIXBlazor.Components.CategoryFilter;
+using SiemensIXBlazor.Enums.CategoryFilter;
 using SiemensIXBlazor.Objects;
+using System.Text.Json;
 
 namespace SiemensIXBlazor.Tests
 {
@@ -57,7 +59,7 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             var cut = RenderComponent<CategoryFilter>();
-            var mockFilterState = new FilterState { Categories = [new FilterStateCategory { Id = "testId", Operator = "testOperator", Value = "testValue" }] };
+            var mockFilterState = new FilterState { Categories = [new FilterStateCategory { Id = "testId", Operator = LogicalFilterOperator.NotEqual, Value = "testValue" }] };
 
             // Act
             cut.Instance.FilterState = mockFilterState;
@@ -95,31 +97,104 @@ namespace SiemensIXBlazor.Tests
         }
 
         [Fact]
-        public void FilterChangedEventTriggeredCorrectly()
+        public async Task FilterChangedEventReceivesTypedState()
         {
-            // Arrange
-            var eventTriggered = false;
-            var cut = RenderComponent<CategoryFilter>(parameters => parameters.Add(p => p.FilterChangedEvent, EventCallback.Factory.Create<FilterState>(this, () => eventTriggered = true)));
+            FilterState? received = null;
+            var cut = RenderComponent<CategoryFilter>(parameters => parameters
+                .Add(p => p.FilterChangedEvent, EventCallback.Factory.Create<FilterState>(this, state => received = state)));
 
-            // Act
-            cut.Instance.FilterChangedEvent.InvokeAsync();
+            var payload = JsonDocument.Parse("""
+                {"tokens":["test"],"categories":[{"id":"vendor","value":"Siemens","operator":"Equal"}]}
+                """).RootElement;
+            await cut.Instance.FilterChanged(payload);
 
-            // Assert
-            Assert.True(eventTriggered);
+            Assert.Equal("test", received!.Tokens[0]);
+            Assert.Equal(LogicalFilterOperator.Equal, received.Categories[0].Operator);
         }
 
         [Fact]
-        public void InputChangedEventTriggeredCorrectly()
+        public async Task InputChangedEventReceivesTypedState()
         {
-            // Arrange
-            var eventTriggered = false;
-            var cut = RenderComponent<CategoryFilter>(parameters => parameters.Add(p => p.InputChangedEvent, EventCallback.Factory.Create<dynamic>(this, () => eventTriggered = true)));
+            InputState? received = null;
+            var cut = RenderComponent<CategoryFilter>(parameters => parameters
+                .Add(p => p.InputChangedEvent, EventCallback.Factory.Create<InputState>(this, state => received = state)));
 
-            // Act
-            cut.Instance.InputChangedEvent.InvokeAsync();
+            var payload = JsonDocument.Parse("""{"token":"Sie","category":"vendor"}""").RootElement;
+            await cut.Instance.InputChanged(payload);
 
-            // Assert
-            Assert.True(eventTriggered);
+            Assert.Equal("Sie", received!.Token);
+            Assert.Equal("vendor", received.Category);
+            Assert.True(received.HasCategory());
+        }
+
+        [Fact]
+        public async Task CategoryChangedEventPassesCategoryAndSupportsClear()
+        {
+            string? category = "not-set";
+            var cleared = false;
+            var cut = RenderComponent<CategoryFilter>(parameters => parameters
+                .Add(p => p.CategoryChangedEvent, EventCallback.Factory.Create<string?>(this, value => category = value))
+                .Add(p => p.FilterClearedEvent, EventCallback.Factory.Create<FilterClearedEventArgs>(this, _ => cleared = true)));
+
+            await cut.Instance.CategoryChanged("category");
+            await cut.Instance.CategoryChanged(null);
+            var canceled = await cut.Instance.FilterCleared();
+
+            Assert.Null(category);
+            Assert.True(cleared);
+            Assert.False(canceled);
+        }
+
+        [Fact]
+        public async Task FilterClearedCanBeCanceled()
+        {
+            var cut = RenderComponent<CategoryFilter>(parameters => parameters
+                .Add(p => p.FilterClearedEvent, EventCallback.Factory.Create<FilterClearedEventArgs>(this, eventArgs => eventArgs.Cancel = true)));
+
+            Assert.True(await cut.Instance.FilterCleared());
+        }
+
+        [Fact]
+        public void FilterStateUsesOfficialOperatorStrings()
+        {
+            var state = new FilterState
+            {
+                Categories = [new() { Id = "vendor", Value = "Siemens", Operator = LogicalFilterOperator.NotEqual }]
+            };
+
+            var json = JsonSerializer.Serialize(state);
+            var deserialized = JsonSerializer.Deserialize<FilterState>(json);
+
+            Assert.Contains("\"operator\":\"Not equal\"", json);
+            Assert.Equal(LogicalFilterOperator.NotEqual, deserialized!.Categories[0].Operator);
+        }
+
+        [Fact]
+        public void RepeatedEquivalentStateDoesNotCauseRecursiveRendering()
+        {
+            var cut = RenderComponent<CategoryFilter>(parameters => parameters
+                .Add(p => p.Id, "category-filter"));
+
+            for (var index = 0; index < 100; index++)
+            {
+                cut.SetParametersAndRender(parameters => parameters
+                    .Add(p => p.Categories, new Dictionary<string, Category>
+                    {
+                        ["vendor"] = new() { Label = "Vendor", Options = ["Siemens"] }
+                    })
+                    .Add(p => p.FilterState, new FilterState
+                    {
+                        Tokens = ["test"],
+                        Categories = []
+                    })
+                    .Add(p => p.NonSelectableCategories, new Dictionary<string, string>
+                    {
+                        ["archived"] = "Archived"
+                    })
+                    .Add(p => p.Suggestions, ["test"]));
+            }
+
+            Assert.Equal("category-filter", cut.Instance.Id);
         }
 
         [Fact]
