@@ -508,9 +508,9 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 ```razor
 <Breadcrumb Id="breadcrumb-1"
             Class="editor-breadcrumb"
-            ItemClicked="(label) => ClickedOnBreadcrumb(label)">
-    <BreadcrumbItem Label="Item 1"></BreadcrumbItem>
-    <BreadcrumbItem Label="Item 2"></BreadcrumbItem>
+            ItemClicked="(item) => ClickedOnBreadcrumb(item)">
+    <BreadcrumbItem BreadcrumbKey="item-1" Label="Item 1"></BreadcrumbItem>
+    <BreadcrumbItem BreadcrumbKey="item-2" Label="Item 2"></BreadcrumbItem>
 </Breadcrumb>
 ```
 
