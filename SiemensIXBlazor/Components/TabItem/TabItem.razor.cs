@@ -8,73 +8,64 @@
 //  -----------------------------------------------------------------------
 
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+using SiemensIXBlazor.Interops;
+using SiemensIXBlazor.Objects.Tabs;
+using System.Text.Json;
 
 namespace SiemensIXBlazor.Components.TabItem
 {
     /// <summary>
     /// Siemens IX Tab Item component for individual tab content
     /// </summary>
-    public partial class TabItem : ComponentBase
+    public partial class TabItem : IXBaseComponent
     {
-        /// <summary>
-        /// Unique identifier for the component
-        /// </summary>
-        [Parameter] public string Id { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Additional CSS classes to apply to the component
-        /// </summary>
-        [Parameter] public string Class { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Inline styles to apply to the component
-        /// </summary>
-        [Parameter] public string Style { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Tab item label text
-        /// </summary>
-        [Parameter] public string? TabTitle { get; set; }
-
-        /// <summary>
-        /// Icon to display in the tab header
-        /// </summary>
+        [Parameter] public string? Id { get; set; }
+        [Parameter, EditorRequired] public string TabKey { get; set; } = string.Empty;
         [Parameter] public string? Icon { get; set; }
-
-        /// <summary>
-        /// Whether the tab is disabled
-        /// </summary>
         [Parameter] public bool Disabled { get; set; } = false;
-
-        /// <summary>
-        /// Whether the tab is selected/active
-        /// </summary>
         [Parameter] public bool Selected { get; set; } = false;
-
-        /// <summary>
-        /// Counter value to display in the tab
-        /// </summary>
         [Parameter] public int? Counter { get; set; }
-
-        /// <summary>
-        /// Additional attributes to apply to the component
-        /// </summary>
-        [Parameter(CaptureUnmatchedValues = true)]
-        public IDictionary<string, object>? UserAttributes { get; set; }
-
-        /// <summary>
-        /// Child content to render inside the tab item
-        /// </summary>
+        [Parameter] public bool Closable { get; set; } = false;
+        [Parameter] public string? Label { get; set; }
+        [Parameter] public string AriaLabelCloseButton { get; set; } = "Close tab";
         [Parameter] public RenderFragment? ChildContent { get; set; }
 
-        private string GetCssClasses()
-        {
-            var classes = new List<string>();
-            
-            if (!string.IsNullOrEmpty(Class))
-                classes.Add(Class);
+        [Parameter] public EventCallback<TabClickDetail> TabClickEvent { get; set; }
+        [Parameter] public EventCallback<TabClickDetail> TabCloseEvent { get; set; }
 
-            return string.Join(" ", classes);
+        private readonly string _generatedId = $"tab-item-{Guid.NewGuid():N}";
+        private BaseInterop? _interop;
+
+        private string EffectiveId => string.IsNullOrWhiteSpace(Id) ? _generatedId : Id;
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                _interop = new(JSRuntime);
+
+                await _interop.AddEventListener(this, EffectiveId, "tabClick", "TabClicked");
+                await _interop.AddEventListener(this, EffectiveId, "tabClose", "TabClosed");
+            }
+        }
+
+        [JSInvokable]
+        public async Task TabClicked(JsonElement data)
+        {
+            await TabClickEvent.InvokeAsync(DeserializeDetail(data));
+        }
+
+        [JSInvokable]
+        public async Task TabClosed(JsonElement data)
+        {
+            await TabCloseEvent.InvokeAsync(DeserializeDetail(data));
+        }
+
+        private static TabClickDetail DeserializeDetail(JsonElement data)
+        {
+            return JsonSerializer.Deserialize<TabClickDetail>(data.GetRawText())
+                ?? new TabClickDetail();
         }
     }
 }

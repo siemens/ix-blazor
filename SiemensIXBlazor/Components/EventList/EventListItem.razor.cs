@@ -21,15 +21,13 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter]
-        public bool? Chevron { get; set; }
+        public bool Chevron { get; set; } = false;
         [Parameter]
         public string? ItemColor { get; set; }
         [Parameter]
-        public bool? Disabled { get; set; }
+        public bool Disabled { get; set; } = false;
         [Parameter]
-        public int Opacity { get; set; } = 1;
-        [Parameter]
-        public bool? Selected { get; set; }
+        public bool Selected { get; set; } = false;
         [Parameter]
         public EventListVariant Variant { get; set; } = EventListVariant.outline;
 

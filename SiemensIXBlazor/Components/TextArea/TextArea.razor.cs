@@ -1,6 +1,17 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿// -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2026 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+//  -----------------------------------------------------------------------
+
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using SiemensIXBlazor.Enums.TextArea;
 using SiemensIXBlazor.Interops;
+using SiemensIXBlazor.Objects;
 using System.Text.Json;
 
 namespace SiemensIXBlazor.Components.TextArea
@@ -52,9 +63,6 @@ namespace SiemensIXBlazor.Components.TextArea
         public string? WarningText { get; set; }
 
         [Parameter]
-        public string? CssClass { get; set; }
-
-        [Parameter]
         public int? MaxLength { get; set; }
 
         [Parameter]
@@ -73,16 +81,25 @@ namespace SiemensIXBlazor.Components.TextArea
         public string? TextareaWidth { get; set; }
 
         [Parameter]
-        public string ResizeBehavior { get; set; } = "both";
+        public TextAreaResizeBehavior ResizeBehavior { get; set; } = TextAreaResizeBehavior.Both;
 
         [Parameter]
         public EventCallback IxBlurEvent { get; set; }
 
         [Parameter]
-        public EventCallback<JsonElement> ValidityStateChangeEvent { get; set; }
+        public EventCallback<ValidityState> ValidityStateChangeEvent { get; set; }
 
         [Parameter]
         public EventCallback<string> ValueChangeEvent { get; set; }
+
+        [Parameter]
+        public EventCallback<string> IxChangeEvent { get; set; }
+
+        public async Task FocusInputAsync()
+        {
+            _interop ??= new(JSRuntime);
+            await _interop.InvokeVoidMethod(Id, "focusInput");
+        }
 
         protected override void OnAfterRender(bool firstRender)
         {
@@ -93,6 +110,7 @@ namespace SiemensIXBlazor.Components.TextArea
                 Task.Run(async () =>
                 {
                     await _interop.AddEventListener(this, Id, "valueChange", "ValueChange");
+                    await _interop.AddEventListener(this, Id, "ixChange", "IxChange");
                     await _interop.AddEventListener(this, Id, "ixBlur", "IxBlur");
                     await _interop.AddEventListener(this, Id, "validityStateChange", "ValidityStateChange");
                 });
@@ -100,24 +118,30 @@ namespace SiemensIXBlazor.Components.TextArea
         }
 
         [JSInvokable]
-        public async void ValueChange(JsonElement valueState)
+        public async Task ValueChange(JsonElement valueState)
         {
             string newValue = valueState.GetString() ?? "";
             Value = newValue;
             await ValueChangeEvent.InvokeAsync(newValue);
-            StateHasChanged();
+            await InvokeAsync(StateHasChanged);
         }
 
         [JSInvokable]
-        public async void IxBlur()
+        public async Task IxBlur()
         {
             await IxBlurEvent.InvokeAsync();
         }
 
         [JSInvokable]
-        public async void ValidityStateChange(JsonElement validityState)
+        public async Task ValidityStateChange(ValidityState validityState)
         {
             await ValidityStateChangeEvent.InvokeAsync(validityState);
+        }
+
+        [JSInvokable]
+        public async Task IxChange(JsonElement valueState)
+        {
+            await IxChangeEvent.InvokeAsync(valueState.GetString() ?? string.Empty);
         }
     }
 }

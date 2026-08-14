@@ -1,18 +1,8 @@
-// -----------------------------------------------------------------------
-// SPDX-FileCopyrightText: 2026 Siemens AG
-//
-// SPDX-License-Identifier: MIT
-//
-// This source code is licensed under the MIT license found in the
-// LICENSE file in the root directory of this source tree.
-//  -----------------------------------------------------------------------
-
-import { defineCustomElements } from "@siemens/ix/loader";
-import { toast, setToastPosition, showModalLoading } from "@siemens/ix";
+﻿import { defineCustomElements } from "@siemens/ix/loader";
 import "@siemens/ix-echarts";
 import { registerTheme } from "@siemens/ix-echarts";
 import * as echarts from "echarts";
-import { themeSwitcher } from "@siemens/ix";
+import { showModalLoading, themeSwitcher } from "@siemens/ix";
 import { Grid } from "ag-grid-community";
 import { defineCustomElements as ixIconsDefineCustomElements } from "@siemens/ix-icons/loader";
 
@@ -111,33 +101,6 @@ window.siemensIXInterop = {
             el.removeEventListener('closeClick', listeners.closeClick);
             delete el.__siemensIxModalHeaderListeners;
         },
-    },
-
-    showMessage(config) {
-        try {
-            const toastConfig = JSON.parse(config);
-            if (toastConfig.messageHtml) {
-                const msgEl = document.createElement('div');
-                msgEl.innerHTML = toastConfig.messageHtml;
-                toastConfig.message = msgEl;
-            }
-
-            if (toastConfig.action) {
-                const actionEl = document.createElement('div');
-                actionEl.innerHTML = toastConfig.action;
-                actionEl.slot = 'action';
-                toastConfig.action = actionEl;
-            }
-
-            if (toastConfig.position) {
-                setToastPosition(toastConfig.position);
-                delete toastConfig.position;
-            }
-
-            toast(toastConfig);
-        } catch (error) {
-            console.error("Failed to display toast message:", error);
-        }
     },
 
     initializeChart(id, options) {

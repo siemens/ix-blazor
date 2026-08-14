@@ -8,13 +8,14 @@
 //  -----------------------------------------------------------------------
 *@
 
+@using SiemensIXBlazor.Enums.LayoutGrid
 @inherits IXBaseComponent
 <ix-col @attributes="UserAttributes"
         class="@Class"
         style="@Style"
-        size="@Size"
-        size-lg="@SizeLg"
-        size-md="@SizeMd"
-        size-sm="@SizeSm">
+        size="@(Size?.ToAttributeValue())"
+        size-lg="@(SizeLg?.ToAttributeValue())"
+        size-md="@(SizeMd?.ToAttributeValue())"
+        size-sm="@(SizeSm?.ToAttributeValue())">
     @ChildContent
 </ix-col>

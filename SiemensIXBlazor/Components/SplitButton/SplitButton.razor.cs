@@ -8,6 +8,7 @@
 //  -----------------------------------------------------------------------
 
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using SiemensIXBlazor.Enums.Button;
 using SiemensIXBlazor.Interops;
@@ -29,25 +30,23 @@ public partial class SplitButton
 	[Parameter]
 	public bool EnableTopLayer { get; set; } = false;
 	[Parameter]
-	public bool Ghost { get; set; } = false;
+	public bool DisableButton { get; set; } = false;
 	[Parameter]
-	public string Icon { get; set; } = string.Empty;
+	public bool DisableDropdownButton { get; set; } = false;
+	[Parameter]
+	public string? Icon { get; set; }
 	[Parameter]
 	public string? Label { get; set; }
 	[Parameter]
-	public bool Outline { get; set; } = false;
-	[Parameter]
-	public string Placement { get; set; } = "bottom-start";
-	[Parameter]
-	public string SplitIcon { get; set; } = "context-menu";
+	public string? SplitIcon { get; set; }
 	[Parameter]
 	public CloseBehavior CloseBehavior { get; set; } = CloseBehavior.Both;
 	[Parameter]
 	public ButtonVariant Variant { get; set; } = ButtonVariant.primary;
 	[Parameter]
-	public EventCallback ButtonClickedEvent { get; set; }
+	public EventCallback<MouseEventArgs> ButtonClickedEvent { get; set; }
 
-	private BaseInterop _interop;
+	private BaseInterop? _interop;
 
 	protected async override Task OnAfterRenderAsync(bool firstRender)
 	{
@@ -60,8 +59,9 @@ public partial class SplitButton
 	}
 
 	[JSInvokable]
-	public async void ButtonClicked()
+	public async Task ButtonClicked(MouseEventArgs args)
 	{
-		await ButtonClickedEvent.InvokeAsync();
+		await ButtonClickedEvent.InvokeAsync(args);
 	}
+
 }

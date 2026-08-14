@@ -17,10 +17,16 @@
               class="@Class"
               style="@Style"
               icon="@Icon"
+              aria-label-icon="@AriaLabelIcon"
               notification="@Notification"
               heading="@Heading"
               subheading="@SubHeading"
               expanded="@Expanded"
               passive="@Passive"
               variant="@(EnumParser<PushCardVariant>.EnumToString(Variant))">
+    @if (TitleAction is not null)
+    {
+        <div slot="title-action">@TitleAction</div>
+    }
+    @ChildContent
 </ix-push-card>

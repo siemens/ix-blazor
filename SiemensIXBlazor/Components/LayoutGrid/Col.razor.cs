@@ -8,6 +8,7 @@
 //  -----------------------------------------------------------------------
 
 using Microsoft.AspNetCore.Components;
+using SiemensIXBlazor.Enums.LayoutGrid;
 
 namespace SiemensIXBlazor.Components.LayoutGrid
 {
@@ -16,12 +17,12 @@ namespace SiemensIXBlazor.Components.LayoutGrid
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter]
-        public string? Size { get; set; }
+        public ColumnSize? Size { get; set; }
         [Parameter]
-        public string? SizeLg { get; set; }
+        public ColumnSize? SizeLg { get; set; }
         [Parameter]
-        public string? SizeMd { get; set; }
+        public ColumnSize? SizeMd { get; set; }
         [Parameter]
-        public string? SizeSm { get; set; }
+        public ColumnSize? SizeSm { get; set; }
     }
 }

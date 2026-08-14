@@ -30,32 +30,32 @@ public class InputTest : TestContextBase
     }
 
     [Fact]
-    public void ChangeEventWorks()
+    public async Task IxChangeEventWorks()
     {
         // Arrange
         var received = string.Empty;
         var cut = RenderComponent<Input>(parameters => parameters
             .Add(p => p.Id, "test-input")
-            .Add(p => p.ChangeEvent, EventCallback.Factory.Create<string>(this, (string val) => received = val)));
+            .Add(p => p.IxChangeEvent, EventCallback.Factory.Create<string>(this, (string val) => received = val)));
 
         // Act
-        cut.Instance.Change(JsonDocument.Parse("\"hello\"").RootElement);
+        await cut.Instance.IxChange(JsonDocument.Parse("\"hello\"").RootElement);
 
         // Assert
         Assert.Equal("hello", received);
     }
 
     [Fact]
-    public void ChangeEventReceivesEmptyStringWhenValueIsNull()
+    public async Task IxChangeEventReceivesEmptyStringWhenValueIsNull()
     {
         // Arrange
         var received = "initial";
         var cut = RenderComponent<Input>(parameters => parameters
             .Add(p => p.Id, "test-input")
-            .Add(p => p.ChangeEvent, EventCallback.Factory.Create<string>(this, (string val) => received = val)));
+            .Add(p => p.IxChangeEvent, EventCallback.Factory.Create<string>(this, (string val) => received = val)));
 
         // Act
-        cut.Instance.Change(JsonDocument.Parse("null").RootElement);
+        await cut.Instance.IxChange(JsonDocument.Parse("null").RootElement);
 
         // Assert
         Assert.Equal(string.Empty, received);

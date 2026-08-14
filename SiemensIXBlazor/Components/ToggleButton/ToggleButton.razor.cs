@@ -9,7 +9,7 @@
 
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using SiemensIXBlazor.Enums.Button;
+using SiemensIXBlazor.Enums.ToggleButton;
 using SiemensIXBlazor.Interops;
 
 namespace SiemensIXBlazor.Components.ToggleButton
@@ -21,8 +21,6 @@ namespace SiemensIXBlazor.Components.ToggleButton
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter]
-        public string? AriaLabelIconButton { get; set; }
-        [Parameter]
         public bool Disabled { get; set; } = false;
         [Parameter]
         public string? Icon { get; set; }
@@ -33,7 +31,7 @@ namespace SiemensIXBlazor.Components.ToggleButton
         [Parameter]
         public bool Pressed { get; set; } = false;
         [Parameter]
-        public ButtonVariant Variant { get; set; } = ButtonVariant.secondary;
+        public ToggleButtonVariant Variant { get; set; } = ToggleButtonVariant.subtle_primary;
         [Parameter]
         public EventCallback<bool> PressedChangeEvent { get; set; }
 
@@ -50,7 +48,7 @@ namespace SiemensIXBlazor.Components.ToggleButton
         }
 
         [JSInvokable]
-        public async void PressedChange(bool value)
+        public async Task PressedChange(bool value)
         {
             await PressedChangeEvent.InvokeAsync(value);
         }

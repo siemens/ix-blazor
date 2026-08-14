@@ -1,6 +1,17 @@
+// -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2026 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+//  -----------------------------------------------------------------------
+
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using SiemensIXBlazor.Enums.Input;
 using SiemensIXBlazor.Interops;
+using SiemensIXBlazor.Objects;
 using System.Text.Json;
 
 namespace SiemensIXBlazor.Components.Input
@@ -30,7 +41,7 @@ namespace SiemensIXBlazor.Components.Input
         public bool Readonly { get; set; } = false;
 
         [Parameter]
-        public string Type { get; set; } = "text";
+        public InputType Type { get; set; } = InputType.Text;
 
         [Parameter]
         public string? Label { get; set; }
@@ -66,10 +77,16 @@ namespace SiemensIXBlazor.Components.Input
         public string? Name { get; set; }
 
         [Parameter]
-        public bool ShowTextAsTooltip { get; set; } = false;
+        public bool? ShowTextAsTooltip { get; set; }
 
         [Parameter]
         public string? Pattern { get; set; }
+
+        [Parameter]
+        public bool SuppressSubmitOnEnter { get; set; } = false;
+
+        [Parameter]
+        public TextAlignment TextAlignment { get; set; } = TextAlignment.Start;
 
         [Parameter]
         public RenderFragment? StartSlot { get; set; }
@@ -81,13 +98,25 @@ namespace SiemensIXBlazor.Components.Input
         public EventCallback<string> ValueChangeEvent { get; set; }
 
         [Parameter]
-        public EventCallback<string> ChangeEvent { get; set; }
+        public EventCallback<string> IxChangeEvent { get; set; }
 
         [Parameter]
         public EventCallback IxBlurEvent { get; set; }
 
         [Parameter]
-        public EventCallback<JsonElement> ValidityStateChangeEvent { get; set; }
+        public EventCallback<ValidityState> ValidityStateChangeEvent { get; set; }
+
+        public async Task FocusInputAsync()
+        {
+            _interop ??= new(JSRuntime);
+            await _interop.InvokeVoidMethod(Id, "focusInput");
+        }
+
+        public async Task<ValidityState> GetValidityStateAsync()
+        {
+            _interop ??= new(JSRuntime);
+            return await _interop.InvokeMethod<ValidityState>(Id, "getValidityState");
+        }
 
         protected override void OnAfterRender(bool firstRender)
         {
@@ -98,7 +127,7 @@ namespace SiemensIXBlazor.Components.Input
                 Task.Run(async () =>
                 {
                     await _interop.AddEventListener(this, Id, "valueChange", "ValueChange");
-                    await _interop.AddEventListener(this, Id, "change", "Change");
+                    await _interop.AddEventListener(this, Id, "ixChange", "IxChange");
                     await _interop.AddEventListener(this, Id, "ixBlur", "IxBlur");
                     await _interop.AddEventListener(this, Id, "validityStateChange", "ValidityStateChange");
                 });
@@ -111,23 +140,23 @@ namespace SiemensIXBlazor.Components.Input
             string newValue = valueState.GetString() ?? "";
             _value = newValue;
             await ValueChangeEvent.InvokeAsync(newValue);
-            StateHasChanged();
+            await InvokeAsync(StateHasChanged);
         }
 
         [JSInvokable]
-        public async void Change(JsonElement valueState)
+        public async Task IxChange(JsonElement valueState)
         {
-            await ChangeEvent.InvokeAsync(valueState.GetString() ?? "");
+            await IxChangeEvent.InvokeAsync(valueState.GetString() ?? "");
         }
 
         [JSInvokable]
-        public async void IxBlur()
+        public async Task IxBlur()
         {
             await IxBlurEvent.InvokeAsync();
         }
 
         [JSInvokable]
-        public async void ValidityStateChange(JsonElement validityState)
+        public async Task ValidityStateChange(ValidityState validityState)
         {
             await ValidityStateChangeEvent.InvokeAsync(validityState);
         }

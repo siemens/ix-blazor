@@ -66,6 +66,7 @@
 	<ItemGroup>
 		<Folder Include="wwwroot\js\siemens-ix\" />
 		<Folder Include="Components\KeyValueList\" />
+		<Folder Include="Components\LayoutAuto\" />
 		<Folder Include="Components\KeyValue\" />
 		<Folder Include="Components\EmptyState\" />
 		<Folder Include="Components\PushCard\" />

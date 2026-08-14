@@ -18,5 +18,11 @@
 <ix-content-header @attributes="UserAttributes" class="@Class" style="@Style" id="@Id" has-back-button="@HasBackButton"
     header-title="@HeaderTitle" header-subtitle="@HeaderSubTitle"
     variant="@(EnumParser<ContentHeaderVariant>.EnumToString(Variant))">
+    @if (HeaderContent != null)
+    {
+        <div slot="header">
+            @HeaderContent
+        </div>
+    }
     @ChildContent
 </ix-content-header>

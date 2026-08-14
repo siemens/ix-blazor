@@ -27,6 +27,6 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string? Unit { get; set; }
         [Parameter]
-        public string? Value { get; set; }
+        public object? Value { get; set; }
     }
 }
