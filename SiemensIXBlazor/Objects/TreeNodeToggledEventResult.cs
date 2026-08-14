@@ -14,8 +14,8 @@ namespace SiemensIXBlazor.Objects
     public class TreeNodeToggledEventResult
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
-        [JsonProperty("isExpaned")]
-        public bool IsExpaned { get; set; }
+        public string Id { get; set; } = string.Empty;
+        [JsonProperty("isExpanded")]
+        public bool IsExpanded { get; set; }
     }
 }
