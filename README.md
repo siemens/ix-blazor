@@ -1040,7 +1040,13 @@ private void DrawerButtonClicked()
 ## KPI
 
 ```razor
-<KPI Label="Motor speed" Value="Nominal"></KPI>
+<KPI Label="Motor speed"
+     Value="@("Nominal")"
+     Unit="rpm"
+     State="@KpiState.Warning"
+     AriaLabelWarningIcon="Motor speed warning" />
+
+<KPI Label="Temperature" Value="@(42)" Unit="°C" />
 ```
 
 ## Layout Grid
