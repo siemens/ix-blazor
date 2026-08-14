@@ -23,8 +23,8 @@ namespace SiemensIXBlazor.Tests
 			{
 				parameters.Add(p => p.Id, "testId");
 				parameters.Add(p => p.Collapse, true);
-				parameters.Add(p => p.I18NMoreCards, "testMoreCards");
-				parameters.Add(p => p.I18NShowAll, "testShowAll");
+				parameters.Add(p => p.I18nMoreCards, "testMoreCards");
+				parameters.Add(p => p.I18nShowAll, "testShowAll");
 				parameters.Add(p => p.Label, "testLabel");
 				parameters.Add(p => p.ListStyle, Enums.CardList.CardListStyle.Stack);
 				parameters.Add(p => p.ShowAllCount, 1);

@@ -26,9 +26,9 @@ namespace SiemensIXBlazor.Components
         [Parameter]
 		public bool Collapse { get; set; } = false;
 		[Parameter]
-		public string I18NMoreCards { get; set; } = "There are more cards available";
+		public string I18nMoreCards { get; set; } = "There are more cards available";
 		[Parameter]
-		public string I18NShowAll { get; set; } = "Show all";
+		public string I18nShowAll { get; set; } = "Show all";
 		[Parameter]
 		public string? Label { get; set; }
 		[Parameter]
