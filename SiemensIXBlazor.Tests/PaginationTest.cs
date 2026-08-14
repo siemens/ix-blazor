@@ -20,7 +20,7 @@ namespace SiemensIXBlazor.Tests
         public void PaginationRendersCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<Pagination>(parameters =>
+            var cut = Render<Pagination>(parameters =>
                 {
                     parameters.Add(p => p.Id, "testId");
                     parameters.Add(p => p.ItemCount, 15);
@@ -38,9 +38,9 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             var itemCount = 0;
-            var cut = RenderComponent<Components.Pagination.Pagination>(
-                ("Id", "pagination"),
-                ("ItemCountChangedEvent", EventCallback.Factory.Create(this, (int count) => itemCount = count))
+            var cut = Render<Components.Pagination.Pagination>(parameters => parameters
+                .Add(p => p.Id, "pagination")
+                .Add(p => p.ItemCountChangedEvent, EventCallback.Factory.Create(this, (int count) => itemCount = count))
             );
 
             // Act
@@ -55,9 +55,9 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             var selectedPage = 0;
-            var cut = RenderComponent<Components.Pagination.Pagination>(
-                ("Id", "pagination"),
-                ("PageSelectedEvent", EventCallback.Factory.Create(this, (int page) => selectedPage = page))
+            var cut = Render<Components.Pagination.Pagination>(parameters => parameters
+                .Add(p => p.Id, "pagination")
+                .Add(p => p.PageSelectedEvent, EventCallback.Factory.Create(this, (int page) => selectedPage = page))
             );
 
             // Act
@@ -71,7 +71,7 @@ namespace SiemensIXBlazor.Tests
         public void ItemCountOptionsIsNullByDefault()
         {
             // Arrange & Act
-            var cut = RenderComponent<Components.Pagination.Pagination>(parameters =>
+            var cut = Render<Components.Pagination.Pagination>(parameters =>
                 parameters.Add(p => p.Id, "testId")
             );
 
@@ -84,7 +84,7 @@ namespace SiemensIXBlazor.Tests
         public void ItemCountOptionsRendersAsCommaSeparatedString()
         {
             // Arrange & Act
-            var cut = RenderComponent<Components.Pagination.Pagination>(parameters =>
+            var cut = Render<Components.Pagination.Pagination>(parameters =>
             {
                 parameters.Add(p => p.Id, "testId");
                 parameters.Add(p => p.ItemCountOptions, new[] { 15, 25, 50 });

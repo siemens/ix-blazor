@@ -21,7 +21,7 @@ public class DateTimeInputTest : TestContextBase
     [Fact]
     public void OfficialPropertiesAndSlotsRender()
     {
-        var cut = RenderComponent<DateTimeInput>(parameters => parameters
+        var cut = Render<DateTimeInput>(parameters => parameters
             .Add(p => p.Id, "datetime-input")
             .Add(p => p.Format, "yyyy/LL/dd HH:mm")
             .Add(p => p.TextAlignment, InputTextAlignment.End)
@@ -39,7 +39,7 @@ public class DateTimeInputTest : TestContextBase
     {
         string? value = null;
         DateTimeInputValidityState? validity = null;
-        var cut = RenderComponent<DateTimeInput>(parameters => parameters
+        var cut = Render<DateTimeInput>(parameters => parameters
             .Add(p => p.Id, "datetime-input")
             .Add(p => p.ValueChangeEvent, EventCallback.Factory.Create<string?>(this, item => value = item))
             .Add(p => p.ValidityStateChangeEvent, EventCallback.Factory.Create<DateTimeInputValidityState>(this, item => validity = item)));

@@ -27,7 +27,7 @@ public class ValidationTooltipTests : TestContextBase
 		ValidationTooltipPlacement placement = ValidationTooltipPlacement.Top;
 
 		// Act
-		var cut = RenderComponent<ValidationTooltip>(parameters => parameters
+		var cut = Render<ValidationTooltip>(parameters => parameters
 				.Add(p => p.Id, id)
 				.Add(p => p.Style, style)
 				.Add(p => p.Class, cssClass)
@@ -52,7 +52,7 @@ public class ValidationTooltipTests : TestContextBase
 		string childContent = $@"<label for=""validationCustom01"">Example input</label><input id=""validationCustom01"" value="""" required minlength=""4"" />";
 
 		// Act
-		var cut = RenderComponent<ValidationTooltip>(parameters => parameters
+		var cut = Render<ValidationTooltip>(parameters => parameters
 			.AddChildContent(childContent)
 		);
 

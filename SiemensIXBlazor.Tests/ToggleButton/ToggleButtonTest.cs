@@ -20,14 +20,14 @@ namespace SiemensIXBlazor.Tests.ToggleButton
         public void ToggleButtonRendersCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<Components.ToggleButton.ToggleButton>(
-                ("Id", "testId"),
-                ("Disabled", true),
-                ("Icon", "test-icon"),
-                ("IconRight", "test-icon-right"),
-                ("Loading", true),
-                ("Pressed", true),
-                ("Variant", ToggleButtonVariant.subtle_secondary)
+            var cut = Render<Components.ToggleButton.ToggleButton>(parameters => parameters
+                .Add(p => p.Id, "testId")
+                .Add(p => p.Disabled, true)
+                .Add(p => p.Icon, "test-icon")
+                .Add(p => p.IconRight, "test-icon-right")
+                .Add(p => p.Loading, true)
+                .Add(p => p.Pressed, true)
+                .Add(p => p.Variant, ToggleButtonVariant.subtle_secondary)
             );
 
             // Assert
@@ -39,9 +39,9 @@ namespace SiemensIXBlazor.Tests.ToggleButton
         {
             // Arrange
             var pressedChanged = false;
-            var cut = RenderComponent<Components.ToggleButton.ToggleButton>(
-                ("Id", "toggleButton"),
-                ("PressedChangeEvent", EventCallback.Factory.Create<bool>(this, newValue => { pressedChanged = true; }))
+            var cut = Render<Components.ToggleButton.ToggleButton>(parameters => parameters
+                .Add(p => p.Id, "toggleButton")
+                .Add(p => p.PressedChangeEvent, EventCallback.Factory.Create<bool>(this, newValue => { pressedChanged = true; }))
             );
 
             // Act

@@ -20,21 +20,21 @@ namespace SiemensIXBlazor.Tests.Menu
 		public void MenuItemRendersCorrectly()
 		{
 			// Arrange
-			var cut = RenderComponent<MenuItem>(
-				("Active", true),
-				("Disabled", false),
-				("Home", true),
-				("Bottom", true),
-				("Icon", "testIcon"),
-				("Notifications", 5),
-				("Label", "label"),
-				("ChildContent", (RenderFragment)(builder =>
+			var cut = Render<MenuItem>(parameters => parameters
+			    .Add(p => p.Active, true)
+			    .Add(p => p.Disabled, false)
+			    .Add(p => p.Home, true)
+			    .Add(p => p.Bottom, true)
+			    .Add(p => p.Icon, "testIcon")
+			    .Add(p => p.Notifications, 5)
+			    .Add(p => p.Label, "label")
+			    .Add(p => p.ChildContent, (RenderFragment)(builder =>
 				{
 					builder.OpenElement(0, "div");
 					builder.AddContent(1, "Test child content");
 					builder.CloseElement();
-				})),
-				("TooltipText", "Test tooltip")
+				}))
+			    .Add(p => p.TooltipText, "Test tooltip")
 			);
 
 			// Assert
@@ -45,7 +45,7 @@ namespace SiemensIXBlazor.Tests.Menu
 		[Fact]
 		public void RendersLinkAttributes()
 		{
-			var cut = RenderComponent<MenuItem>(parameters => parameters
+			var cut = Render<MenuItem>(parameters => parameters
 				.Add(p => p.Label, "Documentation")
 				.Add(p => p.Href, "/docs")
 				.Add(p => p.Target, MenuItemTarget._blank)

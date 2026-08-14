@@ -18,7 +18,7 @@ public class DividerTest : TestContextBase
     public void ComponentRendersWithCorrectProperties()
     {
         // Arrange
-        var cut = RenderComponent<Divider>(parameters => parameters
+        var cut = Render<Divider>(parameters => parameters
             .Add(p => p.Class, "testClass")
             .Add(p => p.Style, "testStyle"));
 

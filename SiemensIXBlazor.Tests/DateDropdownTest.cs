@@ -21,7 +21,7 @@ public class DateDropdownTest : TestContextBase
     [Fact]
     public void OfficialPropertiesRender()
     {
-        var cut = RenderComponent<DateDropdown>(parameters => parameters
+        var cut = Render<DateDropdown>(parameters => parameters
             .Add(p => p.Id, "date-dropdown")
             .Add(p => p.DateRangeId, "last-week")
             .Add(p => p.Format, "yyyy/LL/dd")
@@ -47,7 +47,7 @@ public class DateDropdownTest : TestContextBase
     public async Task DateRangeChangeEventDeserializesOfficialPayload()
     {
         DateDropdownResponse? received = null;
-        var cut = RenderComponent<DateDropdown>(parameters => parameters
+        var cut = Render<DateDropdown>(parameters => parameters
             .Add(p => p.Id, "date-dropdown")
             .Add(p => p.DateRangeChangeEvent,
                 EventCallback.Factory.Create<DateDropdownResponse>(this, value => received = value)));

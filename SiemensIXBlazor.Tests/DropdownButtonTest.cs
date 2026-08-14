@@ -21,7 +21,7 @@ public class DropdownButtonTest : TestContextBase
     public void ComponentRendersWithCorrectProperties()
     {
         // Arrange
-        var cut = RenderComponent<DropdownButton>(parameters => parameters
+        var cut = Render<DropdownButton>(parameters => parameters
             .Add(p => p.Disabled, true)
             .Add(p => p.Icon, "testIcon")
             .Add(p => p.CloseBehavior, DropdownButtonCloseBehavior.both)
@@ -45,7 +45,7 @@ public class DropdownButtonTest : TestContextBase
     public void EnableTopLayerDefaultsToFalse()
     {
         // Arrange
-        var cut = RenderComponent<DropdownButton>(parameters => parameters
+        var cut = Render<DropdownButton>(parameters => parameters
             .Add(p => p.Label, "test"));
 
         // Assert
@@ -57,7 +57,7 @@ public class DropdownButtonTest : TestContextBase
     public void EnableTopLayerTrueRendersAttribute()
     {
         // Arrange
-        var cut = RenderComponent<DropdownButton>(parameters => parameters
+        var cut = Render<DropdownButton>(parameters => parameters
             .Add(p => p.Label, "test")
             .Add(p => p.EnableTopLayer, true));
 
@@ -71,7 +71,7 @@ public class DropdownButtonTest : TestContextBase
     {
         var showChange = false;
         var showChanged = false;
-        var cut = RenderComponent<DropdownButton>(parameters => parameters
+        var cut = Render<DropdownButton>(parameters => parameters
             .Add(p => p.ShowChangeEvent,
                 EventCallback.Factory.Create<bool>(this, value => showChange = value))
             .Add(p => p.ShowChangedEvent,
@@ -87,7 +87,7 @@ public class DropdownButtonTest : TestContextBase
     [Fact]
     public void RendersButtonLabelSlot()
     {
-        var cut = RenderComponent<DropdownButton>(parameters => parameters
+        var cut = Render<DropdownButton>(parameters => parameters
             .Add(p => p.ButtonLabelContent,
                 (RenderFragment)(builder => builder.AddContent(0, "Additional label"))));
 

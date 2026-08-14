@@ -28,13 +28,14 @@ public class MessageBarTests : TestContextBase
         };
 
         // Act
-        var cut = RenderComponent<MessageBar>(
-            ("Id", "testId"),
-            ("Class", "test-class"),
-            ("Style", "width: 100%"),
-            ("Persistent", true),
-            ("Type", MessageBarType.Info),
-            ("ChildContent", childContent));
+        var cut = Render<MessageBar>(parameters => parameters
+            .Add(p => p.Id, "testId")
+            .Add(p => p.Class, "test-class")
+            .Add(p => p.Style, "width: 100%")
+            .Add(p => p.Persistent, true)
+            .Add(p => p.Type, MessageBarType.Info)
+            .Add(p => p.ChildContent, childContent)
+        );
 
         // Assert
         cut.MarkupMatches("<ix-message-bar id=\"testId\" class=\"test-class\" style=\"width: 100%\" persistent=\"\" type=\"info\">Simple Text</ix-message-bar>");
@@ -45,9 +46,9 @@ public class MessageBarTests : TestContextBase
     {
         // Arrange
         var closed = false;
-        var cut = RenderComponent<MessageBar>(
-            ("Id", "messageBar"),
-            ("ClosedChangeEvent", EventCallback.Factory.Create(this, () => closed = true))
+        var cut = Render<MessageBar>(parameters => parameters
+            .Add(p => p.Id, "messageBar")
+            .Add(p => p.ClosedChangeEvent, EventCallback.Factory.Create(this, () => closed = true))
         );
 
         // Act
@@ -62,9 +63,9 @@ public class MessageBarTests : TestContextBase
     {
         // Arrange
         var animationCompleted = false;
-        var cut = RenderComponent<MessageBar>(
-            ("Id", "messageBar"),
-            ("CloseAnimationCompletedEvent", EventCallback.Factory.Create(this, () => animationCompleted = true))
+        var cut = Render<MessageBar>(parameters => parameters
+            .Add(p => p.Id, "messageBar")
+            .Add(p => p.CloseAnimationCompletedEvent, EventCallback.Factory.Create(this, () => animationCompleted = true))
         );
 
         // Act

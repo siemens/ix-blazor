@@ -20,7 +20,7 @@ public class DateInputTest : TestContextBase
     public void EnableTopLayerDefaultsToFalse()
     {
         // Arrange
-        var cut = RenderComponent<DateInput>(parameters => parameters
+        var cut = Render<DateInput>(parameters => parameters
             .Add(p => p.Id, "test-id"));
 
         // Assert
@@ -32,7 +32,7 @@ public class DateInputTest : TestContextBase
     public void EnableTopLayerTrueRendersAttribute()
     {
         // Arrange
-        var cut = RenderComponent<DateInput>(parameters => parameters
+        var cut = Render<DateInput>(parameters => parameters
             .Add(p => p.Id, "test-id")
             .Add(p => p.EnableTopLayer, true));
 
@@ -46,7 +46,7 @@ public class DateInputTest : TestContextBase
     {
         // Arrange
         var received = string.Empty;
-        var cut = RenderComponent<DateInput>(parameters => parameters
+        var cut = Render<DateInput>(parameters => parameters
             .Add(p => p.Id, "test-id")
             .Add(p => p.ChangeEvent, EventCallback.Factory.Create<string?>(this, (string? val) => received = val)));
 
@@ -62,7 +62,7 @@ public class DateInputTest : TestContextBase
     {
         // Arrange
         string? received = "initial";
-        var cut = RenderComponent<DateInput>(parameters => parameters
+        var cut = Render<DateInput>(parameters => parameters
             .Add(p => p.Id, "test-id")
             .Add(p => p.ChangeEvent, EventCallback.Factory.Create<string?>(this, (string? val) => received = val)));
 

@@ -26,9 +26,10 @@ namespace SiemensIXBlazor.Tests.MenuSettings
             };
 
             // Act
-            var cut = RenderComponent<MenuSettingsItem>(
-                ("Label", "Test Label"),
-                ("ChildContent", childContent));
+            var cut = Render<MenuSettingsItem>(parameters => parameters
+                .Add(p => p.Label, "Test Label")
+                .Add(p => p.ChildContent, childContent)
+            );
 
             // Assert
 			cut.MarkupMatches("<ix-menu-settings-item label=\"Test Label\">Simple Text</ix-menu-settings-item>");
@@ -38,7 +39,7 @@ namespace SiemensIXBlazor.Tests.MenuSettings
 		public async Task RendersTabKeyAndForwardsLabelChange()
 		{
 			MenuLabelChangeEvent? changed = null;
-			var cut = RenderComponent<MenuSettingsItem>(parameters => parameters
+			var cut = Render<MenuSettingsItem>(parameters => parameters
 				.Add(p => p.Id, "settings-general")
 				.Add(p => p.TabKey, "general")
 				.Add(p => p.Label, "General")

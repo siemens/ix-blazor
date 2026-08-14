@@ -20,12 +20,12 @@ namespace SiemensIXBlazor.Tests.Menu
         public void MenuAvatarItemRendersCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<MenuAvatarItem>(
-                ("Id", "testId"),
-                ("Icon", "testIcon"),
-                ("Label", "Test Label"),
-                ("Class", "test-class"),
-                ("Style", "width: 100%")
+            var cut = Render<MenuAvatarItem>(parameters => parameters
+                .Add(p => p.Id, "testId")
+                .Add(p => p.Icon, "testIcon")
+                .Add(p => p.Label, "Test Label")
+                .Add(p => p.Class, "test-class")
+                .Add(p => p.Style, "width: 100%")
             );
 
             // Assert
@@ -38,9 +38,9 @@ namespace SiemensIXBlazor.Tests.Menu
         {
             // Arrange
             var clicked = false;
-            var cut = RenderComponent<MenuAvatarItem>(
-                ("Id", "navigationMenuAvatarItem"),
-                ("ItemClickedEvent", EventCallback.Factory.Create(this, (MouseEventArgs args) => clicked = true))
+            var cut = Render<MenuAvatarItem>(parameters => parameters
+                .Add(p => p.Id, "navigationMenuAvatarItem")
+                .Add(p => p.ItemClickedEvent, EventCallback.Factory.Create(this, (MouseEventArgs args) => clicked = true))
             );
 
             // Act

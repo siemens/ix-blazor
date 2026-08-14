@@ -21,7 +21,7 @@ namespace SiemensIXBlazor.Tests.Modal
         public void ModalContent_ShouldRenderBasicProperties()
         {
             // Arrange & Act
-            var component = RenderComponent<ModalContent>(parameters => parameters
+            var component = Render<ModalContent>(parameters => parameters
                 .Add(p => p.Class, "custom-class")
                 .Add(p => p.Style, "color: red;")
             );
@@ -37,7 +37,7 @@ namespace SiemensIXBlazor.Tests.Modal
         public void ModalContent_ShouldRenderChildContent()
         {
             // Arrange & Act
-            var component = RenderComponent<ModalContent>(parameters => parameters
+            var component = Render<ModalContent>(parameters => parameters
                 .AddChildContent("<p>Modal content text</p>")
             );
 
@@ -50,7 +50,7 @@ namespace SiemensIXBlazor.Tests.Modal
         public void ModalContent_ShouldRenderWithoutProperties()
         {
             // Arrange & Act
-            var component = RenderComponent<ModalContent>();
+            var component = Render<ModalContent>((Action<Bunit.ComponentParameterCollectionBuilder<ModalContent>>)(_ => { }));
 
             // Assert
             var element = component.Find("ix-modal-content");
@@ -61,7 +61,7 @@ namespace SiemensIXBlazor.Tests.Modal
         public void ModalContent_ShouldApplyCssClass()
         {
             // Arrange & Act
-            var component = RenderComponent<ModalContent>(parameters => parameters
+            var component = Render<ModalContent>(parameters => parameters
                 .Add(p => p.Class, "test-class another-class")
             );
 
@@ -75,7 +75,7 @@ namespace SiemensIXBlazor.Tests.Modal
         public void ModalContent_ShouldApplyStyleAttribute()
         {
             // Arrange & Act
-            var component = RenderComponent<ModalContent>(parameters => parameters
+            var component = Render<ModalContent>(parameters => parameters
                 .Add(p => p.Style, "background-color: blue; margin: 10px;")
             );
 

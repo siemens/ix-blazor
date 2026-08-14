@@ -21,7 +21,7 @@ namespace SiemensIXBlazor.Tests.Modal
         public void ModalFooter_ShouldRenderBasicProperties()
         {
             // Arrange & Act
-            var component = RenderComponent<ModalFooter>(parameters => parameters
+            var component = Render<ModalFooter>(parameters => parameters
                 .Add(p => p.Class, "custom-class")
                 .Add(p => p.Style, "color: red;")
             );
@@ -37,7 +37,7 @@ namespace SiemensIXBlazor.Tests.Modal
         public void ModalFooter_ShouldRenderChildContent()
         {
             // Arrange & Act
-            var component = RenderComponent<ModalFooter>(parameters => parameters
+            var component = Render<ModalFooter>(parameters => parameters
                 .AddChildContent("<button>Close</button><button>Save</button>")
             );
 
@@ -51,7 +51,7 @@ namespace SiemensIXBlazor.Tests.Modal
         public void ModalFooter_ShouldRenderActionButtons()
         {
             // Arrange & Act
-            var component = RenderComponent<ModalFooter>(parameters => parameters
+            var component = Render<ModalFooter>(parameters => parameters
                 .AddChildContent(
                     @"<ix-button>Cancel</ix-button>
                       <ix-button variant=""primary"">Confirm</ix-button>"
@@ -69,7 +69,7 @@ namespace SiemensIXBlazor.Tests.Modal
         public void ModalFooter_ShouldRenderWithoutProperties()
         {
             // Arrange & Act
-            var component = RenderComponent<ModalFooter>();
+            var component = Render<ModalFooter>((Action<Bunit.ComponentParameterCollectionBuilder<ModalFooter>>)(_ => { }));
 
             // Assert
             var element = component.Find("ix-modal-footer");
@@ -80,7 +80,7 @@ namespace SiemensIXBlazor.Tests.Modal
         public void ModalFooter_ShouldApplyCssClass()
         {
             // Arrange & Act
-            var component = RenderComponent<ModalFooter>(parameters => parameters
+            var component = Render<ModalFooter>(parameters => parameters
                 .Add(p => p.Class, "test-class footer-class")
             );
 
@@ -94,7 +94,7 @@ namespace SiemensIXBlazor.Tests.Modal
         public void ModalFooter_ShouldApplyStyleAttribute()
         {
             // Arrange & Act
-            var component = RenderComponent<ModalFooter>(parameters => parameters
+            var component = Render<ModalFooter>(parameters => parameters
                 .Add(p => p.Style, "text-align: right; padding: 20px;")
             );
 

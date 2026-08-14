@@ -19,7 +19,7 @@ public class ModalHeaderTest : TestContextBase
     [Fact]
     public void ModalHeader_ShouldRenderOfficialProperties()
     {
-        var component = RenderComponent<ModalHeader>(parameters => parameters
+        var component = Render<ModalHeader>(parameters => parameters
             .Add(p => p.HideClose, true)
             .Add(p => p.Icon, "info")
             .Add(p => p.AriaLabelIcon, "Information")
@@ -39,7 +39,7 @@ public class ModalHeaderTest : TestContextBase
     [Fact]
     public void ModalHeader_ShouldUseOfficialCloseLabelByDefault()
     {
-        var component = RenderComponent<ModalHeader>();
+        var component = Render<ModalHeader>((Action<Bunit.ComponentParameterCollectionBuilder<ModalHeader>>)(_ => { }));
 
         Assert.Equal("Close modal", component.Instance.AriaLabelCloseIconButton);
     }

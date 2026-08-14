@@ -20,7 +20,7 @@ public class FlipTileTest : TestContextBase
     public void ComponentRendersAndSetsPropertiesCorrectly()
     {
         // Arrange
-        var cut = RenderComponent<FlipTile>(parameters => parameters
+        var cut = Render<FlipTile>(parameters => parameters
             .Add(p => p.Id, "ix-flip")
             .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content")))
             .Add(p => p.Variant, FlipTileVariant.primary)
@@ -36,7 +36,7 @@ public class FlipTileTest : TestContextBase
     public void ComponentRendersWithAllPropertiesSet()
     {
         // Arrange
-        var cut = RenderComponent<FlipTile>(parameters => parameters
+        var cut = Render<FlipTile>(parameters => parameters
             .Add(p => p.Id, "ix-flip-complete")
             .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Full test")))
             .Add(p => p.Variant, FlipTileVariant.warning)
@@ -54,7 +54,7 @@ public class FlipTileTest : TestContextBase
     {
         var isToggleEventOccured = false;
 
-        var cut = RenderComponent<FlipTile>(parameters => parameters
+        var cut = Render<FlipTile>(parameters => parameters
             .Add(p => p.Id, "ix-flip")
             .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content")))
             .Add(p => p.Variant, FlipTileVariant.alarm)
@@ -76,7 +76,7 @@ public class FlipTileTest : TestContextBase
     public void DefaultVariantIsFilled()
     {
         // Arrange & Act
-        var cut = RenderComponent<FlipTile>(parameters => parameters
+        var cut = Render<FlipTile>(parameters => parameters
             .Add(p => p.Id, "ix-flip")
             .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content"))));
 
@@ -89,7 +89,7 @@ public class FlipTileTest : TestContextBase
     public void DefaultHeightAndWidthAreSet()
     {
         // Arrange & Act
-        var cut = RenderComponent<FlipTile>(parameters => parameters
+        var cut = Render<FlipTile>(parameters => parameters
             .Add(p => p.Id, "ix-flip"));
 
         // Assert
@@ -101,7 +101,7 @@ public class FlipTileTest : TestContextBase
     public void DefaultIndexIsZero()
     {
         // Arrange & Act
-        var cut = RenderComponent<FlipTile>(parameters => parameters
+        var cut = Render<FlipTile>(parameters => parameters
             .Add(p => p.Id, "ix-flip"));
 
         // Assert
@@ -112,7 +112,7 @@ public class FlipTileTest : TestContextBase
     public void AriaLabelEyeIconButtonRendersWhenSet()
     {
         // Arrange & Act
-        var cut = RenderComponent<FlipTile>(parameters => parameters
+        var cut = Render<FlipTile>(parameters => parameters
             .Add(p => p.Id, "ix-flip")
             .Add(p => p.AriaLabelEyeIconButton, "Show details"));
 
@@ -125,7 +125,7 @@ public class FlipTileTest : TestContextBase
     public void AriaLabelEyeIconButtonIsOptional()
     {
         // Arrange & Act
-        var cut = RenderComponent<FlipTile>(parameters => parameters
+        var cut = Render<FlipTile>(parameters => parameters
             .Add(p => p.Id, "ix-flip"));
 
         // Assert
@@ -136,7 +136,7 @@ public class FlipTileTest : TestContextBase
     public void CustomHeightAndWidthRenderCorrectly()
     {
         // Arrange & Act
-        var cut = RenderComponent<FlipTile>(parameters => parameters
+        var cut = Render<FlipTile>(parameters => parameters
             .Add(p => p.Id, "ix-flip")
             .Add(p => p.Height, 50)
             .Add(p => p.Width, 60));
@@ -150,7 +150,7 @@ public class FlipTileTest : TestContextBase
     [Fact]
     public void AutoHeightAndWidthRenderCorrectly()
     {
-        var cut = RenderComponent<FlipTile>(parameters => parameters
+        var cut = Render<FlipTile>(parameters => parameters
             .Add(p => p.Id, "ix-flip-auto")
             .Add(p => p.Height, "auto")
             .Add(p => p.Width, "auto"));
@@ -164,7 +164,7 @@ public class FlipTileTest : TestContextBase
     [Fact]
     public void NumberAndAutoDimensionsAreAccepted()
     {
-        var cut = RenderComponent<FlipTile>(parameters => parameters
+        var cut = Render<FlipTile>(parameters => parameters
             .Add(p => p.Id, "ix-flip-values")
             .Add(p => p.Height, 20.5)
             .Add(p => p.Width, "auto"));
@@ -179,7 +179,7 @@ public class FlipTileTest : TestContextBase
     public void IndexPropertyRenders()
     {
         // Arrange & Act
-        var cut = RenderComponent<FlipTile>(parameters => parameters
+        var cut = Render<FlipTile>(parameters => parameters
             .Add(p => p.Id, "ix-flip")
             .Add(p => p.Index, 7));
 
@@ -199,7 +199,7 @@ public class FlipTileTest : TestContextBase
     public void AllVariantsRenderCorrectly(FlipTileVariant variant, string expectedVariant)
     {
         // Arrange & Act
-        var cut = RenderComponent<FlipTile>(parameters => parameters
+        var cut = Render<FlipTile>(parameters => parameters
             .Add(p => p.Id, "ix-flip")
             .Add(p => p.Variant, variant)
             .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content"))));
@@ -216,7 +216,7 @@ public class FlipTileTest : TestContextBase
         var complexContent = "<div class=\"test\"><span>Complex</span> content</div>";
 
         // Act
-        var cut = RenderComponent<FlipTile>(parameters => parameters
+        var cut = Render<FlipTile>(parameters => parameters
             .Add(p => p.Id, "ix-flip")
             .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, complexContent))));
 
@@ -232,7 +232,7 @@ public class FlipTileTest : TestContextBase
         // Arrange
         int receivedIndex = -1;
 
-        var cut = RenderComponent<FlipTile>(parameters => parameters
+        var cut = Render<FlipTile>(parameters => parameters
             .Add(p => p.Id, "ix-flip")
             .Add(p => p.Index, 42)
             .Add(p => p.ToggleEvent, EventCallback.Factory.Create<int>(this, (index) => receivedIndex = index)));
@@ -248,7 +248,7 @@ public class FlipTileTest : TestContextBase
     public void IdIsRequiredAndRendersCorrectly()
     {
         // Arrange & Act
-        var cut = RenderComponent<FlipTile>(parameters => parameters
+        var cut = Render<FlipTile>(parameters => parameters
             .Add(p => p.Id, "custom-flip-id"));
 
         // Assert
@@ -260,7 +260,7 @@ public class FlipTileTest : TestContextBase
     public void ComponentSupportsUserAttributes()
     {
         // Arrange & Act
-        var cut = RenderComponent<FlipTile>(parameters => parameters
+        var cut = Render<FlipTile>(parameters => parameters
             .Add(p => p.Id, "ix-flip")
             .AddUnmatched("data-testid", "flip-test")
             .AddUnmatched("custom-attr", "custom-value"));

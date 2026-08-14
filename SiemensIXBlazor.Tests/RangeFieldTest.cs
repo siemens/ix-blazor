@@ -22,7 +22,7 @@ public class RangeFieldTest : TestContextBase
     [InlineData(RangeFieldType.DateTimeRange, "datetime-range")]
     public void TypeUsesOfficialAttributeValue(RangeFieldType type, string expected)
     {
-        var cut = RenderComponent<RangeField>(parameters => parameters
+        var cut = Render<RangeField>(parameters => parameters
             .Add(p => p.Type, type)
             .Add(p => p.HideArrow, true)
             .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddContent(0, "range inputs"))));

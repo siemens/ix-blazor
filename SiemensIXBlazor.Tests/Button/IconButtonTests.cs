@@ -20,7 +20,7 @@ namespace SiemensIXBlazor.Tests
         public void IconButtonRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<IconButton>(parameters => {
+            var cut = Render<IconButton>(parameters => {
                 parameters.Add(p => p.IconColor, "testIconColor");
                 parameters.Add(p => p.Disabled, true);
                 parameters.Add(p => p.Icon, "testIcon");
@@ -40,7 +40,7 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             var clickInvoked = false;
-            var cut = RenderComponent<IconButton>(parameters => parameters
+            var cut = Render<IconButton>(parameters => parameters
                 .Add(p => p.ClickEvent, EventCallback.Factory.Create(this, () => clickInvoked = true)));
 
             // Act

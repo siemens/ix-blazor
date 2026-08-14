@@ -19,7 +19,7 @@ public class KPITest : TestContextBase
     public void ComponentRendersWithParametersSetCorrectly()
     {
         // Arrange
-        var cut = RenderComponent<KPI>(parameters => parameters
+        var cut = Render<KPI>(parameters => parameters
             .Add(p => p.Label, "testLabel")
             .Add(p => p.Orientation, KpiOrientation.Horizontal)
             .Add(p => p.State, KpiState.Neutral)
@@ -35,7 +35,7 @@ public class KPITest : TestContextBase
     [Fact]
     public void ComponentRendersNumericValueWithoutUnsupportedAttributes()
     {
-        var cut = RenderComponent<KPI>(parameters => parameters
+        var cut = Render<KPI>(parameters => parameters
             .Add(p => p.Label, "Temperature")
             .Add(p => p.Value, 42)
             .Add(p => p.State, KpiState.Warning)

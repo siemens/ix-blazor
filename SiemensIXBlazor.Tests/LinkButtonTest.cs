@@ -20,7 +20,7 @@ public class LinkButtonTest : TestContextBase
     public void ComponentRendersWithParametersSetCorrectly()
     {
         // Arrange
-        var cut = RenderComponent<LinkButton>(parameters => parameters
+        var cut = Render<LinkButton>(parameters => parameters
             .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content")))
             .Add(p => p.Disabled, true)
             .Add(p => p.Target, LinkButtonTarget._blank)

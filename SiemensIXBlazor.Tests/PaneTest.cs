@@ -22,19 +22,19 @@ namespace SiemensIXBlazor.Tests
         public void PaneRendersCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<Pane>(
-                ("Id", "testId"),
-                ("Borderless", true),
-                ("NoPadding", true),
-                ("Composition", PaneComposition.top),
-                ("Expanded", true),
-                ("CloseOnClickOutside", true),
-                ("Heading", "Test Heading"),
-                ("HideOnCollapse", true),
-                ("Icon", "Test Icon"),
-                ("Size", "240px"),
-                ("Variant", PaneVariant.inline),
-                ("AriaLabelCollapseCloseButton", "testAriaLabelCollapseCloseButton")
+            var cut = Render<Pane>(parameters => parameters
+                .Add(p => p.Id, "testId")
+                .Add(p => p.Borderless, true)
+                .Add(p => p.NoPadding, true)
+                .Add(p => p.Composition, PaneComposition.top)
+                .Add(p => p.Expanded, true)
+                .Add(p => p.CloseOnClickOutside, true)
+                .Add(p => p.Heading, "Test Heading")
+                .Add(p => p.HideOnCollapse, true)
+                .Add(p => p.Icon, "Test Icon")
+                .Add(p => p.Size, "240px")
+                .Add(p => p.Variant, PaneVariant.inline)
+                .Add(p => p.AriaLabelCollapseCloseButton, "testAriaLabelCollapseCloseButton")
             );
 
             // Assert
@@ -44,7 +44,9 @@ namespace SiemensIXBlazor.Tests
         [Fact]
         public void PaneUsesOfficialDefaultValues()
         {
-            var cut = RenderComponent<Pane>(("Id", "default-pane"));
+            var cut = Render<Pane>(parameters => parameters
+                .Add(p => p.Id, "default-pane")
+            );
 
             Assert.DoesNotContain("close-on-click-outside", cut.Markup);
             Assert.DoesNotContain("no-padding", cut.Markup);
@@ -57,9 +59,9 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             var expandedChanged = false;
-            var cut = RenderComponent<Pane>(
-                ("Id", "pane"),
-                ("ExpandedChangedEvent", EventCallback.Factory.Create<PaneExpandedChangedEventResponse>(this, newValue => { expandedChanged = true; }))
+            var cut = Render<Pane>(parameters => parameters
+                .Add(p => p.Id, "pane")
+                .Add(p => p.ExpandedChangedEvent, EventCallback.Factory.Create<PaneExpandedChangedEventResponse>(this, newValue => { expandedChanged = true; }))
             );
 
             // Act
@@ -74,9 +76,9 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             var borderlessChanged = false;
-            var cut = RenderComponent<Pane>(
-                ("Id", "pane"),
-                ("BorderlessChangedEvent", EventCallback.Factory.Create<PaneBorderlessChangedEventResponse>(this, newValue => { borderlessChanged = true; }))
+            var cut = Render<Pane>(parameters => parameters
+                .Add(p => p.Id, "pane")
+                .Add(p => p.BorderlessChangedEvent, EventCallback.Factory.Create<PaneBorderlessChangedEventResponse>(this, newValue => { borderlessChanged = true; }))
             );
 
             // Act
@@ -91,9 +93,9 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             var variantChanged = false;
-            var cut = RenderComponent<Pane>(
-                ("Id", "pane"),
-                ("VariantChangedEvent", EventCallback.Factory.Create<PaneVariantChangedEventResponse>(this, newValue => { variantChanged = true; }))
+            var cut = Render<Pane>(parameters => parameters
+                .Add(p => p.Id, "pane")
+                .Add(p => p.VariantChangedEvent, EventCallback.Factory.Create<PaneVariantChangedEventResponse>(this, newValue => { variantChanged = true; }))
             );
 
             // Act
@@ -110,7 +112,7 @@ namespace SiemensIXBlazor.Tests
             var expectedHeaderContent = "Header content";
 
             // Act
-            var cut = RenderComponent<Pane>(parameters => parameters
+            var cut = Render<Pane>(parameters => parameters
                 .Add(p => p.Id, "testPane")
                 .Add(p => p.HeaderContent, builder => 
                 {
@@ -127,7 +129,7 @@ namespace SiemensIXBlazor.Tests
         public void PaneDoesNotRenderHeaderSlotWhenNull()
         {
             // Arrange & Act
-            var cut = RenderComponent<Pane>(parameters => {
+            var cut = Render<Pane>(parameters => {
                 parameters.Add(p => p.Id, "testPane");
                 parameters.Add(p => p.Heading, "Test Heading");
             });
@@ -140,7 +142,7 @@ namespace SiemensIXBlazor.Tests
         public async Task ExpandedChangedDeserializesOfficialBooleanPayload()
         {
             PaneExpandedChangedEventResponse? response = null;
-            var cut = RenderComponent<Pane>(parameters => parameters
+            var cut = Render<Pane>(parameters => parameters
                 .Add(p => p.Id, "pane-event")
                 .Add(p => p.ExpandedChangedEvent, EventCallback.Factory.Create<PaneExpandedChangedEventResponse>(this, value => response = value)));
 

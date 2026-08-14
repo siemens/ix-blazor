@@ -18,7 +18,7 @@ public class CardAccordionTests : TestContextBase
     [Fact]
     public void RendersOfficialPropertiesAndContent()
     {
-        var cut = RenderComponent<CardAccordion>(parameters => parameters
+        var cut = Render<CardAccordion>(parameters => parameters
             .Add(p => p.AriaLabelExpandButton, "Expand card")
             .Add(p => p.Collapse, true)
             .Add(p => p.Variant, CardAccordionVariant.success)
@@ -30,7 +30,7 @@ public class CardAccordionTests : TestContextBase
     [Fact]
     public void CollapseAndVariantHaveOfficialDefaults()
     {
-        var cut = RenderComponent<CardAccordion>();
+        var cut = Render<CardAccordion>((Action<Bunit.ComponentParameterCollectionBuilder<CardAccordion>>)(_ => { }));
 
         Assert.False(cut.Instance.Collapse);
         Assert.Equal(CardAccordionVariant.outline, cut.Instance.Variant);

@@ -20,7 +20,7 @@ public class TimeInputTest : TestContextBase
     public void EnableTopLayerDefaultsToFalse()
     {
         // Arrange
-        var cut = RenderComponent<TimeInput>(parameters => parameters
+        var cut = Render<TimeInput>(parameters => parameters
             .Add(p => p.Id, "test-id"));
 
         // Assert
@@ -32,7 +32,7 @@ public class TimeInputTest : TestContextBase
     public void EnableTopLayerTrueRendersAttribute()
     {
         // Arrange
-        var cut = RenderComponent<TimeInput>(parameters => parameters
+        var cut = Render<TimeInput>(parameters => parameters
             .Add(p => p.Id, "test-id")
             .Add(p => p.EnableTopLayer, true));
 
@@ -46,7 +46,7 @@ public class TimeInputTest : TestContextBase
     {
         // Arrange
         var received = string.Empty;
-        var cut = RenderComponent<TimeInput>(parameters => parameters
+        var cut = Render<TimeInput>(parameters => parameters
             .Add(p => p.Id, "test-id")
             .Add(p => p.ChangeEvent, EventCallback.Factory.Create<string>(this, (string val) => received = val)));
 
@@ -62,7 +62,7 @@ public class TimeInputTest : TestContextBase
     {
         // Arrange
         var received = "initial";
-        var cut = RenderComponent<TimeInput>(parameters => parameters
+        var cut = Render<TimeInput>(parameters => parameters
             .Add(p => p.Id, "test-id")
             .Add(p => p.ChangeEvent, EventCallback.Factory.Create<string>(this, (string val) => received = val)));
 
@@ -76,7 +76,7 @@ public class TimeInputTest : TestContextBase
     [Fact]
     public void OfficialDefaultsAreExposed()
     {
-        var cut = RenderComponent<TimeInput>(parameters => parameters.Add(p => p.Id, "time-input"));
+        var cut = Render<TimeInput>(parameters => parameters.Add(p => p.Id, "time-input"));
 
         Assert.Equal("TT", cut.Instance.Format);
         Assert.Equal(100, cut.Instance.MillisecondInterval);

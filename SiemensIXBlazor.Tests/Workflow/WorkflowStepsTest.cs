@@ -20,11 +20,11 @@ namespace SiemensIXBlazor.Tests.Workflow
         public void WorkflowStepsRendersCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<WorkflowSteps>(
-                ("Id", "testId"),
-                ("Clickable", true),
-                ("SelectedIndex", 1),
-                ("Vertical", true)
+            var cut = Render<WorkflowSteps>(parameters => parameters
+                .Add(p => p.Id, "testId")
+                .Add(p => p.Clickable, true)
+                .Add(p => p.SelectedIndex, 1)
+                .Add(p => p.Vertical, true)
             );
 
             // Assert
@@ -36,9 +36,9 @@ namespace SiemensIXBlazor.Tests.Workflow
         {
             // Arrange
             var stepSelected = false;
-            var cut = RenderComponent<WorkflowSteps>(
-                ("Id", "workflowSteps"),
-                ("StepSelectedEvent", EventCallback.Factory.Create<int>(this, newValue => { stepSelected = true; }))
+            var cut = Render<WorkflowSteps>(parameters => parameters
+                .Add(p => p.Id, "workflowSteps")
+                .Add(p => p.StepSelectedEvent, EventCallback.Factory.Create<int>(this, newValue => { stepSelected = true; }))
             );
 
             // Act

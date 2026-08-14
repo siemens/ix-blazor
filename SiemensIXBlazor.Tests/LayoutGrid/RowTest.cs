@@ -19,7 +19,7 @@ public class RowTest : TestContextBase
     public void ComponentRendersWithChildContent()
     {
         // Arrange
-        var cut = RenderComponent<Row>(parameters => parameters
+        var cut = Render<Row>(parameters => parameters
             .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content"))));
 
         // Assert

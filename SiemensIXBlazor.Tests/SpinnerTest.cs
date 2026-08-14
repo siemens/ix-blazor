@@ -20,11 +20,11 @@ namespace SiemensIXBlazor.Tests
         public void SpinnerRendersCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<Spinner>(
-                ("Size", "large"),
-                ("Variant", SpinnerVariant.primary),
-                ("Style", "color: red;"),
-                ("Class", "test-class")
+            var cut = Render<Spinner>(parameters => parameters
+                .Add(p => p.Size, "large")
+                .Add(p => p.Variant, SpinnerVariant.primary)
+                .Add(p => p.Style, "color: red;")
+                .Add(p => p.Class, "test-class")
             );
 
             // Assert

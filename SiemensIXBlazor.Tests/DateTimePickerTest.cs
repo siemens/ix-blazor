@@ -21,7 +21,7 @@ public class DateTimePickerTest : TestContextBase
     [Fact]
     public void OfficialPropertiesRender()
     {
-        var cut = RenderComponent<DateTimePicker>(parameters => parameters
+        var cut = Render<DateTimePicker>(parameters => parameters
             .Add(p => p.Id, "datetime-picker")
             .Add(p => p.MinTime, "08:00")
             .Add(p => p.MaxTime, "18:00")
@@ -40,7 +40,7 @@ public class DateTimePickerTest : TestContextBase
     public async Task DateChangePreservesOfficialStringAndRangeForms()
     {
         var received = new List<DateTimeDateChangeEvent>();
-        var cut = RenderComponent<DateTimePicker>(parameters => parameters
+        var cut = Render<DateTimePicker>(parameters => parameters
             .Add(p => p.Id, "datetime-picker")
             .Add(p => p.DateChangeEvent,
                 EventCallback.Factory.Create<DateTimeDateChangeEvent>(this, value => received.Add(value))));

@@ -21,7 +21,7 @@ public class SelectTests : TestContextBase
     public void ComponentRendersWithoutCrashing()
     {
         // Arrange
-        var cut = RenderComponent<Components.Select>(parameters => parameters
+        var cut = Render<Components.Select>(parameters => parameters
             .Add(p => p.Id, "test-select")
             .Add(p => p.Value, "1"));
 
@@ -36,7 +36,7 @@ public class SelectTests : TestContextBase
     public void IdPropertyIsSetCorrectly()
     {
         // Arrange
-        var cut = RenderComponent<Components.Select>(parameters => parameters
+        var cut = Render<Components.Select>(parameters => parameters
             .Add(p => p.Id, "custom-id")
             .Add(p => p.Value, "1"));
 
@@ -52,7 +52,7 @@ public class SelectTests : TestContextBase
     public void AllowClearPropertyIsSetCorrectly()
     {
         // Arrange
-        var cut = RenderComponent<Components.Select>(parameters => parameters
+        var cut = Render<Components.Select>(parameters => parameters
             .Add(p => p.Id, "test-select")
             .Add(p => p.AllowClear, true));
 
@@ -68,7 +68,7 @@ public class SelectTests : TestContextBase
     public void ModePropertyIsSetCorrectly()
     {
         // Arrange
-        var cut = RenderComponent<Components.Select>(parameters => parameters
+        var cut = Render<Components.Select>(parameters => parameters
             .Add(p => p.Id, "test-select")
             .Add(p => p.Value, "1")
             .Add(p => p.Mode, SelectMode.Multiple));
@@ -85,7 +85,7 @@ public class SelectTests : TestContextBase
     public void ValuePropertyIsSetCorrectly()
     {
         // Arrange
-        var cut = RenderComponent<Components.Select>(parameters => parameters
+        var cut = Render<Components.Select>(parameters => parameters
             .Add(p => p.Id, "test-select")
             .Add(p => p.Value, "testValue"));
 
@@ -101,7 +101,7 @@ public class SelectTests : TestContextBase
     public void MultipleValueSupportsStringArray()
     {
         var values = new[] { "1", "2" };
-        var cut = RenderComponent<Components.Select>(parameters => parameters
+        var cut = Render<Components.Select>(parameters => parameters
             .Add(p => p.Id, "test-select")
             .Add(p => p.Mode, SelectMode.Multiple)
             .Add(p => p.Value, values));
@@ -113,7 +113,7 @@ public class SelectTests : TestContextBase
     [Fact]
     public void OfficialLocalizationAndMultipleSelectionPropertiesRender()
     {
-        var cut = RenderComponent<Components.Select>(parameters => parameters
+        var cut = Render<Components.Select>(parameters => parameters
             .Add(p => p.Id, "test-select")
             .Add(p => p.AriaLabelAddItem, "Add option")
             .Add(p => p.I18nMoreItems, "{count} additional")
@@ -132,7 +132,7 @@ public class SelectTests : TestContextBase
     public void ClassPropertyIsSetCorrectly()
     {
         // Arrange
-        var cut = RenderComponent<Components.Select>(parameters => parameters
+        var cut = Render<Components.Select>(parameters => parameters
             .Add(p => p.Id, "test-select")
             .Add(p => p.Value, "1")
             .Add(p => p.Class, "ix-warning"));
@@ -149,7 +149,7 @@ public class SelectTests : TestContextBase
     public void WarningTextPropertyIsSetCorrectly()
     {
         // Arrange
-        var cut = RenderComponent<Components.Select>(parameters => parameters
+        var cut = Render<Components.Select>(parameters => parameters
             .Add(p => p.Id, "test-select")
             .Add(p => p.Value, "1")
             .Add(p => p.WarningText, "This is a warning text"));
@@ -167,7 +167,7 @@ public class SelectTests : TestContextBase
     public void ChildContentIsRenderedCorrectly()
     {
         // Arrange
-        var cut = RenderComponent<Components.Select>(parameters => parameters
+        var cut = Render<Components.Select>(parameters => parameters
             .Add(p => p.Id, "test-select")
             .Add(p => p.Value, "1")
             .Add(p => p.ChildContent, builder =>
@@ -193,7 +193,7 @@ public class SelectTests : TestContextBase
     {
         // Arrange
         string? addedItem = null;
-        var cut = RenderComponent<Components.Select>(parameters => parameters
+        var cut = Render<Components.Select>(parameters => parameters
             .Add(p => p.Id, "test-select")
             .Add(p => p.AddItemEvent, EventCallback.Factory.Create<string>(this, (item) => addedItem = item)));
 
@@ -209,7 +209,7 @@ public class SelectTests : TestContextBase
     {
         // Arrange
         string? changedValue = null;
-        var cut = RenderComponent<Components.Select>(parameters => parameters
+        var cut = Render<Components.Select>(parameters => parameters
             .Add(p => p.Id, "test-select")
             .Add(p => p.ValueChangeEvent, EventCallback.Factory.Create<object?>(this, value => changedValue = value?.ToString())));
 
@@ -226,7 +226,7 @@ public class SelectTests : TestContextBase
     {
         // Arrange
         string[]? changedValues = null;
-        var cut = RenderComponent<Components.Select>(parameters => parameters
+        var cut = Render<Components.Select>(parameters => parameters
             .Add(p => p.Id, "test-select")
             .Add(p => p.ValueChangeEvent, EventCallback.Factory.Create<object?>(this, value => changedValues = value as string[])));
 
@@ -246,7 +246,7 @@ public class SelectTests : TestContextBase
     {
         // Arrange
         string? changedInput = null;
-        var cut = RenderComponent<Components.Select>(parameters => parameters
+        var cut = Render<Components.Select>(parameters => parameters
             .Add(p => p.Id, "test-select")
             .Add(p => p.InputChangeEvent, EventCallback.Factory.Create<string>(this, (input) => changedInput = input)));
 
@@ -262,7 +262,7 @@ public class SelectTests : TestContextBase
     {
         // Arrange
         bool blurTriggered = false;
-        var cut = RenderComponent<Components.Select>(parameters => parameters
+        var cut = Render<Components.Select>(parameters => parameters
             .Add(p => p.Id, "test-select")
             .Add(p => p.BlurEvent, EventCallback.Factory.Create<object>(this, (_) => blurTriggered = true)));
 
@@ -277,7 +277,7 @@ public class SelectTests : TestContextBase
     public void ComplexSelectComponentRendersCorrectly()
     {
         // Arrange & Act
-        var cut = RenderComponent<Components.Select>(parameters => parameters
+        var cut = Render<Components.Select>(parameters => parameters
             .Add(p => p.Id, "valid-select")
             .Add(p => p.Class, "ix-warning")
             .Add(p => p.Mode, SelectMode.Single)
@@ -316,7 +316,7 @@ public class SelectTests : TestContextBase
     public void EnableTopLayerDefaultsToFalse()
     {
         // Arrange
-        var cut = RenderComponent<Components.Select>(parameters => parameters
+        var cut = Render<Components.Select>(parameters => parameters
             .Add(p => p.Id, "test-select"));
 
         // Assert
@@ -328,7 +328,7 @@ public class SelectTests : TestContextBase
     public void EnableTopLayerTrueRendersAttribute()
     {
         // Arrange
-        var cut = RenderComponent<Components.Select>(parameters => parameters
+        var cut = Render<Components.Select>(parameters => parameters
             .Add(p => p.Id, "test-select")
             .Add(p => p.EnableTopLayer, true));
 

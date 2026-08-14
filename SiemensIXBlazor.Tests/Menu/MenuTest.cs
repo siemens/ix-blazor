@@ -17,7 +17,7 @@ public class MenuTest : TestContextBase
     [Fact]
     public void RendersCurrentPublicProperties()
     {
-        var cut = RenderComponent<Components.Menu.Menu>(parameters => parameters
+        var cut = Render<Components.Menu.Menu>(parameters => parameters
             .Add(p => p.Id, "menu")
             .Add(p => p.ApplicationName, "Application")
             .Add(p => p.ApplicationDescription, "Description")
@@ -52,7 +52,7 @@ public class MenuTest : TestContextBase
         var appSwitch = false;
         var settings = false;
         var about = false;
-        var cut = RenderComponent<Components.Menu.Menu>(parameters => parameters
+        var cut = Render<Components.Menu.Menu>(parameters => parameters
             .Add(p => p.Id, "menu")
             .Add(p => p.ExpandChangedEvent, EventCallback.Factory.Create<bool>(this, value => expand = value))
             .Add(p => p.MapExpandChangedEvent, EventCallback.Factory.Create<bool>(this, value => mapExpand = value))

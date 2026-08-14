@@ -20,7 +20,7 @@ public class ExpandingSearchTest : TestContextBase
     public void ComponentRendersWithCorrectProperties()
     {
         // Arrange
-        var cut = RenderComponent<ExpandingSearch>(parameters => parameters
+        var cut = Render<ExpandingSearch>(parameters => parameters
             .Add(p => p.Id, "testId")
             .Add(p => p.Icon, "testIcon")
             .Add(p => p.Placeholder, "testPlaceholder")
@@ -42,7 +42,7 @@ public class ExpandingSearchTest : TestContextBase
     {
         // Arrange
         var valueChangedEventInvoked = false;
-        var cut = RenderComponent<ExpandingSearch>(parameters => parameters
+        var cut = Render<ExpandingSearch>(parameters => parameters
             .Add(p => p.ValueChangedEvent,
                 EventCallback.Factory.Create<string>(this, _ => valueChangedEventInvoked = true)));
 

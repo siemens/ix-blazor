@@ -18,7 +18,7 @@ namespace SiemensIXBlazor.Tests
         public void ChipRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<Chip>(parameters =>
+            var cut = Render<Chip>(parameters =>
             {
                 parameters.Add(p => p.Id, "testId");
                 parameters.Add(p => p.Inactive, true);
@@ -43,7 +43,7 @@ namespace SiemensIXBlazor.Tests
             var expectedContent = "Expected content";
 
             // Act
-            var cut = RenderComponent<Chip>(parameters => parameters
+            var cut = Render<Chip>(parameters => parameters
                 .Add(p => p.ChildContent, builder =>
                 {
                     builder.AddContent(0, expectedContent);
@@ -57,7 +57,7 @@ namespace SiemensIXBlazor.Tests
         public void ChipWithCenterContentTrue()
         {
             // Arrange
-            var cut = RenderComponent<Chip>(parameters =>
+            var cut = Render<Chip>(parameters =>
             {
                 parameters.Add(p => p.Id, "centeredChip");
                 parameters.Add(p => p.CenterContent, true);
@@ -71,7 +71,7 @@ namespace SiemensIXBlazor.Tests
         public void ChipWithCenterContentFalse()
         {
             // Arrange
-            var cut = RenderComponent<Chip>(parameters =>
+            var cut = Render<Chip>(parameters =>
             {
                 parameters.Add(p => p.Id, "notCenteredChip");
                 parameters.Add(p => p.CenterContent, false);
@@ -84,7 +84,7 @@ namespace SiemensIXBlazor.Tests
         [Fact]
         public void ChipMapsIconAccessibilityAndBooleanTooltip()
         {
-            var cut = RenderComponent<Chip>(parameters => parameters
+            var cut = Render<Chip>(parameters => parameters
                 .Add(p => p.Id, "accessibleChip")
                 .Add(p => p.Icon, "info")
                 .Add(p => p.AriaLabelIcon, "Information")
@@ -101,7 +101,7 @@ namespace SiemensIXBlazor.Tests
         [Fact]
         public void ChipFalseTooltipDoesNotRenderTooltipAttribute()
         {
-            var cut = RenderComponent<Chip>(parameters => parameters
+            var cut = Render<Chip>(parameters => parameters
                 .Add(p => p.Id, "noTooltipChip")
                 .Add(p => p.TooltipText, false));
 

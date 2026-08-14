@@ -19,7 +19,7 @@ public class PopoverTests : TestContextBase
     [Fact]
     public void Popover_RendersOfficialPropertiesAndChildContent()
     {
-        var cut = RenderComponent<Components.Popover>(parameters => parameters
+        var cut = Render<Components.Popover>(parameters => parameters
             .Add(p => p.Id, "popover")
             .Add(p => p.Trigger, "popover-trigger")
             .Add(p => p.Show, true)
@@ -47,7 +47,7 @@ public class PopoverTests : TestContextBase
         var showChange = false;
         var showChanged = false;
 
-        var cut = RenderComponent<Components.Popover>(parameters => parameters
+        var cut = Render<Components.Popover>(parameters => parameters
             .Add(p => p.Id, "popover")
             .Add(p => p.ShowChangeEvent, EventCallback.Factory.Create<bool>(this, value => showChange = value))
             .Add(p => p.ShowChangedEvent, EventCallback.Factory.Create<bool>(this, value => showChanged = value)));
@@ -62,7 +62,7 @@ public class PopoverTests : TestContextBase
     [Fact]
     public void PopoverHeader_RendersPropertiesAndNamedSlot()
     {
-        var cut = RenderComponent<Components.PopoverHeader>(parameters => parameters
+        var cut = Render<Components.PopoverHeader>(parameters => parameters
             .Add(p => p.Id, "popover-header")
             .Add(p => p.Icon, "info")
             .Add(p => p.IconColor, "#007993")
@@ -87,7 +87,7 @@ public class PopoverTests : TestContextBase
     public async Task PopoverHeader_RaisesCloseClickEvent()
     {
         MouseEventArgs? received = null;
-        var cut = RenderComponent<Components.PopoverHeader>(parameters => parameters
+        var cut = Render<Components.PopoverHeader>(parameters => parameters
             .Add(p => p.Id, "popover-header")
             .Add(p => p.CloseClickEvent, EventCallback.Factory.Create<MouseEventArgs>(this, value => received = value)));
 
@@ -100,7 +100,7 @@ public class PopoverTests : TestContextBase
     [Fact]
     public void PopoverImage_RendersImageProperties()
     {
-        var cut = RenderComponent<Components.PopoverImage>(parameters => parameters
+        var cut = Render<Components.PopoverImage>(parameters => parameters
             .Add(p => p.Id, "popover-image")
             .Add(p => p.Image, "/images/example.png")
             .Add(p => p.ImageAlt, "Example image"));
@@ -115,7 +115,7 @@ public class PopoverTests : TestContextBase
     [Fact]
     public void PopoverContent_RendersNoPaddingAndChildContent()
     {
-        var cut = RenderComponent<Components.PopoverContent>(parameters => parameters
+        var cut = Render<Components.PopoverContent>(parameters => parameters
             .Add(p => p.Id, "popover-content")
             .Add(p => p.NoPadding, true)
             .AddChildContent("Popover content"));
@@ -130,7 +130,7 @@ public class PopoverTests : TestContextBase
     [Fact]
     public void PopoverFooter_RendersAlignmentAndStartSlot()
     {
-        var cut = RenderComponent<Components.PopoverFooter>(parameters => parameters
+        var cut = Render<Components.PopoverFooter>(parameters => parameters
             .Add(p => p.Id, "popover-footer")
             .Add(p => p.Alignment, PopoverFooterAlignment.Vertical)
             .Add(p => p.StartContent, (RenderFragment)(builder => builder.AddContent(0, "Metadata")))

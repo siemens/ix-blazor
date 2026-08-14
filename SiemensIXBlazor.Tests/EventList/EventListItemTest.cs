@@ -19,7 +19,7 @@ public class EventListItemTest : TestContextBase
     public void ComponentRendersWithCorrectProperties()
     {
         // Arrange
-        var cut = RenderComponent<EventListItem>(parameters => parameters
+        var cut = Render<EventListItem>(parameters => parameters
             .Add(p => p.Id, "testId")
             .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content")))
             .Add(p => p.Chevron, true)
@@ -38,7 +38,7 @@ public class EventListItemTest : TestContextBase
     [Fact]
     public void DefaultBooleanPropertiesMatchOfficialDefaults()
     {
-        var cut = RenderComponent<EventListItem>(parameters => parameters.Add(p => p.Id, "testId"));
+        var cut = Render<EventListItem>(parameters => parameters.Add(p => p.Id, "testId"));
 
         Assert.False(cut.Instance.Chevron);
         Assert.False(cut.Instance.Disabled);
@@ -51,7 +51,7 @@ public class EventListItemTest : TestContextBase
     {
         // Arrange
         var wasClicked = false;
-        var cut = RenderComponent<EventListItem>(parameters => parameters
+        var cut = Render<EventListItem>(parameters => parameters
             .Add(p => p.ItemClickEvent, EventCallback.Factory.Create(this, () => wasClicked = true)));
 
         // Act

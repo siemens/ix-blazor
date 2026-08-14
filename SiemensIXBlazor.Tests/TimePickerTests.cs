@@ -19,7 +19,7 @@ public class TimePickerTests : TestContextBase
     [Fact]
     public void OfficialDefaultsAreRendered()
     {
-        var cut = RenderComponent<TimePicker>(parameters => parameters.Add(p => p.Id, "time-picker"));
+        var cut = Render<TimePicker>(parameters => parameters.Add(p => p.Id, "time-picker"));
         var picker = cut.Find("ix-time-picker");
 
         Assert.Equal("rounded", picker.GetAttribute("corners"));
@@ -36,7 +36,7 @@ public class TimePickerTests : TestContextBase
     [InlineData(TimePickerCorners.Straight, "straight")]
     public void CornersRenderCorrectly(TimePickerCorners corners, string expected)
     {
-        var cut = RenderComponent<TimePicker>(parameters => parameters
+        var cut = Render<TimePicker>(parameters => parameters
             .Add(p => p.Id, "time-picker")
             .Add(p => p.Corners, corners));
 
@@ -48,7 +48,7 @@ public class TimePickerTests : TestContextBase
     {
         string? selected = null;
         string? changed = null;
-        var cut = RenderComponent<TimePicker>(parameters => parameters
+        var cut = Render<TimePicker>(parameters => parameters
             .Add(p => p.Id, "time-picker")
             .Add(p => p.TimeSelectEvent, EventCallback.Factory.Create<string>(this, value => selected = value))
             .Add(p => p.TimeChangeEvent, EventCallback.Factory.Create<string>(this, value => changed = value)));

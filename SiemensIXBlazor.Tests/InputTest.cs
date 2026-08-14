@@ -21,7 +21,7 @@ public class InputTest : TestContextBase
     public void InputRendersWithId()
     {
         // Arrange & Act
-        var cut = RenderComponent<Input>(parameters => parameters
+        var cut = Render<Input>(parameters => parameters
             .Add(p => p.Id, "test-input"));
 
         // Assert
@@ -34,7 +34,7 @@ public class InputTest : TestContextBase
     {
         // Arrange
         var received = string.Empty;
-        var cut = RenderComponent<Input>(parameters => parameters
+        var cut = Render<Input>(parameters => parameters
             .Add(p => p.Id, "test-input")
             .Add(p => p.IxChangeEvent, EventCallback.Factory.Create<string>(this, (string val) => received = val)));
 
@@ -50,7 +50,7 @@ public class InputTest : TestContextBase
     {
         // Arrange
         var received = "initial";
-        var cut = RenderComponent<Input>(parameters => parameters
+        var cut = Render<Input>(parameters => parameters
             .Add(p => p.Id, "test-input")
             .Add(p => p.IxChangeEvent, EventCallback.Factory.Create<string>(this, (string val) => received = val)));
 

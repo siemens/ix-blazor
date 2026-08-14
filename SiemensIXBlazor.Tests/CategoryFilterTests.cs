@@ -22,7 +22,7 @@ namespace SiemensIXBlazor.Tests
         public void CategoryFilterRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<CategoryFilter>(parameters =>
+            var cut = Render<CategoryFilter>(parameters =>
             {
                 parameters.Add(p => p.Id, "testId");
                 parameters.Add(p => p.HideIcon, true);
@@ -44,11 +44,10 @@ namespace SiemensIXBlazor.Tests
         public void CategoriesSetsCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<CategoryFilter>();
             var mockCategories = new Dictionary<string, Category> { { "category1", new() { Label = "Test Label", Options = ["options1"] } } };
 
-            // Act
-            cut.Instance.Categories = mockCategories;
+            var cut = Render<CategoryFilter>(parameters => parameters
+                .Add(p => p.Categories, mockCategories));
 
             // Assert
             Assert.Equal(cut.Instance.Categories, mockCategories);
@@ -58,11 +57,10 @@ namespace SiemensIXBlazor.Tests
         public void FilterStateSetsCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<CategoryFilter>();
             var mockFilterState = new FilterState { Categories = [new FilterStateCategory { Id = "testId", Operator = LogicalFilterOperator.NotEqual, Value = "testValue" }] };
 
-            // Act
-            cut.Instance.FilterState = mockFilterState;
+            var cut = Render<CategoryFilter>(parameters => parameters
+                .Add(p => p.FilterState, mockFilterState));
 
             // Assert
             Assert.Equal(cut.Instance.FilterState, mockFilterState);
@@ -72,11 +70,10 @@ namespace SiemensIXBlazor.Tests
         public void NonSelectableCategoriesSetsCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<CategoryFilter>();
             var mockNonSelectableCategories = new Dictionary<string, string> { { "test", "test" } };
 
-            // Act
-            cut.Instance.NonSelectableCategories = mockNonSelectableCategories;
+            var cut = Render<CategoryFilter>(parameters => parameters
+                .Add(p => p.NonSelectableCategories, mockNonSelectableCategories));
 
             // Assert
             Assert.Equal(cut.Instance.NonSelectableCategories, mockNonSelectableCategories);
@@ -86,11 +83,10 @@ namespace SiemensIXBlazor.Tests
         public void SuggestionsSetsCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<CategoryFilter>();
             var mockSuggestions = new string[] { "test", "test2" };
 
-            // Act
-            cut.Instance.Suggestions = mockSuggestions;
+            var cut = Render<CategoryFilter>(parameters => parameters
+                .Add(p => p.Suggestions, mockSuggestions));
 
             // Assert
             Assert.Equal(cut.Instance.Suggestions, mockSuggestions);
@@ -100,7 +96,7 @@ namespace SiemensIXBlazor.Tests
         public async Task FilterChangedEventReceivesTypedState()
         {
             FilterState? received = null;
-            var cut = RenderComponent<CategoryFilter>(parameters => parameters
+            var cut = Render<CategoryFilter>(parameters => parameters
                 .Add(p => p.FilterChangedEvent, EventCallback.Factory.Create<FilterState>(this, state => received = state)));
 
             var payload = JsonDocument.Parse("""
@@ -116,7 +112,7 @@ namespace SiemensIXBlazor.Tests
         public async Task InputChangedEventReceivesTypedState()
         {
             InputState? received = null;
-            var cut = RenderComponent<CategoryFilter>(parameters => parameters
+            var cut = Render<CategoryFilter>(parameters => parameters
                 .Add(p => p.InputChangedEvent, EventCallback.Factory.Create<InputState>(this, state => received = state)));
 
             var payload = JsonDocument.Parse("""{"token":"Sie","category":"vendor"}""").RootElement;
@@ -132,7 +128,7 @@ namespace SiemensIXBlazor.Tests
         {
             string? category = "not-set";
             var cleared = false;
-            var cut = RenderComponent<CategoryFilter>(parameters => parameters
+            var cut = Render<CategoryFilter>(parameters => parameters
                 .Add(p => p.CategoryChangedEvent, EventCallback.Factory.Create<string?>(this, value => category = value))
                 .Add(p => p.FilterClearedEvent, EventCallback.Factory.Create<FilterClearedEventArgs>(this, _ => cleared = true)));
 
@@ -148,7 +144,7 @@ namespace SiemensIXBlazor.Tests
         [Fact]
         public async Task FilterClearedCanBeCanceled()
         {
-            var cut = RenderComponent<CategoryFilter>(parameters => parameters
+            var cut = Render<CategoryFilter>(parameters => parameters
                 .Add(p => p.FilterClearedEvent, EventCallback.Factory.Create<FilterClearedEventArgs>(this, eventArgs => eventArgs.Cancel = true)));
 
             Assert.True(await cut.Instance.FilterCleared());
@@ -172,12 +168,12 @@ namespace SiemensIXBlazor.Tests
         [Fact]
         public void RepeatedEquivalentStateDoesNotCauseRecursiveRendering()
         {
-            var cut = RenderComponent<CategoryFilter>(parameters => parameters
+            var cut = Render<CategoryFilter>(parameters => parameters
                 .Add(p => p.Id, "category-filter"));
 
             for (var index = 0; index < 100; index++)
             {
-                cut.SetParametersAndRender(parameters => parameters
+                cut.Render(parameters => parameters
                     .Add(p => p.Categories, new Dictionary<string, Category>
                     {
                         ["vendor"] = new() { Label = "Vendor", Options = ["Siemens"] }
@@ -201,7 +197,7 @@ namespace SiemensIXBlazor.Tests
         public void EnableTopLayerDefaultsToFalse()
         {
             // Arrange
-            var cut = RenderComponent<CategoryFilter>(parameters => parameters
+            var cut = Render<CategoryFilter>(parameters => parameters
                 .Add(p => p.Id, "test-id"));
 
             // Assert
@@ -213,7 +209,7 @@ namespace SiemensIXBlazor.Tests
         public void EnableTopLayerTrueRendersAttribute()
         {
             // Arrange
-            var cut = RenderComponent<CategoryFilter>(parameters => parameters
+            var cut = Render<CategoryFilter>(parameters => parameters
                 .Add(p => p.Id, "test-id")
                 .Add(p => p.EnableTopLayer, true));
 

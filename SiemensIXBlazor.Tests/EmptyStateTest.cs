@@ -19,7 +19,7 @@ public class EmptyStateTest : TestContextBase
     public void ComponentRendersWithCorrectProperties()
     {
         // Arrange
-        var cut = RenderComponent<EmptyState>(parameters => parameters
+        var cut = Render<EmptyState>(parameters => parameters
             .Add(p => p.Id, "testId")
             .Add(p => p.Action, "testAction")
             .Add(p => p.Header, "testHeader")
@@ -37,7 +37,7 @@ public class EmptyStateTest : TestContextBase
     {
         // Arrange
         var eventCalled = false;
-        var cut = RenderComponent<EmptyState>(parameters => parameters
+        var cut = Render<EmptyState>(parameters => parameters
             .Add(p => p.Id, "testId")
             .Add(p => p.ActionClickedEvent, EventCallback.Factory.Create(this, () => eventCalled = true)));
 

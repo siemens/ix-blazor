@@ -20,16 +20,16 @@ public class SplitButtonTests : TestContextBase
 	public void SplitButtonRendersCorrectly()
 	{
 		// Arrange
-		var cut = RenderComponent<Components.SplitButton>(
-			("Id", "testId"),
-			("Disabled", true),
-			("DisableButton", true),
-			("DisableDropdownButton", true),
-			("Icon", "test-icon"),
-			("Label", "Test Label"),
-			("SplitIcon", "context-menu"),
-			("CloseBehavior", CloseBehavior.Both),
-			("Variant", ButtonVariant.primary)
+		var cut = Render<Components.SplitButton>(parameters => parameters
+		    .Add(p => p.Id, "testId")
+		    .Add(p => p.Disabled, true)
+		    .Add(p => p.DisableButton, true)
+		    .Add(p => p.DisableDropdownButton, true)
+		    .Add(p => p.Icon, "test-icon")
+		    .Add(p => p.Label, "Test Label")
+		    .Add(p => p.SplitIcon, "context-menu")
+		    .Add(p => p.CloseBehavior, CloseBehavior.Both)
+		    .Add(p => p.Variant, ButtonVariant.primary)
 		);
 
 		// Assert
@@ -42,9 +42,9 @@ public class SplitButtonTests : TestContextBase
 	{
 		// Arrange
 		var buttonClicked = false;
-		var cut = RenderComponent<Components.SplitButton>(
-			("Id", "testId"),
-			("ButtonClickedEvent", EventCallback.Factory.Create<MouseEventArgs>(this, _ => buttonClicked = true))
+		var cut = Render<Components.SplitButton>(parameters => parameters
+		    .Add(p => p.Id, "testId")
+		    .Add(p => p.ButtonClickedEvent, EventCallback.Factory.Create<MouseEventArgs>(this, _ => buttonClicked = true))
 		);
 
 		// Act
@@ -58,7 +58,7 @@ public class SplitButtonTests : TestContextBase
 	public void EnableTopLayerDefaultsToFalse()
 	{
 		// Arrange
-		var cut = RenderComponent<Components.SplitButton>(parameters => parameters
+		var cut = Render<Components.SplitButton>(parameters => parameters
 			.Add(p => p.Id, "test-id"));
 
 		// Assert
@@ -70,7 +70,7 @@ public class SplitButtonTests : TestContextBase
 	public void EnableTopLayerTrueRendersAttribute()
 	{
 		// Arrange
-		var cut = RenderComponent<Components.SplitButton>(parameters => parameters
+		var cut = Render<Components.SplitButton>(parameters => parameters
 			.Add(p => p.Id, "test-id")
 			.Add(p => p.EnableTopLayer, true));
 

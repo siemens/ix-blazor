@@ -19,7 +19,7 @@ namespace SiemensIXBlazor.Tests
         public void ApplicationRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<Application>(parameters => {
+            var cut = Render<Application>(parameters => {
                 parameters.Add(p => p.Id, "testId");
                 parameters.Add(p => p.ForceBreakpoint, Enums.ForceBreakpoint.lg);
                 parameters.Add(p => p.Theme, "testTheme");
@@ -33,7 +33,7 @@ namespace SiemensIXBlazor.Tests
         [Fact]
         public void ColorSchemaDefaultsToSystem()
         {
-            var cut = RenderComponent<Application>();
+            var cut = Render<Application>((Action<Bunit.ComponentParameterCollectionBuilder<Application>>)(_ => { }));
 
             Assert.Equal(Enums.ColorSchema.System, cut.Instance.ColorSchema);
             Assert.Contains("color-schema=\"system\"", cut.Markup);
@@ -47,7 +47,7 @@ namespace SiemensIXBlazor.Tests
             {
                 CurrentAppId = "app-1"
             };
-            var cut = RenderComponent<Application>(parameters => parameters
+            var cut = Render<Application>(parameters => parameters
                 .Add(p => p.AppSwitchConfig, config));
 
             // Assert

@@ -18,7 +18,7 @@ public class MenuAboutTest : TestContextBase
     [Fact]
     public void RendersCurrentPublicProperties()
     {
-        var cut = RenderComponent<Components.MenuAbout.MenuAbout>(parameters => parameters
+        var cut = Render<Components.MenuAbout.MenuAbout>(parameters => parameters
             .Add(p => p.Id, "about")
             .Add(p => p.ActiveTabKey, "legal")
             .Add(p => p.SuppressLegacyTabs, true)
@@ -37,7 +37,7 @@ public class MenuAboutTest : TestContextBase
     {
         MenuCloseEvent? close = null;
         var tabKey = string.Empty;
-        var cut = RenderComponent<Components.MenuAbout.MenuAbout>(parameters => parameters
+        var cut = Render<Components.MenuAbout.MenuAbout>(parameters => parameters
             .Add(p => p.ClosedEvent, EventCallback.Factory.Create<MenuCloseEvent>(this, value => close = value))
             .Add(p => p.TabChangedEvent, EventCallback.Factory.Create<string>(this, value => tabKey = value)));
         var expected = new MenuCloseEvent { Name = "ix-menu-about" };

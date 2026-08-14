@@ -21,7 +21,7 @@ namespace SiemensIXBlazor.Tests
         public void BreadcrumbRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<Breadcrumb>(parameters =>
+            var cut = Render<Breadcrumb>(parameters =>
             {
                 parameters.Add(p => p.Id, "testId");
                 parameters.Add(p => p.Subtle, true);
@@ -41,7 +41,7 @@ namespace SiemensIXBlazor.Tests
             var expectedContent = "Expected content";
 
             // Act
-            var cut = RenderComponent<Breadcrumb>(parameters => parameters
+            var cut = Render<Breadcrumb>(parameters => parameters
                 .Add(p => p.ChildContent, builder =>
                 {
                     builder.AddContent(0, expectedContent);
@@ -56,7 +56,7 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             BreadcrumbClick? clickedItem = null;
-            var cut = RenderComponent<Breadcrumb>(parameters => parameters.Add(p => p.ItemClicked, EventCallback.Factory.Create<BreadcrumbClick>(this, item => clickedItem = item)));
+            var cut = Render<Breadcrumb>(parameters => parameters.Add(p => p.ItemClicked, EventCallback.Factory.Create<BreadcrumbClick>(this, item => clickedItem = item)));
 
             // Act
             cut.Instance.BreadcrumbItemClicked(JsonSerializer.SerializeToElement(new { breadcrumbKey = "test-key", label = "test" }));
@@ -71,7 +71,7 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             BreadcrumbNextClick? clickedItem = null;
-            var cut = RenderComponent<Breadcrumb>(parameters => parameters.Add(p => p.NextItemClicked, EventCallback.Factory.Create<BreadcrumbNextClick>(this, item => clickedItem = item)));
+            var cut = Render<Breadcrumb>(parameters => parameters.Add(p => p.NextItemClicked, EventCallback.Factory.Create<BreadcrumbNextClick>(this, item => clickedItem = item)));
 
             // Act
             cut.Instance.BreadcrumbNextItemClicked(JsonSerializer.SerializeToElement(new { @event = new { type = "click" }, item = new { breadcrumbKey = "test-key", label = "test" } }));
@@ -85,7 +85,7 @@ namespace SiemensIXBlazor.Tests
         public void EnableTopLayerDefaultsToFalse()
         {
             // Arrange
-            var cut = RenderComponent<Breadcrumb>(parameters => parameters
+            var cut = Render<Breadcrumb>(parameters => parameters
                 .Add(p => p.Id, "test-id"));
 
             // Assert
@@ -97,7 +97,7 @@ namespace SiemensIXBlazor.Tests
         public void EnableTopLayerTrueRendersAttribute()
         {
             // Arrange
-            var cut = RenderComponent<Breadcrumb>(parameters => parameters
+            var cut = Render<Breadcrumb>(parameters => parameters
                 .Add(p => p.Id, "test-id")
                 .Add(p => p.EnableTopLayer, true));
 

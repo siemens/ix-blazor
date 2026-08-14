@@ -15,7 +15,7 @@ using Moq;
 
 namespace SiemensIXBlazor.Tests;
 
-public class TestContextBase : TestContext
+public class TestContextBase : BunitContext
 {
     public TestContextBase()
     {

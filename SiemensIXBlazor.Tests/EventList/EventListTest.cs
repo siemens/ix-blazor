@@ -18,7 +18,7 @@ public class EventListTest : TestContextBase
     public void EventListPropertiesAreSetCorrectly()
     {
         // Arrange
-        var cut = RenderComponent<Components.EventList>(parameters => parameters
+        var cut = Render<Components.EventList>(parameters => parameters
             .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content")))
             .Add(p => p.Animated, true)
             .Add(p => p.Chevron, true)
@@ -33,7 +33,7 @@ public class EventListTest : TestContextBase
     [Fact]
     public void NumericItemHeightRendersCorrectly()
     {
-        var cut = RenderComponent<Components.EventList>(parameters => parameters
+        var cut = Render<Components.EventList>(parameters => parameters
             .Add(p => p.ItemHeight, 48));
 
         Assert.Equal("48", cut.Find("ix-event-list").GetAttribute("item-height"));
@@ -42,7 +42,7 @@ public class EventListTest : TestContextBase
     [Fact]
     public void DefaultPropertiesMatchOfficialDefaults()
     {
-        var cut = RenderComponent<Components.EventList>();
+        var cut = Render<Components.EventList>((Action<Bunit.ComponentParameterCollectionBuilder<Components.EventList>>)(_ => { }));
 
         Assert.Equal("S", cut.Instance.ItemHeight);
         Assert.False(cut.Instance.Animated);

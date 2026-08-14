@@ -28,11 +28,11 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public int MaxWidth { get; set; } = 28;
         [Parameter]
-        public static int MinWidth { get; set; } = 16;
+        public int MinWidth { get; set; } = 16;
         [Parameter]
         public bool Show { get; set; } = false;
         [Parameter]
-        public int Width { get; set; } = MinWidth;
+        public int Width { get; set; } = 16;
         [Parameter]
         public EventCallback ClosedEvent { get; set; }
         [Parameter]

@@ -23,20 +23,20 @@ namespace SiemensIXBlazor.Tests
         public void UploadRendersCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<Upload>(
-                ("Id", "testId"),
-                ("Accept", "image/*"),
-                ("Disabled", true),
-                ("I18nUploadDisabled", "File upload currently not possible."),
-                ("I18nUploadFile", "Upload file…"),
-                ("LoadingText", "Checking files…"),
-                ("Multiline", true),
-                ("Multiple", true),
-                ("DirectoryUpload", true),
-                ("State", UploadFileState.UPLOAD_FAILED),
-                ("SelectFileText", "+ Drag files here or…"),
-                ("UploadFailedText", "Upload failed. Please try again."),
-                ("UploadSuccessText", "Upload successful")
+            var cut = Render<Upload>(parameters => parameters
+                .Add(p => p.Id, "testId")
+                .Add(p => p.Accept, "image/*")
+                .Add(p => p.Disabled, true)
+                .Add(p => p.I18nUploadDisabled, "File upload currently not possible.")
+                .Add(p => p.I18nUploadFile, "Upload file…")
+                .Add(p => p.LoadingText, "Checking files…")
+                .Add(p => p.Multiline, true)
+                .Add(p => p.Multiple, true)
+                .Add(p => p.DirectoryUpload, true)
+                .Add(p => p.State, UploadFileState.UPLOAD_FAILED)
+                .Add(p => p.SelectFileText, "+ Drag files here or…")
+                .Add(p => p.UploadFailedText, "Upload failed. Please try again.")
+                .Add(p => p.UploadSuccessText, "Upload successful")
             );
 
             // Assert
@@ -46,7 +46,7 @@ namespace SiemensIXBlazor.Tests
         [Fact]
         public void DirectoryUploadUsesOfficialDefaultState()
         {
-            var cut = RenderComponent<Upload>(parameters => parameters
+            var cut = Render<Upload>(parameters => parameters
                 .Add(p => p.Id, "folder-upload")
                 .Add(p => p.DirectoryUpload, true));
 
@@ -58,7 +58,7 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             IXFile? changedFile = null;
-            var cut = RenderComponent<Upload>(parameters => parameters
+            var cut = Render<Upload>(parameters => parameters
                 .Add(p => p.Id, "upload")
                 .Add(p => p.FileChangedEvent, EventCallback.Factory.Create<List<IXFile>>(this, newValue => { changedFile = newValue.Single(); }))
             );
