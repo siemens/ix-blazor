@@ -915,10 +915,10 @@ private void DrawerButtonClicked()
 ## Event list
 
 ```razor
-<EventList>
-    <EventListItem Id="event-list-item-1" Label="Item 1" ItemCLickEvent="(label) => DropdownButtonClicked(label)"></EventListItem>
-    <EventListItem Id="event-list-item-2" Label="Item 2" ItemCLickEvent="(label) => DropdownButtonClicked(label)"></EventListItem>
-    <EventListItem Id="event-list-item-3" Label="Item 3" ItemCLickEvent="(label) => DropdownButtonClicked(label)"></EventListItem>
+<EventList Animated="true" Compact="true" Chevron="true" ItemHeight="@("L")">
+    <EventListItem Id="event-list-item-1" ItemColor="color-success" Selected="true">Item 1</EventListItem>
+    <EventListItem Id="event-list-item-2" ItemColor="color-warning" Chevron="true">Item 2</EventListItem>
+    <EventListItem Id="event-list-item-3" Disabled="true">Item 3</EventListItem>
 </EventList>
 ```
 
