@@ -1082,7 +1082,10 @@ private void DrawerButtonClicked()
 ## Message bar
 
 ```razor
-<MessageBar ClosedChangeEvent="MessageboxClosed" Id="messagebar1" Type="MessageBarType.Info">
+<MessageBar ClosedChangeEvent="MessageboxClosed"
+            CloseAnimationCompletedEvent="MessageboxCloseAnimationCompleted"
+            Id="messagebar1"
+            Type="MessageBarType.Info">
     <div class="d-flex align-items-center justify-content-between">
         Message text <ix-button>Action</ix-button>
     </div>
