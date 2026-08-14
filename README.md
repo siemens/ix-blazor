@@ -1511,6 +1511,8 @@ tree.TreeModel = treeNodes;
 
 ```razor
 <Upload Id="file-upload-test"
+        DirectoryUpload="true"
+        State="UploadFileState.SELECT_FILE"
         FileChangedEvent="(data) => FileChanged(data)">
 </Upload>
 ```
