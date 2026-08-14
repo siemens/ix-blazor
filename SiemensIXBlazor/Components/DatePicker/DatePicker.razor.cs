@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // SPDX-FileCopyrightText: 2024 Siemens AG
 //
 // SPDX-License-Identifier: MIT
@@ -7,95 +7,97 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
+using System.Text.Json;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using Newtonsoft.Json.Linq;
 using SiemensIXBlazor.Enums.DatePicker;
 using SiemensIXBlazor.Interops;
 using SiemensIXBlazor.Objects;
-using System.Text.Json;
 
-namespace SiemensIXBlazor.Components
+namespace SiemensIXBlazor.Components;
+
+public partial class DatePicker
 {
-    public partial class DatePicker
+    private BaseInterop? _interop;
+    private static readonly JsonSerializerOptions JsonOptions = new()
     {
-        [Parameter, EditorRequired]
-        public string Id { get; set; } = string.Empty;
-        [Parameter]
-        public DatePickerCorners Corners { get; set; } = DatePickerCorners.Rounded;
-   
-        [Parameter]
-        public string Format { get; set; } = "yyyy/MM/dd";
-        [Parameter]
-        public string? From { get; set; } 
-        [Parameter]
-        public string? MaxDate { get; set; }
-        [Parameter]
-        public string? MinDate { get; set; }
-        [Parameter]
-        public string? AriaLabelNextMonthButton { get; set; }
-        [Parameter]
-        public string? AriaLabelPreviousMonthButton { get; set; }
-        [Parameter]
-        public bool SingleSelection { get; set; } = false;
-        [Parameter]
-        public bool EnableTopLayer { get; set; } = false;
-        [Parameter]
-        public string I18nDone { get; set; } = "Done";
-        [Parameter]
-        public string? Locale { get; set; }
-        [Parameter]
-        public int WeekStartIndex { get; set; } = 0;
-        [Parameter]
-        public string? To { get; set; }
-        [Parameter]
-        public EventCallback<DatePickerResponse?> DateRangeChangeEvent { get; set; }
-        [Parameter]
-        public EventCallback<DatePickerResponse?> DateChangeEvent { get; set; }
-        [Parameter]
+        PropertyNameCaseInsensitive = true
+    };
 
-        public EventCallback<DatePickerResponse> DateSelectEvent { get; set; }
+    [Parameter, EditorRequired] public string Id { get; set; } = string.Empty;
+    [Parameter] public string Format { get; set; } = "yyyy/LL/dd";
+    [Parameter] public bool SingleSelection { get; set; }
+    [Parameter] public DatePickerCorners Corners { get; set; } = DatePickerCorners.Rounded;
+    [Parameter] public string? From { get; set; }
+    [Parameter] public string? To { get; set; }
+    [Parameter] public string MinDate { get; set; } = string.Empty;
+    [Parameter] public string MaxDate { get; set; } = string.Empty;
+    [Parameter] public string I18nDone { get; set; } = "Done";
+    [Parameter] public string AriaLabelPreviousMonthButton { get; set; } = "Previous month";
+    [Parameter] public string AriaLabelNextMonthButton { get; set; } = "Next month";
+    [Parameter] public string AriaLabelMonthSelection { get; set; } = "Select month";
+    [Parameter] public string AriaLabelYearSelection { get; set; } = "Select year";
+    [Parameter] public int WeekStartIndex { get; set; }
+    [Parameter] public string? Locale { get; set; }
+    [Parameter] public bool ShowWeekNumbers { get; set; }
+    [Parameter] public bool EnableTopLayer { get; set; }
+    [Parameter] public EventCallback<DatePickerResponse> DateChangeEvent { get; set; }
+    [Parameter] public EventCallback<DatePickerResponse> DateRangeChangeEvent { get; set; }
+    [Parameter] public EventCallback<DatePickerResponse> DateSelectEvent { get; set; }
 
-        private BaseInterop _interop;
+    [Inject] private IJSRuntime JSRuntime { get; set; } = default!;
 
-        protected async override Task OnAfterRenderAsync(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
         {
-            if (firstRender)
-            {
-                _interop = new(JSRuntime);
-
-                await _interop.AddEventListener(this, Id, "dateChange", "DateChange");
-                await _interop.AddEventListener(this, Id, "dateRangeChange", "DateRangeChange");
-                await _interop.AddEventListener(this, Id, "dateSelect", "DateSelect");
-            }
+            return;
         }
 
-        [JSInvokable]
-        public async void DateRangeChange(JsonElement data)
+        _interop = new BaseInterop(JSRuntime);
+        await _interop.AddEventListener(this, Id, "dateChange", nameof(DateChange));
+        await _interop.AddEventListener(this, Id, "dateRangeChange", nameof(DateRangeChange));
+        await _interop.AddEventListener(this, Id, "dateSelect", nameof(DateSelect));
+    }
+
+    public async Task<DatePickerResponse> GetCurrentDate()
+    {
+        if (_interop == null)
         {
-            string jsonDataText = data.GetRawText();
-            DatePickerResponse? jsonData = JObject.Parse(jsonDataText)
-                                                  .ToObject<DatePickerResponse>();
-            await DateRangeChangeEvent.InvokeAsync(jsonData);
+            throw new InvalidOperationException("The date picker has not rendered yet.");
         }
 
+        return await _interop.InvokeElementMethodAsync<DatePickerResponse>(Id, "getCurrentDate")
+            ?? new DatePickerResponse();
+    }
 
-        [JSInvokable]
-        public async void DateChange(JsonElement data)
+    [JSInvokable]
+    public async Task DateChange(JsonElement data)
+    {
+        var response = data.Deserialize<DatePickerResponse>(JsonOptions);
+        if (response != null)
         {
-            string jsonDataText = data.GetRawText();
-            DatePickerResponse? jsonData = JObject.Parse(jsonDataText)
-                                                  .ToObject<DatePickerResponse>();
-            await DateChangeEvent.InvokeAsync(jsonData);
+            await DateChangeEvent.InvokeAsync(response);
         }
+    }
 
-        [JSInvokable]
-        public async void DateSelect(JsonElement data)
+    [JSInvokable]
+    public async Task DateRangeChange(JsonElement data)
+    {
+        var response = data.Deserialize<DatePickerResponse>(JsonOptions);
+        if (response != null)
         {
-            string jsonDataText = data.GetRawText();
-            DatePickerResponse? jsonData = JObject.Parse(jsonDataText)
-                                                  .ToObject<DatePickerResponse>();
-            await DateSelectEvent.InvokeAsync(jsonData);
+            await DateRangeChangeEvent.InvokeAsync(response);
+        }
+    }
+
+    [JSInvokable]
+    public async Task DateSelect(JsonElement data)
+    {
+        var response = data.Deserialize<DatePickerResponse>(JsonOptions);
+        if (response != null)
+        {
+            await DateSelectEvent.InvokeAsync(response);
         }
     }
 }

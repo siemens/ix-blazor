@@ -1,0 +1,52 @@
+name: Product Backlog Item
+description: Create an implementation task or product backlog item
+labels:
+  - task
+  - triage
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe the requested change and the expected outcome.
+
+  - type: checkboxes
+    id: prerequisites
+    attributes:
+      label: Prerequisites
+      description: Make sure the following requirements are satisfied.
+      options:
+        - label: I have read the [Contributing Guidelines](https://github.com/siemens/ix-blazor/blob/master/CONTRIBUTING.md).
+          required: true
+        - label: I have not included internal or restricted information such as screenshots, videos, code snippets or links.
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe what should be implemented and why it is needed.
+      placeholder: Describe the requested change and its purpose.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria
+      description: Define the conditions that should be satisfied, when applicable.
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-information
+    attributes:
+      label: Additional information
+      description: Add relevant technical details, dependencies or references.
+      placeholder: Add any additional context.
+    validations:
+      required: false

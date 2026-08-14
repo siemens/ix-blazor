@@ -33,5 +33,18 @@ namespace SiemensIXBlazor.Tests.Workflow
             // Assert
             cut.MarkupMatches("<ix-workflow-step clickable disabled position=\"first\" selected status=\"open\" vertical></ix-workflow-step>");
         }
+
+        [Fact]
+        public void CustomIconRendersInCustomIconSlot()
+        {
+            var cut = RenderComponent<WorkflowStep>(parameters => parameters
+                .Add(p => p.CustomIcon, (RenderFragment)(builder => builder.AddMarkupContent(0, "<ix-icon name=\"star\"></ix-icon>")))
+                .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddContent(0, "Step"))));
+
+            var iconSlot = cut.Find("[slot='custom-icon']");
+
+            Assert.Contains("star", iconSlot.InnerHtml);
+            Assert.Contains("Step", cut.Markup);
+        }
     }
 }

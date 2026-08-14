@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using SiemensIXBlazor.Enums.Tabs;
 using SiemensIXBlazor.Interops;
+using System.Text.Json;
 
 namespace SiemensIXBlazor.Components
 {
@@ -25,34 +26,48 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public TabsPlacement Placement { get; set; } = TabsPlacement.Bottom;
         [Parameter]
-        public string? AriaLabelChevronLeftIconButton { get; set; }
-        [Parameter]
-        public string? AriaLabelChevronRightIconButton { get; set; }    
-        [Parameter]
         public bool Rounded { get; set; } = false;
         [Parameter]
-        public int Selected { get; set; } = 0;
+        public string? ActiveTabKey { get; set; }
+        [Parameter]
+        public string AriaLabelMoreTabs { get; set; } = "Show all tabs";
+        [Parameter]
+        public TabsKeyboardNavigation KeyboardNavigation { get; set; } = TabsKeyboardNavigation.Automatic;
         [Parameter]
         public bool Small { get; set; } = false;
         [Parameter]
-        public EventCallback<int> SelectedChangeEvent { get; set; }
+        public EventCallback<string?> TabChangeEvent { get; set; }
+        [Parameter]
+        public EventCallback<string?> TabCloseEvent { get; set; }
 
-        TabsInterop _tabsInterop;
+        private BaseInterop? _interop;
 
-        protected async override Task OnAfterRenderAsync(bool firstRender)
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
-                _tabsInterop = new(JSRuntime);
+                _interop = new(JSRuntime);
 
-                await _tabsInterop.SubscribeEvents(this, Id, "selectedChange", "SelectedChange");
+                await _interop.AddEventListener(this, Id, "tabChange", "TabChanged");
+                await _interop.AddEventListener(this, Id, "tabClose", "TabClosed");
             }
         }
 
         [JSInvokable]
-        public void SelectedChange(int value)
+        public async Task TabChanged(string? value)
         {
-            SelectedChangeEvent.InvokeAsync(value);
+            ActiveTabKey = value;
+            await TabChangeEvent.InvokeAsync(value);
+        }
+
+        [JSInvokable]
+        public async Task TabClosed(JsonElement data)
+        {
+            var value = data.ValueKind == JsonValueKind.String
+                ? data.GetString()
+                : JsonSerializer.Deserialize<SiemensIXBlazor.Objects.Tabs.TabClickDetail>(data.GetRawText())?.TabKey;
+
+            await TabCloseEvent.InvokeAsync(value);
         }
     }
 }

@@ -72,4 +72,15 @@ public class TimeInputTest : TestContextBase
         // Assert
         Assert.Equal(string.Empty, received);
     }
+
+    [Fact]
+    public void OfficialDefaultsAreExposed()
+    {
+        var cut = RenderComponent<TimeInput>(parameters => parameters.Add(p => p.Id, "time-input"));
+
+        Assert.Equal("TT", cut.Instance.Format);
+        Assert.Equal(100, cut.Instance.MillisecondInterval);
+        Assert.Equal("Toggle time picker", cut.Instance.AriaLabelTimeToggleButton);
+        Assert.Contains("aria-label-time-toggle-button", cut.Markup);
+    }
 }

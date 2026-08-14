@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // SPDX-FileCopyrightText: 2024 Siemens AG
 //
 // SPDX-License-Identifier: MIT
@@ -7,103 +7,80 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
+using System.Text.Json;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
-using SiemensIXBlazor.Enums.DateDropdown;
+using SiemensIXBlazor.Enums.Button;
 using SiemensIXBlazor.Interops;
 using SiemensIXBlazor.Objects.DateDropdown;
-using System.Text.Json;
 
 namespace SiemensIXBlazor.Components;
 
 public partial class DateDropdown
 {
-    private BaseInterop _interop = null!;
-    private Lazy<Task<IJSObjectReference>>? _moduleTask;
+    private BaseInterop? _interop;
+    private string? _dateRangeOptionsJson;
 
-    [Parameter, EditorRequired]
-    public string Id { get; set; } = string.Empty;
-    [Parameter]
-    public bool CustomRangeDisabled { get; set; } = false;
-    [Parameter]
-    public string DateRangeId { get; set; } = "custom";
-    [Parameter]
-    public EventCallback<string> DateRangeIdChanged { get; set; }
-    [Parameter]
-    public DateDropdownOption[]? DateRangeOptions { get; set; }
-    [Parameter]
-    public string Format { get; set; } = "yyyy/LL/dd";
-    [Parameter]
-    public string? From { get; set; }
-    [Parameter]
-    public string I18NCustomItem { get; set; } = "Custom...";
-    [Parameter]
-    public string I18NDone { get; set; } = "Done";
-    [Parameter]
-    public string I18NNoRange { get; set; } = "No range set";
-    [Parameter]
-    public string? MaxDate { get; set; }
-    [Parameter]
-    public string? MinDate { get; set; }
-    [Parameter]
-    public bool Range { get; set; } = true;
-    [Parameter]
-    public string? To { get; set; }
-    [Parameter]
-    public bool Disabled { get; set; } = false;
-    [Parameter]
-    public bool EnableTopLayer { get; set; } = false;
-    [Parameter]
-    public string? Locale { get; set; }
-    [Parameter]
-    public int? WeekStartIndex { get; set; } = 0;
-    [Parameter]
-    public bool Ghost { get; set; } = false;
-    [Parameter]
-    public bool Outline { get; set; } = false;
-    [Parameter]
-    public bool Loading { get; set; } = false;
-    [Parameter]
-    public DateDropdownVariant Variant { get; set; } = DateDropdownVariant.primary;
-    [Parameter]
-    public EventCallback<DateDropdownResponse> DateRangeChangeEvent { get; set; }
+    [Parameter, EditorRequired] public string Id { get; set; } = string.Empty;
+    [Parameter] public string DateRangeId { get; set; } = "custom";
+    [Parameter] public DateDropdownOption[] DateRangeOptions { get; set; } = [];
+    [Parameter] public string Format { get; set; } = "yyyy/LL/dd";
+    [Parameter] public string From { get; set; } = string.Empty;
+    [Parameter] public string I18nDone { get; set; } = "Done";
+    [Parameter] public string I18nNoRange { get; set; } = "No range set";
+    [Parameter] public string MaxDate { get; set; } = string.Empty;
+    [Parameter] public string MinDate { get; set; } = string.Empty;
+    [Parameter] public bool SingleSelection { get; set; }
+    [Parameter] public string To { get; set; } = string.Empty;
+    [Parameter] public bool Disabled { get; set; }
+    [Parameter] public bool EnableTopLayer { get; set; }
+    [Parameter] public bool ShowWeekNumbers { get; set; }
+    [Parameter] public string? Locale { get; set; }
+    [Parameter] public int WeekStartIndex { get; set; }
+    [Parameter] public bool Loading { get; set; }
+    [Parameter] public ButtonVariant Variant { get; set; } = ButtonVariant.primary;
+    [Parameter] public EventCallback<DateDropdownResponse> DateRangeChangeEvent { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        _interop ??= new BaseInterop(JsRuntime);
+
+        var optionsJson = JsonSerializer.Serialize(DateRangeOptions);
+        if (_dateRangeOptionsJson != optionsJson)
+        {
+            _dateRangeOptionsJson = optionsJson;
+            await _interop.SetElementProperty(Id, "dateRangeOptions", DateRangeOptions);
+        }
+
         if (firstRender)
         {
-            await InitialParameterAsync("setDateRangeOptions", DateRangeOptions);
-            _interop = new BaseInterop(JsRuntime);
-
-            await _interop.AddEventListener(this, Id, "dateRangeChange", "DateRangeChange");
+            await _interop.AddEventListener(this, Id, "dateRangeChange", nameof(DateRangeChange));
         }
     }
 
-    private async Task InitialParameterAsync(string functionName, object? param)
+    public async Task<DateDropdownResponse> GetDateRange()
     {
-        _moduleTask = new Lazy<Task<IJSObjectReference>>(() => JsRuntime.InvokeAsync<IJSObjectReference>(
-            "import", "./_content/Siemens.IX.Blazor/js/siemens-ix/interops/dateDropdownInterop.js").AsTask());
-
-        var dateRangeOptions = JsonConvert.SerializeObject(param, new JsonSerializerSettings
+        if (_interop == null)
         {
-            ContractResolver = new CamelCasePropertyNamesContractResolver()
-        });
+            throw new InvalidOperationException("The date dropdown has not rendered yet.");
+        }
 
-        var module = await _moduleTask.Value;
-        if (module != null)
-            await module.InvokeVoidAsync(functionName, Id, dateRangeOptions);
+        return await _interop.InvokeElementMethodAsync<DateDropdownResponse>(Id, "getDateRange")
+            ?? new DateDropdownResponse();
     }
 
     [JSInvokable]
-    public async void DateRangeChange(JsonElement data)
+    public async Task DateRangeChange(JsonElement data)
     {
-        var jsonDataText = data.GetRawText();
-        var jsonData = JObject.Parse(jsonDataText)
-            .ToObject<DateDropdownResponse>();
-
-        await DateRangeChangeEvent.InvokeAsync(jsonData);
+        var response = data.Deserialize<DateDropdownResponse>(JsonOptions);
+        if (response != null)
+        {
+            await DateRangeChangeEvent.InvokeAsync(response);
+        }
     }
+
+    private static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        PropertyNameCaseInsensitive = true
+    };
 }

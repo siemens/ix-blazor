@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // SPDX-FileCopyrightText: 2024 Siemens AG
 //
 // SPDX-License-Identifier: MIT
@@ -9,78 +9,43 @@
 
 using Bunit;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-namespace SiemensIXBlazor.Tests.MenuAbout
+using SiemensIXBlazor.Objects;
+
+namespace SiemensIXBlazor.Tests.MenuAbout;
+
+public class MenuAboutTest : TestContextBase
 {
-	public class MenuAboutTest: TestContextBase
+    [Fact]
+    public void RendersCurrentPublicProperties()
     {
-        [Fact]
-        public void ComponentRendersWithoutCrashing()
-        {
-            // Arrange
-            var cut = RenderComponent<Components.MenuAbout.MenuAbout>();
+        var cut = RenderComponent<Components.MenuAbout.MenuAbout>(parameters => parameters
+            .Add(p => p.Id, "about")
+            .Add(p => p.ActiveTabKey, "legal")
+            .Add(p => p.SuppressLegacyTabs, true)
+            .Add(p => p.AriaLabelCloseButton, "Close")
+            .Add(p => p.Label, "About"));
 
-            // Assert
-            cut.MarkupMatches("<ix-menu-about aria-label-close-button=\"Close About\" label=\"About &amp; legal information\" id=\"\"></ix-menu-about>");
-        }
+        Assert.Contains("active-tab-key=\"legal\"", cut.Markup);
+        Assert.Contains("slot=\"ix-menu-about\"", cut.Markup);
+        Assert.Contains("suppress-legacy-tabs", cut.Markup);
+        Assert.DoesNotContain("active-tab-label", cut.Markup);
+        Assert.DoesNotContain("show=", cut.Markup);
+    }
 
-        [Fact]
-        public void ChildContentPropertyIsSetCorrectly()
-        {
-            // Arrange
-            var cut = RenderComponent<Components.MenuAbout.MenuAbout>(parameters => parameters.Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content"))));
+    [Fact]
+    public async Task CloseAndTabEventsForwardTypedDetails()
+    {
+        MenuCloseEvent? close = null;
+        var tabKey = string.Empty;
+        var cut = RenderComponent<Components.MenuAbout.MenuAbout>(parameters => parameters
+            .Add(p => p.ClosedEvent, EventCallback.Factory.Create<MenuCloseEvent>(this, value => close = value))
+            .Add(p => p.TabChangedEvent, EventCallback.Factory.Create<string>(this, value => tabKey = value)));
+        var expected = new MenuCloseEvent { Name = "ix-menu-about" };
 
-            // Assert
-            Assert.NotNull(cut.Instance.ChildContent);
-        }
+        await cut.Instance.Closed(expected);
+        await cut.Instance.TabChanged("legal");
 
-        [Fact]
-        public void IdPropertyIsSetCorrectly()
-        {
-            // Arrange
-            var cut = RenderComponent<Components.MenuAbout.MenuAbout>(parameters => parameters.Add(p => p.Id, "testId"));
-
-            // Assert
-            Assert.Equal("testId", cut.Instance.Id);
-        }
-
-        [Fact]
-        public void ClosedEventTriggeredCorrectly()
-        {
-            // Arrange
-            var eventTriggered = false;
-            var cut = RenderComponent<Components.MenuAbout.MenuAbout>(parameters => parameters.Add(p => p.ClosedEvent, EventCallback.Factory.Create<MouseEventArgs>(this, () => eventTriggered = true)));
-
-            // Act
-            cut.Instance.ClosedEvent.InvokeAsync(new MouseEventArgs());
-
-            // Assert
-            Assert.True(eventTriggered);
-        }
-
-        [Fact]
-        public void AriaLabelCloseButtonDefaultsToCloseAbout()
-        {
-            // Arrange
-            var cut = RenderComponent<Components.MenuAbout.MenuAbout>(parameters => parameters
-                .Add(p => p.Id, "test-id"));
-
-            // Assert
-            Assert.Equal("Close About", cut.Instance.AriaLabelCloseButton);
-            Assert.Contains("aria-label-close-button=\"Close About\"", cut.Markup);
-        }
-
-        [Fact]
-        public void AriaLabelCloseButtonCanBeCustomized()
-        {
-            // Arrange
-            var cut = RenderComponent<Components.MenuAbout.MenuAbout>(parameters => parameters
-                .Add(p => p.Id, "test-id")
-                .Add(p => p.AriaLabelCloseButton, "Custom Close Label"));
-
-            // Assert
-            Assert.Equal("Custom Close Label", cut.Instance.AriaLabelCloseButton);
-            Assert.Contains("aria-label-close-button=\"Custom Close Label\"", cut.Markup);
-        }
+        Assert.Same(expected, close);
+        Assert.Equal("legal", tabKey);
     }
 }

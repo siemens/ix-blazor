@@ -8,6 +8,7 @@
 //  -----------------------------------------------------------------------
 
 using Bunit;
+using Microsoft.AspNetCore.Components;
 using SiemensIXBlazor.Components;
 using SiemensIXBlazor.Enums.ProgressIndicator;
 
@@ -78,6 +79,23 @@ namespace SiemensIXBlazor.Tests
 
             // Assert
             cut.MarkupMatches(@"<ix-progress-indicator max=""100"" min=""0"" size=""md"" status=""error"" text-alignment=""center"" type=""linear"" value=""25""></ix-progress-indicator>");
+        }
+
+        [Fact]
+        public void ProgressIndicatorRendersHelperTextSlotAlongsideDefaultContent()
+        {
+            var helperText = (RenderFragment)(builder => builder.AddContent(0, "Custom helper text"));
+            var content = (RenderFragment)(builder => builder.AddContent(0, "50%"));
+
+            var cut = RenderComponent<ProgressIndicator>(parameters => parameters
+                .Add(p => p.HelperTextContent, helperText)
+                .Add(p => p.ChildContent, content));
+
+            var indicatorMarkup = cut.Find("ix-progress-indicator").InnerHtml;
+
+            Assert.Contains("slot=\"helper-text\"", indicatorMarkup);
+            Assert.Contains("Custom helper text", indicatorMarkup);
+            Assert.Contains("50%", indicatorMarkup);
         }
     }
 }

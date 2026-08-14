@@ -1,13 +1,27 @@
-﻿@using Microsoft.JSInterop;
-@using SiemensIXBlazor.Components
+﻿@* -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2026 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+//  -----------------------------------------------------------------------
+*@
+
+@using Microsoft.JSInterop;
+@using SiemensIXBlazor.Enums.TextArea
+@using SiemensIXBlazor.Helpers
 @inherits IXBaseComponent
 @inject IJSRuntime JSRuntime
 
-<ix-textarea id="@Id"
+<ix-textarea @attributes="UserAttributes"
+             class="@Class"
+             style="@Style"
+             id="@Id"
              value="@Value"
-             disabled="@Disabled"
-             readonly="@Readonly"
-             required="@Required"
+             disabled="@(Disabled ? "true" : null)"
+             readonly="@(Readonly ? "true" : null)"
+             required="@(Required ? "true" : null)"
              max-length="@MaxLength"
              min-length="@MinLength"
              name="@Name"
@@ -17,12 +31,12 @@
              textarea-cols="@TextareaCols"
              textarea-height="@TextareaHeight"
              textarea-width="@TextareaWidth"
-             resize-behavior="@ResizeBehavior"
+             resize-behavior="@(EnumParser<TextAreaResizeBehavior>.EnumToString(ResizeBehavior))"
              helper-text="@HelperText"
              info-text="@InfoText"
              warning-text="@WarningText"
              valid-text="@ValidText"
              invalid-text="@InvalidText"
              show-text-as-tooltip="@ShowTextAsTooltip"
-             class="@CssClass">
+             >
 </ix-textarea>

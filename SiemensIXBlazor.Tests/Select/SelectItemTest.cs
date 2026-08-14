@@ -10,6 +10,7 @@
 using Bunit;
 using Microsoft.AspNetCore.Components;
 using SiemensIXBlazor.Components;
+using System.Text.Json;
 
 namespace SiemensIXBlazor.Tests.Select;
 
@@ -78,6 +79,17 @@ public class SelectItemTests : TestContextBase
     }
 
     [Fact]
+    public void DisabledPropertyIsSetCorrectly()
+    {
+        var cut = RenderComponent<SelectItem>(parameters => parameters
+            .Add(p => p.Id, "test-select-item")
+            .Add(p => p.Disabled, true));
+
+        Assert.True(cut.Instance.Disabled);
+        cut.MarkupMatches("<ix-select-item id='test-select-item' disabled></ix-select-item>");
+    }
+
+    [Fact]
     public void ClassPropertyIsSetCorrectly()
     {
         // Arrange
@@ -113,7 +125,7 @@ public class SelectItemTests : TestContextBase
             .Add(p => p.ItemClickEvent, EventCallback.Factory.Create<string>(this, (item) => clickedItem = item)));
 
         // Act
-        cut.Instance.ItemClicked("Item Label");
+        await cut.Instance.ItemClicked(JsonDocument.Parse("{\"value\":\"Item Label\"}").RootElement);
 
         // Assert
         Assert.Equal("Item Label", clickedItem);
@@ -154,9 +166,9 @@ public class SelectItemTests : TestContextBase
 
         // Assert
         cut.MarkupMatches("<ix-select id='parent-select' value='1' " +
-                          "i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
-                          "i18n-select-list-header='Please select an option' mode='single'" +
-                          "i18n-no-matches='No matches'>" +
+                          "aria-label-add-item='Add item' i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
+                          "i18n-select-list-header='Select an option' mode='single'" +
+                          "i18n-no-matches='No matches' i18n-more-items='{count} more' i18n-all-selected='All' i18n-remove-selected-item='Remove'>" +
                           "<ix-select-item id='selectItem1' label='Item 1' value='1'></ix-select-item>" +
                           "</ix-select>");
     }

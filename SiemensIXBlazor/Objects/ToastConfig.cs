@@ -16,36 +16,46 @@ namespace SiemensIXBlazor.Objects
 	public class ToastConfig
 	{
 		/// <summary>
-		/// Sets the HTML content for the toast action area.
-		/// This property accepts an HTML string containing interactive elements such as <c>&lt;ix-button&gt;</c>.
+		/// Toast title.
 		/// </summary>
-		/// <remarks>
-		/// The HTML string is rendered directly within the toast's action container.
-		/// Ensure content is properly escaped to prevent XSS vulnerabilities.
-		/// </remarks>
-		[JsonProperty("action")]
-		public string? Action { get; set; }
-        [JsonProperty("preventAutoClose")]
-        public bool PreventAutoClose { get; set; } = false;
-        [JsonProperty("autoCloseDelay")]
-		public int AutoCloseDelay { get; set; } = 5000;
-		[JsonProperty("hideIcon")]
-		public bool HideIcon { get; set; } = false;
-		[JsonProperty("icon")]
-		public string? Icon { get; set; }
-		[JsonProperty("iconColor")]
-		public string? IconColor { get; set; }
-		[JsonProperty("message")]
-		public string? Message { get; set; }
-		[JsonProperty("messageHtml")]
-		public string? MessageHtml { get; set; }
-		[JsonProperty("position")]
-		[JsonConverter(typeof(StringEnumConverter))]
-		public ToastPosition? Position { get; set; }
 		[JsonProperty("title")]
 		public string? Title { get; set; }
+
+		/// <summary>
+		/// Toast message text.
+		/// </summary>
+		[JsonProperty("message")]
+		public string? Message { get; set; }
+
+		/// <summary>
+		/// HTML content for the action area.
+		/// </summary>
+		[JsonProperty("action")]
+		public string? Action { get; set; }
+
+		/// <summary>
+		/// Toast type. The official default is info when omitted.
+		/// </summary>
 		[JsonProperty("type")]
-		public string Type { get; set; } = "info";
+		[JsonConverter(typeof(StringEnumConverter))]
+		public ToastType? Type { get; set; }
+
+		/// <summary>
+		/// Whether the toast closes automatically.
+		/// </summary>
+		[JsonProperty("autoClose")]
+		public bool? AutoClose { get; set; }
+
+		[JsonProperty("autoCloseDelay")]
+		public int? AutoCloseDelay { get; set; }
+
+		[JsonProperty("icon")]
+		public string? Icon { get; set; }
+
+		[JsonProperty("iconColor")]
+		public string? IconColor { get; set; }
+
+		[JsonProperty("hideIcon")]
+		public bool? HideIcon { get; set; }
 	}
 }
-

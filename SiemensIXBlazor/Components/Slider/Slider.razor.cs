@@ -23,15 +23,23 @@ namespace SiemensIXBlazor.Components.Slider
         [Parameter]
         public bool Disabled { get; set; } = false;
         [Parameter]
-        public dynamic? Error { get; set; }
-        private string? ErrorAsString => Error switch
-        {
-            bool b => b.ToString().ToLowerInvariant(),
-            string s => s,
-            null => null,
-            _ => Error?.ToString()
-        };
-
+        public string? HelperText { get; set; }
+        [Parameter]
+        public string? Label { get; set; }
+        [Parameter]
+        public string? InvalidText { get; set; }
+        [Parameter]
+        public string? InfoText { get; set; }
+        [Parameter]
+        public string? WarningText { get; set; }
+        [Parameter]
+        public string? ValidText { get; set; }
+        [Parameter]
+        public bool ShowTextAsTooltip { get; set; } = false;
+        [Parameter]
+        public RenderFragment? LabelStart { get; set; }
+        [Parameter]
+        public RenderFragment? LabelEnd { get; set; }
         [Parameter]
         public double[]? Marker { get; set; }
         [Parameter]
@@ -39,7 +47,7 @@ namespace SiemensIXBlazor.Components.Slider
         [Parameter]
         public double Min { get; set; } = 0;
         [Parameter]
-        public double? Step { get; set; }
+        public double Step { get; set; } = 1;
         [Parameter]
         public bool Trace { get; set; } = false;
         [Parameter]

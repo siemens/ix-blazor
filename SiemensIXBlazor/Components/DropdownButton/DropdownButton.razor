@@ -15,15 +15,21 @@
 @inherits IXBaseComponent
 
 <ix-dropdown-button @attributes="UserAttributes" 
+                    id="@ElementId"
                     label="@Label"
                     aria-label-dropdown-button="@AriaLabelDropdownButton"
                     variant="@(EnumParser<ButtonVariant>.EnumToString(Variant, replaceUnderscores: true))"
                     placement="@(Placement.HasValue ? EnumParser<DropdownButtonPlacement>.EnumToString(Placement.Value, replaceUnderscores: true): string.Empty )"
                     icon="@Icon" 
-                    closeBehavior="@(EnumParser<DropdownButtonCloseBehavior>.EnumToString(CloseBehavior))"
+                    close-behavior="@(CloseBehavior is bool ? null : CloseBehaviorAttribute)"
                     disabled="@Disabled"
                     enable-top-layer="@EnableTopLayer"
+                    focus-checked-item="@FocusCheckedItem"
                     style="@Style" 
                     class="@Class">
+    @if (ButtonLabelContent is not null)
+    {
+        <span slot="button-label">@ButtonLabelContent</span>
+    }
     @ChildContent
 </ix-dropdown-button>

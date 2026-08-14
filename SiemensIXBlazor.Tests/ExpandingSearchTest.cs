@@ -10,7 +10,7 @@
 using Bunit;
 using Microsoft.AspNetCore.Components;
 using SiemensIXBlazor.Components;
-using SiemensIXBlazor.Enums.ExpandingSearch;
+using SiemensIXBlazor.Enums.Button;
 
 namespace SiemensIXBlazor.Tests;
 
@@ -26,14 +26,15 @@ public class ExpandingSearchTest : TestContextBase
             .Add(p => p.Placeholder, "testPlaceholder")
             .Add(p => p.Value, "testValue")
             .Add(p => p.FullWidth, true)
-            .Add(p => p.Outline, true)
-            .Add(p => p.Ghost, false)
-            .Add(p => p.Variant, ExpandingSearchVariant.secondary)
+            .Add(p => p.AriaLabelClearIconButton, "Clear")
+            .Add(p => p.AriaLabelSearchIconButton, "Search")
+            .Add(p => p.AriaLabelSearchInput, "Search field")
+            .Add(p => p.Variant, ButtonVariant.subtle_secondary)
             );
 
         // Assert
         cut.MarkupMatches(
-            "<ix-expanding-search placeholder=\"testPlaceholder\" icon=\"testIcon\" id=\"testId\" value=\"testValue\" full-width outline variant='secondary'></ix-expanding-search>");
+            "<ix-expanding-search placeholder=\"testPlaceholder\" icon=\"testIcon\" id=\"testId\" value=\"testValue\" aria-label-clear-icon-button=\"Clear\" aria-label-search-icon-button=\"Search\" aria-label-search-input=\"Search field\" full-width variant=\"subtle-secondary\"></ix-expanding-search>");
     }
 
     [Fact]

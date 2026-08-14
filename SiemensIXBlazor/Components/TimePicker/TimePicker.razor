@@ -1,28 +1,28 @@
-﻿@* -----------------------------------------------------------------------
+@* -----------------------------------------------------------------------
 // SPDX-FileCopyrightText: 2024 Siemens AG
 //
 // SPDX-License-Identifier: MIT
 //
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
-// -----------------------------------------------------------------------
+//  -----------------------------------------------------------------------
 *@
 
-@using Microsoft.JSInterop;
-@using SiemensIXBlazor.Enums.DatePicker;
-@using SiemensIXBlazor.Helpers;
-@inject IJSRuntime JSRuntime
+@using SiemensIXBlazor.Enums.TimePicker
+@using SiemensIXBlazor.Helpers
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
 
 <ix-time-picker @attributes="UserAttributes"
                 id="@Id"
                 class="@Class"
-                style="display: block; width: 20rem; @Style"
-                corners="@(EnumParser<DatePickerCorners>.EnumToString(Corners))"
+                style="@Style"
+                corners="@(EnumParser<TimePickerCorners>.EnumToString(Corners))"
                 embedded="@Embedded"
                 format="@Format"
                 time="@Time"
+                min-time="@MinTime"
+                max-time="@MaxTime"
                 hide-header="@HideHeader"
                 hour-interval="@HourInterval"
                 minute-interval="@MinuteInterval"

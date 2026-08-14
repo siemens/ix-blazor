@@ -9,6 +9,8 @@
 *@
 
 @using Microsoft.JSInterop;
+@using SiemensIXBlazor.Enums.Upload;
+@using SiemensIXBlazor.Helpers;
 @inject IJSRuntime JSRuntime
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
@@ -23,6 +25,8 @@ i18n-upload-file="@I18nUploadFile"
 loading-text="@LoadingText"
 multiline="@Multiline"
 multiple="@Multiple"
+directory-upload="@DirectoryUpload"
+state="@(EnumParser<UploadFileState>.EnumToString(State, toLowerCase: false))"
 select-file-text="@SelectFileText"
 upload-failed-text="@UploadFailedText"
 upload-success-text="@UploadSuccessText"

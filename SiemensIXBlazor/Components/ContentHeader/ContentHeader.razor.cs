@@ -21,6 +21,8 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter]
+        public RenderFragment? HeaderContent { get; set; }
+        [Parameter]
         public bool HasBackButton { get; set; } = false;
         [Parameter]
         public string? HeaderSubTitle { get; set; }

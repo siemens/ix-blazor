@@ -10,7 +10,7 @@
 
 @namespace SiemensIXBlazor.Components
 @using SiemensIXBlazor.Helpers
-@using SiemensIXBlazor.Enums.PushCard
+@using SiemensIXBlazor.Enums.ActionCard
 @inherits IXBaseComponent
 
 <ix-action-card @attributes="UserAttributes"
@@ -19,8 +19,10 @@
                 icon="@Icon"
                 heading="@Heading"
                 subheading="@SubHeading"
+                selected="@Selected"
                 aria-label-card="@AriaLabelCard"
                 aria-label-icon="@AriaLabelIcon"
                 passive="@Passive"
-                variant="@(EnumParser<PushCardVariant>.EnumToString(Variant))">
+                variant="@(EnumParser<ActionCardVariant>.EnumToString(Variant))">
+    @ChildContent
 </ix-action-card>

@@ -1,0 +1,101 @@
+@*
+-----------------------------------------------------------------------
+SPDX-FileCopyrightText: 2026 Siemens AG
+
+SPDX-License-Identifier: MIT
+
+This source code is licensed under the MIT license found in the
+LICENSE file in the root directory of this source tree.
+-----------------------------------------------------------------------
+*@
+
+@using SiemensIXBlazor.Helpers
+@using SiemensIXBlazor.Enums.Modal
+@using System.Text.Json
+@using Microsoft.JSInterop
+@inject ModalService ModalService
+@implements IAsyncDisposable
+@namespace SiemensIXBlazor.Components.Modal
+
+@if (ModalService.Current is { } request)
+{
+    <ix-modal id="@GetId(request)"
+              aria-labelledby="@request.Config.AriaLabelledby"
+              aria-describedby="@request.Config.AriaDescribedby"
+              size="@SizeToString(request.Config.Size)"
+              disable-animation="@(!request.Config.Animation ? "true" : null)"
+              hide-backdrop="@(!request.Config.Backdrop ? "true" : null)"
+              close-on-backdrop-click="@(request.Config.CloseOnBackdropClick ? "true" : null)"
+              centered="@(request.Config.Centered ? "true" : null)"
+              is-non-blocking="@(request.Config.IsNonBlocking ? "true" : null)">
+        @request.Config.Content
+    </ix-modal>
+}
+
+@code {
+    private DotNetObjectReference<ModalHost>? _dotNetReference;
+    private string? _attachedId;
+
+    protected override void OnInitialized()
+    {
+        ModalService.Changed += OnModalChanged;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        var request = ModalService.Current;
+        if (request is not null && _attachedId != GetId(request))
+        {
+            _dotNetReference ??= DotNetObjectReference.Create(this);
+            _attachedId = GetId(request);
+            await JSRuntime.InvokeVoidAsync("siemensIXInterop.modal.attach", _attachedId, _dotNetReference);
+            await JSRuntime.InvokeVoidAsync("siemensIXInterop.modal.show", _attachedId);
+        }
+        else if (request is null && _attachedId is not null)
+        {
+            await JSRuntime.InvokeVoidAsync("siemensIXInterop.modal.detach", _attachedId);
+            _attachedId = null;
+            _dotNetReference?.Dispose();
+            _dotNetReference = null;
+        }
+    }
+
+    [Inject]
+    private Microsoft.JSInterop.IJSRuntime JSRuntime { get; set; } = default!;
+
+    [Microsoft.JSInterop.JSInvokable]
+    public Task<bool> BeforeDismiss(JsonElement? reason) =>
+        ModalService.BeforeDismissAsync(_attachedId ?? string.Empty, reason);
+
+    [Microsoft.JSInterop.JSInvokable]
+    public Task DialogClose(JsonElement? reason)
+    {
+        ModalService.HandleClose(_attachedId ?? string.Empty, reason);
+        return Task.CompletedTask;
+    }
+
+    [Microsoft.JSInterop.JSInvokable]
+    public Task DialogDismiss(JsonElement? reason)
+    {
+        ModalService.HandleDismiss(_attachedId ?? string.Empty, reason);
+        return Task.CompletedTask;
+    }
+
+    private static string GetId(ModalRequest request) => request.Instance.Id;
+    private static string SizeToString(ModalSize size) =>
+        EnumParser<ModalSize>.EnumToString(size, replaceUnderscores: true);
+
+    private void OnModalChanged() => _ = InvokeAsync(StateHasChanged);
+
+    public async ValueTask DisposeAsync()
+    {
+        ModalService.Changed -= OnModalChanged;
+
+        if (_attachedId is not null)
+        {
+            await JSRuntime.InvokeVoidAsync("siemensIXInterop.modal.detach", _attachedId);
+        }
+
+        _dotNetReference?.Dispose();
+    }
+}

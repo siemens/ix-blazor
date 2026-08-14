@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using SiemensIXBlazor.Enums.Checkbox;
 
 namespace SiemensIXBlazor.Components.Checkbox
 {
@@ -26,7 +27,7 @@ namespace SiemensIXBlazor.Components.Checkbox
         public string? HelperText { get; set; }
 
         [Parameter]
-        public string Direction { get; set; } = "column";
+        public CheckboxGroupDirection Direction { get; set; } = CheckboxGroupDirection.Column;
 
         [Parameter]
         public bool ShowTextAsTooltip { get; set; } = false;

@@ -27,20 +27,11 @@ namespace SiemensIXBlazor.Tests.Dropdown
         }
 
         [Fact]
-        public void DropdownHeaderRendersChildContent()
+        public void DropdownHeaderDoesNotExposeChildContent()
         {
-            // Arrange
-            var expectedContent = "Expected content";
+            var cut = RenderComponent<DropdownHeader>();
 
-            // Act
-            var cut = RenderComponent<DropdownHeader>(parameters => parameters
-                .Add(p => p.ChildContent, builder =>
-                {
-                    builder.AddContent(0, expectedContent);
-                }));
-
-            // Assert
-            Assert.Contains(expectedContent, cut.Markup);
+            Assert.DoesNotContain("ChildContent", cut.Markup);
         }
     }
 }

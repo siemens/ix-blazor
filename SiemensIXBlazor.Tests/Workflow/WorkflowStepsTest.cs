@@ -23,13 +23,12 @@ namespace SiemensIXBlazor.Tests.Workflow
             var cut = RenderComponent<WorkflowSteps>(
                 ("Id", "testId"),
                 ("Clickable", true),
-                ("Linear", true),
                 ("SelectedIndex", 1),
                 ("Vertical", true)
             );
 
             // Assert
-            cut.MarkupMatches("<ix-workflow-steps id=\"testId\" clickable linear selected-index=\"1\" vertical></ix-workflow-steps>");
+            cut.MarkupMatches("<ix-workflow-steps id=\"testId\" clickable selected-index=\"1\" vertical></ix-workflow-steps>");
         }
 
         [Fact]

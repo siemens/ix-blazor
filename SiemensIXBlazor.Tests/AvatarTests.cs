@@ -20,6 +20,7 @@ namespace SiemensIXBlazor.Tests
             // Arrange
             var cut = RenderComponent<Avatar>(parameters => {
                 parameters.Add(p => p.Image, "testImage");
+                parameters.Add(p => p.TooltipText, "testTooltipText");
                 parameters.Add(p => p.Initials, "testInitials");
                 parameters.Add(p => p.AriaLabel, "testAriaLabel");
                 parameters.Add(p => p.AriaLabelTooltip, "testAriaLabelTooltip");
@@ -27,7 +28,20 @@ namespace SiemensIXBlazor.Tests
             });
         
             // Assert
-            cut.MarkupMatches("<ix-avatar image='testImage' initials='testInitials' aria-label='testAriaLabel' aria-label-tooltip='testAriaLabelTooltip'></ix-avatar>");
+            cut.MarkupMatches("<ix-avatar image='testImage' tooltip-text='testTooltipText' initials='testInitials' aria-label='testAriaLabel' aria-label-tooltip='testAriaLabelTooltip'></ix-avatar>");
+        }
+
+        [Fact]
+        public void TooltipTextIsRenderedWithoutChangingOtherAvatarOptions()
+        {
+            var cut = RenderComponent<Avatar>(parameters => parameters
+                .Add(p => p.Initials, "JD")
+                .Add(p => p.TooltipText, "John Doe"));
+
+            Assert.Equal("JD", cut.Instance.Initials);
+            Assert.Equal("John Doe", cut.Instance.TooltipText);
+            Assert.Contains("initials=\"JD\"", cut.Markup);
+            Assert.Contains("tooltip-text=\"John Doe\"", cut.Markup);
         }
     }
 }

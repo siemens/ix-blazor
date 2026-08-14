@@ -28,6 +28,12 @@ namespace SiemensIXBlazor.Interops
             await module.InvokeAsync<string>("fileUploadEventHandler", objectReference, id, eventName, callbackFunctionName);
         }
 
+        public async Task SetFilesToUpload(string id, object files)
+        {
+            var module = await moduleTask.Value;
+            await module.InvokeVoidAsync("setFilesToUpload", id, files);
+        }
+
         public async ValueTask DisposeAsync()
         {
             if (moduleTask.IsValueCreated)

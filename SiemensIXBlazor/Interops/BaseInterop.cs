@@ -34,6 +34,30 @@ namespace SiemensIXBlazor.Interops
             await module.InvokeVoidAsync("setElementProperty", id, propertyName, propertyValue);
         }
 
+        public async Task<T?> InvokeElementMethodAsync<T>(string id, string methodName)
+        {
+            var module = await moduleTask.Value;
+            return await module.InvokeAsync<T>("invokeElementMethod", id, methodName);
+        }
+
+        public async Task InvokeElementMethodAsync(string id, string methodName)
+        {
+            var module = await moduleTask.Value;
+            await module.InvokeVoidAsync("invokeElementMethod", id, methodName);
+        }
+
+        public async ValueTask<T> InvokeMethod<T>(string id, string methodName)
+        {
+            var module = await moduleTask.Value;
+            return await module.InvokeAsync<T>("invokeMethod", id, methodName);
+        }
+
+        public async ValueTask InvokeVoidMethod(string id, string methodName)
+        {
+            var module = await moduleTask.Value;
+            await module.InvokeVoidAsync("invokeVoidMethod", id, methodName);
+        }
+
         public async ValueTask DisposeAsync()
         {
             if (moduleTask.IsValueCreated)

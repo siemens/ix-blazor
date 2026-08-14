@@ -7,15 +7,15 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace SiemensIXBlazor.Objects
 {
     public class Category
     {
-        [JsonProperty("label")]
-        public string? Label { get; set; }
-        [JsonProperty("options")]
-        public string[]? Options { get; set; }
+        [JsonPropertyName("label")]
+        public string Label { get; set; } = string.Empty;
+        [JsonPropertyName("options")]
+        public string[] Options { get; set; } = [];
     }
 }

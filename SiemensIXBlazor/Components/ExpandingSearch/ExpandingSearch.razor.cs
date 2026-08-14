@@ -9,7 +9,7 @@
 
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using SiemensIXBlazor.Enums.ExpandingSearch;
+using SiemensIXBlazor.Enums.Button;
 using SiemensIXBlazor.Interops;
 
 namespace SiemensIXBlazor.Components
@@ -25,19 +25,15 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string? AriaLabelSearchInput { get; set; }   
         [Parameter] 
-        public string Icon { get; set; } = "search";
+        public string? Icon { get; set; }
         [Parameter]
         public string Placeholder { get; set; } = "Enter text here";
         [Parameter]
         public string Value { get; set; } = string.Empty;
         [Parameter]
-        public bool Ghost { get; set; } = true;
-        [Parameter]
-        public bool Outline { get; set; } = false;
-        [Parameter]
         public bool FullWidth { get; set; } = false;
         [Parameter]
-        public ExpandingSearchVariant Variant { get; set; } = ExpandingSearchVariant.primary;
+        public ButtonVariant Variant { get; set; } = ButtonVariant.tertiary;
         [Parameter]
         public EventCallback<string> ValueChangedEvent { get; set; }
 

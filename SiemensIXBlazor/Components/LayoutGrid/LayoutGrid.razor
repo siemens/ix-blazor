@@ -8,12 +8,13 @@
 //  -----------------------------------------------------------------------
 *@
 
+@using SiemensIXBlazor.Enums.LayoutGrid
 @inherits IXBaseComponent
 <ix-layout-grid @attributes="UserAttributes"
                 class="@Class"
                 style="@Style"
                 columns="@Columns"
-                gap="@Gap"
+                gap="@Gap.ToAttributeValue()"
                 no-margin="@NoMargin">
     @ChildContent
 </ix-layout-grid>

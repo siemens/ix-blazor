@@ -9,17 +9,23 @@
 *@
 
 @inherits IXBaseComponent
+@using SiemensIXBlazor.Enums.Menu
+@using SiemensIXBlazor.Helpers
 
 <ix-menu-item @attributes="UserAttributes"
 			  class="@Class"
 			  style="@Style"
-			  home="@Home"
-			  icon="@Icon"
+				home="@Home"
+				bottom="@Bottom"
+				icon="@Icon"
 			  active="@Active"
 			  disabled="@Disabled"
 			  notifications="@Notifications"
 			  label="@Label"
 			  slot="@Slot"
-			  tooltip-text="@TooltipText">
+			  tooltip-text="@TooltipText"
+			  href="@Href"
+			  target="@(EnumParser<MenuItemTarget>.EnumToString(Target))"
+			  rel="@Rel">
 	@ChildContent
 </ix-menu-item>

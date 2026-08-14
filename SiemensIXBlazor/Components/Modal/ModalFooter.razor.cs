@@ -20,7 +20,5 @@ namespace SiemensIXBlazor.Components.Modal
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
 
-        [Parameter, EditorRequired]
-        public string Id { get; set; } = string.Empty;
     }
 }

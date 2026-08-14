@@ -19,10 +19,11 @@ namespace SiemensIXBlazor.Tests
         public void BreadcrumbItemRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<BreadcrumbItem>();
+            var cut = RenderComponent<BreadcrumbItem>(parameters => parameters
+                .Add(p => p.BreadcrumbKey, "test-key"));
 
             // Assert
-            cut.MarkupMatches("<ix-breadcrumb-item target='_self'></ix-breadcrumb-item>");
+            cut.MarkupMatches("<ix-breadcrumb-item breadcrumb-key='test-key' target='_self'></ix-breadcrumb-item>");
         }
 
         [Fact]
@@ -30,18 +31,17 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             var cut = RenderComponent<BreadcrumbItem>(parameters => parameters
+                .Add(p => p.BreadcrumbKey, "test-key")
                 .Add(p => p.Icon, "testIcon")
                 .Add(p => p.Label, "testLabel")
-                .Add(p => p.AriaLabelButton, "testButton")
                 .Add(p => p.Href, "/test")
                 .Add(p => p.Target, BreadcrumbTarget._blank)
                 .Add(p => p.Rel, "testRel"));
 
             // Assert
             cut.MarkupMatches(@"
-                <ix-breadcrumb-item icon='testIcon' 
+                <ix-breadcrumb-item breadcrumb-key='test-key' icon='testIcon'
                                     label='testLabel' 
-                                    aria-label-button='testButton'
                                     href='/test'
                                     target='_blank'
                                     rel='testRel'>
