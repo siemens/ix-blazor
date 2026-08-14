@@ -1,4 +1,13 @@
-﻿import { defineCustomElements } from "@siemens/ix/loader";
+﻿// -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2026 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+//  -----------------------------------------------------------------------
+
+import { defineCustomElements } from "@siemens/ix/loader";
 import "@siemens/ix-echarts";
 import { registerTheme } from "@siemens/ix-echarts";
 import * as echarts from "echarts";
