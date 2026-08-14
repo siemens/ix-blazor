@@ -742,11 +742,17 @@ chart1.InitialChart(object1);
 
 ```razor
 <Chip Icon="print"
-      Label="Chip with icon"
       Id="chip1"
-      Closable="true"
-      TooltipText="Tooltip Text"
+      AriaLabelIcon="Print"
+      Closable
+      TooltipText="@("Tooltip Text")"
       ClosedEvent="@ChipClosedEventHandler">
+    Chip with icon
+</Chip>
+
+<Chip Id="chip-text-tooltip"
+      TooltipText="@true">
+    Uses chip text as tooltip
 </Chip>
 ```
 
