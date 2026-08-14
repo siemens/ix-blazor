@@ -1246,11 +1246,23 @@ private void OnModalDismissed()
 ## Select
 
 ```razor
-<Select ItemSelectionChangeEvent=SelectItemSelectedChanged
-AddItemEvent="SelectItemAdded" Mode="SelectMode.Single" SelectedIndices="2" Id="select1">
-    <SelectItem Id="selectItem1" Label="Item 1" Value="1"></SelectItem>
-    <SelectItem Id="selectItem2" Label="Item 2" Value="2"></SelectItem>
+<Select Id="select1"
+        Mode="SelectMode.Multiple"
+        Value="selectedValues"
+        ValueChangeEvent="OnValuesChanged"
+        I18nPlaceholder="Select a value">
+    <SelectItem Id="selectItem1" Label="Item 1" Value="1" />
+    <SelectItem Id="selectItem2" Label="Item 2" Value="2" Disabled="true" />
 </Select>
+
+@code {
+    private string[] selectedValues = ["1"];
+
+    private void OnValuesChanged(object? value)
+    {
+        selectedValues = value as string[] ?? [];
+    }
+}
 ```
 
 ## Slider

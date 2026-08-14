@@ -27,9 +27,9 @@ public class SelectTests : TestContextBase
 
         // Assert
         cut.MarkupMatches("<ix-select id='test-select' value='1'" +
-                          "i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
-                          "i18n-select-list-header='Please select an option' mode='single' " +
-                          "i18n-no-matches='No matches'></ix-select>");
+                          "aria-label-add-item='Add item' i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
+                          "i18n-select-list-header='Select an option' mode='single' " +
+                          "i18n-no-matches='No matches' i18n-more-items='{count} more' i18n-all-selected='All' i18n-remove-selected-item='Remove'></ix-select>");
     }
 
     [Fact]
@@ -43,9 +43,9 @@ public class SelectTests : TestContextBase
         // Assert
         Assert.Equal("custom-id", cut.Instance.Id);
         cut.MarkupMatches("<ix-select id='custom-id' value='1'" +
-                          "i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
-                          "i18n-select-list-header='Please select an option' mode='single' " +
-                          "i18n-no-matches='No matches'></ix-select>");
+                          "aria-label-add-item='Add item' i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
+                          "i18n-select-list-header='Select an option' mode='single' " +
+                          "i18n-no-matches='No matches' i18n-more-items='{count} more' i18n-all-selected='All' i18n-remove-selected-item='Remove'></ix-select>");
     }
 
     [Fact]
@@ -59,9 +59,9 @@ public class SelectTests : TestContextBase
         // Assert
         Assert.True(cut.Instance.AllowClear);
         cut.MarkupMatches("<ix-select id='test-select' allow-clear " +
-                          "i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
-                          "i18n-select-list-header='Please select an option' mode='single'" +
-                          "i18n-no-matches='No matches'></ix-select>");
+                          "aria-label-add-item='Add item' i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
+                          "i18n-select-list-header='Select an option' mode='single'" +
+                          "i18n-no-matches='No matches' i18n-more-items='{count} more' i18n-all-selected='All' i18n-remove-selected-item='Remove'></ix-select>");
     }
 
     [Fact]
@@ -76,9 +76,9 @@ public class SelectTests : TestContextBase
         // Assert
         Assert.Equal(SelectMode.Multiple, cut.Instance.Mode);
         cut.MarkupMatches("<ix-select id='test-select' value='1'" +
-                          "i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
-                          "i18n-select-list-header='Please select an option' mode='multiple' " +
-                          "i18n-no-matches='No matches'></ix-select>");
+                          "aria-label-add-item='Add item' i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
+                          "i18n-select-list-header='Select an option' mode='multiple' " +
+                          "i18n-no-matches='No matches' i18n-more-items='{count} more' i18n-all-selected='All' i18n-remove-selected-item='Remove'></ix-select>");
     }
 
     [Fact]
@@ -92,9 +92,40 @@ public class SelectTests : TestContextBase
         // Assert
         Assert.Equal("testValue", cut.Instance.Value);
         cut.MarkupMatches("<ix-select id='test-select' value='testValue'" +
-                          "i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
-                          "i18n-select-list-header='Please select an option' mode='single'" +
-                          "i18n-no-matches='No matches'></ix-select>");
+                          "aria-label-add-item='Add item' i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
+                          "i18n-select-list-header='Select an option' mode='single'" +
+                          "i18n-no-matches='No matches' i18n-more-items='{count} more' i18n-all-selected='All' i18n-remove-selected-item='Remove'></ix-select>");
+    }
+
+    [Fact]
+    public void MultipleValueSupportsStringArray()
+    {
+        var values = new[] { "1", "2" };
+        var cut = RenderComponent<Components.Select>(parameters => parameters
+            .Add(p => p.Id, "test-select")
+            .Add(p => p.Mode, SelectMode.Multiple)
+            .Add(p => p.Value, values));
+
+        Assert.Same(values, cut.Instance.Value);
+        Assert.DoesNotContain("value=", cut.Markup);
+    }
+
+    [Fact]
+    public void OfficialLocalizationAndMultipleSelectionPropertiesRender()
+    {
+        var cut = RenderComponent<Components.Select>(parameters => parameters
+            .Add(p => p.Id, "test-select")
+            .Add(p => p.AriaLabelAddItem, "Add option")
+            .Add(p => p.I18nMoreItems, "{count} additional")
+            .Add(p => p.I18nAllSelected, "Everything")
+            .Add(p => p.I18nRemoveSelectedItem, "Remove option")
+            .Add(p => p.CollapseMultipleSelection, true));
+
+        Assert.Contains("aria-label-add-item=\"Add option\"", cut.Markup);
+        Assert.Contains("i18n-more-items=\"{count} additional\"", cut.Markup);
+        Assert.Contains("i18n-all-selected=\"Everything\"", cut.Markup);
+        Assert.Contains("i18n-remove-selected-item=\"Remove option\"", cut.Markup);
+        Assert.Contains("collapse-multiple-selection", cut.Markup);
     }
 
     [Fact]
@@ -109,9 +140,9 @@ public class SelectTests : TestContextBase
         // Assert
         Assert.Equal("ix-warning", cut.Instance.Class);
         cut.MarkupMatches("<ix-select id='test-select' value='1'" +
-                          "i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
-                          "i18n-select-list-header='Please select an option' mode='single' class='ix-warning' " +
-                          "i18n-no-matches='No matches'></ix-select>");
+                          "aria-label-add-item='Add item' i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
+                          "i18n-select-list-header='Select an option' mode='single' class='ix-warning' " +
+                          "i18n-no-matches='No matches' i18n-more-items='{count} more' i18n-all-selected='All' i18n-remove-selected-item='Remove'></ix-select>");
     }
 
     [Fact]
@@ -126,9 +157,9 @@ public class SelectTests : TestContextBase
         // Assert
         Assert.Equal("This is a warning text", cut.Instance.WarningText);
         cut.MarkupMatches("<ix-select id='test-select' value='1'" +
-                          "i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
-                          "i18n-select-list-header='Please select an option' mode='single' " +
-                          "i18n-no-matches='No matches' " +
+                          "aria-label-add-item='Add item' i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
+                          "i18n-select-list-header='Select an option' mode='single' " +
+                          "i18n-no-matches='No matches' i18n-more-items='{count} more' i18n-all-selected='All' i18n-remove-selected-item='Remove' " +
                           "warning-text='This is a warning text'></ix-select>");
     }
 
@@ -150,9 +181,9 @@ public class SelectTests : TestContextBase
 
         // Assert
         cut.MarkupMatches("<ix-select id='test-select' value='1'" +
-                          "i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
-                          "i18n-select-list-header='Please select an option' mode='single' " +
-                          "i18n-no-matches='No matches'>" +
+                          "aria-label-add-item='Add item' i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
+                          "i18n-select-list-header='Select an option' mode='single' " +
+                          "i18n-no-matches='No matches' i18n-more-items='{count} more' i18n-all-selected='All' i18n-remove-selected-item='Remove'>" +
                           "<ix-select-item id='selectItem1' label='Item 1' value='1'></ix-select-item>" +
                           "</ix-select>");
     }
@@ -167,7 +198,7 @@ public class SelectTests : TestContextBase
             .Add(p => p.AddItemEvent, EventCallback.Factory.Create<string>(this, (item) => addedItem = item)));
 
         // Act
-        await cut.Instance.AddItemChanged("New Item");
+        await cut.Instance.AddItemChanged(JsonDocument.Parse("\"New Item\"").RootElement);
 
         // Assert
         Assert.Equal("New Item", addedItem);
@@ -180,7 +211,7 @@ public class SelectTests : TestContextBase
         string? changedValue = null;
         var cut = RenderComponent<Components.Select>(parameters => parameters
             .Add(p => p.Id, "test-select")
-            .Add(p => p.ValueChangeEvent, EventCallback.Factory.Create<dynamic>(this, (value) => changedValue = value)));
+            .Add(p => p.ValueChangeEvent, EventCallback.Factory.Create<object?>(this, value => changedValue = value?.ToString())));
 
         // Act
         var jsonElement = JsonDocument.Parse("\"Option 1\"").RootElement;
@@ -197,7 +228,7 @@ public class SelectTests : TestContextBase
         string[]? changedValues = null;
         var cut = RenderComponent<Components.Select>(parameters => parameters
             .Add(p => p.Id, "test-select")
-            .Add(p => p.ValueChangeEvent, EventCallback.Factory.Create<dynamic>(this, (value) => changedValues = value)));
+            .Add(p => p.ValueChangeEvent, EventCallback.Factory.Create<object?>(this, value => changedValues = value as string[])));
 
         // Act
         var jsonElement = JsonDocument.Parse("[\"Option 1\", \"Option 2\"]").RootElement;
@@ -220,7 +251,7 @@ public class SelectTests : TestContextBase
             .Add(p => p.InputChangeEvent, EventCallback.Factory.Create<string>(this, (input) => changedInput = input)));
 
         // Act
-        await cut.Instance.InputChanged("New Input");
+        await cut.Instance.InputChanged(JsonDocument.Parse("{\"value\":\"New Input\"}").RootElement);
 
         // Assert
         Assert.Equal("New Input", changedInput);
@@ -271,9 +302,9 @@ public class SelectTests : TestContextBase
 
         // Assert
         cut.MarkupMatches("<ix-select id='valid-select' value='2'" +
-                          "i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
-                          "i18n-select-list-header='Please select an option' mode='single' " +
-                          "class='ix-warning' i18n-no-matches='No matches' " +
+                          " aria-label-add-item='Add item' i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
+                          "i18n-select-list-header='Select an option' mode='single' " +
+                          "class='ix-warning' i18n-no-matches='No matches' i18n-more-items='{count} more' i18n-all-selected='All' i18n-remove-selected-item='Remove' " +
                           " info-text='This is an info text' valid-text='Your selection is correct!' " +
                           "warning-text='This is a warning text'>" +
                           "<ix-select-item id='selectItem1' label='Item 1' value='1'></ix-select-item>" +
@@ -306,4 +337,3 @@ public class SelectTests : TestContextBase
         Assert.Contains("enable-top-layer", cut.Markup);
     }
 }
-
