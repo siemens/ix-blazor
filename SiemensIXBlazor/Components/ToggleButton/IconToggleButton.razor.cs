@@ -8,7 +8,9 @@
 //  -----------------------------------------------------------------------
 
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using SiemensIXBlazor.Enums.Button;
+using SiemensIXBlazor.Interops;
 
 namespace SiemensIXBlazor.Components
 {
@@ -16,10 +18,6 @@ namespace SiemensIXBlazor.Components
     {
         [Parameter, EditorRequired]
         public string Id { get; set; }
-        [Parameter]
-        public string? AriaLabelIconButton { get; set; }   
-        [Parameter]
-        public RenderFragment? ChildContent { get; set; }
         [Parameter]
         public bool Disabled { get; set; } = false;
         [Parameter]
@@ -33,12 +31,30 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Pressed { get; set; } = false;
         [Parameter]
-        public string Size { get; set; } = "24";
+        public IconButtonSize Size { get; set; } = IconButtonSize._24;
         [Parameter]
-        public ButtonVariant Variant { get; set; } = ButtonVariant.secondary;
+        public ButtonVariant Variant { get; set; } = ButtonVariant.subtle_primary;
         [Parameter]
         public bool Oval { get; set; } = false;
         [Parameter]
         public EventCallback<bool> PressedChangeEvent { get; set; }
+
+        private BaseInterop _interop;
+
+        protected async override Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                _interop = new(JSRuntime);
+
+                await _interop.AddEventListener(this, Id, "pressedChange", "PressedChange");
+            }
+        }
+
+        [JSInvokable]
+        public async Task PressedChange(bool value)
+        {
+            await PressedChangeEvent.InvokeAsync(value);
+        }
     }
 }

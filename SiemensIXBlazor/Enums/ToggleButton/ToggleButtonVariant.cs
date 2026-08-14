@@ -1,5 +1,5 @@
-﻿// -----------------------------------------------------------------------
-// SPDX-FileCopyrightText: 2025 Siemens AG
+// -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2026 Siemens AG
 //
 // SPDX-License-Identifier: MIT
 //
@@ -7,10 +7,14 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
-namespace SiemensIXBlazor.Enums.ExpandingSearch;
-public enum ExpandingSearchVariant
+namespace SiemensIXBlazor.Enums.ToggleButton;
+
+public enum ToggleButtonVariant
 {
     primary,
     secondary,
-    danger
+    tertiary,
+    subtle_primary,
+    subtle_secondary,
+    subtle_tertiary
 }
