@@ -517,7 +517,8 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 ## Button
 
 ```razor
-<Button>Test Button</Button>
+<Button Variant="ButtonVariant.primary" Icon="save-all" ClickEvent="Save">Save</Button>
+<Button Variant="ButtonVariant.secondary" Href="https://ix.siemens.io/" Target="ButtonTarget._blank">Open docs</Button>
 ```
 
 ## Card
@@ -582,7 +583,7 @@ ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowM
 ## Icon Button
 
 ```razor
-<IconButton Icon="info"></IconButton>
+<IconButton Icon="info" Variant="ButtonVariant.subtle_primary" />
 ```
 
 ## Category filter
@@ -880,10 +881,10 @@ private void DrawerButtonClicked()
 ## Dropdown Button
 
 ```razor
-<DropdownButton Label="Dropdown" Variant="Primary" Icon="checkboxes">
-    <DropdownItem Label="Item 1" Value="1"></DropdownItem>
-    <DropdownItem Label="Item 2" Value="2"></DropdownItem>
-    <DropdownItem Label="Item 3" Value="3"></DropdownItem>
+<DropdownButton Label="Dropdown" Variant="ButtonVariant.primary" Icon="checkboxes">
+    <DropdownItem Label="Item 1"></DropdownItem>
+    <DropdownItem Label="Item 2"></DropdownItem>
+    <DropdownItem Label="Item 3"></DropdownItem>
 </DropdownButton>
 ```
 
@@ -1311,6 +1312,8 @@ private void OnModalDismissed()
              Label="Split Button"
              SplitIcon="chevron-down-small"
              ButtonClickedEvent="SplitButtonClicked">
+    <DropdownItem Label="Save"></DropdownItem>
+    <DropdownItem Label="Save as"></DropdownItem>
 </SplitButton>
 ```
 

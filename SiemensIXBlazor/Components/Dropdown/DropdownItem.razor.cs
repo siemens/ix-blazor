@@ -8,6 +8,7 @@
 //  -----------------------------------------------------------------------
 
 using Microsoft.AspNetCore.Components;
+using SiemensIXBlazor.Enums.Dropdown;
 
 namespace SiemensIXBlazor.Components
 {
@@ -18,15 +19,20 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string? AriaLabelIcon { get; set; }  
         [Parameter]
-        public string Label { get; set; } = string.Empty;
+        public string? Label { get; set; }
         [Parameter]
-        public string Value { get; set; } = string.Empty;
+        public string? Icon { get; set; }
         [Parameter]
-        public EventCallback<DropdownItem> OnClickEvent { get; set; }
-
-        private async void Clicked(DropdownItem dropdownItem)
-        {
-            await OnClickEvent.InvokeAsync(dropdownItem);
-        }
+        public bool Checked { get; set; } = false;
+        [Parameter]
+        public bool Disabled { get; set; } = false;
+        [Parameter]
+        public bool Hover { get; set; } = false;
+        [Parameter]
+        public DropdownItemRole ItemRole { get; set; } = DropdownItemRole.menuitem;
+        [Parameter]
+        public RenderFragment? ChildContent { get; set; }
+        [Parameter]
+        public RenderFragment? EndContent { get; set; }
     }
 }

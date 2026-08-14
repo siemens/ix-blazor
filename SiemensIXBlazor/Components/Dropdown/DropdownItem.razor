@@ -9,6 +9,8 @@
 *@
 
 @namespace SiemensIXBlazor.Components
+@using SiemensIXBlazor.Enums.Dropdown
+@using SiemensIXBlazor.Helpers
 @inherits IXBaseComponent
 <ix-dropdown-item
 @attributes="UserAttributes"
@@ -16,7 +18,15 @@ style="@Style"
 class="@Class"
 aria-label-button="@AriaLabelButton"
 aria-label-icon="@AriaLabelIcon"
-label="@Label" 
-value="@Value" 
-@onclick="() => Clicked(this)">
+label="@Label"
+icon="@Icon"
+checked="@Checked"
+disabled="@Disabled"
+hover="@Hover"
+item-role="@(EnumParser<DropdownItemRole>.EnumToString(ItemRole))">
+    @ChildContent
+    @if (EndContent is not null)
+    {
+        <div slot="end">@EndContent</div>
+    }
 </ix-dropdown-item>
