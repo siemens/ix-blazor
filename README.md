@@ -1150,6 +1150,16 @@ private void OnModalDismissed()
                    HelperText="Please wait while we process your request"
                    Size="@ProgressIndicatorSize.lg"
                    Status="@ProgressIndicatorStatus.info" />
+
+<ProgressIndicator Value="75"
+                   Label="Processing data..."
+                   Size="@ProgressIndicatorSize.lg"
+                   Status="@ProgressIndicatorStatus.info">
+    <HelperTextContent>
+        <span>Custom helper text</span>
+    </HelperTextContent>
+    <span>75%</span>
+</ProgressIndicator>
 ```
 
 ## Radio button
