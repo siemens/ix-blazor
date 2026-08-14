@@ -592,9 +592,11 @@ ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowM
     @ref="categoryFilter"
     Id="category-filter-1"
     Placeholder="Filter by"
-    RepeatCategories="false"
+    UniqueCategories="true"
     FilterChangedEvent="FilterStateChanged"
-    InputChangedEvent="InputStateChanged">
+    InputChangedEvent="InputStateChanged"
+    CategoryChangedEvent="CategoryStateChanged"
+    FilterClearedEvent="FilterCleared">
 </CategoryFilter>
 ```
 
@@ -602,6 +604,13 @@ ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowM
 CategoryFilter categoryFilter;
 Dictionary<string, Category> categoriesDict;
 FilterState filterState;
+
+void InputStateChanged(InputState state) { }
+void CategoryStateChanged(string? category) { }
+void FilterCleared(FilterClearedEventArgs eventArgs)
+{
+    // Set eventArgs.Cancel = true to keep the current filter.
+}
 
 protected override void OnAfterRender(bool firstRender)
     {
@@ -629,7 +638,7 @@ protected override void OnAfterRender(bool firstRender)
                     {
                         Id = "ID_1",
                         Value = "IBM",
-                        Operator = "Not Equal"
+                        Operator = LogicalFilterOperator.NotEqual
                     }
                 }
             };
