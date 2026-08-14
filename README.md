@@ -487,10 +487,17 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 
 ```razor
 <Blind
-    Label="Test Blind"
     Id="blind1"
     CollapsedChangedEvent="(value) => BlindEventHandler(value)">
-Test content
+    <CustomHeader>
+        <span>Custom header</span>
+    </CustomHeader>
+    <HeaderActions>
+        <Button Variant="@ButtonVariant.secondary">Action</Button>
+    </HeaderActions>
+    <ChildContent>
+        <p>Test content</p>
+    </ChildContent>
 </Blind>
 ```
 

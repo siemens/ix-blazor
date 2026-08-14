@@ -23,7 +23,7 @@ namespace SiemensIXBlazor.Tests
             var cut = RenderComponent<Blind>();
 
             // Assert
-            cut.MarkupMatches("<ix-blind id='' variant='insight'></ix-blind>");
+            cut.MarkupMatches("<ix-blind id='' variant='filled'></ix-blind>");
         }
 
         [Fact]
@@ -60,10 +60,37 @@ namespace SiemensIXBlazor.Tests
         public void VariantPropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<Blind>(parameters => parameters.Add(p => p.Variant, BlindVariant.insight));
+            var cut = RenderComponent<Blind>(parameters => parameters.Add(p => p.Variant, BlindVariant.filled));
 
             // Assert
-            Assert.Equal(BlindVariant.insight, cut.Instance.Variant);
+            Assert.Equal(BlindVariant.filled, cut.Instance.Variant);
+        }
+
+        [Fact]
+        public void BlindRendersCustomHeaderAndHeaderActionsSlots()
+        {
+            var cut = RenderComponent<Blind>(parameters => parameters
+                .Add(p => p.CustomHeader, builder => builder.AddContent(0, "Custom header"))
+                .Add(p => p.HeaderActions, builder => builder.AddContent(0, "Actions"))
+                .Add(p => p.ChildContent, builder => builder.AddContent(0, "Blind content")));
+
+            Assert.Contains("slot=\"custom-header\"", cut.Markup);
+            Assert.Contains("Custom header", cut.Markup);
+            Assert.Contains("slot=\"header-actions\"", cut.Markup);
+            Assert.Contains("Actions", cut.Markup);
+            Assert.Contains("Blind content", cut.Markup);
+        }
+
+        [Fact]
+        public async Task CollapsedChangedEventPassesTypedValue()
+        {
+            var collapsed = false;
+            var cut = RenderComponent<Blind>(parameters => parameters
+                .Add(p => p.CollapsedChangedEvent, EventCallback.Factory.Create<bool>(this, value => collapsed = value)));
+
+            await cut.Instance.CollapsedChanged(true);
+
+            Assert.True(collapsed);
         }
 
         [Fact]
