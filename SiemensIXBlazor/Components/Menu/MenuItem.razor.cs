@@ -8,6 +8,7 @@
 //  -----------------------------------------------------------------------
 
 using Microsoft.AspNetCore.Components;
+using SiemensIXBlazor.Enums.Menu;
 
 namespace SiemensIXBlazor.Components.Menu
 {
@@ -16,11 +17,13 @@ namespace SiemensIXBlazor.Components.Menu
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
     [Parameter]
-    public bool? Active { get; set; }
+    public bool Active { get; set; } = false;
     [Parameter]
-    public bool? Disabled { get; set; }
+    public bool Disabled { get; set; } = false;
     [Parameter]
     public bool Home { get; set; } = false;
+    [Parameter]
+    public bool Bottom { get; set; } = false;
     [Parameter]
     public string? Icon { get; set; }
     [Parameter]
@@ -31,5 +34,11 @@ namespace SiemensIXBlazor.Components.Menu
     public string? Slot { get; set; }
     [Parameter]
     public string? TooltipText { get; set; }
+    [Parameter]
+    public string? Href { get; set; }
+    [Parameter]
+    public MenuItemTarget Target { get; set; } = MenuItemTarget._self;
+    [Parameter]
+    public string? Rel { get; set; }
   }
 }

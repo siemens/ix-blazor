@@ -26,29 +26,30 @@ namespace SiemensIXBlazor.Tests
                 ("Layout", TabsLayout.Auto),
                 ("Placement", TabsPlacement.Bottom),
                 ("Rounded", true),
-                ("Selected", 0),
+                ("ActiveTabKey", "legal"),
+                ("KeyboardNavigation", TabsKeyboardNavigation.Manual),
                 ("Small", true)
             );
 
             // Assert
-            cut.MarkupMatches("<ix-tabs id=\"testId\" layout=\"auto\" placement=\"bottom\" rounded selected=\"0\" small></ix-tabs>");
+            cut.MarkupMatches("<ix-tabs id=\"testId\" layout=\"auto\" placement=\"bottom\" rounded active-tab-key=\"legal\" aria-label-more-tabs=\"Show all tabs\" keyboard-navigation=\"manual\" small></ix-tabs>");
         }
 
         [Fact]
-        public void SelectedChangeEventWorks()
+        public async Task TabChangeEventWorks()
         {
             // Arrange
-            var selectedChanged = false;
+            string? changedTab = null;
             var cut = RenderComponent<Tabs>(
                 ("Id", "testId"),
-                ("SelectedChangeEvent", EventCallback.Factory.Create<int>(this, value => selectedChanged = true))
+                ("TabChangedEvent", EventCallback.Factory.Create<string?>(this, value => changedTab = value))
             );
 
             // Act
-            cut.Instance.SelectedChange(1);
+            await cut.Instance.TabChanged("licenses");
 
             // Assert
-            Assert.True(selectedChanged);
+            Assert.Equal("licenses", changedTab);
         }
     }
 }

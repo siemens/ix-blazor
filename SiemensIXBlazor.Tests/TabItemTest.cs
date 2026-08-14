@@ -43,20 +43,22 @@ namespace SiemensIXBlazor.Tests
         }
 
         [Fact]
-        public void TabItem_Should_Render_TabTitle_As_InnerText()
+        public void TabItem_Should_Render_TabKey_And_Label()
         {
             // Arrange & Act
             var component = RenderComponent<TabItem>(parameters => parameters
-                .Add(p => p.TabTitle, "Overview")
+                .Add(p => p.TabKey, "overview")
+                .Add(p => p.Label, "Overview")
             );
 
             // Assert
             var tabItem = component.Find("ix-tab-item");
-            Assert.Contains("Overview", tabItem.InnerHtml);
+            Assert.Equal("overview", tabItem.GetAttribute("tab-key"));
+            Assert.Equal("Overview", tabItem.GetAttribute("label"));
         }
 
         [Fact]
-        public void TabItem_Should_Render_Icon_As_IxIconChild()
+        public void TabItem_Should_Render_Icon_Attribute()
         {
             // Arrange & Act
             var component = RenderComponent<TabItem>(parameters => parameters
@@ -65,36 +67,22 @@ namespace SiemensIXBlazor.Tests
 
             // Assert
             var tabItem = component.Find("ix-tab-item");
-            var ixIcon = tabItem.QuerySelector("ix-icon");
-            Assert.NotNull(ixIcon);
-            Assert.Equal("star", ixIcon!.GetAttribute("name"));
+            Assert.Equal("star", tabItem.GetAttribute("icon"));
         }
 
         [Fact]
-        public void TabItem_Should_Set_Icon_Attribute_True_When_Icon_Only()
+        public void TabItem_Should_Render_Closable_And_CloseLabel()
         {
             // Arrange & Act
             var component = RenderComponent<TabItem>(parameters => parameters
-                .Add(p => p.Icon, "star")
+                .Add(p => p.Closable, true)
+                .Add(p => p.AriaLabelCloseButton, "Close this tab")
             );
 
             // Assert
             var tabItem = component.Find("ix-tab-item");
-            Assert.Equal("", tabItem.GetAttribute("icon"));
-        }
-
-        [Fact]
-        public void TabItem_Should_Not_Set_Icon_Attribute_When_TabTitle_Present()
-        {
-            // Arrange & Act
-            var component = RenderComponent<TabItem>(parameters => parameters
-                .Add(p => p.Icon, "star")
-                .Add(p => p.TabTitle, "My Tab")
-            );
-
-            // Assert
-            var tabItem = component.Find("ix-tab-item");
-            Assert.Null(tabItem.GetAttribute("icon"));
+            Assert.Equal("", tabItem.GetAttribute("closable"));
+            Assert.Equal("Close this tab", tabItem.GetAttribute("aria-label-close-button"));
         }
 
         [Fact]
@@ -180,12 +168,12 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange & Act
             var component = RenderComponent<TabItem>(parameters => parameters
-                .Add(p => p.TabTitle, "No Icon Tab")
+                .Add(p => p.Label, "No Icon Tab")
             );
 
             // Assert
             var tabItem = component.Find("ix-tab-item");
-            Assert.Null(tabItem.QuerySelector("ix-icon"));
+            Assert.Null(tabItem.GetAttribute("icon"));
         }
     }
 }

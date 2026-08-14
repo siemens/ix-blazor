@@ -1,18 +1,14 @@
 <ix-tab-item id="@Id"
-             class="@GetCssClasses()"
+             tab-key="@TabKey"
+             label="@Label"
+             class="@Class"
              style="@Style"
-             icon="@(string.IsNullOrEmpty(TabTitle) && !string.IsNullOrEmpty(Icon))"
+             icon="@Icon"
              disabled="@Disabled"
              selected="@Selected"
              counter="@Counter"
+             closable="@Closable"
+             aria-label-close-button="@AriaLabelCloseButton"
              @attributes="UserAttributes">
-    @if (!string.IsNullOrEmpty(Icon))
-    {
-        <ix-icon name="@Icon"></ix-icon>
-    }
-    @if (!string.IsNullOrEmpty(TabTitle))
-    {
-        @TabTitle
-    }
     @ChildContent
 </ix-tab-item>

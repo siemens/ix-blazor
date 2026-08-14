@@ -245,14 +245,21 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 ## Menu
 
 ```razor
-<Menu Id="nav-menu-1">
-  <MenuItem Home="true" TabIcon="home"> Home </MenuItem>
-  <MenuItem TabIcon="globe"> Normal Tab </MenuItem>
-  <MenuItem TabIcon="star" disabled> Disabled tab </MenuItem>
-  <MenuItem TabIcon="star"> With other icon </MenuItem>
-  <MenuItem TabIcon="globe" Style="display: none">
-    Should not be visible
-  </MenuItem>
+<Menu Id="nav-menu-1"
+      ApplicationName="Application"
+      ApplicationDescription="Application description"
+      ShowAbout="true"
+      ShowSettings="true"
+      I18nAriaLabelMenu="Application menu"
+      I18nNavigationHint="Use arrow keys to navigate"
+      @ref="menu">
+  <MenuItem Home="true" Icon="home" Label="Home" />
+  <MenuItem Icon="globe" Label="Overview" Href="/overview" />
+  <MenuCategory Label="Administration" Icon="cogwheel">
+    <MenuItem Icon="user" Label="Users" Href="/users" />
+    <MenuItem Icon="lock" Label="Permissions" Href="/permissions" />
+  </MenuCategory>
+  <MenuItem Slot="bottom" Icon="info" Label="Help" Href="/help" />
 </Menu>
 ```
 
@@ -274,15 +281,11 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 @* Menu Avatar *@
 <Menu Id="nav-menu-1">
   <MenuAvatar Id="nav-avatar-menu-1" Image="https://ui-avatars.com/api/?name=John+Doe">
-    <MenuAvatarItem Id="nav-avatar-item-1" Label="Option 1"></MenuAvatarItem>
+    <MenuAvatarItem Id="nav-avatar-item-1" Icon="user" Label="Profile" />
   </MenuAvatar>
-  <MenuItem Home="true" TabIcon="home"> Home </MenuItem>
-  <MenuItem TabIcon="globe"> Normal Tab </MenuItem>
-  <MenuItem TabIcon="star" Disabled="true"> Disabled tab </MenuItem>
-  <MenuItem TabIcon="star"> With other icon </MenuItem>
-  <MenuItem TabIcon="globe" Style="display: none">
-    Should not be visible
-  </MenuItem>
+  <MenuItem Home="true" Icon="home" Label="Home" />
+  <MenuItem Icon="globe" Label="Normal tab" />
+  <MenuItem Icon="star" Label="Disabled tab" Disabled="true" />
 </Menu>
 ```
 
@@ -292,18 +295,23 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 <BasicNavigation>
   <placeholder-logo slot="logo"></placeholder-logo>
   <Menu Id="nav-menu-1">
-    <MenuAbout @ref="menuAboutElement">
-      <MenuAboutItem Label="Tab 1">Content 1</MenuAboutItem>
-      <MenuAboutItem Label="Tab 2">Content 2</MenuAboutItem>
+    <MenuAbout Id="about" SuppressLegacyTabs="true">
+      <Tabs Id="about-tabs" ActiveTabKey="legal">
+        <TabItem TabKey="legal" Label="Legal" />
+        <TabItem TabKey="licenses" Label="Licenses" />
+      </Tabs>
+      <section role="tabpanel" aria-label="About and legal content">
+        Legal information
+      </section>
     </MenuAbout>
   </Menu>
 </BasicNavigation>
 ```
 
 ```csharp
-MenuAbout menuAboutElement;
+Menu? menu;
 
-menuAboutElement.ToggleAbout(true);
+await menu.ToggleAboutAsync(true);
 ```
 
 ## Menu Settings
@@ -312,22 +320,23 @@ menuAboutElement.ToggleAbout(true);
 <BasicNavigation>
   <placeholder-logo slot="logo"></placeholder-logo>
   <Menu Id="nav-menu-1">
-    <MenuSettings @ref="settingsMenuElement">
-      <MenuSettingsItem
-        Label="Example Setting 1"
-      ></MenuSettingsItem>
-      <MenuSettingsItem
-        Label="Example Setting 2"
-      ></MenuSettingsItem>
+    <MenuSettings Id="settings" SuppressLegacyTabs="true">
+      <Tabs Id="settings-tabs" ActiveTabKey="general">
+        <TabItem TabKey="general" Label="General" />
+        <TabItem TabKey="preferences" Label="Preferences" />
+      </Tabs>
+      <section role="tabpanel" aria-label="Settings content">
+        General settings
+      </section>
     </MenuSettings>
   </Menu>
 </BasicNavigation>
 ```
 
 ```csharp
-SettingsMenu settingsMenuElement;
+Menu? menu;
 
-menuAboutElement.ToggleSettings(true);
+await menu.ToggleSettingsAsync(true);
 ```
 
 ## Map Navigation
@@ -360,11 +369,13 @@ menuAboutElement.ToggleSettings(true);
 <BasicNavigation>
   <placeholder-logo slot="logo"></placeholder-logo>
   <Menu Id="nav-menu-1">
-    <MenuAbout>
-      <MenuAboutItem Label="Example"> </MenuAboutItem>
+    <MenuAbout Id="about" SuppressLegacyTabs="true">
+      <Tabs Id="about-tabs" ActiveTabKey="news">
+        <TabItem TabKey="news" Label="News" />
+      </Tabs>
     </MenuAbout>
-    <MenuAboutNews Label="Test" Show="true" AboutItemLabel="Example">
-      Test
+    <MenuAboutNews Id="news" Label="Release notes" Show="true" AboutItemLabel="News" ActiveAboutTabKey="news">
+      Latest release notes
     </MenuAboutNews>
   </Menu>
 </BasicNavigation>
@@ -1203,25 +1214,32 @@ AddItemEvent="SelectItemAdded" Mode="SelectMode.Single" SelectedIndices="2" Id="
 ## Tabs
 
 ```razor
-<Tabs Id="TabsId"  Selected=@_SelectedTab   SelectedChangeEvent=@OnChangeTab >
-    <TabItem Id="Tab1" Selected="@(_SelectedTab == 0)" TabTitle="Tab 1" >Tab 1
-    </TabItem>
-    <TabItem Id="Tab2" Selected="@(_SelectedTab == 1)" TabTitle="Tab 2"> Tab 2
-    </TabItem>
-    <TabItem Id="Tab3" Selected="@(_SelectedTab == 2)" TabTitle="Tab 3"> Tab 3
-    </TabItem>
+<Tabs Id="tabs-demo" ActiveTabKey="@_activeTabKey" TabChangedEvent="OnTabChanged">
+    <TabItem TabKey="tab-1" Label="Tab 1" />
+    <TabItem TabKey="tab-2" Label="Tab 2" />
+    <TabItem TabKey="tab-3" Label="Tab 3" />
 </Tabs>
-@if (_SelectedTab == 0)
+@if (_activeTabKey == "tab-1")
 {
   <h5>Content of Tab 1</h5>
 }
-else if (_SelectedTab == 1)
+else if (_activeTabKey == "tab-2")
 {
   <h5>Content of Tab 2</h5>
 }
-else if (_SelectedTab == 2)
+else if (_activeTabKey == "tab-3")
 {
   <h5>Content of Tab 3</h5>
+}
+
+@code {
+    private string _activeTabKey = "tab-1";
+
+    private Task OnTabChanged(string? tabKey)
+    {
+        _activeTabKey = tabKey ?? "tab-1";
+        return Task.CompletedTask;
+    }
 }
 ```
 

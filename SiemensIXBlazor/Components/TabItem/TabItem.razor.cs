@@ -12,29 +12,34 @@ using Microsoft.AspNetCore.Components;
 namespace SiemensIXBlazor.Components.TabItem
 {
     /// <summary>
-    /// Siemens IX Tab Item component for individual tab content
+    /// Siemens IX tab item component for v5 tab headers.
     /// </summary>
     public partial class TabItem : ComponentBase
     {
         /// <summary>
-        /// Unique identifier for the component
+        /// Optional element identifier.
         /// </summary>
         [Parameter] public string Id { get; set; } = string.Empty;
 
         /// <summary>
-        /// Additional CSS classes to apply to the component
+        /// Additional CSS classes to apply to the host element.
         /// </summary>
         [Parameter] public string Class { get; set; } = string.Empty;
 
         /// <summary>
-        /// Inline styles to apply to the component
+        /// Inline styles to apply to the host element.
         /// </summary>
         [Parameter] public string Style { get; set; } = string.Empty;
 
         /// <summary>
-        /// Tab item label text
+        /// Key used to identify the tab.
         /// </summary>
-        [Parameter] public string? TabTitle { get; set; }
+        [Parameter, EditorRequired] public string TabKey { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Tab label. When omitted, the child content is used by IX as the label.
+        /// </summary>
+        [Parameter] public string? Label { get; set; }
 
         /// <summary>
         /// Icon to display in the tab header
@@ -57,6 +62,16 @@ namespace SiemensIXBlazor.Components.TabItem
         [Parameter] public int? Counter { get; set; }
 
         /// <summary>
+        /// Whether the tab can be closed.
+        /// </summary>
+        [Parameter] public bool Closable { get; set; } = false;
+
+        /// <summary>
+        /// Aria label for the close button.
+        /// </summary>
+        [Parameter] public string AriaLabelCloseButton { get; set; } = "Close tab";
+
+        /// <summary>
         /// Additional attributes to apply to the component
         /// </summary>
         [Parameter(CaptureUnmatchedValues = true)]
@@ -67,14 +82,5 @@ namespace SiemensIXBlazor.Components.TabItem
         /// </summary>
         [Parameter] public RenderFragment? ChildContent { get; set; }
 
-        private string GetCssClasses()
-        {
-            var classes = new List<string>();
-            
-            if (!string.IsNullOrEmpty(Class))
-                classes.Add(Class);
-
-            return string.Join(" ", classes);
-        }
     }
 }

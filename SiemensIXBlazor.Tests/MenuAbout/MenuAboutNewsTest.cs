@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // SPDX-FileCopyrightText: 2024 Siemens AG
 //
 // SPDX-License-Identifier: MIT
@@ -10,108 +10,41 @@
 using Bunit;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using SiemensIXBlazor.Components.MenuAbout;
 
-namespace SiemensIXBlazor.Tests.MenuAbout
+namespace SiemensIXBlazor.Tests.MenuAbout;
+
+public class MenuAboutNewsTest : TestContextBase
 {
-	public class MenuAboutNewsTest: TestContextBase
+    [Fact]
+    public void RendersCurrentPublicProperties()
     {
-        [Fact]
-        public void ComponentRendersWithoutCrashing()
-        {
-            // Arrange
-            var cut = RenderComponent<MenuAboutNews>();
+        var cut = RenderComponent<Components.MenuAbout.MenuAboutNews>(parameters => parameters
+            .Add(p => p.Id, "news")
+            .Add(p => p.Label, "Release notes")
+            .Add(p => p.AboutItemLabel, "News")
+            .Add(p => p.ActiveAboutTabKey, "news")
+            .Add(p => p.I18nShowMore, "Read more")
+            .Add(p => p.Show, true));
 
-            // Assert
-            cut.MarkupMatches("<ix-menu-about-news id='' i18n-show-more='Show more'></ix-menu-about-news>");
-        }
+        Assert.Contains("active-about-tab-key=\"news\"", cut.Markup);
+        Assert.Contains("show", cut.Markup);
+        Assert.DoesNotContain("expanded", cut.Markup);
+    }
 
-        [Fact]
-        public void ChildContentPropertyIsSetCorrectly()
-        {
-            // Arrange
-            var cut = RenderComponent<MenuAboutNews>(parameters => parameters.Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content"))));
+    [Fact]
+    public async Task NewsEventsForwardDetails()
+    {
+        var closed = false;
+        MouseEventArgs? mouseEvent = null;
+        var cut = RenderComponent<Components.MenuAbout.MenuAboutNews>(parameters => parameters
+            .Add(p => p.ClosePopoverEvent, EventCallback.Factory.Create(this, () => closed = true))
+            .Add(p => p.ShowMoreEvent, EventCallback.Factory.Create<MouseEventArgs>(this, value => mouseEvent = value)));
+        var expected = new MouseEventArgs();
 
-            // Assert
-            Assert.NotNull(cut.Instance.ChildContent);
-        }
+        await cut.Instance.ClosePopover();
+        await cut.Instance.ShowMore(expected);
 
-        [Fact]
-        public void AboutItemLabelPropertyIsSetCorrectly()
-        {
-            // Arrange
-            var cut = RenderComponent<MenuAboutNews>(parameters => parameters.Add(p => p.AboutItemLabel, "testAboutItemLabel"));
-
-            // Assert
-            Assert.Equal("testAboutItemLabel", cut.Instance.AboutItemLabel);
-        }
-
-        [Fact]
-        public void ExpandedPropertyIsSetCorrectly()
-        {
-            // Arrange
-            var cut = RenderComponent<MenuAboutNews>(parameters => parameters.Add(p => p.Expanded, true));
-
-            // Assert
-            Assert.True(cut.Instance.Expanded);
-        }
-
-        [Fact]
-        public void I18nShowMorePropertyIsSetCorrectly()
-        {
-            // Arrange
-            var cut = RenderComponent<MenuAboutNews>(parameters => parameters.Add(p => p.I18NShowMore, "showMoreTest"));
-
-            // Assert
-            Assert.Equal("showMoreTest", cut.Instance.I18NShowMore);
-        }
-
-        [Fact]
-        public void LablePropertyIsSetCorrectly()
-        {
-            // Arrange
-            var cut = RenderComponent<MenuAboutNews>(parameters => parameters.Add(p => p.Label, "testLabel"));
-
-            // Assert
-            Assert.Equal("testLabel", cut.Instance.Label);
-        }
-
-        [Fact]
-        public void ShowPropertyIsSetCorrectly()
-        {
-            // Arrange
-            var cut = RenderComponent<MenuAboutNews>(parameters => parameters.Add(p => p.Show, true));
-
-            // Assert
-            Assert.True(cut.Instance.Show);
-        }
-
-        [Fact]
-        public void ClosePopoverEventTriggeredCorrectly()
-        {
-            // Arrange
-            var eventTriggered = false;
-            var cut = RenderComponent<MenuAboutNews>(parameters => parameters.Add(p => p.ClosePopoverEvent, EventCallback.Factory.Create(this, () => eventTriggered = true)));
-
-            // Act
-            cut.Instance.ClosePopoverEvent.InvokeAsync();
-
-            // Assert
-            Assert.True(eventTriggered);
-        }
-
-        [Fact]
-        public void ShowMoreEventTriggeredCorrectly()
-        {
-            // Arrange
-            var eventTriggered = false;
-            var cut = RenderComponent<MenuAboutNews>(parameters => parameters.Add(p => p.ShowMoreEvent, EventCallback.Factory.Create<MouseEventArgs>(this, () => eventTriggered = true)));
-
-            // Act
-            cut.Instance.ShowMoreEvent.InvokeAsync(new MouseEventArgs());
-
-            // Assert
-            Assert.True(eventTriggered);
-        }
+        Assert.True(closed);
+        Assert.Same(expected, mouseEvent);
     }
 }
