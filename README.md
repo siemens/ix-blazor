@@ -992,24 +992,26 @@ private void DrawerButtonClicked()
 ## Key Value List
 
 ```razor
+@using SiemensIXBlazor.Enums.KeyValue
+
 <KeyValueList>
   <KeyValue
     Label="Label"
-    LabelPosition="left"
+    LabelPosition="@KeyValueLabelPosition.left"
     Value="Value"
-  ></KeyValue>
+  />
 
   <KeyValue
     Label="Label"
-    LabelPosition="left"
+    LabelPosition="@KeyValueLabelPosition.left"
     Value="Value"
-  ></KeyValue>
+  />
 
   <KeyValue
     Label="Label"
-    LabelPosition="left"
+    LabelPosition="@KeyValueLabelPosition.left"
     Value="Value"
-  ></KeyValue>
+  />
 </KeyValueList>
 ```
 
@@ -1017,12 +1019,9 @@ private void DrawerButtonClicked()
 
 ```razor
 <KeyValue Label="Label">
-  <input
-    class="form-control"
-    placeholder="Enter text here"
-    type="text"
-    slot="custom-value"
-  />
+  <CustomValue>
+    <input class="form-control" placeholder="Enter text here" type="text" />
+  </CustomValue>
 </KeyValue>
 ```
 
