@@ -11,13 +11,14 @@
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
 @using Microsoft.JSInterop
-@using System.Text.Json
+@using SiemensIXBlazor.Enums
+@using SiemensIXBlazor.Helpers
 @inject IJSRuntime JSRuntime
 
 <ix-application class="@Class" style="@Style" @attributes="UserAttributes" 
     id="@Id" 
     force-breakpoint="@ForceBreakpoint" 
     theme="@Theme" 
-    theme-system-appearance="@ThemeSystemAppearance">
+    color-schema="@(EnumParser<ColorSchema>.EnumToString(ColorSchema))">
   @ChildContent
 </ix-application>

@@ -21,13 +21,36 @@
                       company-logo-alt="@CompanyLogoAlt"
                       app-icon="@AppIcon"
                       app-icon-alt="@AppIconAlt"
+                      app-icon-outline="@AppIconOutline"
                       hide-bottom-border="@HideBottomBorder"
-                      enable-top-layer="@EnableTopLayer">
+                      show-menu="@ShowMenu"
+                      aria-label-app-switch-icon-button="@AriaLabelAppSwitchIconButton"
+                      aria-label-more-menu-icon-button="@AriaLabelMoreMenuIconButton"
+                      enable-top-layer="@EnableTopLayer"
+                      slot="application-header">
     @ChildContent
     @if (Secondary != null)
     {
         <div slot="secondary">
             @Secondary
+        </div>
+    }
+    @if (Overflow != null)
+    {
+        <div slot="overflow">
+            @Overflow
+        </div>
+    }
+    @if (Logo != null)
+    {
+        <div slot="logo">
+            @Logo
+        </div>
+    }
+    @if (Avatar != null)
+    {
+        <div slot="ix-application-header-avatar">
+            @Avatar
         </div>
     }
 </ix-application-header>
