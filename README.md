@@ -1207,35 +1207,68 @@ private void DrawerButtonClicked()
 
 ## Modal
 
-```razor
-<Modal @ref="_modal" Id="modal-example-template"
-    Centered="true"
-    DismissedEvent="OnModalDismissed">
-   <ModalHeader Id="modal-header">Message headline</ModalHeader>
-   <ModalContent Id="modal-content">Message text </ModalContent>
-   <ModalFooter Id="modal-footer">
-   <Button Variant="ButtonVariant.primary" ClickEvent="CloseModal"> Cancel </Button>
-   <Button ClickEvent="CloseModal">OK</Button>
-   </ModalFooter>
-</Modal>
-```
+Register the services once and render one `ModalHost` in the application layout:
 
 ```csharp
-private Modal? _modal;
+builder.Services.AddScoped<ModalService>();
+builder.Services.AddScoped<LoadingService>();
+```
+
+```razor
+<ModalHost />
+<Button ClickEvent="OpenModal">Open modal</Button>
+```
+
+```razor
+@inject ModalService ModalService
+
+@code {
+private ModalInstance<string>? _modal;
+
 private async Task OpenModal()
 {
-  if (_modal is not null)
-    await _modal.ShowAsync();
+  _modal = await ModalService.ShowAsync<string>(new ModalConfig
+  {
+    Centered = true,
+    Content = @<text>
+      <ModalHeader>Message headline</ModalHeader>
+      <ModalContent>Message text</ModalContent>
+      <ModalFooter>
+        <Button Variant="ButtonVariant.primary" ClickEvent="CloseModal">OK</Button>
+        <Button ClickEvent="DismissModal">Cancel</Button>
+      </ModalFooter>
+    </text>
+  });
 }
+
 private async Task CloseModal()
 {
   if (_modal is not null)
-    await _modal.HideAsync();
+    await _modal.CloseAsync("ok");
 }
-private void OnModalDismissed()
+
+private async Task DismissModal()
 {
-  Console.WriteLine("Modal was dismissed.");
+  if (_modal is not null)
+    await _modal.DismissAsync("cancel");
 }
+}
+```
+
+`ModalHeader`, `ModalContent`, and `ModalFooter` are composition wrappers. The
+`ix-modal` and internal `ix-modal-loading` elements are managed by the services;
+they are not instantiated directly.
+
+```csharp
+var loading = await LoadingService.ShowModalLoadingAsync(new ModalLoadingOptions
+{
+  Message = "Loading...",
+  Centered = true
+});
+
+await loading.UpdateAsync("Almost finished...");
+await loading.FinishAsync("Done");
+await loading.DisposeAsync();
 ```
 
 ## Pagination
