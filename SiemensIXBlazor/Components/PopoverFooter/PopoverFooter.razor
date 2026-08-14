@@ -1,0 +1,26 @@
+@* -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2026 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+//  -----------------------------------------------------------------------
+*@
+
+@using SiemensIXBlazor.Enums.Popover
+@using SiemensIXBlazor.Helpers
+@inherits IXBaseComponent
+@namespace SiemensIXBlazor.Components
+
+<ix-popover-footer @attributes="UserAttributes"
+                   id="@Id"
+                   alignment="@(EnumParser<PopoverFooterAlignment>.EnumToString(Alignment))"
+                   class="@Class"
+                   style="@Style">
+    @if (StartContent != null)
+    {
+        <div slot="start">@StartContent</div>
+    }
+    @ChildContent
+</ix-popover-footer>

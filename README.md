@@ -152,6 +152,7 @@ Do not use the legacy `theme-classic-light` or `theme-classic-dark` values.
 - [Link Button](#link-button) **(since v0.4.0)**
 - [Message Bar](#message-bar)
 - [Modal](#modal)
+- [Popover](#popover)
 - [Pane](#pane) **(since 0.5.0)**
 - [Pagination](#pagination)
 - [Pill](#pill)
@@ -1338,6 +1339,34 @@ await loading.UpdateAsync("Almost finished...");
 await loading.FinishAsync("Done");
 await loading.DisposeAsync();
 ```
+
+## Popover
+
+```razor
+<Button Id="popover-trigger">Show details</Button>
+
+<Popover Id="popover"
+         Trigger="popover-trigger"
+         Placement="PopoverPlacement.Bottom"
+         HasSpike="true">
+    <PopoverHeader Id="popover-header"
+                   Icon="info">
+        <ChildContent>Details</ChildContent>
+        <AdditionalItems>
+            <Pill Variant="PillVariant.info">New</Pill>
+        </AdditionalItems>
+    </PopoverHeader>
+    <PopoverContent Id="popover-content">
+        Additional information.
+    </PopoverContent>
+    <PopoverFooter Id="popover-footer">
+        <StartContent>Step 1 of 2</StartContent>
+        <ChildContent><Button>Close</Button></ChildContent>
+    </PopoverFooter>
+</Popover>
+```
+
+Use `PopoverTriggerMode.Hover` for hover and focus interaction, `PopoverPlacement` for the preferred position, and `PopoverFooterAlignment.Vertical` for vertically arranged footer actions. `Popover.ShowPopover()` and `Popover.HidePopover()` expose the official programmatic methods.
 
 ## Pagination
 

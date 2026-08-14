@@ -1,0 +1,29 @@
+@* -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2026 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+//  -----------------------------------------------------------------------
+*@
+
+@using Microsoft.JSInterop
+@using SiemensIXBlazor.Enums.Popover
+@using SiemensIXBlazor.Helpers
+@inject IJSRuntime JSRuntime
+@inherits IXBaseComponent
+@namespace SiemensIXBlazor.Components
+
+<ix-popover @attributes="UserAttributes"
+            id="@Id"
+            trigger="@Trigger"
+            show="@Show"
+            placement="@(EnumParser<PopoverPlacement>.EnumToString(Placement))"
+            has-spike="@HasSpike"
+            trigger-mode="@(EnumParser<PopoverTriggerMode>.EnumToString(TriggerMode))"
+            close-on-click-outside="@CloseOnClickOutside"
+            class="@Class"
+            style="@Style">
+    @ChildContent
+</ix-popover>
