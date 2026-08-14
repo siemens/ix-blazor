@@ -23,11 +23,11 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string? Icon { get; set; }
         [Parameter]
-        public bool Checked { get; set; } = false;
+        public bool Hover { get; set; } = false;
         [Parameter]
         public bool Disabled { get; set; } = false;
         [Parameter]
-        public bool Hover { get; set; } = false;
+        public bool Checked { get; set; } = false;
         [Parameter]
         public DropdownItemRole ItemRole { get; set; } = DropdownItemRole.menuitem;
         [Parameter]

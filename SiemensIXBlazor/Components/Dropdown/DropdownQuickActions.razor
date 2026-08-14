@@ -1,5 +1,5 @@
-﻿@* -----------------------------------------------------------------------
-// SPDX-FileCopyrightText: 2024 Siemens AG
+@* -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2026 Siemens AG
 //
 // SPDX-License-Identifier: MIT
 //
@@ -11,9 +11,6 @@
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
 
-<ix-dropdown-header @attributes="UserAttributes"
-    label="@Label"
-    style="@Style"
-    class="@Class">
-</ix-dropdown-header>
-
+<ix-dropdown-quick-actions @attributes="UserAttributes" style="@Style" class="@Class">
+    @ChildContent
+</ix-dropdown-quick-actions>
