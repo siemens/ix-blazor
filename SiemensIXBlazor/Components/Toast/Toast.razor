@@ -1,19 +1,35 @@
-﻿@* -----------------------------------------------------------------------
+@* -----------------------------------------------------------------------
 // SPDX-FileCopyrightText: 2024 Siemens AG
 //
 // SPDX-License-Identifier: MIT
 //
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
-//  -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 *@
 
-@using Microsoft.JSInterop;
+@using Microsoft.JSInterop
+@using SiemensIXBlazor.Enums
+@using SiemensIXBlazor.Helpers
 @inject IJSRuntime JSRuntime
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
 
-<ix-toast-container
-@attributes="UserAttributes"
-style="@Style"
-class="@Class"></ix-toast-container>
+<ix-toast @attributes="UserAttributes"
+          id="@Id"
+          class="@Class"
+          style="@Style"
+          type="@(EnumParser<ToastType>.EnumToString(Type))"
+          toast-title="@ToastTitle"
+          auto-close-delay="@AutoCloseDelay"
+          prevent-auto-close="@(PreventAutoClose ? "true" : null)"
+          icon="@Icon"
+          icon-color="@IconColor"
+          hide-icon="@(HideIcon ? "true" : null)"
+          aria-label-close-icon-button="@AriaLabelCloseIconButton">
+    @ChildContent
+    @if (ActionContent is not null)
+    {
+        <div slot="action">@ActionContent</div>
+    }
+</ix-toast>
