@@ -1214,9 +1214,20 @@ AddItemEvent="SelectItemAdded" Mode="SelectMode.Single" SelectedIndices="2" Id="
 ## Slider
 
 ```razor
-<Slider Id="slider-demo" Min="0" Max="50" Step="5" Value="0" Marker="[0, 10, 20, 30, 40, 50]">
-    <span slot="label-start">0</span>
-    <span slot="label-end">50</span>
+<Slider Id="slider-demo"
+        Label="Range"
+        HelperText="Select a value"
+        Min="0"
+        Max="50"
+        Step="5"
+        Value="0"
+        Marker="[0, 10, 20, 30, 40, 50]">
+    <LabelStart>
+        <span>0</span>
+    </LabelStart>
+    <LabelEnd>
+        <span>50</span>
+    </LabelEnd>
 </Slider>
 ```
 
