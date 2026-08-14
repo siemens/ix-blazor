@@ -62,9 +62,8 @@ Add `Theme` component to the page that you want to manipulate the theme.
 ```razor
 <Theme @ref="themeProvider"></Theme>
 
-<Button ClickEvent="SetDarkTheme">Set Dark Theme</Button>
+<Button ClickEvent="SetClassicTheme">Set Classic Theme</Button>
 <Button ClickEvent="ToggleTheme">Toggle Theme</Button>
-<Button ClickEvent="ToggleSystemTheme">Toggle System Theme</Button>
 ```
 
 Then use this methods to change theme.
@@ -77,7 +76,7 @@ public partial class Index
     {
         if(firstRender)
         {
-            await themeProvider.SetTheme("theme-classic-light");
+            await themeProvider.SetTheme("classic");
         }
 
     }
@@ -87,17 +86,16 @@ public partial class Index
         await themeProvider.ToggleTheme();
     }
 
-    private async Task SetDarkTheme()
+    private async Task SetClassicTheme()
     {
-        await themeProvider.SetTheme("theme-classic-dark");
-    }
-
-    private async Task ToggleSystemTheme()
-    {
-        await themeProvider.ToggleSystemTheme(true);
+        await themeProvider.SetTheme("classic");
     }
 }
 ```
+
+In iX v5, the theme name and color schema are separate. Use a theme name such as
+`classic` together with `Application.ColorSchema` (`Light`, `Dark`, or `System`).
+Do not use the legacy `theme-classic-light` or `theme-classic-dark` values.
 
 ### Supported Components
 
@@ -173,9 +171,16 @@ public partial class Index
 ## Application
 
 ```razor
-<Application @ref="_app">
-    <ApplicationHeader Name="My Application">
-        <placeholder-logo slot="logo"></placeholder-logo>
+<Application Id="application" @ref="_app" Theme="classic" ColorSchema="System">
+    <ApplicationHeader Id="application-header" Name="My Application">
+        <Logo>
+            <placeholder-logo></placeholder-logo>
+        </Logo>
+        <Button Variant="tertiary">Header action</Button>
+        <ix-avatar slot="ix-application-header-avatar"
+                   initials="JD"
+                   username="Jane Doe"
+                   extra="Product Engineering"></ix-avatar>
     </ApplicationHeader>
     <Menu>
         <MenuItem>Item 1</MenuItem>
@@ -225,8 +230,10 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 ## Application Header
 
 ```razor
-<ApplicationHeader Name="My Application">
-    <placeholder-logo slot="logo"></placeholder-logo>
+<ApplicationHeader Id="application-header" Name="My Application">
+    <Logo>
+        <placeholder-logo></placeholder-logo>
+    </Logo>
 </ApplicationHeader>
 ```
 

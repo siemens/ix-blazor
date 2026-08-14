@@ -14,34 +14,60 @@ using Microsoft.JSInterop;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using SiemensIXBlazor.Enums;
-using SiemensIXBlazor.Interops;
 using SiemensIXBlazor.Objects.Application;
 
 public partial class Application 
 {
     private Lazy<Task<IJSObjectReference>>? moduleTask;
-    private BaseInterop? _interop;
-    private AppSwitchConfig _appSwitchConfig;
+    private AppSwitchConfig? _appSwitchConfig;
+    private bool _hasRendered;
+    private int _appSwitchConfigVersion;
+    private int _appliedAppSwitchConfigVersion;
+    private string[] _breakpoints = ["sm", "md", "lg"];
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
     [Parameter, EditorRequired]
     public string Id { get; set; } = string.Empty;
     [Parameter]
-    public string[] Breakpoints { get; set; } = ["sm", "md", "lg"];
+    public string[] Breakpoints
+    {
+        get => _breakpoints;
+        set
+        {
+            _breakpoints = value ?? [];
+
+            if (_hasRendered)
+            {
+                _ = ApplyBreakpointsAsync(_breakpoints);
+            }
+        }
+    }
     [Parameter]
     public ForceBreakpoint? ForceBreakpoint { get; set; }
     [Parameter]
     public string? Theme { get; set; }
     [Parameter]
-    public bool ThemeSystemAppearance { get; set; } = false;
-    public AppSwitchConfig AppSwitchConfig
+    public ColorSchema ColorSchema { get; set; } = ColorSchema.System;
+
+    [Parameter]
+    public AppSwitchConfig? AppSwitchConfig
     {
         get => _appSwitchConfig;
         set
         {
+            if (ReferenceEquals(_appSwitchConfig, value))
+            {
+                return;
+            }
+
             _appSwitchConfig = value;
-            InitialParameter("setApplicationConfig", _appSwitchConfig);
+            _appSwitchConfigVersion++;
+
+            if (_hasRendered)
+            {
+                _ = ApplyApplicationConfigAsync(_appSwitchConfigVersion, value);
+            }
         }
     }
 
@@ -53,29 +79,56 @@ public partial class Application
                 "import", $"./_content/Siemens.IX.Blazor/js/siemens-ix/interops/applicationInterop.js").AsTask());
 
             var module = await moduleTask.Value;
-            if (module != null)
+            await module.InvokeVoidAsync("setBreakpoints", Id, _breakpoints);
+            _hasRendered = true;
+
+            if (_appliedAppSwitchConfigVersion != _appSwitchConfigVersion)
             {
-                await module.InvokeVoidAsync("setBreakpoints", Id, Breakpoints);
+                await ApplyApplicationConfigAsync(_appSwitchConfigVersion, _appSwitchConfig);
             }
         }
     }
 
-    private void InitialParameter(string functionName, object param)
+    private async Task ApplyBreakpointsAsync(string[] breakpoints)
     {
-
-        moduleTask = new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
-            "import", $"./_content/Siemens.IX.Blazor/js/siemens-ix/interops/applicationInterop.js").AsTask());
-
-        Task.Run(async () =>
+        try
         {
+            moduleTask ??= new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
+                "import", $"./_content/Siemens.IX.Blazor/js/siemens-ix/interops/applicationInterop.js").AsTask());
+
             var module = await moduleTask.Value;
-            if (module != null)
+            await module.InvokeVoidAsync("setBreakpoints", Id, breakpoints);
+        }
+        catch (JSDisconnectedException)
+        {
+            // The component can be disposed while the module is loading.
+        }
+    }
+
+    private async Task ApplyApplicationConfigAsync(int version, AppSwitchConfig? config)
+    {
+        try
+        {
+            moduleTask ??= new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
+                "import", $"./_content/Siemens.IX.Blazor/js/siemens-ix/interops/applicationInterop.js").AsTask());
+
+            var module = await moduleTask.Value;
+            if (version != _appSwitchConfigVersion)
             {
-                await module.InvokeVoidAsync(functionName, Id, JsonConvert.SerializeObject(param, new JsonSerializerSettings
+                return;
+            }
+
+            await module.InvokeVoidAsync("setApplicationConfig", Id,
+                JsonConvert.SerializeObject(config, new JsonSerializerSettings
                 {
                     ContractResolver = new CamelCasePropertyNamesContractResolver()
                 }));
-            }
-        });
+
+            _appliedAppSwitchConfigVersion = version;
+        }
+        catch (JSDisconnectedException)
+        {
+            // The component can be disposed while the module is loading.
+        }
     }
 }

@@ -26,11 +26,15 @@ namespace SiemensIXBlazor.Tests
                 parameters.Add(p => p.CompanyLogoAlt, "Company Logo");
                 parameters.Add(p => p.AppIcon, "app-icon.svg");
                 parameters.Add(p => p.AppIconAlt, "App Icon");
+                parameters.Add(p => p.AppIconOutline, true);
                 parameters.Add(p => p.HideBottomBorder, true);
+                parameters.Add(p => p.ShowMenu, true);
+                parameters.Add(p => p.AriaLabelAppSwitchIconButton, "Open applications");
+                parameters.Add(p => p.AriaLabelMoreMenuIconButton, "More actions");
             });
 
             // Assert
-            cut.MarkupMatches("<ix-application-header id='' name='testName' name-suffix='testSuffix' company-logo='logo.png' company-logo-alt='Company Logo' app-icon='app-icon.svg' app-icon-alt='App Icon' hide-bottom-border=\"\" ></ix-application-header>");
+            cut.MarkupMatches("<ix-application-header id='' name='testName' name-suffix='testSuffix' company-logo='logo.png' company-logo-alt='Company Logo' app-icon='app-icon.svg' app-icon-alt='App Icon' app-icon-outline='' hide-bottom-border='' show-menu='' aria-label-app-switch-icon-button='Open applications' aria-label-more-menu-icon-button='More actions' slot='application-header'></ix-application-header>");
         }
 
         [Fact]
@@ -70,6 +74,19 @@ namespace SiemensIXBlazor.Tests
         }
 
         [Fact]
+        public void ApplicationHeaderRendersNamedSlots()
+        {
+            var cut = RenderComponent<ApplicationHeader>(parameters => parameters
+                .Add(p => p.Overflow, builder => builder.AddContent(0, "Overflow"))
+                .Add(p => p.Logo, builder => builder.AddContent(1, "Logo"))
+                .Add(p => p.Avatar, builder => builder.AddContent(2, "Avatar")));
+
+            Assert.Contains("slot=\"overflow\"", cut.Markup);
+            Assert.Contains("slot=\"logo\"", cut.Markup);
+            Assert.Contains("slot=\"ix-application-header-avatar\"", cut.Markup);
+        }
+
+        [Fact]
         public void ApplicationHeaderDoesNotRenderSecondarySlotWhenNull()
         {
             // Arrange & Act
@@ -95,6 +112,20 @@ namespace SiemensIXBlazor.Tests
 
             // Assert
             Assert.True(eventTriggered);
+        }
+
+        [Fact]
+        public async Task MenuToggleEventWorks()
+        {
+            var menuExpanded = false;
+            var cut = RenderComponent<ApplicationHeader>(
+                ("Id", "headerId"),
+                ("MenuToggleEvent", EventCallback.Factory.Create<bool>(this, value => menuExpanded = value))
+            );
+
+            await cut.InvokeAsync(() => cut.Instance.MenuToggle(true));
+
+            Assert.True(menuExpanded);
         }
 
         [Fact]
