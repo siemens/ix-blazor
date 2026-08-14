@@ -1137,24 +1137,28 @@ private void OnModalDismissed()
 
 ```razor
 <PaneLayout Id="pane-layout"
-                Variant="@PaneVariant.floating"
-                Layout="full-horizontal"
-                Borderless="true">
-    <Pane Id="pane1" Heading="Pane Left" Slot="left" Size="33%">
-        <p>This is the left pane.</p>
-    </Pane>
-
-    <Pane Id="pane2"  Heading="Pane Top" Slot="top" Size="33%">
-        <p>This is the top pane.</p>
-    </Pane>
-
-    <Pane Id="pane3" Heading="Pane Right" Slot="right" Size="33%">
-        <p>This is the right pane.</p>
-    </Pane>
-
-    <Pane Id="pane4" Heading="Pane Bottom" Slot="bottom" Size="33%">
-        <p>This is the bottom pane.</p>
-    <Pane>
+             Variant="@PaneVariant.floating"
+             Layout="full-horizontal"
+             Borderless="true">
+    <Left>
+        <Pane Id="pane-left" Heading="Pane Left" Slot="left" Size="33%">
+            <p>This is the left pane.</p>
+        </Pane>
+    </Left>
+    <Top>
+        <div>This is the top content.</div>
+    </Top>
+    <Content>
+        <div>This is the main content.</div>
+    </Content>
+    <Bottom>
+        <div>This is the bottom content.</div>
+    </Bottom>
+    <Right>
+        <Pane Id="pane-right" Heading="Pane Right" Slot="right" Size="33%" NoPadding="true">
+            <p>This pane has no content padding.</p>
+        </Pane>
+    </Right>
 </PaneLayout>
 ```
 

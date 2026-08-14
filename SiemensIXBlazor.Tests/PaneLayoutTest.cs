@@ -31,5 +31,22 @@ namespace SiemensIXBlazor.Tests
             // Assert
             cut.MarkupMatches("<ix-pane-layout borderless layout=\"full-vertical\" variant=\"inline\"><div>Test content</div></ix-pane-layout>");
         }
+
+        [Fact]
+        public void PaneLayoutRendersNamedSlots()
+        {
+            var cut = RenderComponent<PaneLayout>(parameters => parameters
+                .Add(p => p.Left, builder => builder.AddContent(0, "Left content"))
+                .Add(p => p.Top, builder => builder.AddContent(0, "Top content"))
+                .Add(p => p.Content, builder => builder.AddContent(0, "Content area"))
+                .Add(p => p.Bottom, builder => builder.AddContent(0, "Bottom content"))
+                .Add(p => p.Right, builder => builder.AddContent(0, "Right content")));
+
+            Assert.Equal("Left content", cut.Find("[slot='left']").TextContent.Trim());
+            Assert.Equal("Top content", cut.Find("[slot='top']").TextContent.Trim());
+            Assert.Equal("Content area", cut.Find("[slot='content']").TextContent.Trim());
+            Assert.Equal("Bottom content", cut.Find("[slot='bottom']").TextContent.Trim());
+            Assert.Equal("Right content", cut.Find("[slot='right']").TextContent.Trim());
+        }
     }
 }
