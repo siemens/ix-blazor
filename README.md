@@ -125,7 +125,10 @@ Do not use the legacy `theme-classic-light` or `theme-classic-dark` values.
 - [Content Header](#content-header) **(since v0.3.3)**
 - [Date Dropdown](#date-dropdown)
 - [Date Picker](#date-picker)
+- [Date Input](#date-input)
+- [Date Time Input](#date-time-input)
 - [Date Time Picker](#date-time-picker) **(since 0.5.0)**
+- [Range Field](#range-field)
 - [Divider](#divider)
 - [Drawer](#drawer)
 - [Dropdown Button](#dropdown-button)
@@ -162,6 +165,7 @@ Do not use the legacy `theme-classic-light` or `theme-classic-dark` values.
 - [Text Area](#text-area)
 - [Tile](#tile)
 - [Time Picker](#time-picker)
+- [Time Input](#time-input)
 - [Toast](#toast)
 - [Toggle Buttons](#toggle-buttons) **(since v0.4.0)**
 - [Toggle](#toggle)
@@ -862,6 +866,45 @@ private void Callback(DateDropdownResponse selectedDateDropdown)
 </DatePicker>
 ```
 
+## Date input
+
+```razor
+<DateInput Id="date-input"
+           Label="Date"
+           Value="2026/01/15"
+           MinDate="2026/01/01"
+           MaxDate="2026/12/31"
+           ValueChangeEvent="OnDateChanged"
+           ValidityStateChangeEvent="OnDateValidityChanged">
+    <StartSlot>
+        <span>Start</span>
+    </StartSlot>
+</DateInput>
+```
+
+`DateInput` exposes the official date-input properties, `start` and `end` slots, and typed value, `ixChange`, and validity-state callbacks.
+
+## Date time input
+
+```razor
+<DateTimeInput Id="datetime-input"
+               Label="Date and time"
+               Format="yyyy/LL/dd HH:mm:ss"
+               Value="2026/01/15 09:30:00"
+               ValueChangeEvent="OnDateTimeChanged" />
+```
+
+## Range field
+
+```razor
+<RangeField Type="@RangeFieldType.DateRange">
+    <DateInput Id="date-range-from" />
+    <DateInput Id="date-range-to" />
+</RangeField>
+```
+
+`RangeFieldType` maps to the official `time-range`, `date-range`, or `datetime-range` type. `RangeField` accepts exactly the two range inputs required by IX and supports `HideArrow`.
+
 ## Date time picker
 
 ```razor
@@ -1505,8 +1548,20 @@ private Task OnTabChange(string? tabKey)
             MinuteInterval="15"
             SecondInterval="30"
             HideHeader="false"
-            Corners="DatePickerCorners.Rounded">
+            Corners="@TimePickerCorners.Rounded"
+            MinTime="08:00"
+            MaxTime="18:00">
 </TimePicker>
+```
+
+## Time input
+
+```razor
+<TimeInput Id="time-input"
+           Label="Time"
+           Value="09:30:00"
+           MinuteInterval="15"
+           ValueChangeEvent="OnTimeChanged" />
 ```
 
 ## Toast

@@ -1,0 +1,60 @@
+@* -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2026 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+//  -----------------------------------------------------------------------
+*@
+
+@namespace SiemensIXBlazor.Components.DateTimeInput
+@using SiemensIXBlazor.Components
+@using SiemensIXBlazor.Enums.Input
+@using SiemensIXBlazor.Helpers
+@inherits IXBaseComponent
+@inject Microsoft.JSInterop.IJSRuntime JSRuntime
+
+<ix-datetime-input @attributes="UserAttributes"
+                   class="@Class"
+                   style="@Style"
+                   id="@Id"
+                   name="@Name"
+                   placeholder="@Placeholder"
+                   value="@Value"
+                   format="@Format"
+                   locale="@Locale"
+                   required="@Required"
+                   disabled="@Disabled"
+                   readonly="@Readonly"
+                   min-date="@MinDate"
+                   max-date="@MaxDate"
+                   min-time="@MinTime"
+                   max-time="@MaxTime"
+                   label="@Label"
+                   helper-text="@HelperText"
+                   invalid-text="@InvalidText"
+                   info-text="@InfoText"
+                   warning-text="@WarningText"
+                   valid-text="@ValidText"
+                   show-text-as-tooltip="@ShowTextAsTooltip"
+                   i18n-error-date-time-unparsable="@I18nErrorDateTimeUnparsable"
+                   i18n-done="@I18nDone"
+                   i18n-time="@I18nTime"
+                   aria-label-previous-month-button="@AriaLabelPreviousMonthButton"
+                   aria-label-next-month-button="@AriaLabelNextMonthButton"
+                   aria-label-calendar-button="@AriaLabelCalendarButton"
+                   show-week-numbers="@ShowWeekNumbers"
+                   week-start-index="@WeekStartIndex"
+                   suppress-submit-on-enter="@SuppressSubmitOnEnter"
+                   text-alignment="@(EnumParser<InputTextAlignment>.EnumToString(TextAlignment))"
+                   enable-top-layer="@EnableTopLayer">
+    @if (StartSlot != null)
+    {
+        <div slot="start">@StartSlot</div>
+    }
+    @if (EndSlot != null)
+    {
+        <div slot="end">@EndSlot</div>
+    }
+</ix-datetime-input>

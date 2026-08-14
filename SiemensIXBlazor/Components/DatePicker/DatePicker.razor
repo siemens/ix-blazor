@@ -1,35 +1,36 @@
-﻿@* -----------------------------------------------------------------------
+@* -----------------------------------------------------------------------
 // SPDX-FileCopyrightText: 2024 Siemens AG
 //
 // SPDX-License-Identifier: MIT
 //
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
-// -----------------------------------------------------------------------
+//  -----------------------------------------------------------------------
 *@
 
-@using Microsoft.JSInterop;
-@using SiemensIXBlazor.Enums.DatePicker;
-@using SiemensIXBlazor.Helpers;
+@using SiemensIXBlazor.Enums.DatePicker
+@using SiemensIXBlazor.Helpers
 @namespace SiemensIXBlazor.Components
-@inject IJSRuntime JSRuntime
 @inherits IXBaseComponent
 
-<ix-date-picker @attributes="UserAttributes" 
-                id="@Id" 
-                from="@From" 
+<ix-date-picker @attributes="UserAttributes"
+                id="@Id"
+                from="@From"
                 to="@To"
-                corners="@(EnumParser<DatePickerCorners>.EnumToString(Corners))" 
-                format="@Format" 
+                corners="@(EnumParser<DatePickerCorners>.EnumToString(Corners))"
+                format="@Format"
                 max-date="@MaxDate"
-                min-date="@MinDate" 
+                min-date="@MinDate"
                 single-selection="@SingleSelection"
-                aria-label-next-month-button="@AriaLabelNextMonthButton"  
+                aria-label-next-month-button="@AriaLabelNextMonthButton"
                 aria-label-previous-month-button="@AriaLabelPreviousMonthButton"
+                aria-label-month-selection="@AriaLabelMonthSelection"
+                aria-label-year-selection="@AriaLabelYearSelection"
                 enable-top-layer="@EnableTopLayer"
-                locale="@Locale" 
-                i18n-done="@I18nDone" 
+                locale="@Locale"
+                i18n-done="@I18nDone"
                 week-start-index="@WeekStartIndex"
-                style="@Style" 
+                show-week-numbers="@ShowWeekNumbers"
+                style="@Style"
                 class="@Class">
 </ix-date-picker>

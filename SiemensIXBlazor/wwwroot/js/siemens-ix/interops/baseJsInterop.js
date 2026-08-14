@@ -29,6 +29,20 @@ export function setElementProperty(elementId, propertyName, propertyValue) {
   element[propertyName] = propertyValue;
 }
 
+export function invokeElementMethod(elementId, methodName) {
+  const element = document.getElementById(elementId);
+
+  if (!element) {
+    throw new Error(`Element with ID ${elementId} not found`);
+  }
+
+  if (typeof element[methodName] !== "function") {
+    throw new Error(`Method ${methodName} not found on element ${elementId}`);
+  }
+
+  return element[methodName]();
+}
+
 export async function invokeMethod(elementId, methodName) {
   const element = document.getElementById(elementId);
 

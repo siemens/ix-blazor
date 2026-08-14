@@ -1,4 +1,4 @@
-﻿@* -----------------------------------------------------------------------
+@* -----------------------------------------------------------------------
 // SPDX-FileCopyrightText: 2024 Siemens AG
 //
 // SPDX-License-Identifier: MIT
@@ -8,10 +8,10 @@
 //  -----------------------------------------------------------------------
 *@
 
+@using Microsoft.JSInterop
+@using SiemensIXBlazor.Enums.Button
+@using SiemensIXBlazor.Helpers
 @namespace SiemensIXBlazor.Components
-@using Microsoft.JSInterop;
-@using SiemensIXBlazor.Helpers;
-@using SiemensIXBlazor.Enums.DateDropdown;
 @inject IJSRuntime JsRuntime
 @inherits IXBaseComponent
 
@@ -19,23 +19,20 @@
                   style="@Style"
                   class="@Class"
                   id="@Id"
-                  custom-range-disabled="@CustomRangeDisabled"
                   date-range-id="@DateRangeId"
                   format="@Format"
                   from="@From"
-                  i18n-custom-item="@I18NCustomItem"
-                  i18n-done="@I18NDone"
-                  i18n-no-range="@I18NNoRange"
+                  i18n-done="@I18nDone"
+                  i18n-no-range="@I18nNoRange"
                   max-date="@MaxDate"
                   min-date="@MinDate"
-                  range="@Range"
+                  single-selection="@SingleSelection"
                   to="@To"
                   week-start-index="@WeekStartIndex"
                   locale="@Locale"
                   disabled="@Disabled"
                   enable-top-layer="@EnableTopLayer"
-                  outline="@Outline"
-                  ghost="@Ghost"
+                  show-week-numbers="@ShowWeekNumbers"
                   loading="@Loading"
-                  variant="@(EnumParser<DateDropdownVariant>.EnumToString(Variant))">
+                  variant="@(EnumParser<ButtonVariant>.EnumToString(Variant, replaceUnderscores: true))">
 </ix-date-dropdown>

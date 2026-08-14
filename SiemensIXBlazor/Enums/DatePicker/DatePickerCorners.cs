@@ -13,6 +13,7 @@ namespace SiemensIXBlazor.Enums.DatePicker
     {
         Left,
         Right,
-        Rounded
+        Rounded,
+        Straight
     }
 }
