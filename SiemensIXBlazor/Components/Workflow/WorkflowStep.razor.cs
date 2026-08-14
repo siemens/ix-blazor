@@ -17,6 +17,8 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter]
+        public RenderFragment? CustomIcon { get; set; }
+        [Parameter]
         public bool Clickable { get; set; } = false;
         [Parameter]
         public bool Disabled { get; set; } = false;
