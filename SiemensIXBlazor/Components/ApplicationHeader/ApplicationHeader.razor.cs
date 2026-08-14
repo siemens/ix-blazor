@@ -26,6 +26,15 @@ namespace SiemensIXBlazor.Components
         public RenderFragment? Secondary { get; set; }
 
         [Parameter]
+        public RenderFragment? Overflow { get; set; }
+
+        [Parameter]
+        public RenderFragment? Logo { get; set; }
+
+        [Parameter]
+        public RenderFragment? Avatar { get; set; }
+
+        [Parameter]
         public string? Name { get; set; }
 
         [Parameter]
@@ -44,7 +53,19 @@ namespace SiemensIXBlazor.Components
         public string? AppIconAlt { get; set; }
 
         [Parameter]
+        public bool AppIconOutline { get; set; } = false;
+
+        [Parameter]
         public bool HideBottomBorder { get; set; } = false;
+
+        [Parameter]
+        public bool ShowMenu { get; set; } = false;
+
+        [Parameter]
+        public string? AriaLabelAppSwitchIconButton { get; set; }
+
+        [Parameter]
+        public string? AriaLabelMoreMenuIconButton { get; set; }
 
         [Parameter]
         public bool EnableTopLayer { get; set; } = false;
@@ -55,6 +76,9 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public EventCallback OpenAppSwitchEvent { get; set; }
 
+        [Parameter]
+        public EventCallback<bool> MenuToggleEvent { get; set; }
+
 
 
         protected async override Task OnAfterRenderAsync(bool firstRender)
@@ -64,6 +88,7 @@ namespace SiemensIXBlazor.Components
                 _interop = new(JSRuntime);
 
                 await _interop.AddEventListener(this, Id, "openAppSwitch", "OpenAppSwitch");
+                await _interop.AddEventListener(this, Id, "menuToggle", "MenuToggle");
             }
         }
 
@@ -71,6 +96,12 @@ namespace SiemensIXBlazor.Components
         public async Task OpenAppSwitch()
         {
             await OpenAppSwitchEvent.InvokeAsync();
+        }
+
+        [JSInvokable]
+        public async Task MenuToggle(bool expanded)
+        {
+            await MenuToggleEvent.InvokeAsync(expanded);
         }
 }
 }

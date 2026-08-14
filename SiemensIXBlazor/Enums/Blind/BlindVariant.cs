@@ -13,10 +13,9 @@ namespace SiemensIXBlazor.Enums.Blind
     {
         alarm,
         critical,
+        filled,
         info,
-        insight,
         neutral,
-        notification,
         outline,
         primary,
         success,

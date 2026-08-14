@@ -1,27 +1,23 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
-using SiemensIXBlazor.Interops;
-using System.Text.Json;
+﻿// -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2026 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+//  -----------------------------------------------------------------------
+
+using Microsoft.AspNetCore.Components;
 
 namespace SiemensIXBlazor.Components.CustomField
 {
     public partial class CustomField
     {
-        private ElementReference inputRef;
-        private ElementReference buttonRef;
-        private ElementReference fileRef;
-
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
 
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
-
-        [Parameter]
-        public bool IsFileUpload { get; set; } = false;
-
-        [Parameter]
-        public string FileDisplayText { get; set; } = "No file chosen";
 
         [Parameter]
         public string? HelperText { get; set; }
@@ -47,13 +43,5 @@ namespace SiemensIXBlazor.Components.CustomField
         [Parameter]
         public string? WarningText { get; set; }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender && IsFileUpload) 
-            {
-                await JSRuntime.InvokeVoidAsync("customFieldHelpers.initFileUpload",
-                    buttonRef, fileRef, inputRef);
-            }
-        }
     }
 }

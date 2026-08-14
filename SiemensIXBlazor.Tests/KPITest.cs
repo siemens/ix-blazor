@@ -24,10 +24,26 @@ public class KPITest : TestContextBase
             .Add(p => p.Orientation, KpiOrientation.Horizontal)
             .Add(p => p.State, KpiState.Neutral)
             .Add(p => p.Unit, "testUnit")
-            .Add(p => p.Value, "testValue"));
+            .Add(p => p.Value, "testValue")
+            .Add(p => p.AriaLabelWarningIcon, "Warning status"));
 
         // Assert
-        cut.MarkupMatches("<ix-kpi label=\"testLabel\" value=\"testValue\" orientation=\"horizontal\" state=\"neutral\" onreadystatechange=\"Neutral\" unit=\"testUnit\" aria-label-warning-icon=\"AriaLabelWarningIcon\"></ix-kpi>");
+        cut.MarkupMatches("<ix-kpi label=\"testLabel\" value=\"testValue\" aria-label-warning-icon=\"Warning status\" orientation=\"horizontal\" state=\"neutral\" unit=\"testUnit\"></ix-kpi>");
 
+    }
+
+    [Fact]
+    public void ComponentRendersNumericValueWithoutUnsupportedAttributes()
+    {
+        var cut = RenderComponent<KPI>(parameters => parameters
+            .Add(p => p.Label, "Temperature")
+            .Add(p => p.Value, 42)
+            .Add(p => p.State, KpiState.Warning)
+            .Add(p => p.AriaLabelWarningIcon, "Warning status"));
+
+        Assert.Equal(42, cut.Instance.Value);
+        Assert.Contains("value=\"42\"", cut.Markup);
+        Assert.Contains("aria-label-warning-icon=\"Warning status\"", cut.Markup);
+        Assert.DoesNotContain("onreadystatechange", cut.Markup);
     }
 }

@@ -148,6 +148,34 @@ public class FlipTileTest : TestContextBase
     }
 
     [Fact]
+    public void AutoHeightAndWidthRenderCorrectly()
+    {
+        var cut = RenderComponent<FlipTile>(parameters => parameters
+            .Add(p => p.Id, "ix-flip-auto")
+            .Add(p => p.Height, "auto")
+            .Add(p => p.Width, "auto"));
+
+        var element = cut.Find("ix-flip-tile");
+
+        Assert.Equal("auto", element.GetAttribute("height"));
+        Assert.Equal("auto", element.GetAttribute("width"));
+    }
+
+    [Fact]
+    public void NumberAndAutoDimensionsAreAccepted()
+    {
+        var cut = RenderComponent<FlipTile>(parameters => parameters
+            .Add(p => p.Id, "ix-flip-values")
+            .Add(p => p.Height, 20.5)
+            .Add(p => p.Width, "auto"));
+
+        var element = cut.Find("ix-flip-tile");
+
+        Assert.Equal("20.5", element.GetAttribute("height"));
+        Assert.Equal("auto", element.GetAttribute("width"));
+    }
+
+    [Fact]
     public void IndexPropertyRenders()
     {
         // Arrange & Act

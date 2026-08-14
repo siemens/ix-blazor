@@ -11,7 +11,7 @@
 @using Microsoft.JSInterop;
 @inject IJSRuntime JSRuntime
 @using SiemensIXBlazor.Helpers;
-@using SiemensIXBlazor.Enums.ExpandingSearch;
+@using SiemensIXBlazor.Enums.Button;
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
 <ix-expanding-search @attributes="UserAttributes"
@@ -25,7 +25,5 @@
                      aria-label-search-icon-button="@AriaLabelSearchIconButton"
                      aria-label-search-input="@AriaLabelSearchInput"
                      full-width="@FullWidth"
-                     outline="@Outline"
-                     ghost="@Ghost"
-                     variant="@(EnumParser<ExpandingSearchVariant>.EnumToString(Variant))">
+                     variant="@(EnumParser<ButtonVariant>.EnumToString(Variant, replaceUnderscores: true))">
 </ix-expanding-search>

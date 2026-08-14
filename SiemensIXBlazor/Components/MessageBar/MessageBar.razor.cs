@@ -27,6 +27,8 @@ namespace SiemensIXBlazor.Components
         public MessageBarType Type { get; set; } = MessageBarType.Info;
         [Parameter]
         public EventCallback ClosedChangeEvent { get; set; }
+        [Parameter]
+        public EventCallback CloseAnimationCompletedEvent { get; set; }
 
         private BaseInterop _interop;
 
@@ -37,6 +39,7 @@ namespace SiemensIXBlazor.Components
                 _interop = new(JSRuntime);
 
                 await _interop.AddEventListener(this, Id, "closedChange", "ClosedChange");
+                await _interop.AddEventListener(this, Id, "closeAnimationCompleted", "CloseAnimationCompleted");
             }
         }
 
@@ -44,6 +47,12 @@ namespace SiemensIXBlazor.Components
         public async void ClosedChange()
         {
             await ClosedChangeEvent.InvokeAsync();
-        } 
+        }
+
+        [JSInvokable]
+        public async void CloseAnimationCompleted()
+        {
+            await CloseAnimationCompletedEvent.InvokeAsync();
+        }
     }
 }

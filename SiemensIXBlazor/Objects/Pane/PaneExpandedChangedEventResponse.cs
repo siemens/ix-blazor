@@ -14,8 +14,8 @@ namespace SiemensIXBlazor.Objects.Pane
     public  class PaneExpandedChangedEventResponse
     {
         [JsonPropertyName("slot")]
-        public string Slot { get; set; }
+        public string Slot { get; set; } = string.Empty;
         [JsonPropertyName("expanded")]
-        public string Expanded { get; set; }
+        public bool Expanded { get; set; }
     }
 }

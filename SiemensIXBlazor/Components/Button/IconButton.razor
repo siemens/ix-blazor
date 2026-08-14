@@ -18,14 +18,12 @@
 style="@Style"
 class="@Class" 
 disabled="@Disabled" 
-selected="@Selected"
 type="@(EnumParser<ButtonType>.EnumToString(Type))"
 variant="@(EnumParser<ButtonVariant>.EnumToString(Variant, replaceUnderscores: true))"
 icon-color="@IconColor"
 icon="@Icon"
 oval="@Oval"
 loading="@Loading"
-data-tooltip="@DataTooltip"
 size="@((int)Size)"
-a11y-label="@A11yLabel">
+>
 </ix-icon-button>

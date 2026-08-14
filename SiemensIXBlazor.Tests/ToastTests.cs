@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // SPDX-FileCopyrightText: 2025 Siemens AG
 //
 // SPDX-License-Identifier: MIT
@@ -7,7 +7,9 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
+using System.Text.Json;
 using Bunit;
+using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
 using Moq;
@@ -16,340 +18,218 @@ using SiemensIXBlazor.Components;
 using SiemensIXBlazor.Enums;
 using SiemensIXBlazor.Objects;
 
-namespace SiemensIXBlazor.Tests
+namespace SiemensIXBlazor.Tests;
+
+public class ToastTests : TestContextBase
 {
-    public class ToastTests : TestContextBase
+    [Fact]
+    public void ToastContainer_RendersOfficialDefaults()
     {
-        [Fact]
-        public void ComponentRendersWithoutCrashing()
+        var cut = RenderComponent<ToastContainer>(parameters => parameters
+            .Add(p => p.Id, "toast-container"));
+
+        var container = cut.Find("ix-toast-container");
+        Assert.Equal("toast-container", container.Id);
+        Assert.Equal("bottom-right", container.GetAttribute("position"));
+    }
+
+    [Fact]
+    public void ToastContainer_RendersTopRightPositionAndAttributes()
+    {
+        var cut = RenderComponent<ToastContainer>(parameters => parameters
+            .Add(p => p.Id, "toast-container")
+            .Add(p => p.Position, ToastPosition.TopRight)
+            .AddUnmatched("role", "region")
+            .Add(p => p.Class, "custom-container")
+            .Add(p => p.Style, "inset: 1rem;"));
+
+        var container = cut.Find("ix-toast-container");
+        Assert.Equal("top-right", container.GetAttribute("position"));
+        Assert.Equal("region", container.GetAttribute("role"));
+        Assert.Equal("custom-container", container.GetAttribute("class"));
+        Assert.Equal("inset: 1rem;", container.GetAttribute("style"));
+    }
+
+    [Fact]
+    public void Toast_RendersOfficialPropertiesAndSlots()
+    {
+        var cut = RenderComponent<Toast>(parameters => parameters
+            .Add(p => p.Id, "toast")
+            .Add(p => p.Type, ToastType.Success)
+            .Add(p => p.ToastTitle, "Saved")
+            .Add(p => p.AutoCloseDelay, 3000)
+            .Add(p => p.PreventAutoClose, true)
+            .Add(p => p.Icon, "save")
+            .Add(p => p.IconColor, "color-success")
+            .Add(p => p.HideIcon, true)
+            .Add(p => p.AriaLabelCloseIconButton, "Close notification")
+            .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddContent(0, "The message")))
+            .Add(p => p.ActionContent, (RenderFragment)(builder => builder.AddContent(0, "Undo"))));
+
+        var toast = cut.Find("ix-toast");
+        Assert.Equal("toast", toast.Id);
+        Assert.Equal("success", toast.GetAttribute("type"));
+        Assert.Equal("Saved", toast.GetAttribute("toast-title"));
+        Assert.Equal("3000", toast.GetAttribute("auto-close-delay"));
+        Assert.NotNull(toast.GetAttribute("prevent-auto-close"));
+        Assert.Equal("save", toast.GetAttribute("icon"));
+        Assert.Equal("color-success", toast.GetAttribute("icon-color"));
+        Assert.NotNull(toast.GetAttribute("hide-icon"));
+        Assert.Equal("Close notification", toast.GetAttribute("aria-label-close-icon-button"));
+        Assert.Contains("The message", toast.InnerHtml);
+        Assert.Contains("Undo", cut.Find("[slot='action']").InnerHtml);
+    }
+
+    [Fact]
+    public void Toast_OmitsFalseBooleanProperties()
+    {
+        var cut = RenderComponent<Toast>(parameters => parameters.Add(p => p.Id, "toast"));
+
+        var toast = cut.Find("ix-toast");
+        Assert.Null(toast.GetAttribute("prevent-auto-close"));
+        Assert.Null(toast.GetAttribute("hide-icon"));
+    }
+
+    [Fact]
+    public async Task Toast_CloseToastInvokesCallback()
+    {
+        var closed = false;
+        var cut = RenderComponent<Toast>(parameters => parameters
+            .Add(p => p.Id, "toast")
+            .Add(p => p.CloseToastEvent, EventCallback.Factory.Create(this, () => closed = true)));
+
+        await cut.Instance.CloseToast();
+
+        Assert.True(closed);
+    }
+
+    [Fact]
+    public async Task Toast_ExposesPauseResumeAndIsPausedMethods()
+    {
+        var (jsRuntime, module) = AddJsModule();
+        module.Setup(m => m.InvokeAsync<bool>("isToastPaused", It.IsAny<object[]>()))
+            .Returns(new ValueTask<bool>(true));
+
+        var cut = RenderComponent<Toast>(parameters => parameters.Add(p => p.Id, "toast"));
+
+        await cut.Instance.PauseAsync();
+        await cut.Instance.ResumeAsync();
+        var isPaused = await cut.Instance.IsPausedAsync();
+
+        Assert.True(isPaused);
+        module.Verify(m => m.InvokeAsync<bool>("isToastPaused", It.Is<object[]>(args => args.SequenceEqual(new object[] { "toast" }))), Times.Once);
+        _ = jsRuntime;
+    }
+
+    [Fact]
+    public async Task ToastContainer_ShowToastReturnsLifecycleHandle()
+    {
+        var (_, module) = AddJsModule();
+        module.Setup(m => m.InvokeAsync<string>("showToast", It.IsAny<object[]>()))
+            .Returns(new ValueTask<string>("toast-1"));
+        module.Setup(m => m.InvokeAsync<bool>("isPaused", It.IsAny<object[]>()))
+            .Returns(new ValueTask<bool>(true));
+
+        var cut = RenderComponent<ToastContainer>(parameters => parameters
+            .Add(p => p.Id, "toast-container"));
+        var result = await cut.Instance.ShowToast(new ToastConfig
         {
-            // Arrange
-            var cut = RenderComponent<Toast>();
+            Title = "Saved",
+            Message = "The changes were saved.",
+            Action = "<button>Undo</button>",
+            Type = ToastType.Success,
+            AutoClose = false,
+            AutoCloseDelay = 3000,
+            Icon = "save",
+            IconColor = "color-success",
+            HideIcon = false
+        });
 
-            // Assert
-            cut.MarkupMatches("<ix-toast-container></ix-toast-container>");
-        }
+        await result.PauseAsync();
+        await result.ResumeAsync();
+        Assert.True(await result.IsPausedAsync());
+        await result.CloseAsync("undone");
 
-        [Fact]
-        public void UserAttributesAreAppliedCorrectly()
+        module.Verify(m => m.InvokeAsync<string>("showToast", It.Is<object[]>(args =>
+            args.Length == 3 && args[1] != null && args[1].ToString() == "toast-container" &&
+            args[2] != null && Convert.ToString(args[2])!.Contains("\"type\":\"success\""))), Times.Once);
+        module.Verify(m => m.InvokeAsync<bool>("isPaused", It.Is<object[]>(args => args.SequenceEqual(new object[] { "toast-1" }))), Times.Once);
+    }
+
+    [Fact]
+    public async Task ToastContainer_OnCloseForwardsResultAndRemovesHandle()
+    {
+        var (_, module) = AddJsModule();
+        module.Setup(m => m.InvokeAsync<string>("showToast", It.IsAny<object[]>()))
+            .Returns(new ValueTask<string>("toast-1"));
+
+        var cut = RenderComponent<ToastContainer>(parameters => parameters
+            .Add(p => p.Id, "toast-container"));
+        var result = await cut.Instance.ShowToast(new ToastConfig { Message = "Message" });
+        JsonElement? received = null;
+        result.OnClose += (_, value) => received = value;
+
+        using var document = JsonDocument.Parse("\"closed\"");
+        await cut.Instance.ToastClosed("toast-1", document.RootElement);
+
+        Assert.Equal("closed", received?.GetString());
+    }
+
+    [Fact]
+    public async Task ToastContainer_RejectsNullConfiguration()
+    {
+        var cut = RenderComponent<ToastContainer>(parameters => parameters
+            .Add(p => p.Id, "toast-container"));
+
+        await Assert.ThrowsAsync<ArgumentNullException>(() => cut.Instance.ShowToast(null!));
+    }
+
+    [Fact]
+    public async Task ToastContainer_DisposesOnlyItsOwnToastHandles()
+    {
+        var (_, module) = AddJsModule();
+        module.Setup(m => m.InvokeAsync<string>("showToast", It.IsAny<object[]>()))
+            .Returns(new ValueTask<string>("toast-1"));
+
+        var cut = RenderComponent<ToastContainer>(parameters => parameters
+            .Add(p => p.Id, "toast-container"));
+        await cut.Instance.ShowToast(new ToastConfig { Message = "Message" });
+
+        await cut.Instance.DisposeAsync();
+
+        module.Verify(m => m.InvokeAsync<Microsoft.JSInterop.Infrastructure.IJSVoidResult>(
+            "dispose", It.Is<object[]>(args => args.Length == 1 && args[0].ToString() == "toast-container")), Times.Once);
+    }
+
+    [Fact]
+    public void ToastConfig_SerializesOfficialPropertyNamesAndEnumValues()
+    {
+        var json = JsonConvert.SerializeObject(new ToastConfig
         {
-            // Arrange
-            var attributes = new
-            {
-                role = "alert",
-                tabindex = "0",
-                id = "toast-container-1"
-            };
+            Title = "Saved",
+            Message = "Done",
+            Type = ToastType.Warning,
+            AutoClose = true,
+            AutoCloseDelay = 1000,
+            HideIcon = true
+        });
 
-            // Act
-            var cut = RenderComponent<Toast>(parameters => parameters
-                .AddUnmatched("role", attributes.role)
-                .AddUnmatched("tabindex", attributes.tabindex)
-                .AddUnmatched("id", attributes.id));
+        Assert.Contains("\"title\":\"Saved\"", json);
+        Assert.Contains("\"message\":\"Done\"", json);
+        Assert.Contains("\"type\":\"warning\"", json);
+        Assert.Contains("\"autoClose\":true", json);
+        Assert.DoesNotContain("preventAutoClose", json);
+        Assert.DoesNotContain("messageHtml", json);
+        Assert.DoesNotContain("position", json);
+    }
 
-            // Assert
-            cut.MarkupMatches($"<ix-toast-container role=\"{attributes.role}\" tabindex=\"{attributes.tabindex}\" id=\"{attributes.id}\"></ix-toast-container>");
-        }
-
-        [Fact]
-        public void StyleIsAppliedCorrectly()
-        {
-            // Arrange
-            var style = "position: fixed; top: 10px; right: 10px;";
-
-            // Act
-            var cut = RenderComponent<Toast>(parameters => parameters.Add(p => p.Style, style));
-
-            // Assert
-            cut.MarkupMatches($"<ix-toast-container style=\"{style}\"></ix-toast-container>");
-        }
-
-        [Fact]
-        public void ClassIsAppliedCorrectly()
-        {
-            // Arrange
-            var className = "custom-toast-container";
-
-            // Act
-            var cut = RenderComponent<Toast>(parameters => parameters.Add(p => p.Class, className));
-
-            // Assert
-            cut.MarkupMatches($"<ix-toast-container class=\"{className}\"></ix-toast-container>");
-        }
-
-        [Fact]
-        public async Task ShowToast_WithValidConfig_InvokesJSCorrectly()
-        {
-            // Arrange
-            var jsRuntimeMock = new Mock<IJSRuntime>();
-            Services.AddSingleton(jsRuntimeMock.Object);
-
-            var toastConfig = new ToastConfig
-            {
-                Message = "Test message",
-                Title = "Test title",
-                Type = "success",
-                Icon = "info",
-                IconColor = "#00FF00",
-                PreventAutoClose = true,
-                AutoCloseDelay = 3000
-            };
-
-            string expectedJson = JsonConvert.SerializeObject(toastConfig);
-
-            // Setup the expected JS call
-            jsRuntimeMock
-                .Setup(js => js.InvokeAsync<object>(
-                    It.Is<string>(s => s == "siemensIXInterop.showMessage"),
-                    It.Is<object[]>(args => args.Length == 1 && args[0].ToString() == expectedJson)))
-                .ReturnsAsync(new ValueTask<object>());
-
-            var cut = RenderComponent<Toast>();
-
-            // Act
-            await cut.InvokeAsync(() => cut.Instance.ShowToast(toastConfig));
-
-            // Assert
-            jsRuntimeMock.Verify(
-                js => js.InvokeAsync<object>(
-                    It.Is<string>(s => s == "siemensIXInterop.showMessage"),
-                    It.Is<object[]>(args => args.Length == 1 && args[0].ToString() == expectedJson)),
-                Times.Once);
-        }
-
-        [Fact]
-        public async Task ShowToast_WithNullConfig_ThrowsArgumentNullException()
-        {
-            // Arrange
-            var jsRuntimeMock = new Mock<IJSRuntime>();
-            Services.AddSingleton(jsRuntimeMock.Object);
-            var cut = RenderComponent<Toast>();
-
-            // Act & Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-                await cut.InvokeAsync(() => cut.Instance.ShowToast(null)));
-        }
-
-        [Fact]
-        public async Task ShowToast_WithDefaultValues_UsesCorrectDefaults()
-        {
-            // Arrange
-            var jsRuntimeMock = new Mock<IJSRuntime>();
-            Services.AddSingleton(jsRuntimeMock.Object);
-
-            var toastConfig = new ToastConfig
-            {
-                Message = "Test message"
-            };
-
-            jsRuntimeMock
-                .Setup(js => js.InvokeAsync<object>(
-                    It.Is<string>(s => s == "siemensIXInterop.showMessage"),
-                    It.Is<object[]>(args => VerifyToastConfigDefaults(args[0].ToString(), "Test message"))))
-                .ReturnsAsync(new ValueTask<object>());
-
-            var cut = RenderComponent<Toast>();
-
-            // Act
-            await cut.InvokeAsync(() => cut.Instance.ShowToast(toastConfig));
-
-            // Assert
-            jsRuntimeMock.Verify(
-                js => js.InvokeAsync<object>(
-                    It.Is<string>(s => s == "siemensIXInterop.showMessage"),
-                    It.IsAny<object[]>()),
-                Times.Once);
-        }
-
-        [Fact]
-        public async Task ShowToast_WhenJSRuntimeThrowsException_PropagatesException()
-        {
-            // Arrange
-            var jsRuntimeMock = new Mock<IJSRuntime>();
-            Services.AddSingleton(jsRuntimeMock.Object);
-
-            var toastConfig = new ToastConfig { Message = "Test message" };
-            var expectedException = new JSException("Test JS exception");
-
-            jsRuntimeMock
-                .Setup(js => js.InvokeAsync<object>(
-                    It.Is<string>(s => s == "siemensIXInterop.showMessage"),
-                    It.IsAny<object[]>()))
-                .ThrowsAsync(expectedException);
-
-            var cut = RenderComponent<Toast>();
-
-            // Act & Assert
-            var actualException = await Assert.ThrowsAsync<JSException>(async () =>
-                await cut.InvokeAsync(() => cut.Instance.ShowToast(toastConfig)));
-
-            Assert.Same(expectedException, actualException);
-        }
-
-        [Theory]
-        [InlineData("info")]
-        [InlineData("success")]
-        [InlineData("warning")]
-        [InlineData("error")]
-        public async Task ShowToast_WithDifferentTypes_InvokesJSCorrectly(string toastType)
-        {
-            // Arrange
-            var jsRuntimeMock = new Mock<IJSRuntime>();
-            Services.AddSingleton(jsRuntimeMock.Object);
-
-            var toastConfig = new ToastConfig
-            {
-                Message = "Test message",
-                Type = toastType
-            };
-
-            jsRuntimeMock
-                .Setup(js => js.InvokeAsync<object>(
-                    It.Is<string>(s => s == "siemensIXInterop.showMessage"),
-                    It.Is<object[]>(args => JsonConvert.DeserializeObject<ToastConfig>(args[0].ToString()).Type == toastType)))
-                .ReturnsAsync(new ValueTask<object>());
-
-            var cut = RenderComponent<Toast>();
-
-            // Act
-            await cut.InvokeAsync(() => cut.Instance.ShowToast(toastConfig));
-
-            // Assert
-            jsRuntimeMock.Verify(
-                js => js.InvokeAsync<object>(
-                    It.Is<string>(s => s == "siemensIXInterop.showMessage"),
-                    It.Is<object[]>(args => JsonConvert.DeserializeObject<ToastConfig>(args[0].ToString()).Type == toastType)),
-                Times.Once);
-        }
-
-        [Fact]
-        public async Task ShowToast_WithAction_PassesThroughInterop()
-        {
-            var jsRuntimeMock = new Mock<IJSRuntime>();
-            Services.AddSingleton(jsRuntimeMock.Object);
-
-            var toastConfig = new ToastConfig
-            {
-                Title = "Toast headline",
-                MessageHtml = "<div>Message from template</div>",
-                Action = "<ix-button variant=\"tertiary\" icon=\"undo\">Undo</ix-button>"
-            };
-
-            string expectedJson = JsonConvert.SerializeObject(toastConfig);
-
-            jsRuntimeMock
-                .Setup(js => js.InvokeAsync<object>(
-                    It.Is<string>(s => s == "siemensIXInterop.showMessage"),
-                    It.Is<object[]>(args => args.Length == 1 && args[0].ToString() == expectedJson)))
-                .ReturnsAsync(new ValueTask<object>());
-
-            var cut = RenderComponent<Toast>();
-
-            await cut.InvokeAsync(() => cut.Instance.ShowToast(toastConfig));
-
-            jsRuntimeMock.Verify(
-                js => js.InvokeAsync<object>(
-                    It.Is<string>(s => s == "siemensIXInterop.showMessage"),
-                    It.Is<object[]>(args => args.Length == 1 && args[0].ToString() == expectedJson)),
-                Times.Once);
-        }
-
-        [Theory]
-        [InlineData(ToastPosition.BottomRight)]
-        [InlineData(ToastPosition.TopRight)]
-        public async Task ShowToast_WithPosition_PassesThroughInterop(ToastPosition position)
-        {
-            // Arrange
-            var jsRuntimeMock = new Mock<IJSRuntime>();
-            Services.AddSingleton(jsRuntimeMock.Object);
-
-            var toastConfig = new ToastConfig
-            {
-                Title = "Positioned Toast",
-                Message = "This toast has a position",
-                Position = position
-            };
-
-            string expectedJson = JsonConvert.SerializeObject(toastConfig);
-
-            jsRuntimeMock
-                .Setup(js => js.InvokeAsync<object>(
-                    It.Is<string>(s => s == "siemensIXInterop.showMessage"),
-                    It.Is<object[]>(args => args.Length == 1 && args[0].ToString() == expectedJson)))
-                .ReturnsAsync(new ValueTask<object>());
-
-            var cut = RenderComponent<Toast>();
-
-            // Act
-            await cut.InvokeAsync(() => cut.Instance.ShowToast(toastConfig));
-
-            // Assert
-            jsRuntimeMock.Verify(
-                js => js.InvokeAsync<object>(
-                    It.Is<string>(s => s == "siemensIXInterop.showMessage"),
-                    It.Is<object[]>(args => JsonConvert.DeserializeObject<ToastConfig>(args[0].ToString()).Position == position)),
-                Times.Once);
-        }
-
-        [Fact]
-        public void HideIconDefaultsToFalse()
-        {
-            // Arrange
-            var toastConfig = new ToastConfig();
-
-            // Assert
-            Assert.False(toastConfig.HideIcon);
-        }
-
-        [Fact]
-        public async Task ShowToast_WithHideIconTrue_PassesThroughInterop()
-        {
-            // Arrange
-            var jsRuntimeMock = new Mock<IJSRuntime>();
-            Services.AddSingleton(jsRuntimeMock.Object);
-
-            var toastConfig = new ToastConfig
-            {
-                Title = "Toast without icon",
-                Message = "This toast has no icon",
-                HideIcon = true
-            };
-
-            string expectedJson = JsonConvert.SerializeObject(toastConfig);
-
-            jsRuntimeMock
-                .Setup(js => js.InvokeAsync<object>(
-                    It.Is<string>(s => s == "siemensIXInterop.showMessage"),
-                    It.Is<object[]>(args => args.Length == 1 && args[0].ToString() == expectedJson)))
-                .ReturnsAsync(new ValueTask<object>());
-
-            var cut = RenderComponent<Toast>();
-
-            // Act
-            await cut.InvokeAsync(() => cut.Instance.ShowToast(toastConfig));
-
-            // Assert
-            jsRuntimeMock.Verify(
-                js => js.InvokeAsync<object>(
-                    It.Is<string>(s => s == "siemensIXInterop.showMessage"),
-                    It.Is<object[]>(args => JsonConvert.DeserializeObject<ToastConfig>(args[0].ToString()).HideIcon == true)),
-                Times.Once);
-        }
-
-        #region Helper Methods
-
-        private bool VerifyToastConfigDefaults(string json, string expectedMessage)
-        {
-            var config = JsonConvert.DeserializeObject<ToastConfig>(json);
-            if (config == null)
-                return false;
-
-            return config.Message == expectedMessage &&
-                   config.Type == "info" &&
-                   config.PreventAutoClose == true &&
-                   config.AutoCloseDelay == 5000;
-        }
-
-        #endregion
+    private (Mock<IJSRuntime> JsRuntime, Mock<IJSObjectReference> Module) AddJsModule()
+    {
+        var jsRuntime = new Mock<IJSRuntime>();
+        var module = new Mock<IJSObjectReference>();
+        jsRuntime.Setup(j => j.InvokeAsync<IJSObjectReference>("import", It.IsAny<object[]>()))
+            .Returns(new ValueTask<IJSObjectReference>(module.Object));
+        Services.AddSingleton(jsRuntime.Object);
+        return (jsRuntime, module);
     }
 }

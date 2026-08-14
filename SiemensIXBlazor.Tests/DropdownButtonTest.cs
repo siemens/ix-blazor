@@ -31,8 +31,14 @@ public class DropdownButtonTest : TestContextBase
             .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content"))));
 
         // Assert
-        cut.MarkupMatches(
-            "<ix-dropdown-button label=\"testLabel\" variant=\"primary\" placement=\"bottom-start\" icon=\"testIcon\" closeBehavior=\"both\" disabled=\"\">Test content</ix-dropdown-button>");
+        var element = cut.Find("ix-dropdown-button");
+        Assert.StartsWith("dropdown-button-", element.GetAttribute("id"));
+        Assert.Equal("testLabel", element.GetAttribute("label"));
+        Assert.Equal("primary", element.GetAttribute("variant"));
+        Assert.Equal("bottom-start", element.GetAttribute("placement"));
+        Assert.Equal("testIcon", element.GetAttribute("icon"));
+        Assert.Equal("both", element.GetAttribute("close-behavior"));
+        Assert.Contains("Test content", element.InnerHtml);
     }
 
     [Fact]
@@ -58,5 +64,34 @@ public class DropdownButtonTest : TestContextBase
         // Assert
         Assert.True(cut.Instance.EnableTopLayer);
         Assert.Contains("enable-top-layer", cut.Markup);
+    }
+
+    [Fact]
+    public async Task ShowEventsAreTypedAndForwarded()
+    {
+        var showChange = false;
+        var showChanged = false;
+        var cut = RenderComponent<DropdownButton>(parameters => parameters
+            .Add(p => p.ShowChangeEvent,
+                EventCallback.Factory.Create<bool>(this, value => showChange = value))
+            .Add(p => p.ShowChangedEvent,
+                EventCallback.Factory.Create<bool>(this, value => showChanged = value)));
+
+        await cut.Instance.ShowChange(true);
+        await cut.Instance.ShowChanged(true);
+
+        Assert.True(showChange);
+        Assert.True(showChanged);
+    }
+
+    [Fact]
+    public void RendersButtonLabelSlot()
+    {
+        var cut = RenderComponent<DropdownButton>(parameters => parameters
+            .Add(p => p.ButtonLabelContent,
+                (RenderFragment)(builder => builder.AddContent(0, "Additional label"))));
+
+        Assert.Contains("slot=\"button-label\"", cut.Markup);
+        Assert.Contains("Additional label", cut.Markup);
     }
 }

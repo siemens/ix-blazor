@@ -16,5 +16,11 @@
 <ix-workflow-step @attributes="UserAttributes" style="@Style" class="@Class"
     status="@(EnumParser<WorkflowStatus>.EnumToString(Status))" clickable="@Clickable" disabled="@Disabled"
     position="@(EnumParser<WorkflowPosition>.EnumToString(Position))" selected="@Selected" vertical="@Vertical">
+    @if (CustomIcon != null)
+    {
+        <div slot="custom-icon">
+            @CustomIcon
+        </div>
+    }
     @ChildContent
 </ix-workflow-step>

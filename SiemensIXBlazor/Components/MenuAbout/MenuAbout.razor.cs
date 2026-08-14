@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using SiemensIXBlazor.Interops;
+using SiemensIXBlazor.Objects;
 
 namespace SiemensIXBlazor.Components.MenuAbout
 {
@@ -24,7 +25,7 @@ namespace SiemensIXBlazor.Components.MenuAbout
         /// Active tab. Default value is null.
         /// </summary>
         [Parameter]
-        public string? ActiveTabLabel { get; set; }
+        public string? ActiveTabKey { get; set; }
         /// <summary>
         /// Aria label for close button. Default value is: 'Close About'
         /// </summary>
@@ -36,18 +37,19 @@ namespace SiemensIXBlazor.Components.MenuAbout
         [Parameter]
         public string Label { get; set; } = "About & legal information";
         /// <summary>
-        /// Internal. Default value is: false
+        /// Whether to use slotted tabs instead of legacy MenuAboutItem components.
         /// </summary>
         [Parameter]
-        public bool Show { get; set; } = false;
+        public bool SuppressLegacyTabs { get; set; } = false;
         /// <summary>
         /// About and Legal closed event. Return value is: MouseEventArgs
         /// </summary>
         [Parameter]
-        public EventCallback<MouseEventArgs> ClosedEvent { get; set; }
+        public EventCallback<MenuCloseEvent> ClosedEvent { get; set; }
+        [Parameter]
+        public EventCallback<string> TabChangedEvent { get; set; }
         
         private BaseInterop _interop;
-        private Lazy<Task<IJSObjectReference>>? moduleTask;
 
         protected async override Task OnAfterRenderAsync(bool firstRender)
         {
@@ -57,24 +59,20 @@ namespace SiemensIXBlazor.Components.MenuAbout
 
                 await _interop.AddEventListener(this, Id, "close", "Closed");
 
-                moduleTask = new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
-                "import", "./_content/Siemens.IX.Blazor/js/siemens-ix/interops/aboutMenuInterop.js").AsTask());
+                await _interop.AddEventListener(this, Id, "tabChange", "TabChanged");
             }
         }
 
         [JSInvokable]
-        public async Task Closed(MouseEventArgs args)
+        public async Task Closed(MenuCloseEvent args)
         {
             await ClosedEvent.InvokeAsync(args);
         }
 
-        public async Task ToggleAbout(bool status)
+        [JSInvokable]
+        public async Task TabChanged(string tabKey)
         {
-            var module = await moduleTask.Value;
-            if (module != null)
-            {
-                await module.InvokeVoidAsync("toggleAbout", Id, status);
-            };
+            await TabChangedEvent.InvokeAsync(tabKey);
         }
 
     }

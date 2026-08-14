@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using SiemensIXBlazor.Interops;
+using SiemensIXBlazor.Objects;
 
 namespace SiemensIXBlazor.Components.MenuSettings
 {
@@ -21,18 +22,19 @@ namespace SiemensIXBlazor.Components.MenuSettings
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
         [Parameter]
-        public string? ActiveTabLabel { get; set; }
+        public string? ActiveTabKey { get; set; }
         [Parameter]
         public string AriaLabelCloseButton { get; set; } = "Close Settings";
         [Parameter]
         public string Label { get; set; } = "Settings";
         [Parameter]
-        public bool Show { get; set; } = false;
+        public bool SuppressLegacyTabs { get; set; } = false;
         [Parameter]
-        public EventCallback<MouseEventArgs> ClosedEvent { get; set; }
+        public EventCallback<MenuCloseEvent> ClosedEvent { get; set; }
+        [Parameter]
+        public EventCallback<string> TabChangedEvent { get; set; }
 
         private BaseInterop _interop;
-        private Lazy<Task<IJSObjectReference>>? moduleTask;
 
         protected async override Task OnAfterRenderAsync(bool firstRender)
         {
@@ -42,24 +44,20 @@ namespace SiemensIXBlazor.Components.MenuSettings
 
                 await _interop.AddEventListener(this, Id, "close", "Closed");
 
-                moduleTask = new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
-                "import", "./_content/Siemens.IX.Blazor/js/siemens-ix/interops/settingsMenuInterop.js").AsTask());
+                await _interop.AddEventListener(this, Id, "tabChange", "TabChanged");
             }
         }
 
         [JSInvokable]
-        public async Task Closed(MouseEventArgs args)
+        public async Task Closed(MenuCloseEvent args)
         {
             await ClosedEvent.InvokeAsync(args);
         }
 
-        public async Task ToggleSettings(bool status)
+        [JSInvokable]
+        public async Task TabChanged(string tabKey)
         {
-            var module = await moduleTask.Value;
-            if (module != null)
-            {
-                await module.InvokeVoidAsync("toggleSettings", Id, status);
-            };
+            await TabChangedEvent.InvokeAsync(tabKey);
         }
     }
 }

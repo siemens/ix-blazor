@@ -22,6 +22,7 @@ namespace SiemensIXBlazor.Tests
             var cut = RenderComponent<PushCard>(
                 ("Heading", "Test Heading"),
                 ("Icon", "testIcon"),
+                ("AriaLabelIcon", "Test icon"),
                 ("Notification", "5"),
                 ("SubHeading", "Test SubHeading"),
                 ("Expanded", true),
@@ -30,7 +31,7 @@ namespace SiemensIXBlazor.Tests
 
             // Assert
 
-            cut.MarkupMatches("<ix-push-card heading=\"Test Heading\" icon=\"testIcon\" notification=\"5\" subheading=\"Test SubHeading\" expanded=\"\" variant=\"outline\"></ix-push-card>");
+            cut.MarkupMatches("<ix-push-card aria-label-icon=\"Test icon\" heading=\"Test Heading\" icon=\"testIcon\" notification=\"5\" subheading=\"Test SubHeading\" expanded=\"\" variant=\"outline\"></ix-push-card>");
         }
 
         [Fact]
@@ -54,6 +55,27 @@ namespace SiemensIXBlazor.Tests
             // Assert
             Assert.True(cut.Instance.Passive);
             Assert.Contains("passive", cut.Markup);
+        }
+
+        [Fact]
+        public void ExpandedDefaultsToFalse()
+        {
+            var cut = RenderComponent<PushCard>();
+
+            Assert.False(cut.Instance.Expanded);
+            Assert.DoesNotContain("expanded", cut.Markup);
+        }
+
+        [Fact]
+        public void RendersDefaultAndTitleActionContent()
+        {
+            var cut = RenderComponent<PushCard>(parameters => parameters
+                .Add(p => p.ChildContent, builder => builder.AddContent(0, "Details"))
+                .Add(p => p.TitleAction, builder => builder.AddContent(0, "Action")));
+
+            Assert.Contains("slot=\"title-action\"", cut.Markup);
+            Assert.Contains("Action", cut.Markup);
+            Assert.Contains("Details", cut.Markup);
         }
     }
 }
