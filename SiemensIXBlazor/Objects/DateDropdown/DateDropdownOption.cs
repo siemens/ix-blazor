@@ -8,17 +8,18 @@
 //  -----------------------------------------------------------------------
 
 using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace SiemensIXBlazor.Objects.DateDropdown;
 
 public class
     DateDropdownOption
 {
-    [JsonProperty("id")] public string Id { get; set; } = null!;
+    [JsonProperty("id"), JsonPropertyName("id")] public string Id { get; set; } = null!;
 
-    [JsonProperty("label")] public string Label { get; set; } = null!;
+    [JsonProperty("label"), JsonPropertyName("label")] public string Label { get; set; } = null!;
 
-    [JsonProperty("from")] public string? From { get; set; }
+    [JsonProperty("from"), JsonPropertyName("from")] public string? From { get; set; }
 
-    [JsonProperty("to")] public string? To { get; set; }
+    [JsonProperty("to"), JsonPropertyName("to")] public string? To { get; set; }
 }

@@ -48,7 +48,7 @@ public class DateInputTest : TestContextBase
         var received = string.Empty;
         var cut = RenderComponent<DateInput>(parameters => parameters
             .Add(p => p.Id, "test-id")
-            .Add(p => p.ChangeEvent, EventCallback.Factory.Create<string>(this, (string val) => received = val)));
+            .Add(p => p.ChangeEvent, EventCallback.Factory.Create<string?>(this, (string? val) => received = val)));
 
         // Act
         cut.Instance.Change(JsonDocument.Parse("\"2026/04/01\"").RootElement);
@@ -58,18 +58,18 @@ public class DateInputTest : TestContextBase
     }
 
     [Fact]
-    public void ChangeEventReceivesEmptyStringWhenValueIsNull()
+    public void ChangeEventReceivesNullWhenValueIsNull()
     {
         // Arrange
-        var received = "initial";
+        string? received = "initial";
         var cut = RenderComponent<DateInput>(parameters => parameters
             .Add(p => p.Id, "test-id")
-            .Add(p => p.ChangeEvent, EventCallback.Factory.Create<string>(this, (string val) => received = val)));
+            .Add(p => p.ChangeEvent, EventCallback.Factory.Create<string?>(this, (string? val) => received = val)));
 
         // Act
         cut.Instance.Change(JsonDocument.Parse("null").RootElement);
 
         // Assert
-        Assert.Equal(string.Empty, received);
+        Assert.Null(received);
     }
 }

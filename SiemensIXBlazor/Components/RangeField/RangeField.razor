@@ -1,0 +1,32 @@
+@* -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2026 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+//  -----------------------------------------------------------------------
+*@
+
+@namespace SiemensIXBlazor.Components.RangeField
+@using SiemensIXBlazor.Components
+@using SiemensIXBlazor.Enums.RangeField
+@inherits IXBaseComponent
+
+<ix-range-field @attributes="UserAttributes"
+                class="@Class"
+                style="@Style"
+                type="@(Type.HasValue ? TypeToString(Type.Value) : null)"
+                hide-arrow="@HideArrow">
+    @ChildContent
+</ix-range-field>
+
+@code {
+    private static string TypeToString(RangeFieldType type) => type switch
+    {
+        RangeFieldType.TimeRange => "time-range",
+        RangeFieldType.DateRange => "date-range",
+        RangeFieldType.DateTimeRange => "datetime-range",
+        _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+    };
+}

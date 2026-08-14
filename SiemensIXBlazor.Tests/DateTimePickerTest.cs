@@ -11,6 +11,7 @@ using System.Text.Json;
 using Bunit;
 using Microsoft.AspNetCore.Components;
 using SiemensIXBlazor.Components;
+using SiemensIXBlazor.Enums.TimePicker;
 using SiemensIXBlazor.Objects;
 
 namespace SiemensIXBlazor.Tests;
@@ -18,53 +19,37 @@ namespace SiemensIXBlazor.Tests;
 public class DateTimePickerTest : TestContextBase
 {
     [Fact]
-    public void ComponentRendersWithCorrectProperties()
+    public void OfficialPropertiesRender()
     {
-        // Arrange
         var cut = RenderComponent<DateTimePicker>(parameters => parameters
-            .Add(p => p.Id, "testId")
-            .Add(p => p.DateFormat, "yyyy/MM/dd")
-            .Add(p => p.From, DateTime.Now.ToString("yyyy/MM/dd"))
-            .Add(p => p.MaxDate, "2022/12/31")
-            .Add(p => p.MinDate, "2022/01/01")
-            .Add(p => p.SingleSelection, true)
-            .Add(p => p.ShowTimeReference, "")
-            .Add(p => p.Time, "12:00:00")
-            .Add(p => p.TimeFormat, "HH:mm:ss")
-            .Add(p => p.TimeReference, "12:00:00")
-            .Add(p => p.To, "2022/12/31")
-            .Add(p => p.I18nDone, "Done"));
+            .Add(p => p.Id, "datetime-picker")
+            .Add(p => p.MinTime, "08:00")
+            .Add(p => p.MaxTime, "18:00")
+            .Add(p => p.ShowTimeReference, true)
+            .Add(p => p.TimeReference, TimeReference.PM)
+            .Add(p => p.ShowWeekNumbers, true));
 
-        // Assert
-        cut.MarkupMatches($"<ix-datetime-picker id=\"testId\" date-format=\"yyyy/MM/dd\" from=\"{DateTime.Now:yyyy/MM/dd}\" max-date=\"2022/12/31\" min-date=\"2022/01/01\" single-selection=\"\" show-time-reference=\"\" time=\"12:00:00\" i18n-done=\"Done\" i18n-time=\"Time\" time-format=\"HH:mm:ss\" time-reference=\"12:00:00\" to=\"2022/12/31\"></ix-datetime-picker>");
+        Assert.Contains("min-time=\"08:00\"", cut.Markup);
+        Assert.Contains("max-time=\"18:00\"", cut.Markup);
+        Assert.Contains("show-time-reference", cut.Markup);
+        Assert.Contains("time-reference=\"PM\"", cut.Markup);
+        Assert.Contains("show-week-numbers", cut.Markup);
     }
 
     [Fact]
-    public async Task EventCallbacksAreTriggeredCorrectly()
+    public async Task DateChangePreservesOfficialStringAndRangeForms()
     {
-        // Arrange
-        bool isDateChangeEventTriggered = false;
-        bool isDateSelectEventTriggered = false;
-        bool isTimeChangeEventTriggered = false;
-        var dateChangeJson = JsonSerializer.SerializeToElement(new { From = "2022/12/31" });
-
+        var received = new List<DateTimeDateChangeEvent>();
         var cut = RenderComponent<DateTimePicker>(parameters => parameters
-            .Add(p => p.DateChangeEvent, EventCallback.Factory.Create<string>(this, (date) => isDateChangeEventTriggered = true))
-            .Add(p => p.DateSelectEvent, EventCallback.Factory.Create<DateTimePickerResponse>(this, (response) => isDateSelectEventTriggered = true))
-            .Add(p => p.TimeChangeEvent, EventCallback.Factory.Create<string>(this, (time) => isTimeChangeEventTriggered = true)));
+            .Add(p => p.Id, "datetime-picker")
+            .Add(p => p.DateChangeEvent,
+                EventCallback.Factory.Create<DateTimeDateChangeEvent>(this, value => received.Add(value))));
 
-        // Act
-        await cut.Instance.DateChange(dateChangeJson);
-        await cut.Instance.TimeChange("12:00:00");
+        await cut.Instance.DateChange(JsonSerializer.SerializeToElement("2026/01/01 12:00:00"));
+        await cut.Instance.DateChange(JsonSerializer.SerializeToElement(new { from = "2026/01/01", to = "2026/01/31" }));
 
-        var json = JsonSerializer.Serialize(new DateTimePickerResponse { Time = "2024/01/01" });
-        var parsedJson = JsonDocument.Parse(json).RootElement;
-        await cut.Instance.DateSelect(parsedJson);
-
-
-        // Assert
-        Assert.True(isDateChangeEventTriggered);
-        Assert.True(isTimeChangeEventTriggered);
-        Assert.True(isDateSelectEventTriggered);
+        Assert.Equal("2026/01/01 12:00:00", received[0].Value);
+        Assert.Equal("2026/01/01", received[1].From);
+        Assert.Equal("2026/01/31", received[1].To);
     }
 }

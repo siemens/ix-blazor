@@ -1,49 +1,60 @@
-﻿@using Microsoft.JSInterop;
-@using SiemensIXBlazor.Components
+@* -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2024 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+//  -----------------------------------------------------------------------
+*@
+
+@using SiemensIXBlazor.Enums.Input
+@using SiemensIXBlazor.Helpers
+@inject Microsoft.JSInterop.IJSRuntime JSRuntime
 @inherits IXBaseComponent
-@inject IJSRuntime JSRuntime
 
 <ix-time-input @attributes="UserAttributes"
                class="@Class"
                style="@Style"
-               id = "@Id"
-               name ="@Name"
-               disabled = "@Disabled"
-               enable-top-layer = "@EnableTopLayer"
-               readonly ="@Readonly"
-               label = "@Label"
+               id="@Id"
+               name="@Name"
+               placeholder="@Placeholder"
+               value="@Value"
+               format="@Format"
+               min-time="@MinTime"
+               max-time="@MaxTime"
+               required="@Required"
+               helper-text="@HelperText"
+               label="@Label"
+               invalid-text="@InvalidText"
+               readonly="@Readonly"
+               disabled="@Disabled"
                info-text="@InfoText"
                warning-text="@WarningText"
                valid-text="@ValidText"
-               invalid-text="@InvalidText"
-               helper-text ="@HelperText"
-               value="@Value"
-               format="@Format"
-               show-text-as-tooltip="@(ShowTextAsTooltip == true ? "" : null)"
-               placeholder="@Placeholder"
+               show-text-as-tooltip="@ShowTextAsTooltip"
+               i18n-error-time-unparsable="@I18nErrorTimeUnparsable"
                hour-interval="@HourInterval"
-               millisecond-interval="@MillisecondInterval"
                minute-interval="@MinuteInterval"
                second-interval="@SecondInterval"
-               i18n-error-time-unparsable="@I18nErrorTimeUnparsable"
+               millisecond-interval="@MillisecondInterval"
+               i18n-select-time="@I18nSelectTime"
+               i18n-time="@I18nTime"
                i18n-hour-column-header="@I18nHourColumnHeader"
-               i18n-millisecond-column-header="@I18nMillisecondColumnHeader"
                i18n-minute-column-header="@I18nMinuteColumnHeader"
                i18n-second-column-header="@I18nSecondColumnHeader"
-               i18n-select-time="@I18nSelectTime"
-               i18n-time="@I18nTime" >
-
+               i18n-millisecond-column-header="@I18nMillisecondColumnHeader"
+               suppress-submit-on-enter="@SuppressSubmitOnEnter"
+               hide-header="@HideHeader"
+               text-alignment="@(EnumParser<InputTextAlignment>.EnumToString(TextAlignment))"
+               enable-top-layer="@EnableTopLayer"
+               aria-label-time-toggle-button="@AriaLabelTimeToggleButton">
     @if (StartSlot != null)
     {
-        <div slot="start">
-            @StartSlot
-        </div>
+        <div slot="start">@StartSlot</div>
     }
-
     @if (EndSlot != null)
     {
-        <div slot="end">
-            @EndSlot
-        </div>
+        <div slot="end">@EndSlot</div>
     }
 </ix-time-input>
