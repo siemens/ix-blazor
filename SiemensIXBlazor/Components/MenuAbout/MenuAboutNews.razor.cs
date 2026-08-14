@@ -26,14 +26,14 @@ namespace SiemensIXBlazor.Components.MenuAbout
 		[Parameter]
 		public string? AboutItemLabel { get; set; }
 		[Parameter]
-		public bool Expanded { get; set; } = false;
-		[Parameter]
-		public string I18NShowMore { get; set; } = "Show more";
+		public string I18nShowMore { get; set; } = "Show more";
 		/// <summary>
 		/// Title of the about news. Default value is null.
 		/// </summary>
 		[Parameter]
-		public string? Label { get; set; }
+        public string? Label { get; set; }
+        [Parameter]
+        public string? ActiveAboutTabKey { get; set; }
 		/// <summary>
 		/// Show about news. Default value is: false
 		/// </summary>

@@ -24,23 +24,23 @@ namespace SiemensIXBlazor.Components.Menu
 		[Parameter]
 		public string? ApplicationName { get; set; }
 		[Parameter]
-		public bool EnableMapExpand { get; set; } = false;
-		[Parameter]
 		public bool EnableToggleTheme { get; set; } = false;
 		[Parameter]
 		public bool Expand { get; set; } = false;
 		[Parameter]
-		public string I18NCollapse { get; set; } = "Collapse";
+		public string I18nAriaLabelMenu { get; set; } = "Application Navigation";
 		[Parameter]
-		public string I18NExpand { get; set; } = "Expand";
+		public string I18nCollapse { get; set; } = "Collapse";
 		[Parameter]
-		public string I18NLegal { get; set; } = "About & legal information";
+		public string I18nExpand { get; set; } = "Expand";
 		[Parameter]
-		public string I18NMore { get; set; } = "More...";
+		public string I18nLegal { get; set; } = "About & legal information";
 		[Parameter]
-		public string I18NSettings { get; set; } = "Settings";
+		public string I18nNavigationHint { get; set; } = "Use Up and Down arrow keys to navigate between menu items";
 		[Parameter]
-		public string I18NToggleTheme { get; set; } = "Toggle theme";
+		public string I18nSettings { get; set; } = "Settings";
+		[Parameter]
+		public string I18nToggleTheme { get; set; } = "Toggle theme";
 		
 		[Parameter]
 		public bool ShowAbout { get; set; } = false;
@@ -61,12 +61,15 @@ namespace SiemensIXBlazor.Components.Menu
         [Parameter]
         public EventCallback OpenAboutEvent { get; set; }
 
-        private BaseInterop _interop;
+		private Lazy<Task<IJSObjectReference>>? _moduleTask;
+		private BaseInterop _interop;
 
 		protected async override Task OnAfterRenderAsync(bool firstRender)
 		{
 			if (firstRender)
 			{
+				_moduleTask = new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
+					"import", "./_content/Siemens.IX.Blazor/js/siemens-ix/interops/menuInterop.js").AsTask());
 				_interop = new(JSRuntime);
 
 				await _interop.AddEventListener(this, Id, "expandChange", "ExpandChanged");
@@ -104,6 +107,26 @@ namespace SiemensIXBlazor.Components.Menu
         public async Task OpenSettings()
         {
             await OpenSettingsEvent.InvokeAsync();
+        }
+
+        public async Task ToggleMenuAsync(bool? show = null)
+        {
+            await (await (_moduleTask ?? throw new InvalidOperationException("Menu has not rendered yet.")).Value).InvokeVoidAsync("toggleMenu", Id, show);
+        }
+
+        public async Task ToggleMapExpandAsync(bool? show = null)
+        {
+            await (await (_moduleTask ?? throw new InvalidOperationException("Menu has not rendered yet.")).Value).InvokeVoidAsync("toggleMapExpand", Id, show);
+        }
+
+        public async Task ToggleSettingsAsync(bool show)
+        {
+            await (await (_moduleTask ?? throw new InvalidOperationException("Menu has not rendered yet.")).Value).InvokeVoidAsync("toggleSettings", Id, show);
+        }
+
+        public async Task ToggleAboutAsync(bool show)
+        {
+            await (await (_moduleTask ?? throw new InvalidOperationException("Menu has not rendered yet.")).Value).InvokeVoidAsync("toggleAbout", Id, show);
         }
     }
 }

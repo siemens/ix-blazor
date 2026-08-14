@@ -10,6 +10,7 @@
 using Bunit;
 using Microsoft.AspNetCore.Components;
 using SiemensIXBlazor.Components.MenuSettings;
+using SiemensIXBlazor.Objects;
 
 namespace SiemensIXBlazor.Tests.MenuSettings
 {
@@ -30,7 +31,24 @@ namespace SiemensIXBlazor.Tests.MenuSettings
                 ("ChildContent", childContent));
 
             // Assert
-            cut.MarkupMatches("<ix-menu-settings-item label=\"Test Label\">Simple Text</ix-menu-settings-item>");
-        }
-    }
+			cut.MarkupMatches("<ix-menu-settings-item label=\"Test Label\">Simple Text</ix-menu-settings-item>");
+		}
+
+		[Fact]
+		public async Task RendersTabKeyAndForwardsLabelChange()
+		{
+			MenuLabelChangeEvent? changed = null;
+			var cut = RenderComponent<MenuSettingsItem>(parameters => parameters
+				.Add(p => p.Id, "settings-general")
+				.Add(p => p.TabKey, "general")
+				.Add(p => p.Label, "General")
+				.Add(p => p.LabelChangedEvent, EventCallback.Factory.Create<MenuLabelChangeEvent>(this, value => changed = value)));
+			var expected = new MenuLabelChangeEvent { Name = "settings-general", OldLabel = "Old", NewLabel = "General" };
+
+			await cut.Instance.LabelChanged(expected);
+
+			Assert.Contains("tab-key=\"general\"", cut.Markup);
+			Assert.Same(expected, changed);
+		}
+	}
 }

@@ -8,7 +8,7 @@
 //  -----------------------------------------------------------------------
 *@
 
-@using Microsoft.JSInterop;
+@using Microsoft.JSInterop
 @inherits IXBaseComponent
 @inject IJSRuntime JSRuntime
 
@@ -20,7 +20,7 @@
             label="@Label" 
             show="@Show" 
             about-item-label="@AboutItemLabel"
-            expanded="@Expanded"
-            i18n-show-more="@I18NShowMore">
+            active-about-tab-key="@ActiveAboutTabKey"
+            i18n-show-more="@I18nShowMore">
             @ChildContent
 </ix-menu-about-news>

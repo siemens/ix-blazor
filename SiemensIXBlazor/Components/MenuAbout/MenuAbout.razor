@@ -8,7 +8,7 @@
 //  -----------------------------------------------------------------------
 *@
 
-@using Microsoft.JSInterop;
+@using Microsoft.JSInterop
 @inject IJSRuntime JSRuntime
 @inherits IXBaseComponent
  
@@ -16,10 +16,11 @@
     @attributes="UserAttributes"
     class="@Class"
     style="@Style"
-    active-tab-label="@ActiveTabLabel"
+    slot="ix-menu-about"
+    active-tab-key="@ActiveTabKey"
     aria-label-close-button="@AriaLabelCloseButton"
     label="@Label"
     id="@Id"
-    show="@Show">
+    suppress-legacy-tabs="@SuppressLegacyTabs">
     @ChildContent
 </ix-menu-about>

@@ -8,6 +8,9 @@
 //  -----------------------------------------------------------------------
 *@
 
-<ix-menu-about-item label="@Label">
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+
+<ix-menu-about-item id="@(string.IsNullOrWhiteSpace(Id) ? null : Id)" label="@Label" tab-key="@(string.IsNullOrWhiteSpace(TabKey) ? null : TabKey)">
     @ChildContent
 </ix-menu-about-item>
