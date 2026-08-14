@@ -10,6 +10,7 @@
 using Bunit;
 using Microsoft.AspNetCore.Components;
 using SiemensIXBlazor.Components.MenuAbout;
+using SiemensIXBlazor.Objects;
 
 namespace SiemensIXBlazor.Tests.MenuAbout
 {
@@ -43,6 +44,23 @@ namespace SiemensIXBlazor.Tests.MenuAbout
 
             // Assert
             Assert.Equal("testLabel", cut.Instance.Label);
+        }
+
+        [Fact]
+        public async Task RendersTabKeyAndForwardsLabelChange()
+        {
+            MenuLabelChangeEvent? changed = null;
+            var cut = RenderComponent<MenuAboutItem>(parameters => parameters
+                .Add(p => p.Id, "about-legal")
+                .Add(p => p.TabKey, "legal")
+                .Add(p => p.Label, "Legal")
+                .Add(p => p.LabelChangedEvent, EventCallback.Factory.Create<MenuLabelChangeEvent>(this, value => changed = value)));
+            var expected = new MenuLabelChangeEvent { Name = "about-legal", OldLabel = "Old", NewLabel = "Legal" };
+
+            await cut.Instance.LabelChanged(expected);
+
+            Assert.Contains("tab-key=\"legal\"", cut.Markup);
+            Assert.Same(expected, changed);
         }
     }
 }

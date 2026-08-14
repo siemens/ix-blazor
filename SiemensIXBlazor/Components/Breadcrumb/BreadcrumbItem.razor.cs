@@ -14,12 +14,12 @@ namespace SiemensIXBlazor.Components
 {
     public partial class BreadcrumbItem
     {
+        [Parameter, EditorRequired]
+        public string BreadcrumbKey { get; set; } = string.Empty;
         [Parameter]
         public string? Icon { get; set; }
         [Parameter]
         public string? Label { get; set; }
-        [Parameter]
-        public string? AriaLabelButton { get; set; }
         [Parameter]
         public string? Href { get; set; }
         [Parameter]

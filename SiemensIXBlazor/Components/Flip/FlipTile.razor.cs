@@ -25,9 +25,9 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string? AriaLabelEyeIconButton { get; set; }
         [Parameter]
-        public dynamic Height { get; set; } = 15.125;
+        public object Height { get; set; } = 15.125;
         [Parameter]
-        public dynamic Width { get; set; } = 16;
+        public object Width { get; set; } = 16;
 
         [Parameter]
         public int Index { get; set; } = 0;

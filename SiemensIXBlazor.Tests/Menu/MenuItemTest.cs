@@ -9,6 +9,7 @@
 
 using Bunit;
 using Microsoft.AspNetCore.Components;
+using SiemensIXBlazor.Enums.Menu;
 using SiemensIXBlazor.Components.Menu;
 
 namespace SiemensIXBlazor.Tests.Menu
@@ -23,6 +24,7 @@ namespace SiemensIXBlazor.Tests.Menu
 				("Active", true),
 				("Disabled", false),
 				("Home", true),
+				("Bottom", true),
 				("Icon", "testIcon"),
 				("Notifications", 5),
 				("Label", "label"),
@@ -37,7 +39,21 @@ namespace SiemensIXBlazor.Tests.Menu
 
 			// Assert
 			// Adjust the expected markup to match your component's output
-			cut.MarkupMatches("<ix-menu-item active=\"\" home=\"\" icon=\"testIcon\" notifications=\"5\" label=\"label\" tooltip-text=\"Test tooltip\"><div>Test child content</div></ix-menu-item>");
+			cut.MarkupMatches("<ix-menu-item active=\"\" home=\"\" bottom=\"\" icon=\"testIcon\" notifications=\"5\" label=\"label\" tooltip-text=\"Test tooltip\" target=\"_self\"><div>Test child content</div></ix-menu-item>");
+		}
+
+		[Fact]
+		public void RendersLinkAttributes()
+		{
+			var cut = RenderComponent<MenuItem>(parameters => parameters
+				.Add(p => p.Label, "Documentation")
+				.Add(p => p.Href, "/docs")
+				.Add(p => p.Target, MenuItemTarget._blank)
+				.Add(p => p.Rel, "noopener"));
+
+			Assert.Contains("href=\"/docs\"", cut.Markup);
+			Assert.Contains("target=\"_blank\"", cut.Markup);
+			Assert.Contains("rel=\"noopener\"", cut.Markup);
 		}
 	}
 }

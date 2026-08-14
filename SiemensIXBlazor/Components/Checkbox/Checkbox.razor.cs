@@ -11,7 +11,6 @@ namespace SiemensIXBlazor.Components.Checkbox
         private bool _checked = false;
         private bool _indeterminate = false;
         private string _value = "on";
-        private ValidationState _validationState = ValidationState.None;
         private Lazy<Task<IJSObjectReference>>? moduleTask;
         private BaseInterop? _interop;
 
@@ -64,17 +63,6 @@ namespace SiemensIXBlazor.Components.Checkbox
         }
 
         [Parameter]
-        public ValidationState ValidationState
-        {
-            get => _validationState;
-            set
-            {
-                _validationState = value;
-                UpdateValidationClass(); 
-            }
-        }
-
-        [Parameter]
         public EventCallback<bool> CheckedChangeEvent { get; set; }
 
         [Parameter]
@@ -120,23 +108,6 @@ namespace SiemensIXBlazor.Components.Checkbox
             await ValueChangedEvent.InvokeAsync(value);
         }
 
-        private void UpdateValidationClass()
-        {
-            var validationClass = _validationState switch
-            {
-                ValidationState.Info => "ix-info",
-                ValidationState.Warning => "ix-warning",
-                ValidationState.Invalid => "ix-invalid",
-                ValidationState.Valid => "ix-valid",
-                _ => ""
-            };
-
-            if (!string.IsNullOrEmpty(validationClass))
-            {
-                Class = string.IsNullOrEmpty(Class) ? validationClass : $"{Class} {validationClass}";
-            }
-        }
-
         private void InitialParameter(string functionName, object param)
         {
             moduleTask = new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
@@ -154,14 +125,4 @@ namespace SiemensIXBlazor.Components.Checkbox
 
     }
 
-
-
-    public enum ValidationState
-    {
-        None,     
-        Info,     
-        Warning,  
-        Invalid,  
-        Valid     
-    }
 }

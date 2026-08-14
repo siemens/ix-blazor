@@ -9,6 +9,7 @@
 
 using Bunit;
 using Microsoft.AspNetCore.Components;
+using SiemensIXBlazor.Enums.LayoutGrid;
 
 namespace SiemensIXBlazor.Tests.LayoutGrid;
 
@@ -21,7 +22,7 @@ public class LayoutGridTest : TestContextBase
         var cut = RenderComponent<Components.LayoutGrid.LayoutGrid>(parameters => parameters
             .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content")))
             .Add(p => p.Columns, 12)
-            .Add(p => p.Gap, "24")
+            .Add(p => p.Gap, LayoutGridGap._24)
             .Add(p => p.NoMargin, false));
 
         // Assert

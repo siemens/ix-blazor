@@ -23,25 +23,19 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Loading { get; set; } = false;
         [Parameter]
-        public bool? Oval { get; set; }
+        public bool Oval { get; set; } = false;
         [Parameter]
         public IconButtonSize Size { get; set; } = IconButtonSize._24;
         [Parameter]
-        public bool Selected { get; set; } = false;
-        [Parameter]
-        public string DataTooltip { get; set; } = string.Empty;
-        [Parameter]
         public ButtonType Type { get; set; } = ButtonType.Button;
         [Parameter]
-        public string? A11yLabel { get; set; }
-        [Parameter]
-        public ButtonVariant Variant { get; set; } = ButtonVariant.primary;
+        public ButtonVariant Variant { get; set; } = ButtonVariant.subtle_primary;
         [Parameter]
         public EventCallback ClickEvent { get; set; }
 
-        private void Clicked()
+        private Task Clicked()
         {
-            ClickEvent.InvokeAsync();
+            return ClickEvent.InvokeAsync();
         }
     }
 }

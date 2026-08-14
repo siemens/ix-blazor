@@ -25,7 +25,7 @@ namespace SiemensIXBlazor.Tests
             });
 
             // Assert
-            cut.MarkupMatches("<ix-card variant=\"neutral\" selected=\"\">\r\n      <ix-card-content></ix-card-content>\r\n    </ix-card>");
+            cut.MarkupMatches("<ix-card variant=\"neutral\" selected=\"\"></ix-card>");
         }
 
         [Fact]
@@ -42,7 +42,7 @@ namespace SiemensIXBlazor.Tests
                 }));
 
             // Assert
-            cut.MarkupMatches("<ix-card variant=\"outline\">\r\n      <ix-card-content>Expected content</ix-card-content>\r\n    </ix-card>");
+            cut.MarkupMatches("<ix-card variant=\"outline\">Expected content</ix-card>");
         }
 
         [Fact]
@@ -66,6 +66,15 @@ namespace SiemensIXBlazor.Tests
             // Assert
             Assert.True(cut.Instance.Passive);
             Assert.Contains("passive", cut.Markup);
+        }
+
+        [Fact]
+        public void SelectedDefaultsToFalse()
+        {
+            var cut = RenderComponent<Card>();
+
+            Assert.False(cut.Instance.Selected);
+            Assert.DoesNotContain("selected", cut.Markup);
         }
     }
 }

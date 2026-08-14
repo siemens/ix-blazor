@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // SPDX-FileCopyrightText: 2024 Siemens AG
 //
 // SPDX-License-Identifier: MIT
@@ -9,144 +9,67 @@
 
 using Bunit;
 using Microsoft.AspNetCore.Components;
-using SiemensIXBlazor.Components;
 
 namespace SiemensIXBlazor.Tests.Menu;
 
 public class MenuTest : TestContextBase
 {
-	[Fact]
-	public void MenuRendersCorrectly()
-	{
-		// Arrange
-		var cut = RenderComponent<Components.Menu.Menu>(
-				("Id", "testId"),
-				("Class", "test-class"),
-				("Style", "width: 100%"),
-				("ApplicationName", "Test Application"),
-				("ApplicationDescription", "Test Description"),
-				("EnableMapExpand", true),
-				("EnableToggleTheme", true),
-				("Expand", true),
-				("I18NCollapse", "Collapse"),
-				("I18NExpand", "Expand"),
-				("I18NLegal", "Legal"),
-				("I18NMore", "More"),
-				("I18NSettings", "Settings"),
-				("I18NToggleTheme", "Toggle Theme"),
-				("ShowAbout", true),
-				("ShowSettings", true),
-				("StartExpanded", true),
-				("Pinned", true),
-				("ChildContent", (RenderFragment)(builder =>
-				{
-					builder.OpenElement(0, "div");
-					builder.AddContent(1, "Test child content");
-					builder.CloseElement();
-				}))
-				   );
-
-		// Assert
-		cut.MarkupMatches($@"
-                <ix-menu 
-                    id='testId' 
-                    class='test-class' 
-                    style='width: 100%' 
-                    application-name='Test Application' 
-                    application-description='Test Description' 
-                    enable-map-expand='' 
-                    enable-toggle-theme=''
-                    expand=''
-                    i18n-collapse='Collapse'
-                    i18n-expand='Expand'
-                    i18n-legal='Legal'
-                    i18n-more='More'
-                    i18n-settings='Settings'
-                    i18n-toggle-theme='Toggle Theme'
-                    show-about=''
-                    start-expanded
-					pinned
-                    show-settings=''>
-                    <div>Test child content</div>
-                </ix-menu>");
-		//cut.MarkupMatches("<ix-menu id=\"testId\" class=\"test-class\" style=\"width: 100%\" application-name=\"Test Application\" application-description=\"Test Description\" enable-map-expand=\"\" enable-settings=\"\" enable-toggle-theme=\"\" expand=\"\" i18n-collapse=\"Collapse\" i18n-expand=\"Expand\" i18n-legal=\"Legal\" i18n-more=\"More\" i18n-settings=\"Settings\" i18n-toggle-theme=\"Toggle Theme\"  show-about=\"\" show-settings=\"\"><div>Test child content</div></ix-menu>");
-
-	}
-
-	[Fact]
-	public async Task ExpandChangedEventWorks()
-	{
-		// Arrange
-		var expanded = false;
-		var cut = RenderComponent<Components.Menu.Menu>(
-			("Id", "navMenu"),
-			("ExpandChangedEvent", EventCallback.Factory.Create(this, (bool value) => expanded = value))
-		);
-
-		// Act
-		await cut.Instance.ExpandChanged(true);
-
-		// Assert
-		Assert.True(expanded);
-	}
-
-	[Fact]
-	public async Task MapExpandChangedEventWorks()
-	{
-		// Arrange
-		var mapExpanded = false;
-		var cut = RenderComponent<Components.Menu.Menu>(
-			("Id", "navMenu"),
-			("MapExpandChangedEvent", EventCallback.Factory.Create(this, (bool value) => mapExpanded = value))
-		);
-
-		// Act
-		await cut.Instance.MapExpandChanged(true);
-
-		// Assert
-		Assert.True(mapExpanded);
-	}
-
     [Fact]
-    public async Task OpenAppSwitchEventWorks()
+    public void RendersCurrentPublicProperties()
     {
-        // Arrange
-        var eventTriggered = false;
-        var cut = RenderComponent<Components.Menu.Menu>(
-            ("Id", "testId"),
-            ("OpenAppSwitchEvent", EventCallback.Factory.Create(this, () => { eventTriggered = true; }))
-        );
-
-        // Act
-        await cut.InvokeAsync(() => cut.Instance.OpenAppSwitch());
-
-        // Assert
-        Assert.True(eventTriggered);
-    }
-    [Fact]
-    public async Task OpenAboutEventWorks()
-    {
-		var eventTriggered = false;
         var cut = RenderComponent<Components.Menu.Menu>(parameters => parameters
-				.Add(p=>p.Id,"test")
-				.Add(p=>p.OpenAboutEvent,EventCallback.Factory.Create(this, () => eventTriggered = true)));
- 
+            .Add(p => p.Id, "menu")
+            .Add(p => p.ApplicationName, "Application")
+            .Add(p => p.ApplicationDescription, "Description")
+            .Add(p => p.EnableToggleTheme, true)
+            .Add(p => p.Expand, true)
+            .Add(p => p.I18nAriaLabelMenu, "Application menu")
+            .Add(p => p.I18nNavigationHint, "Use arrows")
+            .Add(p => p.I18nLegal, "Legal")
+            .Add(p => p.I18nSettings, "Settings")
+            .Add(p => p.I18nToggleTheme, "Theme")
+            .Add(p => p.I18nExpand, "Expand menu")
+            .Add(p => p.I18nCollapse, "Collapse menu")
+            .Add(p => p.ShowAbout, true)
+            .Add(p => p.ShowSettings, true)
+            .Add(p => p.StartExpanded, true)
+            .Add(p => p.Pinned, true)
+            .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddContent(0, "Items"))));
 
-        await cut.Instance.OpenAboutEvent.InvokeAsync();
-
-        Assert.True(eventTriggered);
+        Assert.Contains("i18n-aria-label-menu=\"Application menu\"", cut.Markup);
+        Assert.Contains("i18n-navigation-hint=\"Use arrows\"", cut.Markup);
+        Assert.Contains("show-about", cut.Markup);
+        Assert.Contains("show-settings", cut.Markup);
+        Assert.DoesNotContain("i18n-more", cut.Markup);
+        Assert.DoesNotContain("enable-map-expand", cut.Markup);
     }
+
     [Fact]
-    public async Task OpenSettingsEventWorks()
+    public async Task MenuEventsForwardTheirDetails()
     {
-        var eventTriggered = false;
+        var expand = false;
+        var mapExpand = false;
+        var appSwitch = false;
+        var settings = false;
+        var about = false;
         var cut = RenderComponent<Components.Menu.Menu>(parameters => parameters
-				.Add(p => p.Id, "test")
-				.Add(p => p.OpenSettingsEvent, EventCallback.Factory.Create(this, () => eventTriggered = true)));
+            .Add(p => p.Id, "menu")
+            .Add(p => p.ExpandChangedEvent, EventCallback.Factory.Create<bool>(this, value => expand = value))
+            .Add(p => p.MapExpandChangedEvent, EventCallback.Factory.Create<bool>(this, value => mapExpand = value))
+            .Add(p => p.OpenAppSwitchEvent, EventCallback.Factory.Create(this, () => appSwitch = true))
+            .Add(p => p.OpenSettingsEvent, EventCallback.Factory.Create(this, () => settings = true))
+            .Add(p => p.OpenAboutEvent, EventCallback.Factory.Create(this, () => about = true)));
 
+        await cut.Instance.ExpandChanged(true);
+        await cut.Instance.MapExpandChanged(true);
+        await cut.Instance.OpenAppSwitch();
+        await cut.Instance.OpenSettings();
+        await cut.Instance.OpenAbout();
 
-        await cut.Instance.OpenSettingsEvent.InvokeAsync();
-
-        Assert.True(eventTriggered);
+        Assert.True(expand);
+        Assert.True(mapExpand);
+        Assert.True(appSwitch);
+        Assert.True(settings);
+        Assert.True(about);
     }
 }

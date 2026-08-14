@@ -29,6 +29,12 @@ namespace SiemensIXBlazor.Components
         public string? HelperText { get; set; }
 
         /// <summary>
+        /// Custom helper text content for the progress indicator.
+        /// </summary>
+        [Parameter]
+        public RenderFragment? HelperTextContent { get; set; }
+
+        /// <summary>
         /// The label for the progress indicator.
         /// </summary>
         [Parameter]

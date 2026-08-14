@@ -9,7 +9,7 @@
 *@
 
 @using Microsoft.JSInterop;
-@using SiemensIXBlazor.Enums.Button;
+@using SiemensIXBlazor.Enums.ToggleButton;
 @using SiemensIXBlazor.Helpers;
 @inject IJSRuntime JSRuntime
 @inherits IXBaseComponent
@@ -19,11 +19,10 @@
                   style="@Style" 
                   id="@Id" 
                   disabled="@Disabled"
-                  aria-label-icon-button="@AriaLabelIconButton"
                   icon="@Icon" 
                   icon-right="@IconRight"
                   loading="@Loading" 
                   pressed="@Pressed"
-                  variant="@(EnumParser<ButtonVariant>.EnumToString(Variant, replaceUnderscores: true))">
+                  variant="@(EnumParser<ToggleButtonVariant>.EnumToString(Variant, replaceUnderscores: true))">
    @ChildContent
 </ix-toggle-button>

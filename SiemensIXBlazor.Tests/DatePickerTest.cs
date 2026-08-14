@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // SPDX-FileCopyrightText: 2024 Siemens AG
 //
 // SPDX-License-Identifier: MIT
@@ -11,7 +11,6 @@ using System.Text.Json;
 using Bunit;
 using Microsoft.AspNetCore.Components;
 using SiemensIXBlazor.Components;
-using SiemensIXBlazor.Enums.DatePicker;
 using SiemensIXBlazor.Objects;
 
 namespace SiemensIXBlazor.Tests;
@@ -19,88 +18,39 @@ namespace SiemensIXBlazor.Tests;
 public class DatePickerTest : TestContextBase
 {
     [Fact]
-    public void ComponentRendersAndPropertiesAreSetCorrectly()
+    public void OfficialPropertiesRender()
     {
-        // Arrange
         var cut = RenderComponent<DatePicker>(parameters => parameters
-            .Add(p => p.Id, "testId")
-            .Add(p => p.Corners, DatePickerCorners.Rounded)
-            .Add(p => p.Format, "yyyy/MM/dd")
-            .Add(p => p.From, "2022/01/01")
-            .Add(p => p.MaxDate, "2022/12/31")
-            .Add(p => p.MinDate, "2022/01/01")
+            .Add(p => p.Id, "date-picker")
+            .Add(p => p.Format, "dd/LL/yyyy")
             .Add(p => p.SingleSelection, true)
-            .Add(p => p.I18nDone, "Done")
-            .Add(p => p.Locale, "en-US")
-            .Add(p => p.WeekStartIndex, 0)
-            .Add(p => p.To, "2022/12/31"));
-
-        // Assert
-        cut.MarkupMatches($@"
-                <ix-date-picker id=""testId"" from=""2022/01/01"" to=""2022/12/31"" corners=""rounded"" format=""yyyy/MM/dd"" max-date=""2022/12/31"" min-date=""2022/01/01"" single-selection="""" locale=""en-US"" i18n-done=""Done"" week-start-index=""0""></ix-date-picker>");
-    }
-
-    [Fact]
-    public void EventCallbacksAreTriggered()
-    {
-        // Arrange
-        var dateRangeChangeInvoked = false;
-        var dateChangeInvoked = false;
-        var dateSelectInvoked = false;
-
-        var dateRangeChangeEvent =
-            new EventCallbackFactory().Create<DatePickerResponse>(this,
-                response => { dateRangeChangeInvoked = true; });
-
-        var dateChangeEvent =
-            new EventCallbackFactory().Create<DatePickerResponse>(this,
-                response => { dateChangeInvoked = true; });
-
-        var dateSelectEvent =
-            new EventCallbackFactory().Create<DatePickerResponse>(this,
-                response => { dateSelectInvoked = true; });
-
-        var cut = RenderComponent<DatePicker>(parameters => parameters
-            .Add(p => p.Id, "testId")
-            .Add(p => p.DateRangeChangeEvent!, dateRangeChangeEvent)
-            .Add(p => p.DateChangeEvent!, dateChangeEvent)
-            .Add(p => p.DateSelectEvent, dateSelectEvent));
-
-        // Act
-        var json = JsonSerializer.Serialize(new DatePickerResponse { From = "2024/01/01", To = "2024/12/31\"" });
-        var parsedJson = JsonDocument.Parse(json).RootElement;
-        cut.Instance.DateRangeChange(parsedJson);
-        cut.Instance.DateChange(parsedJson);
-        cut.Instance.DateSelect(parsedJson);
-
-        // Assert
-        Assert.True(dateRangeChangeInvoked);
-        Assert.True(dateChangeInvoked);
-        Assert.True(dateSelectInvoked);
-    }
-
-    [Fact]
-    public void EnableTopLayerDefaultsToFalse()
-    {
-        // Arrange
-        var cut = RenderComponent<DatePicker>(parameters => parameters
-            .Add(p => p.Id, "test-id"));
-
-        // Assert
-        Assert.False(cut.Instance.EnableTopLayer);
-        Assert.DoesNotContain("enable-top-layer", cut.Markup);
-    }
-
-    [Fact]
-    public void EnableTopLayerTrueRendersAttribute()
-    {
-        // Arrange
-        var cut = RenderComponent<DatePicker>(parameters => parameters
-            .Add(p => p.Id, "test-id")
+            .Add(p => p.ShowWeekNumbers, true)
+            .Add(p => p.AriaLabelMonthSelection, "Month")
+            .Add(p => p.AriaLabelYearSelection, "Year")
             .Add(p => p.EnableTopLayer, true));
 
-        // Assert
-        Assert.True(cut.Instance.EnableTopLayer);
+        var element = cut.Find("ix-date-picker");
+        Assert.Equal("dd/LL/yyyy", element.GetAttribute("format"));
+        Assert.Contains("single-selection", cut.Markup);
+        Assert.Contains("show-week-numbers", cut.Markup);
+        Assert.Contains("aria-label-month-selection=\"Month\"", cut.Markup);
+        Assert.Contains("aria-label-year-selection=\"Year\"", cut.Markup);
         Assert.Contains("enable-top-layer", cut.Markup);
+    }
+
+    [Fact]
+    public async Task EventsDeserializeDateRangePayload()
+    {
+        DatePickerResponse? received = null;
+        var cut = RenderComponent<DatePicker>(parameters => parameters
+            .Add(p => p.Id, "date-picker")
+            .Add(p => p.DateSelectEvent,
+                EventCallback.Factory.Create<DatePickerResponse>(this, value => received = value)));
+
+        await cut.Instance.DateSelect(JsonSerializer.SerializeToElement(new { from = "2026/01/01", to = "2026/01/31" }));
+
+        Assert.NotNull(received);
+        Assert.Equal("2026/01/01", received!.From);
+        Assert.Equal("2026/01/31", received.To);
     }
 }

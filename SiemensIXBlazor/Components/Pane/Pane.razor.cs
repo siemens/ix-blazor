@@ -30,9 +30,11 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public RenderFragment? HeaderContent { get; set; }
         [Parameter]
-        public bool CloseOnClickOutside { get; set; } = true;
+        public bool CloseOnClickOutside { get; set; } = false;
         [Parameter]
         public bool Borderless { get; set; } = false;
+        [Parameter]
+        public bool NoPadding { get; set; } = false;
         [Parameter]
         public PaneComposition Composition { get; set; } = PaneComposition.top;
         [Parameter]

@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // SPDX-FileCopyrightText: 2024 Siemens AG
 //
 // SPDX-License-Identifier: MIT
@@ -7,120 +7,60 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
+using System.Text.Json;
 using Bunit;
 using Microsoft.AspNetCore.Components;
 using SiemensIXBlazor.Components;
-using SiemensIXBlazor.Enums.DateDropdown;
+using SiemensIXBlazor.Enums.Button;
 using SiemensIXBlazor.Objects.DateDropdown;
-using System.Text.Json;
 
 namespace SiemensIXBlazor.Tests;
 
 public class DateDropdownTest : TestContextBase
 {
-
     [Fact]
-    public void AllPropertiesAreSetCorrectly()
+    public void OfficialPropertiesRender()
     {
-        // Arrange
-        var dateDropdownOptions = new DateDropdownOption[] { new() { Id = "test", Label = "Test" } };
-        var dateRangeChangeEvent = new EventCallbackFactory().Create<DateDropdownResponse>(this, response =>
-        {
-            /* your action here */
-        });
-
         var cut = RenderComponent<DateDropdown>(parameters => parameters
-            .Add(p => p.Id, "testId")
-            .Add(p => p.CustomRangeDisabled, true)
-            .Add(p => p.DateRangeId, "custom")
-            .Add(p => p.DateRangeOptions, dateDropdownOptions)
+            .Add(p => p.Id, "date-dropdown")
+            .Add(p => p.DateRangeId, "last-week")
             .Add(p => p.Format, "yyyy/LL/dd")
-            .Add(p => p.From, "2022/01/01")
-            .Add(p => p.I18NCustomItem, "Custom...")
-            .Add(p => p.I18NDone, "Done")
-            .Add(p => p.I18NNoRange, "No range set")
-            .Add(p => p.MaxDate, "2022/12/31")
-            .Add(p => p.MinDate, "2022/01/01")
-            .Add(p => p.Range, true)
-            .Add(p => p.To, "2022/12/31")
-            .Add(p => p.Locale, "en")
-            .Add(p => p.WeekStartIndex, 2)
-            .Add(p => p.DateRangeChangeEvent, dateRangeChangeEvent)
-            .Add(p => p.Disabled, true)
-            .Add(p => p.Ghost, true)
-            .Add(p => p.Loading, true)
-            .Add(p => p.Outline, true)
-            .Add(p => p.Variant, DateDropdownVariant.secondary)
-            );
+            .Add(p => p.From, "2026/01/01")
+            .Add(p => p.To, "2026/01/31")
+            .Add(p => p.SingleSelection, true)
+            .Add(p => p.ShowWeekNumbers, true)
+            .Add(p => p.Variant, ButtonVariant.secondary)
+            .Add(p => p.I18nDone, "Apply"));
 
-        // Assert
-        cut.MarkupMatches(@"
-                <ix-date-dropdown id='testId' outline ghost loading variant='secondary' locale='en' week-start-index='2' custom-range-disabled='' date-range-id='custom' format='yyyy/LL/dd' from='2022/01/01' i18n-custom-item='Custom...' i18n-done='Done' i18n-no-range='No range set' max-date='2022/12/31' min-date='2022/01/01' range='' to='2022/12/31' disabled></ix-date-dropdown>
-            ");
+        var element = cut.Find("ix-date-dropdown");
+        Assert.Equal("last-week", element.GetAttribute("date-range-id"));
+        Assert.Equal("yyyy/LL/dd", element.GetAttribute("format"));
+        Assert.Equal("2026/01/01", element.GetAttribute("from"));
+        Assert.Equal("2026/01/31", element.GetAttribute("to"));
+        Assert.Equal("secondary", element.GetAttribute("variant"));
+        Assert.Contains("single-selection", cut.Markup);
+        Assert.Contains("show-week-numbers", cut.Markup);
+        Assert.DoesNotContain(" range=", cut.Markup);
     }
 
     [Fact]
-    public void DateRangeChangeEventIsTriggeredCorrectly()
+    public async Task DateRangeChangeEventDeserializesOfficialPayload()
     {
-        // Arrange
-        var dateDropdownOptions = new DateDropdownOption[]
+        DateDropdownResponse? received = null;
+        var cut = RenderComponent<DateDropdown>(parameters => parameters
+            .Add(p => p.Id, "date-dropdown")
+            .Add(p => p.DateRangeChangeEvent,
+                EventCallback.Factory.Create<DateDropdownResponse>(this, value => received = value)));
+
+        await cut.Instance.DateRangeChange(JsonSerializer.SerializeToElement(new
         {
-            new() { Id = "test", Label = "Test", From = "2022/01/01", To = "2022/12/31" },
-            new() { Id = "test2", Label = "Test2", From = "2023/01/01", To = "2023/12/31" }
-        };
-        var dateRangeChangeEventTriggered = false;
-        var dateRangeChangeEvent =
-            new EventCallbackFactory().Create<DateDropdownResponse>(this,
-                response => { dateRangeChangeEventTriggered = true; });
+            id = "custom",
+            from = "2026/01/01",
+            to = "2026/01/31"
+        }));
 
-        var cut = RenderComponent<DateDropdown>(parameters => parameters
-            .Add(p => p.Id, "testId")
-            .Add(p => p.CustomRangeDisabled, true)
-            .Add(p => p.DateRangeId, "test1")
-            .Add(p => p.DateRangeOptions, dateDropdownOptions)
-            .Add(p => p.Format, "yyyy/LL/dd")
-            .Add(p => p.From, "2022/01/01")
-            .Add(p => p.I18NCustomItem, "Custom...")
-            .Add(p => p.I18NDone, "Done")
-            .Add(p => p.I18NNoRange, "No range set")
-            .Add(p => p.MaxDate, "2022/12/31")
-            .Add(p => p.MinDate, "2022/01/01")
-            .Add(p => p.Range, true)
-            .Add(p => p.To, "2022/12/31")
-            .Add(p => p.WeekStartIndex, 0)
-            .Add(p => p.DateRangeChangeEvent, dateRangeChangeEvent));
-
-        // Act
-        var json = JsonSerializer.Serialize(new DateDropdownResponse { Id = "test2" });
-        var parsedJson = JsonDocument.Parse(json).RootElement;
-        cut.Instance.DateRangeChange(parsedJson);
-
-        // Assert
-        Assert.True(dateRangeChangeEventTriggered);
-    }
-
-    [Fact]
-    public void EnableTopLayerDefaultsToFalse()
-    {
-        // Arrange
-        var cut = RenderComponent<DateDropdown>(parameters => parameters
-            .Add(p => p.Id, "test-id"));
-
-        // Assert
-        Assert.False(cut.Instance.EnableTopLayer);
-        Assert.DoesNotContain("enable-top-layer", cut.Markup);
-    }
-
-    [Fact]
-    public void EnableTopLayerTrueRendersAttribute()
-    {
-        // Arrange
-        var cut = RenderComponent<DateDropdown>(parameters => parameters
-            .Add(p => p.Id, "test-id")
-            .Add(p => p.EnableTopLayer, true));
-
-        // Assert
-        Assert.True(cut.Instance.EnableTopLayer);
-        Assert.Contains("enable-top-layer", cut.Markup);
+        Assert.NotNull(received);
+        Assert.Equal("custom", received!.Id);
+        Assert.Equal("2026/01/31", received.To);
     }
 }

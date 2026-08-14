@@ -1,4 +1,4 @@
-﻿@* -----------------------------------------------------------------------
+@* -----------------------------------------------------------------------
 // SPDX-FileCopyrightText: 2024 Siemens AG
 //
 // SPDX-License-Identifier: MIT
@@ -8,27 +8,32 @@
 //  -----------------------------------------------------------------------
 *@
 
-@using Microsoft.JSInterop;
+@using SiemensIXBlazor.Enums.TimePicker
+@using SiemensIXBlazor.Helpers
 @namespace SiemensIXBlazor.Components
-@inject IJSRuntime JSRuntime
 @inherits IXBaseComponent
 
-<ix-datetime-picker
-@attributes="UserAttributes"
-id="@Id"
-date-format="@DateFormat"
-from="@From"
-max-date="@MaxDate"
-min-date="@MinDate"
-aria-label-next-month-button="@AriaLabelNextMonthButton" 
-aria-label-previous-month-button="@AriaLabelPreviousMonthButton"
-single-selection="@SingleSelection"
-show-time-reference="@ShowTimeReference"
-time="@Time"
-time-format="@TimeFormat"
-time-reference="@TimeReference"
-to="@To"
-i18n-done="@I18nDone"
-i18n-time="@I18nTime"
-style="@Style"
-class="@Class"></ix-datetime-picker>
+<ix-datetime-picker @attributes="UserAttributes"
+                    id="@Id"
+                    date-format="@DateFormat"
+                    from="@From"
+                    max-date="@MaxDate"
+                    min-date="@MinDate"
+                    min-time="@MinTime"
+                    max-time="@MaxTime"
+                    aria-label-next-month-button="@AriaLabelNextMonthButton"
+                    aria-label-previous-month-button="@AriaLabelPreviousMonthButton"
+                    single-selection="@SingleSelection"
+                    show-time-reference="@ShowTimeReference"
+                    time="@Time"
+                    time-format="@TimeFormat"
+                    time-reference="@(TimeReference.HasValue ? EnumParser<TimeReference>.EnumToString(TimeReference.Value, toLowerCase: false) : null)"
+                    to="@To"
+                    i18n-done="@I18nDone"
+                    i18n-time="@I18nTime"
+                    week-start-index="@WeekStartIndex"
+                    locale="@Locale"
+                    show-week-numbers="@ShowWeekNumbers"
+                    style="@Style"
+                    class="@Class">
+</ix-datetime-picker>

@@ -14,8 +14,6 @@ namespace SiemensIXBlazor.Enums.Button
         primary,
         secondary,
         tertiary,
-        [Obsolete("Use danger_primary instead for supported components.")]
-        danger,
         danger_primary,
         danger_secondary,
         danger_tertiary,

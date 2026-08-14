@@ -22,7 +22,7 @@ namespace SiemensIXBlazor.Components.MenuAvatar
         [Parameter]
         public string? Bottom { get; set; }
         [Parameter]
-        public string I18NLogout { get; set; } = "Logout";
+        public string I18nLogout { get; set; } = "Logout";
         [Parameter]
         public string? Image { get; set; }
         [Parameter]

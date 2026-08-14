@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // SPDX-FileCopyrightText: 2024 Siemens AG
 //
 // SPDX-License-Identifier: MIT
@@ -11,6 +11,7 @@ using Bunit;
 using Microsoft.AspNetCore.Components;
 using SiemensIXBlazor.Components;
 using SiemensIXBlazor.Enums.Tabs;
+using System.Text.Json;
 using Xunit;
 
 namespace SiemensIXBlazor.Tests
@@ -18,37 +19,53 @@ namespace SiemensIXBlazor.Tests
     public class TabsTests : TestContextBase
     {
         [Fact]
-        public void TabsRendersCorrectly()
+        public void TabsRendersOfficialProperties()
         {
-            // Arrange
             var cut = RenderComponent<Tabs>(
                 ("Id", "testId"),
-                ("Layout", TabsLayout.Auto),
-                ("Placement", TabsPlacement.Bottom),
+                ("Layout", TabsLayout.Stretched),
+                ("Placement", TabsPlacement.Top),
                 ("Rounded", true),
-                ("Selected", 0),
+                ("ActiveTabKey", "tab-2"),
+                ("AriaLabelMoreTabs", "Show every tab"),
+                ("KeyboardNavigation", TabsKeyboardNavigation.Manual),
                 ("Small", true)
             );
 
-            // Assert
-            cut.MarkupMatches("<ix-tabs id=\"testId\" layout=\"auto\" placement=\"bottom\" rounded selected=\"0\" small></ix-tabs>");
+            cut.MarkupMatches("<ix-tabs id=\"testId\" layout=\"stretched\" placement=\"top\" rounded active-tab-key=\"tab-2\" aria-label-more-tabs=\"Show every tab\" keyboard-navigation=\"manual\" small></ix-tabs>");
         }
 
         [Fact]
-        public void SelectedChangeEventWorks()
+        public async Task TabChangeEventUpdatesActiveKeyAndInvokesCallback()
         {
-            // Arrange
-            var selectedChanged = false;
-            var cut = RenderComponent<Tabs>(
-                ("Id", "testId"),
-                ("SelectedChangeEvent", EventCallback.Factory.Create<int>(this, value => selectedChanged = true))
-            );
+            string? changedKey = null;
+            var cut = RenderComponent<Tabs>(parameters => parameters
+                .Add(p => p.Id, "testId")
+                .Add(p => p.TabChangeEvent, EventCallback.Factory.Create<string?>(this, value => changedKey = value)));
 
-            // Act
-            cut.Instance.SelectedChange(1);
+            await cut.Instance.TabChanged("tab-2");
 
-            // Assert
-            Assert.True(selectedChanged);
+            Assert.Equal("tab-2", cut.Instance.ActiveTabKey);
+            Assert.Equal("tab-2", changedKey);
+        }
+
+        [Fact]
+        public async Task TabCloseEventInvokesCallback()
+        {
+            string? closedKey = null;
+            var cut = RenderComponent<Tabs>(parameters => parameters
+                .Add(p => p.Id, "testId")
+                .Add(p => p.TabCloseEvent, EventCallback.Factory.Create<string?>(this, value => closedKey = value)));
+
+            using var document = JsonDocument.Parse("""{"tabKey":"tab-3","nativeEvent":{}}""");
+            await cut.Instance.TabClosed(document.RootElement.Clone());
+
+            Assert.Equal("tab-3", closedKey);
+
+            using var stringValue = JsonDocument.Parse("\"tab-4\"");
+            await cut.Instance.TabClosed(stringValue.RootElement.Clone());
+
+            Assert.Equal("tab-4", closedKey);
         }
     }
 }

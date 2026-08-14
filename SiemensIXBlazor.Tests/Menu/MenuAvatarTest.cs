@@ -24,7 +24,7 @@ namespace SiemensIXBlazor.Tests.Menu
                 ("Class", "test-class"),
                 ("Style", "width: 100%"),
                 ("Bottom", "Bottom Text"),
-                ("I18NLogout", "Logout"),
+                ("I18nLogout", "Logout"),
                 ("Image", "testImage"),
                 ("Initials", "TI"),
                 ("Top", "Top Text"),
@@ -39,7 +39,7 @@ namespace SiemensIXBlazor.Tests.Menu
 
             // Assert
             // Adjust the expected markup to match your component's output
-            cut.MarkupMatches("<ix-menu-avatar id=\"testId\" class=\"test-class\" style=\"width: 100%\" bottom=\"Bottom Text\" i18n-logout=\"Logout\" image=\"testImage\" initials=\"TI\" top=\"Top Text\" hide-logout-button=\"\"><div>Test child content</div></ix-menu-avatar>");
+            cut.MarkupMatches("<ix-menu-avatar id=\"testId\" class=\"test-class\" style=\"width: 100%\" slot=\"ix-menu-avatar\" bottom=\"Bottom Text\" i18n-logout=\"Logout\" image=\"testImage\" initials=\"TI\" top=\"Top Text\" hide-logout-button=\"\"><div>Test child content</div></ix-menu-avatar>");
         }
         [Fact]
         public async Task LogoutClickedEventWorks()

@@ -1,7 +1,17 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿// -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2026 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+//  -----------------------------------------------------------------------
+
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using Newtonsoft.Json.Linq;
+using SiemensIXBlazor.Enums.Input;
 using SiemensIXBlazor.Interops;
+using SiemensIXBlazor.Objects;
 using System.Text.Json;
 
 namespace SiemensIXBlazor.Components.NumberInput
@@ -62,16 +72,22 @@ namespace SiemensIXBlazor.Components.NumberInput
         public object? Step { get; set; }
 
         [Parameter]
+        public bool SuppressSubmitOnEnter { get; set; } = false;
+
+        [Parameter]
+        public TextAlignment TextAlignment { get; set; } = TextAlignment.End;
+
+        [Parameter]
+        public bool AllowEmptyValueChange { get; set; } = false;
+
+        [Parameter]
         public string? ValidText { get; set; }
 
         [Parameter]
-        public double Value { get; set; } = 0;
+        public double? Value { get; set; } = 0;
 
         [Parameter]
         public string? WarningText { get; set; }
-
-        [Parameter]
-        public string? CssClass { get; set; }
 
         [Parameter]
         public RenderFragment? StartSlot { get; set; }
@@ -83,10 +99,19 @@ namespace SiemensIXBlazor.Components.NumberInput
         public EventCallback IxBlurEvent { get; set; }
 
         [Parameter]
-        public EventCallback<object> ValidityStateChangeEvent { get; set; }
+        public EventCallback<ValidityState> ValidityStateChangeEvent { get; set; }
 
         [Parameter]
-        public EventCallback<double> ValueChangeEvent { get; set; }
+        public EventCallback<double?> ValueChangeEvent { get; set; }
+
+        [Parameter]
+        public EventCallback<double?> IxChangeEvent { get; set; }
+
+        public async Task FocusInputAsync()
+        {
+            _interop ??= new(JSRuntime);
+            await _interop.InvokeVoidMethod(Id, "focusInput");
+        }
 
         protected override void OnAfterRender(bool firstRender)
         {
@@ -99,29 +124,51 @@ namespace SiemensIXBlazor.Components.NumberInput
                     await _interop.AddEventListener(this, Id, "ixBlur", "IxBlur");
                     await _interop.AddEventListener(this, Id, "validityStateChange", "ValidityStateChange");
                     await _interop.AddEventListener(this, Id, "valueChange", "ValueChange");
+                    await _interop.AddEventListener(this, Id, "ixChange", "IxChange");
                 });
             }
         }
 
         [JSInvokable]
-        public async void IxBlur()
+        public async Task IxBlur()
         {
             await IxBlurEvent.InvokeAsync();
         }
 
         [JSInvokable]
-        public async void ValidityStateChange(JsonElement validityState)
+        public async Task ValidityStateChange(ValidityState validityState)
         {
             await ValidityStateChangeEvent.InvokeAsync(validityState);
         }
 
         [JSInvokable]
-        public async void ValueChange(JsonElement valueState)
+        public async Task ValueChange(JsonElement valueState)
         {
-            double newValue = valueState.GetDouble();
+            double? newValue = valueState.ValueKind switch
+            {
+                JsonValueKind.Null or JsonValueKind.Undefined => null,
+                JsonValueKind.Number => valueState.GetDouble(),
+                JsonValueKind.String when double.TryParse(valueState.GetString(), out var value) => value,
+                _ => null
+            };
+
             Value = newValue;
             await ValueChangeEvent.InvokeAsync(newValue);
-            StateHasChanged();
+            await InvokeAsync(StateHasChanged);
+        }
+
+        [JSInvokable]
+        public async Task IxChange(JsonElement valueState)
+        {
+            double? newValue = valueState.ValueKind switch
+            {
+                JsonValueKind.Null or JsonValueKind.Undefined => null,
+                JsonValueKind.Number => valueState.GetDouble(),
+                JsonValueKind.String when double.TryParse(valueState.GetString(), out var value) => value,
+                _ => null
+            };
+
+            await IxChangeEvent.InvokeAsync(newValue);
         }
     }
 }

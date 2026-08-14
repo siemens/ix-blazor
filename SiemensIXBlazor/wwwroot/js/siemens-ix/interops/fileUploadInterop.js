@@ -57,3 +57,13 @@ export function fileUploadEventHandler(
       });
   });
 }
+
+export function setFilesToUpload(elementId, files) {
+  const element = document.getElementById(elementId);
+
+  if (!element || typeof element.setFilesToUpload !== "function") {
+    throw new Error(`Upload element with id ${elementId} not found.`);
+  }
+
+  return element.setFilesToUpload(files);
+}

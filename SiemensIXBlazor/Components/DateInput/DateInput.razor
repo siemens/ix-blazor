@@ -1,47 +1,54 @@
-@using Microsoft.JSInterop;
-@using SiemensIXBlazor.Components
+@* -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2026 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+//  -----------------------------------------------------------------------
+*@
+
+@using SiemensIXBlazor.Enums.Input
+@using SiemensIXBlazor.Helpers
+@inject Microsoft.JSInterop.IJSRuntime JSRuntime
 @inherits IXBaseComponent
-@inject IJSRuntime JSRuntime
 
-<ix-date-input @attributes="UserAttributes" 
-               class = "@Class"
-               style = "@Style"
-               id = "@Id"
-               aria-label-calender-button="@AriaLabelCalendarButton"
-               aria-label-next-month-button="@AriaLabelNextMonthButton"
+<ix-date-input @attributes="UserAttributes"
+               class="@Class"
+               style="@Style"
+               id="@Id"
+               name="@Name"
+               placeholder="@Placeholder"
+               value="@Value"
+               min-date="@MinDate"
+               max-date="@MaxDate"
+               locale="@Locale"
+               format="@Format"
+               required="@Required"
+               helper-text="@HelperText"
+               label="@Label"
+               aria-label-calendar-button="@AriaLabelCalendarButton"
+               invalid-text="@InvalidText"
+               readonly="@Readonly"
+               disabled="@Disabled"
+               info-text="@InfoText"
+               warning-text="@WarningText"
+               valid-text="@ValidText"
+               show-text-as-tooltip="@ShowTextAsTooltip"
+               i18n-error-date-unparsable="@I18nErrorDateUnparsable"
+               show-week-numbers="@ShowWeekNumbers"
+               week-start-index="@WeekStartIndex"
                aria-label-previous-month-button="@AriaLabelPreviousMonthButton"
-               value = "@Value"
-               min-date = "@MinDate"
-               max-date = "@MaxDate"
-               disabled = "@Disabled"
-               enable-top-layer = "@EnableTopLayer"
-               readonly = "@Readonly"
-               label = "@Label"
-               name = "@Name"
-               info-text = "@InfoText"
-               warning-text = "@WarningText"
-               valid-text = "@ValidText"
-               invalid-text = "@InvalidText"
-               helper-text = "@HelperText"
-               format = "@Format"
-               i18n-error-date-unparsable = "@I18nErrorDateUnparsable"
-               locale = "@Locale"
-               placeholder = "@Placeholder"
-               required = "@Required"
-               show-text-as-tooltip = "@ShowTextAsTooltip"
-               show-week-numbers="@ShowWeekNumbers">
-
+               aria-label-next-month-button="@AriaLabelNextMonthButton"
+               suppress-submit-on-enter="@SuppressSubmitOnEnter"
+               text-alignment="@(EnumParser<InputTextAlignment>.EnumToString(TextAlignment))"
+               enable-top-layer="@EnableTopLayer">
     @if (StartSlot != null)
     {
-        <div slot="start">
-            @StartSlot
-        </div>
+        <div slot="start">@StartSlot</div>
     }
-
     @if (EndSlot != null)
     {
-        <div slot="end">
-            @EndSlot
-        </div>
+        <div slot="end">@EndSlot</div>
     }
 </ix-date-input>

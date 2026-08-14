@@ -17,6 +17,7 @@ namespace SiemensIXBlazor.Enums.PushCard
 		neutral,
 		outline,
 		filled,
+		primary,
 		success,
 		warning
 	}

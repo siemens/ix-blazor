@@ -1,5 +1,16 @@
+@* -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2026 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+//  -----------------------------------------------------------------------
+*@
+
 @using Microsoft.JSInterop;
-@using SiemensIXBlazor.Components
+@using SiemensIXBlazor.Enums.Input
+@using SiemensIXBlazor.Helpers
 @inherits IXBaseComponent
 @inject IJSRuntime JSRuntime
 
@@ -7,11 +18,11 @@
           class="@Class"
           style="@Style"
           id="@Id"
-          type="@Type"   
+          type="@(EnumParser<InputType>.EnumToString(Type))"
           placeholder="@Placeholder"
           value="@Value"
-          disabled="@Disabled"
-          readonly="@Readonly"
+          disabled="@(Disabled ? "true" : null)"
+          readonly="@(Readonly ? "true" : null)"
           label="@Label"
           helper-text="@HelperText"
           info-text="@InfoText"
@@ -24,7 +35,9 @@
           show-text-as-tooltip="@ShowTextAsTooltip"
           pattern="@Pattern"
           name="@Name"
-          required="@Required">
+          required="@(Required ? "true" : null)"
+          suppress-submit-on-enter="@(SuppressSubmitOnEnter ? "true" : null)"
+          text-alignment="@(EnumParser<TextAlignment>.EnumToString(TextAlignment))">
     @if (StartSlot != null)
     {
         <div slot="start">

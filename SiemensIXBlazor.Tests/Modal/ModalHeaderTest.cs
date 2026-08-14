@@ -9,80 +9,38 @@
 
 using Bunit;
 using SiemensIXBlazor.Components.Modal;
+using SiemensIXBlazor.Tests;
 using Xunit;
 
-namespace SiemensIXBlazor.Tests.Modal
+namespace SiemensIXBlazor.Tests.Modal;
+
+public class ModalHeaderTest : TestContextBase
 {
-    public class ModalHeaderTest : TestContextBase
+    [Fact]
+    public void ModalHeader_ShouldRenderOfficialProperties()
     {
-        [Fact]
-        public void ModalHeader_Should_Render_With_Basic_Properties()
-        {
-            // Arrange & Act
-            var component = RenderComponent<ModalHeader>(parameters => parameters
-                .Add(p => p.Id, "test-modal-header")
-            );
+        var component = RenderComponent<ModalHeader>(parameters => parameters
+            .Add(p => p.HideClose, true)
+            .Add(p => p.Icon, "info")
+            .Add(p => p.AriaLabelIcon, "Information")
+            .Add(p => p.AriaLabelCloseIconButton, "Close dialog")
+            .Add(p => p.IconColor, "color-info")
+            .AddChildContent("Modal title"));
 
-            // Assert
-            var header = component.Find("ix-modal-header");
-            Assert.NotNull(header);
-            Assert.Equal("test-modal-header", header.GetAttribute("id"));
-        }
+        var element = component.Find("ix-modal-header");
+        Assert.Equal("true", element.GetAttribute("hide-close"));
+        Assert.Equal("info", element.GetAttribute("icon"));
+        Assert.Equal("Information", element.GetAttribute("aria-label-icon"));
+        Assert.Equal("Close dialog", element.GetAttribute("aria-label-close-icon-button"));
+        Assert.Equal("color-info", element.GetAttribute("icon-color"));
+        Assert.Contains("Modal title", element.InnerHtml);
+    }
 
-        [Fact]
-        public void ModalHeader_Should_Render_With_Icon()
-        {
-            // Arrange & Act
-            var component = RenderComponent<ModalHeader>(parameters => parameters
-                .Add(p => p.Id, "test-modal-header")
-                .Add(p => p.Icon, "info")
-            );
+    [Fact]
+    public void ModalHeader_ShouldUseOfficialCloseLabelByDefault()
+    {
+        var component = RenderComponent<ModalHeader>();
 
-            // Assert
-            var header = component.Find("ix-modal-header");
-            Assert.Equal("info", header.GetAttribute("icon"));
-        }
-
-        [Fact]
-        public void ModalHeader_Should_Render_With_ChildContent()
-        {
-            // Arrange & Act
-            var component = RenderComponent<ModalHeader>(parameters => parameters
-                .Add(p => p.Id, "test-modal-header")
-                .AddChildContent("<h2>Modal Title</h2>")
-            );
-
-            // Assert
-            var header = component.Find("ix-modal-header");
-            Assert.Contains("Modal Title", header.InnerHtml);
-        }
-
-        [Fact]
-        public void ModalHeader_Should_Render_With_CSS_Class()
-        {
-            // Arrange & Act
-            var component = RenderComponent<ModalHeader>(parameters => parameters
-                .Add(p => p.Id, "test-modal-header")
-                .Add(p => p.Class, "custom-header-class")
-            );
-
-            // Assert
-            var header = component.Find("ix-modal-header");
-            Assert.Equal("custom-header-class", header.GetAttribute("class"));
-        }
-
-        [Fact]
-        public void ModalHeader_Should_Render_With_Style()
-        {
-            // Arrange & Act
-            var component = RenderComponent<ModalHeader>(parameters => parameters
-                .Add(p => p.Id, "test-modal-header")
-                .Add(p => p.Style, "color: blue;")
-            );
-
-            // Assert
-            var header = component.Find("ix-modal-header");
-            Assert.Equal("color: blue;", header.GetAttribute("style"));
-        }
+        Assert.Equal("Close modal", component.Instance.AriaLabelCloseIconButton);
     }
 }

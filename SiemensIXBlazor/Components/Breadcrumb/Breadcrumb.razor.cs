@@ -10,6 +10,8 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using SiemensIXBlazor.Interops;
+using SiemensIXBlazor.Objects.Breadcrumb;
+using System.Text.Json;
 
 namespace SiemensIXBlazor.Components
 {
@@ -20,17 +22,17 @@ namespace SiemensIXBlazor.Components
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
         [Parameter]
-        public EventCallback<string> ItemClicked { get; set; }
+        public EventCallback<BreadcrumbClick> ItemClicked { get; set; }
         [Parameter]
-        public EventCallback<string> NextItemClicked { get; set; }
+        public EventCallback<BreadcrumbNextClick> NextItemClicked { get; set; }
         [Parameter]
         public bool Subtle { get; set; } = false;
         [Parameter]
         public bool EnableTopLayer { get; set; } = false;
         [Parameter]
-        public string AriaLabelPreviousButton { get; set; } = "previous";
+        public string AriaLabelPreviousButton { get; set; } = "Show previous breadcrumb items";
         [Parameter]
-        public string[] NextItems { get; set; } = Array.Empty<string>();
+        public BreadcrumbClick[] NextItems { get; set; } = Array.Empty<BreadcrumbClick>();
         [Parameter]
         public int VisibleItemCount { get; set; } = 9;
 
@@ -61,15 +63,23 @@ namespace SiemensIXBlazor.Components
         }
 
         [JSInvokable]
-        public async Task BreadcrumbItemClicked(string label)
+        public async Task BreadcrumbItemClicked(JsonElement item)
         {
-            await ItemClicked.InvokeAsync(label);
+            var breadcrumbClick = item.Deserialize<BreadcrumbClick>();
+            if (breadcrumbClick is not null)
+            {
+                await ItemClicked.InvokeAsync(breadcrumbClick);
+            }
         }
 
         [JSInvokable]
-        public async Task BreadcrumbNextItemClicked(string label)
+        public async Task BreadcrumbNextItemClicked(JsonElement item)
         {
-            await NextItemClicked.InvokeAsync(label);
+            var nextClick = item.Deserialize<BreadcrumbNextClick>();
+            if (nextClick is not null)
+            {
+                await NextItemClicked.InvokeAsync(nextClick);
+            }
         }
     }
 }
