@@ -760,7 +760,10 @@ chart1.InitialChart(object1);
             HeaderTitle="Content title"
             HeaderSubTitle="Subtitle"
             BackButtonClickedEvent="ContentHeaderBackButtonClicked">
-    Test
+    <HeaderContent>
+        <span>Draft</span>
+    </HeaderContent>
+    <Button>Save</Button>
 </ContentHeader>
 ```
 
