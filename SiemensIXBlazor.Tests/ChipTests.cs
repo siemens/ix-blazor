@@ -33,7 +33,7 @@ namespace SiemensIXBlazor.Tests
             });
 
             // Assert
-            cut.MarkupMatches("<ix-chip id=\"testId\" closable=\"\" outline=\"\" inactive=\"\" background=\"testBackground\" center-content chip-color=\"testColor\" icon=\"testIcon\" variant=\"neutral\" tooltip-text='tooltipText'></ix-chip>");
+            cut.MarkupMatches("<ix-chip id=\"testId\" closable=\"\" outline=\"\" inactive=\"\" background=\"testBackground\" aria-label-close-button=\"Close chip\" center-content chip-color=\"testColor\" icon=\"testIcon\" variant=\"neutral\" tooltip-text='tooltipText'></ix-chip>");
         }
 
         [Fact]
@@ -64,7 +64,7 @@ namespace SiemensIXBlazor.Tests
             });
 
             // Assert
-            cut.MarkupMatches("<ix-chip id=\"centeredChip\" center-content variant=\"primary\"></ix-chip>");
+            cut.MarkupMatches("<ix-chip id=\"centeredChip\" aria-label-close-button=\"Close chip\" center-content variant=\"primary\"></ix-chip>");
         }
 
         [Fact]
@@ -78,7 +78,34 @@ namespace SiemensIXBlazor.Tests
             });
 
             // Assert
-            cut.MarkupMatches("<ix-chip id=\"notCenteredChip\" variant=\"primary\"></ix-chip>");
+            cut.MarkupMatches("<ix-chip id=\"notCenteredChip\" aria-label-close-button=\"Close chip\" variant=\"primary\"></ix-chip>");
+        }
+
+        [Fact]
+        public void ChipMapsIconAccessibilityAndBooleanTooltip()
+        {
+            var cut = RenderComponent<Chip>(parameters => parameters
+                .Add(p => p.Id, "accessibleChip")
+                .Add(p => p.Icon, "info")
+                .Add(p => p.AriaLabelIcon, "Information")
+                .Add(p => p.TooltipText, true)
+                .Add(p => p.ChildContent, builder => builder.AddContent(0, "Chip label")));
+
+            Assert.Equal("Information", cut.Instance.AriaLabelIcon);
+            Assert.Equal(true, cut.Instance.TooltipText);
+            Assert.Contains("aria-label-icon=\"Information\"", cut.Markup);
+            Assert.Contains("tooltip-text=\"\"", cut.Markup);
+            Assert.DoesNotContain("tooltip-text=\"True\"", cut.Markup);
+        }
+
+        [Fact]
+        public void ChipFalseTooltipDoesNotRenderTooltipAttribute()
+        {
+            var cut = RenderComponent<Chip>(parameters => parameters
+                .Add(p => p.Id, "noTooltipChip")
+                .Add(p => p.TooltipText, false));
+
+            Assert.DoesNotContain("tooltip-text", cut.Markup);
         }
     }
 }

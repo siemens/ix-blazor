@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Components;
 using SiemensIXBlazor.Components;
 using SiemensIXBlazor.Enums.Pane;
 using SiemensIXBlazor.Objects.Pane;
+using System.Text.Json;
 
 namespace SiemensIXBlazor.Tests
 {
@@ -24,6 +25,7 @@ namespace SiemensIXBlazor.Tests
             var cut = RenderComponent<Pane>(
                 ("Id", "testId"),
                 ("Borderless", true),
+                ("NoPadding", true),
                 ("Composition", PaneComposition.top),
                 ("Expanded", true),
                 ("CloseOnClickOutside", true),
@@ -36,7 +38,18 @@ namespace SiemensIXBlazor.Tests
             );
 
             // Assert
-            cut.MarkupMatches("<ix-pane id=\"testId\" borderless composition=\"top\" expanded close-on-click-outside=\"\" heading=\"Test Heading\" hide-on-collapse icon=\"Test Icon\" size=\"240px\" variant=\"inline\" aria-label-collapse-close-button=\"testAriaLabelCollapseCloseButton\"></ix-pane>");
+            cut.MarkupMatches("<ix-pane id=\"testId\" borderless composition=\"top\" expanded close-on-click-outside=\"\" heading=\"Test Heading\" hide-on-collapse icon=\"Test Icon\" size=\"240px\" variant=\"inline\" no-padding aria-label-collapse-close-button=\"testAriaLabelCollapseCloseButton\"></ix-pane>");
+        }
+
+        [Fact]
+        public void PaneUsesOfficialDefaultValues()
+        {
+            var cut = RenderComponent<Pane>(("Id", "default-pane"));
+
+            Assert.DoesNotContain("close-on-click-outside", cut.Markup);
+            Assert.DoesNotContain("no-padding", cut.Markup);
+            Assert.False(cut.Instance.CloseOnClickOutside);
+            Assert.False(cut.Instance.NoPadding);
         }
 
         [Fact]
@@ -121,6 +134,21 @@ namespace SiemensIXBlazor.Tests
 
             // Assert
             Assert.DoesNotContain("slot=\"header\"", cut.Markup);
+        }
+
+        [Fact]
+        public async Task ExpandedChangedDeserializesOfficialBooleanPayload()
+        {
+            PaneExpandedChangedEventResponse? response = null;
+            var cut = RenderComponent<Pane>(parameters => parameters
+                .Add(p => p.Id, "pane-event")
+                .Add(p => p.ExpandedChangedEvent, EventCallback.Factory.Create<PaneExpandedChangedEventResponse>(this, value => response = value)));
+
+            await cut.Instance.ExpandChanged(JsonDocument.Parse("{\"slot\":\"left\",\"expanded\":true}").RootElement);
+
+            Assert.NotNull(response);
+            Assert.Equal("left", response!.Slot);
+            Assert.True(response.Expanded);
         }
     }
 }

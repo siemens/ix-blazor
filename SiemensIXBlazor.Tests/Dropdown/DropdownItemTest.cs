@@ -10,6 +10,7 @@
 using Bunit;
 using Microsoft.AspNetCore.Components;
 using SiemensIXBlazor.Components;
+using SiemensIXBlazor.Enums.Dropdown;
 
 namespace SiemensIXBlazor.Tests.Dropdown;
 
@@ -21,26 +22,26 @@ public class DropdownItemTest : TestContextBase
         // Arrange
         var cut = RenderComponent<DropdownItem>(parameters => parameters
             .Add(p => p.Label, "testLabel")
-            .Add(p => p.Value, "testValue"));
+            .Add(p => p.Icon, "testIcon")
+            .Add(p => p.AriaLabelIcon, "icon label")
+            .Add(p => p.AriaLabelButton, "button label")
+            .Add(p => p.Hover, true)
+            .Add(p => p.Disabled, true)
+            .Add(p => p.Checked, true)
+            .Add(p => p.ItemRole, DropdownItemRole.option)
+            .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddContent(0, "Test content"))));
 
         // Assert
-        cut.MarkupMatches("<ix-dropdown-item label=\"testLabel\" value=\"testValue\"></ix-dropdown-item>");
+        cut.MarkupMatches(
+            "<ix-dropdown-item aria-label-button=\"button label\" aria-label-icon=\"icon label\" label=\"testLabel\" icon=\"testIcon\" hover disabled checked item-role=\"option\">Test content</ix-dropdown-item>");
     }
 
     [Fact]
-    public async Task EventCallbacksAreTriggeredCorrectly()
+    public void RendersEndContentSlot()
     {
-        // Arrange
-        var isOnClickEventTriggered = false;
-
         var cut = RenderComponent<DropdownItem>(parameters => parameters
-            .Add(p => p.OnClickEvent,
-                EventCallback.Factory.Create<DropdownItem>(this, label => isOnClickEventTriggered = true)));
+            .Add(p => p.EndContent, (RenderFragment)(builder => builder.AddContent(0, "End content"))));
 
-        // Act
-        await cut.Instance.OnClickEvent.InvokeAsync(cut.Instance);
-
-        // Assert
-        Assert.True(isOnClickEventTriggered);
+        cut.MarkupMatches("<ix-dropdown-item item-role=\"menuitem\"><div slot=\"end\">End content</div></ix-dropdown-item>");
     }
 }

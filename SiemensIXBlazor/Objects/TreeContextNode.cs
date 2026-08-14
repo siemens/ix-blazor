@@ -17,5 +17,7 @@ namespace SiemensIXBlazor.Objects
         public bool IsExpanded { get; set; }
         [JsonProperty("isSelected")]
         public bool IsSelected { get; set; }
+        [JsonProperty("isDisabled")]
+        public bool? IsDisabled { get; set; }
     }
 }

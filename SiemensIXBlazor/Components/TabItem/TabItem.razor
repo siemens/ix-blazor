@@ -1,14 +1,18 @@
-<ix-tab-item id="@Id"
-             tab-key="@TabKey"
-             label="@Label"
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+@inherits IXBaseComponent
+
+<ix-tab-item id="@EffectiveId"
+             @attributes="UserAttributes"
              class="@Class"
              style="@Style"
-             icon="@Icon"
+             tab-key="@TabKey"
              disabled="@Disabled"
              selected="@Selected"
+             icon="@Icon"
              counter="@Counter"
              closable="@Closable"
-             aria-label-close-button="@AriaLabelCloseButton"
-             @attributes="UserAttributes">
+             label="@Label"
+             aria-label-close-button="@AriaLabelCloseButton">
     @ChildContent
 </ix-tab-item>

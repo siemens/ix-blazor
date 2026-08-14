@@ -21,7 +21,42 @@
    @attributes="UserAttributes"
    variant="@Variant"
    layout="@Layout"
-   borderless="@Borderless"
+    borderless="@Borderless"
 >
+    @if (Left is not null)
+    {
+        <div slot="left">
+            @Left
+        </div>
+    }
+
+    @if (Top is not null)
+    {
+        <div slot="top">
+            @Top
+        </div>
+    }
+
+    @if (Content is not null)
+    {
+        <div slot="content">
+            @Content
+        </div>
+    }
+
     @ChildContent
+
+    @if (Bottom is not null)
+    {
+        <div slot="bottom">
+            @Bottom
+        </div>
+    }
+
+    @if (Right is not null)
+    {
+        <div slot="right">
+            @Right
+        </div>
+    }
 </ix-pane-layout>

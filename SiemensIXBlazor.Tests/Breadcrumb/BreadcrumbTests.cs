@@ -12,6 +12,8 @@ namespace SiemensIXBlazor.Tests
     using Bunit;
     using Microsoft.AspNetCore.Components;
     using SiemensIXBlazor.Components;
+    using SiemensIXBlazor.Objects.Breadcrumb;
+    using System.Text.Json;
 
     public class BreadcrumbTests : TestContextBase
     {
@@ -23,13 +25,13 @@ namespace SiemensIXBlazor.Tests
             {
                 parameters.Add(p => p.Id, "testId");
                 parameters.Add(p => p.Subtle, true);
-                parameters.Add(p => p.AriaLabelPreviousButton, "previous");
-                parameters.Add(p => p.NextItems, ["Data"]);
+                parameters.Add(p => p.AriaLabelPreviousButton, "Show previous breadcrumb items");
+                parameters.Add(p => p.NextItems, [new BreadcrumbClick { BreadcrumbKey = "data", Label = "Data" }]);
                 parameters.Add(p => p.VisibleItemCount, 9);
             });
 
             // Assert
-            cut.MarkupMatches("<ix-breadcrumb subtle='true' visibleitemcount='9' id='testId' aria-label-previous-button='previous'></ix-breadcrumb>");
+            cut.MarkupMatches("<ix-breadcrumb subtle='true' visible-item-count='9' id='testId' aria-label-previous-button='Show previous breadcrumb items'></ix-breadcrumb>");
         }
 
         [Fact]
@@ -53,28 +55,30 @@ namespace SiemensIXBlazor.Tests
         public void ItemClickedEventTriggeredCorrectly()
         {
             // Arrange
-            var eventTriggered = false;
-            var cut = RenderComponent<Breadcrumb>(parameters => parameters.Add(p => p.ItemClicked, EventCallback.Factory.Create<string>(this, () => eventTriggered = true)));
+            BreadcrumbClick? clickedItem = null;
+            var cut = RenderComponent<Breadcrumb>(parameters => parameters.Add(p => p.ItemClicked, EventCallback.Factory.Create<BreadcrumbClick>(this, item => clickedItem = item)));
 
             // Act
-            cut.Instance.ItemClicked.InvokeAsync("test");
+            cut.Instance.BreadcrumbItemClicked(JsonSerializer.SerializeToElement(new { breadcrumbKey = "test-key", label = "test" }));
 
             // Assert
-            Assert.True(eventTriggered);
+            Assert.Equal("test-key", clickedItem?.BreadcrumbKey);
+            Assert.Equal("test", clickedItem?.Label);
         }
 
         [Fact]
         public void NextItemClickedEventTriggeredCorrectly()
         {
             // Arrange
-            var eventTriggered = false;
-            var cut = RenderComponent<Breadcrumb>(parameters => parameters.Add(p => p.NextItemClicked, EventCallback.Factory.Create<string>(this, () => eventTriggered = true)));
+            BreadcrumbNextClick? clickedItem = null;
+            var cut = RenderComponent<Breadcrumb>(parameters => parameters.Add(p => p.NextItemClicked, EventCallback.Factory.Create<BreadcrumbNextClick>(this, item => clickedItem = item)));
 
             // Act
-            cut.Instance.NextItemClicked.InvokeAsync("test");
+            cut.Instance.BreadcrumbNextItemClicked(JsonSerializer.SerializeToElement(new { @event = new { type = "click" }, item = new { breadcrumbKey = "test-key", label = "test" } }));
 
             // Assert
-            Assert.True(eventTriggered);
+            Assert.Equal("test-key", clickedItem?.Item.BreadcrumbKey);
+            Assert.Equal("click", clickedItem?.Event.GetProperty("type").GetString());
         }
 
         [Fact]

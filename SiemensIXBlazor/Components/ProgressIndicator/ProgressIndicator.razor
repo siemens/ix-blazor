@@ -21,4 +21,10 @@
     text-alignment="@(EnumParser<ProgressIndicatorTextAlignment>.EnumToString(TextAlignment))"
     type="@(EnumParser<ProgressIndicatorType>.EnumToString(Type))" value="@Value">
   @ChildContent
+  @if (HelperTextContent != null)
+  {
+      <div slot="helper-text">
+          @HelperTextContent
+      </div>
+  }
 </ix-progress-indicator>

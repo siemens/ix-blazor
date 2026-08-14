@@ -27,15 +27,12 @@ namespace SiemensIXBlazor.Tests
                 parameters.Add(p => p.Loading, true);
                 parameters.Add(p => p.Oval, true);
                 parameters.Add(p => p.Size, IconButtonSize._12);
-                parameters.Add(p => p.Selected, true);
-                parameters.Add(p => p.DataTooltip, "testDataTooltip");
                 parameters.Add(p => p.Type, ButtonType.Button);
-                parameters.Add(p => p.A11yLabel, "testA11Label");
-                parameters.Add(p => p.Variant, ButtonVariant.primary);
+                parameters.Add(p => p.Variant, ButtonVariant.subtle_primary);
             });
 
             // Assert
-            cut.MarkupMatches("<ix-icon-button  disabled=\"\" selected=\"\" type=\"button\" variant=\"primary\" icon-color=\"testIconColor\" icon=\"testIcon\" oval=\"\" loading=\"\" data-tooltip=\"testDataTooltip\" size=\"12\" a11y-label=\"testA11Label\"></ix-icon-button>");
+            cut.MarkupMatches("<ix-icon-button disabled=\"\" type=\"button\" variant=\"subtle-primary\" icon-color=\"testIconColor\" icon=\"testIcon\" oval=\"\" loading=\"\" size=\"12\"></ix-icon-button>");
         }
 
         [Fact]

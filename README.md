@@ -62,9 +62,8 @@ Add `Theme` component to the page that you want to manipulate the theme.
 ```razor
 <Theme @ref="themeProvider"></Theme>
 
-<Button ClickEvent="SetDarkTheme">Set Dark Theme</Button>
+<Button ClickEvent="SetClassicTheme">Set Classic Theme</Button>
 <Button ClickEvent="ToggleTheme">Toggle Theme</Button>
-<Button ClickEvent="ToggleSystemTheme">Toggle System Theme</Button>
 ```
 
 Then use this methods to change theme.
@@ -77,7 +76,7 @@ public partial class Index
     {
         if(firstRender)
         {
-            await themeProvider.SetTheme("theme-classic-light");
+            await themeProvider.SetTheme("classic");
         }
 
     }
@@ -87,17 +86,16 @@ public partial class Index
         await themeProvider.ToggleTheme();
     }
 
-    private async Task SetDarkTheme()
+    private async Task SetClassicTheme()
     {
-        await themeProvider.SetTheme("theme-classic-dark");
-    }
-
-    private async Task ToggleSystemTheme()
-    {
-        await themeProvider.ToggleSystemTheme(true);
+        await themeProvider.SetTheme("classic");
     }
 }
 ```
+
+In iX v5, the theme name and color schema are separate. Use a theme name such as
+`classic` together with `Application.ColorSchema` (`Light`, `Dark`, or `System`).
+Do not use the legacy `theme-classic-light` or `theme-classic-dark` values.
 
 ### Supported Components
 
@@ -140,6 +138,10 @@ public partial class Index
 - [Group](#group)
 - [HTML Table](#html-table)
 - [Input](#input)
+- [Number Input](#number-input)
+- [Custom Field](#custom-field)
+- [Field Label](#field-label)
+- [Helper Text](#helper-text)
 - [Key Value List](#key-value-list) **(since v0.3.3)**
 - [Key Value](#key-value) **(since v0.3.3)**
 - [KPI](#kpi)
@@ -173,9 +175,16 @@ public partial class Index
 ## Application
 
 ```razor
-<Application @ref="_app">
-    <ApplicationHeader Name="My Application">
-        <placeholder-logo slot="logo"></placeholder-logo>
+<Application Id="application" @ref="_app" Theme="classic" ColorSchema="System">
+    <ApplicationHeader Id="application-header" Name="My Application">
+        <Logo>
+            <placeholder-logo></placeholder-logo>
+        </Logo>
+        <Button Variant="tertiary">Header action</Button>
+        <ix-avatar slot="ix-application-header-avatar"
+                   initials="JD"
+                   username="Jane Doe"
+                   extra="Product Engineering"></ix-avatar>
     </ApplicationHeader>
     <Menu>
         <MenuItem>Item 1</MenuItem>
@@ -225,8 +234,10 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 ## Application Header
 
 ```razor
-<ApplicationHeader Name="My Application">
-    <placeholder-logo slot="logo"></placeholder-logo>
+<ApplicationHeader Id="application-header" Name="My Application">
+    <Logo>
+        <placeholder-logo></placeholder-logo>
+    </Logo>
 </ApplicationHeader>
 ```
 
@@ -490,7 +501,9 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 
 ```razor
 <Avatar
-    Image="https://ui-avatars.com/api/?name=John+Doe">
+    Image="https://ui-avatars.com/api/?name=John+Doe"
+    TooltipText="John Doe"
+    AriaLabelTooltip="John Doe">
 </Avatar>
 ```
 
@@ -498,10 +511,17 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 
 ```razor
 <Blind
-    Label="Test Blind"
     Id="blind1"
     CollapsedChangedEvent="(value) => BlindEventHandler(value)">
-Test content
+    <CustomHeader>
+        <span>Custom header</span>
+    </CustomHeader>
+    <HeaderActions>
+        <Button Variant="@ButtonVariant.secondary">Action</Button>
+    </HeaderActions>
+    <ChildContent>
+        <p>Test content</p>
+    </ChildContent>
 </Blind>
 ```
 
@@ -510,30 +530,33 @@ Test content
 ```razor
 <Breadcrumb Id="breadcrumb-1"
             Class="editor-breadcrumb"
-            ItemClicked="(label) => ClickedOnBreadcrumb(label)">
-    <BreadcrumbItem Label="Item 1"></BreadcrumbItem>
-    <BreadcrumbItem Label="Item 2"></BreadcrumbItem>
+            ItemClicked="(item) => ClickedOnBreadcrumb(item)">
+    <BreadcrumbItem BreadcrumbKey="item-1" Label="Item 1"></BreadcrumbItem>
+    <BreadcrumbItem BreadcrumbKey="item-2" Label="Item 2"></BreadcrumbItem>
 </Breadcrumb>
 ```
 
 ## Button
 
 ```razor
-<Button>Test Button</Button>
+<Button Variant="ButtonVariant.primary" Icon="save-all" ClickEvent="Save">Save</Button>
+<Button Variant="ButtonVariant.secondary" Href="https://ix.siemens.io/" Target="ButtonTarget._blank">Open docs</Button>
 ```
 
 ## Card
 
 ```razor
-<Card Variant="CardVariant.info">
-    <ix-icon name="capacity"></ix-icon>
-    <ix-typography bold>Number of components</ix-typography>
-    <ix-typography>
-        Item 1<br />
-        Item 2<br />
-        Item 3
-    </ix-typography>
-    <ix-typography format="h1">3</ix-typography>
+<Card Variant="CardVariant.info" Selected="true">
+    <CardTitle>
+        <ChildContent>Components</ChildContent>
+        <TitleActions>
+            <span>Details</span>
+        </TitleActions>
+    </CardTitle>
+    <p>Card content is rendered in the default slot.</p>
+    <CardAccordion Variant="CardAccordionVariant.info">
+        <p>Expandable card content.</p>
+    </CardAccordion>
 </Card>
 ```
 
@@ -564,10 +587,14 @@ ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowM
 
 ```razor
 <PushCard Icon="rocket"
+        AriaLabelIcon="Status"
         Notification="3"
         Heading="Heading content"
         SubHeading="Subheading"
-        Variant="PushCardVariant.outline"></PushCard>
+        Variant="PushCardVariant.outline">
+    <TitleAction>Action</TitleAction>
+    <ChildContent><p>Expandable content.</p></ChildContent>
+</PushCard>
 ```
 
 ## Action Card
@@ -577,14 +604,15 @@ ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowM
       Icon="refresh"
       Heading="Scan for new devices"
       SubHeading="Secondary text"
-      Variant="PushCardVariant.filled"
-></ActionCard>
+      Variant="ActionCardVariant.filled">
+    <span>Additional non-interactive content</span>
+</ActionCard>
 ```
 
 ## Icon Button
 
 ```razor
-<IconButton Icon="info"></IconButton>
+<IconButton Icon="info" Variant="ButtonVariant.subtle_primary" />
 ```
 
 ## Category filter
@@ -594,9 +622,11 @@ ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowM
     @ref="categoryFilter"
     Id="category-filter-1"
     Placeholder="Filter by"
-    RepeatCategories="false"
+    UniqueCategories="true"
     FilterChangedEvent="FilterStateChanged"
-    InputChangedEvent="InputStateChanged">
+    InputChangedEvent="InputStateChanged"
+    CategoryChangedEvent="CategoryStateChanged"
+    FilterClearedEvent="FilterCleared">
 </CategoryFilter>
 ```
 
@@ -604,6 +634,13 @@ ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowM
 CategoryFilter categoryFilter;
 Dictionary<string, Category> categoriesDict;
 FilterState filterState;
+
+void InputStateChanged(InputState state) { }
+void CategoryStateChanged(string? category) { }
+void FilterCleared(FilterClearedEventArgs eventArgs)
+{
+    // Set eventArgs.Cancel = true to keep the current filter.
+}
 
 protected override void OnAfterRender(bool firstRender)
     {
@@ -631,7 +668,7 @@ protected override void OnAfterRender(bool firstRender)
                     {
                         Id = "ID_1",
                         Value = "IBM",
-                        Operator = "Not Equal"
+                        Operator = LogicalFilterOperator.NotEqual
                     }
                 }
             };
@@ -744,11 +781,17 @@ chart1.InitialChart(object1);
 
 ```razor
 <Chip Icon="print"
-      Label="Chip with icon"
       Id="chip1"
-      Closable="true"
-      TooltipText="Tooltip Text"
+      AriaLabelIcon="Print"
+      Closable
+      TooltipText="@("Tooltip Text")"
       ClosedEvent="@ChipClosedEventHandler">
+    Chip with icon
+</Chip>
+
+<Chip Id="chip-text-tooltip"
+      TooltipText="@true">
+    Uses chip text as tooltip
 </Chip>
 ```
 
@@ -771,7 +814,10 @@ chart1.InitialChart(object1);
             HeaderTitle="Content title"
             HeaderSubTitle="Subtitle"
             BackButtonClickedEvent="ContentHeaderBackButtonClicked">
-    Test
+    <HeaderContent>
+        <span>Draft</span>
+    </HeaderContent>
+    <Button>Save</Button>
 </ContentHeader>
 ```
 
@@ -864,10 +910,10 @@ private void DrawerButtonClicked()
 ## Dropdown Button
 
 ```razor
-<DropdownButton Label="Dropdown" Variant="Primary" Icon="checkboxes">
-    <DropdownItem Label="Item 1" Value="1"></DropdownItem>
-    <DropdownItem Label="Item 2" Value="2"></DropdownItem>
-    <DropdownItem Label="Item 3" Value="3"></DropdownItem>
+<DropdownButton Label="Dropdown" Variant="ButtonVariant.primary" Icon="checkboxes">
+    <DropdownItem Label="Item 1" Checked="true"></DropdownItem>
+    <DropdownItem Label="Item 2"></DropdownItem>
+    <DropdownItem Label="Item 3" Disabled="true"></DropdownItem>
 </DropdownButton>
 ```
 
@@ -875,22 +921,29 @@ private void DrawerButtonClicked()
 
 ```razor
 <Button Id="triggerId">Open</Button>
-<Dropdown Trigger="triggerId">
-  <DropdownItem Label="Item 1"></DropdownItem>
+<Dropdown Trigger="@TriggerId">
+  <DropdownItem Label="Item 1" Icon="save-all"></DropdownItem>
   <DropdownItem Label="Item 2"></DropdownItem>
   <DropdownItem Label="Item 3"></DropdownItem>
 </Dropdown>
+
+@code {
+    private object TriggerId { get; } = "triggerId";
+}
 ```
 
 ## Dropdown Header
 
 ```razor
 <Button Id="triggerId">Open</Button>
-<Dropdown Trigger="triggerId">
+<Dropdown Trigger="@TriggerId">
   <DropdownHeader Label="Category"></DropdownHeader>
   <DropdownItem Label="Item 1"></DropdownItem>
   <DropdownItem Label="Item 2"></DropdownItem>
   <DropdownItem Label="Item 3"></DropdownItem>
+  <DropdownQuickActions>
+    <IconButton Icon="save-all" A11yLabel="Save"></IconButton>
+  </DropdownQuickActions>
 </Dropdown>
 ```
 
@@ -908,10 +961,10 @@ private void DrawerButtonClicked()
 ## Event list
 
 ```razor
-<EventList>
-    <EventListItem Id="event-list-item-1" Label="Item 1" ItemCLickEvent="(label) => DropdownButtonClicked(label)"></EventListItem>
-    <EventListItem Id="event-list-item-2" Label="Item 2" ItemCLickEvent="(label) => DropdownButtonClicked(label)"></EventListItem>
-    <EventListItem Id="event-list-item-3" Label="Item 3" ItemCLickEvent="(label) => DropdownButtonClicked(label)"></EventListItem>
+<EventList Animated="true" Compact="true" Chevron="true" ItemHeight="@("L")">
+    <EventListItem Id="event-list-item-1" ItemColor="color-success" Selected="true">Item 1</EventListItem>
+    <EventListItem Id="event-list-item-2" ItemColor="color-warning" Chevron="true">Item 2</EventListItem>
+    <EventListItem Id="event-list-item-3" Disabled="true">Item 3</EventListItem>
 </EventList>
 ```
 
@@ -926,7 +979,10 @@ private void DrawerButtonClicked()
 ## Flip
 
 ```razor
-<FlipTile>
+<FlipTile Id="flip-tile-example"
+          Height="@("auto")"
+          Width="@("auto")"
+          AriaLabelEyeIconButton="Toggle view">
     <div slot="header">Flip header</div>
 
     <div slot="footer">
@@ -990,37 +1046,92 @@ private void DrawerButtonClicked()
 ## Input
 
 ```razor
-<form class="needs-validation m-2">
-  <input
-    class="form-control"
-    defaultValue="Some example text"
-    placeholder="Enter text here"
-    type="text"
-  />
-</form>
+<Input Id="input-example"
+       Type="InputType.Email"
+       Label="Email"
+       Placeholder="name@example.com"
+       TextAlignment="TextAlignment.Start"
+       SuppressSubmitOnEnter="true"
+       ValueChangeEvent="OnInputValueChanged"
+       IxChangeEvent="OnInputChanged" />
+```
+
+## Number Input
+
+```razor
+<NumberInput Id="number-input-example"
+             Label="Quantity"
+             Value="10"
+             Min="0"
+             Max="100"
+             Step="1"
+             AllowEmptyValueChange="true"
+             ValueChangeEvent="OnNumberChanged"
+             IxChangeEvent="OnNumberCommitted" />
+```
+
+## Text Area
+
+```razor
+<TextArea Id="text-area-example"
+          Label="Description"
+          TextareaRows="4"
+          ResizeBehavior="TextAreaResizeBehavior.Vertical"
+          ValueChangeEvent="OnTextChanged"
+          IxChangeEvent="OnTextCommitted" />
+```
+
+## Custom Field
+
+```razor
+<CustomField Id="custom-field-example"
+             Label="Custom control"
+             HelperText="Choose an option">
+  <select aria-label="Custom control">
+    <option>Option one</option>
+  </select>
+</CustomField>
+```
+
+## Field Label
+
+```razor
+<FieldLabel HtmlFor="custom-control" Required="true">
+  Custom control
+</FieldLabel>
+```
+
+## Helper Text
+
+```razor
+<HelperText HtmlFor="custom-control"
+            HelperText="Choose an option"
+            InvalidText="This value is required" />
 ```
 
 ## Key Value List
 
 ```razor
+@using SiemensIXBlazor.Enums.KeyValue
+
 <KeyValueList>
   <KeyValue
     Label="Label"
-    LabelPosition="left"
+    LabelPosition="@KeyValueLabelPosition.left"
     Value="Value"
-  ></KeyValue>
+  />
 
   <KeyValue
     Label="Label"
-    LabelPosition="left"
+    LabelPosition="@KeyValueLabelPosition.left"
     Value="Value"
-  ></KeyValue>
+  />
 
   <KeyValue
     Label="Label"
-    LabelPosition="left"
+    LabelPosition="@KeyValueLabelPosition.left"
     Value="Value"
-  ></KeyValue>
+  />
 </KeyValueList>
 ```
 
@@ -1028,19 +1139,22 @@ private void DrawerButtonClicked()
 
 ```razor
 <KeyValue Label="Label">
-  <input
-    class="form-control"
-    placeholder="Enter text here"
-    type="text"
-    slot="custom-value"
-  />
+  <CustomValue>
+    <input class="form-control" placeholder="Enter text here" type="text" />
+  </CustomValue>
 </KeyValue>
 ```
 
 ## KPI
 
 ```razor
-<KPI Label="Motor speed" Value="Nominal"></KPI>
+<KPI Label="Motor speed"
+     Value="@("Nominal")"
+     Unit="rpm"
+     State="@KpiState.Warning"
+     AriaLabelWarningIcon="Motor speed warning" />
+
+<KPI Label="Temperature" Value="@(42)" Unit="°C" />
 ```
 
 ## Layout Grid
@@ -1048,14 +1162,27 @@ private void DrawerButtonClicked()
 ```razor
 <LayoutGrid>
   <Row>
-    <Col><ix-typography format="display">1</ix-typography></Col>
-    <Col><ix-typography format="display">2</ix-typography></Col>
-    <Col><ix-typography format="display">3</ix-typography></Col>
-    <Col><ix-typography format="display">4</ix-typography></Col>
-    <Col><ix-typography format="display">5</ix-typography></Col>
-    <Col><ix-typography format="display">6</ix-typography></Col>
+    <Col Size="ColumnSize._6">First column</Col>
+    <Col Size="ColumnSize._6">Second column</Col>
   </Row>
 </LayoutGrid>
+```
+
+## Layout Auto
+
+```razor
+<LayoutAuto Id="layout-auto-example" Layout="@Layout">
+  <Input Label="First name" />
+  <Input Label="Last name" />
+</LayoutAuto>
+
+@code {
+  private LayoutAutoItem[] Layout =
+  [
+    new() { MinWidth = "0", Columns = 1 },
+    new() { MinWidth = "48em", Columns = 2 }
+  ];
+}
 ```
 
 ## Link Button
@@ -1064,10 +1191,39 @@ private void DrawerButtonClicked()
 <LinkButton Url="https://ix.siemens.io/">Siemens IX</LinkButton>
 ```
 
+## Checkbox group
+
+```razor
+<CheckboxGroup Id="notification-options"
+               Label="Notifications"
+               HelperText="Choose any options"
+               Direction="CheckboxGroupDirection.Row">
+    <Checkbox Id="email-notifications" Label="Email" Value="email" />
+    <Checkbox Id="sms-notifications" Label="SMS" Value="sms" />
+    <Checkbox Id="push-notifications" Label="Push" Value="push" />
+</CheckboxGroup>
+
+## Radio group
+
+```razor
+<RadioGroup Id="storage-options"
+            Label="Storage options"
+            Direction="RadioGroupDirection.Row"
+            Value="512"
+            ValueChangeEvent="OnStorageChanged">
+    <Radio Label="256GB SSD storage" Value="256" Name="storage" />
+    <Radio Label="512GB SSD storage" Value="512" Name="storage" />
+    <Radio Label="1TB SSD storage" Value="1024" Name="storage" />
+</RadioGroup>
+```
+
 ## Message bar
 
 ```razor
-<MessageBar ClosedChangeEvent="MessageboxClosed" Id="messagebar1" Type="MessageBarType.Info">
+<MessageBar ClosedChangeEvent="MessageboxClosed"
+            CloseAnimationCompletedEvent="MessageboxCloseAnimationCompleted"
+            Id="messagebar1"
+            Type="MessageBarType.Info">
     <div class="d-flex align-items-center justify-content-between">
         Message text <ix-button>Action</ix-button>
     </div>
@@ -1076,35 +1232,68 @@ private void DrawerButtonClicked()
 
 ## Modal
 
-```razor
-<Modal @ref="_modal" Id="modal-example-template"
-    Centered="true"
-    DismissedEvent="OnModalDismissed">
-   <ModalHeader Id="modal-header">Message headline</ModalHeader>
-   <ModalContent Id="modal-content">Message text </ModalContent>
-   <ModalFooter Id="modal-footer">
-   <Button Variant="ButtonVariant.primary" ClickEvent="CloseModal"> Cancel </Button>
-   <Button ClickEvent="CloseModal">OK</Button>
-   </ModalFooter>
-</Modal>
-```
+Register the services once and render one `ModalHost` in the application layout:
 
 ```csharp
-private Modal? _modal;
+builder.Services.AddScoped<ModalService>();
+builder.Services.AddScoped<LoadingService>();
+```
+
+```razor
+<ModalHost />
+<Button ClickEvent="OpenModal">Open modal</Button>
+```
+
+```razor
+@inject ModalService ModalService
+
+@code {
+private ModalInstance<string>? _modal;
+
 private async Task OpenModal()
 {
-  if (_modal is not null)
-    await _modal.ShowAsync();
+  _modal = await ModalService.ShowAsync<string>(new ModalConfig
+  {
+    Centered = true,
+    Content = @<text>
+      <ModalHeader>Message headline</ModalHeader>
+      <ModalContent>Message text</ModalContent>
+      <ModalFooter>
+        <Button Variant="ButtonVariant.primary" ClickEvent="CloseModal">OK</Button>
+        <Button ClickEvent="DismissModal">Cancel</Button>
+      </ModalFooter>
+    </text>
+  });
 }
+
 private async Task CloseModal()
 {
   if (_modal is not null)
-    await _modal.HideAsync();
+    await _modal.CloseAsync("ok");
 }
-private void OnModalDismissed()
+
+private async Task DismissModal()
 {
-  Console.WriteLine("Modal was dismissed.");
+  if (_modal is not null)
+    await _modal.DismissAsync("cancel");
 }
+}
+```
+
+`ModalHeader`, `ModalContent`, and `ModalFooter` are composition wrappers. The
+`ix-modal` and internal `ix-modal-loading` elements are managed by the services;
+they are not instantiated directly.
+
+```csharp
+var loading = await LoadingService.ShowModalLoadingAsync(new ModalLoadingOptions
+{
+  Message = "Loading...",
+  Centered = true
+});
+
+await loading.UpdateAsync("Almost finished...");
+await loading.FinishAsync("Done");
+await loading.DisposeAsync();
 ```
 
 ## Pagination
@@ -1122,24 +1311,28 @@ private void OnModalDismissed()
 
 ```razor
 <PaneLayout Id="pane-layout"
-                Variant="@PaneVariant.floating"
-                Layout="full-horizontal"
-                Borderless="true">
-    <Pane Id="pane1" Heading="Pane Left" Slot="left" Size="33%">
-        <p>This is the left pane.</p>
-    </Pane>
-
-    <Pane Id="pane2"  Heading="Pane Top" Slot="top" Size="33%">
-        <p>This is the top pane.</p>
-    </Pane>
-
-    <Pane Id="pane3" Heading="Pane Right" Slot="right" Size="33%">
-        <p>This is the right pane.</p>
-    </Pane>
-
-    <Pane Id="pane4" Heading="Pane Bottom" Slot="bottom" Size="33%">
-        <p>This is the bottom pane.</p>
-    <Pane>
+             Variant="@PaneVariant.floating"
+             Layout="full-horizontal"
+             Borderless="true">
+    <Left>
+        <Pane Id="pane-left" Heading="Pane Left" Slot="left" Size="33%">
+            <p>This is the left pane.</p>
+        </Pane>
+    </Left>
+    <Top>
+        <div>This is the top content.</div>
+    </Top>
+    <Content>
+        <div>This is the main content.</div>
+    </Content>
+    <Bottom>
+        <div>This is the bottom content.</div>
+    </Bottom>
+    <Right>
+        <Pane Id="pane-right" Heading="Pane Right" Slot="right" Size="33%" NoPadding="true">
+            <p>This pane has no content padding.</p>
+        </Pane>
+    </Right>
 </PaneLayout>
 ```
 
@@ -1159,6 +1352,16 @@ private void OnModalDismissed()
                    HelperText="Please wait while we process your request"
                    Size="@ProgressIndicatorSize.lg"
                    Status="@ProgressIndicatorStatus.info" />
+
+<ProgressIndicator Value="75"
+                   Label="Processing data..."
+                   Size="@ProgressIndicatorSize.lg"
+                   Status="@ProgressIndicatorStatus.info">
+    <HelperTextContent>
+        <span>Custom helper text</span>
+    </HelperTextContent>
+    <span>75%</span>
+</ProgressIndicator>
 ```
 
 ## Radio button
@@ -1179,19 +1382,42 @@ private void OnModalDismissed()
 ## Select
 
 ```razor
-<Select ItemSelectionChangeEvent=SelectItemSelectedChanged
-AddItemEvent="SelectItemAdded" Mode="SelectMode.Single" SelectedIndices="2" Id="select1">
-    <SelectItem Id="selectItem1" Label="Item 1" Value="1"></SelectItem>
-    <SelectItem Id="selectItem2" Label="Item 2" Value="2"></SelectItem>
+<Select Id="select1"
+        Mode="SelectMode.Multiple"
+        Value="selectedValues"
+        ValueChangeEvent="OnValuesChanged"
+        I18nPlaceholder="Select a value">
+    <SelectItem Id="selectItem1" Label="Item 1" Value="1" />
+    <SelectItem Id="selectItem2" Label="Item 2" Value="2" Disabled="true" />
 </Select>
+
+@code {
+    private string[] selectedValues = ["1"];
+
+    private void OnValuesChanged(object? value)
+    {
+        selectedValues = value as string[] ?? [];
+    }
+}
 ```
 
 ## Slider
 
 ```razor
-<Slider Id="slider-demo" Min="0" Max="50" Step="5" Value="0" Marker="[0, 10, 20, 30, 40, 50]">
-    <span slot="label-start">0</span>
-    <span slot="label-end">50</span>
+<Slider Id="slider-demo"
+        Label="Range"
+        HelperText="Select a value"
+        Min="0"
+        Max="50"
+        Step="5"
+        Value="0"
+        Marker="[0, 10, 20, 30, 40, 50]">
+    <LabelStart>
+        <span>0</span>
+    </LabelStart>
+    <LabelEnd>
+        <span>50</span>
+    </LabelEnd>
 </Slider>
 ```
 
@@ -1208,28 +1434,30 @@ AddItemEvent="SelectItemAdded" Mode="SelectMode.Single" SelectedIndices="2" Id="
              Label="Split Button"
              SplitIcon="chevron-down-small"
              ButtonClickedEvent="SplitButtonClicked">
+    <DropdownItem Label="Save"></DropdownItem>
+    <DropdownItem Label="Save as"></DropdownItem>
 </SplitButton>
 ```
 
 ## Tabs
 
 ```razor
-<Tabs Id="tabs-demo" ActiveTabKey="@_activeTabKey" TabChangedEvent="OnTabChanged">
-    <TabItem TabKey="tab-1" Label="Tab 1" />
-    <TabItem TabKey="tab-2" Label="Tab 2" />
-    <TabItem TabKey="tab-3" Label="Tab 3" />
+<Tabs Id="TabsId" ActiveTabKey="@_activeTabKey" TabChangeEvent="@OnTabChange">
+    <TabItem TabKey="overview" Label="Overview" />
+    <TabItem TabKey="details" Label="Details" Counter="2" />
+    <TabItem TabKey="history" Label="History" Closable="true" />
 </Tabs>
-@if (_activeTabKey == "tab-1")
+@if (_activeTabKey == "overview")
 {
-  <h5>Content of Tab 1</h5>
+  <h5>Content of the overview tab</h5>
 }
-else if (_activeTabKey == "tab-2")
+else if (_activeTabKey == "details")
 {
-  <h5>Content of Tab 2</h5>
+  <h5>Content of the details tab</h5>
 }
-else if (_activeTabKey == "tab-3")
+else if (_activeTabKey == "history")
 {
-  <h5>Content of Tab 3</h5>
+  <h5>Content of the history tab</h5>
 }
 
 @code {
@@ -1244,13 +1472,13 @@ else if (_activeTabKey == "tab-3")
 ```
 
 ```csharp
- private int _SelectedTab = 0;
+private string? _activeTabKey = "overview";
 
-private async Task OnChangeTab(int index)
+private Task OnTabChange(string? tabKey)
 {
-    _SelectedTab = index;
+    _activeTabKey = tabKey;
+    return Task.CompletedTask;
 }
-
 ```
 
 ## Text area
@@ -1284,45 +1512,58 @@ private async Task OnChangeTab(int index)
 ## Toast
 
 ```razor
-<Toast @ref="toast"></Toast>
+<ToastContainer @ref="toastContainer" Id="toast-container" Position="ToastPosition.TopRight" />
+
+<Toast Id="toast"
+       Type="ToastType.Success"
+       ToastTitle="Changes applied"
+       PreventAutoClose="true">
+    <ChildContent>Your settings were saved successfully.</ChildContent>
+    <ActionContent>
+        <ix-button variant="tertiary">Undo</ix-button>
+    </ActionContent>
+</Toast>
 ```
 
 ```csharp
-private Toast toast;
+private ToastContainer toastContainer = default!;
+private ToastResult? toastResult;
 
-ToastConfig config = new ToastConfig()
-{
-    Message = "Test message",
-    Position = ToastPosition.BottomRight,
-    Type = "info"
-};
-
-await toast.ShowToast(config);
-
-ToastConfig configWithAction = new ToastConfig()
+toastResult = await toastContainer.ShowToast(new ToastConfig
 {
     Title = "Changes applied",
-    Message = "<div>Your settings were saved successfully.</div>",
-    Action = "<ix-button variant=\"tertiary\" icon=\"undo\">Undo</ix-button>",
-    Type = "success",
-    AutoClose = true,
-    AutoCloseDelay = 5000
-};
+    Message = "Your settings were saved successfully.",
+    Type = ToastType.Success,
+    AutoClose = false
+});
 
-await toast.ShowToast(configWithAction);
+toastResult.OnClose += (_, _) => Console.WriteLine("Toast closed");
+
+await toastResult.PauseAsync();
+await toastResult.ResumeAsync();
+await toastResult.CloseAsync();
 ```
 
 ## Toggle Buttons
 
 ```razor
-<ToggleButton>Normal</ToggleButton>
-<ToggleButton Id="toggle-btn-1" Pressed="true">Pressed</ToggleButton>
+<ToggleButton Id="toggle-btn-1" Variant="ToggleButtonVariant.subtle_secondary">
+    Normal
+</ToggleButton>
+<ToggleButton Id="toggle-btn-2" Pressed="true" Icon="star">
+    Pressed
+</ToggleButton>
 
-<IconToggleButton Outline="true" Icon="checkboxes"></IconToggleButton>
+<IconToggleButton Icon="checkboxes"
+                   Variant="ButtonVariant.subtle_secondary"
+                   Size="IconButtonSize._16"
+                   Pressed="true"
+                   aria-label="Toggle checkboxes">
+</IconToggleButton>
 <IconToggleButton
     Outline="true"
     Icon="checkboxes"
-    Pressed="true"
+    aria-label="Toggle checkboxes outline"
 ></IconToggleButton>
 ```
 
@@ -1359,11 +1600,17 @@ await toast.ShowToast(configWithAction);
 
 ```razor
 <div style="height: 8rem; width: 100%">
-    <Tree Id="tree-1" Root="root" ContextChangedEvent="TreeContextChangeEvent"
-    NodeClickedEvent="TreeNodeClicked"
-    NodeRemovedEvent="NodeRemoved"
-    NodeToggledEvent="TreeNodeToggled"
-    @ref="tree"></Tree>
+    <Tree Id="tree-1"
+          Root="root"
+          Model="@treeNodes"
+          Context="@treeContext"
+          ToggleOnItemClick="true"
+          ContextChangedEvent="TreeContextChangeEvent"
+          NodeClickedEvent="TreeNodeClicked"
+          NodeRemovedEvent="NodeRemoved"
+          NodeToggledEvent="TreeNodeToggled"
+          @ref="tree">
+    </Tree>
 </div>
 ```
 
@@ -1398,6 +1645,7 @@ treeNodes.Add("sample-child-1", new TreeNode()
         Name = "Sample Child 1",
         Icon = "star"
     },
+    Disabled = false,
     HasChildren = false,
     Children = new List<string>() {}
 });
@@ -1411,10 +1659,29 @@ treeNodes.Add("sample-child-2", new TreeNode()
         },
         HasChildren = false,
         Children = new List<string>() { }
-    });
+});
 
+Dictionary<string, TreeContextNode> treeContext = new()
+{
+    ["sample"] = new TreeContextNode { IsExpanded = true, IsSelected = false },
+    ["sample-child-1"] = new TreeContextNode { IsExpanded = false, IsSelected = true }
+};
 
-tree.TreeModel = treeNodes;
+// Update data through the component parameters, or call the public methods:
+await tree.MarkItemsAsDirty("sample-child-1");
+await tree.RefreshTree(new RefreshTreeOptions { Force = true });
+```
+
+Use `TreeItem` for a standalone official tree item, including custom content:
+
+```razor
+<TreeItem Text="Custom item"
+          HasChildren="true"
+          Context="@treeItemContext"
+          ToggleEvent="OnTreeItemToggle"
+          ItemClickEvent="OnTreeItemClick">
+    Custom content
+</TreeItem>
 ```
 
 ## Typography
@@ -1428,6 +1695,8 @@ tree.TreeModel = treeNodes;
 
 ```razor
 <Upload Id="file-upload-test"
+        DirectoryUpload="true"
+        State="UploadFileState.SELECT_FILE"
         FileChangedEvent="(data) => FileChanged(data)">
 </Upload>
 ```
@@ -1436,7 +1705,12 @@ tree.TreeModel = treeNodes;
 
 ```razor
 <WorkflowSteps Id="wf-steps" StepSelectedEvent="(index) => WfSelectedEvent(index)">
-    <WorkflowStep Status="WorkflowStatus.Done">Step 1</WorkflowStep>
+    <WorkflowStep Status="WorkflowStatus.Done">
+        <CustomIcon>
+            <ix-icon name="star"></ix-icon>
+        </CustomIcon>
+        <ChildContent>Step 1</ChildContent>
+    </WorkflowStep>
     <WorkflowStep Status="WorkflowStatus.Success">Step 2</WorkflowStep>
     <WorkflowStep Status="WorkflowStatus.Open">Step 3</WorkflowStep>
     <WorkflowStep Status="WorkflowStatus.Warning">Step 4</WorkflowStep>

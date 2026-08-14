@@ -1,3 +1,12 @@
+// -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2026 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+//  -----------------------------------------------------------------------
+
 using Bunit;
 using Microsoft.Extensions.DependencyInjection;
 using SiemensIXBlazor.Components.Modal;
@@ -13,7 +22,6 @@ namespace SiemensIXBlazor.Tests.Modal
         {
             // Arrange & Act
             var component = RenderComponent<ModalContent>(parameters => parameters
-                .Add(p => p.Id, "test-modal-content")
                 .Add(p => p.Class, "custom-class")
                 .Add(p => p.Style, "color: red;")
             );
@@ -21,7 +29,6 @@ namespace SiemensIXBlazor.Tests.Modal
             // Assert
             var element = component.Find("ix-modal-content");
             Assert.NotNull(element);
-            Assert.Equal("test-modal-content", element.GetAttribute("id"));
             Assert.Contains("custom-class", element.GetAttribute("class") ?? "");
             Assert.Equal("color: red;", element.GetAttribute("style"));
         }

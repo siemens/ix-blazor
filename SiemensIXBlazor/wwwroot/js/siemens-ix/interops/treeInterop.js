@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // SPDX-FileCopyrightText: 2024 Siemens AG
 //
 // SPDX-License-Identifier: MIT
@@ -7,78 +7,85 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
-
 function getElementOrThrow(id) {
-  const el = document.getElementById(id);
-  if (!el) throw new Error(`Element with ID ${id} not found`);
-  return el;
+  const element = document.getElementById(id);
+  if (!element) {
+    throw new Error(`Element with ID ${id} not found`);
+  }
+  return element;
 }
 
 function createElement(tag, props, children = []) {
-  const el = document.createElement(tag);
-  Object.assign(el, props);
-  children.forEach(child => el.appendChild(child));
-  return el;
+  const element = document.createElement(tag);
+  Object.assign(element, props);
+  children.forEach((child) => element.appendChild(child));
+  return element;
 }
 
 export function setTreeModel(id, treeModel) {
-  try {
-    const element = getElementOrThrow(id);
-    element.renderItem = (_, item, __, context, update) => {
-      const { icon: iconName, name: itemName } = item.data || {};
-      const children = [];
+  const element = getElementOrThrow(id);
+  const model = JSON.parse(treeModel);
 
-      if (iconName) {
-        children.push(createElement('ix-icon', {
-          name: iconName,
-          style: 'margin-right: 0.5rem'
-        }));
-      }
+  element.renderItem = (_, item, __, context, update) => {
+    const { icon: iconName, name: itemName } = item.data || {};
+    const children = [];
 
-      let nameEl;
-      if (itemName) {
-        nameEl = createElement('span', { innerText: itemName });
-        children.push(nameEl);
-      }
+    if (iconName) {
+      children.push(createElement('ix-icon', {
+        name: iconName,
+        style: 'margin-right: 0.5rem',
+      }));
+    }
 
-      const el = createElement('ix-tree-item', {
-        hasChildren: item.hasChildren,
-        context: context[item.id]
-      }, children);
+    const itemContext = context[item.id];
+    const treeItem = createElement('ix-tree-item', {
+      text: itemName,
+      hasChildren: item.hasChildren,
+      context: itemContext,
+      disabled: Boolean(item.disabled || itemContext?.isDisabled),
+    }, children);
 
-      update(updateTreeItem => {
-        const uData = updateTreeItem.data || {};
-        if (nameEl && uData.name) nameEl.innerText = uData.name;
-      });
+    update((updatedItem) => {
+      treeItem.text = updatedItem.data?.name;
+      treeItem.disabled = Boolean(updatedItem.disabled);
+    });
 
-      return el;
-    };
-    element.model = JSON.parse(treeModel);
-  } catch (error) {
-    console.error('Failed to set tree model:', error);
-  }
+    return treeItem;
+  };
+
+  element.model = model;
 }
 
 export function setTreeContext(id, treeContext) {
-  try {
-    const element = getElementOrThrow(id);
-    element.context = JSON.parse(treeContext);
-  } catch (error) {
-    console.error('Failed to set tree context:', error);
+  const element = getElementOrThrow(id);
+  element.context = JSON.parse(treeContext);
+}
+
+export function setToggleOnItemClick(id, value) {
+  const element = getElementOrThrow(id);
+  element.toggleOnItemClick = value;
+}
+
+export function setTreeItemContext(id, context) {
+  const element = getElementOrThrow(id);
+  element.context = context ? JSON.parse(context) : undefined;
+}
+
+export function setTreeItemProperty(id, propertyName, propertyValue) {
+  const element = getElementOrThrow(id);
+  element[propertyName] = propertyValue;
+}
+
+export async function refreshTree(id, options = { force: false }) {
+  const element = getElementOrThrow(id);
+  if (typeof element.refreshTree === 'function') {
+    await element.refreshTree(options);
   }
 }
 
-export function markItemAsDirty(treeId, itemIdentifiers) {
-  console.log('markItemAsDirty called:', treeId, itemIdentifiers);
-  const treeElement = document.getElementById(treeId);
-  if (!treeElement) {
-    console.warn(`Tree element with id '${treeId}' not found`);
-    return;
-  }
-  if (typeof treeElement.markItemsAsDirty === 'function') {
-    treeElement.markItemsAsDirty(itemIdentifiers);
-    console.log('Items marked as dirty:', itemIdentifiers);
-  } else {
-    console.warn('markItemsAsDirty method not available on tree element');
+export async function markItemsAsDirty(id, itemIdentifiers) {
+  const element = document.getElementById(id);
+  if (element && typeof element.markItemsAsDirty === 'function') {
+    await element.markItemsAsDirty(itemIdentifiers);
   }
 }

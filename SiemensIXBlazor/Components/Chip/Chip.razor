@@ -25,9 +25,10 @@
          center-content="@CenterContent"
          chip-color="@ChipColor" 
          icon="@Icon" 
+         aria-label-icon="@AriaLabelIcon"
          variant="@(EnumParser<ChipVariant>.EnumToString(Variant))"
          style="@Style" 
          class="@Class" 
-         tooltip-text="@TooltipText">
+         tooltip-text="@TooltipTextAttribute">
      @ChildContent
 </ix-chip>

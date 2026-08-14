@@ -7,17 +7,18 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
-using Newtonsoft.Json;
+using SiemensIXBlazor.Enums.CategoryFilter;
+using System.Text.Json.Serialization;
 
 namespace SiemensIXBlazor.Objects
 {
     public class FilterStateCategory
     {
-        [JsonProperty("id")]
-        public string? Id { get; set; }
-        [JsonProperty("value")]
-        public string? Value { get; set; }
-        [JsonProperty("operator")]
-        public string? Operator { get; set; }
+        [JsonPropertyName("id")]
+        public string Id { get; set; } = string.Empty;
+        [JsonPropertyName("value")]
+        public string Value { get; set; } = string.Empty;
+        [JsonPropertyName("operator")]
+        public LogicalFilterOperator Operator { get; set; } = LogicalFilterOperator.Equal;
     }
 }

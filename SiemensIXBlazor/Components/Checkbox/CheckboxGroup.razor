@@ -1,22 +1,22 @@
 @using Microsoft.JSInterop;
 @using SiemensIXBlazor.Components
+@using SiemensIXBlazor.Enums.Checkbox
+@using SiemensIXBlazor.Helpers
 @inherits IXBaseComponent
 @inject IJSRuntime JSRuntime
 @namespace SiemensIXBlazor.Components.Checkbox
 
-<CascadingValue Value="this">
-    <ix-checkbox-group @attributes="UserAttributes"
-                       class="@Class"
-                       style="@Style"
-                       id="@Id"
-                       label="@Label"
-                       info-text="@InfoText"
-                       warning-text="@WarningText"
-                       invalid-text="@InvalidText"
-                       valid-text="@ValidText"
-                       helper-text="@HelperText"
-                       direction="@Direction"
-                       show-text-as-tooltip="@ShowTextAsTooltip">
-        @ChildContent
-    </ix-checkbox-group>
-</CascadingValue>
+<ix-checkbox-group @attributes="UserAttributes"
+                   class="@Class"
+                   style="@Style"
+                   id="@Id"
+                   label="@Label"
+                   info-text="@InfoText"
+                   warning-text="@WarningText"
+                   invalid-text="@InvalidText"
+                   valid-text="@ValidText"
+                   helper-text="@HelperText"
+                   direction="@(EnumParser<CheckboxGroupDirection>.EnumToString(Direction))"
+                   show-text-as-tooltip="@ShowTextAsTooltip">
+    @ChildContent
+</ix-checkbox-group>

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using SiemensIXBlazor.Interops;
 using SiemensIXBlazor.Objects;
+using SiemensIXBlazor.Enums.Upload;
 using System.Text.Json;
 
 namespace SiemensIXBlazor.Components
@@ -26,15 +27,19 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string I18nUploadDisabled { get; set; } = "File upload currently not possible.";
         [Parameter]
-        public string I18nUploadFile { get; set; } = "Upload file…";
+        public string? I18nUploadFile { get; set; }
         [Parameter]
-        public string LoadingText { get; set; } = "Checking files…";
+        public bool DirectoryUpload { get; set; } = false;
+        [Parameter]
+        public UploadFileState State { get; set; } = UploadFileState.SELECT_FILE;
+        [Parameter]
+        public string? LoadingText { get; set; }
         [Parameter]
         public bool Multiline { get; set; } = false;
         [Parameter]
         public bool Multiple { get; set; } = false;
         [Parameter]
-        public string SelectFileText { get; set; } = "+ Drag files here or…";
+        public string? SelectFileText { get; set; }
         [Parameter]
         public string UploadFailedText { get; set; } = "Upload failed. Please try again.";
         [Parameter]
@@ -42,7 +47,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public EventCallback<List<IXFile>> FileChangedEvent { get; set; }
 
-        FileUploadInterop _fileUploadInterop;
+        private FileUploadInterop? _fileUploadInterop;
 
         protected async override Task OnAfterRenderAsync(bool firstRender)
         {
@@ -55,25 +60,31 @@ namespace SiemensIXBlazor.Components
         }
 
         [JSInvokable]
-        public async void FileChanged(object[] files)
+        public async Task FileChanged(JsonElement[] files)
         {
             var ixFiles = ParseFileObject(files);
             await FileChangedEvent.InvokeAsync(ixFiles);
         }
 
-        private static List<IXFile> ParseFileObject(object[] fileObjects)
+        public async Task SetFilesToUploadAsync(object files)
+        {
+            _fileUploadInterop ??= new(JSRuntime);
+            await _fileUploadInterop.SetFilesToUpload(Id, files);
+        }
+
+        private static List<IXFile> ParseFileObject(IEnumerable<JsonElement> fileObjects)
         {
             List<IXFile> ixFiles = new();
 
             foreach (var fileObj in fileObjects)
             {
-                var fileData = (JsonElement)fileObj;
+                var fileData = fileObj;
 
                 // Extract file properties and base64 data
-                string fileName = fileData.GetProperty("name").GetString();
+                string fileName = fileData.GetProperty("name").GetString() ?? string.Empty;
                 long fileSize = fileData.GetProperty("size").GetInt64();
-                string fileType = fileData.GetProperty("type").GetString();
-                string base64Data = fileData.GetProperty("data").GetString();
+                string fileType = fileData.GetProperty("type").GetString() ?? string.Empty;
+                string base64Data = fileData.GetProperty("data").GetString() ?? string.Empty;
 
                 // Create a custom implementation of IBrowserFile
                 IXFile ixFile = new(fileName, fileSize, fileType, base64Data);

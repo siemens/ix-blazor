@@ -14,8 +14,8 @@ namespace SiemensIXBlazor.Objects.Pane
     public  class PaneVariantChangedEventResponse
     {
         [JsonPropertyName("slot")]
-        public string Slot { get; set; }
+        public string Slot { get; set; } = string.Empty;
         [JsonPropertyName("variant")]
-        public string Variant { get; set; }
+        public string Variant { get; set; } = string.Empty;
     }
 }

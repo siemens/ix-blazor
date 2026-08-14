@@ -11,6 +11,7 @@ using System;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using SiemensIXBlazor.Interops;
+using System.Text.Json;
 
 namespace SiemensIXBlazor.Components
 {
@@ -22,6 +23,8 @@ namespace SiemensIXBlazor.Components
 		public string? Label { get; set; }
 		[Parameter]
 		public bool Selected { get; set; } = false;
+		[Parameter]
+		public bool Disabled { get; set; } = false;
 		[Parameter]
 		public string? Value { get; set; }
 		[Parameter]
@@ -40,10 +43,14 @@ namespace SiemensIXBlazor.Components
         }
 
         [JSInvokable]
-        public async void ItemClicked(string label)
+        public async Task ItemClicked(JsonElement label)
         {
-            await ItemClickEvent.InvokeAsync(label);
+            var value = label.ValueKind == JsonValueKind.String
+                ? label.GetString()
+                : label.TryGetProperty("value", out var property) && property.ValueKind == JsonValueKind.String
+                    ? property.GetString()
+                    : string.Empty;
+            await ItemClickEvent.InvokeAsync(value ?? string.Empty);
         }
     }
 }
-

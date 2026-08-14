@@ -23,12 +23,23 @@ public class SliderTests : TestContextBase
     {
         // Arrange
         var id = "slider1";
-        var error = "error message";
+        var helperText = "Select a value";
+        var label = "Slider label";
+        var invalidText = "Invalid value";
+        var infoText = "Additional information";
+        var warningText = "Warning value";
+        var validText = "Valid value";
 
         var cut = RenderComponent<Slider>(parameters => parameters
             .Add(p => p.Id, id)
             .Add(p => p.Value, 42)
-            .Add<dynamic>(p => p.Error, error)
+            .Add(p => p.HelperText, helperText)
+            .Add(p => p.Label, label)
+            .Add(p => p.InvalidText, invalidText)
+            .Add(p => p.InfoText, infoText)
+            .Add(p => p.WarningText, warningText)
+            .Add(p => p.ValidText, validText)
+            .Add(p => p.ShowTextAsTooltip, true)
             .Add(p => p.Max, 100)
             .Add(p => p.Min, 0)
             .Add(p => p.Step, 1)
@@ -42,13 +53,31 @@ public class SliderTests : TestContextBase
                 id=""{id}"" 
                 value=""42"" 
                 disabled 
-                error=""{error}"" 
+                helper-text=""{helperText}""
+                label=""{label}""
+                invalid-text=""{invalidText}""
+                info-text=""{infoText}""
+                warning-text=""{warningText}""
+                valid-text=""{validText}""
+                show-text-as-tooltip
                 max=""100"" 
                 min=""0"" 
                 step=""1"" 
                 trace 
                 trace-reference=""5"">
             </ix-slider>");
+    }
+
+    [Fact]
+    public void Slider_RendersTypedLabelSlots()
+    {
+        var cut = RenderComponent<Slider>(parameters => parameters
+            .Add(p => p.Id, "slider-slots")
+            .Add(p => p.LabelStart, (RenderFragment)(builder => builder.AddContent(0, "Minimum")))
+            .Add(p => p.LabelEnd, (RenderFragment)(builder => builder.AddContent(0, "Maximum"))));
+
+        cut.MarkupMatches(@"
+            <ix-slider id=""slider-slots"" value=""0"" max=""100"" min=""0"" step=""1"" trace-reference=""0""><div slot=""label-start"">Minimum</div><div slot=""label-end"">Maximum</div></ix-slider>");
     }
 
     [Fact]

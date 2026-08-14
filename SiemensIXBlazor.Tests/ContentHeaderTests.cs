@@ -50,6 +50,34 @@ namespace SiemensIXBlazor.Tests
         }
 
         [Fact]
+        public void ContentHeaderRendersHeaderSlot()
+        {
+            // Arrange
+            var expectedHeaderContent = "Header content";
+
+            // Act
+            var cut = RenderComponent<ContentHeader>(parameters => parameters
+                .Add(p => p.HeaderContent, builder =>
+                {
+                    builder.AddContent(0, expectedHeaderContent);
+                }));
+
+            // Assert
+            Assert.Contains("slot=\"header\"", cut.Markup);
+            Assert.Contains(expectedHeaderContent, cut.Markup);
+        }
+
+        [Fact]
+        public void ContentHeaderDoesNotRenderHeaderSlotWhenNull()
+        {
+            // Arrange & Act
+            var cut = RenderComponent<ContentHeader>();
+
+            // Assert
+            Assert.DoesNotContain("slot=\"header\"", cut.Markup);
+        }
+
+        [Fact]
         public void BackButtonClickedEventTriggeredCorrectly()
         {
             // Arrange

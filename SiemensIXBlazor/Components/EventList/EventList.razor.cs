@@ -18,10 +18,10 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Animated { get; set; } = false;
         [Parameter]
-        public bool? Chevron { get; set; }
+        public bool Chevron { get; set; } = false;
         [Parameter]
         public bool Compact { get; set; } = false;
         [Parameter]
-        public string ItemHeight { get; set; } = "S";
+        public object ItemHeight { get; set; } = "S";
     }
 }

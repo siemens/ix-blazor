@@ -17,13 +17,9 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string Id { get; set; } = string.Empty;
         [Parameter]
-        public string DataToggle { get; set; } = string.Empty;
-        [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter]
         public ButtonVariant Variant { get; set; } = ButtonVariant.primary;
-        [Parameter]
-        public string? AriaLabelButton { get; set; }
         [Parameter]
         public bool Disabled { get; set; } = false;
         [Parameter]
@@ -33,19 +29,21 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public bool Loading { get; set; } = false;
         [Parameter]
-        public bool Selected { get; set; } = false;
-        [Parameter]
         public ButtonType Type { get; set; } = ButtonType.Button;
-        [Parameter]
-        public string DataTooltip { get; set; } = string.Empty;
         [Parameter]
         public string? Form { get; set; }
         [Parameter]
+        public string? Href { get; set; }
+        [Parameter]
+        public ButtonTarget Target { get; set; } = ButtonTarget._self;
+        [Parameter]
+        public string? Rel { get; set; }
+        [Parameter]
         public EventCallback ClickEvent { get; set; }
 
-        private void Clicked()
+        private Task Clicked()
         {
-            ClickEvent.InvokeAsync();
+            return ClickEvent.InvokeAsync();
         }
     }
 }

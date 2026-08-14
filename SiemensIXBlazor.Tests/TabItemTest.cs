@@ -7,8 +7,11 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
+using System.Text.Json;
 using Bunit;
+using Microsoft.AspNetCore.Components;
 using SiemensIXBlazor.Components.TabItem;
+using SiemensIXBlazor.Objects.Tabs;
 using Xunit;
 
 namespace SiemensIXBlazor.Tests
@@ -16,164 +19,80 @@ namespace SiemensIXBlazor.Tests
     public class TabItemTest : TestContextBase
     {
         [Fact]
-        public void TabItem_Should_Render_With_Default_Properties()
+        public void TabItemRendersOfficialDefaults()
         {
-            // Arrange & Act
-            var component = RenderComponent<TabItem>();
+            var component = RenderComponent<TabItem>(parameters => parameters
+                .Add(p => p.TabKey, "tab-1"));
 
-            // Assert
             var tabItem = component.Find("ix-tab-item");
-            Assert.NotNull(tabItem);
+            Assert.Equal("tab-1", tabItem.GetAttribute("tab-key"));
+            Assert.Equal("Close tab", tabItem.GetAttribute("aria-label-close-button"));
             Assert.Null(tabItem.GetAttribute("disabled"));
             Assert.Null(tabItem.GetAttribute("selected"));
+            Assert.Null(tabItem.GetAttribute("closable"));
             Assert.Null(tabItem.GetAttribute("counter"));
         }
 
         [Fact]
-        public void TabItem_Should_Render_With_Id()
+        public void TabItemRendersPublicPropertiesAndContent()
         {
-            // Arrange & Act
             var component = RenderComponent<TabItem>(parameters => parameters
                 .Add(p => p.Id, "my-tab")
-            );
+                .Add(p => p.TabKey, "tab-1")
+                .Add(p => p.Class, "custom-class")
+                .Add(p => p.Style, "color: red;")
+                .Add(p => p.Label, "Overview")
+                .Add(p => p.Icon, "star")
+                .Add(p => p.Counter, 5)
+                .Add(p => p.Disabled, true)
+                .Add(p => p.Selected, true)
+                .Add(p => p.Closable, true)
+                .Add(p => p.AriaLabelCloseButton, "Close overview")
+                .AddChildContent("<span>Content</span>"));
 
-            // Assert
             var tabItem = component.Find("ix-tab-item");
             Assert.Equal("my-tab", tabItem.GetAttribute("id"));
-        }
-
-        [Fact]
-        public void TabItem_Should_Render_TabKey_And_Label()
-        {
-            // Arrange & Act
-            var component = RenderComponent<TabItem>(parameters => parameters
-                .Add(p => p.TabKey, "overview")
-                .Add(p => p.Label, "Overview")
-            );
-
-            // Assert
-            var tabItem = component.Find("ix-tab-item");
-            Assert.Equal("overview", tabItem.GetAttribute("tab-key"));
-            Assert.Equal("Overview", tabItem.GetAttribute("label"));
-        }
-
-        [Fact]
-        public void TabItem_Should_Render_Icon_Attribute()
-        {
-            // Arrange & Act
-            var component = RenderComponent<TabItem>(parameters => parameters
-                .Add(p => p.Icon, "star")
-            );
-
-            // Assert
-            var tabItem = component.Find("ix-tab-item");
-            Assert.Equal("star", tabItem.GetAttribute("icon"));
-        }
-
-        [Fact]
-        public void TabItem_Should_Render_Closable_And_CloseLabel()
-        {
-            // Arrange & Act
-            var component = RenderComponent<TabItem>(parameters => parameters
-                .Add(p => p.Closable, true)
-                .Add(p => p.AriaLabelCloseButton, "Close this tab")
-            );
-
-            // Assert
-            var tabItem = component.Find("ix-tab-item");
-            Assert.Equal("", tabItem.GetAttribute("closable"));
-            Assert.Equal("Close this tab", tabItem.GetAttribute("aria-label-close-button"));
-        }
-
-        [Fact]
-        public void TabItem_Should_Render_With_Disabled()
-        {
-            // Arrange & Act
-            var component = RenderComponent<TabItem>(parameters => parameters
-                .Add(p => p.Disabled, true)
-            );
-
-            // Assert
-            var tabItem = component.Find("ix-tab-item");
-            Assert.Equal("", tabItem.GetAttribute("disabled"));
-        }
-
-        [Fact]
-        public void TabItem_Should_Render_With_Selected()
-        {
-            // Arrange & Act
-            var component = RenderComponent<TabItem>(parameters => parameters
-                .Add(p => p.Selected, true)
-            );
-
-            // Assert
-            var tabItem = component.Find("ix-tab-item");
-            Assert.Equal("", tabItem.GetAttribute("selected"));
-        }
-
-        [Fact]
-        public void TabItem_Should_Render_With_Counter()
-        {
-            // Arrange & Act
-            var component = RenderComponent<TabItem>(parameters => parameters
-                .Add(p => p.Counter, 5)
-            );
-
-            // Assert
-            var tabItem = component.Find("ix-tab-item");
-            Assert.Equal("5", tabItem.GetAttribute("counter"));
-        }
-
-        [Fact]
-        public void TabItem_Should_Render_With_Class()
-        {
-            // Arrange & Act
-            var component = RenderComponent<TabItem>(parameters => parameters
-                .Add(p => p.Class, "custom-class")
-            );
-
-            // Assert
-            var tabItem = component.Find("ix-tab-item");
             Assert.Equal("custom-class", tabItem.GetAttribute("class"));
-        }
-
-        [Fact]
-        public void TabItem_Should_Render_With_Style()
-        {
-            // Arrange & Act
-            var component = RenderComponent<TabItem>(parameters => parameters
-                .Add(p => p.Style, "color: red;")
-            );
-
-            // Assert
-            var tabItem = component.Find("ix-tab-item");
             Assert.Equal("color: red;", tabItem.GetAttribute("style"));
-        }
-
-        [Fact]
-        public void TabItem_Should_Render_ChildContent()
-        {
-            // Arrange & Act
-            var component = RenderComponent<TabItem>(parameters => parameters
-                .AddChildContent("<span>Content</span>")
-            );
-
-            // Assert
-            var tabItem = component.Find("ix-tab-item");
+            Assert.Equal("Overview", tabItem.GetAttribute("label"));
+            Assert.Equal("star", tabItem.GetAttribute("icon"));
+            Assert.Equal("5", tabItem.GetAttribute("counter"));
+            Assert.Equal("", tabItem.GetAttribute("disabled"));
+            Assert.Equal("", tabItem.GetAttribute("selected"));
+            Assert.Equal("", tabItem.GetAttribute("closable"));
+            Assert.Equal("Close overview", tabItem.GetAttribute("aria-label-close-button"));
             Assert.Contains("Content", tabItem.InnerHtml);
         }
 
         [Fact]
-        public void TabItem_Should_Not_Render_IxIcon_When_No_Icon_Set()
+        public async Task TabClickEventDeserializesTypedDetail()
         {
-            // Arrange & Act
+            TabClickDetail? clicked = null;
             var component = RenderComponent<TabItem>(parameters => parameters
-                .Add(p => p.Label, "No Icon Tab")
-            );
+                .Add(p => p.TabKey, "tab-1")
+                .Add(p => p.TabClickEvent, EventCallback.Factory.Create<TabClickDetail>(this, value => clicked = value)));
 
-            // Assert
-            var tabItem = component.Find("ix-tab-item");
-            Assert.Null(tabItem.GetAttribute("icon"));
+            using var document = JsonDocument.Parse("""{"tabKey":"tab-1","nativeEvent":{}}""");
+            await component.Instance.TabClicked(document.RootElement.Clone());
+
+            Assert.NotNull(clicked);
+            Assert.Equal("tab-1", clicked!.TabKey);
+            Assert.Equal(JsonValueKind.Object, clicked.NativeEvent.ValueKind);
+        }
+
+        [Fact]
+        public async Task TabCloseEventDeserializesTypedDetail()
+        {
+            TabClickDetail? closed = null;
+            var component = RenderComponent<TabItem>(parameters => parameters
+                .Add(p => p.TabKey, "tab-1")
+                .Add(p => p.TabCloseEvent, EventCallback.Factory.Create<TabClickDetail>(this, value => closed = value)));
+
+            using var document = JsonDocument.Parse("""{"tabKey":"tab-1","nativeEvent":{}}""");
+            await component.Instance.TabClosed(document.RootElement.Clone());
+
+            Assert.NotNull(closed);
+            Assert.Equal("tab-1", closed!.TabKey);
         }
     }
 }

@@ -7,15 +7,18 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
-using System;
 using Microsoft.AspNetCore.Components;
+using SiemensIXBlazor.Enums.KeyValue;
 
 namespace SiemensIXBlazor.Components
 {
 	public partial class KeyValue
 	{
+        /// <summary>
+        /// Optional custom value content rendered through the official custom-value slot.
+        /// </summary>
         [Parameter]
-        public RenderFragment? ChildContent { get; set; }
+        public RenderFragment? CustomValue { get; set; }
         /// <summary>
         /// Optional key value icon
         /// </summary>
@@ -28,13 +31,13 @@ namespace SiemensIXBlazor.Components
         /// <summary>
         /// Key value label
         /// </summary>
-        [Parameter]
-		public string? Label { get; set; }
+        [Parameter, EditorRequired]
+		public string Label { get; set; } = string.Empty;
         /// <summary>
         /// Optional key value label position - 'top' or 'left'
         /// </summary>
         [Parameter]
-		public string LabelPosition { get; set; } = "top";
+		public KeyValueLabelPosition LabelPosition { get; set; } = KeyValueLabelPosition.top;
         /// <summary>
         /// Optional key value text value
         /// </summary>
@@ -42,4 +45,3 @@ namespace SiemensIXBlazor.Components
 		public string? Value { get; set; }
 	}
 }
-

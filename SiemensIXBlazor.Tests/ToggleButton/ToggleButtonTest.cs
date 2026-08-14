@@ -9,7 +9,7 @@
 
 using Bunit;
 using Microsoft.AspNetCore.Components;
-using SiemensIXBlazor.Enums.Button;
+using SiemensIXBlazor.Enums.ToggleButton;
 using Xunit;
 
 namespace SiemensIXBlazor.Tests.ToggleButton
@@ -27,11 +27,11 @@ namespace SiemensIXBlazor.Tests.ToggleButton
                 ("IconRight", "test-icon-right"),
                 ("Loading", true),
                 ("Pressed", true),
-                ("Variant", ButtonVariant.secondary)
+                ("Variant", ToggleButtonVariant.subtle_secondary)
             );
 
             // Assert
-            cut.MarkupMatches("<ix-toggle-button id=\"testId\" disabled icon=\"test-icon\" icon-right=\"test-icon-right\" loading pressed variant=\"secondary\"></ix-toggle-button>");
+            cut.MarkupMatches("<ix-toggle-button id=\"testId\" disabled icon=\"test-icon\" icon-right=\"test-icon-right\" loading pressed variant=\"subtle-secondary\"></ix-toggle-button>");
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace SiemensIXBlazor.Tests.ToggleButton
             );
 
             // Act
-            cut.Instance.PressedChange(true);
+            await cut.Instance.PressedChange(true);
 
             // Assert
             Assert.True(pressedChanged);

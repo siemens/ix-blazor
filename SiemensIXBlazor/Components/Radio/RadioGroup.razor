@@ -1,15 +1,22 @@
-﻿@using Microsoft.JSInterop;
+@using Microsoft.JSInterop;
 @using SiemensIXBlazor.Components
+@using SiemensIXBlazor.Enums.Radio
+@using SiemensIXBlazor.Helpers
 @inherits IXBaseComponent
 @inject IJSRuntime JSRuntime
 
-<ix-radio-group id="@Id"
+<ix-radio-group @attributes="UserAttributes"
+                class="@Class"
+                style="@Style"
+                id="@Id"
                 label="@Label"
+                helper-text="@HelperText"
                 info-text="@InfoText"
                 warning-text="@WarningText"
                 valid-text="@ValidText"
                 invalid-text="@InvalidText"
-                class="@CssClass"
-                direction="@Direction">
+                show-text-as-tooltip="@ShowTextAsTooltip"
+                value="@Value"
+                direction="@(EnumParser<RadioGroupDirection>.EnumToString(Direction))">
     @ChildContent
 </ix-radio-group>

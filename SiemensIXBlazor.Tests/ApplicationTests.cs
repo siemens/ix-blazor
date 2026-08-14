@@ -23,22 +23,32 @@ namespace SiemensIXBlazor.Tests
                 parameters.Add(p => p.Id, "testId");
                 parameters.Add(p => p.ForceBreakpoint, Enums.ForceBreakpoint.lg);
                 parameters.Add(p => p.Theme, "testTheme");
-                parameters.Add(p => p.ThemeSystemAppearance, true);
+                parameters.Add(p => p.ColorSchema, Enums.ColorSchema.Dark);
             });
 
             // Assert
-            cut.MarkupMatches("<ix-application id='testId' force-breakpoint='lg' theme='testTheme' theme-system-appearance=''></ix-application>");
+            cut.MarkupMatches("<ix-application id='testId' force-breakpoint='lg' theme='testTheme' color-schema='dark'></ix-application>");
+        }
+
+        [Fact]
+        public void ColorSchemaDefaultsToSystem()
+        {
+            var cut = RenderComponent<Application>();
+
+            Assert.Equal(Enums.ColorSchema.System, cut.Instance.ColorSchema);
+            Assert.Contains("color-schema=\"system\"", cut.Markup);
         }
 
         [Fact]
         public void AppSwitchConfig_SetsValueAndCallsInitialParameter()
         {
             // Arrange
-            var cut = RenderComponent<Application>();
-            var config = new AppSwitchConfig();
-
-            // Act
-            cut.Instance.AppSwitchConfig = config;
+            var config = new AppSwitchConfig
+            {
+                CurrentAppId = "app-1"
+            };
+            var cut = RenderComponent<Application>(parameters => parameters
+                .Add(p => p.AppSwitchConfig, config));
 
             // Assert
             Assert.Equal(config, cut.Instance.AppSwitchConfig);

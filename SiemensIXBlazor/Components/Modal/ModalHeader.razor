@@ -13,8 +13,12 @@ LICENSE file in the root directory of this source tree.
 @inherits IXBaseComponent
 
 <ix-modal-header
-    id="@Id"
+    id="@ElementId"
     icon="@Icon"
+    aria-label-icon="@AriaLabelIcon"
+    aria-label-close-icon-button="@AriaLabelCloseIconButton"
+    icon-color="@IconColor"
+    hide-close="@(HideClose ? "true" : null)"
     class="@Class"
     style="@Style"
     @attributes="@UserAttributes">
