@@ -479,7 +479,9 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 
 ```razor
 <Avatar
-    Image="https://ui-avatars.com/api/?name=John+Doe">
+    Image="https://ui-avatars.com/api/?name=John+Doe"
+    TooltipText="John Doe"
+    AriaLabelTooltip="John Doe">
 </Avatar>
 ```
 
@@ -487,10 +489,17 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 
 ```razor
 <Blind
-    Label="Test Blind"
     Id="blind1"
     CollapsedChangedEvent="(value) => BlindEventHandler(value)">
-Test content
+    <CustomHeader>
+        <span>Custom header</span>
+    </CustomHeader>
+    <HeaderActions>
+        <Button Variant="@ButtonVariant.secondary">Action</Button>
+    </HeaderActions>
+    <ChildContent>
+        <p>Test content</p>
+    </ChildContent>
 </Blind>
 ```
 
@@ -733,11 +742,17 @@ chart1.InitialChart(object1);
 
 ```razor
 <Chip Icon="print"
-      Label="Chip with icon"
       Id="chip1"
-      Closable="true"
-      TooltipText="Tooltip Text"
+      AriaLabelIcon="Print"
+      Closable
+      TooltipText="@("Tooltip Text")"
       ClosedEvent="@ChipClosedEventHandler">
+    Chip with icon
+</Chip>
+
+<Chip Id="chip-text-tooltip"
+      TooltipText="@true">
+    Uses chip text as tooltip
 </Chip>
 ```
 
@@ -760,7 +775,10 @@ chart1.InitialChart(object1);
             HeaderTitle="Content title"
             HeaderSubTitle="Subtitle"
             BackButtonClickedEvent="ContentHeaderBackButtonClicked">
-    Test
+    <HeaderContent>
+        <span>Draft</span>
+    </HeaderContent>
+    <Button>Save</Button>
 </ContentHeader>
 ```
 
@@ -897,10 +915,10 @@ private void DrawerButtonClicked()
 ## Event list
 
 ```razor
-<EventList>
-    <EventListItem Id="event-list-item-1" Label="Item 1" ItemCLickEvent="(label) => DropdownButtonClicked(label)"></EventListItem>
-    <EventListItem Id="event-list-item-2" Label="Item 2" ItemCLickEvent="(label) => DropdownButtonClicked(label)"></EventListItem>
-    <EventListItem Id="event-list-item-3" Label="Item 3" ItemCLickEvent="(label) => DropdownButtonClicked(label)"></EventListItem>
+<EventList Animated="true" Compact="true" Chevron="true" ItemHeight="@("L")">
+    <EventListItem Id="event-list-item-1" ItemColor="color-success" Selected="true">Item 1</EventListItem>
+    <EventListItem Id="event-list-item-2" ItemColor="color-warning" Chevron="true">Item 2</EventListItem>
+    <EventListItem Id="event-list-item-3" Disabled="true">Item 3</EventListItem>
 </EventList>
 ```
 
@@ -915,7 +933,10 @@ private void DrawerButtonClicked()
 ## Flip
 
 ```razor
-<FlipTile>
+<FlipTile Id="flip-tile-example"
+          Height="@("auto")"
+          Width="@("auto")"
+          AriaLabelEyeIconButton="Toggle view">
     <div slot="header">Flip header</div>
 
     <div slot="footer">
@@ -992,24 +1013,26 @@ private void DrawerButtonClicked()
 ## Key Value List
 
 ```razor
+@using SiemensIXBlazor.Enums.KeyValue
+
 <KeyValueList>
   <KeyValue
     Label="Label"
-    LabelPosition="left"
+    LabelPosition="@KeyValueLabelPosition.left"
     Value="Value"
-  ></KeyValue>
+  />
 
   <KeyValue
     Label="Label"
-    LabelPosition="left"
+    LabelPosition="@KeyValueLabelPosition.left"
     Value="Value"
-  ></KeyValue>
+  />
 
   <KeyValue
     Label="Label"
-    LabelPosition="left"
+    LabelPosition="@KeyValueLabelPosition.left"
     Value="Value"
-  ></KeyValue>
+  />
 </KeyValueList>
 ```
 
@@ -1017,19 +1040,22 @@ private void DrawerButtonClicked()
 
 ```razor
 <KeyValue Label="Label">
-  <input
-    class="form-control"
-    placeholder="Enter text here"
-    type="text"
-    slot="custom-value"
-  />
+  <CustomValue>
+    <input class="form-control" placeholder="Enter text here" type="text" />
+  </CustomValue>
 </KeyValue>
 ```
 
 ## KPI
 
 ```razor
-<KPI Label="Motor speed" Value="Nominal"></KPI>
+<KPI Label="Motor speed"
+     Value="@("Nominal")"
+     Unit="rpm"
+     State="@KpiState.Warning"
+     AriaLabelWarningIcon="Motor speed warning" />
+
+<KPI Label="Temperature" Value="@(42)" Unit="°C" />
 ```
 
 ## Layout Grid
@@ -1064,12 +1090,28 @@ private void DrawerButtonClicked()
     <Checkbox Id="sms-notifications" Label="SMS" Value="sms" />
     <Checkbox Id="push-notifications" Label="Push" Value="push" />
 </CheckboxGroup>
+
+## Radio group
+
+```razor
+<RadioGroup Id="storage-options"
+            Label="Storage options"
+            Direction="RadioGroupDirection.Row"
+            Value="512"
+            ValueChangeEvent="OnStorageChanged">
+    <Radio Label="256GB SSD storage" Value="256" Name="storage" />
+    <Radio Label="512GB SSD storage" Value="512" Name="storage" />
+    <Radio Label="1TB SSD storage" Value="1024" Name="storage" />
+</RadioGroup>
 ```
 
 ## Message bar
 
 ```razor
-<MessageBar ClosedChangeEvent="MessageboxClosed" Id="messagebar1" Type="MessageBarType.Info">
+<MessageBar ClosedChangeEvent="MessageboxClosed"
+            CloseAnimationCompletedEvent="MessageboxCloseAnimationCompleted"
+            Id="messagebar1"
+            Type="MessageBarType.Info">
     <div class="d-flex align-items-center justify-content-between">
         Message text <ix-button>Action</ix-button>
     </div>
@@ -1124,24 +1166,28 @@ private void OnModalDismissed()
 
 ```razor
 <PaneLayout Id="pane-layout"
-                Variant="@PaneVariant.floating"
-                Layout="full-horizontal"
-                Borderless="true">
-    <Pane Id="pane1" Heading="Pane Left" Slot="left" Size="33%">
-        <p>This is the left pane.</p>
-    </Pane>
-
-    <Pane Id="pane2"  Heading="Pane Top" Slot="top" Size="33%">
-        <p>This is the top pane.</p>
-    </Pane>
-
-    <Pane Id="pane3" Heading="Pane Right" Slot="right" Size="33%">
-        <p>This is the right pane.</p>
-    </Pane>
-
-    <Pane Id="pane4" Heading="Pane Bottom" Slot="bottom" Size="33%">
-        <p>This is the bottom pane.</p>
-    <Pane>
+             Variant="@PaneVariant.floating"
+             Layout="full-horizontal"
+             Borderless="true">
+    <Left>
+        <Pane Id="pane-left" Heading="Pane Left" Slot="left" Size="33%">
+            <p>This is the left pane.</p>
+        </Pane>
+    </Left>
+    <Top>
+        <div>This is the top content.</div>
+    </Top>
+    <Content>
+        <div>This is the main content.</div>
+    </Content>
+    <Bottom>
+        <div>This is the bottom content.</div>
+    </Bottom>
+    <Right>
+        <Pane Id="pane-right" Heading="Pane Right" Slot="right" Size="33%" NoPadding="true">
+            <p>This pane has no content padding.</p>
+        </Pane>
+    </Right>
 </PaneLayout>
 ```
 
@@ -1161,6 +1207,16 @@ private void OnModalDismissed()
                    HelperText="Please wait while we process your request"
                    Size="@ProgressIndicatorSize.lg"
                    Status="@ProgressIndicatorStatus.info" />
+
+<ProgressIndicator Value="75"
+                   Label="Processing data..."
+                   Size="@ProgressIndicatorSize.lg"
+                   Status="@ProgressIndicatorStatus.info">
+    <HelperTextContent>
+        <span>Custom helper text</span>
+    </HelperTextContent>
+    <span>75%</span>
+</ProgressIndicator>
 ```
 
 ## Radio button
@@ -1191,9 +1247,20 @@ AddItemEvent="SelectItemAdded" Mode="SelectMode.Single" SelectedIndices="2" Id="
 ## Slider
 
 ```razor
-<Slider Id="slider-demo" Min="0" Max="50" Step="5" Value="0" Marker="[0, 10, 20, 30, 40, 50]">
-    <span slot="label-start">0</span>
-    <span slot="label-end">50</span>
+<Slider Id="slider-demo"
+        Label="Range"
+        HelperText="Select a value"
+        Min="0"
+        Max="50"
+        Step="5"
+        Value="0"
+        Marker="[0, 10, 20, 30, 40, 50]">
+    <LabelStart>
+        <span>0</span>
+    </LabelStart>
+    <LabelEnd>
+        <span>50</span>
+    </LabelEnd>
 </Slider>
 ```
 
@@ -1431,7 +1498,12 @@ tree.TreeModel = treeNodes;
 
 ```razor
 <WorkflowSteps Id="wf-steps" StepSelectedEvent="(index) => WfSelectedEvent(index)">
-    <WorkflowStep Status="WorkflowStatus.Done">Step 1</WorkflowStep>
+    <WorkflowStep Status="WorkflowStatus.Done">
+        <CustomIcon>
+            <ix-icon name="star"></ix-icon>
+        </CustomIcon>
+        <ChildContent>Step 1</ChildContent>
+    </WorkflowStep>
     <WorkflowStep Status="WorkflowStatus.Success">Step 2</WorkflowStep>
     <WorkflowStep Status="WorkflowStatus.Open">Step 3</WorkflowStep>
     <WorkflowStep Status="WorkflowStatus.Warning">Step 4</WorkflowStep>

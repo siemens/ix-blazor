@@ -25,7 +25,6 @@ public class EventListItemTest : TestContextBase
             .Add(p => p.Chevron, true)
             .Add(p => p.ItemColor, "red")
             .Add(p => p.Disabled, false)
-            .Add(p => p.Opacity, 1)
             .Add(p => p.Selected, true)
             .Add(p=>p.Variant,Enums.EventList.EventListVariant.outline)
             .Add(p => p.ItemClickEvent, EventCallback.Factory.Create(this, () => { })));
@@ -33,7 +32,18 @@ public class EventListItemTest : TestContextBase
 
         // Assert
         cut.MarkupMatches(
-            "<ix-event-list-item id=\"testId\" item-color=\"red\" chevron=\"\" variant=\"outline\" opacity=\"1\" selected=\"\">Test content</ix-event-list-item>");
+            "<ix-event-list-item id=\"testId\" item-color=\"red\" chevron=\"\" variant=\"outline\" selected=\"\">Test content</ix-event-list-item>");
+    }
+
+    [Fact]
+    public void DefaultBooleanPropertiesMatchOfficialDefaults()
+    {
+        var cut = RenderComponent<EventListItem>(parameters => parameters.Add(p => p.Id, "testId"));
+
+        Assert.False(cut.Instance.Chevron);
+        Assert.False(cut.Instance.Disabled);
+        Assert.False(cut.Instance.Selected);
+        Assert.DoesNotContain("opacity", cut.Markup);
     }
 
     [Fact]

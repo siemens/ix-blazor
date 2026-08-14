@@ -23,10 +23,30 @@ public class EventListTest : TestContextBase
             .Add(p => p.Animated, true)
             .Add(p => p.Chevron, true)
             .Add(p => p.Compact, false)
-            .Add(p => p.ItemHeight, "M"));
+            .Add(p => p.ItemHeight, "L"));
 
         // Assert
         cut.MarkupMatches(
-            "<ix-event-list animated=\"true\" chevron=\"\" item-height=\"M\">Test content</ix-event-list>");
+            "<ix-event-list animated=\"true\" chevron=\"\" item-height=\"L\">Test content</ix-event-list>");
+    }
+
+    [Fact]
+    public void NumericItemHeightRendersCorrectly()
+    {
+        var cut = RenderComponent<Components.EventList>(parameters => parameters
+            .Add(p => p.ItemHeight, 48));
+
+        Assert.Equal("48", cut.Find("ix-event-list").GetAttribute("item-height"));
+    }
+
+    [Fact]
+    public void DefaultPropertiesMatchOfficialDefaults()
+    {
+        var cut = RenderComponent<Components.EventList>();
+
+        Assert.Equal("S", cut.Instance.ItemHeight);
+        Assert.False(cut.Instance.Animated);
+        Assert.False(cut.Instance.Compact);
+        Assert.False(cut.Instance.Chevron);
     }
 }
