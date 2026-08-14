@@ -479,7 +479,9 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 
 ```razor
 <Avatar
-    Image="https://ui-avatars.com/api/?name=John+Doe">
+    Image="https://ui-avatars.com/api/?name=John+Doe"
+    TooltipText="John Doe"
+    AriaLabelTooltip="John Doe">
 </Avatar>
 ```
 
