@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // SPDX-FileCopyrightText: 2026 Siemens AG
 //
 // SPDX-License-Identifier: MIT
@@ -8,16 +8,17 @@
 //  -----------------------------------------------------------------------
 
 using Microsoft.AspNetCore.Components;
+using SiemensIXBlazor.Components;
 
-namespace SiemensIXBlazor.Components.CustomField
+namespace SiemensIXBlazor.Components.HelperText
 {
-    public partial class CustomField
+    public abstract class HelperTextBase : IXBaseComponent
     {
-        [Parameter, EditorRequired]
-        public string Id { get; set; } = string.Empty;
+        [Parameter]
+        public string? Id { get; set; }
 
         [Parameter]
-        public RenderFragment? ChildContent { get; set; }
+        public string? HtmlFor { get; set; }
 
         [Parameter]
         public string? HelperText { get; set; }
@@ -29,19 +30,9 @@ namespace SiemensIXBlazor.Components.CustomField
         public string? InvalidText { get; set; }
 
         [Parameter]
-        public string? Label { get; set; }
-
-        [Parameter]
-        public bool Required { get; set; } = false;
-
-        [Parameter]
-        public bool? ShowTextAsTooltip { get; set; }
-
-        [Parameter]
         public string? ValidText { get; set; }
 
         [Parameter]
         public string? WarningText { get; set; }
-
     }
 }
