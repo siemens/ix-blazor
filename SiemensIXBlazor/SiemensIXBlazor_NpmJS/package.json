@@ -13,7 +13,7 @@
     "@siemens/ix": "5.1.1",
     "@siemens/ix-aggrid": "5.0.1",
     "@siemens/ix-echarts": "4.1.0",
-    "@siemens/ix-icons": "3.4.0",
+    "@siemens/ix-icons": "3.5.0",
     "ag-grid-community": "^33",
     "echarts": "^5.5.1"
   },
