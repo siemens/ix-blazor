@@ -43,7 +43,7 @@ public partial class DateDropdown
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        _interop ??= new BaseInterop(JsRuntime);
+        _interop ??= new BaseInterop(JSRuntime);
 
         var optionsJson = JsonSerializer.Serialize(DateRangeOptions);
         if (_dateRangeOptionsJson != optionsJson)

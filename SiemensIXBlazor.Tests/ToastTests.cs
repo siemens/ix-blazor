@@ -223,7 +223,7 @@ public class ToastTests : TestContextBase
         Assert.DoesNotContain("position", json);
     }
 
-    private (Mock<IJSRuntime> JsRuntime, Mock<IJSObjectReference> Module) AddJsModule()
+    private (Mock<IJSRuntime> JSRuntime, Mock<IJSObjectReference> Module) AddJsModule()
     {
         var jsRuntime = new Mock<IJSRuntime>();
         var module = new Mock<IJSObjectReference>();
