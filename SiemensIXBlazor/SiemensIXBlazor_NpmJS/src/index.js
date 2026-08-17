@@ -12,7 +12,6 @@ import "@siemens/ix-echarts";
 import { registerTheme } from "@siemens/ix-echarts";
 import * as echarts from "echarts";
 import { showModalLoading, themeSwitcher } from "@siemens/ix";
-import { Grid } from "ag-grid-community";
 import { defineCustomElements as ixIconsDefineCustomElements } from "@siemens/ix-icons/loader";
 
 window.echarts = echarts;
@@ -164,32 +163,6 @@ window.siemensIXInterop = {
         }
     },
 
-    agGridInterop: {
-        dotnetReference: null,
-
-        createGrid(dotnetRef, elementId, gridOptions) {
-            const parsedOption = JSON.parse(gridOptions);
-            this.dotnetReference = dotnetRef;
-
-            parsedOption.onCellClicked = (event) => {
-                dotnetRef.invokeMethodAsync("OnCellClickedCallback", event.data);
-            };
-
-            return new Grid(document.getElementById(elementId), parsedOption);
-        },
-
-        setData(grid, data) {
-            grid.gridOptions.api.setRowData(data);
-        },
-
-        getSelectedRows(grid) {
-            return grid.gridOptions.api.getSelectedRows();
-        },
-
-        dispose() {
-            this.dotnetReference = null;
-        },
-    },
 };
 
 (async () => {

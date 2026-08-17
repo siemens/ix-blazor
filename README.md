@@ -22,7 +22,7 @@ dotnet add package Siemens.IX.Blazor
 NuGet\Install-Package Siemens.IX.Blazor
 ```
 
-Add required `CSS` and `Javascript` packages into the `index.html` file.
+Add the required stylesheet and JavaScript bundle to `index.html`.
 
 ```html
 <html lang="en">
@@ -30,12 +30,6 @@ Add required `CSS` and `Javascript` packages into the `index.html` file.
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blazor App</title>
-
-    <!--Deprecated after v0.4.0-->
-    <link
-      rel="stylesheet"
-      href="_content/Siemens.IX.Blazor/css/siemens-ix/ix-icons.css"
-    />
 
     <link
       rel="stylesheet"
@@ -106,8 +100,9 @@ Do not use the legacy `theme-classic-light` or `theme-classic-dark` values.
 - [About and Legal](#about-and-legal)
 - [Menu Settings](#menu-settings)
 - [Map Navigation](#map-navigation)
+- [Map Navigation Overlay](#map-navigation-overlay)
 - [Popover News](#popover-news)
-- [AGGrid (Preview)](#aggrid-preview) **(since 0.4.2)**
+- [AG Grid](#ag-grid) **(since v0.6.0)**
 - [Avatar](#avatar) **(since v0.4.0)**
 - [Blind](#blind)
 - [Breadcrumb](#breadcrumb)
@@ -120,6 +115,7 @@ Do not use the legacy `theme-classic-light` or `theme-classic-dark` values.
 - [Category Filter](#category-filter)
 - [ECharts](#echarts) **(since v0.3.2)**
 - [Checkbox](#checkbox)
+- [Checkbox group](#checkbox-group)
 - [Chip](#chip)
 - [Content](#content) **(since 0.5.0)**
 - [Content Header](#content-header) **(since v0.3.3)**
@@ -149,6 +145,7 @@ Do not use the legacy `theme-classic-light` or `theme-classic-dark` values.
 - [Key Value](#key-value) **(since v0.3.3)**
 - [KPI](#kpi)
 - [Layout Grid](#layout-grid) **(since v0.4.0)**
+- [Layout Auto](#layout-auto)
 - [Link Button](#link-button) **(since v0.4.0)**
 - [Message Bar](#message-bar)
 - [Modal](#modal)
@@ -158,6 +155,7 @@ Do not use the legacy `theme-classic-light` or `theme-classic-dark` values.
 - [Pill](#pill)
 - [Progress Indicator](#progress-indicator) **(since 0.5.4)**
 - [Radio Button](#radio-button)
+- [Radio group](#radio-group)
 - [Select](#select)
 - [Slider](#slider)
 - [Spinner](#spinner)
@@ -174,7 +172,7 @@ Do not use the legacy `theme-classic-light` or `theme-classic-dark` values.
 - [Tree](#tree)
 - [Typography](#typography)
 - [Upload](#upload)
-- [Validation Tooltip - Form Validation](#validation-tooltip-form-validation)
+- [Validation Tooltip - Form Validation](#validation-tooltip---form-validation)
 - [Workflow](#workflow)
 
 ## Application
@@ -397,110 +395,153 @@ await menu.ToggleSettingsAsync(true);
 </BasicNavigation>
 ```
 
-## AGGrid Preview
+## AG Grid
 
-This component is currently in **preview** version.
+`AGGrid<TData>` wraps AG Grid Community for Blazor. It registers the Community modules, applies the Siemens IX theme, and loads the JavaScript bundle automatically. Refer to the official [AG Grid documentation](https://www.ag-grid.com/javascript-data-grid/) for the underlying grid options and behavior.
 
-### Installation
+### Setup and typed API
 
-Add necessary css files into the `index.html` file.
-
-```html
-<!-- Include the core CSS, this is needed by the grid -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-grid.css"
-/>
-
-<!-- Include the theme CSS, only need to import the theme you are going to use -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-alpine.css"
-/>
-
-<link
-  rel="stylesheet"
-  href="_content/Siemens.IX.Blazor/css/siemens-ix/ix-aggrid.css"
-/>
-```
+Give the host a non-zero height and provide typed row data and column definitions. `GridReady` exposes `AgGridApi<TData>` after the grid has rendered:
 
 ```razor
-<AGGrid
-    @ref="agGridRef"
-    Id="grid1"
-    Class="ag-theme-alpine-dark ag-theme-ix"
-    Style="height: 150px; width: 600px">
-</AGGrid>
-```
+<AGGrid TData="EquipmentRow"
+        RowData="rows"
+        ColumnDefinitions="columns"
+        Options="options"
+        GridReady="OnGridReady"
+        Style="height: 24rem; width: 100%" />
 
-```csharp
-AGGrid agGridRef;
-protected override async Task OnAfterRenderAsync(bool firstRender)
-{
-    if(firstRender)
-    {
-        Dictionary<string, dynamic> row1 = new()
-        {
-            { "type", "Equipment" },
-            { "status", "Normal" },
-            { "hwVersion", "2.0" },
-            { "checked", false }
-        };
+@code {
+    private AgGridApi<EquipmentRow>? gridApi;
 
-        Dictionary<string, dynamic> row2 = new()
-        {
-            { "type", "Positioner" },
-            { "status", "Maintenance" },
-            { "hwVersion", "1.0" },
-            { "checked", true }
-        };
+    private readonly EquipmentRow[] rows =
+    [
+        new("Equipment", "Normal"),
+    ];
 
-        Dictionary<string, dynamic> row3 = new()
-        {
-            { "type", "Pressure sensor" },
-            { "status", "Unknown" },
-            { "hwVersion", "N/A" },
-            { "checked", false }
-        };
+    private readonly IAgGridColumnDefinition[] columns =
+    [
+        new AgGridColumnDefinition { Field = "type", HeaderName = "Type" },
+        new AgGridColumnDefinition { Field = "status", Sortable = true, Filter = true },
+    ];
 
+    private void OnGridReady(AgGridReadyEvent<EquipmentRow> gridEvent) =>
+        gridApi = gridEvent.Api;
 
-        GridOptions options = new GridOptions()
-        {
-            ColumnDefs = new List<ColumnDefs>
-            {
-                new ColumnDefs()
-                {
-                    Field = "type",
-                    HeaderName = "Type",
-                    Resizable = true,
-                    CheckboxSelection = true
-                },
-                new ColumnDefs()
-                {
-                    Field = "status",
-                    HeaderName = "Status",
-                    Resizable = true,
-                    Sortable = true,
-                    Filter = true
-                },
-                new ColumnDefs()
-                {
-                    Field = "hwVersion",
-                    HeaderName = "HW version",
-                    Resizable= true
-                }
-            },
-            RowData = new List<Dictionary<string, dynamic>> { row1, row2, row3 },
-            CheckboxSelection = true,
-            RowSelection = "multiple",
-            SuppressCellFocus = true
-        };
-
-        await agGridRef.CreateGrid(options);
-    }
-
+    private sealed record EquipmentRow(string Type, string Status);
 }
 ```
+
+Configure common Community features with typed options and call stable grid operations through the typed API:
+
+```csharp
+private readonly AgGridOptions options = new()
+{
+    Pagination = true,
+    PaginationPageSize = 10,
+    DefaultColumnDefinition = new AgGridColumnDefinition
+    {
+        Sortable = true,
+        Resizable = true,
+        Filter = true,
+    },
+};
+
+private async Task ReadGridAsync()
+{
+    int displayedRows = await gridApi!.GetDisplayedRowCountAsync();
+    AgGridCellPosition? focusedCell = await gridApi.GetFocusedCellAsync();
+    await gridApi.SetFocusedCellAsync(new AgGridCellPosition(0, "status"));
+    await gridApi.PaginationGoToNextPageAsync();
+}
+```
+
+The typed surface covers common selection, pagination, editing, state, column state, row visibility, overlays, CSV export, and infinite-row operations. Common component events include cell and row interaction, selection, filtering, sorting, pagination, editing, column changes, scrolling, and lifecycle events.
+
+### JSON extension points
+
+Use `AdditionalOptions` for a JSON-compatible option that does not yet have a typed property; it cannot duplicate a typed option. Use `InvokeAsync` for a serializable Community API that is not yet wrapped:
+
+```csharp
+AgGridOptions options = new()
+{
+    AdditionalOptions =
+    {
+        ["suppressRowClickSelection"] = true,
+        ["autoGroupColumnDef"] = new { minWidth = 240 },
+    },
+};
+int displayedRows = await gridApi!.InvokeAsync<int>("getDisplayedRowCount");
+System.Text.Json.JsonElement filterModel = await gridApi.GetFilterModelAsync();
+await gridApi.SetFilterModelAsync(filterModel);
+```
+
+Filter models, grid state, column groups, CSV parameters, cache state, and other filter-specific structures remain `JsonElement`/`object` because their shapes vary by AG Grid feature.
+
+### Events and custom cell renderers
+
+Handle common events directly on `AGGrid`; the event contains the typed row data when available:
+
+```razor
+<AGGrid TData="EquipmentRow"
+        RowData="rows"
+        ColumnDefinitions="columns"
+        RowClicked="OnRowClicked"
+        Style="height: 24rem; width: 100%" />
+
+@code {
+    private string? selectedType;
+
+    private void OnRowClicked(AgGridEvent<EquipmentRow> eventData)
+    {
+        selectedType = eventData.Data?.Type;
+    }
+}
+```
+
+Use `EventSubscriptions` with `AgGridEventNames` and `EventReceived` for other public events. Custom cell renderers remain JavaScript because AG Grid virtualizes cells and expects their lifecycle to be synchronous. Set `JavaScriptModule` to an ES module and refer to the registered renderer by name:
+
+```csharp
+new AgGridColumnDefinition
+{
+    Field = "status",
+    CellRenderer = "statusRenderer",
+    CellRendererParams = new { prefix = "Status: " },
+}
+```
+
+Example module:
+
+```javascript
+export function configureAgGrid({ options, createCellRendererComponent, registerCellRenderer }) {
+    const StatusRenderer = createCellRendererComponent({
+        create(params) {
+            const element = document.createElement("span");
+            element.textContent = `${params.prefix}${params.value}`;
+            return element;
+        },
+        refresh(element, params) {
+            element.textContent = `${params.prefix}${params.value}`;
+            return true;
+        },
+        destroy(element) {
+            element.replaceChildren();
+        },
+    });
+
+    return registerCellRenderer(options, "statusRenderer", StatusRenderer);
+}
+```
+
+The module receives `createCellRendererComponent` and `registerCellRenderer` helpers. The adapter implements AG Grid's `init`, `getGui`, `refresh`, and `destroy` lifecycle; `create` must return an `HTMLElement`, and `refresh` must synchronously return `true` when it updates the existing element or `false` when AG Grid should recreate it. The module may also export `projectAgGridEvent(name, event)` and `disposeAgGrid({ api, instanceId })`.
+
+### Important boundaries
+
+- Use a non-zero host height; the grid cannot render correctly in a zero-height container.
+- Do not add AG Grid CDN assets, theme classes, manual `createGrid` calls, or `ix-aggrid.css`; the wrapper provides the Community bundle and Siemens IX theme.
+- Keep callbacks, DOM values, custom components, and high-frequency renderer logic in JavaScript; pass JSON-compatible values across the Blazor boundary.
+- Use `InfiniteDataSource` with an `IAgGridInfiniteDataSource<TData>` implementation for Blazor-backed infinite data; its requests include sorting, filtering, failure reporting, and cancellation.
+- Use `RowData` for normal client-side data and transactions or refresh methods for in-place updates.
 
 ## Avatar
 
@@ -800,7 +841,7 @@ chart1.InitialChart(object1);
 </Chip>
 ```
 
-##Content
+## Content
 
 ```razor
 <Content>
@@ -1041,8 +1082,6 @@ private void DrawerButtonClicked()
 </FlipTile>
 ```
 
-- [ ] AG grid
-
 ## Group
 
 ```razor
@@ -1156,24 +1195,22 @@ private void DrawerButtonClicked()
 ## Key Value List
 
 ```razor
-@using SiemensIXBlazor.Enums.KeyValue
-
 <KeyValueList>
   <KeyValue
     Label="Label"
-    LabelPosition="@KeyValueLabelPosition.left"
+    LabelPosition="@(SiemensIXBlazor.Enums.KeyValue.KeyValueLabelPosition.left)"
     Value="Value"
   />
 
   <KeyValue
     Label="Label"
-    LabelPosition="@KeyValueLabelPosition.left"
+    LabelPosition="@(SiemensIXBlazor.Enums.KeyValue.KeyValueLabelPosition.left)"
     Value="Value"
   />
 
   <KeyValue
     Label="Label"
-    LabelPosition="@KeyValueLabelPosition.left"
+    LabelPosition="@(SiemensIXBlazor.Enums.KeyValue.KeyValueLabelPosition.left)"
     Value="Value"
   />
 </KeyValueList>
@@ -1246,6 +1283,7 @@ private void DrawerButtonClicked()
     <Checkbox Id="sms-notifications" Label="SMS" Value="sms" />
     <Checkbox Id="push-notifications" Label="Push" Value="push" />
 </CheckboxGroup>
+```
 
 ## Radio group
 
@@ -1514,7 +1552,9 @@ Use `PopoverTriggerMode.Hover` for hover and focus interaction, `PopoverPlacemen
 ## Tabs
 
 ```razor
-<Tabs Id="TabsId" ActiveTabKey="@_activeTabKey" TabChangeEvent="@OnTabChange">
+<Tabs Id="tabs-demo"
+      ActiveTabKey="@_activeTabKey"
+      TabChangeEvent="OnTabChanged">
     <TabItem TabKey="overview" Label="Overview" />
     <TabItem TabKey="details" Label="Details" Counter="2" />
     <TabItem TabKey="history" Label="History" Closable="true" />
@@ -1533,30 +1573,14 @@ else if (_activeTabKey == "history")
 }
 
 @code {
-    private string _activeTabKey = "tab-1";
+    private string? _activeTabKey = "overview";
 
     private Task OnTabChanged(string? tabKey)
     {
-        _activeTabKey = tabKey ?? "tab-1";
+        _activeTabKey = tabKey;
         return Task.CompletedTask;
     }
 }
-```
-
-```csharp
-private string? _activeTabKey = "overview";
-
-private Task OnTabChange(string? tabKey)
-{
-    _activeTabKey = tabKey;
-    return Task.CompletedTask;
-}
-```
-
-## Text area
-
-```razor
-<textarea class="form-control" placeholder="Enter text here"></textarea>
 ```
 
 ## Tile
@@ -1578,8 +1602,9 @@ private Task OnTabChange(string? tabKey)
             SecondInterval="30"
             HideHeader="false"
             Corners="@TimePickerCorners.Rounded"
-            MinTime="08:00"
-            MaxTime="18:00">
+            Format="HH:mm:ss"
+            MinTime="09:00:00"
+            MaxTime="17:30:00">
 </TimePicker>
 ```
 

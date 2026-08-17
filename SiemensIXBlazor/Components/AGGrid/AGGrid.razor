@@ -10,11 +10,13 @@
 
 @using Microsoft.JSInterop;
 @inherits IXBaseComponent
-@inject IJSRuntime JSRuntime
+@typeparam TData
 
 <div 
+    @ref="_element"
     @attributes="UserAttributes" 
     id="@Id" 
     class="@Class" 
-    style="@Style">
+    style="@Style"
+    aria-busy="@(_isReady ? "false" : "true")">
 </div>
