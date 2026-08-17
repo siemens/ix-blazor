@@ -19,18 +19,18 @@ namespace SiemensIXBlazor.Tests
         public void DrawerRendersCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<Drawer>(
-                ("Id", "testId"),
-                ("CloseOnClickOutside", true),
-                ("FullHeight", false),
-                ("MaxWidth", 28),
-                ("MinWidth", 16),
-                ("Show", true),
-                ("Width", 16)
+            var cut = Render<Drawer>(parameters => parameters
+                .Add(p => p.Id, "testId")
+                .Add(p => p.CloseOnClickOutside, true)
+                .Add(p => p.FullHeight, false)
+                .Add(p => p.MaxWidth, 28)
+                .Add(p => p.MinWidth, 16)
+                .Add(p => p.Show, true)
+                .Add(p => p.Width, 16)
             );
 
             // Assert
-            cut.MarkupMatches("<ix-drawer minwidth=\"16\" id=\"testId\" show=\"\" close-on-click-outside=\"\" max-width=\"28\" min-width=\"16\" width=\"16\"></ix-drawer>");
+            cut.MarkupMatches("<ix-drawer id=\"testId\" show=\"\" close-on-click-outside=\"\" max-width=\"28\" min-width=\"16\" width=\"16\"></ix-drawer>");
         }
 
         [Fact]
@@ -38,9 +38,9 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             var closed = false;
-            var cut = RenderComponent<Drawer>(
-                ("Id", "drawer"),
-                ("ClosedEvent", EventCallback.Factory.Create(this, () => closed = true))
+            var cut = Render<Drawer>(parameters => parameters
+                .Add(p => p.Id, "drawer")
+                .Add(p => p.ClosedEvent, EventCallback.Factory.Create(this, () => closed = true))
             );
 
             // Act
@@ -55,9 +55,9 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             var opened = false;
-            var cut = RenderComponent<Drawer>(
-                ("Id", "drawer"),
-                ("OpenedEvent", EventCallback.Factory.Create(this, () => opened = true))
+            var cut = Render<Drawer>(parameters => parameters
+                .Add(p => p.Id, "drawer")
+                .Add(p => p.OpenedEvent, EventCallback.Factory.Create(this, () => opened = true))
             );
 
             // Act

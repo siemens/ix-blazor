@@ -19,7 +19,7 @@ public class DropdownTest : TestContextBase
     public void ComponentRendersWithCorrectProperties()
     {
         // Arrange
-        var cut = RenderComponent<Components.Dropdown>(parameters => parameters
+        var cut = Render<Components.Dropdown>(parameters => parameters
             .Add(p => p.Id, "testId")
             .Add(p => p.Anchor, "testAnchor")
             .Add(p => p.CloseBehavior, DropdownButtonCloseBehavior.both)
@@ -48,7 +48,7 @@ public class DropdownTest : TestContextBase
         var showChange = false;
         var showChanged = false;
 
-        var cut = RenderComponent<Components.Dropdown>(parameters => parameters
+        var cut = Render<Components.Dropdown>(parameters => parameters
             .Add(p => p.Id, "testId")
             .Add(p => p.ShowChangeEvent,
                 EventCallback.Factory.Create<bool>(this, value => showChange = value))
@@ -67,7 +67,7 @@ public class DropdownTest : TestContextBase
     [Fact]
     public void SupportsBooleanCloseBehavior()
     {
-        var cut = RenderComponent<Components.Dropdown>(parameters => parameters
+        var cut = Render<Components.Dropdown>(parameters => parameters
             .Add(p => p.Id, "testId")
             .Add(p => p.CloseBehavior, false));
 

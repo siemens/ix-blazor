@@ -18,7 +18,7 @@ public class DropdownQuickActionsTest : TestContextBase
     [Fact]
     public void RendersChildContent()
     {
-        var cut = RenderComponent<DropdownQuickActions>(parameters => parameters
+        var cut = Render<DropdownQuickActions>(parameters => parameters
             .Add(p => p.ChildContent,
                 (RenderFragment)(builder => builder.AddContent(0, "Quick action"))));
 

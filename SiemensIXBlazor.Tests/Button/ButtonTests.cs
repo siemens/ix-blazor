@@ -20,7 +20,7 @@ namespace SiemensIXBlazor.Tests
         public void ButtonRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<Button>(parameters => {
+            var cut = Render<Button>(parameters => {
                 parameters.Add(p => p.Id, "testId");
                 parameters.Add(p => p.Variant, ButtonVariant.primary);
                 parameters.Add(p => p.Disabled, true);
@@ -43,7 +43,7 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             var clickInvoked = false;
-            var cut = RenderComponent<Button>(parameters => parameters
+            var cut = Render<Button>(parameters => parameters
                 .Add(p => p.ClickEvent, EventCallback.Factory.Create(this, () => clickInvoked = true)));
 
             // Act

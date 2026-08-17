@@ -20,7 +20,7 @@ public class DropdownItemTest : TestContextBase
     public void ComponentRendersWithCorrectProperties()
     {
         // Arrange
-        var cut = RenderComponent<DropdownItem>(parameters => parameters
+        var cut = Render<DropdownItem>(parameters => parameters
             .Add(p => p.Label, "testLabel")
             .Add(p => p.Icon, "testIcon")
             .Add(p => p.AriaLabelIcon, "icon label")
@@ -39,7 +39,7 @@ public class DropdownItemTest : TestContextBase
     [Fact]
     public void RendersEndContentSlot()
     {
-        var cut = RenderComponent<DropdownItem>(parameters => parameters
+        var cut = Render<DropdownItem>(parameters => parameters
             .Add(p => p.EndContent, (RenderFragment)(builder => builder.AddContent(0, "End content"))));
 
         cut.MarkupMatches("<ix-dropdown-item item-role=\"menuitem\"><div slot=\"end\">End content</div></ix-dropdown-item>");

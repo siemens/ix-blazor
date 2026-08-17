@@ -18,7 +18,7 @@ public class MenuAboutNewsTest : TestContextBase
     [Fact]
     public void RendersCurrentPublicProperties()
     {
-        var cut = RenderComponent<Components.MenuAbout.MenuAboutNews>(parameters => parameters
+        var cut = Render<Components.MenuAbout.MenuAboutNews>(parameters => parameters
             .Add(p => p.Id, "news")
             .Add(p => p.Label, "Release notes")
             .Add(p => p.AboutItemLabel, "News")
@@ -36,7 +36,7 @@ public class MenuAboutNewsTest : TestContextBase
     {
         var closed = false;
         MouseEventArgs? mouseEvent = null;
-        var cut = RenderComponent<Components.MenuAbout.MenuAboutNews>(parameters => parameters
+        var cut = Render<Components.MenuAbout.MenuAboutNews>(parameters => parameters
             .Add(p => p.ClosePopoverEvent, EventCallback.Factory.Create(this, () => closed = true))
             .Add(p => p.ShowMoreEvent, EventCallback.Factory.Create<MouseEventArgs>(this, value => mouseEvent = value)));
         var expected = new MouseEventArgs();

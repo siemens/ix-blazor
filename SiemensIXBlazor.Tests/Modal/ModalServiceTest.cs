@@ -28,7 +28,7 @@ public class ModalServiceTest : TestContextBase
         Services.AddSingleton<ModalService>(services =>
             new ModalService(services.GetRequiredService<IJSRuntime>()));
         var service = Services.GetRequiredService<ModalService>();
-        var host = RenderComponent<ModalHost>();
+        var host = Render<ModalHost>((Action<Bunit.ComponentParameterCollectionBuilder<ModalHost>>)(_ => { }));
 
         var config = new ModalConfig
         {
@@ -60,7 +60,7 @@ public class ModalServiceTest : TestContextBase
         Services.AddSingleton<ModalService>(services =>
             new ModalService(services.GetRequiredService<IJSRuntime>()));
         var service = Services.GetRequiredService<ModalService>();
-        var host = RenderComponent<ModalHost>();
+        var host = Render<ModalHost>((Action<Bunit.ComponentParameterCollectionBuilder<ModalHost>>)(_ => { }));
         var wasCalled = false;
         var config = new ModalConfig
         {

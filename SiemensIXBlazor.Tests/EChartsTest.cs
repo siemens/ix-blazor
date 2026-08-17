@@ -18,7 +18,7 @@ public class EChartsTest : TestContextBase
     public void ComponentRendersWithCorrectProperties()
     {
         // Arrange
-        var cut = RenderComponent<ECharts>(parameters => parameters
+        var cut = Render<ECharts>(parameters => parameters
             .Add(p => p.Id, "testId"));
 
         // Assert

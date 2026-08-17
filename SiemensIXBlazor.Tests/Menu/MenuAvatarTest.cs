@@ -19,17 +19,17 @@ namespace SiemensIXBlazor.Tests.Menu
         public void MenuAvatarRendersCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<MenuAvatar>(
-                ("Id", "testId"),
-                ("Class", "test-class"),
-                ("Style", "width: 100%"),
-                ("Bottom", "Bottom Text"),
-                ("I18nLogout", "Logout"),
-                ("Image", "testImage"),
-                ("Initials", "TI"),
-                ("Top", "Top Text"),
-                ("HideLogoutButton", true),
-                ("ChildContent", (RenderFragment)(builder =>
+            var cut = Render<MenuAvatar>(parameters => parameters
+                .Add(p => p.Id, "testId")
+                .Add(p => p.Class, "test-class")
+                .Add(p => p.Style, "width: 100%")
+                .Add(p => p.Bottom, "Bottom Text")
+                .Add(p => p.I18nLogout, "Logout")
+                .Add(p => p.Image, "testImage")
+                .Add(p => p.Initials, "TI")
+                .Add(p => p.Top, "Top Text")
+                .Add(p => p.HideLogoutButton, true)
+                .Add(p => p.ChildContent, (RenderFragment)(builder =>
                 {
                     builder.OpenElement(0, "div");
                     builder.AddContent(1, "Test child content");
@@ -46,9 +46,9 @@ namespace SiemensIXBlazor.Tests.Menu
         {
             // Arrange
             var clicked = false;
-            var cut = RenderComponent<MenuAvatar>(
-                ("Id", "navigationMenuAvatar"),
-                ("LogoutClickedEvent", EventCallback.Factory.Create(this, () => clicked = true))
+            var cut = Render<MenuAvatar>(parameters => parameters
+                .Add(p => p.Id, "navigationMenuAvatar")
+                .Add(p => p.LogoutClickedEvent, EventCallback.Factory.Create(this, () => clicked = true))
             );
 
             // Act
@@ -62,7 +62,7 @@ namespace SiemensIXBlazor.Tests.Menu
         public void EnableTopLayerDefaultsToFalse()
         {
             // Arrange
-            var cut = RenderComponent<MenuAvatar>(parameters => parameters
+            var cut = Render<MenuAvatar>(parameters => parameters
                 .Add(p => p.Id, "test-id"));
 
             // Assert
@@ -74,7 +74,7 @@ namespace SiemensIXBlazor.Tests.Menu
         public void EnableTopLayerTrueRendersAttribute()
         {
             // Arrange
-            var cut = RenderComponent<MenuAvatar>(parameters => parameters
+            var cut = Render<MenuAvatar>(parameters => parameters
                 .Add(p => p.Id, "test-id")
                 .Add(p => p.EnableTopLayer, true));
 
@@ -87,7 +87,7 @@ namespace SiemensIXBlazor.Tests.Menu
         public void TooltipTextPropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<MenuAvatar>(parameters => parameters
+            var cut = Render<MenuAvatar>(parameters => parameters
                 .Add(p => p.Id, "test-id")
                 .Add(p => p.TooltipText, "Test tooltip"));
 
@@ -100,7 +100,7 @@ namespace SiemensIXBlazor.Tests.Menu
         public void AriaLabelTooltipPropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<MenuAvatar>(parameters => parameters
+            var cut = Render<MenuAvatar>(parameters => parameters
                 .Add(p => p.Id, "test-id")
                 .Add(p => p.AriaLabelTooltip, "Tooltip label"));
 
@@ -113,7 +113,7 @@ namespace SiemensIXBlazor.Tests.Menu
         public void TooltipTextAndAriaLabelTooltipCanBeCombined()
         {
             // Arrange
-            var cut = RenderComponent<MenuAvatar>(parameters => parameters
+            var cut = Render<MenuAvatar>(parameters => parameters
                 .Add(p => p.Id, "test-id")
                 .Add(p => p.TooltipText, "Hover text")
                 .Add(p => p.AriaLabelTooltip, "Screen reader text"));

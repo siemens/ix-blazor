@@ -19,7 +19,7 @@ namespace SiemensIXBlazor.Tests
         public void BreadcrumbItemRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<BreadcrumbItem>(parameters => parameters
+            var cut = Render<BreadcrumbItem>(parameters => parameters
                 .Add(p => p.BreadcrumbKey, "test-key"));
 
             // Assert
@@ -30,7 +30,7 @@ namespace SiemensIXBlazor.Tests
         public void AllPropertiesAreSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<BreadcrumbItem>(parameters => parameters
+            var cut = Render<BreadcrumbItem>(parameters => parameters
                 .Add(p => p.BreadcrumbKey, "test-key")
                 .Add(p => p.Icon, "testIcon")
                 .Add(p => p.Label, "testLabel")

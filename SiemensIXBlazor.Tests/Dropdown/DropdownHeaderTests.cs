@@ -18,7 +18,7 @@ namespace SiemensIXBlazor.Tests.Dropdown
         public void DropdownHeaderRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<DropdownHeader>(parameters => {
+            var cut = Render<DropdownHeader>(parameters => {
                 parameters.Add(p => p.Label, "testLabel");
             });
 
@@ -29,7 +29,7 @@ namespace SiemensIXBlazor.Tests.Dropdown
         [Fact]
         public void DropdownHeaderDoesNotExposeChildContent()
         {
-            var cut = RenderComponent<DropdownHeader>();
+            var cut = Render<DropdownHeader>((Action<Bunit.ComponentParameterCollectionBuilder<DropdownHeader>>)(_ => { }));
 
             Assert.DoesNotContain("ChildContent", cut.Markup);
         }

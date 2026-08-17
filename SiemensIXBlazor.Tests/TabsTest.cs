@@ -21,15 +21,15 @@ namespace SiemensIXBlazor.Tests
         [Fact]
         public void TabsRendersOfficialProperties()
         {
-            var cut = RenderComponent<Tabs>(
-                ("Id", "testId"),
-                ("Layout", TabsLayout.Stretched),
-                ("Placement", TabsPlacement.Top),
-                ("Rounded", true),
-                ("ActiveTabKey", "tab-2"),
-                ("AriaLabelMoreTabs", "Show every tab"),
-                ("KeyboardNavigation", TabsKeyboardNavigation.Manual),
-                ("Small", true)
+            var cut = Render<Tabs>(parameters => parameters
+                .Add(p => p.Id, "testId")
+                .Add(p => p.Layout, TabsLayout.Stretched)
+                .Add(p => p.Placement, TabsPlacement.Top)
+                .Add(p => p.Rounded, true)
+                .Add(p => p.ActiveTabKey, "tab-2")
+                .Add(p => p.AriaLabelMoreTabs, "Show every tab")
+                .Add(p => p.KeyboardNavigation, TabsKeyboardNavigation.Manual)
+                .Add(p => p.Small, true)
             );
 
             cut.MarkupMatches("<ix-tabs id=\"testId\" layout=\"stretched\" placement=\"top\" rounded active-tab-key=\"tab-2\" aria-label-more-tabs=\"Show every tab\" keyboard-navigation=\"manual\" small></ix-tabs>");
@@ -39,7 +39,7 @@ namespace SiemensIXBlazor.Tests
         public async Task TabChangeEventUpdatesActiveKeyAndInvokesCallback()
         {
             string? changedKey = null;
-            var cut = RenderComponent<Tabs>(parameters => parameters
+            var cut = Render<Tabs>(parameters => parameters
                 .Add(p => p.Id, "testId")
                 .Add(p => p.TabChangeEvent, EventCallback.Factory.Create<string?>(this, value => changedKey = value)));
 
@@ -53,7 +53,7 @@ namespace SiemensIXBlazor.Tests
         public async Task TabCloseEventInvokesCallback()
         {
             string? closedKey = null;
-            var cut = RenderComponent<Tabs>(parameters => parameters
+            var cut = Render<Tabs>(parameters => parameters
                 .Add(p => p.Id, "testId")
                 .Add(p => p.TabCloseEvent, EventCallback.Factory.Create<string?>(this, value => closedKey = value)));
 

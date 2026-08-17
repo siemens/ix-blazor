@@ -19,17 +19,17 @@ namespace SiemensIXBlazor.Tests.Menu
         public void MenuCategoryRendersCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<MenuCategory>(
-                ("Icon", "testIcon"),
-                ("Label", "Test Label"),
-                ("Notifications", 5),
-                ("ChildContent", (RenderFragment)(builder =>
+            var cut = Render<MenuCategory>(parameters => parameters
+                .Add(p => p.Icon, "testIcon")
+                .Add(p => p.Label, "Test Label")
+                .Add(p => p.Notifications, 5)
+                .Add(p => p.ChildContent, (RenderFragment)(builder =>
                 {
                     builder.OpenElement(0, "div");
                     builder.AddContent(1, "Test child content");
                     builder.CloseElement();
-                })),
-                ("TooltipText", "Test tooltip")
+                }))
+                .Add(p => p.TooltipText, "Test tooltip")
             );
 
             // Assert

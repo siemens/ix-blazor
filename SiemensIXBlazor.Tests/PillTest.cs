@@ -20,7 +20,7 @@ namespace SiemensIXBlazor.Tests
         public void PillRendersWithAllParameters()
         {
             // Arrange & Act
-            var cut = RenderComponent<Pill>(parameters =>
+            var cut = Render<Pill>(parameters =>
             {
                 parameters.Add(p => p.AlignLeft, true);
                 parameters.Add(p => p.Background, "red");
@@ -45,7 +45,7 @@ namespace SiemensIXBlazor.Tests
         public void PillRendersWithDefaultParameters()
         {
             // Act
-            var cut = RenderComponent<Pill>();
+            var cut = Render<Pill>((Action<Bunit.ComponentParameterCollectionBuilder<Pill>>)(_ => { }));
 
             // Assert
             cut.MarkupMatches("<ix-pill variant=\"primary\"></ix-pill>");
@@ -58,7 +58,7 @@ namespace SiemensIXBlazor.Tests
             var content = "Simple Text";
 
             // Act
-            var cut = RenderComponent<Pill>(parameters =>
+            var cut = Render<Pill>(parameters =>
             {
                 parameters.Add(p => p.ChildContent, (RenderFragment)(builder =>
                 {
@@ -74,7 +74,7 @@ namespace SiemensIXBlazor.Tests
         public void PillHasBooleanAttributes()
         {
             // Act
-            var cut = RenderComponent<Pill>(parameters =>
+            var cut = Render<Pill>(parameters =>
             {
                 parameters.Add(p => p.AlignLeft, true);
                 parameters.Add(p => p.Outline, true);

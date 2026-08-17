@@ -20,19 +20,19 @@ namespace SiemensIXBlazor.Tests
         public void ProgressIndicatorRendersCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<ProgressIndicator>(
-                ("Value", 50.0),
-                ("Max", 100.0),
-                ("Min", 0.0),
-                ("Label", "Loading"),
-                ("HelperText", "Please wait"),
-                ("Size", ProgressIndicatorSize.md),
-                ("Status", ProgressIndicatorStatus.@default),
-                ("Type", ProgressIndicatorType.linear),
-                ("TextAlignment", ProgressIndicatorTextAlignment.left),
-                ("ShowTextAsTooltip", true),
-                ("Style", "margin: 10px;"),
-                ("Class", "test-class")
+            var cut = Render<ProgressIndicator>(parameters => parameters
+                .Add(p => p.Value, 50.0)
+                .Add(p => p.Max, 100.0)
+                .Add(p => p.Min, 0.0)
+                .Add(p => p.Label, "Loading")
+                .Add(p => p.HelperText, "Please wait")
+                .Add(p => p.Size, ProgressIndicatorSize.md)
+                .Add(p => p.Status, ProgressIndicatorStatus.@default)
+                .Add(p => p.Type, ProgressIndicatorType.linear)
+                .Add(p => p.TextAlignment, ProgressIndicatorTextAlignment.left)
+                .Add(p => p.ShowTextAsTooltip, true)
+                .Add(p => p.Style, "margin: 10px;")
+                .Add(p => p.Class, "test-class")
             );
 
             // Assert
@@ -43,10 +43,10 @@ namespace SiemensIXBlazor.Tests
         public void ProgressIndicatorWithCircularType()
         {
             // Arrange
-            var cut = RenderComponent<ProgressIndicator>(
-                ("Type", ProgressIndicatorType.circular),
-                ("Value", 75.0),
-                ("Status", ProgressIndicatorStatus.success)
+            var cut = Render<ProgressIndicator>(parameters => parameters
+                .Add(p => p.Type, ProgressIndicatorType.circular)
+                .Add(p => p.Value, 75.0)
+                .Add(p => p.Status, ProgressIndicatorStatus.success)
             );
 
             // Assert
@@ -57,10 +57,10 @@ namespace SiemensIXBlazor.Tests
         public void ProgressIndicatorWithTooltip()
         {
             // Arrange
-            var cut = RenderComponent<ProgressIndicator>(
-                ("ShowTextAsTooltip", true),
-                ("HelperText", "Tooltip text"),
-                ("Size", ProgressIndicatorSize.lg)
+            var cut = Render<ProgressIndicator>(parameters => parameters
+                .Add(p => p.ShowTextAsTooltip, true)
+                .Add(p => p.HelperText, "Tooltip text")
+                .Add(p => p.Size, ProgressIndicatorSize.lg)
             );
 
             // Assert
@@ -71,10 +71,10 @@ namespace SiemensIXBlazor.Tests
         public void ProgressIndicatorWithErrorStatus()
         {
             // Arrange
-            var cut = RenderComponent<ProgressIndicator>(
-                ("Status", ProgressIndicatorStatus.error),
-                ("Value", 25.0),
-                ("TextAlignment", ProgressIndicatorTextAlignment.center)
+            var cut = Render<ProgressIndicator>(parameters => parameters
+                .Add(p => p.Status, ProgressIndicatorStatus.error)
+                .Add(p => p.Value, 25.0)
+                .Add(p => p.TextAlignment, ProgressIndicatorTextAlignment.center)
             );
 
             // Assert
@@ -87,7 +87,7 @@ namespace SiemensIXBlazor.Tests
             var helperText = (RenderFragment)(builder => builder.AddContent(0, "Custom helper text"));
             var content = (RenderFragment)(builder => builder.AddContent(0, "50%"));
 
-            var cut = RenderComponent<ProgressIndicator>(parameters => parameters
+            var cut = Render<ProgressIndicator>(parameters => parameters
                 .Add(p => p.HelperTextContent, helperText)
                 .Add(p => p.ChildContent, content));
 

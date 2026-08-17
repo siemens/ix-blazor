@@ -26,7 +26,7 @@ public class TreeTests : TestContextBase
             ["node"] = new() { Id = "node", Data = new TreeData { Name = "Node" } }
         };
 
-        var cut = RenderComponent<Tree>(parameters => parameters
+        var cut = Render<Tree>(parameters => parameters
             .Add(p => p.Id, "tree-id")
             .Add(p => p.Root, "root")
             .Add(p => p.Model, model)
@@ -42,13 +42,13 @@ public class TreeTests : TestContextBase
     [Fact]
     public async Task ContextChanged_ShouldDeserializeDisabledState()
     {
-        var cut = RenderComponent<Tree>(parameters => parameters
+        var cut = Render<Tree>(parameters => parameters
             .Add(p => p.Id, "tree-id")
             .Add(p => p.ContextChangedEvent, EventCallback.Factory.Create<Dictionary<string, TreeContextNode>>(
                 this, _ => { })));
 
         Dictionary<string, TreeContextNode>? receivedContext = null;
-        cut.SetParametersAndRender(parameters => parameters
+        cut.Render(parameters => parameters
             .Add(p => p.ContextChangedEvent, EventCallback.Factory.Create<Dictionary<string, TreeContextNode>>(
                 this, context => receivedContext = context)));
 
@@ -63,11 +63,11 @@ public class TreeTests : TestContextBase
     [Fact]
     public async Task NodeToggled_ShouldExposeOfficialIsExpandedProperty()
     {
-        var cut = RenderComponent<Tree>(parameters => parameters
+        var cut = Render<Tree>(parameters => parameters
             .Add(p => p.Id, "tree-id"));
         TreeNodeToggledEventResult? result = null;
 
-        cut.SetParametersAndRender(parameters => parameters
+        cut.Render(parameters => parameters
             .Add(p => p.NodeToggledEvent, EventCallback.Factory.Create<TreeNodeToggledEventResult>(
                 this, value => result = value)));
 
@@ -82,7 +82,7 @@ public class TreeTests : TestContextBase
     [Fact]
     public async Task TreeMethods_ShouldAcceptOfficialMethodShapes()
     {
-        var cut = RenderComponent<Tree>(parameters => parameters
+        var cut = Render<Tree>(parameters => parameters
             .Add(p => p.Id, "tree-methods"));
 
         await cut.Instance.MarkItemsAsDirty("item1", "item2");
@@ -104,7 +104,7 @@ public class TreeTests : TestContextBase
         var toggled = false;
         var clicked = false;
 
-        var cut = RenderComponent<TreeItem>(parameters => parameters
+        var cut = Render<TreeItem>(parameters => parameters
             .Add(p => p.Text, "Node")
             .Add(p => p.HasChildren, true)
             .Add(p => p.Disabled, true)

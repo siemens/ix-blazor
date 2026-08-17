@@ -20,7 +20,7 @@ namespace SiemensIXBlazor.Tests
         public void ContentHeaderRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<ContentHeader>(parameters => {
+            var cut = Render<ContentHeader>(parameters => {
                 parameters.Add(p => p.Id, "testId");
                 parameters.Add(p => p.HasBackButton, true);
                 parameters.Add(p => p.HeaderSubTitle, "testHeaderSubTitle");
@@ -39,7 +39,7 @@ namespace SiemensIXBlazor.Tests
             var expectedContent = "Expected content";
 
             // Act
-            var cut = RenderComponent<ContentHeader>(parameters => parameters
+            var cut = Render<ContentHeader>(parameters => parameters
                 .Add(p => p.ChildContent, builder =>
                 {
                     builder.AddContent(0, expectedContent);
@@ -56,7 +56,7 @@ namespace SiemensIXBlazor.Tests
             var expectedHeaderContent = "Header content";
 
             // Act
-            var cut = RenderComponent<ContentHeader>(parameters => parameters
+            var cut = Render<ContentHeader>(parameters => parameters
                 .Add(p => p.HeaderContent, builder =>
                 {
                     builder.AddContent(0, expectedHeaderContent);
@@ -71,7 +71,7 @@ namespace SiemensIXBlazor.Tests
         public void ContentHeaderDoesNotRenderHeaderSlotWhenNull()
         {
             // Arrange & Act
-            var cut = RenderComponent<ContentHeader>();
+            var cut = Render<ContentHeader>((Action<Bunit.ComponentParameterCollectionBuilder<ContentHeader>>)(_ => { }));
 
             // Assert
             Assert.DoesNotContain("slot=\"header\"", cut.Markup);
@@ -82,7 +82,7 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             var eventTriggered = false;
-            var cut = RenderComponent<ContentHeader>(parameters => parameters.Add(p => p.BackButtonClickedEvent, EventCallback.Factory.Create(this, () => eventTriggered = true)));
+            var cut = Render<ContentHeader>(parameters => parameters.Add(p => p.BackButtonClickedEvent, EventCallback.Factory.Create(this, () => eventTriggered = true)));
 
             // Act
             cut.Instance.BackButtonClickedEvent.InvokeAsync(true);

@@ -20,7 +20,7 @@ public class ColTest : TestContextBase
     public void ComponentRendersWithParametersSetCorrectly()
     {
         // Arrange
-        var cut = RenderComponent<Col>(parameters => parameters
+        var cut = Render<Col>(parameters => parameters
             .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content")))
             .Add(p => p.Size, ColumnSize._12)
             .Add(p => p.SizeLg, ColumnSize._10)
@@ -34,7 +34,7 @@ public class ColTest : TestContextBase
     [Fact]
     public void ComponentRendersWithoutSizeAttributesByDefault()
     {
-        var cut = RenderComponent<Col>();
+        var cut = Render<Col>((Action<Bunit.ComponentParameterCollectionBuilder<Col>>)(_ => { }));
 
         cut.MarkupMatches("<ix-col></ix-col>");
     }
@@ -42,7 +42,7 @@ public class ColTest : TestContextBase
     [Fact]
     public void ComponentRendersAutoColumnSize()
     {
-        var cut = RenderComponent<Col>(parameters => parameters
+        var cut = Render<Col>(parameters => parameters
             .Add(p => p.Size, ColumnSize.auto));
 
         cut.MarkupMatches("<ix-col size=\"auto\"></ix-col>");

@@ -15,17 +15,17 @@ using Xunit;
 
 namespace SiemensIXBlazor.Tests
 {
-    public class PaneLayoutTests : TestContext
+    public class PaneLayoutTests : TestContextBase
     {
         [Fact]
         public void PaneLayoutRendersCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<PaneLayout>(
-                ("Borderless", true),
-                ("Layout", "full-vertical"),
-                ("Variant", PaneVariant.inline),
-                ("ChildContent", (RenderFragment)(builder => builder.AddMarkupContent(0, "<div>Test content</div>")))
+            var cut = Render<PaneLayout>(parameters => parameters
+                .Add(p => p.Borderless, true)
+                .Add(p => p.Layout, "full-vertical")
+                .Add(p => p.Variant, PaneVariant.inline)
+                .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "<div>Test content</div>")))
             );
 
             // Assert
@@ -35,7 +35,7 @@ namespace SiemensIXBlazor.Tests
         [Fact]
         public void PaneLayoutRendersNamedSlots()
         {
-            var cut = RenderComponent<PaneLayout>(parameters => parameters
+            var cut = Render<PaneLayout>(parameters => parameters
                 .Add(p => p.Left, builder => builder.AddContent(0, "Left content"))
                 .Add(p => p.Top, builder => builder.AddContent(0, "Top content"))
                 .Add(p => p.Content, builder => builder.AddContent(0, "Content area"))

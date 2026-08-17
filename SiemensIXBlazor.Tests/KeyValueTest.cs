@@ -20,7 +20,7 @@ public class KeyValueTest : TestContextBase
     public void ComponentRendersCustomValueThroughNamedSlot()
     {
         // Arrange
-        var cut = RenderComponent<KeyValue>(parameters => parameters
+        var cut = Render<KeyValue>(parameters => parameters
             .Add(p => p.CustomValue, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content")))
             .Add(p => p.Icon, "testIcon")
             .Add(p => p.AriaLabelIcon, "Test icon")
@@ -42,7 +42,7 @@ public class KeyValueTest : TestContextBase
     public void ComponentUsesTextValueInsteadOfCustomValueSlotWhenValueIsSet()
     {
         // Arrange
-        var cut = RenderComponent<KeyValue>(parameters => parameters
+        var cut = Render<KeyValue>(parameters => parameters
             .Add(p => p.CustomValue, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content")))
             .Add(p => p.Label, "testLabel")
             .Add(p => p.Value, "testValue"));
@@ -57,7 +57,7 @@ public class KeyValueTest : TestContextBase
     public void ComponentUsesOfficialDefaultLabelPosition()
     {
         // Arrange
-        var cut = RenderComponent<KeyValue>(parameters => parameters
+        var cut = Render<KeyValue>(parameters => parameters
             .Add(p => p.Label, "testLabel"));
 
         // Assert

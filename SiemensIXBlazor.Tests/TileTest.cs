@@ -21,9 +21,9 @@ namespace SiemensIXBlazor.Tests
         public void TileRendersCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<Tile>(
-                ("Size", TileSize.Medium),
-                ("ChildContent", (RenderFragment)(builder =>
+            var cut = Render<Tile>(parameters => parameters
+                .Add(p => p.Size, TileSize.Medium)
+                .Add(p => p.ChildContent, (RenderFragment)(builder =>
                 {
                     builder.AddMarkupContent(0, "<div>Test child content</div>");
                 }))

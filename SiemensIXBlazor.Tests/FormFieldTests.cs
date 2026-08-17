@@ -27,7 +27,7 @@ public class FormFieldTests : TestContextBase
     [Fact]
     public void InputRendersOfficialDefaultsAndProperties()
     {
-        var cut = RenderComponent<Input>(parameters => parameters
+        var cut = Render<Input>(parameters => parameters
             .Add(p => p.Id, "input")
             .Add(p => p.Type, InputType.Email)
             .Add(p => p.SuppressSubmitOnEnter, true)
@@ -42,7 +42,7 @@ public class FormFieldTests : TestContextBase
     [Fact]
     public void NumberInputSupportsNullableValueAndOfficialProperties()
     {
-        var cut = RenderComponent<NumberInput>(parameters => parameters
+        var cut = Render<NumberInput>(parameters => parameters
             .Add(p => p.Id, "number")
             .Add(p => p.AllowEmptyValueChange, true)
             .Add(p => p.Value, null)
@@ -58,7 +58,7 @@ public class FormFieldTests : TestContextBase
     public async Task NumberInputEmitsNullableValue()
     {
         double? received = 1;
-        var cut = RenderComponent<NumberInput>(parameters => parameters
+        var cut = Render<NumberInput>(parameters => parameters
             .Add(p => p.Id, "number")
             .Add(p => p.ValueChangeEvent, EventCallback.Factory.Create<double?>(this, value => received = value)));
 
@@ -71,7 +71,7 @@ public class FormFieldTests : TestContextBase
     [Fact]
     public void TextAreaUsesTypedResizeBehavior()
     {
-        var cut = RenderComponent<TextArea>(parameters => parameters
+        var cut = Render<TextArea>(parameters => parameters
             .Add(p => p.Id, "textarea")
             .Add(p => p.ResizeBehavior, TextAreaResizeBehavior.Vertical));
 
@@ -82,7 +82,7 @@ public class FormFieldTests : TestContextBase
     public async Task InputValidityStateUsesTypedCallback()
     {
         ValidityState? received = null;
-        var cut = RenderComponent<Input>(parameters => parameters
+        var cut = Render<Input>(parameters => parameters
             .Add(p => p.Id, "input")
             .Add(p => p.ValidityStateChangeEvent,
                 EventCallback.Factory.Create<ValidityState>(this, value => received = value)));
@@ -96,7 +96,7 @@ public class FormFieldTests : TestContextBase
     [Fact]
     public void CustomFieldOnlyRendersItsDefaultSlot()
     {
-        var cut = RenderComponent<CustomField>(parameters => parameters
+        var cut = Render<CustomField>(parameters => parameters
             .Add(p => p.Id, "custom")
             .AddChildContent("control"));
 
@@ -107,11 +107,11 @@ public class FormFieldTests : TestContextBase
     [Fact]
     public void FieldLabelAndHelperTextMapTheirPublicAttributes()
     {
-        var label = RenderComponent<FieldLabel>(parameters => parameters
+        var label = Render<FieldLabel>(parameters => parameters
             .Add(p => p.HtmlFor, "input")
             .Add(p => p.Required, true)
             .AddChildContent("Label"));
-        var helper = RenderComponent<HelperText>(parameters => parameters
+        var helper = Render<HelperText>(parameters => parameters
             .Add(p => p.HtmlFor, "input")
             .Add(p => p.HelperText, "Help")
             .Add(p => p.InvalidText, "Error"));

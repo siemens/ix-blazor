@@ -21,7 +21,7 @@ namespace SiemensIXBlazor.Tests
         [Fact]
         public void TabItemRendersOfficialDefaults()
         {
-            var component = RenderComponent<TabItem>(parameters => parameters
+            var component = Render<TabItem>(parameters => parameters
                 .Add(p => p.TabKey, "tab-1"));
 
             var tabItem = component.Find("ix-tab-item");
@@ -36,7 +36,7 @@ namespace SiemensIXBlazor.Tests
         [Fact]
         public void TabItemRendersPublicPropertiesAndContent()
         {
-            var component = RenderComponent<TabItem>(parameters => parameters
+            var component = Render<TabItem>(parameters => parameters
                 .Add(p => p.Id, "my-tab")
                 .Add(p => p.TabKey, "tab-1")
                 .Add(p => p.Class, "custom-class")
@@ -68,7 +68,7 @@ namespace SiemensIXBlazor.Tests
         public async Task TabClickEventDeserializesTypedDetail()
         {
             TabClickDetail? clicked = null;
-            var component = RenderComponent<TabItem>(parameters => parameters
+            var component = Render<TabItem>(parameters => parameters
                 .Add(p => p.TabKey, "tab-1")
                 .Add(p => p.TabClickEvent, EventCallback.Factory.Create<TabClickDetail>(this, value => clicked = value)));
 
@@ -84,7 +84,7 @@ namespace SiemensIXBlazor.Tests
         public async Task TabCloseEventDeserializesTypedDetail()
         {
             TabClickDetail? closed = null;
-            var component = RenderComponent<TabItem>(parameters => parameters
+            var component = Render<TabItem>(parameters => parameters
                 .Add(p => p.TabKey, "tab-1")
                 .Add(p => p.TabCloseEvent, EventCallback.Factory.Create<TabClickDetail>(this, value => closed = value)));
 

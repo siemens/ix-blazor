@@ -18,7 +18,7 @@ public class CheckboxTests : TestContextBase
     [Fact]
     public void CheckboxRendersOfficialProperties()
     {
-        var cut = RenderComponent<Checkbox>(parameters => parameters
+        var cut = Render<Checkbox>(parameters => parameters
             .Add(p => p.Id, "checkbox")
             .Add(p => p.Label, "Accept terms")
             .Add(p => p.Name, "terms")
@@ -33,7 +33,7 @@ public class CheckboxTests : TestContextBase
     [Fact]
     public void CheckboxGroupRendersValidationTextAndDirection()
     {
-        var cut = RenderComponent<CheckboxGroup>(parameters => parameters
+        var cut = Render<CheckboxGroup>(parameters => parameters
             .Add(p => p.Id, "checkbox-group")
             .Add(p => p.Label, "Options")
             .Add(p => p.HelperText, "Choose any")
@@ -51,7 +51,9 @@ public class CheckboxTests : TestContextBase
     [Fact]
     public void CheckboxGroupDirectionDefaultsToColumn()
     {
-        var cut = RenderComponent<CheckboxGroup>(("Id", "checkbox-group"));
+        var cut = Render<CheckboxGroup>(parameters => parameters
+            .Add(p => p.Id, "checkbox-group")
+        );
 
         Assert.Equal(CheckboxGroupDirection.Column, cut.Instance.Direction);
         Assert.Equal("column", cut.Find("ix-checkbox-group").GetAttribute("direction"));

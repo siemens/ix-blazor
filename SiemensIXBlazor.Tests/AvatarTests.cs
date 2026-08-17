@@ -18,7 +18,7 @@ namespace SiemensIXBlazor.Tests
         public void AvatarRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<Avatar>(parameters => {
+            var cut = Render<Avatar>(parameters => {
                 parameters.Add(p => p.Image, "testImage");
                 parameters.Add(p => p.TooltipText, "testTooltipText");
                 parameters.Add(p => p.Initials, "testInitials");
@@ -34,7 +34,7 @@ namespace SiemensIXBlazor.Tests
         [Fact]
         public void TooltipTextIsRenderedWithoutChangingOtherAvatarOptions()
         {
-            var cut = RenderComponent<Avatar>(parameters => parameters
+            var cut = Render<Avatar>(parameters => parameters
                 .Add(p => p.Initials, "JD")
                 .Add(p => p.TooltipText, "John Doe"));
 

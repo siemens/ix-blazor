@@ -30,7 +30,7 @@ public class SliderTests : TestContextBase
         var warningText = "Warning value";
         var validText = "Valid value";
 
-        var cut = RenderComponent<Slider>(parameters => parameters
+        var cut = Render<Slider>(parameters => parameters
             .Add(p => p.Id, id)
             .Add(p => p.Value, 42)
             .Add(p => p.HelperText, helperText)
@@ -71,7 +71,7 @@ public class SliderTests : TestContextBase
     [Fact]
     public void Slider_RendersTypedLabelSlots()
     {
-        var cut = RenderComponent<Slider>(parameters => parameters
+        var cut = Render<Slider>(parameters => parameters
             .Add(p => p.Id, "slider-slots")
             .Add(p => p.LabelStart, (RenderFragment)(builder => builder.AddContent(0, "Minimum")))
             .Add(p => p.LabelEnd, (RenderFragment)(builder => builder.AddContent(0, "Maximum"))));
@@ -85,7 +85,7 @@ public class SliderTests : TestContextBase
     {
         // Arrange
         double eventValue = 0;
-        var cut = RenderComponent<Slider>(parameters => parameters
+        var cut = Render<Slider>(parameters => parameters
             .Add(p => p.Id, "slider2")
             .Add(p => p.ValueChangeEvent, EventCallback.Factory.Create<double>(this, v => eventValue = v))
         );
@@ -130,7 +130,7 @@ public class SliderTests : TestContextBase
         var markerArray = new double[] { 0, 25, 50 };
 
         // Act
-        var cut = RenderComponent<Slider>(parameters => parameters
+        var cut = Render<Slider>(parameters => parameters
             .Add(p => p.Id, "slider-js")
             .Add(p => p.Marker, markerArray)
         );

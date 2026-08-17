@@ -19,7 +19,7 @@ namespace SiemensIXBlazor.Tests
         public void ApplicationHeaderRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<ApplicationHeader>(parameters => {
+            var cut = Render<ApplicationHeader>(parameters => {
                 parameters.Add(p => p.Name, "testName");
                 parameters.Add(p => p.NameSuffix, "testSuffix");
                 parameters.Add(p => p.CompanyLogo, "logo.png");
@@ -44,7 +44,7 @@ namespace SiemensIXBlazor.Tests
             var expectedContent = "Expected content";
 
             // Act
-            var cut = RenderComponent<ApplicationHeader>(parameters => parameters
+            var cut = Render<ApplicationHeader>(parameters => parameters
                 .Add(p => p.ChildContent, builder => 
                 {
                     builder.AddContent(0, expectedContent);
@@ -61,7 +61,7 @@ namespace SiemensIXBlazor.Tests
             var expectedSecondaryContent = "Secondary content";
 
             // Act
-            var cut = RenderComponent<ApplicationHeader>(parameters => parameters
+            var cut = Render<ApplicationHeader>(parameters => parameters
                 .Add(p => p.Secondary, builder => 
                 {
                     builder.AddContent(0, expectedSecondaryContent);
@@ -76,7 +76,7 @@ namespace SiemensIXBlazor.Tests
         [Fact]
         public void ApplicationHeaderRendersNamedSlots()
         {
-            var cut = RenderComponent<ApplicationHeader>(parameters => parameters
+            var cut = Render<ApplicationHeader>(parameters => parameters
                 .Add(p => p.Overflow, builder => builder.AddContent(0, "Overflow"))
                 .Add(p => p.Logo, builder => builder.AddContent(1, "Logo"))
                 .Add(p => p.Avatar, builder => builder.AddContent(2, "Avatar")));
@@ -90,7 +90,7 @@ namespace SiemensIXBlazor.Tests
         public void ApplicationHeaderDoesNotRenderSecondarySlotWhenNull()
         {
             // Arrange & Act
-            var cut = RenderComponent<ApplicationHeader>(parameters => {
+            var cut = Render<ApplicationHeader>(parameters => {
                 parameters.Add(p => p.Name, "testName");
             });
 
@@ -102,9 +102,9 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             var eventTriggered = false;
-            var cut = RenderComponent<ApplicationHeader>(
-                ("Id", "headerId"),
-                ("OpenAppSwitchEvent", EventCallback.Factory.Create(this, () => { eventTriggered = true; }))
+            var cut = Render<ApplicationHeader>(parameters => parameters
+                .Add(p => p.Id, "headerId")
+                .Add(p => p.OpenAppSwitchEvent, EventCallback.Factory.Create(this, () => { eventTriggered = true; }))
             );
 
             // Act
@@ -118,9 +118,9 @@ namespace SiemensIXBlazor.Tests
         public async Task MenuToggleEventWorks()
         {
             var menuExpanded = false;
-            var cut = RenderComponent<ApplicationHeader>(
-                ("Id", "headerId"),
-                ("MenuToggleEvent", EventCallback.Factory.Create<bool>(this, value => menuExpanded = value))
+            var cut = Render<ApplicationHeader>(parameters => parameters
+                .Add(p => p.Id, "headerId")
+                .Add(p => p.MenuToggleEvent, EventCallback.Factory.Create<bool>(this, value => menuExpanded = value))
             );
 
             await cut.InvokeAsync(() => cut.Instance.MenuToggle(true));
@@ -132,7 +132,7 @@ namespace SiemensIXBlazor.Tests
         public void EnableTopLayerDefaultsToFalse()
         {
             // Arrange
-            var cut = RenderComponent<ApplicationHeader>(parameters => parameters
+            var cut = Render<ApplicationHeader>(parameters => parameters
                 .Add(p => p.Id, "test-id"));
 
             // Assert
@@ -144,7 +144,7 @@ namespace SiemensIXBlazor.Tests
         public void EnableTopLayerTrueRendersAttribute()
         {
             // Arrange
-            var cut = RenderComponent<ApplicationHeader>(parameters => parameters
+            var cut = Render<ApplicationHeader>(parameters => parameters
                 .Add(p => p.Id, "test-id")
                 .Add(p => p.EnableTopLayer, true));
 

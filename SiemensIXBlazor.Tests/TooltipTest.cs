@@ -22,12 +22,12 @@ namespace SiemensIXBlazor.Tests
         public void TooltipRendersCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<Tooltip>(
-                ("Id", "tooltipId"),
-                ("TitleContent", "Test Tooltip"),
-                ("Interactive", true),
-                ("Placement", TooltipVariant.bottom),
-                ("For", "testElement")
+            var cut = Render<Tooltip>(parameters => parameters
+                .Add(p => p.Id, "tooltipId")
+                .Add(p => p.TitleContent, "Test Tooltip")
+                .Add(p => p.Interactive, true)
+                .Add(p => p.Placement, TooltipVariant.bottom)
+                .Add(p => p.For, "testElement")
             );
 
             // Assert

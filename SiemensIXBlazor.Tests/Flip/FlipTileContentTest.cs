@@ -19,7 +19,7 @@ public class FlipTileContentTest : TestContextBase
     public void ComponentRendersAndPropertiesSetCorrectly()
     {
         // Arrange
-        var cut = RenderComponent<FlipTileContent>(parameters => parameters.Add(p => p.ChildContent,
+        var cut = Render<FlipTileContent>(parameters => parameters.Add(p => p.ChildContent,
             (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content"))));
 
         // Assert

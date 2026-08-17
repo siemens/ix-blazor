@@ -19,7 +19,7 @@ public class KeyValueListTest : TestContextBase
     public void ComponentRendersWithParametersSetCorrectly()
     {
         // Arrange
-        var cut = RenderComponent<KeyValueList>(parameters => parameters
+        var cut = Render<KeyValueList>(parameters => parameters
             .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content")))
             .Add(p => p.Striped, true));
 

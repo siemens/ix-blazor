@@ -23,7 +23,7 @@ namespace SiemensIXBlazor.Tests
         public void ComponentRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<AGGrid>();
+            var cut = Render<AGGrid>((Action<Bunit.ComponentParameterCollectionBuilder<AGGrid>>)(_ => { }));
 
             // Assert
             cut.MarkupMatches("<div id=''></div>");
@@ -34,7 +34,7 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             var eventTriggered = false;
-            var cut = RenderComponent<AGGrid>(parameters => parameters.Add(p => p.OnCellClicked, EventCallback.Factory.Create(this, () => eventTriggered = true)));
+            var cut = Render<AGGrid>(parameters => parameters.Add(p => p.OnCellClicked, EventCallback.Factory.Create(this, () => eventTriggered = true)));
 
             // Act
             cut.Instance.OnCellClicked.InvokeAsync(true);
@@ -47,7 +47,7 @@ namespace SiemensIXBlazor.Tests
         public void IdPropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<AGGrid>(parameters => parameters.Add(p => p.Id, "testId"));
+            var cut = Render<AGGrid>(parameters => parameters.Add(p => p.Id, "testId"));
 
             // Assert
             Assert.Equal("testId", cut.Instance.Id);
@@ -79,7 +79,7 @@ namespace SiemensIXBlazor.Tests
                 .Returns(new ValueTask<IJSObjectReference>(jsObjectReferenceMock.Object));
             Services.AddSingleton(jsRuntimeMock.Object);
 
-            var cut = RenderComponent<AGGrid>(parameters => parameters.Add(p => p.Id, "testId"));
+            var cut = Render<AGGrid>(parameters => parameters.Add(p => p.Id, "testId"));
 
             // Act
             var result = await cut.Instance.CreateGrid(gridOptions);
@@ -95,7 +95,7 @@ namespace SiemensIXBlazor.Tests
             // Arrange
             var jsRuntimeMock = new Mock<IJSRuntime>();
             Services.AddSingleton(jsRuntimeMock.Object);
-            var cut = RenderComponent<AGGrid>(parameters => parameters.Add(p => p.Id, "testId"));
+            var cut = Render<AGGrid>(parameters => parameters.Add(p => p.Id, "testId"));
             var jsObjectReferenceMock = new Mock<IJSObjectReference>();
             jsRuntimeMock.Setup(x => x.InvokeAsync<object>("siemensIXInterop.agGridInterop.getSelectedRows", It.IsAny<object[]>()))
                 .ReturnsAsync(new object());

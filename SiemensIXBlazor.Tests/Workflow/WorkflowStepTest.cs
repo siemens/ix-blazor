@@ -21,13 +21,13 @@ namespace SiemensIXBlazor.Tests.Workflow
         public void WorkflowStepRendersCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<WorkflowStep>(
-                ("Clickable", true),
-                ("Disabled", true),
-                ("Position", WorkflowPosition.First),
-                ("Selected", true),
-                ("Status", WorkflowStatus.Open),
-                ("Vertical", true)
+            var cut = Render<WorkflowStep>(parameters => parameters
+                .Add(p => p.Clickable, true)
+                .Add(p => p.Disabled, true)
+                .Add(p => p.Position, WorkflowPosition.First)
+                .Add(p => p.Selected, true)
+                .Add(p => p.Status, WorkflowStatus.Open)
+                .Add(p => p.Vertical, true)
             );
 
             // Assert
@@ -37,7 +37,7 @@ namespace SiemensIXBlazor.Tests.Workflow
         [Fact]
         public void CustomIconRendersInCustomIconSlot()
         {
-            var cut = RenderComponent<WorkflowStep>(parameters => parameters
+            var cut = Render<WorkflowStep>(parameters => parameters
                 .Add(p => p.CustomIcon, (RenderFragment)(builder => builder.AddMarkupContent(0, "<ix-icon name=\"star\"></ix-icon>")))
                 .Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddContent(0, "Step"))));
 

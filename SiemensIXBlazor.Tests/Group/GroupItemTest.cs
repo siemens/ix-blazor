@@ -19,7 +19,7 @@ public class GroupItemTest : TestContextBase
     public void ComponentRendersWithParametersSetCorrectly()
     {
         // Arrange
-        var cut = RenderComponent<GroupItem>(parameters => parameters
+        var cut = Render<GroupItem>(parameters => parameters
             .Add(p => p.Id, "testId")
             .Add(p => p.Disabled, true)
             .Add(p => p.Icon, "testIcon")
@@ -39,7 +39,7 @@ public class GroupItemTest : TestContextBase
     {
         // Arrange
         var wasCalled = false;
-        var cut = RenderComponent<GroupItem>(parameters => parameters
+        var cut = Render<GroupItem>(parameters => parameters
             .Add(p => p.Id, "testId")
             .Add(p => p.SelectedChangeEvent, EventCallback.Factory.Create<string>(this, id => { wasCalled = true; })));
 
@@ -54,7 +54,7 @@ public class GroupItemTest : TestContextBase
     public void ComponentRendersWithChildContent()
     {
         // Arrange
-        var cut = RenderComponent<GroupItem>(parameters => parameters
+        var cut = Render<GroupItem>(parameters => parameters
             .Add(p => p.Id, "testId")
             .AddChildContent("<button>Custom Entry</button>"));
 

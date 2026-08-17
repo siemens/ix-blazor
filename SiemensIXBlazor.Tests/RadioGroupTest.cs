@@ -20,7 +20,7 @@ public class RadioGroupTests : TestContextBase
     [Fact]
     public void RendersPublicPropertiesAndChildContent()
     {
-        var cut = RenderComponent<RadioGroup>(parameters => parameters
+        var cut = Render<RadioGroup>(parameters => parameters
             .Add(p => p.Id, "radio-group")
             .Add(p => p.Label, "Storage options")
             .Add(p => p.HelperText, "Choose one")
@@ -39,7 +39,9 @@ public class RadioGroupTests : TestContextBase
     [Fact]
     public void DirectionDefaultsToColumn()
     {
-        var cut = RenderComponent<RadioGroup>(("Id", "radio-group"));
+        var cut = Render<RadioGroup>(parameters => parameters
+            .Add(p => p.Id, "radio-group")
+        );
 
         Assert.Equal(RadioGroupDirection.Column, cut.Instance.Direction);
         Assert.Equal("column", cut.Find("ix-radio-group").GetAttribute("direction"));
@@ -49,7 +51,7 @@ public class RadioGroupTests : TestContextBase
     public async Task ValueChangeEventUpdatesValueAndInvokesCallback()
     {
         string? received = null;
-        var cut = RenderComponent<RadioGroup>(parameters => parameters
+        var cut = Render<RadioGroup>(parameters => parameters
             .Add(p => p.Id, "radio-group")
             .Add(p => p.ValueChangeEvent, EventCallback.Factory.Create<string>(this, value => received = value)));
 

@@ -25,7 +25,7 @@ public class ThemeTests : TestContextBase
         var themeName = "dark";
 
         // Act
-        var cut = RenderComponent<Theme>();
+        var cut = Render<Theme>((Action<Bunit.ComponentParameterCollectionBuilder<Theme>>)(_ => { }));
         await cut.Instance.SetTheme(themeName);
 
         // Assert
@@ -49,7 +49,7 @@ public class ThemeTests : TestContextBase
         Services.AddSingleton<IJSRuntime>(jsRuntimeMock.Object);
 
         // Act
-        var cut = RenderComponent<Theme>();
+        var cut = Render<Theme>((Action<Bunit.ComponentParameterCollectionBuilder<Theme>>)(_ => { }));
         await cut.Instance.ToggleTheme();
 
         // Assert
@@ -70,7 +70,7 @@ public class ThemeTests : TestContextBase
         var useSystemTheme = true;
 
         // Act
-        var cut = RenderComponent<Theme>();
+        var cut = Render<Theme>((Action<Bunit.ComponentParameterCollectionBuilder<Theme>>)(_ => { }));
         await cut.Instance.ToggleSystemTheme(useSystemTheme);
 
         // Assert

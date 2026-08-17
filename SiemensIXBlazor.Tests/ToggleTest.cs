@@ -20,15 +20,15 @@ namespace SiemensIXBlazor.Tests
         public void ToggleRendersCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<Toggle>(
-                ("Id", "testId"),
-                ("Checked", true),
-                ("Disabled", true),
-                ("HideText", true),
-                ("Indeterminate", true),
-                ("TextIndeterminate", "Mixed"),
-                ("TextOff", "Off"),
-                ("TextOn", "On")
+            var cut = Render<Toggle>(parameters => parameters
+                .Add(p => p.Id, "testId")
+                .Add(p => p.Checked, true)
+                .Add(p => p.Disabled, true)
+                .Add(p => p.HideText, true)
+                .Add(p => p.Indeterminate, true)
+                .Add(p => p.TextIndeterminate, "Mixed")
+                .Add(p => p.TextOff, "Off")
+                .Add(p => p.TextOn, "On")
             );
 
             // Assert
@@ -40,9 +40,9 @@ namespace SiemensIXBlazor.Tests
         {
             // Arrange
             var checkedChanged = false;
-            var cut = RenderComponent<Toggle>(
-                ("Id", "testId"),
-                ("CheckedChangeEvent", EventCallback.Factory.Create(this, (bool value) => checkedChanged = true))
+            var cut = Render<Toggle>(parameters => parameters
+                .Add(p => p.Id, "testId")
+                .Add(p => p.CheckedChangeEvent, EventCallback.Factory.Create(this, (bool value) => checkedChanged = true))
             );
 
             // Act

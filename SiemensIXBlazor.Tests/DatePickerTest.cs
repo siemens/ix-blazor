@@ -20,7 +20,7 @@ public class DatePickerTest : TestContextBase
     [Fact]
     public void OfficialPropertiesRender()
     {
-        var cut = RenderComponent<DatePicker>(parameters => parameters
+        var cut = Render<DatePicker>(parameters => parameters
             .Add(p => p.Id, "date-picker")
             .Add(p => p.Format, "dd/LL/yyyy")
             .Add(p => p.SingleSelection, true)
@@ -42,7 +42,7 @@ public class DatePickerTest : TestContextBase
     public async Task EventsDeserializeDateRangePayload()
     {
         DatePickerResponse? received = null;
-        var cut = RenderComponent<DatePicker>(parameters => parameters
+        var cut = Render<DatePicker>(parameters => parameters
             .Add(p => p.Id, "date-picker")
             .Add(p => p.DateSelectEvent,
                 EventCallback.Factory.Create<DatePickerResponse>(this, value => received = value)));

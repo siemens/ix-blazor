@@ -20,7 +20,7 @@ public class SelectItemTests : TestContextBase
     public void ComponentRendersWithoutCrashing()
     {
         // Arrange
-        var cut = RenderComponent<SelectItem>(parameters => parameters
+        var cut = Render<SelectItem>(parameters => parameters
             .Add(p => p.Id, "test-select-item"));
 
         // Assert
@@ -31,7 +31,7 @@ public class SelectItemTests : TestContextBase
     public void IdPropertyIsSetCorrectly()
     {
         // Arrange
-        var cut = RenderComponent<SelectItem>(parameters => parameters
+        var cut = Render<SelectItem>(parameters => parameters
             .Add(p => p.Id, "custom-item-id"));
 
         // Assert
@@ -43,7 +43,7 @@ public class SelectItemTests : TestContextBase
     public void LabelPropertyIsSetCorrectly()
     {
         // Arrange
-        var cut = RenderComponent<SelectItem>(parameters => parameters
+        var cut = Render<SelectItem>(parameters => parameters
             .Add(p => p.Id, "test-select-item")
             .Add(p => p.Label, "Test Label"));
 
@@ -56,7 +56,7 @@ public class SelectItemTests : TestContextBase
     public void ValuePropertyIsSetCorrectly()
     {
         // Arrange
-        var cut = RenderComponent<SelectItem>(parameters => parameters
+        var cut = Render<SelectItem>(parameters => parameters
             .Add(p => p.Id, "test-select-item")
             .Add(p => p.Value, "item-value"));
 
@@ -69,7 +69,7 @@ public class SelectItemTests : TestContextBase
     public void SelectedPropertyIsSetCorrectly()
     {
         // Arrange
-        var cut = RenderComponent<SelectItem>(parameters => parameters
+        var cut = Render<SelectItem>(parameters => parameters
             .Add(p => p.Id, "test-select-item")
             .Add(p => p.Selected, true));
 
@@ -81,7 +81,7 @@ public class SelectItemTests : TestContextBase
     [Fact]
     public void DisabledPropertyIsSetCorrectly()
     {
-        var cut = RenderComponent<SelectItem>(parameters => parameters
+        var cut = Render<SelectItem>(parameters => parameters
             .Add(p => p.Id, "test-select-item")
             .Add(p => p.Disabled, true));
 
@@ -93,7 +93,7 @@ public class SelectItemTests : TestContextBase
     public void ClassPropertyIsSetCorrectly()
     {
         // Arrange
-        var cut = RenderComponent<SelectItem>(parameters => parameters
+        var cut = Render<SelectItem>(parameters => parameters
             .Add(p => p.Id, "test-select-item")
             .Add(p => p.Class, "custom-class"));
 
@@ -106,7 +106,7 @@ public class SelectItemTests : TestContextBase
     public void StylePropertyIsSetCorrectly()
     {
         // Arrange
-        var cut = RenderComponent<SelectItem>(parameters => parameters
+        var cut = Render<SelectItem>(parameters => parameters
             .Add(p => p.Id, "test-select-item")
             .Add(p => p.Style, "color: red;"));
 
@@ -120,7 +120,7 @@ public class SelectItemTests : TestContextBase
     {
         // Arrange
         string? clickedItem = null;
-        var cut = RenderComponent<SelectItem>(parameters => parameters
+        var cut = Render<SelectItem>(parameters => parameters
             .Add(p => p.Id, "test-select-item")
             .Add(p => p.ItemClickEvent, EventCallback.Factory.Create<string>(this, (item) => clickedItem = item)));
 
@@ -135,7 +135,7 @@ public class SelectItemTests : TestContextBase
     public void CompleteSelectItemRendersCorrectly()
     {
         // Arrange & Act
-        var cut = RenderComponent<SelectItem>(parameters => parameters
+        var cut = Render<SelectItem>(parameters => parameters
             .Add(p => p.Id, "selectItem1")
             .Add(p => p.Label, "Item 1")
             .Add(p => p.Value, "1")
@@ -152,7 +152,7 @@ public class SelectItemTests : TestContextBase
     public void SelectItemRendersWithinSelect()
     {
         // Arrange & Act
-        var cut = RenderComponent<Components.Select>(parameters => parameters
+        var cut = Render<Components.Select>(parameters => parameters
             .Add(p => p.Id, "parent-select")
             .Add(p => p.Value, "1")
             .Add(p => p.ChildContent, builder =>

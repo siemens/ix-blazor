@@ -20,7 +20,7 @@ namespace SiemensIXBlazor.Tests
             var expectedContent = "Expected content";
 
             // Act
-            var cut = RenderComponent<Content>(parameters => parameters
+            var cut = Render<Content>(parameters => parameters
                 .Add(p => p.ChildContent, builder =>
                 {
                     builder.AddContent(0, expectedContent);

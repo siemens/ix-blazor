@@ -18,7 +18,7 @@ public class GroupTest : TestContextBase
     public void ComponentRendersWithParametersSetCorrectly()
     {
         // Arrange
-        var cut = RenderComponent<Components.Group>(parameters => parameters
+        var cut = Render<Components.Group>(parameters => parameters
             .Add(p => p.Id, "testId")
             .Add(p => p.Expanded, true)
             .Add(p => p.ExpandOnHeaderClick, false)
@@ -44,7 +44,7 @@ public class GroupTest : TestContextBase
         var selectGroupEventWasCalled = false;
         var selectItemEventValue = 0;
 
-        var cut = RenderComponent<Components.Group>(parameters => parameters
+        var cut = Render<Components.Group>(parameters => parameters
             .Add(p => p.Id, "testId")
             .Add(p => p.ExpandedChangedEvent,
                 EventCallback.Factory.Create(this, (bool value) => { expandedChangedEventWasCalled = true; }))

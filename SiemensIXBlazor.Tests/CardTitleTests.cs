@@ -17,7 +17,7 @@ public class CardTitleTests : TestContextBase
     [Fact]
     public void RendersDefaultAndTitleActionsSlots()
     {
-        var cut = RenderComponent<CardTitle>(parameters => parameters
+        var cut = Render<CardTitle>(parameters => parameters
             .Add(p => p.ChildContent, builder => builder.AddContent(0, "Title"))
             .Add(p => p.TitleActions, builder => builder.AddContent(0, "Actions")));
 

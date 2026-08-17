@@ -18,7 +18,7 @@ namespace SiemensIXBlazor.Tests
         public void CardRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<Card>(parameters =>
+            var cut = Render<Card>(parameters =>
             {
                 parameters.Add(p => p.Selected, true);
                 parameters.Add(p => p.Variant, Enums.CardVariant.neutral);
@@ -35,7 +35,7 @@ namespace SiemensIXBlazor.Tests
             var expectedContent = "Expected content";
 
             // Act
-            var cut = RenderComponent<Card>(parameters => parameters
+            var cut = Render<Card>(parameters => parameters
                 .Add(p => p.ChildContent, builder =>
                 {
                     builder.AddContent(0, expectedContent);
@@ -49,7 +49,7 @@ namespace SiemensIXBlazor.Tests
         public void PassiveDefaultsToFalse()
         {
             // Arrange
-            var cut = RenderComponent<Card>();
+            var cut = Render<Card>((Action<Bunit.ComponentParameterCollectionBuilder<Card>>)(_ => { }));
 
             // Assert
             Assert.False(cut.Instance.Passive);
@@ -60,7 +60,7 @@ namespace SiemensIXBlazor.Tests
         public void PassiveTrueRendersAttribute()
         {
             // Arrange
-            var cut = RenderComponent<Card>(parameters => parameters
+            var cut = Render<Card>(parameters => parameters
                 .Add(p => p.Passive, true));
 
             // Assert
@@ -71,7 +71,7 @@ namespace SiemensIXBlazor.Tests
         [Fact]
         public void SelectedDefaultsToFalse()
         {
-            var cut = RenderComponent<Card>();
+            var cut = Render<Card>((Action<Bunit.ComponentParameterCollectionBuilder<Card>>)(_ => { }));
 
             Assert.False(cut.Instance.Selected);
             Assert.DoesNotContain("selected", cut.Markup);

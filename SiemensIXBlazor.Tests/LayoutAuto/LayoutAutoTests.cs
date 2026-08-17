@@ -20,7 +20,7 @@ public class LayoutAutoTests : TestContextBase
     [Fact]
     public void ComponentRendersChildContentAndId()
     {
-        var cut = RenderComponent<LayoutAuto>(parameters => parameters
+        var cut = Render<LayoutAuto>(parameters => parameters
             .Add(p => p.Id, "layout-auto")
             .Add(p => p.ChildContent, (RenderFragment)(builder =>
                 builder.AddMarkupContent(0, "Test content"))));
@@ -31,7 +31,7 @@ public class LayoutAutoTests : TestContextBase
     [Fact]
     public void LayoutDefaultsMatchOfficialValues()
     {
-        var cut = RenderComponent<LayoutAuto>(parameters => parameters
+        var cut = Render<LayoutAuto>(parameters => parameters
             .Add(p => p.Id, "layout-auto"));
 
         Assert.Equal(
@@ -52,7 +52,7 @@ public class LayoutAutoTests : TestContextBase
             new LayoutAutoItem { MinWidth = "64em", Columns = 3 }
         };
 
-        var cut = RenderComponent<LayoutAuto>(parameters => parameters
+        var cut = Render<LayoutAuto>(parameters => parameters
             .Add(p => p.Id, "layout-auto")
             .Add(p => p.Layout, layout));
 

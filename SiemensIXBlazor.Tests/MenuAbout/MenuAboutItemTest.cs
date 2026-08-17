@@ -20,7 +20,7 @@ namespace SiemensIXBlazor.Tests.MenuAbout
         public void ComponentRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<MenuAboutItem>();
+            var cut = Render<MenuAboutItem>((Action<Bunit.ComponentParameterCollectionBuilder<MenuAboutItem>>)(_ => { }));
 
             // Assert
             cut.MarkupMatches("<ix-menu-about-item></ix-menu-about-item>");
@@ -30,7 +30,7 @@ namespace SiemensIXBlazor.Tests.MenuAbout
         public void ChildContentPropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<MenuAboutItem>(parameters => parameters.Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content"))));
+            var cut = Render<MenuAboutItem>(parameters => parameters.Add(p => p.ChildContent, (RenderFragment)(builder => builder.AddMarkupContent(0, "Test content"))));
 
             // Assert
             Assert.NotNull(cut.Instance.ChildContent);
@@ -40,7 +40,7 @@ namespace SiemensIXBlazor.Tests.MenuAbout
         public void LablePropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<MenuAboutItem>(parameters => parameters.Add(p => p.Label, "testLabel"));
+            var cut = Render<MenuAboutItem>(parameters => parameters.Add(p => p.Label, "testLabel"));
 
             // Assert
             Assert.Equal("testLabel", cut.Instance.Label);
@@ -50,7 +50,7 @@ namespace SiemensIXBlazor.Tests.MenuAbout
         public async Task RendersTabKeyAndForwardsLabelChange()
         {
             MenuLabelChangeEvent? changed = null;
-            var cut = RenderComponent<MenuAboutItem>(parameters => parameters
+            var cut = Render<MenuAboutItem>(parameters => parameters
                 .Add(p => p.Id, "about-legal")
                 .Add(p => p.TabKey, "legal")
                 .Add(p => p.Label, "Legal")

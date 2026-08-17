@@ -19,14 +19,14 @@ namespace SiemensIXBlazor.Tests
         public void PushCardRendersCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<PushCard>(
-                ("Heading", "Test Heading"),
-                ("Icon", "testIcon"),
-                ("AriaLabelIcon", "Test icon"),
-                ("Notification", "5"),
-                ("SubHeading", "Test SubHeading"),
-                ("Expanded", true),
-                ("Variant", PushCardVariant.outline)
+            var cut = Render<PushCard>(parameters => parameters
+                .Add(p => p.Heading, "Test Heading")
+                .Add(p => p.Icon, "testIcon")
+                .Add(p => p.AriaLabelIcon, "Test icon")
+                .Add(p => p.Notification, "5")
+                .Add(p => p.SubHeading, "Test SubHeading")
+                .Add(p => p.Expanded, true)
+                .Add(p => p.Variant, PushCardVariant.outline)
             );
 
             // Assert
@@ -38,7 +38,7 @@ namespace SiemensIXBlazor.Tests
         public void PassiveDefaultsToFalse()
         {
             // Arrange
-            var cut = RenderComponent<PushCard>();
+            var cut = Render<PushCard>((Action<Bunit.ComponentParameterCollectionBuilder<PushCard>>)(_ => { }));
 
             // Assert
             Assert.False(cut.Instance.Passive);
@@ -49,7 +49,7 @@ namespace SiemensIXBlazor.Tests
         public void PassiveTrueRendersAttribute()
         {
             // Arrange
-            var cut = RenderComponent<PushCard>(parameters => parameters
+            var cut = Render<PushCard>(parameters => parameters
                 .Add(p => p.Passive, true));
 
             // Assert
@@ -60,7 +60,7 @@ namespace SiemensIXBlazor.Tests
         [Fact]
         public void ExpandedDefaultsToFalse()
         {
-            var cut = RenderComponent<PushCard>();
+            var cut = Render<PushCard>((Action<Bunit.ComponentParameterCollectionBuilder<PushCard>>)(_ => { }));
 
             Assert.False(cut.Instance.Expanded);
             Assert.DoesNotContain("expanded", cut.Markup);
@@ -69,7 +69,7 @@ namespace SiemensIXBlazor.Tests
         [Fact]
         public void RendersDefaultAndTitleActionContent()
         {
-            var cut = RenderComponent<PushCard>(parameters => parameters
+            var cut = Render<PushCard>(parameters => parameters
                 .Add(p => p.ChildContent, builder => builder.AddContent(0, "Details"))
                 .Add(p => p.TitleAction, builder => builder.AddContent(0, "Action")));
 

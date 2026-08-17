@@ -25,7 +25,7 @@ public class ToastTests : TestContextBase
     [Fact]
     public void ToastContainer_RendersOfficialDefaults()
     {
-        var cut = RenderComponent<ToastContainer>(parameters => parameters
+        var cut = Render<ToastContainer>(parameters => parameters
             .Add(p => p.Id, "toast-container"));
 
         var container = cut.Find("ix-toast-container");
@@ -36,7 +36,7 @@ public class ToastTests : TestContextBase
     [Fact]
     public void ToastContainer_RendersTopRightPositionAndAttributes()
     {
-        var cut = RenderComponent<ToastContainer>(parameters => parameters
+        var cut = Render<ToastContainer>(parameters => parameters
             .Add(p => p.Id, "toast-container")
             .Add(p => p.Position, ToastPosition.TopRight)
             .AddUnmatched("role", "region")
@@ -53,7 +53,7 @@ public class ToastTests : TestContextBase
     [Fact]
     public void Toast_RendersOfficialPropertiesAndSlots()
     {
-        var cut = RenderComponent<Toast>(parameters => parameters
+        var cut = Render<Toast>(parameters => parameters
             .Add(p => p.Id, "toast")
             .Add(p => p.Type, ToastType.Success)
             .Add(p => p.ToastTitle, "Saved")
@@ -83,7 +83,7 @@ public class ToastTests : TestContextBase
     [Fact]
     public void Toast_OmitsFalseBooleanProperties()
     {
-        var cut = RenderComponent<Toast>(parameters => parameters.Add(p => p.Id, "toast"));
+        var cut = Render<Toast>(parameters => parameters.Add(p => p.Id, "toast"));
 
         var toast = cut.Find("ix-toast");
         Assert.Null(toast.GetAttribute("prevent-auto-close"));
@@ -94,7 +94,7 @@ public class ToastTests : TestContextBase
     public async Task Toast_CloseToastInvokesCallback()
     {
         var closed = false;
-        var cut = RenderComponent<Toast>(parameters => parameters
+        var cut = Render<Toast>(parameters => parameters
             .Add(p => p.Id, "toast")
             .Add(p => p.CloseToastEvent, EventCallback.Factory.Create(this, () => closed = true)));
 
@@ -110,7 +110,7 @@ public class ToastTests : TestContextBase
         module.Setup(m => m.InvokeAsync<bool>("isToastPaused", It.IsAny<object[]>()))
             .Returns(new ValueTask<bool>(true));
 
-        var cut = RenderComponent<Toast>(parameters => parameters.Add(p => p.Id, "toast"));
+        var cut = Render<Toast>(parameters => parameters.Add(p => p.Id, "toast"));
 
         await cut.Instance.PauseAsync();
         await cut.Instance.ResumeAsync();
@@ -130,7 +130,7 @@ public class ToastTests : TestContextBase
         module.Setup(m => m.InvokeAsync<bool>("isPaused", It.IsAny<object[]>()))
             .Returns(new ValueTask<bool>(true));
 
-        var cut = RenderComponent<ToastContainer>(parameters => parameters
+        var cut = Render<ToastContainer>(parameters => parameters
             .Add(p => p.Id, "toast-container"));
         var result = await cut.Instance.ShowToast(new ToastConfig
         {
@@ -163,7 +163,7 @@ public class ToastTests : TestContextBase
         module.Setup(m => m.InvokeAsync<string>("showToast", It.IsAny<object[]>()))
             .Returns(new ValueTask<string>("toast-1"));
 
-        var cut = RenderComponent<ToastContainer>(parameters => parameters
+        var cut = Render<ToastContainer>(parameters => parameters
             .Add(p => p.Id, "toast-container"));
         var result = await cut.Instance.ShowToast(new ToastConfig { Message = "Message" });
         JsonElement? received = null;
@@ -178,7 +178,7 @@ public class ToastTests : TestContextBase
     [Fact]
     public async Task ToastContainer_RejectsNullConfiguration()
     {
-        var cut = RenderComponent<ToastContainer>(parameters => parameters
+        var cut = Render<ToastContainer>(parameters => parameters
             .Add(p => p.Id, "toast-container"));
 
         await Assert.ThrowsAsync<ArgumentNullException>(() => cut.Instance.ShowToast(null!));
@@ -191,7 +191,7 @@ public class ToastTests : TestContextBase
         module.Setup(m => m.InvokeAsync<string>("showToast", It.IsAny<object[]>()))
             .Returns(new ValueTask<string>("toast-1"));
 
-        var cut = RenderComponent<ToastContainer>(parameters => parameters
+        var cut = Render<ToastContainer>(parameters => parameters
             .Add(p => p.Id, "toast-container"));
         await cut.Instance.ShowToast(new ToastConfig { Message = "Message" });
 

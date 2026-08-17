@@ -19,7 +19,7 @@ namespace SiemensIXBlazor.Tests
         public void ComponentRendersWithoutCrashing()
         {
             // Arrange
-            var cut = RenderComponent<ActionCard>();
+            var cut = Render<ActionCard>((Action<Bunit.ComponentParameterCollectionBuilder<ActionCard>>)(_ => { }));
 
             // Assert
             cut.MarkupMatches("<ix-action-card variant='outline'></ix-action-card>");
@@ -29,7 +29,7 @@ namespace SiemensIXBlazor.Tests
         public void IconPropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<ActionCard>(parameters => parameters.Add(p => p.Icon, "testIcon"));
+            var cut = Render<ActionCard>(parameters => parameters.Add(p => p.Icon, "testIcon"));
 
             // Assert
             Assert.Equal("testIcon", cut.Instance.Icon);
@@ -39,7 +39,7 @@ namespace SiemensIXBlazor.Tests
         public void HeadingPropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<ActionCard>(parameters => parameters.Add(p => p.Heading, "testHeading"));
+            var cut = Render<ActionCard>(parameters => parameters.Add(p => p.Heading, "testHeading"));
 
             // Assert
             Assert.Equal("testHeading", cut.Instance.Heading);
@@ -49,7 +49,7 @@ namespace SiemensIXBlazor.Tests
         public void SubHeadingPropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<ActionCard>(parameters => parameters.Add(p => p.SubHeading, "testSubHeading"));
+            var cut = Render<ActionCard>(parameters => parameters.Add(p => p.SubHeading, "testSubHeading"));
 
             // Assert
             Assert.Equal("testSubHeading", cut.Instance.SubHeading);
@@ -59,7 +59,7 @@ namespace SiemensIXBlazor.Tests
         public void SelectedPropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<ActionCard>(parameters => parameters.Add(p => p.Selected, true));
+            var cut = Render<ActionCard>(parameters => parameters.Add(p => p.Selected, true));
 
             // Assert
             Assert.True(cut.Instance.Selected);
@@ -70,7 +70,7 @@ namespace SiemensIXBlazor.Tests
         public void VariantPropertyIsSetCorrectly()
         {
             // Arrange
-            var cut = RenderComponent<ActionCard>(parameters => parameters.Add(p => p.Variant, ActionCardVariant.outline));
+            var cut = Render<ActionCard>(parameters => parameters.Add(p => p.Variant, ActionCardVariant.outline));
 
             // Assert
             Assert.Equal(ActionCardVariant.outline, cut.Instance.Variant);
@@ -80,7 +80,7 @@ namespace SiemensIXBlazor.Tests
         public void PassiveDefaultsToFalse()
         {
             // Arrange
-            var cut = RenderComponent<ActionCard>();
+            var cut = Render<ActionCard>((Action<Bunit.ComponentParameterCollectionBuilder<ActionCard>>)(_ => { }));
 
             // Assert
             Assert.False(cut.Instance.Passive);
@@ -91,7 +91,7 @@ namespace SiemensIXBlazor.Tests
         public void PassiveTrueRendersAttribute()
         {
             // Arrange
-            var cut = RenderComponent<ActionCard>(parameters => parameters
+            var cut = Render<ActionCard>(parameters => parameters
                 .Add(p => p.Passive, true));
 
             // Assert
@@ -102,7 +102,7 @@ namespace SiemensIXBlazor.Tests
         [Fact]
         public void RendersDefaultContent()
         {
-            var cut = RenderComponent<ActionCard>(parameters => parameters
+            var cut = Render<ActionCard>(parameters => parameters
                 .Add(p => p.ChildContent, builder => builder.AddContent(0, "Additional content")));
 
             Assert.Contains("Additional content", cut.Markup);
