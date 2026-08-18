@@ -6,7 +6,7 @@
 
 	<ItemGroup>
 		<PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="10.0.10" />
-		<PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.8.1" />
+		<PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.9.0" />
 		<PackageVersion Include="bunit" Version="2.9.0" />
 		<PackageVersion Include="coverlet.collector" Version="10.0.1" />
 		<PackageVersion Include="Moq" Version="4.20.72" />
