@@ -15,6 +15,6 @@
 
 <ix-pill @attributes="UserAttributes" variant="@(EnumParser<PillVariant>.EnumToString(Variant))" pill-color="@PillColor"
     aria-label-icon="@AriaLabelIcon" background="@Background" align-left="@(AlignLeft ? "true" : null)"
-    icon="@Icon" outline="@(Outline ? "true" : null)" style="@Style" class="@Class" tooltip-text="@TooltipText">
+    icon="@Icon" outline="@(Outline ? "true" : null)" style="@Style" class="@Class" tooltip-text="@TooltipTextAttribute">
     @ChildContent
 </ix-pill>

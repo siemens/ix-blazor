@@ -19,7 +19,7 @@
                     label="@Label"
                     aria-label-dropdown-button="@AriaLabelDropdownButton"
                     variant="@(EnumParser<ButtonVariant>.EnumToString(Variant, replaceUnderscores: true))"
-                    placement="@(Placement.HasValue ? EnumParser<DropdownButtonPlacement>.EnumToString(Placement.Value, replaceUnderscores: true): string.Empty )"
+                    placement="@(Placement.HasValue ? EnumParser<DropdownButtonPlacement>.EnumToString(Placement.Value, replaceUnderscores: true) : null)"
                     icon="@Icon" 
                     close-behavior="@(CloseBehavior is bool ? null : CloseBehaviorAttribute)"
                     disabled="@(Disabled ? "true" : null)"

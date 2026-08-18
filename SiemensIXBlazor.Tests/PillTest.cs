@@ -85,5 +85,25 @@ namespace SiemensIXBlazor.Tests
             Assert.True(element.HasAttribute("align-left"));
             Assert.True(element.HasAttribute("outline"));
         }
+
+        [Fact]
+        public void PillTooltipTrueUsesPresenceOnlyAttribute()
+        {
+            var cut = Render<Pill>(parameters => parameters
+                .Add(p => p.TooltipText, true));
+
+            var element = cut.Find("ix-pill");
+            Assert.True(element.HasAttribute("tooltip-text"));
+            Assert.Equal(string.Empty, element.GetAttribute("tooltip-text"));
+        }
+
+        [Fact]
+        public void PillTooltipFalseOmitsAttribute()
+        {
+            var cut = Render<Pill>(parameters => parameters
+                .Add(p => p.TooltipText, false));
+
+            Assert.False(cut.Find("ix-pill").HasAttribute("tooltip-text"));
+        }
     }
 }

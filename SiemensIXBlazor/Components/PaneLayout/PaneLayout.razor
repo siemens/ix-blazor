@@ -19,7 +19,7 @@
    class="@Class"
    style="@Style"
    @attributes="UserAttributes"
-   variant="@Variant"
+   variant="@(EnumParser<PaneVariant>.EnumToString(Variant))"
    layout="@Layout"
     borderless="@(Borderless ? "true" : null)"
 >

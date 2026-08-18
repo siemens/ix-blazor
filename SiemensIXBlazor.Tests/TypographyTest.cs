@@ -31,4 +31,15 @@ public class TypographyTest : TestContextBase
 		// Assert
 		cut.MarkupMatches("<ix-typography id=\"testId\" bold='true' format=\"body-xs\" text-color=\"alarm\" text-decoration=\"line-through\">Test content</ix-typography>");
 	}
+
+	[Fact]
+	public void TypographyOmitsUnsetOptionalAttributesAndUsesDefaultDecoration()
+	{
+		var cut = Render<Typography>();
+		var element = cut.Find("ix-typography");
+
+		Assert.False(element.HasAttribute("format"));
+		Assert.False(element.HasAttribute("text-color"));
+		Assert.Equal("none", element.GetAttribute("text-decoration"));
+	}
 }

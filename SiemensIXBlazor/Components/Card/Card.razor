@@ -11,11 +11,12 @@
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
 @using SiemensIXBlazor.Helpers
+@using SiemensIXBlazor.Enums
 
 <ix-card @attributes="UserAttributes"
          class=@Class
          style=@Style
-         variant=@Variant
+         variant="@(EnumParser<CardVariant>.EnumToString(Variant))"
          selected="@(Selected ? "true" : null)"
          passive="@(Passive ? "true" : null)">
     @ChildContent

@@ -54,6 +54,15 @@ public class DropdownButtonTest : TestContextBase
     }
 
     [Fact]
+    public void PlacementIsOmittedWhenUnset()
+    {
+        var cut = Render<DropdownButton>(parameters => parameters
+            .Add(p => p.Label, "test"));
+
+        Assert.False(cut.Find("ix-dropdown-button").HasAttribute("placement"));
+    }
+
+    [Fact]
     public void EnableTopLayerTrueRendersAttribute()
     {
         // Arrange

@@ -9,13 +9,15 @@
 *@
 
 @using Microsoft.JSInterop;
+@using SiemensIXBlazor.Enums.Tooltip;
+@using SiemensIXBlazor.Helpers;
 @namespace SiemensIXBlazor.Components
 @inject IJSRuntime JSRuntime
 @inherits IXBaseComponent
 
 <ix-tooltip @attributes="UserAttributes"
              id="@Id"
-             placement="@Placement"
+             placement="@(EnumParser<TooltipVariant>.EnumToString(Placement))"
              title-content="@TitleContent"
              interactive="@(Interactive ? "true" : null)"
              for="@For"
