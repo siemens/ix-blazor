@@ -29,7 +29,7 @@ namespace SiemensIXBlazor.Tests
             );
 
             // Assert
-            cut.MarkupMatches("<ix-pane-layout borderless layout=\"full-vertical\" variant=\"inline\"><div>Test content</div></ix-pane-layout>");
+            cut.MarkupMatches("<ix-pane-layout borderless='true' layout=\"full-vertical\" variant=\"inline\"><div>Test content</div></ix-pane-layout>");
         }
 
         [Fact]

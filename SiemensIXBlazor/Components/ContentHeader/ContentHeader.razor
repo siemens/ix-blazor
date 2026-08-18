@@ -15,7 +15,7 @@
 @inherits IXBaseComponent
 @inject IJSRuntime JSRuntime
 
-<ix-content-header @attributes="UserAttributes" class="@Class" style="@Style" id="@Id" has-back-button="@HasBackButton"
+<ix-content-header @attributes="UserAttributes" class="@Class" style="@Style" id="@Id" has-back-button="@(HasBackButton ? "true" : null)"
     header-title="@HeaderTitle" header-subtitle="@HeaderSubTitle"
     variant="@(EnumParser<ContentHeaderVariant>.EnumToString(Variant))">
     @if (HeaderContent != null)

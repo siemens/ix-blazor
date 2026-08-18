@@ -17,6 +17,6 @@
                    valid-text="@ValidText"
                    helper-text="@HelperText"
                    direction="@(EnumParser<CheckboxGroupDirection>.EnumToString(Direction))"
-                   show-text-as-tooltip="@ShowTextAsTooltip">
+                   show-text-as-tooltip="@(ShowTextAsTooltip ? "true" : null)">
     @ChildContent
 </ix-checkbox-group>

@@ -52,18 +52,18 @@ public class SliderTests : TestContextBase
             <ix-slider 
                 id=""{id}"" 
                 value=""42"" 
-                disabled 
+                disabled='true'
                 helper-text=""{helperText}""
                 label=""{label}""
                 invalid-text=""{invalidText}""
                 info-text=""{infoText}""
                 warning-text=""{warningText}""
                 valid-text=""{validText}""
-                show-text-as-tooltip
+                show-text-as-tooltip='true'
                 max=""100"" 
                 min=""0"" 
                 step=""1"" 
-                trace 
+                trace='true'
                 trace-reference=""5"">
             </ix-slider>");
     }

@@ -32,7 +32,7 @@ namespace SiemensIXBlazor.Tests
             );
 
             // Assert
-            cut.MarkupMatches("<ix-toggle id=\"testId\" checked disabled hide-text indeterminate text-indeterminate=\"Mixed\" text-off=\"Off\" text-on=\"On\"></ix-toggle>");
+            cut.MarkupMatches("<ix-toggle id=\"testId\" checked='true' disabled='true' hide-text='true' indeterminate='true' text-indeterminate=\"Mixed\" text-off=\"Off\" text-on=\"On\"></ix-toggle>");
         }
 
         [Fact]

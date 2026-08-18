@@ -16,7 +16,7 @@
          class=@Class
          style=@Style
          variant=@Variant
-         selected=@Selected
-         passive=@Passive>
+         selected="@(Selected ? "true" : null)"
+         passive="@(Passive ? "true" : null)">
     @ChildContent
 </ix-card>

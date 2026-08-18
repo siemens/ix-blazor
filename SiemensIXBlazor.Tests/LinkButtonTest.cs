@@ -27,6 +27,6 @@ public class LinkButtonTest : TestContextBase
             .Add(p => p.Url, "https://example.com"));
 
         // Assert
-        cut.MarkupMatches("<ix-link-button url=\"https://example.com\" disabled=\"\" target=\"_blank\">Test content</ix-link-button>");
+        cut.MarkupMatches("<ix-link-button url=\"https://example.com\" disabled=\"true\" target=\"_blank\">Test content</ix-link-button>");
     }
 }

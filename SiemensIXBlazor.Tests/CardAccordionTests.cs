@@ -24,7 +24,7 @@ public class CardAccordionTests : TestContextBase
             .Add(p => p.Variant, CardAccordionVariant.success)
             .Add(p => p.ChildContent, builder => builder.AddContent(0, "Accordion content")));
 
-        cut.MarkupMatches("<ix-card-accordion slot=\"card-accordion\" aria-label-expand-button=\"Expand card\" collapse=\"\" variant=\"success\">Accordion content</ix-card-accordion>");
+        cut.MarkupMatches("<ix-card-accordion slot=\"card-accordion\" aria-label-expand-button=\"Expand card\" collapse=\"true\" variant=\"success\">Accordion content</ix-card-accordion>");
     }
 
     [Fact]

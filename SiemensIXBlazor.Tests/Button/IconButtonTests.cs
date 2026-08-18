@@ -32,7 +32,7 @@ namespace SiemensIXBlazor.Tests
             });
 
             // Assert
-            cut.MarkupMatches("<ix-icon-button disabled=\"\" type=\"button\" variant=\"subtle-primary\" icon-color=\"testIconColor\" icon=\"testIcon\" oval=\"\" loading=\"\" size=\"12\"></ix-icon-button>");
+            cut.MarkupMatches("<ix-icon-button disabled=\"true\" type=\"button\" variant=\"subtle-primary\" icon-color=\"testIconColor\" icon=\"testIcon\" oval=\"true\" loading=\"true\" size=\"12\"></ix-icon-button>");
         }
 
         [Fact]

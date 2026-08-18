@@ -19,9 +19,9 @@
 @attributes="UserAttributes"
 id="@Id"
 item-color="@ItemColor"
-chevron="@Chevron"
-disabled="@Disabled"
-selected="@Selected"
+chevron="@(Chevron ? "true" : null)"
+disabled="@(Disabled ? "true" : null)"
+selected="@(Selected ? "true" : null)"
 variant="@(EnumParser<EventListVariant>.EnumToString(Variant))"
 style="@Style"
 class="@Class">@ChildContent</ix-event-list-item>

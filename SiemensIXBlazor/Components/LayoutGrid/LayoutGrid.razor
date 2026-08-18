@@ -15,6 +15,6 @@
                 style="@Style"
                 columns="@Columns"
                 gap="@Gap.ToAttributeValue()"
-                no-margin="@NoMargin">
+                no-margin="@(NoMargin ? "true" : null)">
     @ChildContent
 </ix-layout-grid>

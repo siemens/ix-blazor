@@ -40,7 +40,7 @@ namespace SiemensIXBlazor.Tests
             );
 
             // Assert
-            cut.MarkupMatches("<ix-upload id=\"testId\" accept=\"image/*\" disabled i18n-upload-disabled=\"File upload currently not possible.\" i18n-upload-file=\"Upload file…\" loading-text=\"Checking files…\" multiline multiple directory-upload state=\"UPLOAD_FAILED\" select-file-text=\"+ Drag files here or…\" upload-failed-text=\"Upload failed. Please try again.\" upload-success-text=\"Upload successful\"></ix-upload>");
+            cut.MarkupMatches("<ix-upload id=\"testId\" accept=\"image/*\" disabled='true' i18n-upload-disabled=\"File upload currently not possible.\" i18n-upload-file=\"Upload file…\" loading-text=\"Checking files…\" multiline='true' multiple='true' directory-upload='true' state=\"UPLOAD_FAILED\" select-file-text=\"+ Drag files here or…\" upload-failed-text=\"Upload failed. Please try again.\" upload-success-text=\"Upload successful\"></ix-upload>");
         }
 
         [Fact]
@@ -50,7 +50,7 @@ namespace SiemensIXBlazor.Tests
                 .Add(p => p.Id, "folder-upload")
                 .Add(p => p.DirectoryUpload, true));
 
-            cut.MarkupMatches("<ix-upload id=\"folder-upload\" directory-upload state=\"SELECT_FILE\" i18n-upload-disabled=\"File upload currently not possible.\" upload-failed-text=\"Upload failed. Please try again.\" upload-success-text=\"Upload successful\"></ix-upload>");
+            cut.MarkupMatches("<ix-upload id=\"folder-upload\" directory-upload='true' state=\"SELECT_FILE\" i18n-upload-disabled=\"File upload currently not possible.\" upload-failed-text=\"Upload failed. Please try again.\" upload-success-text=\"Upload successful\"></ix-upload>");
         }
 
         [Fact]

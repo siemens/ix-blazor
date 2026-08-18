@@ -14,11 +14,11 @@
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
 <ix-select @attributes="UserAttributes"
-           allow-clear="@AllowClear"
+           allow-clear="@(AllowClear ? "true" : null)"
            aria-label-clear-icon-button="@AriaLabelClearIconButton"
-           disabled="@Disabled"
-           editable="@Editable"
-           enable-top-layer="@EnableTopLayer"
+           disabled="@(Disabled ? "true" : null)"
+           editable="@(Editable ? "true" : null)"
+           enable-top-layer="@(EnableTopLayer ? "true" : null)"
            value="@(Value is string stringValue ? stringValue : null)"
            aria-label-add-item="@AriaLabelAddItem"
            i18n-placeholder="@I18nPlaceholder"
@@ -30,10 +30,10 @@
            i18n-remove-selected-item="@I18nRemoveSelectedItem"
            mode="@(EnumParser<SelectMode>.EnumToString(Mode))"
            id="@Id"
-           readonly="@Readonly"
+           readonly="@(Readonly ? "true" : null)"
            style="@Style"
            class="@Class"
-           hide-list-header="@HideListHeader"
+           hide-list-header="@(HideListHeader ? "true" : null)"
            dropdown-max-width="@DropdownMaxWidth"
            dropdown-width="@DropdownWidth"
            helper-text="@HelperText"
@@ -41,10 +41,10 @@
            invalid-text="@InvalidText"
            valid-text="@ValidText"
            warning-text="@WarningText"
-           collapse-multiple-selection="@CollapseMultipleSelection"
+           collapse-multiple-selection="@(CollapseMultipleSelection ? "true" : null)"
            label="@Label"
            name="@Name"
-           required="@Required"
-           show-text-as-tooltip="@ShowTextAsTooltip">
+           required="@(Required ? "true" : null)"
+           show-text-as-tooltip="@(ShowTextAsTooltip ? "true" : null)">
     @ChildContent
 </ix-select>

@@ -21,7 +21,7 @@
    @attributes="UserAttributes"
    variant="@Variant"
    layout="@Layout"
-    borderless="@Borderless"
+    borderless="@(Borderless ? "true" : null)"
 >
     @if (Left is not null)
     {

@@ -25,7 +25,7 @@
             top="@Top"
             tooltip-text="@TooltipText"
             aria-label-tooltip="@AriaLabelTooltip"
-            hide-logout-button="@HideLogoutButton"
-            enable-top-layer="@EnableTopLayer">
+            hide-logout-button="@(HideLogoutButton ? "true" : null)"
+            enable-top-layer="@(EnableTopLayer ? "true" : null)">
     @ChildContent
 </ix-menu-avatar>

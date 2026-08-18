@@ -24,6 +24,6 @@ public class KeyValueListTest : TestContextBase
             .Add(p => p.Striped, true));
 
         // Assert
-        cut.MarkupMatches("<ix-key-value-list striped=\"\">Test content</ix-key-value-list>");
+        cut.MarkupMatches("<ix-key-value-list striped=\"true\">Test content</ix-key-value-list>");
     }
 }

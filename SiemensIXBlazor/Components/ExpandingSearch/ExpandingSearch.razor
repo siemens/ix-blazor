@@ -24,6 +24,6 @@
                      aria-label-clear-icon-button="@AriaLabelClearIconButton"
                      aria-label-search-icon-button="@AriaLabelSearchIconButton"
                      aria-label-search-input="@AriaLabelSearchInput"
-                     full-width="@FullWidth"
+                     full-width="@(FullWidth ? "true" : null)"
                      variant="@(EnumParser<ButtonVariant>.EnumToString(Variant, replaceUnderscores: true))">
 </ix-expanding-search>

@@ -17,13 +17,13 @@
 @attributes="UserAttributes"
 style="@Style"
 class="@Class" 
-disabled="@Disabled" 
+disabled="@(Disabled ? "true" : null)"
 type="@(EnumParser<ButtonType>.EnumToString(Type))"
 variant="@(EnumParser<ButtonVariant>.EnumToString(Variant, replaceUnderscores: true))"
 icon-color="@IconColor"
 icon="@Icon"
-oval="@Oval"
-loading="@Loading"
+oval="@(Oval ? "true" : null)"
+loading="@(Loading ? "true" : null)"
 size="@((int)Size)"
 >
 </ix-icon-button>

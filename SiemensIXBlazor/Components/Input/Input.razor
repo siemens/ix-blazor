@@ -32,7 +32,7 @@
           allowed-characters-pattern="@AllowedCharactersPattern"
           max-length="@MaxLength"
           min-length="@MinLength"
-          show-text-as-tooltip="@ShowTextAsTooltip"
+          show-text-as-tooltip="@(ShowTextAsTooltip == true ? "true" : null)"
           pattern="@Pattern"
           name="@Name"
           required="@(Required ? "true" : null)"

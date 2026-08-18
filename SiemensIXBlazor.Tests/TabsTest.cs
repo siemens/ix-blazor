@@ -32,7 +32,7 @@ namespace SiemensIXBlazor.Tests
                 .Add(p => p.Small, true)
             );
 
-            cut.MarkupMatches("<ix-tabs id=\"testId\" layout=\"stretched\" placement=\"top\" rounded active-tab-key=\"tab-2\" aria-label-more-tabs=\"Show every tab\" keyboard-navigation=\"manual\" small></ix-tabs>");
+            cut.MarkupMatches("<ix-tabs id=\"testId\" layout=\"stretched\" placement=\"top\" rounded='true' active-tab-key=\"tab-2\" aria-label-more-tabs=\"Show every tab\" keyboard-navigation=\"manual\" small='true'></ix-tabs>");
         }
 
         [Fact]

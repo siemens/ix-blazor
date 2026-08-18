@@ -18,7 +18,7 @@
             style="@Style"
             id="@Id"
             label="@Label" 
-            show="@Show" 
+            show="@(Show ? "true" : null)"
             about-item-label="@AboutItemLabel"
             active-about-tab-key="@ActiveAboutTabKey"
             i18n-show-more="@I18nShowMore">

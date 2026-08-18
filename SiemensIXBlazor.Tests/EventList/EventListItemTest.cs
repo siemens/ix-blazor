@@ -32,7 +32,7 @@ public class EventListItemTest : TestContextBase
 
         // Assert
         cut.MarkupMatches(
-            "<ix-event-list-item id=\"testId\" item-color=\"red\" chevron=\"\" variant=\"outline\" selected=\"\">Test content</ix-event-list-item>");
+            "<ix-event-list-item id=\"testId\" item-color=\"red\" chevron=\"true\" variant=\"outline\" selected=\"true\">Test content</ix-event-list-item>");
     }
 
     [Fact]

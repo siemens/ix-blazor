@@ -21,8 +21,8 @@
               notification="@Notification"
               heading="@Heading"
               subheading="@SubHeading"
-              expanded="@Expanded"
-              passive="@Passive"
+              expanded="@(Expanded ? "true" : null)"
+              passive="@(Passive ? "true" : null)"
               variant="@(EnumParser<PushCardVariant>.EnumToString(Variant))">
     @if (TitleAction is not null)
     {

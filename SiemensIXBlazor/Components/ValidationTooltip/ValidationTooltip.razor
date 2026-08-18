@@ -20,7 +20,7 @@
 					   style="@Style"
 					   class="@Class"
 					   message="@Message"
-					   suppress-automatic-placement="@SuppressAutomaticPlacement"
+					   suppress-automatic-placement="@(SuppressAutomaticPlacement ? "true" : null)"
 					   placement="@(EnumParser<ValidationTooltipPlacement>.EnumToString(Placement))">
 	@ChildContent
 </ix-validation-tooltip>

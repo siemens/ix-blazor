@@ -29,6 +29,6 @@ public class TypographyTest : TestContextBase
 		);
 
 		// Assert
-		cut.MarkupMatches("<ix-typography id=\"testId\" bold format=\"body-xs\" text-color=\"alarm\" text-decoration=\"line-through\">Test content</ix-typography>");
+		cut.MarkupMatches("<ix-typography id=\"testId\" bold='true' format=\"body-xs\" text-color=\"alarm\" text-decoration=\"line-through\">Test content</ix-typography>");
 	}
 }

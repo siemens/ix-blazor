@@ -16,10 +16,10 @@
 <ix-drawer
 @attributes="UserAttributes"
 id="@Id" 
-show="@Show" 
+show="@(Show ? "true" : null)"
 aria-label-close-button="@AriaLabelCloseButton"
-full-height="@FullHeight" 
-close-on-click-outside="@CloseOnClickOutside"
+full-height="@(FullHeight ? "true" : null)"
+close-on-click-outside="@(CloseOnClickOutside ? "true" : null)"
 max-width="@MaxWidth"
 min-width="@MinWidth"
 width="@Width"

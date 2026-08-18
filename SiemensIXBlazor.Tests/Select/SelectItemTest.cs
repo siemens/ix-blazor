@@ -75,7 +75,7 @@ public class SelectItemTests : TestContextBase
 
         // Assert
         Assert.True(cut.Instance.Selected);
-        cut.MarkupMatches("<ix-select-item id='test-select-item' selected></ix-select-item>");
+        cut.MarkupMatches("<ix-select-item id='test-select-item' selected='true'></ix-select-item>");
     }
 
     [Fact]
@@ -86,7 +86,7 @@ public class SelectItemTests : TestContextBase
             .Add(p => p.Disabled, true));
 
         Assert.True(cut.Instance.Disabled);
-        cut.MarkupMatches("<ix-select-item id='test-select-item' disabled></ix-select-item>");
+        cut.MarkupMatches("<ix-select-item id='test-select-item' disabled='true'></ix-select-item>");
     }
 
     [Fact]
@@ -144,7 +144,7 @@ public class SelectItemTests : TestContextBase
             .Add(p => p.Style, "margin-top: 5px;"));
 
         // Assert
-        cut.MarkupMatches("<ix-select-item id='selectItem1' label='Item 1' value='1' selected " +
+        cut.MarkupMatches("<ix-select-item id='selectItem1' label='Item 1' value='1' selected='true' " +
                          "style='margin-top: 5px;' class='custom-class'></ix-select-item>");
     }
 

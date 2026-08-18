@@ -17,8 +17,8 @@
 id="@Id" 
 label="@Label" 
 value="@Value" 
-selected="@Selected"
-disabled="@Disabled"
+selected="@(Selected ? "true" : null)"
+disabled="@(Disabled ? "true" : null)"
 style="@Style"
 class="@Class"></ix-select-item>
 

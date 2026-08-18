@@ -21,6 +21,6 @@
     aria-label-close-button="@AriaLabelCloseButton"
     label="@Label"
     id="@Id"
-    suppress-legacy-tabs="@SuppressLegacyTabs">
+    suppress-legacy-tabs="@(SuppressLegacyTabs ? "true" : null)">
     @ChildContent
 </ix-menu-about>

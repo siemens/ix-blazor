@@ -33,7 +33,7 @@ namespace SiemensIXBlazor.Tests
             });
 
             // Assert
-            cut.MarkupMatches("<ix-chip id=\"testId\" closable=\"\" outline=\"\" inactive=\"\" background=\"testBackground\" aria-label-close-button=\"Close chip\" center-content chip-color=\"testColor\" icon=\"testIcon\" variant=\"neutral\" tooltip-text='tooltipText'></ix-chip>");
+            cut.MarkupMatches("<ix-chip id=\"testId\" closable=\"true\" outline=\"true\" inactive=\"true\" background=\"testBackground\" aria-label-close-button=\"Close chip\" center-content='true' chip-color=\"testColor\" icon=\"testIcon\" variant=\"neutral\" tooltip-text='tooltipText'></ix-chip>");
         }
 
         [Fact]
@@ -64,7 +64,7 @@ namespace SiemensIXBlazor.Tests
             });
 
             // Assert
-            cut.MarkupMatches("<ix-chip id=\"centeredChip\" aria-label-close-button=\"Close chip\" center-content variant=\"primary\"></ix-chip>");
+            cut.MarkupMatches("<ix-chip id=\"centeredChip\" aria-label-close-button=\"Close chip\" center-content='true' variant=\"primary\"></ix-chip>");
         }
 
         [Fact]

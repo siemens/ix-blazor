@@ -18,8 +18,8 @@
 		 style="@Style"
 		 application-description="@ApplicationDescription"
 		 application-name="@ApplicationName"
-		 enable-toggle-theme="@EnableToggleTheme"
-		 expand="@Expand"
+		 enable-toggle-theme="@(EnableToggleTheme ? "true" : null)"
+		 expand="@(Expand ? "true" : null)"
 		 i18n-aria-label-menu="@I18nAriaLabelMenu"
 		 i18n-collapse="@I18nCollapse"
 		 i18n-expand="@I18nExpand"
@@ -27,9 +27,9 @@
 		 i18n-navigation-hint="@I18nNavigationHint"
 		 i18n-settings="@I18nSettings"
 		 i18n-toggle-theme="@I18nToggleTheme"
-		 show-about="@ShowAbout"
-		 show-settings="@ShowSettings"
-		 start-expanded="@StartExpanded"
-		 pinned="@Pinned">
+		 show-about="@(ShowAbout ? "true" : null)"
+		 show-settings="@(ShowSettings ? "true" : null)"
+		 start-expanded="@(StartExpanded ? "true" : null)"
+		 pinned="@(Pinned ? "true" : null)">
 	@ChildContent
 </ix-menu>

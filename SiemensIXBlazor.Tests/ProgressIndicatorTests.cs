@@ -36,7 +36,7 @@ namespace SiemensIXBlazor.Tests
             );
 
             // Assert
-            cut.MarkupMatches(@"<ix-progress-indicator helper-text=""Please wait"" label=""Loading"" max=""100"" min=""0"" show-text-as-tooltip size=""md"" status=""default"" text-alignment=""left"" type=""linear"" value=""50"" style=""margin: 10px;"" class=""test-class""></ix-progress-indicator>");
+            cut.MarkupMatches(@"<ix-progress-indicator helper-text=""Please wait"" label=""Loading"" max=""100"" min=""0"" show-text-as-tooltip='true' size=""md"" status=""default"" text-alignment=""left"" type=""linear"" value=""50"" style=""margin: 10px;"" class=""test-class""></ix-progress-indicator>");
         }
 
         [Fact]
@@ -64,7 +64,7 @@ namespace SiemensIXBlazor.Tests
             );
 
             // Assert
-            cut.MarkupMatches(@"<ix-progress-indicator helper-text=""Tooltip text"" max=""100"" min=""0"" show-text-as-tooltip size=""lg"" status=""default"" text-alignment=""left"" type=""linear"" value=""0""></ix-progress-indicator>");
+            cut.MarkupMatches(@"<ix-progress-indicator helper-text=""Tooltip text"" max=""100"" min=""0"" show-text-as-tooltip='true' size=""lg"" status=""default"" text-alignment=""left"" type=""linear"" value=""0""></ix-progress-indicator>");
         }
 
         [Fact]

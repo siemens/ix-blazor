@@ -12,9 +12,9 @@
 @inherits IXBaseComponent
 
 <ix-event-list @attributes="UserAttributes"
-               animated="@Animated.ToString().ToLower()"
-               chevron="@Chevron"
-               compact="@Compact"
+               animated="@(Animated ? "true" : null)"
+               chevron="@(Chevron ? "true" : null)"
+               compact="@(Compact ? "true" : null)"
                item-height="@ItemHeight"
                style="@Style"
                class="@Class">

@@ -15,7 +15,7 @@
                 warning-text="@WarningText"
                 valid-text="@ValidText"
                 invalid-text="@InvalidText"
-                show-text-as-tooltip="@ShowTextAsTooltip"
+                show-text-as-tooltip="@(ShowTextAsTooltip ? "true" : null)"
                 value="@Value"
                 direction="@(EnumParser<RadioGroupDirection>.EnumToString(Direction))">
     @ChildContent

@@ -18,13 +18,13 @@
                         class="@Class" 
                         style="@Style" 
                         id="@Id" 
-                       disabled="@Disabled"
-                       ghost="@Ghost"
+                       disabled="@(Disabled ? "true" : null)"
+                       ghost="@(Ghost ? "true" : null)"
                         icon="@Icon"
-                       loading="@Loading"
-                       outline="@Outline"
-                        pressed="@Pressed" 
+                       loading="@(Loading ? "true" : null)"
+                       outline="@(Outline ? "true" : null)"
+                        pressed="@(Pressed ? "true" : null)"
                        size="@((int)Size)"
                        variant="@(EnumParser<ButtonVariant>.EnumToString(Variant, replaceUnderscores: true))"
-                        oval="@Oval">
+                        oval="@(Oval ? "true" : null)">
 </ix-icon-toggle-button>

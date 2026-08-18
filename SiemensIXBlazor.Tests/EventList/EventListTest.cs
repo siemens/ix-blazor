@@ -27,7 +27,7 @@ public class EventListTest : TestContextBase
 
         // Assert
         cut.MarkupMatches(
-            "<ix-event-list animated=\"true\" chevron=\"\" item-height=\"L\">Test content</ix-event-list>");
+            "<ix-event-list animated=\"true\" chevron=\"true\" item-height=\"L\">Test content</ix-event-list>");
     }
 
     [Fact]

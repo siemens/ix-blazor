@@ -33,7 +33,7 @@ public class GroupTest : TestContextBase
 
         // Assert
         cut.MarkupMatches(
-            "<ix-group header=\"testHeader\" sub-header=\"testSubHeader\" expanded=\"\" index=\"1\" selected=\"\" id=\"testId\"></ix-group>");
+            "<ix-group header=\"testHeader\" sub-header=\"testSubHeader\" expanded=\"true\" index=\"1\" selected=\"true\" id=\"testId\"></ix-group>");
     }
 
     [Fact]

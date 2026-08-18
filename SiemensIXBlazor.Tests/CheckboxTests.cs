@@ -27,7 +27,7 @@ public class CheckboxTests : TestContextBase
             .Add(p => p.Indeterminate, true)
             .Add(p => p.Required, true));
 
-        cut.MarkupMatches("<ix-checkbox id=\"checkbox\" checked indeterminate label=\"Accept terms\" name=\"terms\" required value=\"accepted\"></ix-checkbox>");
+        cut.MarkupMatches("<ix-checkbox id=\"checkbox\" checked='true' indeterminate='true' label=\"Accept terms\" name=\"terms\" required='true' value=\"accepted\"></ix-checkbox>");
     }
 
     [Fact]
@@ -45,7 +45,7 @@ public class CheckboxTests : TestContextBase
             .Add(p => p.Direction, CheckboxGroupDirection.Row)
             .AddChildContent("Options"));
 
-        cut.MarkupMatches("<ix-checkbox-group id=\"checkbox-group\" label=\"Options\" info-text=\"Info\" warning-text=\"Warning\" invalid-text=\"Invalid\" valid-text=\"Valid\" helper-text=\"Choose any\" direction=\"row\" show-text-as-tooltip>Options</ix-checkbox-group>");
+        cut.MarkupMatches("<ix-checkbox-group id=\"checkbox-group\" label=\"Options\" info-text=\"Info\" warning-text=\"Warning\" invalid-text=\"Invalid\" valid-text=\"Valid\" helper-text=\"Choose any\" direction=\"row\" show-text-as-tooltip='true'>Options</ix-checkbox-group>");
     }
 
     [Fact]

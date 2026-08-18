@@ -22,9 +22,9 @@
                     placement="@(Placement.HasValue ? EnumParser<DropdownButtonPlacement>.EnumToString(Placement.Value, replaceUnderscores: true): string.Empty )"
                     icon="@Icon" 
                     close-behavior="@(CloseBehavior is bool ? null : CloseBehaviorAttribute)"
-                    disabled="@Disabled"
-                    enable-top-layer="@EnableTopLayer"
-                    focus-checked-item="@FocusCheckedItem"
+                    disabled="@(Disabled ? "true" : null)"
+                    enable-top-layer="@(EnableTopLayer ? "true" : null)"
+                    focus-checked-item="@(FocusCheckedItem ? "true" : null)"
                     style="@Style" 
                     class="@Class">
     @if (ButtonLabelContent is not null)

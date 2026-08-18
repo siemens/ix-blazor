@@ -30,7 +30,7 @@ namespace SiemensIXBlazor.Tests
                 }
             );
             // Assert
-            cut.MarkupMatches("<ix-pagination id=\"testId\" item-count=\"15\" selected-page=\"1\" hide-item-count=\"\" aria-label-page-selection=\"testAriaLabelPageSelection\" i18n-items=\"Items\" i18n-of=\"of\" i18n-page=\"Page\"></ix-pagination>");
+            cut.MarkupMatches("<ix-pagination id=\"testId\" item-count=\"15\" selected-page=\"1\" hide-item-count=\"true\" aria-label-page-selection=\"testAriaLabelPageSelection\" i18n-items=\"Items\" i18n-of=\"of\" i18n-page=\"Page\"></ix-pagination>");
         }
 
         [Fact]

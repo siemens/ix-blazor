@@ -38,7 +38,7 @@ namespace SiemensIXBlazor.Tests
             });
 
             // Assert
-            cut.MarkupMatches("<ix-pill align-left=\"\" background=\"red\" pill-color=\"white\" icon=\"testIcon\" outline=\"\" variant=\"primary\" tooltip-text='tooltipText'><div>Test child content</div></ix-pill>");
+            cut.MarkupMatches("<ix-pill align-left=\"true\" background=\"red\" pill-color=\"white\" icon=\"testIcon\" outline=\"true\" variant=\"primary\" tooltip-text='tooltipText'><div>Test child content</div></ix-pill>");
         }
 
         [Fact]

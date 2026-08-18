@@ -20,7 +20,7 @@
                  invalid-text="@InvalidText"
                  label="@Label"
                  required="@(Required ? "true" : null)"
-                 show-text-as-tooltip="@ShowTextAsTooltip"
+                 show-text-as-tooltip="@(ShowTextAsTooltip == true ? "true" : null)"
                  valid-text="@ValidText"
                  warning-text="@WarningText">
 

@@ -57,9 +57,9 @@ namespace SiemensIXBlazor.Tests
             Assert.Equal("Overview", tabItem.GetAttribute("label"));
             Assert.Equal("star", tabItem.GetAttribute("icon"));
             Assert.Equal("5", tabItem.GetAttribute("counter"));
-            Assert.Equal("", tabItem.GetAttribute("disabled"));
-            Assert.Equal("", tabItem.GetAttribute("selected"));
-            Assert.Equal("", tabItem.GetAttribute("closable"));
+            Assert.Equal("true", tabItem.GetAttribute("disabled"));
+            Assert.Equal("true", tabItem.GetAttribute("selected"));
+            Assert.Equal("true", tabItem.GetAttribute("closable"));
             Assert.Equal("Close overview", tabItem.GetAttribute("aria-label-close-button"));
             Assert.Contains("Content", tabItem.InnerHtml);
         }

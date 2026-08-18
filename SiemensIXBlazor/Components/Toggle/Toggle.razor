@@ -15,11 +15,11 @@
 
 <ix-toggle
 @attributes="UserAttributes"
-checked="@Checked"
+checked="@(Checked ? "true" : null)"
 id="@Id"
-disabled="@Disabled"
-hide-text="@HideText"
-indeterminate="@Indeterminate"
+disabled="@(Disabled ? "true" : null)"
+hide-text="@(HideText ? "true" : null)"
+indeterminate="@(Indeterminate ? "true" : null)"
 text-indeterminate="@TextIndeterminate"
 text-off="@TextOff"
 text-on="@TextOn"

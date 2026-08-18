@@ -24,9 +24,9 @@
                    value="@Value"
                    format="@Format"
                    locale="@Locale"
-                   required="@Required"
-                   disabled="@Disabled"
-                   readonly="@Readonly"
+                   required="@(Required ? "true" : null)"
+                   disabled="@(Disabled ? "true" : null)"
+                   readonly="@(Readonly ? "true" : null)"
                    min-date="@MinDate"
                    max-date="@MaxDate"
                    min-time="@MinTime"
@@ -37,18 +37,18 @@
                    info-text="@InfoText"
                    warning-text="@WarningText"
                    valid-text="@ValidText"
-                   show-text-as-tooltip="@ShowTextAsTooltip"
+                   show-text-as-tooltip="@(ShowTextAsTooltip ? "true" : null)"
                    i18n-error-date-time-unparsable="@I18nErrorDateTimeUnparsable"
                    i18n-done="@I18nDone"
                    i18n-time="@I18nTime"
                    aria-label-previous-month-button="@AriaLabelPreviousMonthButton"
                    aria-label-next-month-button="@AriaLabelNextMonthButton"
                    aria-label-calendar-button="@AriaLabelCalendarButton"
-                   show-week-numbers="@ShowWeekNumbers"
+                   show-week-numbers="@(ShowWeekNumbers ? "true" : null)"
                    week-start-index="@WeekStartIndex"
-                   suppress-submit-on-enter="@SuppressSubmitOnEnter"
+                   suppress-submit-on-enter="@(SuppressSubmitOnEnter ? "true" : null)"
                    text-alignment="@(EnumParser<InputTextAlignment>.EnumToString(TextAlignment))"
-                   enable-top-layer="@EnableTopLayer">
+                   enable-top-layer="@(EnableTopLayer ? "true" : null)">
     @if (StartSlot != null)
     {
         <div slot="start">@StartSlot</div>

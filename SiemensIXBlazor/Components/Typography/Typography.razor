@@ -14,7 +14,7 @@
 @namespace SiemensIXBlazor.Components
 @inherits IXBaseComponent
 
-<ix-typography @attributes="UserAttributes" id="@Id" style="@Style" class="@Class" bold="@Bold"
+<ix-typography @attributes="UserAttributes" id="@Id" style="@Style" class="@Class" bold="@(Bold ? "true" : null)"
 	format="@(Format.HasValue ? EnumParser<TypographyFormat>.EnumToString(Format.Value)?.Replace('_', '-') : "")"
 	text-color="@(TextColor.HasValue ? EnumParser<TypographyColor>.EnumToString(TextColor.Value)?.Replace('_', '-') : "")"
 	text-decoration="@(TextDecoration.HasValue ? EnumParser<TextDecoration>.EnumToString(TextDecoration.Value)?.Replace('_', '-') : "")">
