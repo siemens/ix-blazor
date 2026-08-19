@@ -1,24 +1,29 @@
 {
   "name": "npmjs",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack ./src/index.js --mode production --output-path ../wwwroot/js/siemens-ix --output-filename index.bundle.js"
+    "build": "webpack --config webpack.config.cjs --mode production",
+    "check": "tsc --noEmit --allowJs --checkJs --skipLibCheck --moduleResolution bundler --module preserve --target es2022 src/ag-grid-interop.js",
+    "test": "node --test test/*.test.mjs"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "@siemens/ix": "5.1.1",
-    "@siemens/ix-aggrid": "5.0.1",
-    "@siemens/ix-echarts": "4.1.0",
+    "@siemens/ix": "5.2.0",
+    "@siemens/ix-aggrid": "5.1.0",
+    "@siemens/ix-echarts": "4.1.1",
     "@siemens/ix-icons": "3.5.0",
-    "ag-grid-community": "^33",
-    "echarts": "^5.5.1"
+    "ag-grid-community": "35.2.0",
+    "echarts": "6.1.0"
   },
   "devDependencies": {
-    "webpack": "^5.109.2",
-    "webpack-cli": "^7.2.2"
+    "happy-dom": "20.11.2",
+    "typescript": "^5.9.3",
+    "webpack": "5.109.2",
+    "webpack-cli": "7.2.2"
   }
 }

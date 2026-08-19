@@ -371,3 +371,4 @@ FodyWeavers.xsd
 
 # Ignore webpack generated static js files
 /SiemensIXBlazor/wwwroot/js/siemens-ix/*index.bundle.js*
+/SiemensIXBlazor/wwwroot/js/siemens-ix/aggrid/
