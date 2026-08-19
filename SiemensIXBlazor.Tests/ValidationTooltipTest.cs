@@ -39,7 +39,7 @@ public class ValidationTooltipTests : TestContextBase
 
 		// Assert
 		cut.MarkupMatches($@"
-					<ix-validation-tooltip id=""{id}"" style=""{style}"" class=""{cssClass}"" message=""{message}"" suppress-automatic-placement placement=""top"">
+					<ix-validation-tooltip id=""{id}"" style=""{style}"" class=""{cssClass}"" message=""{message}"" suppress-automatic-placement='true' placement=""top"">
 						{childContent}
 					</ix-validation-tooltip>
 				");

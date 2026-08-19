@@ -18,11 +18,11 @@
                   class="@Class" 
                   style="@Style" 
                   id="@Id" 
-                  disabled="@Disabled"
+                  disabled="@(Disabled ? "true" : null)"
                   icon="@Icon" 
                   icon-right="@IconRight"
-                  loading="@Loading" 
-                  pressed="@Pressed"
+                  loading="@(Loading ? "true" : null)"
+                  pressed="@(Pressed ? "true" : null)"
                   variant="@(EnumParser<ToggleButtonVariant>.EnumToString(Variant, replaceUnderscores: true))">
    @ChildContent
 </ix-toggle-button>

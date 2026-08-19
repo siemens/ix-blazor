@@ -31,7 +31,7 @@ namespace SiemensIXBlazor.Tests
 
             // Assert
 
-            cut.MarkupMatches("<ix-push-card aria-label-icon=\"Test icon\" heading=\"Test Heading\" icon=\"testIcon\" notification=\"5\" subheading=\"Test SubHeading\" expanded=\"\" variant=\"outline\"></ix-push-card>");
+            cut.MarkupMatches("<ix-push-card aria-label-icon=\"Test icon\" heading=\"Test Heading\" icon=\"testIcon\" notification=\"5\" subheading=\"Test SubHeading\" expanded=\"true\" variant=\"outline\"></ix-push-card>");
         }
 
         [Fact]

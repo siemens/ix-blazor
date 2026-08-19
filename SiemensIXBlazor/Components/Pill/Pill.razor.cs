@@ -27,11 +27,17 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string? Icon { get; set; }
         [Parameter]
-        public string? TooltipText { get; set; }
+        public object? TooltipText { get; set; }
         [Parameter]
         public bool Outline { get; set; } = false;
         [Parameter]
         public PillVariant Variant { get; set; } = PillVariant.primary;
+
+        private string? TooltipTextAttribute => TooltipText switch
+        {
+            bool value => value ? string.Empty : null,
+            null => null,
+            _ => TooltipText.ToString()
+        };
     }
 }
-

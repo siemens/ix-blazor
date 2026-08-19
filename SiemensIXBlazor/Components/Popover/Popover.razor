@@ -18,11 +18,11 @@
 <ix-popover @attributes="UserAttributes"
             id="@Id"
             trigger="@Trigger"
-            show="@Show"
+            show="@(Show ? "true" : null)"
             placement="@(EnumParser<PopoverPlacement>.EnumToString(Placement))"
-            has-spike="@HasSpike"
+            has-spike="@(HasSpike ? "true" : null)"
             trigger-mode="@(EnumParser<PopoverTriggerMode>.EnumToString(TriggerMode))"
-            close-on-click-outside="@CloseOnClickOutside"
+            close-on-click-outside="@(CloseOnClickOutside ? "true" : null)"
             class="@Class"
             style="@Style">
     @ChildContent

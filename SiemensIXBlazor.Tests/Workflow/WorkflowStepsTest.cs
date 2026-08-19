@@ -28,7 +28,7 @@ namespace SiemensIXBlazor.Tests.Workflow
             );
 
             // Assert
-            cut.MarkupMatches("<ix-workflow-steps id=\"testId\" clickable selected-index=\"1\" vertical></ix-workflow-steps>");
+            cut.MarkupMatches("<ix-workflow-steps id=\"testId\" clickable='true' selected-index=\"1\" vertical='true'></ix-workflow-steps>");
         }
 
         [Fact]

@@ -26,13 +26,13 @@
                   i18n-no-range="@I18nNoRange"
                   max-date="@MaxDate"
                   min-date="@MinDate"
-                  single-selection="@SingleSelection"
+                  single-selection="@(SingleSelection ? "true" : null)"
                   to="@To"
                   week-start-index="@WeekStartIndex"
                   locale="@Locale"
-                  disabled="@Disabled"
-                  enable-top-layer="@EnableTopLayer"
-                  show-week-numbers="@ShowWeekNumbers"
-                  loading="@Loading"
+                  disabled="@(Disabled ? "true" : null)"
+                  enable-top-layer="@(EnableTopLayer ? "true" : null)"
+                  show-week-numbers="@(ShowWeekNumbers ? "true" : null)"
+                  loading="@(Loading ? "true" : null)"
                   variant="@(EnumParser<ButtonVariant>.EnumToString(Variant, replaceUnderscores: true))">
 </ix-date-dropdown>

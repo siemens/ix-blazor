@@ -25,7 +25,7 @@ namespace SiemensIXBlazor.Tests
             });
 
             // Assert
-            cut.MarkupMatches("<ix-card variant=\"neutral\" selected=\"\"></ix-card>");
+            cut.MarkupMatches("<ix-card variant=\"neutral\" selected=\"true\"></ix-card>");
         }
 
         [Fact]

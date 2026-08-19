@@ -38,7 +38,7 @@ namespace SiemensIXBlazor.Tests
             );
 
             // Assert
-            cut.MarkupMatches("<ix-pane id=\"testId\" borderless composition=\"top\" expanded close-on-click-outside=\"\" heading=\"Test Heading\" hide-on-collapse icon=\"Test Icon\" size=\"240px\" variant=\"inline\" no-padding aria-label-collapse-close-button=\"testAriaLabelCollapseCloseButton\"></ix-pane>");
+            cut.MarkupMatches("<ix-pane id=\"testId\" borderless='true' composition=\"top\" expanded='true' close-on-click-outside=\"true\" heading=\"Test Heading\" hide-on-collapse='true' icon=\"Test Icon\" size=\"240px\" variant=\"inline\" no-padding='true' aria-label-collapse-close-button=\"testAriaLabelCollapseCloseButton\"></ix-pane>");
         }
 
         [Fact]

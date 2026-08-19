@@ -34,7 +34,7 @@ public class ExpandingSearchTest : TestContextBase
 
         // Assert
         cut.MarkupMatches(
-            "<ix-expanding-search placeholder=\"testPlaceholder\" icon=\"testIcon\" id=\"testId\" value=\"testValue\" aria-label-clear-icon-button=\"Clear\" aria-label-search-icon-button=\"Search\" aria-label-search-input=\"Search field\" full-width variant=\"subtle-secondary\"></ix-expanding-search>");
+            "<ix-expanding-search placeholder=\"testPlaceholder\" icon=\"testIcon\" id=\"testId\" value=\"testValue\" aria-label-clear-icon-button=\"Clear\" aria-label-search-icon-button=\"Search\" aria-label-search-input=\"Search field\" full-width='true' variant=\"subtle-secondary\"></ix-expanding-search>");
     }
 
     [Fact]

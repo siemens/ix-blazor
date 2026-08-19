@@ -39,7 +39,7 @@ namespace SiemensIXBlazor.Tests.Menu
 
 			// Assert
 			// Adjust the expected markup to match your component's output
-			cut.MarkupMatches("<ix-menu-item active=\"\" home=\"\" bottom=\"\" icon=\"testIcon\" notifications=\"5\" label=\"label\" tooltip-text=\"Test tooltip\" target=\"_self\"><div>Test child content</div></ix-menu-item>");
+			cut.MarkupMatches("<ix-menu-item active=\"true\" home=\"true\" bottom=\"true\" icon=\"testIcon\" notifications=\"5\" label=\"label\" tooltip-text=\"Test tooltip\" target=\"_self\"><div>Test child content</div></ix-menu-item>");
 		}
 
 		[Fact]

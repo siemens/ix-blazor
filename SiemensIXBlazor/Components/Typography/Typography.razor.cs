@@ -22,7 +22,7 @@ public partial class Typography
 	[Parameter]
 	public TypographyColor? TextColor { get; set; }
 	[Parameter]
-	public TextDecoration? TextDecoration { get; set; } = Enums.Typography.TextDecoration.None;
+	public TextDecoration TextDecoration { get; set; } = Enums.Typography.TextDecoration.None;
 	[Parameter]
 	public RenderFragment? ChildContent { get; set; }
 }

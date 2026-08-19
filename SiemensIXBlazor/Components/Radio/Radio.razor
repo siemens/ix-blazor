@@ -4,11 +4,11 @@
 @inject IJSRuntime JSRuntime
 
 <ix-radio id="@Id"
-          checked="@Checked"
-          disabled="@Disabled"
+          checked="@(Checked ? "true" : null)"
+          disabled="@(Disabled ? "true" : null)"
           label="@Label"
           name="@Name"
-          required="@Required"
+          required="@(Required ? "true" : null)"
           value="@Value"
           class="@CssClass">
 </ix-radio>

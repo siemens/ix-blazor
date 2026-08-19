@@ -19,10 +19,10 @@
                 icon="@Icon"
                 heading="@Heading"
                 subheading="@SubHeading"
-                selected="@Selected"
+                selected="@(Selected ? "true" : null)"
                 aria-label-card="@AriaLabelCard"
                 aria-label-icon="@AriaLabelIcon"
-                passive="@Passive"
+                passive="@(Passive ? "true" : null)"
                 variant="@(EnumParser<ActionCardVariant>.EnumToString(Variant))">
     @ChildContent
 </ix-action-card>

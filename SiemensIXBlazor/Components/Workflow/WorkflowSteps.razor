@@ -16,9 +16,9 @@
 <ix-workflow-steps
 @attributes="UserAttributes"
 id="@Id"
-clickable="@Clickable"
+clickable="@(Clickable ? "true" : null)"
 selected-index="@SelectedIndex"
-vertical="@Vertical"
+vertical="@(Vertical ? "true" : null)"
 style="@Style"
 class="@Class">
     @ChildContent

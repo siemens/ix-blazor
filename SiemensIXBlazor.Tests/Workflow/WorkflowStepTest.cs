@@ -31,7 +31,7 @@ namespace SiemensIXBlazor.Tests.Workflow
             );
 
             // Assert
-            cut.MarkupMatches("<ix-workflow-step clickable disabled position=\"first\" selected status=\"open\" vertical></ix-workflow-step>");
+            cut.MarkupMatches("<ix-workflow-step clickable='true' disabled='true' position=\"first\" selected='true' status=\"open\" vertical='true'></ix-workflow-step>");
         }
 
         [Fact]

@@ -33,7 +33,7 @@ public class DropdownItemTest : TestContextBase
 
         // Assert
         cut.MarkupMatches(
-            "<ix-dropdown-item aria-label-button=\"button label\" aria-label-icon=\"icon label\" label=\"testLabel\" icon=\"testIcon\" hover disabled checked item-role=\"option\">Test content</ix-dropdown-item>");
+            "<ix-dropdown-item aria-label-button=\"button label\" aria-label-icon=\"icon label\" label=\"testLabel\" icon=\"testIcon\" hover='true' disabled='true' checked='true' item-role=\"option\">Test content</ix-dropdown-item>");
     }
 
     [Fact]

@@ -15,7 +15,7 @@
 
 <ix-progress-indicator
     @attributes="UserAttributes" style="@Style" class="@Class" id="@Id" helper-text="@HelperText"
-    label="@Label" max="@Max" min="@Min" show-text-as-tooltip="@ShowTextAsTooltip"
+    label="@Label" max="@Max" min="@Min" show-text-as-tooltip="@(ShowTextAsTooltip ? "true" : null)"
     size="@(EnumParser<ProgressIndicatorSize>.EnumToString(Size))"
     status="@(EnumParser<ProgressIndicatorStatus>.EnumToString(Status))"
     text-alignment="@(EnumParser<ProgressIndicatorTextAlignment>.EnumToString(TextAlignment))"

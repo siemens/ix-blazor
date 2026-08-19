@@ -13,7 +13,7 @@
 
 <ix-popover-content @attributes="UserAttributes"
                     id="@Id"
-                    no-padding="@NoPadding"
+                    no-padding="@(NoPadding ? "true" : null)"
                     class="@Class"
                     style="@Style">
     @ChildContent

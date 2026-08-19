@@ -19,11 +19,11 @@
           style="@Style"
           class="@Class"
           sub-header="@SubHeader"
-          expanded="@Expanded"
-          expand-on-header-click="@ExpandOnHeaderClick"
+          expanded="@(Expanded ? "true" : null)"
+          expand-on-header-click="@(ExpandOnHeaderClick ? "true" : null)"
           index="@Index"
-          selected="@Selected"
-          suppress-header-selection="@SuppressHeaderSelection"
+          selected="@(Selected == true ? "true" : null)"
+          suppress-header-selection="@(SuppressHeaderSelection ? "true" : null)"
           id="@Id">
     @ChildContent
 </ix-group>

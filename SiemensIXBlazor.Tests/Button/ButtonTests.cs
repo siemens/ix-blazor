@@ -35,7 +35,7 @@ namespace SiemensIXBlazor.Tests
             });
 
             // Assert
-            cut.MarkupMatches("<ix-button id='testId' disabled='' icon='testIcon' icon-right='testIconRight' loading='' type='button' variant='primary' form='testForm' href='/test' target='_blank' rel='noopener'></ix-button>");
+            cut.MarkupMatches("<ix-button id='testId' disabled='true' icon='testIcon' icon-right='testIconRight' loading='true' type='button' variant='primary' form='testForm' href='/test' target='_blank' rel='noopener'></ix-button>");
         }
 
         [Fact]

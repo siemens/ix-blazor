@@ -19,9 +19,9 @@
    class="@Class"
    style="@Style"
    @attributes="UserAttributes"
-   variant="@Variant"
+   variant="@(EnumParser<PaneVariant>.EnumToString(Variant))"
    layout="@Layout"
-    borderless="@Borderless"
+    borderless="@(Borderless ? "true" : null)"
 >
     @if (Left is not null)
     {

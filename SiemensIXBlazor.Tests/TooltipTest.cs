@@ -31,7 +31,7 @@ namespace SiemensIXBlazor.Tests
             );
 
             // Assert
-            cut.MarkupMatches("<ix-tooltip id=\"tooltipId\" title-content=\"Test Tooltip\" interactive placement=\"bottom\" for=\"testElement\"></ix-tooltip>");
+            cut.MarkupMatches("<ix-tooltip id=\"tooltipId\" title-content=\"Test Tooltip\" interactive='true' placement=\"bottom\" for=\"testElement\"></ix-tooltip>");
         }
 
 

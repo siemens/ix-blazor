@@ -7,11 +7,11 @@
              class="@Class"
              style="@Style"
              tab-key="@TabKey"
-             disabled="@Disabled"
-             selected="@Selected"
+             disabled="@(Disabled ? "true" : null)"
+             selected="@(Selected ? "true" : null)"
              icon="@Icon"
              counter="@Counter"
-             closable="@Closable"
+             closable="@(Closable ? "true" : null)"
              label="@Label"
              aria-label-close-button="@AriaLabelCloseButton">
     @ChildContent

@@ -38,7 +38,7 @@ public class DropdownTest : TestContextBase
 
         // Assert
         cut.MarkupMatches(
-            "<ix-dropdown id=\"testId\" trigger=\"testTrigger\" anchor=\"testAnchor\" close-behavior=\"both\" header=\"testHeader\" placement=\"bottom-start\" positioning-strategy=\"fixed\" suppress-trigger-visibility-check disable-focus-handling disable-focus-trap enable-top-layer focus-checked-item>Test content</ix-dropdown>");
+            "<ix-dropdown id=\"testId\" trigger=\"testTrigger\" anchor=\"testAnchor\" close-behavior=\"both\" header=\"testHeader\" placement=\"bottom-start\" positioning-strategy=\"fixed\" suppress-trigger-visibility-check='true' disable-focus-handling='true' disable-focus-trap='true' enable-top-layer='true' focus-checked-item='true'>Test content</ix-dropdown>");
     }
 
     [Fact]

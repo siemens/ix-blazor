@@ -30,7 +30,7 @@ namespace SiemensIXBlazor.Tests
             );
 
             // Assert
-            cut.MarkupMatches("<ix-drawer id=\"testId\" show=\"\" close-on-click-outside=\"\" max-width=\"28\" min-width=\"16\" width=\"16\"></ix-drawer>");
+            cut.MarkupMatches("<ix-drawer id=\"testId\" show=\"true\" close-on-click-outside=\"true\" max-width=\"28\" min-width=\"16\" width=\"16\"></ix-drawer>");
         }
 
         [Fact]

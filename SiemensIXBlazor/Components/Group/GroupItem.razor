@@ -19,12 +19,12 @@
                class="@Class"
                text="@Text"
                aria-label-icon="@AriaLabelIcon"
-               disabled="@Disabled"
+               disabled="@(Disabled ? "true" : null)"
                icon="@Icon"
                index="@Index"
                secondary-text="@SecondaryText"
-               selected="@Selected"
-               suppress-selection="@SuppressSelection"
+               selected="@(Selected == true ? "true" : null)"
+               suppress-selection="@(SuppressSelection ? "true" : null)"
                id="@Id"
                @onclick="ItemClicked">
     @ChildContent

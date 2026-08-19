@@ -13,6 +13,6 @@
 <ix-key-value-list @attributes="UserAttributes"
                    class="@Class"
                    style="@Style"
-                   striped="@Striped">
+                   striped="@(Striped == true ? "true" : null)">
     @ChildContent
 </ix-key-value-list>

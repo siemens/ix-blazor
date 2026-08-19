@@ -17,7 +17,7 @@
                 class="@Class"
                 style="@Style"
                 type="@(Type.HasValue ? TypeToString(Type.Value) : null)"
-                hide-arrow="@HideArrow">
+                hide-arrow="@(HideArrow ? "true" : null)">
     @ChildContent
 </ix-range-field>
 

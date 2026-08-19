@@ -21,12 +21,12 @@
                       company-logo-alt="@CompanyLogoAlt"
                       app-icon="@AppIcon"
                       app-icon-alt="@AppIconAlt"
-                      app-icon-outline="@AppIconOutline"
-                      hide-bottom-border="@HideBottomBorder"
-                      show-menu="@ShowMenu"
+                      app-icon-outline="@(AppIconOutline ? "true" : null)"
+                      hide-bottom-border="@(HideBottomBorder ? "true" : null)"
+                      show-menu="@(ShowMenu ? "true" : null)"
                       aria-label-app-switch-icon-button="@AriaLabelAppSwitchIconButton"
                       aria-label-more-menu-icon-button="@AriaLabelMoreMenuIconButton"
-                      enable-top-layer="@EnableTopLayer"
+                      enable-top-layer="@(EnableTopLayer ? "true" : null)"
                       slot="application-header">
     @ChildContent
     @if (Secondary != null)

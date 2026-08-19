@@ -35,7 +35,7 @@ namespace SiemensIXBlazor.Tests.ToggleButton
             );
 
             // Assert
-            cut.MarkupMatches("<ix-icon-toggle-button id=\"testId\" disabled ghost icon=\"test-icon\" loading outline pressed size=\"16\" variant=\"subtle-secondary\" oval></ix-icon-toggle-button>");
+            cut.MarkupMatches("<ix-icon-toggle-button id=\"testId\" disabled='true' ghost='true' icon=\"test-icon\" loading='true' outline='true' pressed='true' size=\"16\" variant=\"subtle-secondary\" oval='true'></ix-icon-toggle-button>");
         }
 
         [Fact]

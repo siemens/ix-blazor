@@ -18,7 +18,7 @@
                    style="@Style"
                    slot="card-accordion"
                    aria-label-expand-button="@AriaLabelExpandButton"
-                   collapse="@Collapse"
+                   collapse="@(Collapse ? "true" : null)"
                    variant="@(EnumParser<CardAccordionVariant>.EnumToString(Variant))">
     @ChildContent
 </ix-card-accordion>

@@ -19,10 +19,10 @@
 
 
 <ix-pane class="@Class" style="@Style" @attributes="UserAttributes" id="@Id"
-         aria-label-icon="@AriaLabelIcon" aria-label-collapse-close-button="@AriaLabelCollapseCloseButton" close-on-click-outside="@CloseOnClickOutside" heading="@Heading"
-    composition="@(EnumParser<PaneComposition>.EnumToString(Composition))" size="@Size" borderless="@Borderless" no-padding="@NoPadding"
-    icon="@Icon" variant="@(EnumParser<PaneVariant>.EnumToString(Variant))" hide-on-collapse="@HideOnCollapse"
-    expanded="@Expanded">
+         aria-label-icon="@AriaLabelIcon" aria-label-collapse-close-button="@AriaLabelCollapseCloseButton" close-on-click-outside="@(CloseOnClickOutside ? "true" : null)" heading="@Heading"
+    composition="@(EnumParser<PaneComposition>.EnumToString(Composition))" size="@Size" borderless="@(Borderless ? "true" : null)" no-padding="@(NoPadding ? "true" : null)"
+    icon="@Icon" variant="@(EnumParser<PaneVariant>.EnumToString(Variant))" hide-on-collapse="@(HideOnCollapse ? "true" : null)"
+    expanded="@(Expanded ? "true" : null)">
     @if (HeaderContent != null)
     {
         <div slot="header">

@@ -16,6 +16,6 @@
 @inherits IXBaseComponent
 
 <ix-message-bar @attributes="UserAttributes" style="@Style" class="@Class"
-    type="@(EnumParser<MessageBarType>.EnumToString(Type))" id="@Id" persistent="@Persistent">
+    type="@(EnumParser<MessageBarType>.EnumToString(Type))" id="@Id" persistent="@(Persistent ? "true" : null)">
     @ChildContent
 </ix-message-bar>

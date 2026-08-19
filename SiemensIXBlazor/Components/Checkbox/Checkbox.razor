@@ -7,12 +7,12 @@
              class="@Class"
              style="@Style"
              id="@Id"
-             checked="@Checked"
-             disabled="@Disabled"
-             indeterminate="@Indeterminate"
+             checked="@(Checked ? "true" : null)"
+             disabled="@(Disabled ? "true" : null)"
+             indeterminate="@(Indeterminate ? "true" : null)"
              label="@Label"
              name="@Name"
-             required="@Required"
+             required="@(Required ? "true" : null)"
              value="@Value">
 </ix-checkbox>
 

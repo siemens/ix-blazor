@@ -20,9 +20,9 @@ aria-label-button="@AriaLabelButton"
 aria-label-icon="@AriaLabelIcon"
 label="@Label"
 icon="@Icon"
-hover="@Hover"
-disabled="@Disabled"
-checked="@Checked"
+hover="@(Hover ? "true" : null)"
+disabled="@(Disabled ? "true" : null)"
+checked="@(Checked ? "true" : null)"
 item-role="@(EnumParser<DropdownItemRole>.EnumToString(ItemRole))">
     @ChildContent
     @if (EndContent is not null)

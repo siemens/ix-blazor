@@ -17,18 +17,18 @@
            class="@Class" 
            style="@Style" 
            value="@Value"
-           disabled="@Disabled"
+           disabled="@(Disabled ? "true" : null)"
            helper-text="@HelperText"
            label="@Label"
            invalid-text="@InvalidText"
            info-text="@InfoText"
            warning-text="@WarningText"
            valid-text="@ValidText"
-           show-text-as-tooltip="@ShowTextAsTooltip"
+           show-text-as-tooltip="@(ShowTextAsTooltip ? "true" : null)"
            max="@Max"
            min="@Min"
            step="@Step"
-           trace="@Trace"
+           trace="@(Trace ? "true" : null)"
            trace-reference="@TraceReference">
     @if (LabelStart is not null)
     {

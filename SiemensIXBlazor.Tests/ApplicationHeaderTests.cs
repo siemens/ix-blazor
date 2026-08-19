@@ -34,7 +34,7 @@ namespace SiemensIXBlazor.Tests
             });
 
             // Assert
-            cut.MarkupMatches("<ix-application-header id='' name='testName' name-suffix='testSuffix' company-logo='logo.png' company-logo-alt='Company Logo' app-icon='app-icon.svg' app-icon-alt='App Icon' app-icon-outline='' hide-bottom-border='' show-menu='' aria-label-app-switch-icon-button='Open applications' aria-label-more-menu-icon-button='More actions' slot='application-header'></ix-application-header>");
+            cut.MarkupMatches("<ix-application-header id='' name='testName' name-suffix='testSuffix' company-logo='logo.png' company-logo-alt='Company Logo' app-icon='app-icon.svg' app-icon-alt='App Icon' app-icon-outline='true' hide-bottom-border='true' show-menu='true' aria-label-app-switch-icon-button='Open applications' aria-label-more-menu-icon-button='More actions' slot='application-header'></ix-application-header>");
         }
 
         [Fact]

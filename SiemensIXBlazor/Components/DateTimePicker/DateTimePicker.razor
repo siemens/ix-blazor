@@ -23,8 +23,8 @@
                     max-time="@MaxTime"
                     aria-label-next-month-button="@AriaLabelNextMonthButton"
                     aria-label-previous-month-button="@AriaLabelPreviousMonthButton"
-                    single-selection="@SingleSelection"
-                    show-time-reference="@ShowTimeReference"
+                    single-selection="@(SingleSelection ? "true" : null)"
+                    show-time-reference="@(ShowTimeReference ? "true" : null)"
                     time="@Time"
                     time-format="@TimeFormat"
                     time-reference="@(TimeReference.HasValue ? EnumParser<TimeReference>.EnumToString(TimeReference.Value, toLowerCase: false) : null)"
@@ -33,7 +33,7 @@
                     i18n-time="@I18nTime"
                     week-start-index="@WeekStartIndex"
                     locale="@Locale"
-                    show-week-numbers="@ShowWeekNumbers"
+                    show-week-numbers="@(ShowWeekNumbers ? "true" : null)"
                     style="@Style"
                     class="@Class">
 </ix-datetime-picker>

@@ -58,7 +58,7 @@ public class SelectTests : TestContextBase
 
         // Assert
         Assert.True(cut.Instance.AllowClear);
-        cut.MarkupMatches("<ix-select id='test-select' allow-clear " +
+        cut.MarkupMatches("<ix-select id='test-select' allow-clear='true' " +
                           "aria-label-add-item='Add item' i18n-placeholder='Select an option' i18n-placeholder-editable='Type of select option' " +
                           "i18n-select-list-header='Select an option' mode='single'" +
                           "i18n-no-matches='No matches' i18n-more-items='{count} more' i18n-all-selected='All' i18n-remove-selected-item='Remove'></ix-select>");

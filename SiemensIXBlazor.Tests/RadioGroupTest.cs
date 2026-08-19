@@ -33,7 +33,7 @@ public class RadioGroupTests : TestContextBase
             .Add(p => p.Direction, RadioGroupDirection.Row)
             .AddChildContent("Options"));
 
-        cut.MarkupMatches("<ix-radio-group id=\"radio-group\" label=\"Storage options\" helper-text=\"Choose one\" info-text=\"Info\" warning-text=\"Warning\" valid-text=\"Valid\" invalid-text=\"Invalid\" show-text-as-tooltip value=\"512\" direction=\"row\">Options</ix-radio-group>");
+        cut.MarkupMatches("<ix-radio-group id=\"radio-group\" label=\"Storage options\" helper-text=\"Choose one\" info-text=\"Info\" warning-text=\"Warning\" valid-text=\"Valid\" invalid-text=\"Invalid\" show-text-as-tooltip='true' value=\"512\" direction=\"row\">Options</ix-radio-group>");
     }
 
     [Fact]

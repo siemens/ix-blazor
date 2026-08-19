@@ -34,7 +34,7 @@ public class SplitButtonTests : TestContextBase
 
 		// Assert
 		cut.MarkupMatches(
-			"<ix-split-button id=\"testId\" disabled disable-button disable-dropdown-button icon=\"test-icon\" label=\"Test Label\" split-icon=\"context-menu\" variant=\"primary\" close-behavior=\"both\"></ix-split-button>");
+			"<ix-split-button id=\"testId\" disabled='true' disable-button='true' disable-dropdown-button='true' icon=\"test-icon\" label=\"Test Label\" split-icon=\"context-menu\" variant=\"primary\" close-behavior=\"both\"></ix-split-button>");
 	}
 
 	[Fact]

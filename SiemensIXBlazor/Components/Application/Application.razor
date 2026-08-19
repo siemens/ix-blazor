@@ -17,7 +17,7 @@
 
 <ix-application class="@Class" style="@Style" @attributes="UserAttributes" 
     id="@Id" 
-    force-breakpoint="@ForceBreakpoint" 
+    force-breakpoint="@(ForceBreakpoint.HasValue ? EnumParser<ForceBreakpoint>.EnumToString(ForceBreakpoint.Value) : null)"
     theme="@Theme" 
     color-schema="@(EnumParser<ColorSchema>.EnumToString(ColorSchema))">
   @ChildContent

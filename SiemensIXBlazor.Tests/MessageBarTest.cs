@@ -38,7 +38,7 @@ public class MessageBarTests : TestContextBase
         );
 
         // Assert
-        cut.MarkupMatches("<ix-message-bar id=\"testId\" class=\"test-class\" style=\"width: 100%\" persistent=\"\" type=\"info\">Simple Text</ix-message-bar>");
+        cut.MarkupMatches("<ix-message-bar id=\"testId\" class=\"test-class\" style=\"width: 100%\" persistent=\"true\" type=\"info\">Simple Text</ix-message-bar>");
     }
 
     [Fact]

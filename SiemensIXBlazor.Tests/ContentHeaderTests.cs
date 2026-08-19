@@ -29,7 +29,7 @@ namespace SiemensIXBlazor.Tests
             });
 
             // Assert
-            cut.MarkupMatches("<ix-content-header id=\"testId\" has-back-button=\"\" header-title=\"testHeaderTitle\" header-subtitle=\"testHeaderSubTitle\" variant=\"primary\"></ix-content-header>");
+            cut.MarkupMatches("<ix-content-header id=\"testId\" has-back-button=\"true\" header-title=\"testHeaderTitle\" header-subtitle=\"testHeaderSubTitle\" variant=\"primary\"></ix-content-header>");
         }
 
         [Fact]
