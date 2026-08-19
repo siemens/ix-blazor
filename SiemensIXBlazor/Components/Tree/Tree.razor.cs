@@ -61,7 +61,7 @@ public partial class Tree
             _interop = new(JSRuntime);
 
             await _interop.AddEventListener(this, Id, "contextChange", nameof(ContextChanged));
-            await _interop.AddEventListener(this, Id, "nodeRemoved", nameof(NodeRemoved));
+            await _interop.AddEventListener(this, Id, "nodeRemoved", nameof(NodeRemoved), includeDetail: false);
             await _interop.AddEventListener(this, Id, "nodeClicked", nameof(NodeClicked));
             await _interop.AddEventListener(this, Id, "nodeToggled", nameof(NodeToggled));
         }

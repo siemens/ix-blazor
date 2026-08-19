@@ -74,9 +74,9 @@ namespace SiemensIXBlazor.Components.Menu
 
 				await _interop.AddEventListener(this, Id, "expandChange", "ExpandChanged");
 				await _interop.AddEventListener(this, Id, "mapExpandChange", "MapExpandChanged");
-                await _interop.AddEventListener(this, Id, "openAppSwitch", "OpenAppSwitch");
-                await _interop.AddEventListener(this, Id, "openAbout", "OpenAbout");
-                await _interop.AddEventListener(this, Id, "openSettings", "OpenSettings");
+                await _interop.AddEventListener(this, Id, "openAppSwitch", "OpenAppSwitch", includeDetail: false);
+                await _interop.AddEventListener(this, Id, "openAbout", "OpenAbout", includeDetail: false);
+                await _interop.AddEventListener(this, Id, "openSettings", "OpenSettings", includeDetail: false);
             }
 		}
 

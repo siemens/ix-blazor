@@ -59,7 +59,7 @@ namespace SiemensIXBlazor.Components
             {
                 _interop = new(JSRuntime);
 
-                await _interop.AddEventListener(this, Id, "actionClick", "ActionClicked");
+                await _interop.AddEventListener(this, Id, "actionClick", "ActionClicked", includeDetail: false);
             }
         }
 
@@ -71,4 +71,3 @@ namespace SiemensIXBlazor.Components
 
     }
 }
-

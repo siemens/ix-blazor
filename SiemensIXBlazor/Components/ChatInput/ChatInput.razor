@@ -1,0 +1,50 @@
+@* -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2026 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+// -----------------------------------------------------------------------
+*@
+
+@namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
+
+<ix-chat-input @attributes="UserAttributes"
+               id="@ElementId"
+               class="@Class"
+               style="@Style"
+               state="@StateAttribute"
+               name="@Name"
+               placeholder="@Placeholder"
+               value="@Value"
+               disabled="@(Disabled ? "true" : null)"
+               readonly="@(Readonly ? "true" : null)"
+               textarea-label="@TextareaLabel"
+               max-length="@MaxLength"
+               character-limit="@CharacterLimit"
+               i18n-character-limit-reached="@I18nCharacterLimitReached"
+               i18n-character-limit-warning="@I18nCharacterLimitWarning"
+               character-limit-warning-threshold="@CharacterLimitWarningThreshold"
+               min-rows="@MinRows"
+               max-rows="@MaxRows"
+               insert-line-break-on-enter="@(InsertLineBreakOnEnter ? "true" : null)"
+               disclaimer="@Disclaimer">
+    @if (Attachments is not null)
+    {
+        <div slot="attachments">@Attachments</div>
+    }
+    @if (FollowUp is not null)
+    {
+        <div slot="follow-up">@FollowUp</div>
+    }
+    @if (Start is not null)
+    {
+        <div slot="start">@Start</div>
+    }
+    @if (End is not null)
+    {
+        <div slot="end">@End</div>
+    }
+</ix-chat-input>

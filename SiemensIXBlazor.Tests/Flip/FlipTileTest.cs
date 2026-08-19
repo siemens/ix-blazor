@@ -227,6 +227,18 @@ public class FlipTileTest : TestContextBase
     }
 
     [Fact]
+    public void HeaderAndFooterSlotsRenderCorrectly()
+    {
+        var cut = Render<FlipTile>(parameters => parameters
+            .Add(p => p.Id, "ix-flip-slots")
+            .Add(p => p.HeaderContent, (RenderFragment)(builder => builder.AddContent(0, "Header")))
+            .Add(p => p.FooterContent, (RenderFragment)(builder => builder.AddContent(0, "Footer"))));
+
+        Assert.Equal("Header", cut.Find("[slot='header']").TextContent);
+        Assert.Equal("Footer", cut.Find("[slot='footer']").TextContent);
+    }
+
+    [Fact]
     public void ToggleEventReceivesCorrectIndex()
     {
         // Arrange

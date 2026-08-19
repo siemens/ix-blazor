@@ -258,13 +258,13 @@ public class SelectTests : TestContextBase
     }
 
     [Fact]
-    public async Task BlurEventIsTriggeredCorrectly()
+    public async Task IxBlurEventIsTriggeredCorrectly()
     {
         // Arrange
         bool blurTriggered = false;
         var cut = Render<Components.Select>(parameters => parameters
             .Add(p => p.Id, "test-select")
-            .Add(p => p.BlurEvent, EventCallback.Factory.Create<object>(this, (_) => blurTriggered = true)));
+            .Add(p => p.IxBlurEvent, EventCallback.Factory.Create(this, () => blurTriggered = true)));
 
         // Act
         await cut.Instance.Blurred();

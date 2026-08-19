@@ -10,6 +10,8 @@
 using Bunit;
 using Microsoft.AspNetCore.Components;
 using SiemensIXBlazor.Components;
+using SiemensIXBlazor.Objects.CardList;
+using System.Text.Json;
 
 namespace SiemensIXBlazor.Tests
 {
@@ -25,6 +27,7 @@ namespace SiemensIXBlazor.Tests
 				parameters.Add(p => p.Collapse, true);
 				parameters.Add(p => p.I18nMoreCards, "testMoreCards");
 				parameters.Add(p => p.I18nShowAll, "testShowAll");
+				parameters.Add(p => p.I18nShowLess, "testShowLess");
 				parameters.Add(p => p.Label, "testLabel");
 				parameters.Add(p => p.ListStyle, Enums.CardList.CardListStyle.Stack);
 				parameters.Add(p => p.ShowAllCount, 1);
@@ -34,7 +37,7 @@ namespace SiemensIXBlazor.Tests
 			});
 
 			// Assert
-			cut.MarkupMatches("<ix-card-list id=\"testId\" label=\"testLabel\" show-all-count=\"1\" list-style=\"stack\" collapse=\"true\" i18n-more-cards=\"testMoreCards\" i18n-show-all=\"testShowAll\" suppress-overflow-handling=\"true\" hide-show-all='true'></ix-card-list>");
+			cut.MarkupMatches("<ix-card-list id=\"testId\" label=\"testLabel\" show-all-count=\"1\" list-style=\"stack\" collapse=\"true\" i18n-more-cards=\"testMoreCards\" i18n-show-all=\"testShowAll\" i18n-show-less=\"testShowLess\" suppress-overflow-handling=\"true\" hide-show-all='true'></ix-card-list>");
 		}
 
 		[Fact]
@@ -52,31 +55,45 @@ namespace SiemensIXBlazor.Tests
 		}
 
 		[Fact]
-		public void ShowAllClickedEventTriggeredCorrectly()
+		public async Task ShowAllClickedEventTriggeredCorrectly()
 		{
 			// Arrange
 			var eventTriggered = false;
-			var cut = Render<CardList>(parameters => parameters.Add(p => p.ShowAllClickEvent, EventCallback.Factory.Create(this, () => eventTriggered = true)));
+			string? receivedNativeEvent = null;
+			var cut = Render<CardList>(parameters => parameters.Add(p => p.ShowAllClickEvent, EventCallback.Factory.Create<CardListClickEventArgs>(this, args =>
+			{
+				eventTriggered = true;
+				receivedNativeEvent = args.NativeEvent.GetProperty("type").GetString();
+			})));
 
 			// Act
-			cut.Instance.ShowAllClickEvent.InvokeAsync();
+			using JsonDocument detail = JsonDocument.Parse("{\"nativeEvent\":{\"type\":\"click\"}}");
+			await cut.Instance.ShowAllClicked(detail.RootElement);
 
 			// Assert
 			Assert.True(eventTriggered);
+			Assert.Equal("click", receivedNativeEvent);
 		}
 
 		[Fact]
-		public void ShowMoreCardClickedEventTriggeredCorrectly()
+		public async Task ShowMoreCardClickedEventTriggeredCorrectly()
 		{
 			// Arrange
 			var eventTriggered = false;
-			var cut = Render<CardList>(parameters => parameters.Add(p => p.ShowMoreCardClickEvent, EventCallback.Factory.Create(this, () => eventTriggered = true)));
+			string? receivedKey = null;
+			var cut = Render<CardList>(parameters => parameters.Add(p => p.ShowMoreCardClickEvent, EventCallback.Factory.Create<CardListClickEventArgs>(this, args =>
+			{
+				eventTriggered = true;
+				receivedKey = args.NativeEvent.GetProperty("key").GetString();
+			})));
 
 			// Act
-			cut.Instance.ShowMoreCardClickEvent.InvokeAsync();
+			using JsonDocument detail = JsonDocument.Parse("{\"nativeEvent\":{\"key\":\"Enter\"}}");
+			await cut.Instance.ShowMoreCardClicked(detail.RootElement);
 
 			// Assert
 			Assert.True(eventTriggered);
+			Assert.Equal("Enter", receivedKey);
 		}
 	}
 }

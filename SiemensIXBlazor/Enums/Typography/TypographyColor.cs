@@ -12,12 +12,19 @@ namespace SiemensIXBlazor.Enums.Typography;
 public enum TypographyColor
 {
 	Alarm,
+	Alarm_Contrast,
 	Contrast,
+	Critical_Contrast,
+	Info_Contrast,
 	Inv_Contrast,
 	Inv_Soft,
 	Inv_Std,
 	Inv_Weak,
+	Neutral_Contrast,
+	Primary_Contrast,
 	Soft,
 	Std,
+	Success_Contrast,
+	Warning_Contrast,
 	Weak
 }

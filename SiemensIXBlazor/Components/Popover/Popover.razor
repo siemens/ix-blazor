@@ -17,7 +17,7 @@
 
 <ix-popover @attributes="UserAttributes"
             id="@Id"
-            trigger="@Trigger"
+            trigger="@(Trigger as string)"
             show="@(Show ? "true" : null)"
             placement="@(EnumParser<PopoverPlacement>.EnumToString(Placement))"
             has-spike="@(HasSpike ? "true" : null)"

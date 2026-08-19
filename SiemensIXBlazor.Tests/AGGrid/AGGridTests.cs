@@ -648,6 +648,25 @@ public sealed class AGGridTests : TestContextBase
         Assert.Equal("Nothing here", serialized.GetProperty("localeText").GetProperty("noRowsToShow").GetString());
     }
 
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void PassesOfficialIxStripedRowsThemeOption(bool stripedRows)
+    {
+        object? capturedSettings = null;
+        _module
+            .Setup(module => module.InvokeAsync<IJSObjectReference>("createAgGrid", It.IsAny<object[]?>()))
+            .Callback<string, object[]?>((_, arguments) => capturedSettings = arguments![3])
+            .ReturnsAsync(_controller.Object);
+
+        AgGridOptions options = new() { StripedRows = stripedRows };
+        using IRenderedComponent<AGGrid<TestRow>> cut = RenderGrid(parameters => parameters
+            .Add(component => component.Options, options));
+
+        JsonElement settings = JsonSerializer.SerializeToElement(capturedSettings);
+        Assert.Equal(stripedRows, settings.GetProperty("stripedRows").GetBoolean());
+    }
+
     [Fact]
     public void ReplacesChangedColumnsWithoutRecreatingGrid()
     {

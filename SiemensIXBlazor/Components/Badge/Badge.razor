@@ -1,0 +1,33 @@
+@* -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2026 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+// -----------------------------------------------------------------------
+*@
+
+@namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
+
+<ix-badge @attributes="UserAttributes"
+          class="@Class"
+          style="@Style"
+          align-left="@(AlignLeft ? "true" : null)"
+          aria-label-icon="@AriaLabelIcon"
+          background="@Background"
+          badge-color="@BadgeColor"
+          border="@(Border ? "true" : null)"
+          enable-animation="@(EnableAnimation ? "true" : null)"
+          icon="@Icon"
+          label="@Label"
+          offset-x="@OffsetX"
+          offset-y="@OffsetY"
+          outline="@(Outline ? "true" : null)"
+          position="@PositionAttribute"
+          tooltip-text="@TooltipTextAttribute"
+          type="@TypeAttribute"
+          variant="@VariantAttribute">
+    @ChildContent
+</ix-badge>

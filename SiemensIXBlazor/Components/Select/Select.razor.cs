@@ -80,7 +80,7 @@ public partial class Select
     [Parameter]
     public EventCallback<string> InputChangeEvent { get; set; }
     [Parameter]
-    public EventCallback<object> BlurEvent { get; set; }
+    public EventCallback IxBlurEvent { get; set; }
     [Parameter]
     public string I18nMoreItems { get; set; } = "{count} more";
     [Parameter]
@@ -92,6 +92,18 @@ public partial class Select
 
     private BaseInterop? _interop;
 
+    public async Task FocusInputAsync()
+    {
+        _interop ??= new(JSRuntime);
+        await _interop.InvokeElementMethodAsync(Id, "focusInput");
+    }
+
+    public async Task<IJSObjectReference?> GetNativeInputElementAsync()
+    {
+        _interop ??= new(JSRuntime);
+        return await _interop.InvokeElementMethodAsync<IJSObjectReference>(Id, "getNativeInputElement");
+    }
+
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
         TrackValueChange();
@@ -101,7 +113,7 @@ public partial class Select
             await _interop.AddEventListener(this, Id, "addItem", nameof(AddItemChanged));
             await _interop.AddEventListener(this, Id, "valueChange", nameof(ValueChanged));
             await _interop.AddEventListener(this, Id, "inputChange", nameof(InputChanged));
-            await _interop.AddEventListener(this, Id, "ixBlur", nameof(Blurred));
+            await _interop.AddEventListener(this, Id, "ixBlur", nameof(Blurred), includeDetail: false);
         }
 
         if (_valueChanged)
@@ -178,9 +190,9 @@ public partial class Select
     [JSInvokable]
     public async Task Blurred()
     {
-        if (BlurEvent.HasDelegate)
+        if (IxBlurEvent.HasDelegate)
         {
-            await BlurEvent.InvokeAsync(null);
+            await IxBlurEvent.InvokeAsync();
         }
     }
 }

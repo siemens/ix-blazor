@@ -14,6 +14,7 @@ namespace SiemensIXBlazor.Interops
     public class BaseInterop
     {
         private readonly Lazy<Task<IJSObjectReference>> moduleTask;
+        private readonly List<(IDisposable Reference, string ListenerId)> listeners = [];
 
         public BaseInterop(IJSRuntime jsRuntime)
         {
@@ -21,11 +22,26 @@ namespace SiemensIXBlazor.Interops
                 "import", $"./_content/Siemens.IX.Blazor/js/siemens-ix/interops/baseJsInterop.js").AsTask());
         }
 
-        public async Task AddEventListener(object classObject, string id, string eventName, string callbackFunctionName)
+        public async Task AddEventListener(
+            object classObject,
+            string id,
+            string eventName,
+            string callbackFunctionName,
+            bool includeDetail = true)
         {
             var module = await moduleTask.Value;
             var objectReference = DotNetObjectReference.Create(classObject);
-            await module.InvokeAsync<string>("listenEvent", objectReference, id, eventName, callbackFunctionName);
+            try
+            {
+                string listenerId = await module.InvokeAsync<string>(
+                    "listenEvent", objectReference, id, eventName, callbackFunctionName, includeDetail);
+                listeners.Add((objectReference, listenerId));
+            }
+            catch
+            {
+                objectReference.Dispose();
+                throw;
+            }
         }
 
         public async Task SetElementProperty(string id, string propertyName, object propertyValue)
@@ -65,6 +81,22 @@ namespace SiemensIXBlazor.Interops
                 try
                 {
                     var module = await moduleTask.Value;
+                    foreach ((IDisposable reference, string listenerId) in listeners)
+                    {
+                        try
+                        {
+                            await module.InvokeVoidAsync("removeEventListener", listenerId);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.Error.WriteLine($"Failed to remove event listener: {ex.Message}");
+                        }
+                        finally
+                        {
+                            reference.Dispose();
+                        }
+                    }
+                    listeners.Clear();
                     await module.DisposeAsync();
                 }
                 catch (Exception ex)

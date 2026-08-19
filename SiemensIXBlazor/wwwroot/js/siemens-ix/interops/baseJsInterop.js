@@ -7,16 +7,37 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
-export function listenEvent(caller, elementId, eventName, funtionName) {
+const eventListeners = new Map();
+let nextEventListenerId = 0;
+
+export function listenEvent(caller, elementId, eventName, functionName, includeDetail = true) {
   const element = document.getElementById(elementId);
 
   if (!element) {
     throw new Error(`Element with ID ${elementId} not found`);
   }
 
-  element.addEventListener(eventName, (e) => {
-    caller.invokeMethodAsync(funtionName, e.detail);
-  });
+  const listenerId = `base-listener-${++nextEventListenerId}`;
+  const listener = (e) => {
+    if (includeDetail) {
+      caller.invokeMethodAsync(functionName, e.detail);
+    } else {
+      caller.invokeMethodAsync(functionName);
+    }
+  };
+  element.addEventListener(eventName, listener);
+  eventListeners.set(listenerId, { element, eventName, listener });
+  return listenerId;
+}
+
+export function removeEventListener(listenerId) {
+  const registration = eventListeners.get(listenerId);
+  if (!registration) {
+    return;
+  }
+
+  registration.element.removeEventListener(registration.eventName, registration.listener);
+  eventListeners.delete(listenerId);
 }
 
 export function setElementProperty(elementId, propertyName, propertyValue) {

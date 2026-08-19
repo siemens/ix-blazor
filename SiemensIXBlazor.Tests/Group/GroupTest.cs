@@ -37,7 +37,7 @@ public class GroupTest : TestContextBase
     }
 
     [Fact]
-    public void EventCallbacksTriggered()
+    public async Task EventCallbacksTriggered()
     {
         // Arrange
         var expandedChangedEventWasCalled = false;
@@ -54,13 +54,25 @@ public class GroupTest : TestContextBase
                 EventCallback.Factory.Create(this, (int value) => { selectItemEventValue = value; })));
 
         // Act
-        cut.Instance.ExpandedChanged(true);
-        cut.Instance.GroupSelected(true);
-        cut.Instance.ItemSelected(1);
+        await cut.Instance.ExpandedChanged(true);
+        await cut.Instance.GroupSelected(true);
+        await cut.Instance.ItemSelected(1);
 
         // Assert
         Assert.True(expandedChangedEventWasCalled);
         Assert.True(selectGroupEventWasCalled);
         Assert.Equal(1, selectItemEventValue);
+    }
+
+    [Fact]
+    public void HeaderAndFooterSlotsRenderCorrectly()
+    {
+        var cut = Render<Components.Group>(parameters => parameters
+            .Add(p => p.Id, "testId")
+            .Add(p => p.HeaderContent, (RenderFragment)(builder => builder.AddContent(0, "Header")))
+            .Add(p => p.FooterContent, (RenderFragment)(builder => builder.AddContent(0, "Footer"))));
+
+        Assert.Equal("Header", cut.Find("[slot='header']").TextContent);
+        Assert.Equal("Footer", cut.Find("[slot='footer']").TextContent);
     }
 }

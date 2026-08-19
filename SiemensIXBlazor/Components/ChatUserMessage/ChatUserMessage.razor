@@ -1,0 +1,24 @@
+@* -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2026 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+// -----------------------------------------------------------------------
+*@
+
+@namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
+
+<ix-chat-user-message @attributes="UserAttributes" class="@Class" style="@Style" message="@Message">
+    @ChildContent
+    @if (Actions is not null)
+    {
+        <div slot="actions">@Actions</div>
+    }
+    @if (Attachments is not null)
+    {
+        <div slot="attachments">@Attachments</div>
+    }
+</ix-chat-user-message>

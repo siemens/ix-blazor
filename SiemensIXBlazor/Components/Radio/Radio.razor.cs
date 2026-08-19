@@ -51,7 +51,7 @@ namespace SiemensIXBlazor.Components.Radio
                 Task.Run(async () =>
                 {
                     await _interop.AddEventListener(this, Id, "checkedChange", "CheckedChange");
-                    await _interop.AddEventListener(this, Id, "ixBlur", "IxBlur");
+                    await _interop.AddEventListener(this, Id, "ixBlur", "IxBlur", includeDetail: false);
                     await _interop.AddEventListener(this, Id, "valueChange", "ValueChange");
                 });
             }

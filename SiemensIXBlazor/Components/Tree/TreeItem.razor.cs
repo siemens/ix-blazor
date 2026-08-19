@@ -53,8 +53,8 @@ public partial class TreeItem
         if (firstRender)
         {
             _interop = new(JSRuntime);
-            await _interop.AddEventListener(this, ElementId, "toggle", nameof(Toggle));
-            await _interop.AddEventListener(this, ElementId, "itemClick", nameof(ItemClick));
+            await _interop.AddEventListener(this, ElementId, "toggle", nameof(Toggle), includeDetail: false);
+            await _interop.AddEventListener(this, ElementId, "itemClick", nameof(ItemClick), includeDetail: false);
         }
 
         await ApplyPropertiesAsync();

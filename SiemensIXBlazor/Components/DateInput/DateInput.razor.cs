@@ -94,6 +94,10 @@ public partial class DateInput
         _interop?.InvokeElementMethodAsync(Id, "focusInput")
         ?? throw new InvalidOperationException("The date input has not rendered yet.");
 
+    public Task<IJSObjectReference?> GetNativeInputElementAsync() =>
+        _interop?.InvokeElementMethodAsync<IJSObjectReference>(Id, "getNativeInputElement")
+        ?? throw new InvalidOperationException("The date input has not rendered yet.");
+
     private static string? ReadNullableString(JsonElement value) =>
         value.ValueKind is JsonValueKind.Null or JsonValueKind.Undefined ? null : value.GetString();
 

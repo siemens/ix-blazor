@@ -14,12 +14,16 @@ using SiemensIXBlazor.Enums.Flip;
 
 namespace SiemensIXBlazor.Components
 {
-    public partial class FlipTile
+    public partial class FlipTile : IAsyncDisposable
     {
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
+        [Parameter]
+        public RenderFragment? HeaderContent { get; set; }
+        [Parameter]
+        public RenderFragment? FooterContent { get; set; }
         [Parameter]
         public FlipTileVariant Variant { get; set; } = FlipTileVariant.filled;
         [Parameter]
@@ -35,7 +39,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public EventCallback<int> ToggleEvent { get; set; }
 
-        private BaseInterop _interop;
+        private BaseInterop? _interop;
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -51,6 +55,14 @@ namespace SiemensIXBlazor.Components
         public async Task ToggleClicked(int index)
         {
             await ToggleEvent.InvokeAsync(index);
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            if (_interop is not null)
+            {
+                await _interop.DisposeAsync();
+            }
         }
     }
 }

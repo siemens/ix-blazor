@@ -19,6 +19,10 @@ public sealed class AgGridOptions
     public bool? PaginateChildRows { get; set; }
     public bool? SuppressPaginationPanel { get; set; }
     public bool? Loading { get; set; }
+    /// <summary>
+    /// Enables alternating row backgrounds in the official iX AG Grid theme.
+    /// </summary>
+    public bool StripedRows { get; set; }
     public bool? AnimateRows { get; set; }
     public bool? RowDragManaged { get; set; }
     public bool? SuppressContextMenu { get; set; }

@@ -18,7 +18,6 @@ const {
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
-const ixTheme = getIxTheme(agGrid);
 const communityModuleNames = Object.freeze(
   (AllCommunityModule.dependsOn ?? [])
     .map((module) => module.moduleName)
@@ -400,6 +399,9 @@ export async function createAgGrid(
   }
 
   const instanceId = settings?.instanceId ?? globalThis.crypto?.randomUUID?.() ?? `${Date.now()}`;
+  const ixTheme = getIxTheme(agGrid, {
+    stripedRows: settings?.stripedRows === true,
+  });
   let extensionModule = null;
   let configuredOptions = { ...(options ?? {}) };
 

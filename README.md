@@ -8,7 +8,7 @@ SPDX-License-Identifier: MIT
 
 ## Installation
 
-Install the `Siemens.IX.Blazor` package from the [NuGet](https://www.nuget.org/packages/Siemens.IX.Blazor) package manager.
+Install the `Siemens.IX.Blazor` package from [NuGet](https://www.nuget.org/packages/Siemens.IX.Blazor).
 
 ## .NET CLI
 
@@ -44,14 +44,14 @@ Add the required stylesheet and JavaScript bundle to `index.html`.
 ```
 
 > [!CAUTION]
-> If you want to use this library with a `Blazor Web App`, you need to set the `render mode` to `InteractiveServer`.
-> You can find more information at [here](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-10.0).
+> When using this library with a Blazor Web App, set the render mode to `InteractiveServer`.
+> Learn more about [ASP.NET Core Blazor render modes](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-10.0).
 
 ### Theme Switching
 
 **Since v0.3.9**
 
-Add `Theme` component to the page that you want to manipulate the theme.
+Add the `Theme` component to any page where the theme can be changed.
 
 ```razor
 <Theme @ref="themeProvider"></Theme>
@@ -87,9 +87,7 @@ public partial class Index
 }
 ```
 
-In iX v5, the theme name and color schema are separate. Use a theme name such as
-`classic` together with `Application.ColorSchema` (`Light`, `Dark`, or `System`).
-Do not use the legacy `theme-classic-light` or `theme-classic-dark` values.
+In iX v5, configure the theme and `Application.ColorSchema` (`Light`, `Dark`, or `System`) separately. Use a theme such as `classic` instead of the legacy `theme-classic-light` or `theme-classic-dark` values.
 
 ### Supported Components
 
@@ -99,16 +97,16 @@ Do not use the legacy `theme-classic-light` or `theme-classic-dark` values.
 - [Menu](#menu)
 - [About and Legal](#about-and-legal)
 - [Menu Settings](#menu-settings)
-- [Map Navigation](#map-navigation)
-- [Map Navigation Overlay](#map-navigation-overlay)
 - [Popover News](#popover-news)
 - [AG Grid](#ag-grid) **(since v0.6.0)**
 - [Avatar](#avatar) **(since v0.4.0)**
+- [Badge](#badge) **(since v0.6.0)**
 - [Blind](#blind)
 - [Breadcrumb](#breadcrumb)
 - [Button](#button)
 - [Card](#card) **(since 0.5.0)**
 - [Card List](#card-list) **(since v0.3.3)**
+- [Chat](#chat) **(since v0.6.0)**
 - [Push Card](#push-card) **(since v0.3.3)**
 - [Action Card](#action-card) **(since v0.3.3)**
 - [Icon Button](#icon-button)
@@ -126,7 +124,6 @@ Do not use the legacy `theme-classic-light` or `theme-classic-dark` values.
 - [Date Time Picker](#date-time-picker) **(since 0.5.0)**
 - [Range Field](#range-field)
 - [Divider](#divider)
-- [Drawer](#drawer)
 - [Dropdown Button](#dropdown-button)
 - [Dropdown](#dropdown)
 - [Dropdown Header](#dropdown-header)
@@ -172,7 +169,6 @@ Do not use the legacy `theme-classic-light` or `theme-classic-dark` values.
 - [Tree](#tree)
 - [Typography](#typography)
 - [Upload](#upload)
-- [Validation Tooltip - Form Validation](#validation-tooltip---form-validation)
 - [Workflow](#workflow)
 
 ## Application
@@ -353,30 +349,6 @@ Menu? menu;
 await menu.ToggleSettingsAsync(true);
 ```
 
-## Map Navigation
-
-```razor
-<MapNavigation
-  ApplicationName="Test Application"
-  NavigationTitle="Some other content"
->
-  <placeholder-logo slot="logo"></placeholder-logo>
-  <Menu Id="nav-menu-1">
-    <MenuItem>Item 1</MenuItem>
-    <MenuItem>Item 2</MenuItem>
-    <MenuItem>Item 3</MenuItem>
-  </Menu>
-  <div slot="sidebar-content">Sidebar content</div>
-  <div>Content</div>
-</MapNavigation>
-```
-
-## Map Navigation Overlay
-
-```razor
-<MapNavigationOverlay  Id="overlay"></MapNavigationOverlay>
-```
-
 ## Popover News
 
 ```razor
@@ -398,6 +370,15 @@ await menu.ToggleSettingsAsync(true);
 ## AG Grid
 
 `AGGrid<TData>` wraps AG Grid Community for Blazor. It registers the Community modules, applies the Siemens IX theme, and loads the JavaScript bundle automatically. Refer to the official [AG Grid documentation](https://www.ag-grid.com/javascript-data-grid/) for the underlying grid options and behavior.
+
+Set `AgGridOptions.StripedRows` to enable the optional alternating-row styling supplied by `@siemens/ix-aggrid`:
+
+```csharp
+private readonly AgGridOptions options = new()
+{
+    StripedRows = true,
+};
+```
 
 ### Setup and typed API
 
@@ -610,7 +591,7 @@ The module receives `createCellRendererComponent` and `registerCellRenderer` hel
 
 ```razor
 <CardList Id="carlist1" Label="Stack Layout" ShowAllCount="12" ListStyle="Enums.CardList.CardListStyle.Stack" CollapseChangedEvent="CardListCollapsedChanged"
-ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowMoreClicked">
+          I18nShowLess="Show fewer" ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowMoreClicked">
     <PushCard Icon="rocket"
               Notification="3"
               Heading="Heading content"
@@ -628,6 +609,50 @@ ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowM
               Variant="PushCardVariant.success"></PushCard>
 </CardList>
 ```
+
+Card List click callbacks receive `CardListClickEventArgs`.
+
+## Badge
+
+```razor
+<Badge Type="BadgeType.Label" Label="New" Variant="BadgeVariant.Info" Icon="info" />
+<Badge Type="BadgeType.Dot" Variant="BadgeVariant.Success" TooltipText="Ready" />
+<Badge Type="BadgeType.Counter" Label="3" Border="true">
+    <Button Variant="ButtonVariant.secondary">Notifications</Button>
+</Badge>
+```
+
+Use child content for an attached badge. `TooltipText` accepts text or a Boolean value.
+
+## Chat
+
+```razor
+<Chat>
+    <ChildContent>
+        <ChatAiMessage>
+            <ChildContent>Answer from the assistant.</ChildContent>
+            <Actions><Button Variant="ButtonVariant.secondary">Copy</Button></Actions>
+            <Sources>Source details</Sources>
+        </ChatAiMessage>
+        <ChatUserMessage Message="The user's question." />
+    </ChildContent>
+    <Prompt>
+        <ChatInput Value="@Prompt" ValueChange="OnPromptChanged" PromptSubmit="SubmitPrompt">
+            <Attachments>
+                <ChatAttachment FileName="report.pdf" PreviewSupported="true" />
+            </Attachments>
+        </ChatInput>
+    </Prompt>
+</Chat>
+
+@code {
+    private string Prompt { get; set; } = string.Empty;
+    private void OnPromptChanged(string value) => Prompt = value;
+    private Task SubmitPrompt(string value) => Task.CompletedTask;
+}
+```
+
+Chat supports named content slots and typed attachment/input events.
 
 ## Push Card
 
@@ -661,13 +686,14 @@ ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowM
 <IconButton Icon="info" Variant="ButtonVariant.subtle_primary" />
 ```
 
-## Category filter
+## Category Filter
 
 ```razor
 <CategoryFilter
-    @ref="categoryFilter"
     Id="category-filter-1"
     Placeholder="Filter by"
+    Categories="@Categories"
+    FilterState="@CurrentFilter"
     UniqueCategories="true"
     FilterChangedEvent="FilterStateChanged"
     InputChangedEvent="InputStateChanged"
@@ -677,52 +703,36 @@ ShowAllClickEvent="CardListShowAllClicked" ShowMoreCardClickEvent="CardListShowM
 ```
 
 ```csharp
-CategoryFilter categoryFilter;
-Dictionary<string, Category> categoriesDict;
-FilterState filterState;
+private Dictionary<string, Category> Categories { get; } = new()
+{
+    ["ID_1"] = new Category
+    {
+        Label = "Vendor",
+        Options = ["Apple", "Microsoft", "Siemens"]
+    }
+};
 
-void InputStateChanged(InputState state) { }
-void CategoryStateChanged(string? category) { }
-void FilterCleared(FilterClearedEventArgs eventArgs)
+private FilterState CurrentFilter { get; set; } = new()
+{
+    Tokens = ["Custom filter text"],
+    Categories =
+    [
+        new FilterStateCategory
+        {
+            Id = "ID_1",
+            Value = "Siemens",
+            Operator = LogicalFilterOperator.NotEqual
+        }
+    ]
+};
+
+private void FilterStateChanged(FilterState state) => CurrentFilter = state;
+private void InputStateChanged(InputState state) { }
+private void CategoryStateChanged(string? category) { }
+private void FilterCleared(FilterClearedEventArgs eventArgs)
 {
     // Set eventArgs.Cancel = true to keep the current filter.
 }
-
-protected override void OnAfterRender(bool firstRender)
-    {
-        if(firstRender)
-        {
-            categoriesDict = new();
-            categoriesDict.Add("ID_1", new Category()
-            {
-                Label = "Vendor",
-                Options = new string[]
-                {
-                    "Apple", "MS", "Siemens"
-                }
-            });
-
-            filterState = new()
-            {
-                Tokens = new string[]
-                {
-                    "Custom filter text"
-                },
-                Categories = new FilterStateCategory[]
-                {
-                    new FilterStateCategory()
-                    {
-                        Id = "ID_1",
-                        Value = "IBM",
-                        Operator = LogicalFilterOperator.NotEqual
-                    }
-                }
-            };
-
-            categoryFilter.Categories = categoriesDict;
-            categoryFilter.FilterState = filterState;
-        }
-    }
 ```
 
 ## ECharts
@@ -898,7 +908,7 @@ private void Callback(DateDropdownResponse selectedDateDropdown)
 }
 ```
 
-## Date picker
+## Date Picker
 
 ```razor
 <DatePicker From="2023/02/01"
@@ -908,7 +918,7 @@ private void Callback(DateDropdownResponse selectedDateDropdown)
 </DatePicker>
 ```
 
-## Date input
+## Date Input
 
 ```razor
 <DateInput Id="date-input"
@@ -926,7 +936,7 @@ private void Callback(DateDropdownResponse selectedDateDropdown)
 
 `DateInput` exposes the official date-input properties, `start` and `end` slots, and typed value, `ixChange`, and validity-state callbacks.
 
-## Date time input
+## Date Time Input
 
 ```razor
 <DateTimeInput Id="datetime-input"
@@ -947,7 +957,7 @@ private void Callback(DateDropdownResponse selectedDateDropdown)
 
 `RangeFieldType` maps to the official `time-range`, `date-range`, or `datetime-range` type. `RangeField` accepts exactly the two range inputs required by IX and supports `HideArrow`.
 
-## Date time picker
+## Date Time Picker
 
 ```razor
 <DateTimePicker
@@ -963,33 +973,6 @@ private void Callback(DateDropdownResponse selectedDateDropdown)
 
 ```razor
 <Divider></Divider>
-```
-
-## Drawer
-
-```razor
-<Button ClickEvent="DrawerButtonClicked">Drawer Button</Button>
-<Drawer @ref="drawer1" Id="drawer1">
-    <span>Some content of drawer</span>
-</Drawer>
-```
-
-```csharp
-Drawer drawer1;
-
-protected override void OnAfterRender(bool firstRender)
-{
-    if(firstRender)
-    {
-        drawer1.FullHeight = true;
-        drawer1.CloseOnClickOutside = true;
-    }
-}
-
-private void DrawerButtonClicked()
-{
-    drawer1.Show = !drawer1.Show;
-}
 ```
 
 ## Dropdown Button
@@ -1027,7 +1010,7 @@ private void DrawerButtonClicked()
   <DropdownItem Label="Item 2"></DropdownItem>
   <DropdownItem Label="Item 3"></DropdownItem>
   <DropdownQuickActions>
-    <IconButton Icon="save-all" A11yLabel="Save"></IconButton>
+    <IconButton Icon="save-all" aria-label="Save"></IconButton>
   </DropdownQuickActions>
 </Dropdown>
 ```
@@ -1043,7 +1026,7 @@ private void DrawerButtonClicked()
 ></EmptyState>
 ```
 
-## Event list
+## Event List
 
 ```razor
 <EventList Animated="true" Compact="true" Chevron="true" ItemHeight="@("L")">
@@ -1053,7 +1036,7 @@ private void DrawerButtonClicked()
 </EventList>
 ```
 
-## Expanding search
+## Expanding Search
 
 ```razor
 <ExpandingSearch Id="exp-search"
@@ -1068,17 +1051,12 @@ private void DrawerButtonClicked()
           Height="@("auto")"
           Width="@("auto")"
           AriaLabelEyeIconButton="Toggle view">
-    <div slot="header">Flip header</div>
-
-    <div slot="footer">
-      <div>Predicted maintenance date</div>
-      <div class="d-flex align-items-center">
-        <ix-icon name="info" size="16"></ix-icon>2021-06-22
-      </div>
-    </div>
-
-    <FlipTileContent> Example 1 </FlipTileContent>
-    <FlipTileContent> Example 2 </FlipTileContent>
+    <HeaderContent>Flip header</HeaderContent>
+    <ChildContent>
+        <FlipTileContent>Example 1</FlipTileContent>
+        <FlipTileContent>Example 2</FlipTileContent>
+    </ChildContent>
+    <FooterContent>Predicted maintenance date: 2021-06-22</FooterContent>
 </FlipTile>
 ```
 
@@ -1086,13 +1064,17 @@ private void DrawerButtonClicked()
 
 ```razor
 <Group Id="group1" Header="Header text" SubHeader="Subheader text">
-    <GroupItem Id="groupitem1" Text="Example text 1"></GroupItem>
-    <GroupItem Id="groupitem2" Text="Example text 2"></GroupItem>
-    <GroupItem Id="groupitem3" Text="Example text 3" SelectedChangeEvent="GroupItemSelectedChanged"></GroupItem>
+    <HeaderContent>Custom header</HeaderContent>
+    <ChildContent>
+        <GroupItem Id="groupitem1" Text="Example text 1"></GroupItem>
+        <GroupItem Id="groupitem2" Text="Example text 2"></GroupItem>
+        <GroupItem Id="groupitem3" Text="Example text 3" SelectedChangeEvent="GroupItemSelectedChanged"></GroupItem>
+    </ChildContent>
+    <FooterContent>Group footer</FooterContent>
 </Group>
 ```
 
-## HTML table
+## HTML Table
 
 ```razor
 <table class="table">
@@ -1272,7 +1254,7 @@ private void DrawerButtonClicked()
 <LinkButton Url="https://ix.siemens.io/">Siemens IX</LinkButton>
 ```
 
-## Checkbox group
+## Checkbox Group
 
 ```razor
 <CheckboxGroup Id="notification-options"
@@ -1285,7 +1267,7 @@ private void DrawerButtonClicked()
 </CheckboxGroup>
 ```
 
-## Radio group
+## Radio Group
 
 ```razor
 <RadioGroup Id="storage-options"
@@ -1299,7 +1281,7 @@ private void DrawerButtonClicked()
 </RadioGroup>
 ```
 
-## Message bar
+## Message Bar
 
 ```razor
 <MessageBar ClosedChangeEvent="MessageboxClosed"
@@ -1337,6 +1319,8 @@ private async Task OpenModal()
   _modal = await ModalService.ShowAsync<string>(new ModalConfig
   {
     Centered = true,
+    Animation = true,
+    Backdrop = true,
     Content = @<text>
       <ModalHeader>Message headline</ModalHeader>
       <ModalContent>Message text</ModalContent>
@@ -1362,9 +1346,7 @@ private async Task DismissModal()
 }
 ```
 
-`ModalHeader`, `ModalContent`, and `ModalFooter` are composition wrappers. The
-`ix-modal` and internal `ix-modal-loading` elements are managed by the services;
-they are not instantiated directly.
+`ModalHeader`, `ModalContent`, and `ModalFooter` are composition wrappers. The services manage `ix-modal` and the internal `ix-modal-loading` element; applications do not instantiate them directly.
 
 ```csharp
 var loading = await LoadingService.ShowModalLoadingAsync(new ModalLoadingOptions
@@ -1394,6 +1376,9 @@ await loading.DisposeAsync();
             <Pill Variant="PillVariant.info">New</Pill>
         </AdditionalItems>
     </PopoverHeader>
+    <PopoverImage Id="popover-image"
+                  Image="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='160'%3E%3Crect fill='%232a2a4a' width='100%25' height='100%25'/%3E%3C/svg%3E"
+                  ImageAlt="Release preview" />
     <PopoverContent Id="popover-content">
         Additional information.
     </PopoverContent>
@@ -1474,7 +1459,7 @@ Use `PopoverTriggerMode.Hover` for hover and focus interaction, `PopoverPlacemen
 </ProgressIndicator>
 ```
 
-## Radio button
+## Radio Button
 
 ```razor
 <div class="example-list">
@@ -1537,7 +1522,7 @@ Use `PopoverTriggerMode.Hover` for hover and focus interaction, `PopoverPlacemen
 <Spinner></Spinner>
 ```
 
-## Split button
+## Split Button
 
 ```razor
 <SplitButton Id="split-button-1"
@@ -1587,12 +1572,14 @@ else if (_activeTabKey == "history")
 
 ```razor
 <Tile Size="TileSize.Medium" Class="mr-1">
-    <div slot="header">Tile header</div>
-    <div class="text-l">92.8 °C</div>
+    <HeaderContent>Tile header</HeaderContent>
+    <SubheaderContent>Temperature</SubheaderContent>
+    <ChildContent><div class="text-l">92.8 °C</div></ChildContent>
+    <FooterContent>Updated now</FooterContent>
 </Tile>
 ```
 
-## Time picker
+## Time Picker
 
 ```razor
 <TimePicker Id="timePicker1"
@@ -1608,7 +1595,7 @@ else if (_activeTabKey == "history")
 </TimePicker>
 ```
 
-## Time input
+## Time Input
 
 ```razor
 <TimeInput Id="time-input"
@@ -1679,7 +1666,7 @@ await toastResult.CloseAsync();
 ## Toggle
 
 ```razor
-<Toggle></Toggle>
+<Toggle Id="notifications" Name="notifications" Value="enabled"></Toggle>
 ```
 
 ## Tooltip
@@ -1689,20 +1676,10 @@ await toastResult.CloseAsync();
     Save
 </Button>
 <Tooltip Id="tooltip-1" For=".any-class">
-    When you click, all changes will be saved
+    <TitleIconContent><ix-icon name="info" size="16"></ix-icon></TitleIconContent>
+    <TitleContentSlot>Save changes</TitleContentSlot>
+    <ChildContent>When you click, all changes will be saved</ChildContent>
 </Tooltip>
-```
-
-## Validation Tooltip - Form Validation
-
-```razor
-<form class="needs-validation" novalidate @onsubmit="()=>{}">
-	<ValidationTooltip Message="Cannot be empty!" Placement="ValidationTooltipPlacement.Top">
-		<label for="validationCustom01">Name</label>
-		<input id="validationCustom01" value="" required />
-	</ValidationTooltip>
-	<Button Type="ButtonType.Submit">Submit</Button>
-</form>
 ```
 
 ## Tree
@@ -1828,9 +1805,9 @@ Use `TreeItem` for a standalone official tree item, including custom content:
 </WorkflowSteps>
 ```
 
-### Usage
+### Native iX Elements
 
-You can follow the original documentation and use native `Javascript` components.
+Native iX custom elements can be used directly when a Blazor wrapper is not required.
 
 ```razor
 <ix-button class="m-1" variant="Secondary">
@@ -1838,7 +1815,7 @@ You can follow the original documentation and use native `Javascript` components
 </ix-button>
 ```
 
-Or you can use supported components as a native `Blazor` components.
+For supported components, use the corresponding Blazor wrapper.
 
 ```razor
 <Button Class="m-1" Variant="Secondary">
@@ -1846,7 +1823,7 @@ Or you can use supported components as a native `Blazor` components.
 </Button>
 ```
 
-If you want to use native `siemens-ix` html elements, you have to handle events over `javascript interops`.
+Handle events from native iX custom elements through JavaScript interop.
 
 ## 📝 License
 

@@ -25,5 +25,13 @@
           selected="@(Selected == true ? "true" : null)"
           suppress-header-selection="@(SuppressHeaderSelection ? "true" : null)"
           id="@Id">
+    @if (HeaderContent is not null)
+    {
+        <div slot="header">@HeaderContent</div>
+    }
     @ChildContent
+    @if (FooterContent is not null)
+    {
+        <div slot="footer">@FooterContent</div>
+    }
 </ix-group>

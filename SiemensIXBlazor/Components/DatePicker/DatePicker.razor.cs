@@ -33,8 +33,8 @@ public partial class DatePicker
     [Parameter] public string MinDate { get; set; } = string.Empty;
     [Parameter] public string MaxDate { get; set; } = string.Empty;
     [Parameter] public string I18nDone { get; set; } = "Done";
-    [Parameter] public string AriaLabelPreviousMonthButton { get; set; } = "Previous month";
-    [Parameter] public string AriaLabelNextMonthButton { get; set; } = "Next month";
+    [Parameter] public string AriaLabelPreviousMonthButton { get; set; } = "Change calendar view to previous month";
+    [Parameter] public string AriaLabelNextMonthButton { get; set; } = "Change calendar view to next month";
     [Parameter] public string AriaLabelMonthSelection { get; set; } = "Select month";
     [Parameter] public string AriaLabelYearSelection { get; set; } = "Select year";
     [Parameter] public int WeekStartIndex { get; set; }

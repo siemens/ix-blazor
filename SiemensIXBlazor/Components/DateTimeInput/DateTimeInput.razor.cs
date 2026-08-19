@@ -71,8 +71,8 @@ public partial class DateTimeInput
         await _interop.AddEventListener(this, Id, "valueChange", nameof(ValueChange));
         await _interop.AddEventListener(this, Id, "validityStateChange", nameof(ValidityStateChange));
         await _interop.AddEventListener(this, Id, "ixChange", nameof(Change));
-        await _interop.AddEventListener(this, Id, "ixFocus", nameof(IxFocus));
-        await _interop.AddEventListener(this, Id, "ixBlur", nameof(IxBlur));
+        await _interop.AddEventListener(this, Id, "ixFocus", nameof(IxFocus), includeDetail: false);
+        await _interop.AddEventListener(this, Id, "ixBlur", nameof(IxBlur), includeDetail: false);
     }
 
     [JSInvokable]
