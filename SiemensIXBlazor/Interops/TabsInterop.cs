@@ -21,12 +21,6 @@ namespace SiemensIXBlazor.Interops
                 "import", $"./_content/Siemens.IX.Blazor/js/siemens-ix/interops/tabsInterop.js").AsTask());
         }
 
-        public async Task InitialComponent(string id)
-        {
-            var module = await moduleTask.Value;
-            await module.InvokeAsync<string>("initialTable", id);
-        }
-
         public async Task SubscribeEvents(object classObject, string id, string eventName, string methodName)
         {
             var module = await moduleTask.Value;
