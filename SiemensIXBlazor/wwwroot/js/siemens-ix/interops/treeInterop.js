@@ -22,6 +22,37 @@ function createElement(tag, props, children = []) {
   return element;
 }
 
+const nodeRemovedListeners = new Map();
+let nextNodeRemovedListenerId = 0;
+
+export function listenNodeRemoved(caller, id) {
+  const element = getElementOrThrow(id);
+  const listenerId = `tree-node-removed-${++nextNodeRemovedListenerId}`;
+  const listener = (event) => {
+    const nodeIds = Array.isArray(event.detail)
+      ? event.detail
+          .map((node) => node?.getAttribute?.('data-tree-node-id'))
+          .filter((nodeId) => typeof nodeId === 'string' && nodeId.length > 0)
+      : [];
+
+    caller.invokeMethodAsync('NodeRemoved', { nodeIds });
+  };
+
+  element.addEventListener('nodeRemoved', listener);
+  nodeRemovedListeners.set(listenerId, { element, listener });
+  return listenerId;
+}
+
+export function removeNodeRemovedListener(listenerId) {
+  const registration = nodeRemovedListeners.get(listenerId);
+  if (!registration) {
+    return;
+  }
+
+  registration.element.removeEventListener('nodeRemoved', registration.listener);
+  nodeRemovedListeners.delete(listenerId);
+}
+
 export function setTreeModel(id, treeModel) {
   const element = getElementOrThrow(id);
   const model = JSON.parse(treeModel);

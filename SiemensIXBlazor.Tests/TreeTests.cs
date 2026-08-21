@@ -80,6 +80,42 @@ public class TreeTests : TestContextBase
     }
 
     [Fact]
+    public async Task NodeRemoved_ShouldInvokeLegacyAndDetailedCallbacks()
+    {
+        var legacyCallbackCalled = false;
+        TreeNodeRemovedEventArgs? receivedDetails = null;
+        var cut = Render<Tree>(parameters => parameters
+            .Add(p => p.Id, "tree-id")
+            .Add(p => p.NodeRemovedEvent, EventCallback.Factory.Create(
+                this, () => legacyCallbackCalled = true))
+            .Add(p => p.NodeRemovedDetailsEvent, EventCallback.Factory.Create<TreeNodeRemovedEventArgs>(
+                this, details => receivedDetails = details)));
+
+        using var document = JsonDocument.Parse("{\"nodeIds\":[\"node-1\",\"node-2\"]}");
+        await cut.Instance.NodeRemoved(document.RootElement);
+
+        Assert.True(legacyCallbackCalled);
+        Assert.NotNull(receivedDetails);
+        Assert.Equal(["node-1", "node-2"], receivedDetails!.NodeIds);
+    }
+
+    [Fact]
+    public async Task NodeRemoved_ShouldSupportEmptyDetails()
+    {
+        TreeNodeRemovedEventArgs? receivedDetails = null;
+        var cut = Render<Tree>(parameters => parameters
+            .Add(p => p.Id, "tree-id")
+            .Add(p => p.NodeRemovedDetailsEvent, EventCallback.Factory.Create<TreeNodeRemovedEventArgs>(
+                this, details => receivedDetails = details)));
+
+        using var document = JsonDocument.Parse("{\"nodeIds\":[]}");
+        await cut.Instance.NodeRemoved(document.RootElement);
+
+        Assert.NotNull(receivedDetails);
+        Assert.Empty(receivedDetails!.NodeIds);
+    }
+
+    [Fact]
     public async Task TreeMethods_ShouldAcceptOfficialMethodShapes()
     {
         var cut = Render<Tree>(parameters => parameters

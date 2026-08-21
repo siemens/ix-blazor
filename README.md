@@ -1694,6 +1694,7 @@ await toastResult.CloseAsync();
           ContextChangedEvent="TreeContextChangeEvent"
           NodeClickedEvent="TreeNodeClicked"
           NodeRemovedEvent="NodeRemoved"
+          NodeRemovedDetailsEvent="TreeNodesRemoved"
           NodeToggledEvent="TreeNodeToggled"
           @ref="tree">
     </Tree>
@@ -1756,6 +1757,11 @@ Dictionary<string, TreeContextNode> treeContext = new()
 // Update data through the component parameters, or call the public methods:
 await tree.MarkItemsAsDirty("sample-child-1");
 await tree.RefreshTree(new RefreshTreeOptions { Force = true });
+
+void TreeNodesRemoved(TreeNodeRemovedEventArgs details)
+{
+    var removedIds = details.NodeIds;
+}
 ```
 
 Use `TreeItem` for a standalone official tree item, including custom content:
