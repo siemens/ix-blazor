@@ -107,19 +107,15 @@ namespace SiemensIXBlazor.Components.TextArea
             return await _interop.InvokeElementMethodAsync<IJSObjectReference>(Id, "getNativeInputElement");
         }
 
-        protected override void OnAfterRender(bool firstRender)
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
-                _interop = new(JSRuntime);
-
-                Task.Run(async () =>
-                {
-                    await _interop.AddEventListener(this, Id, "valueChange", "ValueChange");
-                    await _interop.AddEventListener(this, Id, "ixChange", "IxChange");
-                    await _interop.AddEventListener(this, Id, "ixBlur", "IxBlur", includeDetail: false);
-                    await _interop.AddEventListener(this, Id, "validityStateChange", "ValidityStateChange");
-                });
+                _interop ??= new(JSRuntime);
+                await _interop.AddEventListener(this, Id, "valueChange", "ValueChange");
+                await _interop.AddEventListener(this, Id, "ixChange", "IxChange");
+                await _interop.AddEventListener(this, Id, "ixBlur", "IxBlur", includeDetail: false);
+                await _interop.AddEventListener(this, Id, "validityStateChange", "ValidityStateChange");
             }
         }
 

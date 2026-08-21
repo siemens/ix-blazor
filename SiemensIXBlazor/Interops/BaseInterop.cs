@@ -11,10 +11,12 @@ using Microsoft.JSInterop;
 
 namespace SiemensIXBlazor.Interops
 {
-    public class BaseInterop
+    public class BaseInterop : IAsyncDisposable
     {
         private readonly Lazy<Task<IJSObjectReference>> moduleTask;
         private readonly List<(IDisposable Reference, string ListenerId)> listeners = [];
+        private readonly object listenerLock = new();
+        private bool disposed;
 
         public BaseInterop(IJSRuntime jsRuntime)
         {
@@ -29,13 +31,46 @@ namespace SiemensIXBlazor.Interops
             string callbackFunctionName,
             bool includeDetail = true)
         {
+            lock (listenerLock)
+            {
+                ObjectDisposedException.ThrowIf(disposed, this);
+            }
+
             var module = await moduleTask.Value;
             var objectReference = DotNetObjectReference.Create(classObject);
             try
             {
                 string listenerId = await module.InvokeAsync<string>(
                     "listenEvent", objectReference, id, eventName, callbackFunctionName, includeDetail);
-                listeners.Add((objectReference, listenerId));
+
+                var disposeImmediately = false;
+                lock (listenerLock)
+                {
+                    if (disposed)
+                    {
+                        disposeImmediately = true;
+                    }
+                    else
+                    {
+                        listeners.Add((objectReference, listenerId));
+                    }
+                }
+
+                if (disposeImmediately)
+                {
+                    try
+                    {
+                        await module.InvokeVoidAsync("removeEventListener", listenerId);
+                    }
+                    finally
+                    {
+                        objectReference.Dispose();
+                    }
+
+                    return;
+                }
+
+                (classObject as IInteropOwner)?.RegisterDisposable(this);
             }
             catch
             {
@@ -76,27 +111,62 @@ namespace SiemensIXBlazor.Interops
 
         public async ValueTask DisposeAsync()
         {
-            if (moduleTask.IsValueCreated)
+            List<(IDisposable Reference, string ListenerId)> listenersToDispose;
+            lock (listenerLock)
+            {
+                if (disposed)
+                {
+                    return;
+                }
+
+                disposed = true;
+                listenersToDispose = [.. listeners];
+                listeners.Clear();
+            }
+
+            if (!moduleTask.IsValueCreated)
+            {
+                foreach (var (reference, _) in listenersToDispose)
+                {
+                    reference.Dispose();
+                }
+
+                return;
+            }
+
+            IJSObjectReference? module = null;
+            try
+            {
+                module = await moduleTask.Value;
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"Failed to load interop module for disposal: {ex.Message}");
+            }
+
+            foreach ((IDisposable reference, string listenerId) in listenersToDispose)
             {
                 try
                 {
-                    var module = await moduleTask.Value;
-                    foreach ((IDisposable reference, string listenerId) in listeners)
+                    if (module is not null)
                     {
-                        try
-                        {
-                            await module.InvokeVoidAsync("removeEventListener", listenerId);
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.Error.WriteLine($"Failed to remove event listener: {ex.Message}");
-                        }
-                        finally
-                        {
-                            reference.Dispose();
-                        }
+                        await module.InvokeVoidAsync("removeEventListener", listenerId);
                     }
-                    listeners.Clear();
+                }
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine($"Failed to remove event listener: {ex.Message}");
+                }
+                finally
+                {
+                    reference.Dispose();
+                }
+            }
+
+            if (module is not null)
+            {
+                try
+                {
                     await module.DisposeAsync();
                 }
                 catch (Exception ex)

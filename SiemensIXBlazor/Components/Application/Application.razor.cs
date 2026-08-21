@@ -16,7 +16,7 @@ using Newtonsoft.Json.Serialization;
 using SiemensIXBlazor.Enums;
 using SiemensIXBlazor.Objects.Application;
 
-public partial class Application 
+public partial class Application
 {
     private Lazy<Task<IJSObjectReference>>? moduleTask;
     private AppSwitchConfig? _appSwitchConfig;
@@ -75,10 +75,8 @@ public partial class Application
     {
         if (firstRender)
         {
-            moduleTask ??= new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
-                "import", $"./_content/Siemens.IX.Blazor/js/siemens-ix/interops/applicationInterop.js").AsTask());
-
-            var module = await moduleTask.Value;
+            var module = await GetModuleAsync();
+            RegisterDisposable(module);
             await module.InvokeVoidAsync("setBreakpoints", Id, _breakpoints);
             _hasRendered = true;
 
@@ -93,10 +91,8 @@ public partial class Application
     {
         try
         {
-            moduleTask ??= new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
-                "import", $"./_content/Siemens.IX.Blazor/js/siemens-ix/interops/applicationInterop.js").AsTask());
-
-            var module = await moduleTask.Value;
+            var module = await GetModuleAsync();
+            RegisterDisposable(module);
             await module.InvokeVoidAsync("setBreakpoints", Id, breakpoints);
         }
         catch (JSDisconnectedException)
@@ -109,10 +105,8 @@ public partial class Application
     {
         try
         {
-            moduleTask ??= new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
-                "import", $"./_content/Siemens.IX.Blazor/js/siemens-ix/interops/applicationInterop.js").AsTask());
-
-            var module = await moduleTask.Value;
+            var module = await GetModuleAsync();
+            RegisterDisposable(module);
             if (version != _appSwitchConfigVersion)
             {
                 return;
@@ -131,4 +125,13 @@ public partial class Application
             // The component can be disposed while the module is loading.
         }
     }
+
+    private Task<IJSObjectReference> GetModuleAsync()
+    {
+        moduleTask ??= new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
+            "import", "./_content/Siemens.IX.Blazor/js/siemens-ix/interops/applicationInterop.js").AsTask());
+
+        return moduleTask.Value;
+    }
+
 }

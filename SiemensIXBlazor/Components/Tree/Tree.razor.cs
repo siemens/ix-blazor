@@ -165,7 +165,7 @@ public partial class Tree : IAsyncDisposable
         await module.InvokeVoidAsync("refreshTree", Id, options ?? new RefreshTreeOptions());
     }
 
-    public async ValueTask DisposeAsync()
+    public override async ValueTask DisposeAsync()
     {
         try
         {
@@ -185,12 +185,6 @@ public partial class Tree : IAsyncDisposable
             _nodeRemovedListenerId = null;
         }
 
-        if (_interop is not null)
-        {
-            await _interop.DisposeAsync();
-            _interop = null;
-        }
-
         if (_moduleTask?.IsValueCreated == true)
         {
             try
@@ -202,5 +196,7 @@ public partial class Tree : IAsyncDisposable
             {
             }
         }
+
+        await base.DisposeAsync();
     }
 }

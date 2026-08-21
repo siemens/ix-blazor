@@ -38,7 +38,7 @@ public class ExpandingSearchTest : TestContextBase
     }
 
     [Fact]
-    public void ValueChangedEventInvokedOnValueChange()
+    public async Task ValueChangedEventInvokedOnValueChange()
     {
         // Arrange
         var valueChangedEventInvoked = false;
@@ -47,7 +47,7 @@ public class ExpandingSearchTest : TestContextBase
                 EventCallback.Factory.Create<string>(this, _ => valueChangedEventInvoked = true)));
 
         // Act
-        cut.Instance.ValueChanged(string.Empty);
+        await cut.Instance.ValueChanged(string.Empty);
 
         // Assert
         Assert.True(valueChangedEventInvoked);

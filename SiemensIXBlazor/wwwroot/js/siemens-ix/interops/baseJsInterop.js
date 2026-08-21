@@ -7,17 +7,14 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
-const eventListeners = new Map();
-let nextEventListenerId = 0;
+import { createListenerRegistry } from "./listenerRegistry.js";
+import { getElementOrThrow } from "./elementUtils.js";
+
+const eventListeners = createListenerRegistry("base-listener");
 
 export function listenEvent(caller, elementId, eventName, functionName, includeDetail = true) {
-  const element = document.getElementById(elementId);
+  const element = getElementOrThrow(elementId);
 
-  if (!element) {
-    throw new Error(`Element with ID ${elementId} not found`);
-  }
-
-  const listenerId = `base-listener-${++nextEventListenerId}`;
   const listener = (e) => {
     if (includeDetail) {
       caller.invokeMethodAsync(functionName, e.detail);
@@ -25,37 +22,21 @@ export function listenEvent(caller, elementId, eventName, functionName, includeD
       caller.invokeMethodAsync(functionName);
     }
   };
-  element.addEventListener(eventName, listener);
-  eventListeners.set(listenerId, { element, eventName, listener });
-  return listenerId;
+  return eventListeners.add(element, eventName, listener);
 }
 
 export function removeEventListener(listenerId) {
-  const registration = eventListeners.get(listenerId);
-  if (!registration) {
-    return;
-  }
-
-  registration.element.removeEventListener(registration.eventName, registration.listener);
-  eventListeners.delete(listenerId);
+  eventListeners.remove(listenerId);
 }
 
 export function setElementProperty(elementId, propertyName, propertyValue) {
-  const element = document.getElementById(elementId);
-
-  if (!element) {
-    throw new Error(`Element with ID ${elementId} not found`);
-  }
+  const element = getElementOrThrow(elementId);
 
   element[propertyName] = propertyValue;
 }
 
 export function invokeElementMethod(elementId, methodName) {
-  const element = document.getElementById(elementId);
-
-  if (!element) {
-    throw new Error(`Element with ID ${elementId} not found`);
-  }
+  const element = getElementOrThrow(elementId);
 
   if (typeof element[methodName] !== "function") {
     throw new Error(`Method ${methodName} not found on element ${elementId}`);
@@ -65,11 +46,7 @@ export function invokeElementMethod(elementId, methodName) {
 }
 
 export async function invokeMethod(elementId, methodName) {
-  const element = document.getElementById(elementId);
-
-  if (!element) {
-    throw new Error(`Element with ID ${elementId} not found`);
-  }
+  const element = getElementOrThrow(elementId);
 
   const result = await element[methodName]();
 
@@ -93,11 +70,7 @@ export async function invokeMethod(elementId, methodName) {
 }
 
 export async function invokeVoidMethod(elementId, methodName) {
-  const element = document.getElementById(elementId);
-
-  if (!element) {
-    throw new Error(`Element with ID ${elementId} not found`);
-  }
+  const element = getElementOrThrow(elementId);
 
   await element[methodName]();
 }

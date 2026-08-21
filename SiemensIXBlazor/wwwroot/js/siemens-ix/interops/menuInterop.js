@@ -7,11 +7,10 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
+import { getElementOrThrow } from "./elementUtils.js";
+
 async function invokeMenuMethod(id, methodName, ...args) {
-  const element = document.getElementById(id);
-  if (!element) {
-    throw new Error("Element with ID " + id + " not found");
-  }
+  const element = getElementOrThrow(id);
 
   await element[methodName](...args);
 }

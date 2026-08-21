@@ -92,12 +92,9 @@ namespace SiemensIXBlazor.Components
 			};
 		}
 
-		public async ValueTask DisposeAsync()
+		public override async ValueTask DisposeAsync()
 		{
-			if (_interop is not null)
-			{
-				await _interop.DisposeAsync();
-			}
+			await base.DisposeAsync();
 		}
 	}
 }

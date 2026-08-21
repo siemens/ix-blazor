@@ -66,17 +66,26 @@ namespace SiemensIXBlazor.Components
             return _moduleTask.Value;
         }
 
-        public async ValueTask DisposeAsync()
+        public override async ValueTask DisposeAsync()
         {
-            if (_moduleTask is not null && _moduleTask.IsValueCreated)
+            try
             {
-                var module = await _moduleTask.Value;
-                await module.InvokeVoidAsync("dispose", Id);
-                await module.DisposeAsync();
+                if (_moduleTask is not null && _moduleTask.IsValueCreated)
+                {
+                    var module = await _moduleTask.Value;
+                    await module.InvokeVoidAsync("dispose", Id);
+                    await module.DisposeAsync();
+                }
             }
-
-            _toastResults.Clear();
-            _dotNetReference?.Dispose();
+            catch (JSDisconnectedException)
+            {
+            }
+            finally
+            {
+                _toastResults.Clear();
+                _dotNetReference?.Dispose();
+                _dotNetReference = null;
+            }
         }
     }
 }

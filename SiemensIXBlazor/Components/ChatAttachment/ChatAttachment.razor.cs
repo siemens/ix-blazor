@@ -76,11 +76,8 @@ public partial class ChatAttachment : IAsyncDisposable
     [JSInvokable]
     public Task RemoveClicked() => RemoveClick.InvokeAsync();
 
-    public async ValueTask DisposeAsync()
+    public override async ValueTask DisposeAsync()
     {
-        if (_interop is not null)
-        {
-            await _interop.DisposeAsync();
-        }
+        await base.DisposeAsync();
     }
 }

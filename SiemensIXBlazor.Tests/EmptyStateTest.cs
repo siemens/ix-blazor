@@ -33,7 +33,7 @@ public class EmptyStateTest : TestContextBase
     }
 
     [Fact]
-    public void ActionClickedEventInvoked()
+    public async Task ActionClickedEventInvoked()
     {
         // Arrange
         var eventCalled = false;
@@ -42,7 +42,7 @@ public class EmptyStateTest : TestContextBase
             .Add(p => p.ActionClickedEvent, EventCallback.Factory.Create(this, () => eventCalled = true)));
 
         // Act
-        cut.Instance.ActionClicked();
+        await cut.Instance.ActionClicked();
 
         // Assert
         Assert.True(eventCalled);

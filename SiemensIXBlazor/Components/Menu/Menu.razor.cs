@@ -62,7 +62,7 @@ namespace SiemensIXBlazor.Components.Menu
         public EventCallback OpenAboutEvent { get; set; }
 
 		private Lazy<Task<IJSObjectReference>>? _moduleTask;
-		private BaseInterop _interop;
+		private BaseInterop? _interop;
 
 		protected async override Task OnAfterRenderAsync(bool firstRender)
 		{
@@ -111,22 +111,29 @@ namespace SiemensIXBlazor.Components.Menu
 
         public async Task ToggleMenuAsync(bool? show = null)
         {
-            await (await (_moduleTask ?? throw new InvalidOperationException("Menu has not rendered yet.")).Value).InvokeVoidAsync("toggleMenu", Id, show);
+			await (await GetModuleAsync()).InvokeVoidAsync("toggleMenu", Id, show);
         }
 
         public async Task ToggleMapExpandAsync(bool? show = null)
         {
-            await (await (_moduleTask ?? throw new InvalidOperationException("Menu has not rendered yet.")).Value).InvokeVoidAsync("toggleMapExpand", Id, show);
+			await (await GetModuleAsync()).InvokeVoidAsync("toggleMapExpand", Id, show);
         }
 
         public async Task ToggleSettingsAsync(bool show)
         {
-            await (await (_moduleTask ?? throw new InvalidOperationException("Menu has not rendered yet.")).Value).InvokeVoidAsync("toggleSettings", Id, show);
+			await (await GetModuleAsync()).InvokeVoidAsync("toggleSettings", Id, show);
         }
 
         public async Task ToggleAboutAsync(bool show)
         {
-            await (await (_moduleTask ?? throw new InvalidOperationException("Menu has not rendered yet.")).Value).InvokeVoidAsync("toggleAbout", Id, show);
+			await (await GetModuleAsync()).InvokeVoidAsync("toggleAbout", Id, show);
+        }
+
+        private async Task<IJSObjectReference> GetModuleAsync()
+        {
+			var module = await (_moduleTask ?? throw new InvalidOperationException("Menu has not rendered yet.")).Value;
+			RegisterDisposable(module);
+			return module;
         }
     }
 }

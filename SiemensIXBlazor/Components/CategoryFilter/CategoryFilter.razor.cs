@@ -227,11 +227,11 @@ namespace SiemensIXBlazor.Components.CategoryFilter
             }
         }
 
-        public async ValueTask DisposeAsync()
+        public override async ValueTask DisposeAsync()
         {
-            if (moduleTask is not null && moduleTask.IsValueCreated)
+            try
             {
-                try
+                if (moduleTask is not null && moduleTask.IsValueCreated)
                 {
                     var module = await moduleTask.Value;
                     if (_initializedId is not null)
@@ -240,13 +240,16 @@ namespace SiemensIXBlazor.Components.CategoryFilter
                     }
                     await module.DisposeAsync();
                 }
-                catch (JSDisconnectedException)
-                {
-                }
             }
-
-            _objectReference?.Dispose();
-            GC.SuppressFinalize(this);
+            catch (JSDisconnectedException)
+            {
+            }
+            finally
+            {
+                _objectReference?.Dispose();
+                _objectReference = null;
+                GC.SuppressFinalize(this);
+            }
         }
 
     }

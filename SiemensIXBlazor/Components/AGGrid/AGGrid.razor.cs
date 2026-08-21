@@ -330,7 +330,7 @@ public partial class AGGrid<TData> : IAsyncDisposable
         }
     }
 
-    public async ValueTask DisposeAsync()
+    public override async ValueTask DisposeAsync()
     {
         if (_disposed)
         {

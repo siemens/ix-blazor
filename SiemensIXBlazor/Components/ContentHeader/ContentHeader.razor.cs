@@ -46,7 +46,7 @@ namespace SiemensIXBlazor.Components
         }
 
         [JSInvokable]
-        public async void BackButtonClicked()
+        public async Task BackButtonClicked()
         {
             await BackButtonClickedEvent.InvokeAsync();
         }

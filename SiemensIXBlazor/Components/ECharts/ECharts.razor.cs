@@ -15,14 +15,37 @@ namespace SiemensIXBlazor.Components.ECharts
 {
     public partial class ECharts
     {
+        private bool _chartInitialized;
+
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
 
-        public async void InitialChart(dynamic options)
+        public async Task InitialChart(dynamic options)
         {
             string serializedOptions = JsonConvert.SerializeObject(options);
 
             await JSRuntime.InvokeVoidAsync("siemensIXInterop.initializeChart", Id, serializedOptions);
+            _chartInitialized = true;
+        }
+
+        public override async ValueTask DisposeAsync()
+        {
+            try
+            {
+                if (_chartInitialized)
+                {
+                    await JSRuntime.InvokeVoidAsync("siemensIXInterop.disposeChart", Id);
+                }
+            }
+            catch (JSDisconnectedException)
+            {
+            }
+            finally
+            {
+                _chartInitialized = false;
+            }
+
+            await base.DisposeAsync();
         }
     }
 }

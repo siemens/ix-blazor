@@ -47,7 +47,7 @@ namespace SiemensIXBlazor.Components
         }
 
         [JSInvokable]
-        public async void ItemClicked()
+        public async Task ItemClicked()
         {
             await ItemClickEvent.InvokeAsync();
         }

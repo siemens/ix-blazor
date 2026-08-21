@@ -41,7 +41,7 @@ namespace SiemensIXBlazor.Components
         }
 
         [JSInvokable]
-        public async void StepSelected(int index)
+        public async Task StepSelected(int index)
         {
             SelectedIndex = index;
             await StepSelectedEvent.InvokeAsync(index);

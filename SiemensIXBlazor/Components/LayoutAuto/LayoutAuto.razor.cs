@@ -46,6 +46,7 @@ public partial class LayoutAuto
         if (firstRender)
         {
             _interop = new(JSRuntime);
+            RegisterDisposable(_interop);
             await ApplyLayoutAsync();
         }
     }
@@ -69,12 +70,9 @@ public partial class LayoutAuto
             .ToArray();
     }
 
-    public async ValueTask DisposeAsync()
+    public override async ValueTask DisposeAsync()
     {
-        if (_interop is not null)
-        {
-            await _interop.DisposeAsync();
-        }
+        await base.DisposeAsync();
     }
 
     private sealed class LayoutAutoItemComparer : IEqualityComparer<LayoutAutoItem>

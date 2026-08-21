@@ -7,13 +7,8 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
-function getElementOrThrow(id) {
-  const element = document.getElementById(id);
-  if (!element) {
-    throw new Error(`Element with ID ${id} not found`);
-  }
-  return element;
-}
+import { createListenerRegistry } from "./listenerRegistry.js";
+import { getElement, getElementOrThrow } from "./elementUtils.js";
 
 function createElement(tag, props, children = []) {
   const element = document.createElement(tag);
@@ -22,12 +17,10 @@ function createElement(tag, props, children = []) {
   return element;
 }
 
-const nodeRemovedListeners = new Map();
-let nextNodeRemovedListenerId = 0;
+const nodeRemovedListeners = createListenerRegistry("tree-node-removed");
 
 export function listenNodeRemoved(caller, id) {
   const element = getElementOrThrow(id);
-  const listenerId = `tree-node-removed-${++nextNodeRemovedListenerId}`;
   const listener = (event) => {
     const nodeIds = Array.isArray(event.detail)
       ? event.detail
@@ -38,19 +31,11 @@ export function listenNodeRemoved(caller, id) {
     caller.invokeMethodAsync('NodeRemoved', { nodeIds });
   };
 
-  element.addEventListener('nodeRemoved', listener);
-  nodeRemovedListeners.set(listenerId, { element, listener });
-  return listenerId;
+  return nodeRemovedListeners.add(element, 'nodeRemoved', listener);
 }
 
 export function removeNodeRemovedListener(listenerId) {
-  const registration = nodeRemovedListeners.get(listenerId);
-  if (!registration) {
-    return;
-  }
-
-  registration.element.removeEventListener('nodeRemoved', registration.listener);
-  nodeRemovedListeners.delete(listenerId);
+  nodeRemovedListeners.remove(listenerId);
 }
 
 export function setTreeModel(id, treeModel) {
@@ -115,7 +100,7 @@ export async function refreshTree(id, options = { force: false }) {
 }
 
 export async function markItemsAsDirty(id, itemIdentifiers) {
-  const element = document.getElementById(id);
+  const element = getElement(id);
   if (element && typeof element.markItemsAsDirty === 'function') {
     await element.markItemsAsDirty(itemIdentifiers);
   }

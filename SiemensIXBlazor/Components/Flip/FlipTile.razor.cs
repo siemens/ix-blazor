@@ -57,12 +57,9 @@ namespace SiemensIXBlazor.Components
             await ToggleEvent.InvokeAsync(index);
         }
 
-        public async ValueTask DisposeAsync()
+        public override async ValueTask DisposeAsync()
         {
-            if (_interop is not null)
-            {
-                await _interop.DisposeAsync();
-            }
+            await base.DisposeAsync();
         }
     }
 }

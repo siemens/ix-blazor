@@ -91,11 +91,21 @@ LICENSE file in the root directory of this source tree.
     {
         ModalService.Changed -= OnModalChanged;
 
-        if (_attachedId is not null)
+        try
         {
-            await JSRuntime.InvokeVoidAsync("siemensIXInterop.modal.detach", _attachedId);
+            if (_attachedId is not null)
+            {
+                await JSRuntime.InvokeVoidAsync("siemensIXInterop.modal.detach", _attachedId);
+            }
         }
-
-        _dotNetReference?.Dispose();
+        catch (JSDisconnectedException)
+        {
+        }
+        finally
+        {
+            _attachedId = null;
+            _dotNetReference?.Dispose();
+            _dotNetReference = null;
+        }
     }
 }

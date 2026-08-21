@@ -15,6 +15,8 @@ namespace SiemensIXBlazor.Components.Slider
     public partial class Slider
     {
         private Lazy<Task<IJSObjectReference>>? _moduleTask;
+        private DotNetObjectReference<Slider>? _dotNetReference;
+        private string? _listenerId;
 
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
@@ -66,9 +68,10 @@ namespace SiemensIXBlazor.Components.Slider
 
                 var module = await _moduleTask.Value;
 
-                await module.InvokeAsync<string>(
+                _dotNetReference = DotNetObjectReference.Create(this);
+                _listenerId = await module.InvokeAsync<string?>(
                     "listenEvent",
-                    DotNetObjectReference.Create(this),
+                    _dotNetReference,
                     Id,
                     "valueChange",
                     "ValueChanged"
@@ -87,12 +90,42 @@ namespace SiemensIXBlazor.Components.Slider
             await ValueChangeEvent.InvokeAsync(value);
         }
 
-        public async ValueTask DisposeAsync()
+        public override async ValueTask DisposeAsync()
         {
-            if (_moduleTask?.IsValueCreated == true)
+            try
             {
-                var module = await _moduleTask.Value;
-                await module.DisposeAsync();
+                if (_moduleTask?.IsValueCreated == true)
+                {
+                    var module = await _moduleTask.Value;
+                    if (_listenerId is not null)
+                    {
+                        try
+                        {
+                            await module.InvokeVoidAsync("removeEventListener", _listenerId);
+                        }
+                        catch (JSDisconnectedException)
+                        {
+                        }
+
+                        _listenerId = null;
+                    }
+
+                    try
+                    {
+                        await module.DisposeAsync();
+                    }
+                    catch (JSDisconnectedException)
+                    {
+                    }
+                }
+            }
+            catch (JSDisconnectedException)
+            {
+            }
+            finally
+            {
+                _dotNetReference?.Dispose();
+                _dotNetReference = null;
             }
         }
     }

@@ -36,23 +36,22 @@ namespace SiemensIXBlazor.Components
         public RenderFragment? ChildContent { get; set; }
 
         private BaseInterop? _interop;
+        private object? _lastObjectFor;
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            _interop ??= new(JSRuntime);
-
-            if (For is not null and not string)
+            if (For is not null and not string && !Equals(_lastObjectFor, For))
             {
+                _interop ??= new(JSRuntime);
+                RegisterDisposable(_interop);
                 await _interop.SetElementProperty(Id, "for", For);
+                _lastObjectFor = For;
             }
         }
 
-        public async ValueTask DisposeAsync()
+        public override async ValueTask DisposeAsync()
         {
-            if (_interop is not null)
-            {
-                await _interop.DisposeAsync();
-            }
+            await base.DisposeAsync();
         }
     }
 }

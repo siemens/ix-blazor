@@ -73,11 +73,8 @@ public partial class Popover : IAsyncDisposable
 
     public Task HidePopover() => _interop.InvokeElementMethodAsync(Id, "hidePopover");
 
-    public async ValueTask DisposeAsync()
+    public override async ValueTask DisposeAsync()
     {
-        if (_interop is not null)
-        {
-            await _interop.DisposeAsync();
-        }
+        await base.DisposeAsync();
     }
 }

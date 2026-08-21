@@ -7,20 +7,14 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
-function getElement(id) {
-  const element = document.getElementById(id);
-  if (!element) {
-    throw new Error(`Element with ID ${id} not found`);
-  }
-  return element;
-}
+import { getElementOrThrow } from "./elementUtils.js";
 
 const listeners = new Map();
 
 export function initialize(caller, id) {
   dispose(id);
 
-  const element = getElement(id);
+  const element = getElementOrThrow(id);
   let resumeClear = false;
   let clearPending = false;
   let active = true;
@@ -75,7 +69,7 @@ export function dispose(id) {
 
 export function setCategories(id, categories) {
   try {
-    getElement(id).categories = categories ?? undefined;
+    getElementOrThrow(id).categories = categories ?? undefined;
   } catch (err) {
     console.error("Failed to set categories:", err);
   }
@@ -83,7 +77,7 @@ export function setCategories(id, categories) {
 
 export function setFilterState(id, filterState) {
   try {
-    getElement(id).filterState = filterState ?? undefined;
+    getElementOrThrow(id).filterState = filterState ?? undefined;
   } catch (err) {
     console.error("Failed to set filter state:", err);
   }
@@ -91,7 +85,7 @@ export function setFilterState(id, filterState) {
 
 export function setNonSelectableCategories(id, nonSelectableCategories) {
   try {
-    getElement(id).nonSelectableCategories = nonSelectableCategories ?? undefined;
+    getElementOrThrow(id).nonSelectableCategories = nonSelectableCategories ?? undefined;
   } catch (error) {
     console.error("Failed to set non-selectable categories:", error);
   }
@@ -99,7 +93,7 @@ export function setNonSelectableCategories(id, nonSelectableCategories) {
 
 export function setSuggestions(id, suggestionsObject) {
   try {
-    getElement(id).suggestions = suggestionsObject ?? undefined;
+    getElementOrThrow(id).suggestions = suggestionsObject ?? undefined;
   } catch (error) {
     console.error("Failed to set suggestions:", error);
   }
@@ -107,7 +101,7 @@ export function setSuggestions(id, suggestionsObject) {
 
 export function setStaticOperator(id, logicalFilter) {
     try {
-        getElement(id).staticOperator = logicalFilter ?? undefined;
+        getElementOrThrow(id).staticOperator = logicalFilter ?? undefined;
     } catch (err) {
         console.error("Failed on setting staticOperator", err);
     }

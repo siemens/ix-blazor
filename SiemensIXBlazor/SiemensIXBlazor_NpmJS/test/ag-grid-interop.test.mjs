@@ -390,7 +390,7 @@ test("createAgGrid renders and destroys a real Community grid", async () => {
         headerCheckbox: true,
         selectAll: "filtered",
       },
-      autoSizeStrategy: { type: "fitGridWidth" },
+      autoSizeStrategy: { type: "fitProvidedWidth", width: 800 },
     },
     dotNetReference,
     { instanceId: "integration-grid", eventSubscriptions: [] }

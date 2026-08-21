@@ -7,21 +7,14 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
+import { getElementOrThrow } from "./elementUtils.js";
+
 const toastHandles = new Map();
 const closeToastListeners = new Map();
 let nextHandle = 0;
 
-function getElement(id) {
-  const element = document.getElementById(id);
-  if (!element) {
-    throw new Error(`Element with ID ${id} not found`);
-  }
-
-  return element;
-}
-
 export function listenCloseToast(dotNetReference, id) {
-  const element = getElement(id);
+  const element = getElementOrThrow(id);
   removeCloseToast(id);
 
   const listener = () => dotNetReference.invokeMethodAsync("CloseToast");
@@ -40,19 +33,19 @@ export function removeCloseToast(id) {
 }
 
 export function pauseToast(id) {
-  return getElement(id).pause();
+  return getElementOrThrow(id).pause();
 }
 
 export function resumeToast(id) {
-  return getElement(id).resume();
+  return getElementOrThrow(id).resume();
 }
 
 export function isToastPaused(id) {
-  return getElement(id).isPaused();
+  return getElementOrThrow(id).isPaused();
 }
 
 export async function showToast(dotNetReference, containerId, configJson) {
-  const container = getElement(containerId);
+  const container = getElementOrThrow(containerId);
   const config = JSON.parse(configJson);
 
   if (typeof config.action === "string") {
@@ -101,8 +94,5 @@ export function dispose(containerId) {
     if (entry.containerId === containerId) {
       toastHandles.delete(handle);
     }
-  }
-  for (const id of closeToastListeners.keys()) {
-    removeCloseToast(id);
   }
 }

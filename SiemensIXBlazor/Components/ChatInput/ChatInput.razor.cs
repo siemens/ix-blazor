@@ -155,11 +155,8 @@ public partial class ChatInput : IAsyncDisposable
         await PromptSubmit.InvokeAsync(nextValue);
     }
 
-    public async ValueTask DisposeAsync()
+    public override async ValueTask DisposeAsync()
     {
-        if (_interop is not null)
-        {
-            await _interop.DisposeAsync();
-        }
+        await base.DisposeAsync();
     }
 }

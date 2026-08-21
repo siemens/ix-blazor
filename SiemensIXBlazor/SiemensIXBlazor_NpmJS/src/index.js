@@ -15,6 +15,33 @@ import { showModalLoading, themeSwitcher } from "@siemens/ix";
 import { defineCustomElements as ixIconsDefineCustomElements } from "@siemens/ix-icons/loader";
 
 window.echarts = echarts;
+const charts = new Map();
+
+function getElement(id) {
+    return document.getElementById(id);
+}
+
+function getElementOrThrow(id) {
+    const element = getElement(id);
+    if (!element) {
+        throw new Error(`Element with id '${id}' not found`);
+    }
+    return element;
+}
+
+function disposeChart(id) {
+    const chartState = charts.get(id);
+    if (!chartState) {
+        return;
+    }
+
+    chartState.themeDisposer?.dispose();
+    window.removeEventListener("resize", chartState.resizeListener);
+    if (!chartState.chart.isDisposed()) {
+        chartState.chart.dispose();
+    }
+    charts.delete(id);
+}
 
 window.siemensIXInterop = {
     async initialize() {
@@ -26,7 +53,7 @@ window.siemensIXInterop = {
     },
     modal: {
         async show(id) {
-            const el = document.getElementById(id);
+            const el = getElement(id);
             if (el) {
                 await el.showModal();
             } else {
@@ -34,7 +61,7 @@ window.siemensIXInterop = {
             }
         },
         async close(id, reason) {
-            const el = document.getElementById(id);
+            const el = getElement(id);
             if (el) {
                 await el.closeModal(reason);
             } else {
@@ -42,7 +69,7 @@ window.siemensIXInterop = {
             }
         },
         async dismiss(id, reason) {
-            const el = document.getElementById(id);
+            const el = getElement(id);
             if (el) {
                 await el.dismissModal(reason);
             } else {
@@ -50,10 +77,7 @@ window.siemensIXInterop = {
             }
         },
         attach(id, dotnetReference) {
-            const el = document.getElementById(id);
-            if (!el) {
-                throw new Error(`Element with id '${id}' not found`);
-            }
+            const el = getElementOrThrow(id);
 
             this.detach(id);
 
@@ -70,7 +94,7 @@ window.siemensIXInterop = {
             el.__siemensIxModalListeners = { beforeDismiss, dialogClose, dialogDismiss, dotnetReference };
         },
         detach(id) {
-            const el = document.getElementById(id);
+            const el = getElement(id);
             const listeners = el?.__siemensIxModalListeners;
             if (!el || !listeners) {
                 return;
@@ -88,10 +112,7 @@ window.siemensIXInterop = {
 
     modalHeader: {
         attach(id, dotnetReference) {
-            const el = document.getElementById(id);
-            if (!el) {
-                throw new Error(`Element with id '${id}' not found`);
-            }
+            const el = getElementOrThrow(id);
 
             this.detach(id);
             const closeClick = (event) =>
@@ -100,7 +121,7 @@ window.siemensIXInterop = {
             el.__siemensIxModalHeaderListeners = { closeClick };
         },
         detach(id) {
-            const el = document.getElementById(id);
+            const el = getElement(id);
             const listeners = el?.__siemensIxModalHeaderListeners;
             if (!el || !listeners) {
                 return;
@@ -113,8 +134,8 @@ window.siemensIXInterop = {
 
     initializeChart(id, options) {
         try {
-            const element = document.getElementById(id);
-            if (!element) throw new Error(`Element with ID ${id} not found`);
+            disposeChart(id);
+            const element = getElementOrThrow(id);
 
             registerTheme(echarts);
 
@@ -128,24 +149,34 @@ window.siemensIXInterop = {
                 });
             }
 
-            let myChart = echarts.init(element, themeSwitcher.getCurrentTheme());
-            myChart.setOption(parsedOptions);
+            const chartState = {
+                chart: echarts.init(element, themeSwitcher.getCurrentTheme()),
+                themeDisposer: null,
+                resizeListener: null,
+            };
+            chartState.chart.setOption(parsedOptions);
 
-            themeSwitcher.themeChanged.on((theme) => {
-                myChart.dispose();
-                myChart = echarts.init(element, theme);
-                myChart.setOption(parsedOptions);
-            });
-
-            window.addEventListener('resize', () => {
-                if (myChart && !myChart.isDisposed()) {
-                    myChart.resize();
+            chartState.themeDisposer = themeSwitcher.themeChanged.on((theme) => {
+                if (chartState.chart.isDisposed()) {
+                    return;
                 }
+                chartState.chart.dispose();
+                chartState.chart = echarts.init(element, theme);
+                chartState.chart.setOption(parsedOptions);
             });
+
+            chartState.resizeListener = () => {
+                if (!chartState.chart.isDisposed()) {
+                    chartState.chart.resize();
+                }
+            };
+            window.addEventListener("resize", chartState.resizeListener);
+            charts.set(id, chartState);
         } catch (error) {
             console.error("Failed to initialize chart:", error);
         }
     },
+    disposeChart,
 
     setTheme(theme) {
         themeSwitcher.setTheme(theme);

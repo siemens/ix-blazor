@@ -52,12 +52,9 @@ namespace SiemensIXBlazor.Components
         [JSInvokable]
         public Task SelectedChanged() => SelectedChangeEvent.InvokeAsync(Id);
 
-        public async ValueTask DisposeAsync()
+        public override async ValueTask DisposeAsync()
         {
-            if (_interop is not null)
-            {
-                await _interop.DisposeAsync();
-            }
+            await base.DisposeAsync();
         }
     }
 }
