@@ -26,13 +26,16 @@ namespace SiemensIXBlazor.Tests
                 .Add(p => p.Disabled, true)
                 .Add(p => p.HideText, true)
                 .Add(p => p.Indeterminate, true)
+                .Add(p => p.Name, "notifications")
+                .Add(p => p.Required, true)
                 .Add(p => p.TextIndeterminate, "Mixed")
                 .Add(p => p.TextOff, "Off")
                 .Add(p => p.TextOn, "On")
+                .Add(p => p.Value, "enabled")
             );
 
             // Assert
-            cut.MarkupMatches("<ix-toggle id=\"testId\" checked='true' disabled='true' hide-text='true' indeterminate='true' text-indeterminate=\"Mixed\" text-off=\"Off\" text-on=\"On\"></ix-toggle>");
+            cut.MarkupMatches("<ix-toggle id=\"testId\" checked='true' disabled='true' hide-text='true' indeterminate='true' name=\"notifications\" required='true' text-indeterminate=\"Mixed\" text-off=\"Off\" text-on=\"On\" value=\"enabled\"></ix-toggle>");
         }
 
         [Fact]
@@ -46,10 +49,24 @@ namespace SiemensIXBlazor.Tests
             );
 
             // Act
-            cut.Instance.CheckedChannged(true);
+            cut.Instance.CheckedChanged(true);
 
             // Assert
             Assert.True(checkedChanged);
+            Assert.True(cut.Instance.Checked);
+        }
+
+        [Fact]
+        public async Task IxBlurEventWorks()
+        {
+            var blurred = false;
+            var cut = Render<Toggle>(parameters => parameters
+                .Add(p => p.Id, "testId")
+                .Add(p => p.IxBlurEvent, EventCallback.Factory.Create(this, () => blurred = true)));
+
+            await cut.Instance.Blurred();
+
+            Assert.True(blurred);
         }
     }
 }

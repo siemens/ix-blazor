@@ -35,7 +35,7 @@ public class GroupItemTest : TestContextBase
     }
 
     [Fact]
-    public void ItemClickedEventTriggered()
+    public async Task SelectedChangedEventTriggered()
     {
         // Arrange
         var wasCalled = false;
@@ -44,7 +44,7 @@ public class GroupItemTest : TestContextBase
             .Add(p => p.SelectedChangeEvent, EventCallback.Factory.Create<string>(this, id => { wasCalled = true; })));
 
         // Act
-        cut.Instance.ItemClicked();
+        await cut.Instance.SelectedChanged();
 
         // Assert
         Assert.True(wasCalled);

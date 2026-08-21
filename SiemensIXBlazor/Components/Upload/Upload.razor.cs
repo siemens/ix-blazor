@@ -53,7 +53,8 @@ namespace SiemensIXBlazor.Components
         {
             if (firstRender)
             {
-                _fileUploadInterop = new(JSRuntime);
+                _fileUploadInterop ??= new(JSRuntime);
+                RegisterDisposable(_fileUploadInterop);
 
                 await _fileUploadInterop.AddEventListener(this, Id, "filesChanged", "FileChanged");
             }
@@ -68,7 +69,12 @@ namespace SiemensIXBlazor.Components
 
         public async Task SetFilesToUploadAsync(object files)
         {
-            _fileUploadInterop ??= new(JSRuntime);
+            if (_fileUploadInterop is null)
+            {
+                _fileUploadInterop = new(JSRuntime);
+                RegisterDisposable(_fileUploadInterop);
+            }
+
             await _fileUploadInterop.SetFilesToUpload(Id, files);
         }
 
@@ -94,5 +100,6 @@ namespace SiemensIXBlazor.Components
             
             return ixFiles;
         }
+
     }
 }

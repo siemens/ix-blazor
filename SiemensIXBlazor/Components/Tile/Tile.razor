@@ -14,5 +14,17 @@
 @inherits IXBaseComponent
 
 <ix-tile @attributes="UserAttributes" size="@(EnumParser<TileSize>.EnumToString(Size))" style="@Style" class="@Class">
+    @if (HeaderContent is not null)
+    {
+        <div slot="header">@HeaderContent</div>
+    }
+    @if (SubheaderContent is not null)
+    {
+        <div slot="subheader">@SubheaderContent</div>
+    }
     @ChildContent
+    @if (FooterContent is not null)
+    {
+        <div slot="footer">@FooterContent</div>
+    }
 </ix-tile>

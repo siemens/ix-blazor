@@ -98,7 +98,7 @@ public class SliderTests : TestContextBase
     }
 
     [Fact]
-    public void OnAfterRenderAsync_FirstRender_AttachesListenerAndSetsMarker()
+    public async Task OnAfterRenderAsync_FirstRender_AttachesListenerAndSetsMarker()
     {
         // Arrange
         var jsRuntimeMock = new Mock<IJSRuntime>();
@@ -159,6 +159,16 @@ public class SliderTests : TestContextBase
                 args[1].GetType() == typeof(double[]) &&
                 ((double[])args[1]).SequenceEqual(markerArray)
             )
-        ), Times.Once());
+            ), Times.Once());
+
+        await cut.Instance.DisposeAsync();
+
+        Assert.Contains(jsObjectReferenceMock.Invocations, invocation =>
+            invocation.Method.Name == nameof(IJSObjectReference.InvokeAsync) &&
+            invocation.Arguments.Count == 2 &&
+            (string)invocation.Arguments[0] == "removeEventListener" &&
+            invocation.Arguments[1] is object[] arguments &&
+            arguments.Length == 1 &&
+            (string)arguments[0] == "fakeEventId");
     }
 }

@@ -13,6 +13,7 @@ namespace SiemensIXBlazor.Components.Checkbox
         private string _value = "on";
         private Lazy<Task<IJSObjectReference>>? moduleTask;
         private BaseInterop? _interop;
+        private readonly List<(string FunctionName, string Parameter)> pendingParameterUpdates = [];
 
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
@@ -71,23 +72,34 @@ namespace SiemensIXBlazor.Components.Checkbox
         [Parameter]
         public EventCallback<string> ValueChangedEvent { get; set; }
 
-        protected override void OnAfterRender(bool firstRender)
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
-                _interop = new(JSRuntime);
-
-                Task.Run(async () =>
-                {
-                    await _interop.AddEventListener(this, Id, "checkedChange", "CheckedChanged");
-                    await _interop.AddEventListener(this, Id, "ixBlur", "IxBlur");
-                    await _interop.AddEventListener(this, Id, "valueChange", "ValueChanged");
-                });
+                _interop ??= new(JSRuntime);
+                await _interop.AddEventListener(this, Id, "checkedChange", "CheckedChanged");
+                await _interop.AddEventListener(this, Id, "ixBlur", "IxBlur", includeDetail: false);
+                await _interop.AddEventListener(this, Id, "valueChange", "ValueChanged");
             }
+
+            if (pendingParameterUpdates.Count == 0 || moduleTask is null)
+            {
+                return;
+            }
+
+            var module = await moduleTask.Value;
+            RegisterDisposable(module);
+
+            foreach (var (functionName, parameter) in pendingParameterUpdates)
+            {
+                await module.InvokeVoidAsync(functionName, Id, parameter);
+            }
+
+            pendingParameterUpdates.Clear();
         }
 
         [JSInvokable]
-        public async void CheckedChanged(JsonElement checkState)
+        public async Task CheckedChanged(JsonElement checkState)
         {
             bool isChecked = checkState.GetBoolean();
             _checked = isChecked;
@@ -95,13 +107,13 @@ namespace SiemensIXBlazor.Components.Checkbox
         }
 
         [JSInvokable]
-        public async void IxBlur()
+        public async Task IxBlur()
         {
-            await IxBlurEvent.InvokeAsync(true);
+            await IxBlurEvent.InvokeAsync();
         }
 
         [JSInvokable]
-        public async void ValueChanged(JsonElement valueState)
+        public async Task ValueChanged(JsonElement valueState)
         {
             string value = valueState.GetString() ?? "on";
             _value = value;
@@ -110,17 +122,9 @@ namespace SiemensIXBlazor.Components.Checkbox
 
         private void InitialParameter(string functionName, object param)
         {
-            moduleTask = new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
+            moduleTask ??= new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
                 "import", $"./_content/Siemens.IX.Blazor/js/siemens-ix/interops/checkboxInterop.js").AsTask());
-
-            Task.Run(async () =>
-            {
-                var module = await moduleTask.Value;
-                if (module != null)
-                {
-                    await module.InvokeVoidAsync(functionName, Id, JsonConvert.SerializeObject(param));
-                }
-            });
+            pendingParameterUpdates.Add((functionName, JsonConvert.SerializeObject(param)));
         }
 
     }

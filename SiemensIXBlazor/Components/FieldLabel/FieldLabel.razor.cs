@@ -23,9 +23,6 @@ namespace SiemensIXBlazor.Components.FieldLabel
         public bool? Required { get; set; }
 
         [Parameter]
-        public bool IsInvalid { get; set; } = false;
-
-        [Parameter]
         public RenderFragment? ChildContent { get; set; }
     }
 }

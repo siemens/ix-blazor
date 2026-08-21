@@ -7,20 +7,12 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
+import { getElementOrThrow } from "./elementUtils.js";
+
 const listeners = new Map();
 
-function getElement(id) {
-  const element = document.getElementById(id);
-
-  if (!element) {
-    throw new Error(`Element with ID ${id} not found`);
-  }
-
-  return element;
-}
-
 export function attachEvent(dotNetReference, elementId, eventName, callbackName) {
-  const element = getElement(elementId);
+  const element = getElementOrThrow(elementId);
   const key = `${elementId}:${eventName}`;
 
   detachEvent(elementId, eventName);
@@ -57,10 +49,10 @@ export function detachEvents(elementId) {
 }
 
 export function setProperty(elementId, propertyName, propertyValue) {
-  getElement(elementId)[propertyName] = propertyValue;
+  getElementOrThrow(elementId)[propertyName] = propertyValue;
 }
 
 export async function updatePosition(elementId) {
-  const element = getElement(elementId);
+  const element = getElementOrThrow(elementId);
   await element.updatePosition();
 }

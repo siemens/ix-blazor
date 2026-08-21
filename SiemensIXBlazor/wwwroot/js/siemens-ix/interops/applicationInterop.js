@@ -7,12 +7,10 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
-export const setApplicationConfig = (id, config) => {
-  const element = document.getElementById(id);
+import { getElementOrThrow } from "./elementUtils.js";
 
-  if (!element) {
-    throw new Error(`Element with ID ${id} not found`);
-  }
+export const setApplicationConfig = (id, config) => {
+  const element = getElementOrThrow(id);
 
   try {
     element.appSwitchConfig = JSON.parse(config);
@@ -22,11 +20,7 @@ export const setApplicationConfig = (id, config) => {
 };
 
 export const setBreakpoints = (id, breakpoints) => {
-    const element = document.getElementById(id);
-
-    if (!element) {
-        throw new Error(`Element with ID ${id} not found`);
-    }
+    const element = getElementOrThrow(id);
 
     element.breakpoints = breakpoints;
 };

@@ -53,8 +53,8 @@ public partial class TreeItem
         if (firstRender)
         {
             _interop = new(JSRuntime);
-            await _interop.AddEventListener(this, ElementId, "toggle", nameof(Toggle));
-            await _interop.AddEventListener(this, ElementId, "itemClick", nameof(ItemClick));
+            await _interop.AddEventListener(this, ElementId, "toggle", nameof(Toggle), includeDetail: false);
+            await _interop.AddEventListener(this, ElementId, "itemClick", nameof(ItemClick), includeDetail: false);
         }
 
         await ApplyPropertiesAsync();
@@ -65,7 +65,9 @@ public partial class TreeItem
         _moduleTask ??= new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
             "import", "./_content/Siemens.IX.Blazor/js/siemens-ix/interops/treeInterop.js").AsTask());
 
-        return await _moduleTask.Value;
+        var module = await _moduleTask.Value;
+        RegisterDisposable(module);
+        return module;
     }
 
     private async Task ApplyPropertiesAsync()
@@ -103,4 +105,5 @@ public partial class TreeItem
     {
         await ItemClickEvent.InvokeAsync();
     }
+
 }

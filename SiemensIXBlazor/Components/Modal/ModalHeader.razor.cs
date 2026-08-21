@@ -90,12 +90,23 @@ namespace SiemensIXBlazor.Components.Modal
             return CloseClickEvent.InvokeAsync(eventArgs);
         }
 
-        public async ValueTask DisposeAsync()
+        public override async ValueTask DisposeAsync()
         {
-            if (_dotNetReference is not null)
+            try
             {
-                await JSRuntime.InvokeVoidAsync("siemensIXInterop.modalHeader.detach", ElementId);
-                _dotNetReference.Dispose();
+                if (_dotNetReference is not null)
+                {
+                    await JSRuntime.InvokeVoidAsync("siemensIXInterop.modalHeader.detach", ElementId);
+                }
+            }
+            catch (JSDisconnectedException)
+            {
+            }
+            finally
+            {
+                _dotNetReference?.Dispose();
+                _dotNetReference = null;
+                _listenerAttached = false;
             }
         }
     }

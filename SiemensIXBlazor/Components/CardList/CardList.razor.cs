@@ -8,14 +8,15 @@
 //  -----------------------------------------------------------------------
 
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using SiemensIXBlazor.Enums.CardList;
 using SiemensIXBlazor.Interops;
+using SiemensIXBlazor.Objects.CardList;
+using System.Text.Json;
 
 namespace SiemensIXBlazor.Components
 {
-	public partial class CardList
+	public partial class CardList : IAsyncDisposable
 	{
 		[Parameter, EditorRequired]
 		public string Id { get; set; } = string.Empty;
@@ -30,6 +31,8 @@ namespace SiemensIXBlazor.Components
 		[Parameter]
 		public string I18nShowAll { get; set; } = "Show all";
 		[Parameter]
+		public string I18nShowLess { get; set; } = "Show less";
+		[Parameter]
 		public string? Label { get; set; }
 		[Parameter]
 		public CardListStyle ListStyle { get; set; } = CardListStyle.Stack;
@@ -42,11 +45,11 @@ namespace SiemensIXBlazor.Components
 		[Parameter]
 		public EventCallback<bool> CollapseChangedEvent { get; set; }
 		[Parameter]
-		public EventCallback ShowAllClickEvent { get; set; }
+		public EventCallback<CardListClickEventArgs> ShowAllClickEvent { get; set; }
 		[Parameter]
-		public EventCallback ShowMoreCardClickEvent { get; set; }
+		public EventCallback<CardListClickEventArgs> ShowMoreCardClickEvent { get; set; }
 
-		private BaseInterop _interop;
+		private BaseInterop? _interop;
 
 		protected async override Task OnAfterRenderAsync(bool firstRender)
 		{
@@ -61,21 +64,37 @@ namespace SiemensIXBlazor.Components
 		}
 
 		[JSInvokable]
-		public async void CollapseChanged(bool value)
+		public async Task CollapseChanged(bool value)
 		{
 			await CollapseChangedEvent.InvokeAsync(value);
 		}
 
 		[JSInvokable]
-		public async void ShowAllClicked()
+		public async Task ShowAllClicked(JsonElement detail)
 		{
-			await ShowAllClickEvent.InvokeAsync();
+			await ShowAllClickEvent.InvokeAsync(CreateClickEventArgs(detail));
 		}
 
 		[JSInvokable]
-		public async void ShowMoreCardClicked()
+		public async Task ShowMoreCardClicked(JsonElement detail)
 		{
-			await ShowMoreCardClickEvent.InvokeAsync();
+			await ShowMoreCardClickEvent.InvokeAsync(CreateClickEventArgs(detail));
+		}
+
+		private static CardListClickEventArgs CreateClickEventArgs(JsonElement detail)
+		{
+			return new()
+			{
+				NativeEvent = detail.ValueKind == JsonValueKind.Object &&
+					detail.TryGetProperty("nativeEvent", out JsonElement nativeEvent)
+					? nativeEvent.Clone()
+					: detail.Clone(),
+			};
+		}
+
+		public override async ValueTask DisposeAsync()
+		{
+			await base.DisposeAsync();
 		}
 	}
 }

@@ -38,19 +38,22 @@ internal sealed class DropdownInterop(IJSRuntime jsRuntime, string elementId) : 
 
     public async ValueTask DisposeAsync()
     {
-        if (moduleTask.IsValueCreated)
+        try
         {
-            try
+            if (moduleTask.IsValueCreated)
             {
                 var module = await moduleTask.Value;
                 await module.InvokeVoidAsync("detachEvents", elementId);
                 await module.DisposeAsync();
             }
-            catch (JSDisconnectedException)
-            {
-            }
         }
-
-        dotNetReference?.Dispose();
+        catch (JSDisconnectedException)
+        {
+        }
+        finally
+        {
+            dotNetReference?.Dispose();
+            dotNetReference = null;
+        }
     }
 }

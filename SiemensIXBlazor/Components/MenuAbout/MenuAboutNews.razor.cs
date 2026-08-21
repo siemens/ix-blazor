@@ -58,7 +58,7 @@ namespace SiemensIXBlazor.Components.MenuAbout
 			{
 				_interop = new(JSRuntime);
 
-				await _interop.AddEventListener(this, Id, "closePopover", "ClosePopover");
+				await _interop.AddEventListener(this, Id, "closePopover", "ClosePopover", includeDetail: false);
 				await _interop.AddEventListener(this, Id, "showMore", "ShowMore");
 			}
 		}

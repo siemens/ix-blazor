@@ -59,16 +59,15 @@ namespace SiemensIXBlazor.Components
             {
                 _interop = new(JSRuntime);
 
-                await _interop.AddEventListener(this, Id, "actionClick", "ActionClicked");
+                await _interop.AddEventListener(this, Id, "actionClick", "ActionClicked", includeDetail: false);
             }
         }
 
         [JSInvokable]
-        public async void ActionClicked()
+        public async Task ActionClicked()
         {
             await ActionClickedEvent.InvokeAsync();
         }
 
     }
 }
-

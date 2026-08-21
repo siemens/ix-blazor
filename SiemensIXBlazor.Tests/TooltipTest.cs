@@ -34,6 +34,28 @@ namespace SiemensIXBlazor.Tests
             cut.MarkupMatches("<ix-tooltip id=\"tooltipId\" title-content=\"Test Tooltip\" interactive='true' placement=\"bottom\" for=\"testElement\"></ix-tooltip>");
         }
 
+        [Fact]
+        public void TooltipRendersTitleSlots()
+        {
+            var cut = Render<Tooltip>(parameters => parameters
+                .Add(p => p.Id, "tooltipId")
+                .Add(p => p.TitleIconContent, (RenderFragment)(builder => builder.AddContent(0, "Icon")))
+                .Add(p => p.TitleContentSlot, (RenderFragment)(builder => builder.AddContent(0, "Title"))));
+
+            Assert.Equal("Icon", cut.Find("[slot='title-icon']").TextContent);
+            Assert.Equal("Title", cut.Find("[slot='title-content']").TextContent);
+        }
+
+        [Fact]
+        public void TooltipAcceptsElementBackedTargets()
+        {
+            var cut = Render<Tooltip>(parameters => parameters
+                .Add(p => p.Id, "tooltipId")
+                .Add(p => p.For, new object()));
+
+            Assert.False(cut.Find("ix-tooltip").HasAttribute("for"));
+        }
+
 
     }
 }

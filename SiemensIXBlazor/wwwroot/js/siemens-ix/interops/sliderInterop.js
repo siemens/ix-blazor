@@ -7,20 +7,33 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
+import { createListenerRegistry } from "./listenerRegistry.js";
+import { getElement } from "./elementUtils.js";
+
+const listeners = createListenerRegistry("slider-listener");
+
 export function setMarker(id, markerArray) {
-    const el = document.getElementById(id);
+    const el = getElement(id);
     if (el) {
         el.marker = markerArray;
     }
 }
 
 export function listenEvent(dotNetRef, id, eventName, callbackName) {
-    const el = document.getElementById(id);
-    if (el) {
-        el.addEventListener(eventName, e => {
-            if (callbackName === "ValueChanged") {
-                dotNetRef.invokeMethodAsync(callbackName, e.detail);
-            }
-        });
+    const el = getElement(id);
+    if (!el) {
+        return null;
     }
+
+    const listener = e => {
+        if (callbackName === "ValueChanged") {
+            dotNetRef.invokeMethodAsync(callbackName, e.detail);
+        }
+    };
+
+    return listeners.add(el, eventName, listener);
+}
+
+export function removeEventListener(listenerId) {
+    listeners.remove(listenerId);
 }

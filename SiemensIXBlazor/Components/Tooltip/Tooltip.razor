@@ -20,8 +20,16 @@
              placement="@(EnumParser<TooltipVariant>.EnumToString(Placement))"
              title-content="@TitleContent"
              interactive="@(Interactive ? "true" : null)"
-             for="@For"
+             for="@(For as string)"
              style="@Style"
              class="@Class">
+    @if (TitleIconContent is not null)
+    {
+        <span slot="title-icon">@TitleIconContent</span>
+    }
+    @if (TitleContentSlot is not null)
+    {
+        <span slot="title-content">@TitleContentSlot</span>
+    }
     @ChildContent
 </ix-tooltip>

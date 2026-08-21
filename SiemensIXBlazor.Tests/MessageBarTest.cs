@@ -52,14 +52,14 @@ public class MessageBarTests : TestContextBase
         );
 
         // Act
-        cut.Instance.ClosedChange();
+        await cut.Instance.ClosedChange();
 
         // Assert
         Assert.True(closed);
     }
 
     [Fact]
-    public void CloseAnimationCompletedEventWorks()
+    public async Task CloseAnimationCompletedEventWorks()
     {
         // Arrange
         var animationCompleted = false;
@@ -69,7 +69,7 @@ public class MessageBarTests : TestContextBase
         );
 
         // Act
-        cut.Instance.CloseAnimationCompleted();
+        await cut.Instance.CloseAnimationCompleted();
 
         // Assert
         Assert.True(animationCompleted);

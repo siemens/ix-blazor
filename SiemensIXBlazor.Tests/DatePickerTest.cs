@@ -18,6 +18,15 @@ namespace SiemensIXBlazor.Tests;
 public class DatePickerTest : TestContextBase
 {
     [Fact]
+    public void UsesOfficialNavigationLabelsByDefault()
+    {
+        var cut = Render<DatePicker>(parameters => parameters.Add(p => p.Id, "date-picker"));
+
+        Assert.Equal("Change calendar view to previous month", cut.Instance.AriaLabelPreviousMonthButton);
+        Assert.Equal("Change calendar view to next month", cut.Instance.AriaLabelNextMonthButton);
+    }
+
+    [Fact]
     public void OfficialPropertiesRender()
     {
         var cut = Render<DatePicker>(parameters => parameters

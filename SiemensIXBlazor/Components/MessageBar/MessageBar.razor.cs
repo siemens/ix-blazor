@@ -44,13 +44,13 @@ namespace SiemensIXBlazor.Components
         }
 
         [JSInvokable]
-        public async void ClosedChange()
+        public async Task ClosedChange()
         {
             await ClosedChangeEvent.InvokeAsync();
         }
 
         [JSInvokable]
-        public async void CloseAnimationCompleted()
+        public async Task CloseAnimationCompleted()
         {
             await CloseAnimationCompletedEvent.InvokeAsync();
         }

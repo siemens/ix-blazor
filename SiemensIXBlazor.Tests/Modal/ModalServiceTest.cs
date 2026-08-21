@@ -55,6 +55,25 @@ public class ModalServiceTest : TestContextBase
     }
 
     [Fact]
+    public async Task ModalHost_ShouldKeepAnimationAndBackdropEnabledByDefault()
+    {
+        Services.AddSingleton<ModalService>(services =>
+            new ModalService(services.GetRequiredService<IJSRuntime>()));
+        var service = Services.GetRequiredService<ModalService>();
+        var host = Render<ModalHost>((Action<Bunit.ComponentParameterCollectionBuilder<ModalHost>>)(_ => { }));
+
+        await service.OpenAsync<string>(new ModalConfig
+        {
+            Content = builder => builder.AddContent(0, "Modal content"),
+        });
+        host.Render();
+
+        var modal = host.Find("ix-modal");
+        Assert.False(modal.HasAttribute("disable-animation"));
+        Assert.False(modal.HasAttribute("hide-backdrop"));
+    }
+
+    [Fact]
     public async Task ModalService_ShouldPreserveDismissReasonAndAllowCancellation()
     {
         Services.AddSingleton<ModalService>(services =>

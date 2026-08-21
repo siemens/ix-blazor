@@ -30,5 +30,13 @@ namespace SiemensIXBlazor.Tests
             // Assert
             cut.MarkupMatches("<ix-spinner size=\"large\" variant=\"primary\" style=\"color: red;\" class=\"test-class\"></ix-spinner>");
         }
+
+        [Fact]
+        public void SecondaryVariantRendersOfficialValue()
+        {
+            var cut = Render<Spinner>(parameters => parameters.Add(p => p.Variant, SpinnerVariant.secondary));
+
+            Assert.Equal("secondary", cut.Find("ix-spinner").GetAttribute("variant"));
+        }
     }
 }

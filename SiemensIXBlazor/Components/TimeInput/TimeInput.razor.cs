@@ -100,6 +100,10 @@ public partial class TimeInput
         _interop?.InvokeElementMethodAsync(Id, "focusInput")
         ?? throw new InvalidOperationException("The time input has not rendered yet.");
 
+    public Task<IJSObjectReference?> GetNativeInputElementAsync() =>
+        _interop?.InvokeElementMethodAsync<IJSObjectReference>(Id, "getNativeInputElement")
+        ?? throw new InvalidOperationException("The time input has not rendered yet.");
+
     private static string ReadString(JsonElement value) =>
         value.ValueKind is JsonValueKind.Null or JsonValueKind.Undefined ? string.Empty : value.GetString() ?? string.Empty;
 

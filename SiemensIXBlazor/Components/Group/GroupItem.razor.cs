@@ -8,10 +8,12 @@
 //  -----------------------------------------------------------------------
 
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+using SiemensIXBlazor.Interops;
 
 namespace SiemensIXBlazor.Components
 {
-    public partial class GroupItem
+    public partial class GroupItem : IAsyncDisposable
     {
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
@@ -36,10 +38,23 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public EventCallback<string> SelectedChangeEvent { get; set; }
 
-        public async void ItemClicked()
+        private BaseInterop? _interop;
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            await SelectedChangeEvent.InvokeAsync(Id);
+            if (firstRender)
+            {
+                _interop = new(JSRuntime);
+                await _interop.AddEventListener(this, Id, "selectedChanged", nameof(SelectedChanged), includeDetail: false);
+            }
         }
 
+        [JSInvokable]
+        public Task SelectedChanged() => SelectedChangeEvent.InvokeAsync(Id);
+
+        public override async ValueTask DisposeAsync()
+        {
+            await base.DisposeAsync();
+        }
     }
 }

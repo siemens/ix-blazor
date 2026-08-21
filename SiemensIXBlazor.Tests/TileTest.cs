@@ -32,5 +32,18 @@ namespace SiemensIXBlazor.Tests
             // Assert
             cut.MarkupMatches("<ix-tile size=\"medium\"><div>Test child content</div></ix-tile>");
         }
+
+        [Fact]
+        public void TileRendersNamedSlots()
+        {
+            var cut = Render<Tile>(parameters => parameters
+                .Add(p => p.HeaderContent, (RenderFragment)(builder => builder.AddContent(0, "Header")))
+                .Add(p => p.SubheaderContent, (RenderFragment)(builder => builder.AddContent(0, "Subheader")))
+                .Add(p => p.FooterContent, (RenderFragment)(builder => builder.AddContent(0, "Footer"))));
+
+            Assert.Equal("Header", cut.Find("[slot='header']").TextContent);
+            Assert.Equal("Subheader", cut.Find("[slot='subheader']").TextContent);
+            Assert.Equal("Footer", cut.Find("[slot='footer']").TextContent);
+        }
     }
 }

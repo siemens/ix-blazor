@@ -48,7 +48,7 @@ namespace SiemensIXBlazor.Components.MenuAvatar
             {
                 _interop = new(JSRuntime);
 
-                await _interop.AddEventListener(this, Id, "logoutClick", "LogoutClicked");
+                await _interop.AddEventListener(this, Id, "logoutClick", "LogoutClicked", includeDetail: false);
             }
         }
 

@@ -37,6 +37,7 @@ public partial class AGGrid<TData> : IAsyncDisposable
     private object? _rowDataReference;
     private object? _dataSourceReference;
     private string? _javaScriptModuleReference;
+    private bool _stripedRows;
     private long _eventSequence;
     private bool _isReady;
     private bool _lifecycleFaulted;
@@ -329,7 +330,7 @@ public partial class AGGrid<TData> : IAsyncDisposable
         }
     }
 
-    public async ValueTask DisposeAsync()
+    public override async ValueTask DisposeAsync()
     {
         if (_disposed)
         {
@@ -386,6 +387,7 @@ public partial class AGGrid<TData> : IAsyncDisposable
             {
                 instanceId = _instanceId,
                 javaScriptModule = JavaScriptModule,
+                stripedRows = Options.StripedRows,
                 hasInfiniteDataSource = InfiniteDataSource is not null,
                 eventSubscriptions = eventNames,
             });
@@ -409,6 +411,7 @@ public partial class AGGrid<TData> : IAsyncDisposable
 
         if (!ReferenceEquals(_dataSourceReference, InfiniteDataSource) ||
             !string.Equals(_javaScriptModuleReference, JavaScriptModule, StringComparison.Ordinal) ||
+            _stripedRows != Options.StripedRows ||
             !string.Equals(_eventsSignature, eventsSignature, StringComparison.Ordinal))
         {
             await RecreatePreservingStateAsync();
@@ -549,6 +552,7 @@ public partial class AGGrid<TData> : IAsyncDisposable
         _rowDataReference = RowData;
         _dataSourceReference = InfiniteDataSource;
         _javaScriptModuleReference = JavaScriptModule;
+        _stripedRows = Options.StripedRows;
     }
 
     private void ValidateParameters()

@@ -47,7 +47,7 @@ public class EventListItemTest : TestContextBase
     }
 
     [Fact]
-    public void ItemClickEventInvoked()
+    public async Task ItemClickEventInvoked()
     {
         // Arrange
         var wasClicked = false;
@@ -55,7 +55,7 @@ public class EventListItemTest : TestContextBase
             .Add(p => p.ItemClickEvent, EventCallback.Factory.Create(this, () => wasClicked = true)));
 
         // Act
-        cut.Instance.ItemClicked();
+        await cut.Instance.ItemClicked();
 
         // Assert
         Assert.True(wasClicked);

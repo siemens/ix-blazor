@@ -16,13 +16,15 @@ using System.Text.Json;
 
 namespace SiemensIXBlazor.Components.Tree;
 
-public partial class Tree
+public partial class Tree : IAsyncDisposable
 {
     private Lazy<Task<IJSObjectReference>>? _moduleTask;
     private BaseInterop? _interop;
     private string? _lastModel;
     private string? _lastContext;
     private bool? _lastToggleOnItemClick;
+    private DotNetObjectReference<Tree>? _nodeRemovedReference;
+    private string? _nodeRemovedListenerId;
 
     [Parameter, EditorRequired]
     public string Id { get; set; } = string.Empty;
@@ -49,6 +51,9 @@ public partial class Tree
     public EventCallback NodeRemovedEvent { get; set; }
 
     [Parameter]
+    public EventCallback<TreeNodeRemovedEventArgs> NodeRemovedDetailsEvent { get; set; }
+
+    [Parameter]
     public EventCallback<string> NodeClickedEvent { get; set; }
 
     [Parameter]
@@ -61,9 +66,13 @@ public partial class Tree
             _interop = new(JSRuntime);
 
             await _interop.AddEventListener(this, Id, "contextChange", nameof(ContextChanged));
-            await _interop.AddEventListener(this, Id, "nodeRemoved", nameof(NodeRemoved));
             await _interop.AddEventListener(this, Id, "nodeClicked", nameof(NodeClicked));
             await _interop.AddEventListener(this, Id, "nodeToggled", nameof(NodeToggled));
+
+            var module = await GetModuleAsync();
+            _nodeRemovedReference = DotNetObjectReference.Create(this);
+            _nodeRemovedListenerId = await module.InvokeAsync<string>(
+                "listenNodeRemoved", _nodeRemovedReference, Id);
         }
 
         await ApplyPropertiesAsync();
@@ -111,9 +120,13 @@ public partial class Tree
     }
 
     [JSInvokable]
-    public async Task NodeRemoved()
+    public async Task NodeRemoved(JsonElement removedNodes)
     {
+        var details = JsonConvert.DeserializeObject<TreeNodeRemovedEventArgs>(removedNodes.GetRawText())
+            ?? new TreeNodeRemovedEventArgs();
+
         await NodeRemovedEvent.InvokeAsync();
+        await NodeRemovedDetailsEvent.InvokeAsync(details);
     }
 
     [JSInvokable]
@@ -150,5 +163,40 @@ public partial class Tree
     {
         var module = await GetModuleAsync();
         await module.InvokeVoidAsync("refreshTree", Id, options ?? new RefreshTreeOptions());
+    }
+
+    public override async ValueTask DisposeAsync()
+    {
+        try
+        {
+            if (_moduleTask?.IsValueCreated == true && _nodeRemovedListenerId is not null)
+            {
+                var module = await _moduleTask.Value;
+                await module.InvokeVoidAsync("removeNodeRemovedListener", _nodeRemovedListenerId);
+            }
+        }
+        catch (JSDisconnectedException)
+        {
+        }
+        finally
+        {
+            _nodeRemovedReference?.Dispose();
+            _nodeRemovedReference = null;
+            _nodeRemovedListenerId = null;
+        }
+
+        if (_moduleTask?.IsValueCreated == true)
+        {
+            try
+            {
+                var module = await _moduleTask.Value;
+                await module.DisposeAsync();
+            }
+            catch (JSDisconnectedException)
+            {
+            }
+        }
+
+        await base.DisposeAsync();
     }
 }

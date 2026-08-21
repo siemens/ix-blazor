@@ -7,20 +7,25 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
+import { createListenerRegistry } from "./listenerRegistry.js";
+import { getElement } from "./elementUtils.js";
+
+const listeners = createListenerRegistry("file-upload-listener");
+
 export function fileUploadEventHandler(
   caller,
   elementId,
   eventName,
   functionName
 ) {
-  const element = document.getElementById(elementId);
+  const element = getElement(elementId);
 
   if (!element) {
     console.error(`Element with id ${elementId} not found.`);
     return;
   }
 
-  element.addEventListener(eventName, (e) => {
+  const listener = (e) => {
     const files = e.detail;
     if (!files || files.length === 0) return; // Early exit if no files selected
 
@@ -55,11 +60,17 @@ export function fileUploadEventHandler(
       .catch((error) => {
         console.error("Error processing files:", error);
       });
-  });
+  };
+
+  return listeners.add(element, eventName, listener);
+}
+
+export function removeFileUploadEventHandler(listenerId) {
+  listeners.remove(listenerId);
 }
 
 export function setFilesToUpload(elementId, files) {
-  const element = document.getElementById(elementId);
+  const element = getElement(elementId);
 
   if (!element || typeof element.setFilesToUpload !== "function") {
     throw new Error(`Upload element with id ${elementId} not found.`);

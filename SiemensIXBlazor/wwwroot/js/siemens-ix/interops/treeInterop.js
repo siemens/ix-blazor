@@ -7,19 +7,35 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
-function getElementOrThrow(id) {
-  const element = document.getElementById(id);
-  if (!element) {
-    throw new Error(`Element with ID ${id} not found`);
-  }
-  return element;
-}
+import { createListenerRegistry } from "./listenerRegistry.js";
+import { getElement, getElementOrThrow } from "./elementUtils.js";
 
 function createElement(tag, props, children = []) {
   const element = document.createElement(tag);
   Object.assign(element, props);
   children.forEach((child) => element.appendChild(child));
   return element;
+}
+
+const nodeRemovedListeners = createListenerRegistry("tree-node-removed");
+
+export function listenNodeRemoved(caller, id) {
+  const element = getElementOrThrow(id);
+  const listener = (event) => {
+    const nodeIds = Array.isArray(event.detail)
+      ? event.detail
+          .map((node) => node?.getAttribute?.('data-tree-node-id'))
+          .filter((nodeId) => typeof nodeId === 'string' && nodeId.length > 0)
+      : [];
+
+    caller.invokeMethodAsync('NodeRemoved', { nodeIds });
+  };
+
+  return nodeRemovedListeners.add(element, 'nodeRemoved', listener);
+}
+
+export function removeNodeRemovedListener(listenerId) {
+  nodeRemovedListeners.remove(listenerId);
 }
 
 export function setTreeModel(id, treeModel) {
@@ -84,7 +100,7 @@ export async function refreshTree(id, options = { force: false }) {
 }
 
 export async function markItemsAsDirty(id, itemIdentifiers) {
-  const element = document.getElementById(id);
+  const element = getElement(id);
   if (element && typeof element.markItemsAsDirty === 'function') {
     await element.markItemsAsDirty(itemIdentifiers);
   }

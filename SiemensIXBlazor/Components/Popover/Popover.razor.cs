@@ -14,13 +14,13 @@ using SiemensIXBlazor.Interops;
 
 namespace SiemensIXBlazor.Components;
 
-public partial class Popover
+public partial class Popover : IAsyncDisposable
 {
     [Parameter, EditorRequired]
     public string Id { get; set; } = string.Empty;
 
     [Parameter]
-    public string? Trigger { get; set; }
+    public object? Trigger { get; set; }
 
     [Parameter]
     public bool Show { get; set; }
@@ -50,14 +50,17 @@ public partial class Popover
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (!firstRender)
+        if (firstRender)
         {
-            return;
+            _interop = new(JSRuntime);
+            await _interop.AddEventListener(this, Id, "showChange", "ShowChange");
+            await _interop.AddEventListener(this, Id, "showChanged", "ShowChanged");
         }
 
-        _interop = new(JSRuntime);
-        await _interop.AddEventListener(this, Id, "showChange", "ShowChange");
-        await _interop.AddEventListener(this, Id, "showChanged", "ShowChanged");
+        if (Trigger is not null and not string)
+        {
+            await _interop.SetElementProperty(Id, "trigger", Trigger);
+        }
     }
 
     [JSInvokable]
@@ -69,4 +72,9 @@ public partial class Popover
     public Task ShowPopover() => _interop.InvokeElementMethodAsync(Id, "showPopover");
 
     public Task HidePopover() => _interop.InvokeElementMethodAsync(Id, "hidePopover");
+
+    public override async ValueTask DisposeAsync()
+    {
+        await base.DisposeAsync();
+    }
 }

@@ -42,23 +42,19 @@ namespace SiemensIXBlazor.Components.Radio
         [Parameter]
         public EventCallback<string> ValueChangeEvent { get; set; }
 
-        protected override void OnAfterRender(bool firstRender)
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
-                _interop = new(JSRuntime);
-
-                Task.Run(async () =>
-                {
-                    await _interop.AddEventListener(this, Id, "checkedChange", "CheckedChange");
-                    await _interop.AddEventListener(this, Id, "ixBlur", "IxBlur");
-                    await _interop.AddEventListener(this, Id, "valueChange", "ValueChange");
-                });
+                _interop ??= new(JSRuntime);
+                await _interop.AddEventListener(this, Id, "checkedChange", "CheckedChange");
+                await _interop.AddEventListener(this, Id, "ixBlur", "IxBlur", includeDetail: false);
+                await _interop.AddEventListener(this, Id, "valueChange", "ValueChange");
             }
         }
 
         [JSInvokable]
-        public async void CheckedChange(JsonElement checkedState)
+        public async Task CheckedChange(JsonElement checkedState)
         {
             bool newChecked = checkedState.GetBoolean();
             Checked = newChecked;
@@ -67,13 +63,13 @@ namespace SiemensIXBlazor.Components.Radio
         }
 
         [JSInvokable]
-        public async void IxBlur()
+        public async Task IxBlur()
         {
             await IxBlurEvent.InvokeAsync();
         }
 
         [JSInvokable]
-        public async void ValueChange(JsonElement valueState)
+        public async Task ValueChange(JsonElement valueState)
         {
             string newValue = valueState.GetString();
             Value = newValue;

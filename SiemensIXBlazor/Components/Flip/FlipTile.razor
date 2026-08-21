@@ -25,5 +25,13 @@ class="@Class"
 height="@Height"
 width="@Width"
 index ="@Index">
+    @if (HeaderContent is not null)
+    {
+        <div slot="header">@HeaderContent</div>
+    }
     @ChildContent
+    @if (FooterContent is not null)
+    {
+        <div slot="footer">@FooterContent</div>
+    }
 </ix-flip-tile>

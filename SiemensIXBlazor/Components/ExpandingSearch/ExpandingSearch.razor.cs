@@ -50,7 +50,7 @@ namespace SiemensIXBlazor.Components
         }
 
         [JSInvokable]
-        public async void ValueChanged(string value)
+        public async Task ValueChanged(string value)
         {
             Value = value;
             await ValueChangedEvent.InvokeAsync(value);

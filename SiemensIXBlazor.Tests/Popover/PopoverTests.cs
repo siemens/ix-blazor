@@ -60,6 +60,16 @@ public class PopoverTests : TestContextBase
     }
 
     [Fact]
+    public void Popover_AcceptsElementBackedTriggers()
+    {
+        var cut = Render<Components.Popover>(parameters => parameters
+            .Add(p => p.Id, "popover")
+            .Add(p => p.Trigger, new object()));
+
+        Assert.False(cut.Find("ix-popover").HasAttribute("trigger"));
+    }
+
+    [Fact]
     public void PopoverHeader_RendersPropertiesAndNamedSlot()
     {
         var cut = Render<Components.PopoverHeader>(parameters => parameters

@@ -11,13 +11,12 @@
 
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using SiemensIXBlazor.Enums.Chip;
 using SiemensIXBlazor.Enums.Tooltip;
 using SiemensIXBlazor.Interops;
 
 namespace SiemensIXBlazor.Components
 {
-    public partial class Tooltip
+    public partial class Tooltip : IAsyncDisposable
     {
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
@@ -28,10 +27,31 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public TooltipVariant Placement { get; set; } = TooltipVariant.top;
         [Parameter]
-        public string? For { get; set; }
+        public object? For { get; set; }
+        [Parameter]
+        public RenderFragment? TitleIconContent { get; set; }
+        [Parameter]
+        public RenderFragment? TitleContentSlot { get; set; }
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
-        private BaseInterop _interop;
+
+        private BaseInterop? _interop;
+        private object? _lastObjectFor;
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (For is not null and not string && !Equals(_lastObjectFor, For))
+            {
+                _interop ??= new(JSRuntime);
+                RegisterDisposable(_interop);
+                await _interop.SetElementProperty(Id, "for", For);
+                _lastObjectFor = For;
+            }
+        }
+
+        public override async ValueTask DisposeAsync()
+        {
+            await base.DisposeAsync();
+        }
     }
 }
-

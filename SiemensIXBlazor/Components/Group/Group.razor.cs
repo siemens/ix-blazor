@@ -13,10 +13,14 @@ using SiemensIXBlazor.Interops;
 
 namespace SiemensIXBlazor.Components
 {
-    public partial class Group
+    public partial class Group : IAsyncDisposable
     {
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
+        [Parameter]
+        public RenderFragment? HeaderContent { get; set; }
+        [Parameter]
+        public RenderFragment? FooterContent { get; set; }
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
         [Parameter]
@@ -40,7 +44,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public EventCallback<int> SelectItemEvent { get; set; }
 
-        private BaseInterop _interop;
+        private BaseInterop? _interop;
 
         protected async override Task OnAfterRenderAsync(bool firstRender)
         {
@@ -55,21 +59,29 @@ namespace SiemensIXBlazor.Components
         }
 
         [JSInvokable]
-        public async void ExpandedChanged(bool value)
+        public Task ExpandedChanged(bool value)
         {
-            await ExpandedChangedEvent.InvokeAsync(value);
+            Expanded = value;
+            return ExpandedChangedEvent.InvokeAsync(value);
         }
 
         [JSInvokable]
-        public async void GroupSelected(bool value)
+        public Task GroupSelected(bool value)
         {
-            await SelectGroupEvent.InvokeAsync(value);
+            Selected = value;
+            return SelectGroupEvent.InvokeAsync(value);
         }
 
         [JSInvokable]
-        public async void ItemSelected(int index)
+        public Task ItemSelected(int index)
         {
-            await SelectItemEvent.InvokeAsync(index);
+            Index = index;
+            return SelectItemEvent.InvokeAsync(index);
+        }
+
+        public override async ValueTask DisposeAsync()
+        {
+            await base.DisposeAsync();
         }
     }
 }

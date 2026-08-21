@@ -80,7 +80,7 @@ namespace SiemensIXBlazor.Components
             await ShowChangedEvent.InvokeAsync(value);
         }
 
-        public async ValueTask DisposeAsync()
+        public override async ValueTask DisposeAsync()
         {
             if (_interop is not null)
             {

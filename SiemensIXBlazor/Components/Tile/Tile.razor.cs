@@ -17,6 +17,12 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public TileSize Size { get; set; } = TileSize.Medium;
         [Parameter]
+        public RenderFragment? HeaderContent { get; set; }
+        [Parameter]
+        public RenderFragment? SubheaderContent { get; set; }
+        [Parameter]
+        public RenderFragment? FooterContent { get; set; }
+        [Parameter]
         public RenderFragment? ChildContent { get; set; }
     }
 }
