@@ -13,6 +13,10 @@ import { registerTheme } from "@siemens/ix-echarts";
 import * as echarts from "echarts";
 import { showModalLoading, themeSwitcher } from "@siemens/ix";
 import { defineCustomElements as ixIconsDefineCustomElements } from "@siemens/ix-icons/loader";
+import {
+    IxChatInput,
+    defineCustomElement as defineChatInput,
+} from "@siemens/ix/components/ix-chat-input.js";
 
 window.echarts = echarts;
 const charts = new Map();
@@ -43,12 +47,26 @@ function disposeChart(id) {
     charts.delete(id);
 }
 
+function prepareChatInput() {
+    const lifecycleBase = Object.getPrototypeOf(IxChatInput.prototype);
+
+    // iX 5.2.0 calls these hooks from ChatInput although its base mixins do not define them.
+    for (const lifecycleMethod of ["componentWillLoad", "componentDidRender"]) {
+        if (typeof lifecycleBase[lifecycleMethod] !== "function") {
+            lifecycleBase[lifecycleMethod] = () => undefined;
+        }
+    }
+
+    defineChatInput();
+}
+
 window.siemensIXInterop = {
     async initialize() {
         await ixIconsDefineCustomElements(window, {
             resourcesUrl: "./_content/Siemens.IX.Blazor/"
         });
 
+        prepareChatInput();
         await defineCustomElements();
     },
     modal: {

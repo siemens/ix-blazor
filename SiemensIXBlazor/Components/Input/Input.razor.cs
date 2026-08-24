@@ -28,6 +28,7 @@ namespace SiemensIXBlazor.Components.Input
         public string? Placeholder {  get; set; }
 
         [Parameter]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "BL0007", Justification = "The setter preserves the existing null-to-empty value normalization.")]
         public string Value
         {
             get => _value;

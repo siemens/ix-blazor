@@ -75,4 +75,21 @@ public class GroupTest : TestContextBase
         Assert.Equal("Header", cut.Find("[slot='header']").TextContent);
         Assert.Equal("Footer", cut.Find("[slot='footer']").TextContent);
     }
+
+    [Fact]
+    public void DropdownSlotRendersCorrectly()
+    {
+        var cut = Render<Components.Group>(parameters => parameters
+            .Add(p => p.Id, "testId")
+            .Add(p => p.DropdownContent, (RenderFragment)(builder =>
+            {
+                builder.OpenElement(0, "ix-dropdown");
+                builder.AddAttribute(1, "slot", "dropdown");
+                builder.AddContent(2, "Group actions");
+                builder.CloseElement();
+            })));
+
+        var dropdown = cut.Find("ix-dropdown[slot='dropdown']");
+        Assert.Equal("Group actions", dropdown.TextContent);
+    }
 }

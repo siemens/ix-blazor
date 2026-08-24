@@ -29,6 +29,10 @@
     {
         <div slot="header">@HeaderContent</div>
     }
+    @if (DropdownContent is not null)
+    {
+        @DropdownContent
+    }
     @ChildContent
     @if (FooterContent is not null)
     {

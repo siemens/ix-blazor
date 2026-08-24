@@ -59,13 +59,13 @@ namespace SiemensIXBlazor.Components
         public EventCallback<PaneVariantChangedEventResponse> VariantChangedEvent { get; set; }
 
 
-        private BaseInterop _interop;
+        private BaseInterop? _interop;
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
-                _interop = new(JSRuntime);
+                _interop ??= new(JSRuntime);
 
                 await _interop.AddEventListener(this, Id, "expandedChanged", "ExpandChanged");
                 await _interop.AddEventListener(this, Id, "variantChanged", "VariantChanged");

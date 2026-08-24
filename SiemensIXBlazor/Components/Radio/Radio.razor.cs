@@ -71,9 +71,9 @@ namespace SiemensIXBlazor.Components.Radio
         [JSInvokable]
         public async Task ValueChange(JsonElement valueState)
         {
-            string newValue = valueState.GetString();
+            string? newValue = valueState.GetString();
             Value = newValue;
-            await ValueChangeEvent.InvokeAsync(newValue);
+            await ValueChangeEvent.InvokeAsync(newValue!);
             StateHasChanged();
         }
     }

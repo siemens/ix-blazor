@@ -20,6 +20,8 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public RenderFragment? HeaderContent { get; set; }
         [Parameter]
+        public RenderFragment? DropdownContent { get; set; }
+        [Parameter]
         public RenderFragment? FooterContent { get; set; }
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;

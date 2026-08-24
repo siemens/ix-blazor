@@ -105,6 +105,7 @@ In iX v5, configure the theme and `Application.ColorSchema` (`Light`, `Dark`, or
 - [Breadcrumb](#breadcrumb)
 - [Button](#button)
 - [Card](#card) **(since 0.5.0)**
+- [Card Content](#card-content) **(since v0.6.0)**
 - [Card List](#card-list) **(since v0.3.3)**
 - [Chat](#chat) **(since v0.6.0)**
 - [Push Card](#push-card) **(since v0.3.3)**
@@ -115,6 +116,7 @@ In iX v5, configure the theme and `Application.ColorSchema` (`Light`, `Dark`, or
 - [Checkbox](#checkbox)
 - [Checkbox group](#checkbox-group)
 - [Chip](#chip)
+- [Filter Chip](#filter-chip) **(since v0.6.0)**
 - [Content](#content) **(since 0.5.0)**
 - [Content Header](#content-header) **(since v0.3.3)**
 - [Date Dropdown](#date-dropdown)
@@ -132,6 +134,7 @@ In iX v5, configure the theme and `Application.ColorSchema` (`Light`, `Dark`, or
 - [Expanding Search](#expanding-search)
 - [Flip](#flip)
 - [Group](#group)
+- [Group Context Menu](#group-context-menu) **(since v0.6.0)**
 - [HTML Table](#html-table)
 - [Input](#input)
 - [Number Input](#number-input)
@@ -580,11 +583,17 @@ The module receives `createCellRendererComponent` and `registerCellRenderer` hel
             <span>Details</span>
         </TitleActions>
     </CardTitle>
-    <p>Card content is rendered in the default slot.</p>
+    <CardContent>Card content.</CardContent>
     <CardAccordion Variant="CardAccordionVariant.info">
         <p>Expandable card content.</p>
     </CardAccordion>
 </Card>
+```
+
+## Card Content
+
+```razor
+<CardContent>Card content.</CardContent>
 ```
 
 ## Card List
@@ -851,6 +860,16 @@ chart1.InitialChart(object1);
 </Chip>
 ```
 
+## Filter Chip
+
+```razor
+<FilterChip Id="status-filter"
+            AriaLabelCloseIconButton="Remove status filter"
+            CloseClickEvent="RemoveStatusFilter">
+    Status: Active
+</FilterChip>
+```
+
 ## Content
 
 ```razor
@@ -1065,6 +1084,11 @@ private void Callback(DateDropdownResponse selectedDateDropdown)
 ```razor
 <Group Id="group1" Header="Header text" SubHeader="Subheader text">
     <HeaderContent>Custom header</HeaderContent>
+    <DropdownContent>
+        <Dropdown Id="group-actions" slot="dropdown">
+            <DropdownItem Label="Group action" />
+        </Dropdown>
+    </DropdownContent>
     <ChildContent>
         <GroupItem Id="groupitem1" Text="Example text 1"></GroupItem>
         <GroupItem Id="groupitem2" Text="Example text 2"></GroupItem>
@@ -1072,6 +1096,16 @@ private void Callback(DateDropdownResponse selectedDateDropdown)
     </ChildContent>
     <FooterContent>Group footer</FooterContent>
 </Group>
+```
+
+## Group Context Menu
+
+```razor
+<GroupContextMenu>
+    <Dropdown Id="group-actions">
+        <DropdownItem Label="Group action" />
+    </Dropdown>
+</GroupContextMenu>
 ```
 
 ## HTML Table

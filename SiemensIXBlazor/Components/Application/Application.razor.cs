@@ -30,6 +30,7 @@ public partial class Application
     [Parameter, EditorRequired]
     public string Id { get; set; } = string.Empty;
     [Parameter]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "BL0007", Justification = "The setter applies breakpoint changes to the web component after the initial render.")]
     public string[] Breakpoints
     {
         get => _breakpoints;
@@ -51,6 +52,7 @@ public partial class Application
     public ColorSchema ColorSchema { get; set; } = ColorSchema.System;
 
     [Parameter]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "BL0007", Justification = "The setter applies application-switch changes to the web component after the initial render.")]
     public AppSwitchConfig? AppSwitchConfig
     {
         get => _appSwitchConfig;

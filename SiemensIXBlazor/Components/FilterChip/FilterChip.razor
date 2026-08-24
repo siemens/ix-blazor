@@ -1,0 +1,24 @@
+@* -----------------------------------------------------------------------
+// SPDX-FileCopyrightText: 2026 Siemens AG
+//
+// SPDX-License-Identifier: MIT
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+// -----------------------------------------------------------------------
+*@
+
+@namespace SiemensIXBlazor.Components
+@inherits IXBaseComponent
+@inject Microsoft.JSInterop.IJSRuntime JSRuntime
+
+<ix-filter-chip @attributes="UserAttributes"
+                id="@Id"
+                aria-label-close-icon-button="@AriaLabelCloseIconButton"
+                disabled="@(Disabled ? "true" : null)"
+                hide-close-button="@(HideCloseButton ? "true" : null)"
+                readonly="@(Readonly ? "true" : null)"
+                class="@Class"
+                style="@Style">
+    @ChildContent
+</ix-filter-chip>

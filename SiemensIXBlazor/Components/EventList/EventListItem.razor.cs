@@ -34,13 +34,13 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public EventCallback ItemClickEvent { get; set; }
 
-        private BaseInterop _interop;
+        private BaseInterop? _interop;
 
         protected async override Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
-                _interop = new(JSRuntime);
+                _interop ??= new(JSRuntime);
 
                 await _interop.AddEventListener(this, Id, "itemClick", "ItemClicked");
             }

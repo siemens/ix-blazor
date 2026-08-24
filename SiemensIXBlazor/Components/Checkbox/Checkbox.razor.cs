@@ -19,6 +19,7 @@ namespace SiemensIXBlazor.Components.Checkbox
         public string Id { get; set; } = string.Empty;
 
         [Parameter]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "BL0007", Justification = "The setter queues the checked value for the underlying web component.")]
         public bool Checked
         {
             get => _checked;
@@ -33,6 +34,7 @@ namespace SiemensIXBlazor.Components.Checkbox
         public bool Disabled { get; set; } = false;
 
         [Parameter]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "BL0007", Justification = "The setter queues the indeterminate value for the underlying web component.")]
         public bool Indeterminate
         {
             get => _indeterminate;
@@ -53,6 +55,7 @@ namespace SiemensIXBlazor.Components.Checkbox
         public bool Required { get; set; } = false;
 
         [Parameter]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "BL0007", Justification = "The setter queues the value for the underlying web component.")]
         public string Value
         {
             get => _value;

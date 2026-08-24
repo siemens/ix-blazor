@@ -86,6 +86,7 @@ namespace SiemensIXBlazor.Components
     /// The value of the progress indicator.
     /// </summary>
     [Parameter]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "BL0007", Justification = "The setter clamps values to the configured minimum and maximum.")]
     public double Value
     {
       get => _value;
