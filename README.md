@@ -98,16 +98,16 @@ In iX v5, configure the theme and `Application.ColorSchema` (`Light`, `Dark`, or
 - [About and Legal](#about-and-legal)
 - [Menu Settings](#menu-settings)
 - [Popover News](#popover-news)
-- [AG Grid](#ag-grid) **(since v0.6.0)**
+- [AG Grid](#ag-grid) **(since 1.0.0)**
 - [Avatar](#avatar) **(since v0.4.0)**
-- [Badge](#badge) **(since v0.6.0)**
+- [Badge](#badge) **(since 1.0.0)**
 - [Blind](#blind)
 - [Breadcrumb](#breadcrumb)
 - [Button](#button)
 - [Card](#card) **(since 0.5.0)**
-- [Card Content](#card-content) **(since v0.6.0)**
+- [Card Content](#card-content) **(since 1.0.0)**
 - [Card List](#card-list) **(since v0.3.3)**
-- [Chat](#chat) **(since v0.6.0)**
+- [Chat](#chat) **(since 1.0.0)**
 - [Push Card](#push-card) **(since v0.3.3)**
 - [Action Card](#action-card) **(since v0.3.3)**
 - [Icon Button](#icon-button)
@@ -116,7 +116,7 @@ In iX v5, configure the theme and `Application.ColorSchema` (`Light`, `Dark`, or
 - [Checkbox](#checkbox)
 - [Checkbox group](#checkbox-group)
 - [Chip](#chip)
-- [Filter Chip](#filter-chip) **(since v0.6.0)**
+- [Filter Chip](#filter-chip) **(since 1.0.0)**
 - [Content](#content) **(since 0.5.0)**
 - [Content Header](#content-header) **(since v0.3.3)**
 - [Date Dropdown](#date-dropdown)
@@ -134,7 +134,7 @@ In iX v5, configure the theme and `Application.ColorSchema` (`Light`, `Dark`, or
 - [Expanding Search](#expanding-search)
 - [Flip](#flip)
 - [Group](#group)
-- [Group Context Menu](#group-context-menu) **(since v0.6.0)**
+- [Group Context Menu](#group-context-menu) **(since 1.0.0)**
 - [HTML Table](#html-table)
 - [Input](#input)
 - [Number Input](#number-input)
