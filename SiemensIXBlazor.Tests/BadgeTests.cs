@@ -35,6 +35,7 @@ public class BadgeTests : TestContextBase
         Assert.Equal("status-icon", element.GetAttribute("type"));
         Assert.Equal("error", element.GetAttribute("variant"));
         Assert.Equal("bottom-after", element.GetAttribute("position"));
+        Assert.Equal("Warning", element.GetAttribute("aria-label-icon"));
         Assert.Equal("true", element.GetAttribute("border"));
         Assert.Equal("true", element.GetAttribute("enable-animation"));
     }
@@ -58,5 +59,44 @@ public class BadgeTests : TestContextBase
 
         var presenceCut = Render<Badge>(parameters => parameters.Add(p => p.TooltipText, true));
         Assert.Equal(string.Empty, presenceCut.Find("ix-badge").GetAttribute("tooltip-text"));
+    }
+
+    [Theory]
+    [InlineData(BadgeType.Counter, "counter")]
+    [InlineData(BadgeType.Dot, "dot")]
+    [InlineData(BadgeType.Label, "label")]
+    [InlineData(BadgeType.StatusIcon, "status-icon")]
+    public void SupportsEveryOfficialBadgeType(BadgeType type, string expected)
+    {
+        var cut = Render<Badge>(parameters => parameters.Add(p => p.Type, type));
+
+        Assert.Equal(expected, cut.Find("ix-badge").GetAttribute("type"));
+    }
+
+    [Theory]
+    [InlineData(BadgePosition.TopAfter, "top-after")]
+    [InlineData(BadgePosition.BottomAfter, "bottom-after")]
+    public void SupportsEveryOfficialBadgePosition(BadgePosition position, string expected)
+    {
+        var cut = Render<Badge>(parameters => parameters.Add(p => p.Position, position));
+
+        Assert.Equal(expected, cut.Find("ix-badge").GetAttribute("position"));
+    }
+
+    [Theory]
+    [InlineData(BadgeVariant.Alarm, "alarm")]
+    [InlineData(BadgeVariant.Critical, "critical")]
+    [InlineData(BadgeVariant.Custom, "custom")]
+    [InlineData(BadgeVariant.Error, "error")]
+    [InlineData(BadgeVariant.Info, "info")]
+    [InlineData(BadgeVariant.Neutral, "neutral")]
+    [InlineData(BadgeVariant.Primary, "primary")]
+    [InlineData(BadgeVariant.Success, "success")]
+    [InlineData(BadgeVariant.Warning, "warning")]
+    public void SupportsEveryOfficialBadgeVariant(BadgeVariant variant, string expected)
+    {
+        var cut = Render<Badge>(parameters => parameters.Add(p => p.Variant, variant));
+
+        Assert.Equal(expected, cut.Find("ix-badge").GetAttribute("variant"));
     }
 }

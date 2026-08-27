@@ -9,7 +9,7 @@
 
 import { defineCustomElements } from "@siemens/ix/loader";
 import "@siemens/ix-echarts";
-import { registerTheme } from "@siemens/ix-echarts";
+import { registerTheme, resolveEChartThemeName } from "@siemens/ix-echarts";
 import { showModalLoading, themeSwitcher } from "@siemens/ix";
 import { defineCustomElements as ixIconsDefineCustomElements } from "@siemens/ix-icons/loader";
 
@@ -150,10 +150,9 @@ window.siemensIXInterop = {
             disposeChart(id);
             const element = getElementOrThrow(id);
             const echarts = await loadECharts();
+            const parsedOptions = JSON.parse(options);
 
             registerTheme(echarts);
-
-            const parsedOptions = JSON.parse(options);
 
             if (parsedOptions.series) {
                 parsedOptions.series.forEach(series => {
@@ -164,18 +163,18 @@ window.siemensIXInterop = {
             }
 
             const chartState = {
-                chart: echarts.init(element, themeSwitcher.getCurrentTheme()),
+                chart: echarts.init(element, resolveEChartThemeName()),
                 themeDisposer: null,
                 resizeListener: null,
             };
             chartState.chart.setOption(parsedOptions);
 
-            chartState.themeDisposer = themeSwitcher.themeChanged.on((theme) => {
+            chartState.themeDisposer = themeSwitcher.themeChanged.on(() => {
                 if (chartState.chart.isDisposed()) {
                     return;
                 }
                 chartState.chart.dispose();
-                chartState.chart = echarts.init(element, theme);
+                chartState.chart = echarts.init(element, resolveEChartThemeName());
                 chartState.chart.setOption(parsedOptions);
             });
 

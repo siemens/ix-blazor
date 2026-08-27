@@ -183,23 +183,24 @@ In iX v5, configure the theme and `Application.ColorSchema` (`Light`, `Dark`, or
             <placeholder-logo></placeholder-logo>
         </Logo>
         <Button Variant="tertiary">Header action</Button>
-        <ix-avatar slot="ix-application-header-avatar"
-                   initials="JD"
-                   username="Jane Doe"
-                   extra="Product Engineering"></ix-avatar>
+        <Avatar slot="ix-application-header-avatar"
+                Initials="JD"
+                Username="Jane Doe"
+                Extra="Product Engineering" />
     </ApplicationHeader>
-    <Menu>
+    <Menu Id="application-menu">
         <MenuItem>Item 1</MenuItem>
         <MenuItem>Item 2</MenuItem>
     </Menu>
 
-    <ix-content>
+    <Content>
         <ContentHeader
-            Slot="header"
+            Id="application-content-header"
+            slot="header"
             HeaderTitle="My Content Page"
         >
         </ContentHeader>
-    </ix-content>
+    </Content>
 </Application>
 ```
 
@@ -226,7 +227,7 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
                     IconSrc = "..."
                 }
             ]
-        }
+        };
 
         _app.AppSwitchConfig = config;
     }
@@ -279,7 +280,7 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 ```razor
 @* Menu Category *@
 <BasicNavigation>
-  <Menu>
+  <Menu Id="category-menu">
     <MenuItem Home="true" Icon="home">Home</MenuItem>
     <MenuItem Icon="globe">Normal Tab</MenuItem>
     <MenuCategory Label="Top level Category" Icon="rocket">
@@ -746,6 +747,8 @@ private void FilterCleared(FilterClearedEventArgs eventArgs)
 
 ## ECharts
 
+`ECharts` loads the ECharts runtime when `InitialChart` is first called, reducing initial load work without changing the component API.
+
 ```razor
 <ECharts Id="chart1" @ref="chart1">
 </ECharts>
@@ -825,7 +828,7 @@ var series = new List<Dictionary<string, object>>
 };
 dynamicObject.Add("series", series);
 
-chart1.InitialChart(object1);
+await chart1!.InitialChart(dynamicObject);
 ```
 
 ## Checkbox
@@ -874,7 +877,7 @@ chart1.InitialChart(object1);
 
 ```razor
 <Content>
-    <ContentHeader Id="myheader" HeaderTitle="My Content Page" />
+    <ContentHeader Id="myheader" slot="header" HeaderTitle="My Content Page" />
     Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
     accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
     sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
@@ -1008,7 +1011,7 @@ private void Callback(DateDropdownResponse selectedDateDropdown)
 
 ```razor
 <Button Id="triggerId">Open</Button>
-<Dropdown Trigger="@TriggerId">
+<Dropdown Id="dropdown-example" Trigger="@TriggerId">
   <DropdownItem Label="Item 1" Icon="save-all"></DropdownItem>
   <DropdownItem Label="Item 2"></DropdownItem>
   <DropdownItem Label="Item 3"></DropdownItem>
@@ -1023,7 +1026,7 @@ private void Callback(DateDropdownResponse selectedDateDropdown)
 
 ```razor
 <Button Id="triggerId">Open</Button>
-<Dropdown Trigger="@TriggerId">
+<Dropdown Id="dropdown-header-example" Trigger="@TriggerId">
   <DropdownHeader Label="Category"></DropdownHeader>
   <DropdownItem Label="Item 1"></DropdownItem>
   <DropdownItem Label="Item 2"></DropdownItem>
@@ -1038,6 +1041,7 @@ private void Callback(DateDropdownResponse selectedDateDropdown)
 
 ```razor
 <EmptyState
+  Id="empty-state-example"
   Header="No elements available"
   SubHeader="Create an element first"
   Icon="add"
@@ -1269,8 +1273,8 @@ private void Callback(DateDropdownResponse selectedDateDropdown)
 
 ```razor
 <LayoutAuto Id="layout-auto-example" Layout="@Layout">
-  <Input Label="First name" />
-  <Input Label="Last name" />
+  <Input Id="first-name" Label="First name" />
+  <Input Id="last-name" Label="Last name" />
 </LayoutAuto>
 
 @code {
@@ -1309,9 +1313,9 @@ private void Callback(DateDropdownResponse selectedDateDropdown)
             Direction="RadioGroupDirection.Row"
             Value="512"
             ValueChangeEvent="OnStorageChanged">
-    <Radio Label="256GB SSD storage" Value="256" Name="storage" />
-    <Radio Label="512GB SSD storage" Value="512" Name="storage" />
-    <Radio Label="1TB SSD storage" Value="1024" Name="storage" />
+    <Radio Id="storage-256" Label="256GB SSD storage" Value="256" Name="storage" />
+    <Radio Id="storage-512" Label="512GB SSD storage" Value="512" Name="storage" />
+    <Radio Id="storage-1024" Label="1TB SSD storage" Value="1024" Name="storage" />
 </RadioGroup>
 ```
 
@@ -1323,7 +1327,7 @@ private void Callback(DateDropdownResponse selectedDateDropdown)
             Id="messagebar1"
             Type="MessageBarType.Info">
     <div class="d-flex align-items-center justify-content-between">
-        Message text <ix-button>Action</ix-button>
+        Message text <Button>Action</Button>
     </div>
 </MessageBar>
 ```
@@ -1650,7 +1654,7 @@ else if (_activeTabKey == "history")
        PreventAutoClose="true">
     <ChildContent>Your settings were saved successfully.</ChildContent>
     <ActionContent>
-        <ix-button variant="tertiary">Undo</ix-button>
+        <Button Variant="ButtonVariant.tertiary">Undo</Button>
     </ActionContent>
 </Toast>
 ```

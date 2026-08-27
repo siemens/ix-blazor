@@ -59,4 +59,32 @@ public class TimePickerTests : TestContextBase
         Assert.Equal("15:30", selected);
         Assert.Equal("15:31", changed);
     }
+
+    [Fact]
+    public async Task OptionalPropertiesAndCurrentTimeMethodAreSupported()
+    {
+        var cut = Render<TimePicker>(parameters => parameters
+            .Add(p => p.Id, "time-picker")
+            .Add(p => p.Embedded, true)
+            .Add(p => p.HideHeader, true)
+            .Add(p => p.Time, "14:30:00")
+            .Add(p => p.MinTime, "08:00:00")
+            .Add(p => p.MaxTime, "18:00:00"));
+
+        cut.Render();
+        var element = cut.Find("ix-time-picker");
+
+        Assert.Equal("true", element.GetAttribute("embedded"));
+        Assert.Equal("true", element.GetAttribute("hide-header"));
+        Assert.Equal("14:30:00", element.GetAttribute("time"));
+        Assert.Equal("08:00:00", element.GetAttribute("min-time"));
+        Assert.Equal("18:00:00", element.GetAttribute("max-time"));
+        Assert.Null(await cut.Instance.GetCurrentTime());
+    }
+
+    [Fact]
+    public async Task GetCurrentTimeBeforeRenderingIsRejected()
+    {
+        await Assert.ThrowsAsync<InvalidOperationException>(() => new TimePicker().GetCurrentTime());
+    }
 }

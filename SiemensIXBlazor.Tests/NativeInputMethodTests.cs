@@ -35,5 +35,10 @@ public class NativeInputMethodTests : TestContextBase
         Assert.Null(await dateInput.Instance.GetNativeInputElementAsync());
         Assert.Null(await timeInput.Instance.GetNativeInputElementAsync());
         Assert.Null(await select.Instance.GetNativeInputElementAsync());
+
+        await input.Instance.FocusInputAsync();
+        await numberInput.Instance.FocusInputAsync();
+        await textarea.Instance.FocusInputAsync();
+        await select.Instance.FocusInputAsync();
     }
 }

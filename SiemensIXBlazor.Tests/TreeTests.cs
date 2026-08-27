@@ -116,6 +116,48 @@ public class TreeTests : TestContextBase
     }
 
     [Fact]
+    public async Task NodeRemoved_ShouldUseEmptyDetailsForMissingPayloadFields()
+    {
+        TreeNodeRemovedEventArgs? receivedDetails = null;
+        var cut = Render<Tree>(parameters => parameters
+            .Add(p => p.Id, "tree-id")
+            .Add(p => p.NodeRemovedDetailsEvent, EventCallback.Factory.Create<TreeNodeRemovedEventArgs>(
+                this, details => receivedDetails = details)));
+
+        using var document = JsonDocument.Parse("{}");
+        await cut.Instance.NodeRemoved(document.RootElement);
+
+        Assert.NotNull(receivedDetails);
+        Assert.Empty(receivedDetails!.NodeIds);
+    }
+
+    [Fact]
+    public async Task NodeToggled_ShouldUseDefaultsForMissingPayloadFields()
+    {
+        TreeNodeToggledEventResult? result = null;
+        var cut = Render<Tree>(parameters => parameters
+            .Add(p => p.Id, "tree-id")
+            .Add(p => p.NodeToggledEvent, EventCallback.Factory.Create<TreeNodeToggledEventResult>(
+                this, value => result = value)));
+
+        using var document = JsonDocument.Parse("{}");
+        await cut.Instance.NodeToggled(document.RootElement);
+
+        Assert.NotNull(result);
+        Assert.Equal(string.Empty, result!.Id);
+        Assert.False(result.IsExpanded);
+    }
+
+    [Fact]
+    public async Task TreeMethodsIgnoreEmptyDirtyItemLists()
+    {
+        var cut = Render<Tree>(parameters => parameters.Add(p => p.Id, "tree-methods"));
+
+        await cut.Instance.MarkItemsAsDirty();
+        await cut.Instance.MarkItemAsDirty();
+    }
+
+    [Fact]
     public async Task TreeMethods_ShouldAcceptOfficialMethodShapes()
     {
         var cut = Render<Tree>(parameters => parameters

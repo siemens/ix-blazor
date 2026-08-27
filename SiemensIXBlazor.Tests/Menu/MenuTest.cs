@@ -72,4 +72,26 @@ public class MenuTest : TestContextBase
         Assert.True(settings);
         Assert.True(about);
     }
+
+    [Fact]
+    public async Task MenuMethodsForwardOptionalAndRequiredArguments()
+    {
+        var cut = Render<Components.Menu.Menu>(parameters => parameters.Add(p => p.Id, "menu"));
+
+        await cut.Instance.ToggleMenuAsync();
+        await cut.Instance.ToggleMenuAsync(true);
+        await cut.Instance.ToggleMenuAsync(false);
+        await cut.Instance.ToggleMapExpandAsync();
+        await cut.Instance.ToggleMapExpandAsync(true);
+        await cut.Instance.ToggleSettingsAsync(false);
+        await cut.Instance.ToggleAboutAsync(true);
+    }
+
+    [Fact]
+    public async Task MenuMethodsRequireInitialRender()
+    {
+        var menu = new Components.Menu.Menu();
+
+        await Assert.ThrowsAsync<InvalidOperationException>(() => menu.ToggleMenuAsync());
+    }
 }

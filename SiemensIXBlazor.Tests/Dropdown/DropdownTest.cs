@@ -45,23 +45,25 @@ public class DropdownTest : TestContextBase
     public async Task EventCallbacksAreTriggeredCorrectly()
     {
         // Arrange
-        var showChange = false;
-        var showChanged = false;
+        var showChange = new List<bool>();
+        var showChanged = new List<bool>();
 
         var cut = Render<Components.Dropdown>(parameters => parameters
             .Add(p => p.Id, "testId")
             .Add(p => p.ShowChangeEvent,
-                EventCallback.Factory.Create<bool>(this, value => showChange = value))
+                EventCallback.Factory.Create<bool>(this, showChange.Add))
             .Add(p => p.ShowChangedEvent,
-                EventCallback.Factory.Create<bool>(this, value => showChanged = value)));
+                EventCallback.Factory.Create<bool>(this, showChanged.Add)));
 
         // Act
         await cut.Instance.ShowChange(true);
+        await cut.Instance.ShowChange(false);
         await cut.Instance.ShowChanged(true);
+        await cut.Instance.ShowChanged(false);
 
         // Assert
-        Assert.True(showChange);
-        Assert.True(showChanged);
+        Assert.Equal([true, false], showChange);
+        Assert.Equal([true, false], showChanged);
     }
 
     [Fact]
@@ -73,5 +75,30 @@ public class DropdownTest : TestContextBase
 
         Assert.False((bool)cut.Instance.CloseBehavior);
         Assert.DoesNotContain("close-behavior", cut.Markup);
+    }
+
+    [Fact]
+    public async Task UpdatePositionIsSafeBeforeAndAfterRendering()
+    {
+        var unrendered = new Components.Dropdown();
+        await unrendered.UpdatePositionAsync();
+
+        var cut = Render<Components.Dropdown>(parameters => parameters.Add(p => p.Id, "dropdown"));
+        await cut.Instance.UpdatePositionAsync();
+        await cut.Instance.DisposeAsync();
+        await cut.Instance.DisposeAsync();
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void ShowSupportsBothWebComponentBooleanStates(bool show)
+    {
+        var cut = Render<Components.Dropdown>(parameters => parameters
+            .Add(p => p.Id, "dropdown")
+            .Add(p => p.Show, show));
+
+        Assert.Equal(show, cut.Instance.Show);
+        Assert.Equal(show ? "true" : null, cut.Find("ix-dropdown").GetAttribute("show"));
     }
 }

@@ -74,11 +74,23 @@ public class ChatTests : TestContextBase
         Assert.Equal("failed", element.GetAttribute("status"));
         Assert.Equal("true", element.GetAttribute("hide-remove-button"));
         Assert.Equal("true", element.GetAttribute("preview-supported"));
+        Assert.Equal("Remove attachment", element.GetAttribute("remove-aria-label"));
 
         cut.Instance.AttachmentClicked();
         cut.Instance.RemoveClicked();
         Assert.True(attachmentClicked);
         Assert.True(removed);
+    }
+
+    [Theory]
+    [InlineData(ChatAttachmentStatus.Default, "default")]
+    [InlineData(ChatAttachmentStatus.Loading, "loading")]
+    [InlineData(ChatAttachmentStatus.Failed, "failed")]
+    public void ChatAttachmentSupportsEveryOfficialStatus(ChatAttachmentStatus status, string expected)
+    {
+        var cut = Render<ChatAttachment>(parameters => parameters.Add(p => p.Status, status));
+
+        Assert.Equal(expected, cut.Find("ix-chat-attachment").GetAttribute("status"));
     }
 
     [Fact]
@@ -103,6 +115,18 @@ public class ChatTests : TestContextBase
         Assert.Equal("true", element.GetAttribute("insert-line-break-on-enter"));
         Assert.Contains("slot=\"start\"", cut.Markup);
         Assert.Contains("slot=\"end\"", cut.Markup);
+    }
+
+    [Fact]
+    public void ChatInputRendersAccessibleDefaultsAndOmitsDisabledBooleanAttributes()
+    {
+        var cut = Render<ChatInput>();
+
+        var element = cut.Find("ix-chat-input");
+        Assert.Equal("Chat input", element.GetAttribute("textarea-label"));
+        Assert.False(element.HasAttribute("disabled"));
+        Assert.False(element.HasAttribute("readonly"));
+        Assert.False(element.HasAttribute("insert-line-break-on-enter"));
     }
 
     [Fact]

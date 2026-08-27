@@ -103,4 +103,23 @@ public class DropdownButtonTest : TestContextBase
         Assert.Contains("slot=\"button-label\"", cut.Markup);
         Assert.Contains("Additional label", cut.Markup);
     }
+
+    [Fact]
+    public void SupportsBooleanCloseBehaviorWithoutRenderingTheEnumAttribute()
+    {
+        var trueCut = Render<DropdownButton>(parameters => parameters
+            .Add(p => p.CloseBehavior, true));
+        var falseCut = Render<DropdownButton>(parameters => parameters
+            .Add(p => p.CloseBehavior, false));
+
+        Assert.True(trueCut.Find("ix-dropdown-button").HasAttribute("close-behavior") == false);
+        Assert.False(falseCut.Find("ix-dropdown-button").HasAttribute("close-behavior"));
+    }
+
+    [Fact]
+    public void RejectsUnsupportedCloseBehaviorValues()
+    {
+        Assert.Throws<ArgumentException>(() => Render<DropdownButton>(parameters =>
+            parameters.Add(p => p.CloseBehavior, new object())));
+    }
 }

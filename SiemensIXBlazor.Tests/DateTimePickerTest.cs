@@ -52,4 +52,29 @@ public class DateTimePickerTest : TestContextBase
         Assert.Equal("2026/01/01", received[1].From);
         Assert.Equal("2026/01/31", received[1].To);
     }
+
+    [Fact]
+    public async Task TimeAndDateSelectEventsForwardTypedPayloads()
+    {
+        string? time = null;
+        DateTimePickerResponse? selected = null;
+        var cut = Render<DateTimePicker>(parameters => parameters
+            .Add(p => p.Id, "datetime-picker")
+            .Add(p => p.TimeChangeEvent, EventCallback.Factory.Create<string>(this, value => time = value))
+            .Add(p => p.DateSelectEvent, EventCallback.Factory.Create<DateTimePickerResponse>(this, value => selected = value)));
+
+        await cut.Instance.TimeChange("14:30:00");
+        await cut.Instance.DateSelect(JsonSerializer.SerializeToElement(new
+        {
+            from = "2026/08/27",
+            to = "2026/08/27",
+            time = "14:30:00"
+        }));
+
+        Assert.Equal("14:30:00", time);
+        Assert.NotNull(selected);
+        Assert.Equal("2026/08/27", selected!.From);
+        Assert.Equal("2026/08/27", selected.To);
+        Assert.Equal("14:30:00", selected.Time);
+    }
 }

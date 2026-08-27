@@ -72,6 +72,35 @@ public class LayoutAutoTests : TestContextBase
             JsonSerializer.Serialize(layout));
     }
 
+    [Fact]
+    public void LayoutIsNotReappliedWhenEquivalentAndIsReappliedWhenChanged()
+    {
+        var initial = new[] { new LayoutAutoItem { MinWidth = "0", Columns = 1 } };
+        var changed = new[] { new LayoutAutoItem { MinWidth = "48em", Columns = 2 } };
+        var cut = Render<LayoutAuto>(parameters => parameters
+            .Add(p => p.Id, "layout-auto")
+            .Add(p => p.Layout, initial));
+
+        cut.Render(parameters => parameters
+            .Add(p => p.Id, "layout-auto")
+            .Add(p => p.Layout, [new LayoutAutoItem { MinWidth = "0", Columns = 1 }]));
+        cut.Render(parameters => parameters
+            .Add(p => p.Id, "layout-auto")
+            .Add(p => p.Layout, changed));
+
+        Assert.Equal(changed, cut.Instance.Layout, LayoutAutoItemComparer.Instance);
+    }
+
+    [Fact]
+    public void NullLayoutIsHandledAsAnEmptyLayout()
+    {
+        var cut = Render<LayoutAuto>(parameters => parameters
+            .Add(p => p.Id, "layout-auto")
+            .Add(p => p.Layout, null));
+
+        Assert.Null(cut.Instance.Layout);
+    }
+
     private sealed class LayoutAutoItemComparer : IEqualityComparer<LayoutAutoItem>
     {
         public static LayoutAutoItemComparer Instance { get; } = new();

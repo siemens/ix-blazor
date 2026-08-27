@@ -47,5 +47,19 @@ namespace SiemensIXBlazor.Tests.Workflow
             // Assert
             Assert.True(stepSelected);
         }
+
+        [Fact]
+        public async Task StepSelectedUpdatesIndexAndInvokesCallback()
+        {
+            var selectedIndex = -1;
+            var cut = Render<WorkflowSteps>(parameters => parameters
+                .Add(p => p.Id, "workflowSteps")
+                .Add(p => p.StepSelectedEvent, EventCallback.Factory.Create<int>(this, index => selectedIndex = index)));
+
+            await cut.InvokeAsync(() => cut.Instance.StepSelected(2));
+
+            Assert.Equal(2, cut.Instance.SelectedIndex);
+            Assert.Equal(2, selectedIndex);
+        }
     }
 }

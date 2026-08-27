@@ -152,5 +152,24 @@ namespace SiemensIXBlazor.Tests
             Assert.Equal("left", response!.Slot);
             Assert.True(response.Expanded);
         }
+
+        [Fact]
+        public async Task BorderlessAndVariantEventsDeserializeOfficialPayloads()
+        {
+            PaneBorderlessChangedEventResponse? borderless = null;
+            PaneVariantChangedEventResponse? variant = null;
+            var cut = Render<Pane>(parameters => parameters
+                .Add(p => p.Id, "pane-events")
+                .Add(p => p.BorderlessChangedEvent, EventCallback.Factory.Create<PaneBorderlessChangedEventResponse>(this, value => borderless = value))
+                .Add(p => p.VariantChangedEvent, EventCallback.Factory.Create<PaneVariantChangedEventResponse>(this, value => variant = value)));
+
+            await cut.Instance.BorderlessChanged(JsonDocument.Parse("{\"borderless\":true}").RootElement);
+            await cut.Instance.VariantChanged(JsonDocument.Parse("{\"variant\":\"floating\"}").RootElement);
+
+            Assert.NotNull(borderless);
+            Assert.True(borderless!.Borderless);
+            Assert.NotNull(variant);
+            Assert.Equal("floating", variant!.Variant);
+        }
     }
 }

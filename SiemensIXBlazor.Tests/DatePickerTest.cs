@@ -62,4 +62,42 @@ public class DatePickerTest : TestContextBase
         Assert.Equal("2026/01/01", received!.From);
         Assert.Equal("2026/01/31", received.To);
     }
+
+    [Fact]
+    public async Task GetCurrentDateReturnsAnEmptyResponseWhenTheElementHasNoDate()
+    {
+        var cut = Render<DatePicker>(parameters => parameters.Add(p => p.Id, "date-picker"));
+
+        var response = await cut.Instance.GetCurrentDate();
+
+        Assert.NotNull(response);
+        Assert.Null(response.From);
+        Assert.Null(response.To);
+    }
+
+    [Fact]
+    public async Task DateAndRangeEventsForwardTypedPayloads()
+    {
+        var dateChanges = new List<DatePickerResponse>();
+        var rangeChanges = new List<DatePickerResponse>();
+        var cut = Render<DatePicker>(parameters => parameters
+            .Add(p => p.Id, "date-picker")
+            .Add(p => p.DateChangeEvent, EventCallback.Factory.Create<DatePickerResponse>(this, value => dateChanges.Add(value)))
+            .Add(p => p.DateRangeChangeEvent, EventCallback.Factory.Create<DatePickerResponse>(this, value => rangeChanges.Add(value))));
+
+        await cut.Instance.DateChange(JsonSerializer.SerializeToElement(new { from = "2026/08/01" }));
+        await cut.Instance.DateRangeChange(JsonSerializer.SerializeToElement(new { from = "2026/08/01", to = "2026/08/07" }));
+        await cut.Instance.DateSelect(JsonSerializer.SerializeToElement((string?)null));
+
+        Assert.Single(dateChanges);
+        Assert.Equal("2026/08/01", dateChanges[0].From);
+        Assert.Single(rangeChanges);
+        Assert.Equal("2026/08/07", rangeChanges[0].To);
+    }
+
+    [Fact]
+    public async Task GetCurrentDateBeforeRenderingIsRejected()
+    {
+        await Assert.ThrowsAsync<InvalidOperationException>(() => new DatePicker().GetCurrentDate());
+    }
 }

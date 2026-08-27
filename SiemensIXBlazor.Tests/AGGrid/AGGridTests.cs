@@ -50,6 +50,7 @@ public sealed class AGGridTests : TestContextBase
         using IRenderedComponent<AGGrid<TestRow>> cut = RenderGrid();
 
         Assert.True(cut.Instance.IsReady);
+        Assert.Equal("false", cut.Find("div").GetAttribute("aria-busy"));
         Assert.NotNull(cut.Instance.Api);
         Assert.NotNull(capturedOptions);
         Assert.Equal(2, Assert.IsAssignableFrom<Array>(capturedOptions["rowData"]).Length);
@@ -700,6 +701,7 @@ public sealed class AGGridTests : TestContextBase
             EventCallback.Factory.Create<AgGridInitializationError>(this, errors.Add)));
 
         Assert.False(cut.Instance.IsReady);
+        Assert.Equal("true", cut.Find("div").GetAttribute("aria-busy"));
         Assert.Single(errors);
         cut.Render();
         _module.Verify(
@@ -862,6 +864,38 @@ public sealed class AGGridTests : TestContextBase
         await cut.Instance.DispatchEventAsync("cellFocused", payload.RootElement);
         Assert.Null(received);
         cut.Dispose();
+    }
+
+    [Fact]
+    public async Task ApiPropagatesControllerFailuresAndNullTransactions()
+    {
+        _controller
+            .Setup(controller => controller.InvokeAsync<AgGridTransactionResult<TestRow>?>(
+                "applyTransaction", It.IsAny<object[]?>()))
+            .ReturnsAsync((AgGridTransactionResult<TestRow>?)null);
+        using IRenderedComponent<AGGrid<TestRow>> cut = RenderGrid();
+        AgGridApi<TestRow> api = cut.Instance.Api!;
+
+        Assert.Null(await api.ApplyTransactionAsync(new()));
+
+        _controller
+            .Setup(controller => controller.InvokeAsync<JsonElement>(
+                "invoke", It.IsAny<object[]?>()))
+            .ThrowsAsync(new JSException("controller failed"));
+
+        await Assert.ThrowsAsync<JSException>(() => api.GetFilterModelAsync().AsTask());
+    }
+
+    [Fact]
+    public async Task ApiRejectsEveryOperationAfterGridDisposal()
+    {
+        using IRenderedComponent<AGGrid<TestRow>> cut = RenderGrid();
+        AgGridApi<TestRow> api = cut.Instance.Api!;
+
+        await cut.Instance.DisposeAsync();
+
+        await Assert.ThrowsAsync<ObjectDisposedException>(() => api.GetDisplayedRowCountAsync().AsTask());
+        Assert.Throws<ObjectDisposedException>(() => api.InvokeVoidAsync("refreshCells"));
     }
 
     private IRenderedComponent<AGGrid<TestRow>> RenderGrid(
