@@ -1873,6 +1873,6 @@ Handle events from native iX custom elements through JavaScript interop.
 
 Copyright © 2026 [Siemens AG](https://www.siemens.com/).
 
-[Siemens Third-Party Software Disclosure Document](/docs/Siemens.IX.Blazor__0.5.5__READMEOSS.html)
+[Siemens Third-Party Software Disclosure Document](/docs/Siemens.IX.Blazor__1.0.0__READMEOSS.html)
 
 This project is MIT licensed.

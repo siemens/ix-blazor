@@ -4,6 +4,42 @@ SPDX-FileCopyrightText: 2024 Siemens AG
 SPDX-License-Identifier: MIT
 -->
 
+## 1.0.0 - 2026-09-22
+
+### Highlights
+
+- The Blazor wrappers now cover the public iX 5.2.1 component API.
+- Typed AG Grid Community integration is available through `AGGrid<TData>`, including grid options, columns, column groups, events, APIs, transactions, infinite data sources, JSON extension points, and JavaScript module support for custom cell renderers. Enterprise modules are not included.
+- Public wrappers are available for `Badge`, the `Chat` family, `CardAccordion`, `CardContent`, `CardTitle`, `DateTimeInput`, `DropdownQuickActions`, `FieldLabel`, `FilterChip`, `GroupContextMenu`, `HelperText`, `LayoutAuto`, the `Popover` family, and `RangeField`.
+- The current modal and notification APIs are available through `ModalService`, `ModalHost`, `LoadingService`, declarative `Toast`, and `ToastContainer` lifecycle operations.
+
+### Component and API updates
+
+- Parameters, defaults, enums, slots, event payloads, accessibility attributes, serialization, and rendering behavior now follow the iX 5.2.1 component contracts.
+- Typed contracts and native methods are available across Application, Button, Cards, Checkbox, Radio, CategoryFilter, date/time controls, Dropdown, form fields, Menu, Pane, Select, Slider, Tabs, Toast, Tree, Upload, Workflow, and related components.
+- Named content and slot mappings are available across content headers, progress indicators, blinds, panes, workflow steps, key-value components, flip tiles, groups, tooltips, cards, and chat components.
+- CategoryFilter clearing can be canceled; typed Tree node-removal details, element-backed Tooltip and Popover targets, Toggle form integration, Upload directory/state handling, `AgGridOptions.StripedRows`, and `CardList.I18nShowLess` are available.
+- Current iX value shapes can be passed for numeric and string KPI values, numeric and `"auto"` dimensions, numeric and `"auto"` item heights, and single or multiple Select values.
+
+### Runtime and behavior improvements
+
+- Boolean and optional-attribute serialization now follows iX semantics: `false` values are omitted and enabled presence attributes are emitted as `"true"`.
+- Interop lifecycle ownership, listener cleanup, native element access, browser-object handling, and ECharts theme resolution have been improved.
+- ECharts is lazy-loaded on first chart use, and bundled icon URLs are resolved relative to the host application base path.
+- The iX icon assets have been refreshed, with current validation, color, localization, and accessibility behavior.
+
+### Breaking Changes
+
+- The following APIs were removed: `Drawer`, `MapNavigationOverlay`, `ValidationTooltip`, legacy modal components, and the preview AG Grid contract.
+- Tabs and Menu navigation now use stable keys and current iX control methods.
+- Loose string, dynamic, and raw JSON contracts have been replaced with typed parameter and event models; public localization parameters use `I18n...`.
+- Current iX defaults and enum-backed APIs are used. See [Breaking Changes in 1.0.0](BREAKING_CHANGES/1.0.0.md) for migration details.
+
+### Runtime dependencies
+
+- iX packages: `@siemens/ix` 5.2.1, `@siemens/ix-aggrid` 5.1.0, `@siemens/ix-echarts` 4.1.1, and `@siemens/ix-icons` 3.5.0.
+- Runtime packages: AG Grid Community 35.2.0, ECharts 6.1.0, and Siemens.IX.Blazor 1.0.0.
+
 ## 0.5.5 - 2026-06-22
 
 ### What's Changed
